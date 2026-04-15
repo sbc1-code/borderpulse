@@ -42,6 +42,7 @@ export default function Dashboard() {
   const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
   const [region, setRegion] = useState(() => localStorage.getItem('borderPulse_region') || 'ALL');
   const [search, setSearch] = useState('');
+  const [showOffline, setShowOffline] = useState(false);
   const [view, setView] = useState('live');
   const [shareOpen, setShareOpen] = useState(false);
 
@@ -110,6 +111,16 @@ export default function Dashboard() {
       return b.current_wait_time - a.current_wait_time;
     });
   }, [filteredCrossings]);
+
+  const reportingCrossings = useMemo(
+    () => sortedCrossings.filter((c) => c.current_wait_time != null),
+    [sortedCrossings],
+  );
+  const offlineCrossings = useMemo(
+    () => sortedCrossings.filter((c) => c.current_wait_time == null),
+    [sortedCrossings],
+  );
+  const visibleCrossings = showOffline ? sortedCrossings : reportingCrossings;
 
   if (state.isLoading) {
     return (
@@ -260,29 +271,47 @@ export default function Dashboard() {
             </div>
 
             <div className="xl:col-span-9">
-              {sortedCrossings.length === 0 ? (
+              {visibleCrossings.length === 0 ? (
                 <Card className="border-dashed">
                   <CardContent className="p-8 text-center text-sm text-slate-500">
                     {search
                       ? (language === 'en'
                         ? `No crossings match "${search}". Try a different name or clear the search.`
                         : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
-                      : (language === 'en'
-                        ? 'No crossings in this region right now.'
-                        : 'No hay cruces en esta región ahora.')}
+                      : offlineCrossings.length > 0
+                        ? (language === 'en'
+                          ? 'No crossings are currently reporting wait times in this region.'
+                          : 'Ningún cruce está reportando tiempos en esta región.')
+                        : (language === 'en'
+                          ? 'No crossings in this region right now.'
+                          : 'No hay cruces en esta región ahora.')}
                   </CardContent>
                 </Card>
               ) : (
                 <>
-                  <p className="text-xs text-slate-500 mb-2">
-                    {language === 'en'
-                      ? `Showing ${sortedCrossings.length} crossing${sortedCrossings.length === 1 ? '' : 's'}`
-                      : `Mostrando ${sortedCrossings.length} cruce${sortedCrossings.length === 1 ? '' : 's'}`}
-                    {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
-                    {search && ` · "${search}"`}
-                  </p>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <p className="text-xs text-slate-500">
+                      {language === 'en'
+                        ? `Showing ${visibleCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
+                        : `Mostrando ${visibleCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
+                      {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
+                      {search && ` · "${search}"`}
+                    </p>
+                    {offlineCrossings.length > 0 && (
+                      <button
+                        onClick={() => setShowOffline((v) => !v)}
+                        className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white underline decoration-dotted"
+                      >
+                        {showOffline
+                          ? (language === 'en' ? 'Hide offline' : 'Ocultar sin datos')
+                          : (language === 'en'
+                            ? `Show ${offlineCrossings.length} offline/no-data`
+                            : `Mostrar ${offlineCrossings.length} sin datos`)}
+                      </button>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
-                    {sortedCrossings.map((crossing, idx) => (
+                    {visibleCrossings.map((crossing, idx) => (
                       <BorderCrossingCard
                         key={crossing.id || crossing.port_number}
                         crossing={crossing}

@@ -128,26 +128,69 @@ const mapPort = (p) => {
   };
 };
 
-// Collapse dupes: for a given port, if there are multiple rows and one of them
-// is just the port_name with no crossing_name (e.g. Otay Mesa generic +
-// Otay Mesa Passenger/Commercial), keep the named rows and drop the bare one
-// when it has no wait data.
+// Canonical-name map — CBP has multiple rows for the same physical crossing
+// under slightly different labels (e.g. "Marcelino Serna" = "Tornillo",
+// "Paso Del Norte" alone = "El Paso - Paso Del Norte (PDN)").
+const CANONICAL = [
+  { test: /marcelino\s*serna|tornillo/i, key: 'tornillo' },
+  { test: /paso\s*del\s*norte/i, key: 'pdn' },
+  { test: /bridge\s*of\s*the\s*americas|\bbota\b/i, key: 'bota' },
+  { test: /ysleta|zaragoza/i, key: 'ysleta' },
+  { test: /stanton/i, key: 'stanton' },
+  { test: /otay\s*mesa/i, key: 'otay-mesa' },
+  { test: /san\s*ysidro/i, key: 'san-ysidro' },
+  { test: /^roma/i, key: 'roma' },
+  { test: /cargo|facility/i, key: '__cargo__' }, // deprioritize cargo-only rows
+];
+
+const canonicalKey = (row) => {
+  const blob = `${row.port_name} ${row.crossing_name}`;
+  for (const { test, key } of CANONICAL) {
+    if (test.test(blob)) return key;
+  }
+  return (row.port_name + '|' + (row.crossing_name || '')).toLowerCase().trim();
+};
+
+// Score a row for dedupe priority: higher is better.
+const rowScore = (r) => {
+  let s = 0;
+  if (r.current_wait_time != null) s += 100;         // real passenger data wins
+  if (r.lanes?.passenger_standard) s += 20;
+  if (r.lanes?.passenger_ready) s += 5;
+  if (r.lanes?.passenger_sentri) s += 5;
+  if (r.lanes?.pedestrian_standard) s += 3;
+  if (r.lanes?.commercial_standard) s += 2;
+  if (r.name && r.name.includes(' - ')) s += 1;      // prefer "City - Crossing"
+  if (/cargo|facility/i.test(r.name || '')) s -= 10; // cargo-only → last
+  return s;
+};
+
+// Dedupe strategy: group by canonical key, pick the single highest-scoring
+// row. Merge any lane data the winner is missing from siblings.
 const dedupe = (rows) => {
-  const byPort = new Map();
+  const groups = new Map();
   for (const r of rows) {
-    const arr = byPort.get(r.port_name) || [];
+    const k = canonicalKey(r);
+    const arr = groups.get(k) || [];
     arr.push(r);
-    byPort.set(r.port_name, arr);
+    groups.set(k, arr);
   }
   const keep = [];
-  for (const [, arr] of byPort) {
-    if (arr.length === 1) { keep.push(arr[0]); continue; }
-    const hasNamedWithWait = arr.some((r) => r.crossing_name && r.current_wait_time != null);
-    for (const r of arr) {
-      const isBare = !r.crossing_name;
-      if (isBare && hasNamedWithWait && r.current_wait_time == null) continue; // drop
-      keep.push(r);
+  for (const [, arr] of groups) {
+    arr.sort((a, b) => rowScore(b) - rowScore(a));
+    const winner = { ...arr[0], lanes: { ...arr[0].lanes } };
+    // Merge lane data from siblings if winner has gaps.
+    for (const sib of arr.slice(1)) {
+      for (const k of Object.keys(sib.lanes || {})) {
+        if (!winner.lanes[k] && sib.lanes[k]) winner.lanes[k] = sib.lanes[k];
+      }
+      // If winner has no wait but sibling does, promote.
+      if (winner.current_wait_time == null && sib.current_wait_time != null) {
+        winner.current_wait_time = sib.current_wait_time;
+        winner.status = sib.status;
+      }
     }
+    keep.push(winner);
   }
   return keep;
 };
