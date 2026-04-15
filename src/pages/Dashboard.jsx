@@ -8,6 +8,7 @@ import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
 import AnalyticsView from '@/components/dashboard/AnalyticsView';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
@@ -208,6 +209,8 @@ export default function Dashboard() {
               )}
             </div>
           </div>
+
+          <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} />
 
           <div className="text-center text-xs text-slate-400 mt-6">
             {language === 'en' ? 'Source:' : 'Fuente:'} {state.source}
