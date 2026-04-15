@@ -10,7 +10,6 @@ import ShareModal from '@/components/dashboard/ShareModal';
 import AnalyticsView from '@/components/dashboard/AnalyticsView';
 import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AboutFooter from '@/components/dashboard/AboutFooter';
-import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
@@ -341,8 +340,6 @@ export default function Dashboard() {
               )}
             </div>
           </div>
-
-          <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} />
 
           <AboutFooter
             language={language}
