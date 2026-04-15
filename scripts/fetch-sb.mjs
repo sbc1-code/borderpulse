@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Pulls southbound (US -> MX) delay estimates for major passenger crossings
- * using Google Maps Distance Matrix and writes public/data/crossings-sb.json.
+ * using the Google Maps Platform Distance Matrix API and writes
+ * public/data/crossings-sb.json.
  *
  * Method:
  *   - Query a short driving segment that approaches the border crossing from
@@ -256,7 +257,7 @@ async function main() {
   const fetchedAt = new Date().toISOString();
 
   const empty = {
-    source: 'Google Maps Distance Matrix (estimated southbound queue delay)',
+    source: 'Border Pulse southbound model (Google Maps Platform Distance Matrix API)',
     source_url: 'https://developers.google.com/maps/documentation/distance-matrix',
     fetched_at: fetchedAt,
     coverage: 'Major passenger crossings only',
@@ -292,7 +293,7 @@ async function main() {
   }
 
   const payload = {
-    source: 'Google Maps Distance Matrix (estimated southbound queue delay)',
+    source: 'Border Pulse southbound model (Google Maps Platform Distance Matrix API)',
     source_url: 'https://developers.google.com/maps/documentation/distance-matrix',
     fetched_at: fetchedAt,
     coverage: 'Major passenger crossings only',

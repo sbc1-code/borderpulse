@@ -46,7 +46,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             target="_blank"
             rel="noopener noreferrer"
           >
-            {isSouthbound ? 'Uses Google Maps Platform routing data' : 'bwt.cbp.gov/api/bwtpublicmod'}
+            {isSouthbound ? 'Uses Google Maps Platform Distance Matrix API' : 'bwt.cbp.gov/api/bwtpublicmod'}
           </a>
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">

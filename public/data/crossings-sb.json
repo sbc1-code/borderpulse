@@ -1,5 +1,5 @@
 {
-  "source": "Google Maps Distance Matrix (estimated southbound queue delay)",
+  "source": "Border Pulse southbound model (Google Maps Platform Distance Matrix API)",
   "source_url": "https://developers.google.com/maps/documentation/distance-matrix",
   "fetched_at": "2026-04-15T15:56:48.490Z",
   "coverage": "Major passenger crossings only",
@@ -231,5 +231,5 @@
     }
   ],
   "errors": [],
-  "note": "Southbound values are estimates based on live Google Maps traffic near the border, not an official government wait-time feed."
+  "note": "Southbound values are Border Pulse estimates based on live routing conditions near the border, not an official government wait-time feed."
 }

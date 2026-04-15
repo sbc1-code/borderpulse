@@ -46,7 +46,7 @@ export default function Dashboard() {
   const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
   const [region, setRegion] = useState(() => localStorage.getItem('borderPulse_region') || 'ALL');
   const [search, setSearch] = useState('');
-  const [showOffline, setShowOffline] = useState(false);
+  const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [shareOpen, setShareOpen] = useState(false);
 
@@ -126,7 +126,7 @@ export default function Dashboard() {
     () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) == null),
     [sortedCrossings, direction],
   );
-  const visibleCrossings = showOffline ? sortedCrossings : reportingCrossings;
+  const visibleCrossings = showWithoutCurrentWaits ? sortedCrossings : reportingCrossings;
 
   if (state.isLoading) {
     return (
@@ -294,8 +294,8 @@ export default function Dashboard() {
                         : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
                       : offlineCrossings.length > 0
                         ? (language === 'en'
-                          ? 'No crossings are currently reporting wait times in this region.'
-                          : 'Ningún cruce está reportando tiempos en esta región.')
+                          ? 'No crossings currently have published wait times in this region.'
+                          : 'Ningún cruce tiene tiempos publicados en este momento en esta región.')
                         : (language === 'en'
                           ? 'No crossings in this region right now.'
                           : 'No hay cruces en esta región ahora.')}
@@ -313,14 +313,16 @@ export default function Dashboard() {
                     </p>
                     {offlineCrossings.length > 0 && (
                       <button
-                        onClick={() => setShowOffline((v) => !v)}
+                        onClick={() => setShowWithoutCurrentWaits((value) => !value)}
                         className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white underline decoration-dotted"
                       >
-                        {showOffline
-                          ? (language === 'en' ? 'Hide offline' : 'Ocultar sin datos')
+                        {showWithoutCurrentWaits
+                          ? (language === 'en'
+                            ? `Hide ${offlineCrossings.length} without current waits`
+                            : `Ocultar ${offlineCrossings.length} sin tiempo actual`)
                           : (language === 'en'
-                            ? `Show ${offlineCrossings.length} offline/no-data`
-                            : `Mostrar ${offlineCrossings.length} sin datos`)}
+                            ? `Show ${offlineCrossings.length} without current waits`
+                            : `Mostrar ${offlineCrossings.length} sin tiempo actual`)}
                       </button>
                     )}
                   </div>

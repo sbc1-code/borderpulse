@@ -17,6 +17,7 @@ import {
 } from '@/components/utils/crossingDirection';
 import {
   getAdvisoryType,
+  getHoursSummary,
   getOperationalNotice,
   getPortStatus,
   hasOperationalAdvisory,
@@ -106,9 +107,7 @@ export default function BorderCrossingCard({
       ? (isSouthbound ? 'Estimate not available yet' : 'No current wait time reported')
       : (isSouthbound ? 'La estimación todavía no está disponible' : 'No hay tiempo actual reportado'))
     : (isSouthbound ? (language === 'en' ? 'Estimated delay' : 'Demora estimada') : (language === 'en' ? 'Official wait time' : 'Tiempo oficial'));
-  const hoursLabel = crossing.hours
-    ? `${language === 'en' ? 'Official hours' : 'Horario oficial'}: ${crossing.hours}`
-    : (language === 'en' ? 'Official hours unavailable' : 'Horario oficial no disponible');
+  const hoursLabel = getHoursSummary(crossing, language);
   const advisoryText = summarizeNotice(getOperationalNotice(crossing));
   const hasAdvisory = hasOperationalAdvisory(crossing);
   const advisoryType = getAdvisoryType(crossing);
@@ -206,7 +205,11 @@ export default function BorderCrossingCard({
               {wait == null ? '—' : wait}
             </span>
             <span className="text-sm text-slate-500">
-              {wait == null ? (language === 'en' ? 'no data' : 'sin datos') : 'min'}
+              {wait == null
+                ? (language === 'en'
+                  ? (isSouthbound ? 'no estimate' : 'not reported')
+                  : (isSouthbound ? 'sin estimación' : 'sin reporte'))
+                : 'min'}
             </span>
             {wait != null && (
               <TrendIcon className={`w-4 h-4 ${trendColor}`} />
