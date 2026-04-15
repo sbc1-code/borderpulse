@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, MapPin, Activity, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getWaitMinutes } from '@/components/utils/crossingDirection';
 
 // Status thresholds ALIGNED with scripts/fetch-cbp.mjs → statusFromDelay():
 //   good    < 15 min
@@ -17,17 +18,9 @@ export default function StatsOverview({
   theme,
   regionLabel,
 }) {
-  const getWaitTime = (crossing) => {
-    if (selectedDirection === 'southbound') {
-      return typeof crossing.southbound_wait_time === 'number' ? crossing.southbound_wait_time : null;
-    }
-    const nb = typeof crossing.northbound_wait_time === 'number'
-      ? crossing.northbound_wait_time
-      : (typeof crossing.current_wait_time === 'number' ? crossing.current_wait_time : null);
-    return nb;
-  };
-
-  const reportingWaits = crossings.map(getWaitTime).filter((t) => t !== null);
+  const reportingWaits = crossings
+    .map((crossing) => getWaitMinutes(crossing, selectedDirection))
+    .filter((t) => t !== null);
   const totalCrossings = crossings.length;
   const reportingCount = reportingWaits.length;
 

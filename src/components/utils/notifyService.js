@@ -3,6 +3,8 @@
  * Notification API. No backend, no SMS, no accounts. Persisted in
  * localStorage; evaluated on each data refresh from the Dashboard.
  */
+import { getStorageKey, getWaitMinutes } from '@/components/utils/crossingDirection';
+
 const STORAGE_KEY = 'borderPulse_notifyPrefs_v1';
 const LAST_FIRED_KEY = 'borderPulse_notifyFired_v1';
 const COOLDOWN_MS = 60 * 60 * 1000; // 1 hour per (crossing, kind)
@@ -15,11 +17,16 @@ function write(key, obj) {
 }
 
 export function getPrefs() { return read(STORAGE_KEY); }
-export function getPrefForCrossing(id) { return read(STORAGE_KEY)[id] || null; }
+export function getPrefForCrossing(id, direction = 'northbound') {
+  const key = getStorageKey(id, direction);
+  return key ? read(STORAGE_KEY)[key] || null : null;
+}
 
-export function setPref(id, pref) {
+export function setPref(id, pref, direction = 'northbound') {
+  const key = getStorageKey(id, direction);
+  if (!key) return;
   const all = read(STORAGE_KEY);
-  if (!pref) delete all[id]; else all[id] = pref;
+  if (!pref) delete all[key]; else all[key] = pref;
   write(STORAGE_KEY, all);
 }
 
@@ -51,15 +58,15 @@ function fire(id, kind, title, body) {
   return true;
 }
 
-export function evaluate(crossings, language = 'en') {
+export function evaluate(crossings, language = 'en', direction = 'northbound') {
   if (typeof window === 'undefined' || !('Notification' in window)) return;
   if (Notification.permission !== 'granted') return;
   const prefs = read(STORAGE_KEY);
   for (const c of crossings) {
-    const id = c.port_number || c.id;
-    const pref = prefs[id];
+    const id = getStorageKey(c.port_number || c.id, direction);
+    const pref = id ? prefs[id] : null;
     if (!pref || !pref.active) continue;
-    const wait = c.current_wait_time;
+    const wait = getWaitMinutes(c, direction);
     if (wait == null) continue;
 
     if (pref.kind === 'below' && wait < pref.threshold) {

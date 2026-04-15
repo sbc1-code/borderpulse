@@ -9,13 +9,14 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select';
 import { setPref, requestPermission, permission as getPermission } from '@/components/utils/notifyService';
+import { getWaitMinutes } from '@/components/utils/crossingDirection';
 
 /**
  * Hero CTA inspired by Base44's "Get Alerted When to Leave" banner.
  * No SMS backend — uses the browser Notification API. Persists prefs
  * in localStorage; the Dashboard evaluates them on each data refresh.
  */
-export default function DepartureAlertBanner({ crossings, language }) {
+export default function DepartureAlertBanner({ crossings, language, direction = 'northbound' }) {
   const [open, setOpen] = useState(false);
   const [crossingId, setCrossingId] = useState('');
   const [condition, setCondition] = useState('below');
@@ -34,12 +35,16 @@ export default function DepartureAlertBanner({ crossings, language }) {
 
   const handleSave = () => {
     if (!crossingId) return;
-    setPref(crossingId, { active: true, kind: condition, threshold: Number(threshold) });
+    setPref(crossingId, { active: true, kind: condition, threshold: Number(threshold) }, direction);
     setSaved(true);
     setTimeout(() => setOpen(false), 900);
   };
 
   const selected = crossings.find((c) => c.port_number === crossingId);
+  const selectedWait = selected ? getWaitMinutes(selected, direction) : null;
+  const availableCrossings = crossings
+    .filter((c) => c.name && getWaitMinutes(c, direction) != null)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
@@ -60,8 +65,8 @@ export default function DepartureAlertBanner({ crossings, language }) {
               </div>
               <div className="text-[11px] sm:text-xs text-white/80">
                 {language === 'en'
-                  ? 'Pick a crossing + threshold. We ping you when conditions hit.'
-                  : 'Elige un cruce + umbral. Te avisamos cuando se cumpla.'}
+                  ? `Pick a crossing + threshold. We ping you when ${direction === 'southbound' ? 'southbound estimates' : 'wait times'} hit.`
+                  : `Elige un cruce + umbral. Te avisamos cuando ${direction === 'southbound' ? 'la estimación hacia México' : 'el tiempo de espera'} se cumpla.`}
               </div>
             </div>
           </div>
@@ -99,14 +104,11 @@ export default function DepartureAlertBanner({ crossings, language }) {
                   <SelectValue placeholder={language === 'en' ? 'Pick a crossing…' : 'Elige un cruce…'} />
                 </SelectTrigger>
                 <SelectContent className="max-h-64">
-                  {crossings
-                    .filter((c) => c.name)
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((c) => (
+                  {availableCrossings.map((c) => (
                       <SelectItem key={c.port_number} value={c.port_number}>
                         {c.name} {c.state ? `· ${c.state}` : ''}
                       </SelectItem>
-                    ))}
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -146,9 +148,11 @@ export default function DepartureAlertBanner({ crossings, language }) {
 
             {selected && (
               <div className="rounded-md border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700">
-                {language === 'en' ? 'Current wait at' : 'Espera actual en'} <span className="font-medium">{selected.name}</span>:{' '}
+                {language === 'en'
+                  ? (direction === 'southbound' ? 'Current estimate at' : 'Current wait at')
+                  : (direction === 'southbound' ? 'Estimación actual en' : 'Espera actual en')} <span className="font-medium">{selected.name}</span>:{' '}
                 <span className="font-semibold">
-                  {selected.current_wait_time == null ? '—' : `${selected.current_wait_time} min`}
+                  {selectedWait == null ? '—' : `${selectedWait} min`}
                 </span>
               </div>
             )}

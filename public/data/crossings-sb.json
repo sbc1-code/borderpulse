@@ -1,8 +1,9 @@
 {
-  "source": "Community reports (Google Form)",
-  "fetched_at": "2026-04-15T14:44:31.503Z",
-  "window_hours": 2,
+  "source": "Google Maps Distance Matrix (estimated southbound queue delay)",
+  "source_url": "https://developers.google.com/maps/documentation/distance-matrix",
+  "fetched_at": "2026-04-15T15:27:28.979Z",
+  "coverage": "Major passenger crossings only",
   "count": 0,
-  "by_port": {},
-  "note": "SB_SHEET_CSV_URL env var not set — no reports ingested yet"
+  "crossings": [],
+  "note": "GOOGLE_MAPS_API_KEY env var not set — no southbound estimates ingested yet"
 }

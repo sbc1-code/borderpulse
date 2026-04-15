@@ -2,26 +2,33 @@ import React, { useMemo, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Copy, Share2, Check } from 'lucide-react';
+import { getWaitMinutes } from '@/components/utils/crossingDirection';
 
-function buildStatusText(crossings, language) {
+function buildStatusText(crossings, language, direction) {
   const now = new Date();
   const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const directionLabel = direction === 'southbound'
+    ? (language === 'en' ? 'To Mexico' : 'Hacia México')
+    : (language === 'en' ? 'To USA' : 'Hacia EE.UU.');
   const header = language === 'en'
-    ? `🚦 Border Wait Times (${time}):`
-    : `🚦 Tiempos de Espera (${time}):`;
+    ? `🚦 Border Wait Times ${directionLabel} (${time}):`
+    : `🚦 Tiempos de Espera ${directionLabel} (${time}):`;
   const lines = crossings
-    .filter((c) => c.current_wait_time != null)
+    .filter((c) => getWaitMinutes(c, direction) != null)
     .slice(0, 17)
-    .map((c) => `${c.name} ${c.current_wait_time}min`);
+    .map((c) => `${c.name} ${getWaitMinutes(c, direction)}min`);
   const footer = language === 'en'
     ? '📲 Real-time updates: borderpulse.com'
     : '📲 Actualizaciones en vivo: borderpulse.com';
   return [header, '', ...lines, '', footer].join('\n');
 }
 
-export default function ShareModal({ open, onOpenChange, crossings, language }) {
+export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound' }) {
   const [copied, setCopied] = useState(false);
-  const text = useMemo(() => buildStatusText(crossings || [], language), [crossings, language]);
+  const text = useMemo(
+    () => buildStatusText(crossings || [], language, direction),
+    [crossings, language, direction],
+  );
 
   const copy = async () => {
     try {

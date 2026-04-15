@@ -3,6 +3,8 @@
  * Keeps last 7 days of { t, wait } samples per port_number.
  * Used for sparklines, trend arrows, and the Analytics view.
  */
+import { getStorageKey, getWaitMinutes } from '@/components/utils/crossingDirection';
+
 const STORAGE_KEY = 'borderPulse_waitHistory_v1';
 const MAX_DAYS = 7;
 const MAX_SAMPLES_PER_CROSSING = 7 * 24 * 4; // 15-min grain × 7d
@@ -24,16 +26,16 @@ function writeAll(obj) {
   }
 }
 
-export function recordSnapshot(crossings) {
+export function recordSnapshot(crossings, direction = 'northbound') {
   if (!Array.isArray(crossings) || crossings.length === 0) return;
   const now = Date.now();
   const cutoff = now - MAX_DAYS * 24 * 60 * 60 * 1000;
   const all = readAll();
 
   for (const c of crossings) {
-    const id = c.port_number || c.id;
+    const id = getStorageKey(c.port_number || c.id, direction);
     if (!id) continue;
-    const wait = c.current_wait_time;
+    const wait = getWaitMinutes(c, direction);
     if (wait == null) continue;
 
     const series = all[id] || [];
@@ -54,14 +56,32 @@ export function getHistory(crossingId) {
   return all[crossingId] || [];
 }
 
-export function getPreviousWait(crossingId) {
-  const h = getHistory(crossingId);
+export function getHistoryForDirection(crossingId, direction = 'northbound') {
+  const key = getStorageKey(crossingId, direction);
+  if (!key) return [];
+  const all = readAll();
+  return all[key] || [];
+}
+
+export function getPreviousWait(crossingId, direction = 'northbound') {
+  const h = getHistoryForDirection(crossingId, direction);
   if (h.length < 2) return null;
   return h[h.length - 2].wait;
 }
 
-export function getAllHistory() {
-  return readAll();
+export function getAllHistory(direction = null) {
+  const all = readAll();
+  if (!direction) return all;
+
+  const filtered = {};
+  const suffix = direction === 'southbound' ? ':sb' : null;
+
+  for (const [key, value] of Object.entries(all)) {
+    if (suffix && key.endsWith(suffix)) filtered[key] = value;
+    if (!suffix && !key.endsWith(':sb')) filtered[key] = value;
+  }
+
+  return filtered;
 }
 
 export function clearHistory() {

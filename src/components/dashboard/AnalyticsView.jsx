@@ -3,9 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid } from 'recharts';
 import { getAllHistory } from '@/components/utils/waitTimeHistory';
 
-export default function AnalyticsView({ crossings, language }) {
+export default function AnalyticsView({ crossings, language, direction = 'northbound' }) {
   const byHour = useMemo(() => {
-    const all = getAllHistory();
+    const all = getAllHistory(direction);
     const buckets = Array.from({ length: 24 }, (_, h) => ({ hour: h, sum: 0, n: 0 }));
     for (const id in all) {
       for (const sample of all[id]) {
@@ -18,10 +18,10 @@ export default function AnalyticsView({ crossings, language }) {
       hour: `${String(b.hour).padStart(2, '0')}:00`,
       avg: b.n ? Math.round(b.sum / b.n) : null,
     }));
-  }, []);
+  }, [direction]);
 
   const byDow = useMemo(() => {
-    const all = getAllHistory();
+    const all = getAllHistory(direction);
     const names = language === 'en'
       ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
       : ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
@@ -45,17 +45,17 @@ export default function AnalyticsView({ crossings, language }) {
   }, [byHour]);
 
   const totalSamples = useMemo(() => {
-    const all = getAllHistory();
+    const all = getAllHistory(direction);
     return Object.values(all).reduce((n, arr) => n + arr.length, 0);
-  }, []);
+  }, [direction]);
 
   if (totalSamples < 10) {
     return (
       <Card className="border-dashed">
         <CardContent className="p-6 text-center text-sm text-slate-500">
-          {language === 'en'
-            ? 'Analytics populate as you use the app. Check back after a few visits.'
-            : 'Los análisis se llenan conforme uses la app. Vuelve después de varias visitas.'}
+            {language === 'en'
+              ? 'Analytics populate as you use the app. Check back after a few visits.'
+              : 'Los análisis se llenan conforme uses la app. Vuelve después de varias visitas.'}
           <div className="mt-2 text-[11px] text-slate-400">
             {language === 'en' ? 'Samples collected' : 'Muestras recolectadas'}: {totalSamples}
           </div>
@@ -86,9 +86,9 @@ export default function AnalyticsView({ crossings, language }) {
         <Card>
           <CardContent className="p-4">
             <div className="text-xs text-slate-500 uppercase tracking-wide">
-              {language === 'en' ? 'Crossings tracked' : 'Cruces monitoreados'}
-            </div>
-            <div className="text-2xl font-bold text-slate-900">{Object.keys(getAllHistory()).length}</div>
+            {language === 'en' ? 'Crossings tracked' : 'Cruces monitoreados'}
+          </div>
+            <div className="text-2xl font-bold text-slate-900">{Object.keys(getAllHistory(direction)).length}</div>
           </CardContent>
         </Card>
       </div>

@@ -14,6 +14,7 @@ import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
+import { getWaitMinutes } from '@/components/utils/crossingDirection';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -35,6 +36,9 @@ export default function Dashboard() {
     isLoading: true,
     isRefreshing: false,
     source: null,
+    southboundSource: null,
+    southboundFetchedAt: null,
+    southboundNote: null,
     fetchedAt: null,
   });
 
@@ -49,22 +53,22 @@ export default function Dashboard() {
   const load = async () => {
     setState((s) => ({ ...s, isRefreshing: true }));
     const data = await dataService.getBorderData();
-    const normalized = (data.crossings || []).map((c) => ({
-      ...c,
-      northbound_wait_time: c.current_wait_time,
-      southbound_wait_time: null,
-    }));
     setState({
-      crossings: normalized,
+      crossings: data.crossings || [],
       exchangeRate: data.exchange_rate,
       isLoading: false,
       isRefreshing: false,
       source: data.source,
+      southboundSource: data.southbound_source,
+      southboundFetchedAt: data.southbound_timestamp,
+      southboundNote: data.southbound_note,
       fetchedAt: data.timestamp,
     });
     try {
-      recordSnapshot(normalized);
-      evaluateNotify(normalized, language);
+      recordSnapshot(data.crossings || [], 'northbound');
+      recordSnapshot(data.crossings || [], 'southbound');
+      evaluateNotify(data.crossings || [], language, 'northbound');
+      evaluateNotify(data.crossings || [], language, 'southbound');
     } catch (e) {
       console.warn('[dashboard] snapshot/notify error', e);
     }
@@ -105,20 +109,22 @@ export default function Dashboard() {
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
-      if (a.current_wait_time == null && b.current_wait_time == null) return 0;
-      if (a.current_wait_time == null) return 1;
-      if (b.current_wait_time == null) return -1;
-      return b.current_wait_time - a.current_wait_time;
+      const waitA = getWaitMinutes(a, direction);
+      const waitB = getWaitMinutes(b, direction);
+      if (waitA == null && waitB == null) return 0;
+      if (waitA == null) return 1;
+      if (waitB == null) return -1;
+      return waitB - waitA;
     });
-  }, [filteredCrossings]);
+  }, [filteredCrossings, direction]);
 
   const reportingCrossings = useMemo(
-    () => sortedCrossings.filter((c) => c.current_wait_time != null),
-    [sortedCrossings],
+    () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) != null),
+    [sortedCrossings, direction],
   );
   const offlineCrossings = useMemo(
-    () => sortedCrossings.filter((c) => c.current_wait_time == null),
-    [sortedCrossings],
+    () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) == null),
+    [sortedCrossings, direction],
   );
   const visibleCrossings = showOffline ? sortedCrossings : reportingCrossings;
 
@@ -191,7 +197,7 @@ export default function Dashboard() {
       </header>
 
       {/* Departure Alert hero */}
-      <DepartureAlertBanner crossings={state.crossings} language={language} />
+      <DepartureAlertBanner crossings={state.crossings} language={language} direction={direction} />
 
       {/* Direction toggle */}
       <div className="flex rounded-lg p-1 mb-3 max-w-md mx-auto bg-slate-100 dark:bg-gray-800">
@@ -205,19 +211,27 @@ export default function Dashboard() {
           {language === 'en' ? 'To US' : 'Hacia EE.UU.'}
         </Button>
         <Button
-          variant="ghost"
+          variant={direction === 'southbound' ? 'default' : 'ghost'}
           size="sm"
-          disabled
-          className="flex-1 gap-2 h-9 opacity-60 cursor-not-allowed"
-          title={language === 'en' ? 'CBP does not publish southbound wait times' : 'CBP no publica tiempos hacia México'}
+          onClick={() => changeDirection('southbound')}
+          className="flex-1 gap-2 h-9"
+          title={language === 'en' ? 'Estimated southbound delay from Google Maps traffic' : 'Demora estimada hacia México con tráfico de Google Maps'}
         >
           <ArrowDown className="w-4 h-4" />
-          {language === 'en' ? 'To MX (soon)' : 'Hacia MX (pronto)'}
+          {language === 'en' ? 'To MX' : 'Hacia MX'}
         </Button>
       </div>
 
+      {direction === 'southbound' && (
+        <div className="max-w-3xl mx-auto mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+          {language === 'en'
+            ? 'Southbound values are estimates from Google Maps traffic at major passenger crossings, not an official government wait-time feed.'
+            : 'Los valores hacia México son estimaciones con tráfico de Google Maps en cruces principales de pasajeros, no un feed oficial del gobierno.'}
+        </div>
+      )}
+
       {view === 'analytics' ? (
-        <AnalyticsView crossings={state.crossings} language={language} />
+        <AnalyticsView crossings={state.crossings} language={language} direction={direction} />
       ) : (
         <>
           {/* Search + region filter */}
@@ -317,6 +331,7 @@ export default function Dashboard() {
                         crossing={crossing}
                         language={language}
                         index={idx}
+                        selectedDirection={direction}
                       />
                     ))}
                   </div>
@@ -329,13 +344,20 @@ export default function Dashboard() {
 
           <AboutFooter
             language={language}
-            fetchedAt={state.fetchedAt}
+            fetchedAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
             count={state.crossings.length}
+            direction={direction}
           />
         </>
       )}
 
-      <ShareModal open={shareOpen} onOpenChange={setShareOpen} crossings={sortedCrossings} language={language} />
+      <ShareModal
+        open={shareOpen}
+        onOpenChange={setShareOpen}
+        crossings={sortedCrossings}
+        language={language}
+        direction={direction}
+      />
     </div>
   );
 }

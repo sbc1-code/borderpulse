@@ -7,9 +7,14 @@ import {
   Car, User, Truck, ChevronDown, ChevronUp, Bell, BellRing, BarChart3,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getHistory, getPreviousWait } from '@/components/utils/waitTimeHistory';
+import { getHistoryForDirection, getPreviousWait } from '@/components/utils/waitTimeHistory';
 import { getPrefForCrossing, setPref, permission, requestPermission } from '@/components/utils/notifyService';
 import Sparkline from '@/components/charts/Sparkline';
+import {
+  getStatusForDirection,
+  getUpdatedAtForDirection,
+  getWaitMinutes,
+} from '@/components/utils/crossingDirection';
 
 const STATUS_STYLES = {
   good: { bar: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: { en: 'Good', es: 'Bueno' }, dot: 'bg-emerald-500' },
@@ -36,25 +41,36 @@ function LaneRow({ icon: Icon, label, data, language }) {
   );
 }
 
-export default function BorderCrossingCard({ crossing, language, index = 0 }) {
+export default function BorderCrossingCard({
+  crossing,
+  language,
+  index = 0,
+  selectedDirection = 'northbound',
+}) {
   const [showLanes, setShowLanes] = useState(false);
   const [showTrends, setShowTrends] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
-  const [pref, setPrefState] = useState(() => getPrefForCrossing(crossing.port_number));
+  const [pref, setPrefState] = useState(() => getPrefForCrossing(crossing.port_number, selectedDirection));
   const [perm, setPerm] = useState(() => (typeof window !== 'undefined' ? permission() : 'default'));
 
-  const status = crossing.status || 'unknown';
+  useEffect(() => {
+    setPrefState(getPrefForCrossing(crossing.port_number, selectedDirection));
+  }, [crossing.port_number, selectedDirection]);
+
+  const status = getStatusForDirection(crossing, selectedDirection);
   const s = STATUS_STYLES[status] || STATUS_STYLES.unknown;
-  const wait = crossing.current_wait_time;
+  const wait = getWaitMinutes(crossing, selectedDirection);
   const isHigh = typeof wait === 'number' && wait >= 45;
+  const updatedAt = getUpdatedAtForDirection(crossing, selectedDirection);
+  const isSouthbound = selectedDirection === 'southbound';
 
   const history = useMemo(
-    () => getHistory(crossing.port_number || crossing.id),
-    [crossing.port_number, crossing.id, crossing.updated_at]
+    () => getHistoryForDirection(crossing.port_number || crossing.id, selectedDirection),
+    [crossing.port_number, crossing.id, selectedDirection, crossing.updated_at, crossing.southbound_updated_at]
   );
   const previousWait = useMemo(
-    () => getPreviousWait(crossing.port_number || crossing.id),
-    [crossing.port_number, crossing.id, crossing.updated_at]
+    () => getPreviousWait(crossing.port_number || crossing.id, selectedDirection),
+    [crossing.port_number, crossing.id, selectedDirection, crossing.updated_at, crossing.southbound_updated_at]
   );
 
   const trend = useMemo(() => {
@@ -71,7 +87,7 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
 
   const handleToggleNotify = async () => {
     if (pref) {
-      setPref(crossing.port_number, null);
+      setPref(crossing.port_number, null, selectedDirection);
       setPrefState(null);
       setShowNotify(false);
       return;
@@ -85,7 +101,7 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
 
   const saveNotify = (kind, threshold) => {
     const newPref = { active: true, kind, threshold: Number(threshold) };
-    setPref(crossing.port_number, newPref);
+    setPref(crossing.port_number, newPref, selectedDirection);
     setPrefState(newPref);
     setShowNotify(false);
   };
@@ -106,12 +122,14 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
                 <h3 className="text-sm font-semibold text-slate-900 truncate" title={crossing.name}>
                   {crossing.name || crossing.port_name}
                 </h3>
-                <span className="text-base leading-none">🇺🇸</span>
+                <span className="text-base leading-none">{isSouthbound ? '🇲🇽' : '🇺🇸'}</span>
               </div>
               <div className="flex items-center gap-1 text-xs text-slate-500">
                 <MapPin className="w-3 h-3 flex-shrink-0" />
                 <span className="truncate">
-                  {language === 'en' ? 'To USA' : 'Hacia EE.UU.'}
+                  {isSouthbound
+                    ? (language === 'en' ? 'To Mexico' : 'Hacia México')
+                    : (language === 'en' ? 'To USA' : 'Hacia EE.UU.')}
                 </span>
               </div>
             </div>
@@ -134,7 +152,11 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
           </div>
           <div className="flex items-center gap-1 text-[11px] text-slate-500 mb-3">
             <Clock className="w-3 h-3" />
-            <span>{language === 'en' ? 'Average wait time' : 'Tiempo promedio'}</span>
+            <span>
+              {isSouthbound
+                ? (language === 'en' ? 'Estimated border delay' : 'Demora estimada')
+                : (language === 'en' ? 'Average wait time' : 'Tiempo promedio')}
+            </span>
           </div>
 
           {/* Action buttons */}
@@ -168,7 +190,9 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
                 className="gap-1.5 h-8 text-xs"
               >
                 {showLanes ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                {language === 'en' ? 'Lanes' : 'Carriles'}
+                {isSouthbound
+                  ? (language === 'en' ? 'Method' : 'Método')
+                  : (language === 'en' ? 'Lanes' : 'Carriles')}
               </Button>
             </div>
           </div>
@@ -244,14 +268,42 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 mb-3 divide-y divide-slate-200">
-                  <LaneRow icon={Car} label={{ en: 'Standard', es: 'Estándar' }} data={lanes.passenger_standard} language={language} />
-                  <LaneRow icon={Car} label={{ en: 'Ready Lane', es: 'Ready Lane' }} data={lanes.passenger_ready} language={language} />
-                  <LaneRow icon={Car} label={{ en: 'SENTRI', es: 'SENTRI' }} data={lanes.passenger_sentri} language={language} />
-                  <LaneRow icon={User} label={{ en: 'Pedestrian', es: 'Peatones' }} data={lanes.pedestrian_standard} language={language} />
-                  <LaneRow icon={Truck} label={{ en: 'Commercial', es: 'Comercial' }} data={lanes.commercial_standard} language={language} />
-                  <LaneRow icon={Truck} label={{ en: 'FAST', es: 'FAST' }} data={lanes.commercial_fast} language={language} />
-                </div>
+                {isSouthbound ? (
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 mb-3 space-y-2 text-xs text-slate-700">
+                    <div className="flex items-center justify-between">
+                      <span>{language === 'en' ? 'Live drive segment' : 'Trayecto en vivo'}</span>
+                      <span className="font-medium tabular-nums">
+                        {crossing.southbound_live_route_minutes == null ? '—' : `${crossing.southbound_live_route_minutes}m`}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>{language === 'en' ? 'Free-flow baseline' : 'Línea base libre'}</span>
+                      <span className="font-medium tabular-nums">
+                        {crossing.southbound_free_flow_minutes == null ? '—' : `${crossing.southbound_free_flow_minutes}m`}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>{language === 'en' ? 'Estimated border delay' : 'Demora estimada'}</span>
+                      <span className="font-medium tabular-nums">
+                        {wait == null ? '—' : `${wait}m`}
+                      </span>
+                    </div>
+                    <div className="pt-1 text-[11px] text-slate-500">
+                      {crossing.southbound_route_origin && crossing.southbound_route_destination
+                        ? `${crossing.southbound_route_origin} -> ${crossing.southbound_route_destination}`
+                        : (crossing.southbound_methodology || (language === 'en' ? 'No route metadata yet.' : 'Sin metadata de ruta todavía.'))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 mb-3 divide-y divide-slate-200">
+                    <LaneRow icon={Car} label={{ en: 'Standard', es: 'Estándar' }} data={lanes.passenger_standard} language={language} />
+                    <LaneRow icon={Car} label={{ en: 'Ready Lane', es: 'Ready Lane' }} data={lanes.passenger_ready} language={language} />
+                    <LaneRow icon={Car} label={{ en: 'SENTRI', es: 'SENTRI' }} data={lanes.passenger_sentri} language={language} />
+                    <LaneRow icon={User} label={{ en: 'Pedestrian', es: 'Peatones' }} data={lanes.pedestrian_standard} language={language} />
+                    <LaneRow icon={Truck} label={{ en: 'Commercial', es: 'Comercial' }} data={lanes.commercial_standard} language={language} />
+                    <LaneRow icon={Truck} label={{ en: 'FAST', es: 'FAST' }} data={lanes.commercial_fast} language={language} />
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -262,7 +314,7 @@ export default function BorderCrossingCard({ crossing, language, index = 0 }) {
               <span className={`w-1.5 h-1.5 rounded-full ${s.dot} animate-pulse`} />
               <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
             </div>
-            <span className="text-slate-400 truncate">{crossing.updated_at}</span>
+            <span className="text-slate-400 truncate">{updatedAt}</span>
           </div>
           {isHigh && (
             <div className="mt-2 flex items-center gap-1.5 rounded-md bg-rose-50 px-2 py-1 text-[11px] text-rose-700">
