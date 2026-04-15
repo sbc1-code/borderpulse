@@ -9,7 +9,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const CBP_URL = 'https://bwt.cbp.gov/api/waittimes';
+// bwt.cbp.gov serves two endpoints with the same JSON shape:
+//   /api/waittimes        — legacy, currently frozen on 3/26/2026
+//   /api/bwtpublicmod     — current, used by the CBP Angular app
+// We use the modern one. If CBP retires it, swap back to /api/waittimes.
+const CBP_URL = 'https://bwt.cbp.gov/api/bwtpublicmod';
 const OUT_PATH = path.join(process.cwd(), 'public', 'data', 'crossings.json');
 
 const parseLane = (lane) => {
@@ -42,13 +46,19 @@ const mapPort = (p) => {
 
   const primaryDelay = passenger_standard?.delay_minutes ?? null;
 
+  const portName = (p.port_name || '').trim();
+  const crossingName = (p.crossing_name || '').trim();
+  const fullName = portName && crossingName && portName.toLowerCase() !== crossingName.toLowerCase()
+    ? `${portName} - ${crossingName}`
+    : (portName || crossingName);
+
   return {
     id: p.port_number,
     cbp_id: p.port_number,
     port_number: p.port_number,
-    name: p.crossing_name || p.port_name,
-    port_name: p.port_name,
-    crossing_name: p.crossing_name,
+    name: fullName,
+    port_name: portName,
+    crossing_name: crossingName,
     border: p.border,
     hours: p.hours,
     port_status: p.port_status,
