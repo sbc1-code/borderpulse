@@ -9,8 +9,9 @@ import React, { useEffect, useRef } from 'react';
  * writes the ad. If the script is blocked (ad-blocker, network), the ad
  * simply doesn't render — nothing else breaks.
  */
-const DEFAULT_CONTAINER = 'container-38623b438448656f55dd47ec2b4b5cdb';
-const DEFAULT_SCRIPT = '//pl29144493.profitablecpmratenetwork.com/38623b438448656f55dd47ec2b4b5cdb/invoke.js';
+// borderpulse.com Adsterra site 5724428, Native Banner placement 29055831.
+const DEFAULT_CONTAINER = 'container-180a8c300ca7dd92be799ce6c11cd06a';
+const DEFAULT_SCRIPT = 'https://pl29156330.profitablecpmratenetwork.com/180a8c300ca7dd92be799ce6c11cd06a/invoke.js';
 
 export default function AdsterraBanner({
   containerId = DEFAULT_CONTAINER,
