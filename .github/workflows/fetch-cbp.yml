@@ -24,14 +24,18 @@ jobs:
         run: node scripts/fetch-cbp.mjs
       - name: Fetch USD/MXN exchange rate
         run: node scripts/fetch-fx.mjs
+      - name: Fetch southbound community reports
+        run: node scripts/fetch-sb-reports.mjs
+        env:
+          SB_SHEET_CSV_URL: ${{ secrets.SB_SHEET_CSV_URL }}
       - name: Commit data snapshot
         run: |
           git config user.name  "borderpulse-bot"
           git config user.email "borderpulse-bot@users.noreply.github.com"
-          git add public/data/crossings.json public/data/exchange-rate.json
+          git add public/data/crossings.json public/data/exchange-rate.json public/data/crossings-sb.json
           if git diff --cached --quiet; then
             echo "No data changes."
           else
-            git commit -m "chore(data): refresh CBP + FX snapshot"
+            git commit -m "chore(data): refresh CBP + FX + SB snapshot"
             git push
           fi

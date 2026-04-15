@@ -1,58 +1,66 @@
 import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Clock, MapPin, Activity, AlertTriangle } from "lucide-react";
-import { motion } from "framer-motion";
+import { Card, CardContent } from '@/components/ui/card';
+import { Clock, MapPin, Activity, AlertTriangle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
+// Math fix: a crossing with null wait_time has NO DATA; it must not be
+// treated as "0 min" in the average or "< 15" as Good. Thresholds also
+// aligned with statusFromDelay() in scripts/fetch-cbp.mjs: good < 15,
+// heavy >= 45.
 export default function StatsOverview({ crossings, selectedDirection = 'northbound', language, theme }) {
-  const totalCrossings = crossings.length;
-  
-  // Get wait times based on selected direction
   const getWaitTime = (crossing) => {
     if (selectedDirection === 'southbound') {
-      return crossing.southbound_wait_time ?? 0;
+      return typeof crossing.southbound_wait_time === 'number' ? crossing.southbound_wait_time : null;
     }
-    return crossing.northbound_wait_time ?? crossing.current_wait_time ?? 0;
+    const nb = crossing.northbound_wait_time ?? crossing.current_wait_time;
+    return typeof nb === 'number' ? nb : null;
   };
 
-  const waitTimes = crossings.map(getWaitTime);
-  const averageWaitTime = waitTimes.length > 0 
-    ? Math.round(waitTimes.reduce((sum, time) => sum + time, 0) / waitTimes.length)
-    : 0;
-  
-  const goodCrossings = waitTimes.filter(time => time < 20).length;
-  const alertCrossings = waitTimes.filter(time => time > 45).length;
+  const reportingWaits = crossings.map(getWaitTime).filter((t) => t !== null);
+  const totalCrossings = crossings.length;
+  const reportingCount = reportingWaits.length;
+
+  const averageWaitTime = reportingCount
+    ? Math.round(reportingWaits.reduce((sum, t) => sum + t, 0) / reportingCount)
+    : null;
+  const goodCount = reportingWaits.filter((t) => t < 15).length;
+  const heavyCount = reportingWaits.filter((t) => t >= 45).length;
 
   const stats = [
     {
       icon: MapPin,
-      label: language === 'en' ? 'Crossings' : 'Cruces',
-      value: totalCrossings,
+      label: language === 'en' ? 'Open' : 'Abiertos',
+      value: `${reportingCount}/${totalCrossings}`,
       color: 'text-blue-600',
-      bg: 'bg-blue-100'
+      bg: 'bg-blue-100',
+      hint: language === 'en' ? 'reporting / total' : 'reportando / total',
     },
     {
       icon: Clock,
       label: language === 'en' ? 'Avg Wait' : 'Promedio',
-      value: selectedDirection === 'southbound' && averageWaitTime === 0 
-        ? (language === 'en' ? 'No Wait' : 'Sin Espera')
-        : `${averageWaitTime}min`,
+      value: averageWaitTime == null
+        ? '—'
+        : `${averageWaitTime} min`,
       color: 'text-indigo-600',
-      bg: 'bg-indigo-100'
+      bg: 'bg-indigo-100',
+      hint: language === 'en' ? 'across open crossings' : 'entre cruces abiertos',
     },
     {
       icon: Activity,
       label: language === 'en' ? 'Good' : 'Bueno',
-      value: goodCrossings,
-      color: 'text-green-600',
-      bg: 'bg-green-100'
+      value: goodCount,
+      color: 'text-emerald-600',
+      bg: 'bg-emerald-100',
+      hint: language === 'en' ? '< 15 min' : '< 15 min',
     },
     {
-      icon: AlertTriangle,  
+      icon: AlertTriangle,
       label: language === 'en' ? 'Heavy' : 'Pesado',
-      value: alertCrossings,
-      color: 'text-red-600',
-      bg: 'bg-red-100'
-    }
+      value: heavyCount,
+      color: 'text-rose-600',
+      bg: 'bg-rose-100',
+      hint: language === 'en' ? '≥ 45 min' : '≥ 45 min',
+    },
   ];
 
   return (
@@ -60,29 +68,30 @@ export default function StatsOverview({ crossings, selectedDirection = 'northbou
       {stats.map((stat, index) => (
         <motion.div
           key={stat.label}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
+          transition={{ delay: index * 0.05 }}
         >
           <Card className={`${
-            theme === 'dark' 
-              ? 'bg-gray-800/50 border-gray-700' 
+            theme === 'dark'
+              ? 'bg-gray-800/60 border-gray-700'
               : 'bg-white/80 border-slate-200'
           } backdrop-blur-sm transition-all duration-300 hover:shadow-md`}>
             <CardContent className="p-3">
-              <div className="flex items-center gap-2">
+              <div className="flex items-start gap-2">
                 <div className={`p-1.5 rounded-lg ${stat.bg} flex-shrink-0`}>
-                  <stat.icon className={`w-3 h-3 ${stat.color}`} />
+                  <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide truncate">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-wider truncate">
                     {stat.label}
                   </p>
-                  <p className={`text-sm font-bold ${
-                    theme === 'dark' ? 'text-white' : 'text-gray-900'
-                  } truncate`} title={stat.value.toString()}>
+                  <p className={`text-base sm:text-lg font-bold ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  } leading-tight`}>
                     {stat.value}
                   </p>
+                  <p className="text-[10px] text-slate-400 truncate">{stat.hint}</p>
                 </div>
               </div>
             </CardContent>

@@ -9,6 +9,7 @@ import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
 import AnalyticsView from '@/components/dashboard/AnalyticsView';
 import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
+import AboutFooter from '@/components/dashboard/AboutFooter';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
@@ -122,7 +123,7 @@ export default function Dashboard() {
               animate={{ opacity: 1, x: 0 }}
               className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
             >
-              {language === 'en' ? 'Border Intelligence' : 'Inteligencia Fronteriza'}
+              {language === 'en' ? 'Border Crossing Intelligence' : 'Inteligencia de Cruces Fronterizos'}
             </motion.h1>
             <p className="text-xs sm:text-sm text-slate-500">
               {language === 'en'
@@ -250,11 +251,11 @@ export default function Dashboard() {
 
           <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} />
 
-          <div className="text-center text-xs text-slate-400 mt-6">
-            {language === 'en' ? 'Source:' : 'Fuente:'} {state.source}
-            {' · '}
-            {language === 'en' ? 'Fetched:' : 'Actualizado:'} {new Date(state.fetchedAt).toLocaleString()}
-          </div>
+          <AboutFooter
+            language={language}
+            fetchedAt={state.fetchedAt}
+            count={state.crossings.length}
+          />
         </>
       )}
 

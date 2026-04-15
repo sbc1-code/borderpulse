@@ -1,0 +1,8 @@
+{
+  "source": "Community reports (Google Form)",
+  "fetched_at": "2026-04-15T04:19:04.218Z",
+  "window_hours": 2,
+  "count": 0,
+  "by_port": {},
+  "note": "SB_SHEET_CSV_URL env var not set — no reports ingested yet"
+}

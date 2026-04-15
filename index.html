@@ -4,15 +4,76 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Real-time US-Mexico border crossing wait times. Official CBP data, updated every 15 minutes. Bilingual EN/ES." />
     <meta name="theme-color" content="#0b0b0b" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://borderpulse.com" />
+
+    <title>Border Pulse | Real-Time US-Mexico Border Crossing Wait Times (CBP)</title>
+    <meta name="description" content="Live wait times at every US-Mexico border crossing. Official U.S. Customs and Border Protection (CBP) data updated every 15 minutes. Covers 52 crossings across California, Arizona, New Mexico, and Texas. Bilingual EN/ES." />
+    <meta name="keywords" content="border wait times, US Mexico border, CBP wait times, San Ysidro wait time, Otay Mesa wait time, Bridge of the Americas, Paso del Norte, Nogales Mariposa, Hidalgo Pharr, Laredo bridge, Eagle Pass wait, El Paso border, Tijuana border, Ciudad Juarez border, tiempos de espera frontera, cruces fronterizos, frontera México Estados Unidos" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="author" content="Border Pulse" />
+
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Border Pulse | Real-Time US-Mexico Border Wait Times" />
-    <meta property="og:description" content="Live wait times at every US-Mexico border crossing, from official CBP data. Bilingual EN/ES." />
+    <meta property="og:site_name" content="Border Pulse" />
+    <meta property="og:title" content="Border Pulse | Real-Time US-Mexico Border Crossing Wait Times" />
+    <meta property="og:description" content="Live wait times at every US-Mexico border crossing. Official CBP data, updated every 15 minutes. Bilingual EN/ES." />
     <meta property="og:url" content="https://borderpulse.com" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <title>Border Pulse | Real-Time US-Mexico Border Wait Times</title>
+    <meta property="og:image" content="https://borderpulse.com/favicon.svg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_MX" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Border Pulse | Real-Time US-Mexico Border Crossing Wait Times" />
+    <meta name="twitter:description" content="Live wait times at every US-Mexico border crossing. Official CBP data, updated every 15 minutes." />
+    <meta name="twitter:image" content="https://borderpulse.com/favicon.svg" />
+
+    <link rel="alternate" hreflang="en" href="https://borderpulse.com" />
+    <link rel="alternate" hreflang="es" href="https://borderpulse.com" />
+    <link rel="alternate" hreflang="x-default" href="https://borderpulse.com" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Border Pulse",
+          "url": "https://borderpulse.com",
+          "description": "Real-time US-Mexico border crossing wait times. Official CBP data, updated every 15 minutes.",
+          "applicationCategory": "TravelApplication",
+          "operatingSystem": "Web",
+          "inLanguage": ["en-US", "es-MX"],
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "isAccessibleForFree": true
+        },
+        {
+          "@type": "Dataset",
+          "name": "US-Mexico Border Crossing Wait Times",
+          "description": "Real-time wait times for passenger, pedestrian, and commercial lanes at every US-Mexico border crossing, updated every 15 minutes.",
+          "url": "https://borderpulse.com",
+          "creator": { "@type": "Organization", "name": "U.S. Customs and Border Protection", "url": "https://bwt.cbp.gov/" },
+          "publisher": { "@type": "Organization", "name": "Border Pulse", "url": "https://borderpulse.com" },
+          "license": "https://www.usa.gov/government-works",
+          "spatialCoverage": "United States-Mexico border (California, Arizona, New Mexico, Texas)",
+          "temporalCoverage": "2026-04/..",
+          "keywords": ["border wait times", "CBP", "US Mexico border", "port of entry", "SENTRI", "Ready Lane"],
+          "distribution": {
+            "@type": "DataDownload",
+            "contentUrl": "https://borderpulse.com/data/crossings.json",
+            "encodingFormat": "application/json"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "Border Pulse",
+          "url": "https://borderpulse.com",
+          "logo": "https://borderpulse.com/favicon.svg",
+          "sameAs": ["https://github.com/sbc1-code/borderpulse"]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
