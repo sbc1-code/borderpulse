@@ -56,18 +56,12 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           <div className="font-medium text-slate-900 dark:text-white text-sm">
             {language === 'en' ? 'Every 15 minutes' : 'Cada 15 minutos'}
           </div>
-          <div className="text-[10px] text-slate-500">
-            {language === 'en' ? 'via GitHub Actions cron' : 'vía cron de GitHub Actions'}
-          </div>
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
           <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
             {language === 'en' ? 'Last updated' : 'Última actualización'}
           </div>
           <div className="font-medium text-slate-900 dark:text-white text-sm">{updatedStr}</div>
-          <div className="text-[10px] text-slate-500">
-            {language === 'en' ? 'from static snapshot' : 'desde snapshot estático'}
-          </div>
         </div>
       </div>
 
