@@ -22,21 +22,38 @@ const LANE_TYPE_LABELS = new Set([
   'commercial', 'commercial vehicles', 'cargo', 'auto', 'vehicular',
 ]);
 
-// port_name → US state (for region filtering).
+// port_name → US state (for region filtering). CBP uses inconsistent naming
+// across rows, so we match by substring too (see stateForPort below).
 const PORT_STATE = {
   // California
-  'San Ysidro': 'CA', 'Otay Mesa': 'CA', 'Tecate': 'CA',
-  'Calexico': 'CA', 'Andrade': 'CA',
+  'San Ysidro': 'CA', 'Otay Mesa': 'CA', 'Otay Mesa Port of Entry': 'CA',
+  'Tecate': 'CA', 'Calexico': 'CA', 'Andrade': 'CA',
   // Arizona
   'San Luis': 'AZ', 'Lukeville': 'AZ', 'Sasabe': 'AZ',
-  'Nogales': 'AZ', 'Naco': 'AZ', 'Douglas': 'AZ',
+  'Nogales': 'AZ', 'Naco': 'AZ',
+  'Douglas': 'AZ', 'Douglas (Raul Hector Castro)': 'AZ',
   // New Mexico
   'Santa Teresa': 'NM', 'Columbus': 'NM',
   // Texas
   'El Paso': 'TX', 'Fabens': 'TX', 'Fort Hancock': 'TX', 'Tornillo': 'TX',
+  'Marcelino Serna': 'TX', 'Paso Del Norte': 'TX',
+  'Bridge of the Americas Port of Entry': 'TX', 'BOTA CARGO FACILITY': 'TX',
   'Presidio': 'TX', 'Del Rio': 'TX', 'Eagle Pass': 'TX',
-  'Laredo': 'TX', 'Hidalgo/Pharr': 'TX', 'Hidalgo': 'TX', 'Pharr': 'TX',
-  'Progreso': 'TX', 'Rio Grande City': 'TX', 'Roma': 'TX', 'Brownsville': 'TX',
+  'Laredo': 'TX', 'Gateway': 'TX',
+  'Hidalgo/Pharr': 'TX', 'Hidalgo': 'TX', 'Pharr': 'TX',
+  'Progreso': 'TX', 'Rio Grande City': 'TX', 'Roma': 'TX', 'ROMA TEXAS': 'TX',
+  'Brownsville': 'TX',
+};
+
+const stateForPort = (portName) => {
+  if (!portName) return null;
+  if (PORT_STATE[portName]) return PORT_STATE[portName];
+  // Fuzzy fallback — first known prefix match.
+  const lower = portName.toLowerCase();
+  for (const [k, v] of Object.entries(PORT_STATE)) {
+    if (lower.startsWith(k.toLowerCase())) return v;
+  }
+  return null;
 };
 
 const parseLane = (lane) => {
@@ -82,7 +99,7 @@ const mapPort = (p) => {
     ? `${portName} - ${crossingName}`
     : (portName || crossingName);
 
-  const state = PORT_STATE[portName] || null;
+  const state = stateForPort(portName);
 
   return {
     id: p.port_number,

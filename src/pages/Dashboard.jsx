@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2 } from 'lucide-react';
+import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
@@ -23,6 +23,11 @@ const REGIONS = [
   { code: 'TX', label: { en: 'Texas', es: 'Texas' } },
 ];
 
+const regionLabelFor = (code, lang) => {
+  const r = REGIONS.find((x) => x.code === code);
+  return r ? (r.label[lang] || r.label.en) : '';
+};
+
 export default function Dashboard() {
   const [state, setState] = useState({
     crossings: [],
@@ -36,7 +41,8 @@ export default function Dashboard() {
   const [language, setLanguage] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
   const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
   const [region, setRegion] = useState(() => localStorage.getItem('borderPulse_region') || 'ALL');
-  const [view, setView] = useState('live'); // 'live' | 'analytics'
+  const [search, setSearch] = useState('');
+  const [view, setView] = useState('live');
   const [shareOpen, setShareOpen] = useState(false);
 
   const load = async () => {
@@ -55,7 +61,6 @@ export default function Dashboard() {
       source: data.source,
       fetchedAt: data.timestamp,
     });
-    // Record snapshot + evaluate notifications (post-render)
     try {
       recordSnapshot(normalized);
       evaluateNotify(normalized, language);
@@ -80,22 +85,29 @@ export default function Dashboard() {
     setDirection(dir);
     localStorage.setItem('borderPulse_direction', dir);
   };
-
   const changeRegion = (r) => {
     setRegion(r);
     localStorage.setItem('borderPulse_region', r);
   };
 
+  // Filter by region + search; then sort heaviest first, keep null waits last.
   const filteredCrossings = useMemo(() => {
-    if (region === 'ALL') return state.crossings;
-    return state.crossings.filter((c) => c.state === region);
-  }, [state.crossings, region]);
+    const q = search.trim().toLowerCase();
+    return state.crossings.filter((c) => {
+      if (region !== 'ALL' && c.state !== region) return false;
+      if (!q) return true;
+      const haystack = [c.name, c.port_name, c.crossing_name, c.state]
+        .filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(q);
+    });
+  }, [state.crossings, region, search]);
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
+      if (a.current_wait_time == null && b.current_wait_time == null) return 0;
       if (a.current_wait_time == null) return 1;
       if (b.current_wait_time == null) return -1;
-      return b.current_wait_time - a.current_wait_time; // heaviest first — matches live site
+      return b.current_wait_time - a.current_wait_time;
     });
   }, [filteredCrossings]);
 
@@ -115,60 +127,57 @@ export default function Dashboard() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1600px] mx-auto">
       {/* Header */}
-      <div className="mb-4 sm:mb-6">
-        <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
-          <div>
-            <motion.h1
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
-            >
-              {language === 'en' ? 'Border Crossing Intelligence' : 'Inteligencia de Cruces Fronterizos'}
-            </motion.h1>
-            <p className="text-xs sm:text-sm text-slate-500">
-              {language === 'en'
-                ? 'Real-time border crossing data · Official CBP feed · 15 min updates'
-                : 'Datos de cruces en tiempo real · Feed oficial CBP · Actualizado cada 15 min'}
-            </p>
-          </div>
+      <header className="mb-4 sm:mb-5">
+        <motion.h1
+          initial={{ opacity: 0, x: -8 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
+        >
+          {language === 'en' ? 'Border Crossing Intelligence' : 'Inteligencia de Cruces Fronterizos'}
+        </motion.h1>
+        <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          {language === 'en'
+            ? 'Real-time data · Official CBP feed · Updated every 15 min'
+            : 'Datos en tiempo real · Feed oficial CBP · Actualizado cada 15 min'}
+        </p>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex items-center gap-1 text-xs text-slate-500">
-              <Wifi className="w-3 h-3 text-emerald-500" />
-              <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
-            </div>
-            <Button
-              variant={view === 'analytics' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
-              className="gap-1"
-            >
-              <BarChart3 className="w-3 h-3" />
-              <span className="hidden sm:inline text-xs">
-                {view === 'analytics'
-                  ? (language === 'en' ? 'Live view' : 'Vista en vivo')
-                  : (language === 'en' ? 'Analytics' : 'Análisis')}
-              </span>
-            </Button>
-            <div className="flex items-center bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-0.5">
-              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 py-1 h-7">EN</Button>
-              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 py-1 h-7">ES</Button>
-            </div>
-            <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1">
-              <Share2 className="w-3 h-3" />
-              <span className="hidden sm:inline text-xs">
-                {language === 'en' ? 'Share' : 'Compartir'}
-              </span>
-            </Button>
-            <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1">
-              <RefreshCw className={`w-3 h-3 ${state.isRefreshing ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline text-xs">
-                {language === 'en' ? 'Refresh' : 'Actualizar'}
-              </span>
-            </Button>
+        {/* Controls row — wraps cleanly on mobile */}
+        <div className="flex items-center gap-2 flex-wrap mt-3">
+          <div className="flex items-center gap-1 text-[11px] text-slate-500 mr-auto">
+            <Wifi className="w-3 h-3 text-emerald-500" />
+            <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
           </div>
+          <Button
+            variant={view === 'analytics' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
+            className="gap-1 h-8"
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            <span className="text-xs">
+              {view === 'analytics'
+                ? (language === 'en' ? 'Live' : 'En vivo')
+                : (language === 'en' ? 'Analytics' : 'Análisis')}
+            </span>
+          </Button>
+          <div className="flex items-center bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-0.5">
+            <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2.5 h-7">EN</Button>
+            <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2.5 h-7">ES</Button>
+          </div>
+          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 h-8">
+            <Share2 className="w-3.5 h-3.5" />
+            <span className="text-xs hidden sm:inline">
+              {language === 'en' ? 'Share' : 'Compartir'}
+            </span>
+          </Button>
+          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 h-8">
+            <RefreshCw className={`w-3.5 h-3.5 ${state.isRefreshing ? 'animate-spin' : ''}`} />
+            <span className="text-xs hidden sm:inline">
+              {language === 'en' ? 'Refresh' : 'Actualizar'}
+            </span>
+          </Button>
         </div>
-      </div>
+      </header>
 
       {/* Departure Alert hero */}
       <DepartureAlertBanner crossings={state.crossings} language={language} />
@@ -179,7 +188,7 @@ export default function Dashboard() {
           variant={direction === 'northbound' ? 'default' : 'ghost'}
           size="sm"
           onClick={() => changeDirection('northbound')}
-          className="flex-1 gap-2"
+          className="flex-1 gap-2 h-9"
         >
           <ArrowUp className="w-4 h-4" />
           {language === 'en' ? 'To US' : 'Hacia EE.UU.'}
@@ -188,7 +197,7 @@ export default function Dashboard() {
           variant="ghost"
           size="sm"
           disabled
-          className="flex-1 gap-2 opacity-60 cursor-not-allowed"
+          className="flex-1 gap-2 h-9 opacity-60 cursor-not-allowed"
           title={language === 'en' ? 'CBP does not publish southbound wait times' : 'CBP no publica tiempos hacia México'}
         >
           <ArrowDown className="w-4 h-4" />
@@ -196,30 +205,53 @@ export default function Dashboard() {
         </Button>
       </div>
 
-      {/* Region filter */}
-      <div className="flex items-center gap-1.5 flex-wrap mb-4 justify-center">
-        {REGIONS.map((r) => (
-          <Button
-            key={r.code}
-            variant={region === r.code ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => changeRegion(r.code)}
-            className="text-xs h-7 px-3"
-          >
-            {r.label[language] || r.label.en}
-          </Button>
-        ))}
-      </div>
-
       {view === 'analytics' ? (
         <AnalyticsView crossings={state.crossings} language={language} />
       ) : (
         <>
+          {/* Search + region filter */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 max-w-3xl mx-auto">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              <input
+                type="search"
+                inputMode="search"
+                placeholder={language === 'en' ? 'Search crossing or city (San Ysidro, Laredo, Nogales…)' : 'Buscar cruce o ciudad…'}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full h-10 pl-9 pr-9 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+              />
+              {search && (
+                <button
+                  onClick={() => setSearch('')}
+                  aria-label="Clear search"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
+                >
+                  <X className="w-3.5 h-3.5 text-slate-400" />
+                </button>
+              )}
+            </div>
+            <div className="flex items-center gap-1.5 flex-wrap justify-center sm:justify-end">
+              {REGIONS.map((r) => (
+                <Button
+                  key={r.code}
+                  variant={region === r.code ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => changeRegion(r.code)}
+                  className="text-xs h-8 px-3"
+                >
+                  {r.label[language] || r.label.en}
+                </Button>
+              ))}
+            </div>
+          </div>
+
           <StatsOverview
-            crossings={state.crossings}
+            crossings={filteredCrossings}
             selectedDirection={direction}
             language={language}
             theme="light"
+            regionLabel={regionLabelFor(region, language)}
           />
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6 mt-4">
@@ -231,20 +263,35 @@ export default function Dashboard() {
               {sortedCrossings.length === 0 ? (
                 <Card className="border-dashed">
                   <CardContent className="p-8 text-center text-sm text-slate-500">
-                    {language === 'en' ? 'No crossings available right now.' : 'No hay cruces disponibles en este momento.'}
+                    {search
+                      ? (language === 'en'
+                        ? `No crossings match "${search}". Try a different name or clear the search.`
+                        : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
+                      : (language === 'en'
+                        ? 'No crossings in this region right now.'
+                        : 'No hay cruces en esta región ahora.')}
                   </CardContent>
                 </Card>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
-                  {sortedCrossings.map((crossing, idx) => (
-                    <BorderCrossingCard
-                      key={crossing.id || crossing.port_number}
-                      crossing={crossing}
-                      language={language}
-                      index={idx}
-                    />
-                  ))}
-                </div>
+                <>
+                  <p className="text-xs text-slate-500 mb-2">
+                    {language === 'en'
+                      ? `Showing ${sortedCrossings.length} crossing${sortedCrossings.length === 1 ? '' : 's'}`
+                      : `Mostrando ${sortedCrossings.length} cruce${sortedCrossings.length === 1 ? '' : 's'}`}
+                    {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
+                    {search && ` · "${search}"`}
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
+                    {sortedCrossings.map((crossing, idx) => (
+                      <BorderCrossingCard
+                        key={crossing.id || crossing.port_number}
+                        crossing={crossing}
+                        language={language}
+                        index={idx}
+                      />
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </div>
