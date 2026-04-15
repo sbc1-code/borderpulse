@@ -8,10 +8,19 @@ import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
 import AnalyticsView from '@/components/dashboard/AnalyticsView';
+import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
+
+const REGIONS = [
+  { code: 'ALL', label: { en: 'All', es: 'Todos' } },
+  { code: 'CA', label: { en: 'California', es: 'California' } },
+  { code: 'AZ', label: { en: 'Arizona', es: 'Arizona' } },
+  { code: 'NM', label: { en: 'New Mexico', es: 'Nuevo México' } },
+  { code: 'TX', label: { en: 'Texas', es: 'Texas' } },
+];
 
 export default function Dashboard() {
   const [state, setState] = useState({
@@ -25,6 +34,7 @@ export default function Dashboard() {
 
   const [language, setLanguage] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
   const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
+  const [region, setRegion] = useState(() => localStorage.getItem('borderPulse_region') || 'ALL');
   const [view, setView] = useState('live'); // 'live' | 'analytics'
   const [shareOpen, setShareOpen] = useState(false);
 
@@ -70,13 +80,23 @@ export default function Dashboard() {
     localStorage.setItem('borderPulse_direction', dir);
   };
 
+  const changeRegion = (r) => {
+    setRegion(r);
+    localStorage.setItem('borderPulse_region', r);
+  };
+
+  const filteredCrossings = useMemo(() => {
+    if (region === 'ALL') return state.crossings;
+    return state.crossings.filter((c) => c.state === region);
+  }, [state.crossings, region]);
+
   const sortedCrossings = useMemo(() => {
-    return [...state.crossings].sort((a, b) => {
+    return [...filteredCrossings].sort((a, b) => {
       if (a.current_wait_time == null) return 1;
       if (b.current_wait_time == null) return -1;
       return b.current_wait_time - a.current_wait_time; // heaviest first — matches live site
     });
-  }, [state.crossings]);
+  }, [filteredCrossings]);
 
   if (state.isLoading) {
     return (
@@ -149,8 +169,11 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Departure Alert hero */}
+      <DepartureAlertBanner crossings={state.crossings} language={language} />
+
       {/* Direction toggle */}
-      <div className="flex rounded-lg p-1 mb-4 max-w-md mx-auto bg-slate-100 dark:bg-gray-800">
+      <div className="flex rounded-lg p-1 mb-3 max-w-md mx-auto bg-slate-100 dark:bg-gray-800">
         <Button
           variant={direction === 'northbound' ? 'default' : 'ghost'}
           size="sm"
@@ -170,6 +193,21 @@ export default function Dashboard() {
           <ArrowDown className="w-4 h-4" />
           {language === 'en' ? 'To MX (soon)' : 'Hacia MX (pronto)'}
         </Button>
+      </div>
+
+      {/* Region filter */}
+      <div className="flex items-center gap-1.5 flex-wrap mb-4 justify-center">
+        {REGIONS.map((r) => (
+          <Button
+            key={r.code}
+            variant={region === r.code ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => changeRegion(r.code)}
+            className="text-xs h-7 px-3"
+          >
+            {r.label[language] || r.label.en}
+          </Button>
+        ))}
       </div>
 
       {view === 'analytics' ? (

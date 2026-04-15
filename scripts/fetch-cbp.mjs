@@ -3,18 +3,41 @@
  * Fetches US-Mexico border wait times from CBP's official public feed
  * and writes a clean JSON snapshot to public/data/crossings.json.
  *
- * CBP feed: https://bwt.cbp.gov/api/waittimes
+ * CBP feed: https://bwt.cbp.gov/api/bwtpublicmod
  * Runs every 15 minutes via GitHub Actions.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 // bwt.cbp.gov serves two endpoints with the same JSON shape:
-//   /api/waittimes        — legacy, currently frozen on 3/26/2026
+//   /api/waittimes        — legacy, frozen on 3/26/2026 (do NOT use)
 //   /api/bwtpublicmod     — current, used by the CBP Angular app
-// We use the modern one. If CBP retires it, swap back to /api/waittimes.
 const CBP_URL = 'https://bwt.cbp.gov/api/bwtpublicmod';
 const OUT_PATH = path.join(process.cwd(), 'public', 'data', 'crossings.json');
+
+// CBP uses these as `crossing_name` but they're lane-type labels, not crossings.
+// Drop them from the display name (they'd produce rows like "Otay Mesa - Passenger").
+const LANE_TYPE_LABELS = new Set([
+  'passenger', 'passengers', 'pedestrian', 'pedestrians',
+  'commercial', 'commercial vehicles', 'cargo', 'auto', 'vehicular',
+]);
+
+// port_name → US state (for region filtering).
+const PORT_STATE = {
+  // California
+  'San Ysidro': 'CA', 'Otay Mesa': 'CA', 'Tecate': 'CA',
+  'Calexico': 'CA', 'Andrade': 'CA',
+  // Arizona
+  'San Luis': 'AZ', 'Lukeville': 'AZ', 'Sasabe': 'AZ',
+  'Nogales': 'AZ', 'Naco': 'AZ', 'Douglas': 'AZ',
+  // New Mexico
+  'Santa Teresa': 'NM', 'Columbus': 'NM',
+  // Texas
+  'El Paso': 'TX', 'Fabens': 'TX', 'Fort Hancock': 'TX', 'Tornillo': 'TX',
+  'Presidio': 'TX', 'Del Rio': 'TX', 'Eagle Pass': 'TX',
+  'Laredo': 'TX', 'Hidalgo/Pharr': 'TX', 'Hidalgo': 'TX', 'Pharr': 'TX',
+  'Progreso': 'TX', 'Rio Grande City': 'TX', 'Roma': 'TX', 'Brownsville': 'TX',
+};
 
 const parseLane = (lane) => {
   if (!lane || lane.operational_status === 'N/A' || lane.operational_status === 'Lanes Closed') return null;
@@ -35,6 +58,13 @@ const statusFromDelay = (minutes) => {
   return 'heavy';
 };
 
+const cleanCrossingName = (raw) => {
+  const s = (raw || '').trim();
+  if (!s) return '';
+  if (LANE_TYPE_LABELS.has(s.toLowerCase())) return '';
+  return s;
+};
+
 const mapPort = (p) => {
   const passenger_standard = parseLane(p.passenger_vehicle_lanes?.standard_lanes);
   const passenger_sentri = parseLane(p.passenger_vehicle_lanes?.NEXUS_SENTRI_lanes);
@@ -47,10 +77,12 @@ const mapPort = (p) => {
   const primaryDelay = passenger_standard?.delay_minutes ?? null;
 
   const portName = (p.port_name || '').trim();
-  const crossingName = (p.crossing_name || '').trim();
+  const crossingName = cleanCrossingName(p.crossing_name);
   const fullName = portName && crossingName && portName.toLowerCase() !== crossingName.toLowerCase()
     ? `${portName} - ${crossingName}`
     : (portName || crossingName);
+
+  const state = PORT_STATE[portName] || null;
 
   return {
     id: p.port_number,
@@ -59,6 +91,7 @@ const mapPort = (p) => {
     name: fullName,
     port_name: portName,
     crossing_name: crossingName,
+    state,
     border: p.border,
     hours: p.hours,
     port_status: p.port_status,
@@ -78,6 +111,30 @@ const mapPort = (p) => {
   };
 };
 
+// Collapse dupes: for a given port, if there are multiple rows and one of them
+// is just the port_name with no crossing_name (e.g. Otay Mesa generic +
+// Otay Mesa Passenger/Commercial), keep the named rows and drop the bare one
+// when it has no wait data.
+const dedupe = (rows) => {
+  const byPort = new Map();
+  for (const r of rows) {
+    const arr = byPort.get(r.port_name) || [];
+    arr.push(r);
+    byPort.set(r.port_name, arr);
+  }
+  const keep = [];
+  for (const [, arr] of byPort) {
+    if (arr.length === 1) { keep.push(arr[0]); continue; }
+    const hasNamedWithWait = arr.some((r) => r.crossing_name && r.current_wait_time != null);
+    for (const r of arr) {
+      const isBare = !r.crossing_name;
+      if (isBare && hasNamedWithWait && r.current_wait_time == null) continue; // drop
+      keep.push(r);
+    }
+  }
+  return keep;
+};
+
 async function main() {
   console.log(`Fetching ${CBP_URL}...`);
   const res = await fetch(CBP_URL, { headers: { 'User-Agent': 'borderpulse.com/1.0 (static-fetch)' } });
@@ -85,9 +142,11 @@ async function main() {
   const data = await res.json();
   if (!Array.isArray(data)) throw new Error('CBP response was not an array');
 
-  const mexican = data
-    .filter((p) => p.border === 'Mexican Border')
-    .map(mapPort);
+  const mexican = dedupe(
+    data
+      .filter((p) => p.border === 'Mexican Border')
+      .map(mapPort),
+  );
 
   const payload = {
     source: 'U.S. Customs and Border Protection',
