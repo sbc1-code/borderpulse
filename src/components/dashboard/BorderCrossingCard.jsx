@@ -45,6 +45,20 @@ function summarizeNotice(text) {
   return `${firstSentence.slice(0, 157)}...`;
 }
 
+function formatUpdatedAt(value, language) {
+  if (!value) return '';
+  if (typeof value === 'string' && /T.*Z$/.test(value)) {
+    const d = new Date(value);
+    if (!Number.isNaN(d.getTime())) {
+      return d.toLocaleTimeString(language === 'en' ? 'en-US' : 'es-MX', {
+        hour: 'numeric',
+        minute: '2-digit',
+      });
+    }
+  }
+  return String(value);
+}
+
 function advisoryLabel(type, language) {
   const labels = {
     closure: { en: 'Closure', es: 'Cierre' },
@@ -382,7 +396,7 @@ export default function BorderCrossingCard({
               <span className={`w-1.5 h-1.5 rounded-full ${s.dot} animate-pulse`} />
               <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
             </div>
-            <span className="text-slate-400 truncate">{updatedAt}</span>
+            <span className="text-slate-400 truncate">{formatUpdatedAt(updatedAt, language)}</span>
           </div>
           {isHigh && (
             <div className="mt-2 flex items-center gap-1.5 rounded-md bg-rose-50 px-2 py-1 text-[11px] text-rose-700">
