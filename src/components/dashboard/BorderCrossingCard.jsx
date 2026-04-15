@@ -15,13 +15,46 @@ import {
   getUpdatedAtForDirection,
   getWaitMinutes,
 } from '@/components/utils/crossingDirection';
+import {
+  getAdvisoryType,
+  getOperationalNotice,
+  getPortStatus,
+  hasOperationalAdvisory,
+} from '@/components/utils/crossingMeta';
 
 const STATUS_STYLES = {
   good: { bar: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: { en: 'Good', es: 'Bueno' }, dot: 'bg-emerald-500' },
   moderate: { bar: 'bg-amber-500', badge: 'bg-amber-50 text-amber-700 border-amber-200', label: { en: 'Moderate', es: 'Moderado' }, dot: 'bg-amber-500' },
   heavy: { bar: 'bg-rose-500', badge: 'bg-rose-50 text-rose-700 border-rose-200', label: { en: 'Heavy', es: 'Pesado' }, dot: 'bg-rose-500' },
-  unknown: { bar: 'bg-slate-300', badge: 'bg-slate-50 text-slate-600 border-slate-200', label: { en: 'No data', es: 'Sin datos' }, dot: 'bg-slate-300' },
+  unknown: { bar: 'bg-slate-300', badge: 'bg-slate-50 text-slate-600 border-slate-200', label: { en: 'No wait', es: 'Sin tiempo' }, dot: 'bg-slate-300' },
 };
+
+const PORT_STATUS_STYLES = {
+  open: { badge: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: { en: 'Open now', es: 'Abierto ahora' } },
+  closed: { badge: 'bg-rose-50 text-rose-700 border-rose-200', label: { en: 'Closed now', es: 'Cerrado ahora' } },
+  unknown: { badge: 'bg-slate-50 text-slate-600 border-slate-200', label: { en: 'Status unavailable', es: 'Estado no disponible' } },
+};
+
+function summarizeNotice(text) {
+  if (!text) return null;
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (!clean) return null;
+  const firstSentence = clean.split(/(?<=[.!?])\s+/)[0];
+  if (firstSentence.length <= 160) return firstSentence;
+  return `${firstSentence.slice(0, 157)}...`;
+}
+
+function advisoryLabel(type, language) {
+  const labels = {
+    closure: { en: 'Closure', es: 'Cierre' },
+    construction: { en: 'Construction', es: 'Obras' },
+    hours: { en: 'Hours notice', es: 'Aviso de horario' },
+    lane: { en: 'Lane notice', es: 'Aviso de carriles' },
+    notice: { en: 'Advisory', es: 'Aviso' },
+  };
+  const item = labels[type] || labels.notice;
+  return item[language] || item.en;
+}
 
 function LaneRow({ icon: Icon, label, data, language }) {
   if (!data) return null;
@@ -63,6 +96,22 @@ export default function BorderCrossingCard({
   const isHigh = typeof wait === 'number' && wait >= 45;
   const updatedAt = getUpdatedAtForDirection(crossing, selectedDirection);
   const isSouthbound = selectedDirection === 'southbound';
+  const portStatus = getPortStatus(crossing);
+  const portStatusStyle = PORT_STATUS_STYLES[portStatus] || PORT_STATUS_STYLES.unknown;
+  const sourceLabel = isSouthbound
+    ? (language === 'en' ? 'Border Pulse estimate' : 'Estimación de Border Pulse')
+    : (language === 'en' ? 'Official CBP' : 'CBP oficial');
+  const waitMetaLabel = wait == null
+    ? (language === 'en'
+      ? (isSouthbound ? 'Estimate not available yet' : 'No current wait time reported')
+      : (isSouthbound ? 'La estimación todavía no está disponible' : 'No hay tiempo actual reportado'))
+    : (isSouthbound ? (language === 'en' ? 'Estimated delay' : 'Demora estimada') : (language === 'en' ? 'Official wait time' : 'Tiempo oficial'));
+  const hoursLabel = crossing.hours
+    ? `${language === 'en' ? 'Official hours' : 'Horario oficial'}: ${crossing.hours}`
+    : (language === 'en' ? 'Official hours unavailable' : 'Horario oficial no disponible');
+  const advisoryText = summarizeNotice(getOperationalNotice(crossing));
+  const hasAdvisory = hasOperationalAdvisory(crossing);
+  const advisoryType = getAdvisoryType(crossing);
 
   const history = useMemo(
     () => getHistoryForDirection(crossing.port_number || crossing.id, selectedDirection),
@@ -132,6 +181,19 @@ export default function BorderCrossingCard({
                     : (language === 'en' ? 'To USA' : 'Hacia EE.UU.')}
                 </span>
               </div>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                <Badge variant="outline" className={`text-[11px] font-medium whitespace-nowrap ${portStatusStyle.badge}`}>
+                  {portStatusStyle.label[language] || portStatusStyle.label.en}
+                </Badge>
+                <Badge variant="outline" className="text-[11px] font-medium whitespace-nowrap bg-slate-50 text-slate-700 border-slate-200">
+                  {sourceLabel}
+                </Badge>
+                {hasAdvisory && (
+                  <Badge variant="outline" className="text-[11px] font-medium whitespace-nowrap bg-amber-50 text-amber-700 border-amber-200">
+                    {advisoryLabel(advisoryType, language)}
+                  </Badge>
+                )}
+              </div>
             </div>
             <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap ${s.badge}`}>
               {s.label[language] || s.label.en}
@@ -152,12 +214,15 @@ export default function BorderCrossingCard({
           </div>
           <div className="flex items-center gap-1 text-[11px] text-slate-500 mb-3">
             <Clock className="w-3 h-3" />
-            <span>
-              {isSouthbound
-                ? (language === 'en' ? 'Estimated border delay' : 'Demora estimada')
-                : (language === 'en' ? 'Average wait time' : 'Tiempo promedio')}
-            </span>
+            <span>{waitMetaLabel}</span>
           </div>
+          <div className="text-[11px] text-slate-500 mb-3">{hoursLabel}</div>
+          {advisoryText && (
+            <div className="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+              <span className="font-medium">{language === 'en' ? 'Advisory:' : 'Aviso:'}</span>{' '}
+              {advisoryText}
+            </div>
+          )}
 
           {/* Action buttons */}
           <div className="grid grid-cols-1 gap-2 mb-3">

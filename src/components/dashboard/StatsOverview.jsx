@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Clock, MapPin, Activity, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { getPortStatus, hasOperationalAdvisory } from '@/components/utils/crossingMeta';
 
 // Status thresholds ALIGNED with scripts/fetch-cbp.mjs → statusFromDelay():
 //   good    < 15 min
@@ -23,12 +24,12 @@ export default function StatsOverview({
     .filter((t) => t !== null);
   const totalCrossings = crossings.length;
   const reportingCount = reportingWaits.length;
+  const openCount = crossings.filter((crossing) => getPortStatus(crossing) === 'open').length;
+  const advisoryCount = crossings.filter((crossing) => hasOperationalAdvisory(crossing)).length;
 
   const averageWaitTime = reportingCount
     ? Math.round(reportingWaits.reduce((sum, t) => sum + t, 0) / reportingCount)
     : null;
-  const goodCount = reportingWaits.filter((t) => t < 15).length;
-  const heavyCount = reportingWaits.filter((t) => t >= 45).length;
 
   const regionSuffix = regionLabel && regionLabel !== 'All' && regionLabel !== 'Todos'
     ? ` · ${regionLabel}`
@@ -37,37 +38,37 @@ export default function StatsOverview({
   const stats = [
     {
       icon: MapPin,
-      label: (language === 'en' ? 'Open' : 'Abiertos') + regionSuffix,
+      label: (language === 'en' ? 'Wait times available' : 'Tiempos disponibles') + regionSuffix,
       value: totalCrossings === 0
         ? '—'
         : `${reportingCount}/${totalCrossings}`,
       color: 'text-blue-600',
       bg: 'bg-blue-100 dark:bg-blue-950/40',
-      hint: language === 'en' ? 'reporting / total' : 'reportando / total',
+      hint: language === 'en' ? 'current waits / total crossings' : 'tiempos actuales / cruces totales',
     },
     {
       icon: Clock,
-      label: language === 'en' ? 'Avg Wait' : 'Promedio',
-      value: averageWaitTime == null ? '—' : `${averageWaitTime} min`,
+      label: language === 'en' ? 'Open now' : 'Abiertos ahora',
+      value: totalCrossings === 0 ? '—' : `${openCount}/${totalCrossings}`,
       color: 'text-indigo-600',
       bg: 'bg-indigo-100 dark:bg-indigo-950/40',
-      hint: language === 'en' ? 'passenger standard' : 'pasajeros estándar',
+      hint: language === 'en' ? 'official port status' : 'estado oficial del puerto',
     },
     {
       icon: Activity,
-      label: language === 'en' ? 'Good' : 'Bueno',
-      value: reportingCount === 0 ? '—' : goodCount,
+      label: language === 'en' ? 'Average wait' : 'Espera promedio',
+      value: averageWaitTime == null ? '—' : `${averageWaitTime} min`,
       color: 'text-emerald-600',
       bg: 'bg-emerald-100 dark:bg-emerald-950/40',
-      hint: language === 'en' ? '< 15 min' : '< 15 min',
+      hint: language === 'en' ? 'crossings with current waits' : 'cruces con tiempos actuales',
     },
     {
       icon: AlertTriangle,
-      label: language === 'en' ? 'Heavy' : 'Pesado',
-      value: reportingCount === 0 ? '—' : heavyCount,
+      label: language === 'en' ? 'Advisories' : 'Avisos',
+      value: totalCrossings === 0 ? '—' : advisoryCount,
       color: 'text-rose-600',
       bg: 'bg-rose-100 dark:bg-rose-950/40',
-      hint: language === 'en' ? '≥ 45 min' : '≥ 45 min',
+      hint: language === 'en' ? 'closures, notices, limits' : 'cierres, avisos, límites',
     },
   ];
 

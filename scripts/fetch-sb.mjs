@@ -299,7 +299,7 @@ async function main() {
     count: successes.length,
     crossings: successes,
     errors,
-    note: 'Southbound values are estimates based on live Google Maps traffic near the border, not an official government wait-time feed.',
+    note: 'Southbound values are Border Pulse estimates based on live routing conditions near the border, not an official government wait-time feed.',
   };
 
   await writePayload(payload);

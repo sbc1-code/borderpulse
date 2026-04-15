@@ -1,4 +1,7 @@
 export function getWaitMinutes(crossing, direction = 'northbound') {
+  if ((crossing?.port_status || '').trim().toLowerCase() === 'closed') {
+    return null;
+  }
   if (direction === 'southbound') {
     return typeof crossing.southbound_wait_time === 'number' ? crossing.southbound_wait_time : null;
   }
@@ -14,10 +17,12 @@ export function getStatusForWait(wait) {
 }
 
 export function getStatusForDirection(crossing, direction = 'northbound') {
+  const wait = getWaitMinutes(crossing, direction);
+  if (wait == null) return 'unknown';
   if (direction === 'southbound') {
-    return crossing.southbound_status || getStatusForWait(getWaitMinutes(crossing, direction));
+    return crossing.southbound_status || getStatusForWait(wait);
   }
-  return crossing.status || getStatusForWait(getWaitMinutes(crossing, direction));
+  return crossing.status || getStatusForWait(wait);
 }
 
 export function getUpdatedAtForDirection(crossing, direction = 'northbound') {

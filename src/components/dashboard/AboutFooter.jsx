@@ -13,36 +13,32 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
     <section className="mt-8 mb-4 text-xs text-slate-600 dark:text-slate-400 max-w-3xl mx-auto space-y-4 px-2">
       <div className="rounded-lg border border-slate-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/40 p-4">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">
-          {language === 'en' ? 'About this data' : 'Sobre estos datos'}
+          {language === 'en' ? 'How Border Pulse works' : 'Cómo funciona Border Pulse'}
         </h2>
-        <p className="leading-relaxed">
+        <div className="space-y-2 leading-relaxed">
           {language === 'en' ? (
             <>
-              {isSouthbound ? (
-                <>Border Pulse estimates southbound (US to Mexico) delay at major passenger crossings using live Google Maps traffic snapshots on the approach to each port. These values are updated every 15 minutes and are not an official government wait-time feed.</>
-              ) : (
-                <>Border Pulse reports real-time wait times at every US-Mexico border crossing. Data is pulled directly from the U.S. Customs and Border Protection (CBP) public feed at <a href="https://bwt.cbp.gov/" className="underline hover:text-slate-900 dark:hover:text-white" target="_blank" rel="noopener noreferrer">bwt.cbp.gov</a>, updated every 15 minutes. Coverage includes {count || '52'} crossings across California, Arizona, New Mexico, and Texas — including passenger, pedestrian, commercial, SENTRI, and Ready Lane wait times where reported.</>
-              )}
+              <p>Northbound wait times come from official CBP data and refresh every 15 minutes.</p>
+              <p>Southbound delays are estimated by Border Pulse at major crossings using live routing conditions and crossing-specific baseline travel times.</p>
+              <p>Port status, operating hours, and advisories are shown when available. A crossing can be open even when no current wait time is reported.</p>
             </>
           ) : (
             <>
-              {isSouthbound ? (
-                <>Border Pulse estima la demora hacia México en cruces principales de pasajeros usando snapshots de tráfico en vivo de Google Maps en la aproximación a cada puerto. Estos valores se actualizan cada 15 minutos y no son un feed oficial del gobierno.</>
-              ) : (
-                <>Border Pulse reporta tiempos de espera en tiempo real en todos los cruces fronterizos EE.UU.-México. Los datos provienen directamente del feed público de U.S. Customs and Border Protection (CBP) en <a href="https://bwt.cbp.gov/" className="underline" target="_blank" rel="noopener noreferrer">bwt.cbp.gov</a>, actualizado cada 15 minutos. Cubre {count || '52'} cruces en California, Arizona, Nuevo México y Texas — incluyendo carriles de pasajeros, peatonales, comerciales, SENTRI y Ready Lane cuando están disponibles.</>
-              )}
+              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan cada 15 minutos.</p>
+              <p>Las demoras hacia México son estimadas por Border Pulse en cruces principales usando condiciones de ruta en tiempo real y tiempos base por cruce.</p>
+              <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
           )}
-        </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
           <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? 'Source' : 'Fuente'}
+            {language === 'en' ? (isSouthbound ? 'Method' : 'Source') : (isSouthbound ? 'Método' : 'Fuente')}
           </div>
           <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {isSouthbound ? 'Google Maps Distance Matrix (estimated)' : 'U.S. Customs and Border Protection'}
+            {isSouthbound ? 'Border Pulse estimate' : 'U.S. Customs and Border Protection'}
           </div>
           <a
             href={isSouthbound ? 'https://developers.google.com/maps/documentation/distance-matrix' : 'https://bwt.cbp.gov/api/bwtpublicmod'}
@@ -50,7 +46,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             target="_blank"
             rel="noopener noreferrer"
           >
-            {isSouthbound ? 'developers.google.com/maps/documentation/distance-matrix' : 'bwt.cbp.gov/api/bwtpublicmod'}
+            {isSouthbound ? 'Uses Google Maps Platform routing data' : 'bwt.cbp.gov/api/bwtpublicmod'}
           </a>
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
@@ -82,7 +78,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
         <div className="mt-3 space-y-3 leading-relaxed">
           <div>
             <div className="font-medium text-slate-900 dark:text-white">
-              {language === 'en' ? 'Where does the wait time data come from?' : '¿De dónde vienen los tiempos de espera?'}
+              {language === 'en' ? 'Where do northbound wait times come from?' : '¿De dónde vienen los tiempos hacia Estados Unidos?'}
             </div>
             <p>
               {language === 'en'
@@ -92,12 +88,22 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           </div>
           <div>
             <div className="font-medium text-slate-900 dark:text-white">
-              {language === 'en' ? 'Why is southbound (to Mexico) not shown?' : '¿Por qué no se muestra el sentido sur (hacia México)?'}
+              {language === 'en' ? 'How are southbound delays estimated?' : '¿Cómo se estiman las demoras hacia México?'}
             </div>
             <p>
               {language === 'en'
-                ? 'CBP only publishes northbound (to US) data. Border Pulse estimates southbound delay at major crossings using Google Maps traffic on short approach segments near the border.'
-                : 'CBP solo publica datos hacia EE.UU. Border Pulse estima la demora hacia México en cruces principales usando tráfico de Google Maps en segmentos cortos cerca de la frontera.'}
+                ? 'CBP does not publish southbound wait times. Border Pulse estimates delay at major crossings using live routing conditions and crossing-specific baseline travel times.'
+                : 'CBP no publica tiempos hacia México. Border Pulse estima la demora en cruces principales usando condiciones de ruta en tiempo real y tiempos base por cruce.'}
+            </p>
+          </div>
+          <div>
+            <div className="font-medium text-slate-900 dark:text-white">
+              {language === 'en' ? 'What does “no current wait time” mean?' : '¿Qué significa “sin tiempo actual”?'}
+            </div>
+            <p>
+              {language === 'en'
+                ? 'It means the crossing does not currently have a wait time available. The port may still be open, so check the official port status and hours shown on the card.'
+                : 'Significa que ese cruce no tiene un tiempo disponible en este momento. El puerto puede seguir abierto, así que revisa el estado oficial y el horario que aparecen en la tarjeta.'}
             </p>
           </div>
           <div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BarChart3, Menu, X, Moon, Sun, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import BetaBanner from '@/components/ui/BetaBanner';
 
 const SB_MARK = (
   <span className="inline-flex items-center gap-1 font-semibold">
@@ -71,8 +70,6 @@ export default function Layout({ children }) {
 
   return (
     <div className={`min-h-screen ${bgShell} ${textClass}`}>
-      <BetaBanner language={language} />
-
       {/* Mobile header */}
       <div className={`lg:hidden ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
@@ -123,7 +120,7 @@ export default function Layout({ children }) {
                   Border Pulse
                 </h1>
                 <p className={`text-[11px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                  {language === 'en' ? 'Intelligence Dashboard' : 'Panel de Inteligencia'}
+                  {language === 'en' ? 'Border wait times' : 'Tiempos de espera'}
                 </p>
               </div>
             </Link>

@@ -154,8 +154,8 @@ export default function Dashboard() {
         </motion.h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
           {language === 'en'
-            ? 'Real-time data · Official CBP feed · Updated every 15 min'
-            : 'Datos en tiempo real · Feed oficial CBP · Actualizado cada 15 min'}
+            ? 'Official wait times to the U.S. · Estimated delays to Mexico · Updated every 15 min'
+            : 'Tiempos oficiales hacia EE.UU. · Demoras estimadas hacia México · Actualizado cada 15 min'}
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}
@@ -215,7 +215,7 @@ export default function Dashboard() {
           size="sm"
           onClick={() => changeDirection('southbound')}
           className="flex-1 gap-2 h-9"
-          title={language === 'en' ? 'Estimated southbound delay from Google Maps traffic' : 'Demora estimada hacia México con tráfico de Google Maps'}
+          title={language === 'en' ? 'Estimated southbound delay at major crossings' : 'Demora estimada hacia México en cruces principales'}
         >
           <ArrowDown className="w-4 h-4" />
           {language === 'en' ? 'To MX' : 'Hacia MX'}
@@ -225,8 +225,8 @@ export default function Dashboard() {
       {direction === 'southbound' && (
         <div className="max-w-3xl mx-auto mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
           {language === 'en'
-            ? 'Southbound values are estimates from Google Maps traffic at major passenger crossings, not an official government wait-time feed.'
-            : 'Los valores hacia México son estimaciones con tráfico de Google Maps en cruces principales de pasajeros, no un feed oficial del gobierno.'}
+            ? 'To MX uses Border Pulse estimates at major crossings. Official port status, hours, and advisories are shown when available.'
+            : 'Hacia MX usa estimaciones de Border Pulse en cruces principales. El estado oficial del puerto, horarios y avisos se muestran cuando están disponibles.'}
         </div>
       )}
 
