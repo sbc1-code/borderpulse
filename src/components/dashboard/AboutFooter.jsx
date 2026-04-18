@@ -106,8 +106,8 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             </div>
             <p>
               {language === 'en'
-                ? 'No accounts, no cookies, no analytics. Your preferences stay in your browser. Ads only load if you opt in, per session.'
-                : 'Sin cuentas, sin cookies, sin analítica. Tus preferencias quedan en tu navegador. Los anuncios solo cargan si los habilitas, por sesion.'}
+                ? 'No accounts, no cookies, no personal tracking. We use privacy-first analytics (Umami) that collects only anonymous page views. Your preferences stay in your browser. Ads only load if you opt in, per session.'
+                : 'Sin cuentas, sin cookies, sin rastreo personal. Usamos analitica respetuosa (Umami) que solo recopila vistas anonimas. Tus preferencias quedan en tu navegador. Los anuncios solo cargan si los habilitas, por sesion.'}
             </p>
           </div>
         </div>
