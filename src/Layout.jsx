@@ -70,6 +70,13 @@ export default function Layout({ children }) {
 
   return (
     <div className={`min-h-screen ${bgShell} ${textClass}`}>
+      {/* Skip to content - accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:text-slate-900 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:text-sm focus:font-medium"
+      >
+        {language === 'en' ? 'Skip to content' : 'Ir al contenido'}
+      </a>
       {/* Mobile header */}
       <div className={`lg:hidden ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
@@ -154,7 +161,7 @@ export default function Layout({ children }) {
             </a>
           </div>
         </aside>
-        <main className="flex-1 overflow-auto">{children}</main>
+        <main id="main-content" className="flex-1 overflow-auto">{children}</main>
       </div>
 
       {/* Mobile content */}

@@ -19,14 +19,14 @@
     <meta property="og:title" content="Border Pulse | Real-Time US-Mexico Border Crossing Wait Times" />
     <meta property="og:description" content="Live wait times at every US-Mexico border crossing. Official CBP data, updated every 15 minutes. Bilingual EN/ES." />
     <meta property="og:url" content="https://borderpulse.com" />
-    <meta property="og:image" content="https://borderpulse.com/favicon.svg" />
+    <meta property="og:image" content="https://borderpulse.com/og-card.png" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="es_MX" />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Border Pulse | Real-Time US-Mexico Border Crossing Wait Times" />
     <meta name="twitter:description" content="Live wait times at every US-Mexico border crossing. Official CBP data, updated every 15 minutes." />
-    <meta name="twitter:image" content="https://borderpulse.com/favicon.svg" />
+    <meta name="twitter:image" content="https://borderpulse.com/og-card.png" />
 
     <link rel="alternate" hreflang="en" href="https://borderpulse.com" />
     <link rel="alternate" hreflang="es" href="https://borderpulse.com" />
@@ -64,10 +64,51 @@
           "name": "Border Pulse",
           "url": "https://borderpulse.com",
           "logo": "https://borderpulse.com/favicon.svg"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Where do northbound wait times come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Directly from U.S. Customs and Border Protection (CBP). Each port officer reports current conditions; we refresh the feed every 15 minutes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How are southbound delays estimated?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CBP does not publish southbound wait times. Border Pulse estimates delay at major crossings using live routing conditions and crossing-specific baseline travel times."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does no current wait time mean?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It means the crossing does not currently have a wait time available. The port may still be open, so check the official port status and hours shown on the card."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you track me?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No accounts, no cookies, no personal tracking. We use privacy-first analytics (Umami) that collects only anonymous page views. Your preferences stay in your browser."
+              }
+            }
+          ]
         }
       ]
     }
     </script>
+
+    <!-- Resource hints for faster data loads -->
+    <link rel="dns-prefetch" href="https://bwt.cbp.gov" />
+    <link rel="preconnect" href="https://bwt.cbp.gov" crossorigin />
   </head>
   <body>
     <div id="root"></div>
