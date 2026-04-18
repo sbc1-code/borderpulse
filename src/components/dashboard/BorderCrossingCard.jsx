@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Clock, MapPin, TrendingUp, TrendingDown, Minus, AlertTriangle,
-  Car, User, Truck, ChevronDown, ChevronUp, Bell, BellRing, BarChart3,
+  Car, User, Truck, ChevronDown, ChevronUp, Bell, BellRing, BarChart3, Star,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getHistoryForDirection, getPreviousWait } from '@/components/utils/waitTimeHistory';
@@ -94,6 +94,8 @@ export default function BorderCrossingCard({
   language,
   index = 0,
   selectedDirection = 'northbound',
+  isFavorite = false,
+  onToggleFavorite,
 }) {
   const [showLanes, setShowLanes] = useState(false);
   const [showTrends, setShowTrends] = useState(false);
@@ -208,9 +210,29 @@ export default function BorderCrossingCard({
                 )}
               </div>
             </div>
-            <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap ${s.badge}`}>
-              {s.label[language] || s.label.en}
-            </Badge>
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleFavorite?.(crossing.port_number);
+                }}
+                aria-label={isFavorite
+                  ? (language === 'en' ? 'Remove from favorites' : 'Quitar de favoritos')
+                  : (language === 'en' ? 'Add to favorites' : 'Agregar a favoritos')}
+                className="p-1 rounded-md hover:bg-slate-100 transition-colors"
+              >
+                <Star
+                  className={`w-4 h-4 transition-colors ${
+                    isFavorite
+                      ? 'fill-amber-400 text-amber-400'
+                      : 'text-slate-300 hover:text-slate-400'
+                  }`}
+                />
+              </button>
+              <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap ${s.badge}`}>
+                {s.label[language] || s.label.en}
+              </Badge>
+            </div>
           </div>
 
           {/* Wait time */}

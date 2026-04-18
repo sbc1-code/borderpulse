@@ -1,16 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X } from 'lucide-react';
+import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
 import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
-import AnalyticsView from '@/components/dashboard/AnalyticsView';
+const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
 import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AboutFooter from '@/components/dashboard/AboutFooter';
 import AdConsentCard from '@/components/ads/AdConsentCard';
+import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
@@ -49,6 +50,26 @@ export default function Dashboard() {
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [shareOpen, setShareOpen] = useState(false);
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const stored = localStorage.getItem('borderPulse_favorites');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleFavorite = useCallback((portNumber) => {
+    setFavorites((prev) => {
+      const next = prev.includes(portNumber)
+        ? prev.filter((p) => p !== portNumber)
+        : [...prev, portNumber];
+      localStorage.setItem('borderPulse_favorites', JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
+  const favoritesSet = useMemo(() => new Set(favorites), [favorites]);
 
   const load = async () => {
     setState((s) => ({ ...s, isRefreshing: true }));
@@ -109,6 +130,9 @@ export default function Dashboard() {
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
+      const aFav = favoritesSet.has(a.port_number) ? 1 : 0;
+      const bFav = favoritesSet.has(b.port_number) ? 1 : 0;
+      if (aFav !== bFav) return bFav - aFav;
       const waitA = getWaitMinutes(a, direction);
       const waitB = getWaitMinutes(b, direction);
       if (waitA == null && waitB == null) return 0;
@@ -116,7 +140,7 @@ export default function Dashboard() {
       if (waitB == null) return -1;
       return waitB - waitA;
     });
-  }, [filteredCrossings, direction]);
+  }, [filteredCrossings, direction, favoritesSet]);
 
   const reportingCrossings = useMemo(
     () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) != null),
@@ -231,7 +255,20 @@ export default function Dashboard() {
       )}
 
       {view === 'analytics' ? (
-        <AnalyticsView crossings={state.crossings} language={language} direction={direction} />
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-[40vh]">
+              <div className="text-center">
+                <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-slate-400" />
+                <p className="text-xs text-slate-500">
+                  {language === 'en' ? 'Loading analytics...' : 'Cargando analisis...'}
+                </p>
+              </div>
+            </div>
+          }
+        >
+          <AnalyticsView crossings={state.crossings} language={language} direction={direction} />
+        </Suspense>
       ) : (
         <>
           {/* Search + region filter */}
@@ -326,22 +363,65 @@ export default function Dashboard() {
                       </button>
                     )}
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
-                    {visibleCrossings.map((crossing, idx) => (
-                      <BorderCrossingCard
-                        key={crossing.id || crossing.port_number}
-                        crossing={crossing}
-                        language={language}
-                        index={idx}
-                        selectedDirection={direction}
-                      />
-                    ))}
-                  </div>
+                  {(() => {
+                    const favCrossings = visibleCrossings.filter((c) => favoritesSet.has(c.port_number));
+                    const restCrossings = visibleCrossings.filter((c) => !favoritesSet.has(c.port_number));
+                    return (
+                      <>
+                        {favCrossings.length > 0 && (
+                          <>
+                            <div className="flex items-center gap-2 mb-2 mt-1">
+                              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                              <span className="text-xs font-medium text-slate-600">
+                                {language === 'en' ? 'Favorites' : 'Favoritos'}
+                              </span>
+                              <div className="flex-1 h-px bg-slate-200" />
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4 mb-4">
+                              {favCrossings.map((crossing, idx) => (
+                                <BorderCrossingCard
+                                  key={crossing.id || crossing.port_number}
+                                  crossing={crossing}
+                                  language={language}
+                                  index={idx}
+                                  selectedDirection={direction}
+                                  isFavorite={true}
+                                  onToggleFavorite={toggleFavorite}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                        {favCrossings.length > 0 && restCrossings.length > 0 && (
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-medium text-slate-600">
+                              {language === 'en' ? 'All crossings' : 'Todos los cruces'}
+                            </span>
+                            <div className="flex-1 h-px bg-slate-200" />
+                          </div>
+                        )}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
+                          {restCrossings.map((crossing, idx) => (
+                            <BorderCrossingCard
+                              key={crossing.id || crossing.port_number}
+                              crossing={crossing}
+                              language={language}
+                              index={idx}
+                              selectedDirection={direction}
+                              isFavorite={false}
+                              onToggleFavorite={toggleFavorite}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    );
+                  })()}
                 </>
               )}
             </div>
           </div>
 
+          <InstallPrompt language={language} />
           <AdConsentCard language={language} />
 
           <AboutFooter
