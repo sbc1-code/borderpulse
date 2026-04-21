@@ -12,6 +12,7 @@ import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AboutFooter from '@/components/dashboard/AboutFooter';
 import AdConsentCard from '@/components/ads/AdConsentCard';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
+import PopularCrossings from '@/components/dashboard/PopularCrossings';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
@@ -420,6 +421,8 @@ export default function Dashboard() {
               )}
             </div>
           </div>
+
+          <PopularCrossings crossings={state.crossings} language={language} />
 
           <InstallPrompt language={language} />
           <AdConsentCard language={language} />

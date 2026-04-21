@@ -140,6 +140,29 @@ function rewriteIndex(indexHtml, head) {
   return html;
 }
 
+function injectCrawlableLinks(html, crossings, portToSlug) {
+  const links = crossings
+    .map((c) => {
+      const slug = portToSlug[c.port_number];
+      if (!slug) return null;
+      return `    <li><a href="/crossing/${slug}">${esc(c.name)} wait times</a></li>`;
+    })
+    .filter(Boolean)
+    .join('\n');
+
+  const block = `
+<nav aria-label="All border crossings" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+  <h2>All U.S. border crossings</h2>
+  <ul>
+${links}
+  </ul>
+</nav>
+`;
+
+  // Place it just before </body> so it exists in the static HTML for crawlers.
+  return html.replace(/<\/body>/i, `${block}\n  </body>`);
+}
+
 async function main() {
   const distDir = path.resolve(root, 'dist');
   const indexPath = path.resolve(distDir, 'index.html');
@@ -148,13 +171,17 @@ async function main() {
     process.exit(1);
   }
 
-  const indexHtml = fs.readFileSync(indexPath, 'utf8');
+  const originalIndex = fs.readFileSync(indexPath, 'utf8');
 
   const slugs = await import(path.resolve(root, 'src/lib/slugs.js'));
   const dataPath = path.resolve(root, 'public/data/crossings.json');
   const doc = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   const crossings = doc.crossings || [];
   const { portToSlug } = slugs.buildSlugMap(crossings);
+
+  // Rewrite the homepage index.html to include a crawlable link nav to all crossings.
+  const indexWithLinks = injectCrawlableLinks(originalIndex, crossings, portToSlug);
+  fs.writeFileSync(indexPath, indexWithLinks);
 
   const aggregatesDir = path.resolve(root, 'public/data/aggregates');
   let pageCount = 0;
@@ -169,14 +196,14 @@ async function main() {
       } catch {}
     }
     const head = renderHead(c, slug, aggregate);
-    const html = rewriteIndex(indexHtml, head);
+    const html = rewriteIndex(indexWithLinks, head);
     const outDir = path.resolve(distDir, 'crossing', slug);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     pageCount++;
   }
 
-  console.log(`[prerender] wrote ${pageCount} crossing pages`);
+  console.log(`[prerender] wrote ${pageCount} crossing pages + crawlable nav on homepage`);
 }
 
 main().catch((e) => {
