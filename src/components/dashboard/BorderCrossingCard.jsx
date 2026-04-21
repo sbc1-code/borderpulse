@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -184,7 +185,13 @@ export default function BorderCrossingCard({
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 mb-0.5">
                 <h3 className="text-sm font-semibold text-slate-900 truncate" title={crossing.name}>
-                  {crossing.name || crossing.port_name}
+                  {crossing.slug ? (
+                    <Link to={`/crossing/${crossing.slug}`} className="hover:underline">
+                      {crossing.name || crossing.port_name}
+                    </Link>
+                  ) : (
+                    crossing.name || crossing.port_name
+                  )}
                 </h3>
                 <span className="text-base leading-none">{isSouthbound ? '🇲🇽' : '🇺🇸'}</span>
               </div>

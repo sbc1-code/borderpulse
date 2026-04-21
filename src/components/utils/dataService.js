@@ -2,6 +2,8 @@
  * dataService - reads static JSON snapshots published by the GitHub Action
  * fetch workflow (scripts/fetch-cbp.mjs). No auth, no entity API, no LLM.
  */
+import { buildSlugMap } from '@/lib/slugs';
+
 const DATA_PATH = '/data/crossings.json';
 const FX_PATH = '/data/exchange-rate.json';
 const SB_PATH = '/data/crossings-sb.json';
@@ -12,6 +14,7 @@ function mergeSouthbound(crossingsDoc, sbDoc) {
   const southboundByPort = new Map(
     southboundRows.map((row) => [String(row.port_number), row]),
   );
+  const { portToSlug } = buildSlugMap(crossings);
 
   return crossings.map((crossing) => {
     const southbound = southboundByPort.get(String(crossing.port_number));
@@ -21,6 +24,7 @@ function mergeSouthbound(crossingsDoc, sbDoc) {
 
     return {
       ...crossing,
+      slug: portToSlug[crossing.port_number] || null,
       northbound_wait_time: northboundWait,
       southbound_wait_time: typeof southbound?.southbound_wait_time === 'number'
         ? southbound.southbound_wait_time

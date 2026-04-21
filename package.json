@@ -5,11 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-sitemap.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/prerender.mjs",
     "preview": "vite preview",
     "fetch:cbp": "node scripts/fetch-cbp.mjs",
     "fetch:fx": "node scripts/fetch-fx.mjs",
-    "fetch:sb": "node scripts/fetch-sb.mjs"
+    "fetch:sb": "node scripts/fetch-sb.mjs",
+    "aggregates": "node scripts/build-aggregates.mjs",
+    "sitemap": "node scripts/build-sitemap.mjs",
+    "prerender": "node scripts/prerender.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
