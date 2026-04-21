@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /tag/
+Disallow: /tags/
+Disallow: /category/
 
 # AI training crawlers — explicitly welcome
 User-agent: GPTBot
