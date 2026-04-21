@@ -37,6 +37,7 @@ function renderHead(crossing, slug, aggregate) {
   const title = `${crossing.name} wait times | Border Pulse`;
   const desc = `Live ${crossing.name} border wait times from U.S. Customs and Border Protection, refreshed every 15 minutes. Historical patterns, hours, and best times to cross.`;
   const canonical = `${BASE}/crossing/${slug}`;
+  const ogImage = `${BASE}/og/${slug}.png`;
 
   const place = {
     '@context': 'https://schema.org',
@@ -74,6 +75,7 @@ function renderHead(crossing, slug, aggregate) {
     title,
     desc,
     canonical,
+    ogImage,
     jsonLd: [place, faq, breadcrumb],
   };
 }
@@ -110,13 +112,15 @@ function rewriteIndex(indexHtml, head) {
     );
   }
 
-  // og:title, og:description, og:url
+  // og:title, og:description, og:url, og:image
   const og = [
     ['og:title', head.title],
     ['og:description', head.desc],
     ['og:url', head.canonical],
+    ['og:image', head.ogImage],
     ['twitter:title', head.title],
     ['twitter:description', head.desc],
+    ['twitter:image', head.ogImage],
   ];
   for (const [prop, val] of og) {
     const propAttr = prop.startsWith('twitter:') ? 'name' : 'property';
