@@ -29,3 +29,6 @@ dist-ssr
 
 .env
 .vite
+
+# Mode A anomaly queue is a regenerated artifact, not content.
+drafts/blog/auto-a/queue.json

@@ -1,0 +1,71 @@
+name: Mode A anomaly scan
+
+on:
+  schedule:
+    # Daily at 14:00 UTC (7am PT / 9am ET). Runs after the CBP fetch cron has been
+    # producing snapshots for hours, so aggregates are fresh.
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Regenerate aggregates from committed snapshots
+        run: node scripts/build-aggregates.mjs
+
+      - name: Detect anomalies
+        run: node scripts/detect-anomalies.mjs
+
+      - name: Check for anomalies
+        id: check
+        run: |
+          COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('drafts/blog/auto-a/queue.json','utf8')); console.log((d.anomalies || []).length);")
+          echo "anomaly_count=$COUNT" >> $GITHUB_OUTPUT
+          echo "Detected $COUNT anomalies."
+
+      - name: Draft posts from anomalies
+        if: steps.check.outputs.anomaly_count != '0'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/draft-from-anomaly.mjs
+
+      - name: Commit drafts and open PR
+        if: steps.check.outputs.anomaly_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="auto-a/drafts-$DATE"
+          git config user.name "borderpulse-bot"
+          git config user.email "207095575+sbc1-code@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          # Only add the generated draft MDX files (queue.json is gitignored).
+          git add drafts/blog/auto-a/*.mdx || true
+          if git diff --cached --quiet; then
+            echo "No draft files changed. Nothing to commit."
+            exit 0
+          fi
+          git commit -m "Mode A: drafts for $DATE"
+          git push --set-upstream origin "$BRANCH"
+          gh pr create \
+            --title "Mode A drafts $DATE" \
+            --body "Auto-generated draft posts from today's anomaly scan. Review each one per drafts/REVIEW_CHECKLIST.md. Merge after rewriting headline and lede, flipping humanEdited:true, and moving the file to src/content/blog/." \
+            --label "draft:auto-a" \
+            --base main
