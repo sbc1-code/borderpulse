@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "title": "Best time to cross San Ysidro: hour by hour from 30 days of CBP data",
+      "description": "Median wait times for every hour of every day at San Ysidro, pulled from U.S. Customs and Border Protection over the last 30 days. The patterns most travelers miss.",
+      "slug": "best-time-to-cross-san-ysidro",
+      "date": "2026-04-23",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "san-ysidro",
+        "tijuana",
+        "california",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-san-ysidro.png",
+      "relatedCrossings": [
+        "250401",
+        "250601"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Ready Lanes program",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    }
+  ],
+  "generated_at": "2026-04-24T00:04:17.335Z"
+}

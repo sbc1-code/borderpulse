@@ -16,6 +16,17 @@ function esc(s) {
 
 const BASE = 'https://borderpulse.com';
 
+function readBlogPosts() {
+  const indexPath = path.resolve(root, 'public/data/blog/index.json');
+  if (!fs.existsSync(indexPath)) return [];
+  try {
+    const doc = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    return doc.posts || [];
+  } catch {
+    return [];
+  }
+}
+
 async function main() {
   const buildSlugMap = await loadSlugBuilder();
   const dataPath = path.resolve(root, 'public/data/crossings.json');
@@ -36,6 +47,27 @@ async function main() {
       priority: '0.9',
       lastmod: today,
     });
+  }
+
+  const posts = readBlogPosts();
+  if (posts.length > 0) {
+    urls.push({
+      loc: `${BASE}/blog`,
+      changefreq: 'weekly',
+      priority: '0.7',
+      lastmod: posts.reduce((acc, p) => {
+        const d = p.updated || p.date;
+        return d > acc ? d : acc;
+      }, posts[0].updated || posts[0].date),
+    });
+    for (const p of posts) {
+      urls.push({
+        loc: `${BASE}/blog/${p.slug}`,
+        changefreq: 'monthly',
+        priority: '0.6',
+        lastmod: p.updated || p.date,
+      });
+    }
   }
 
   const body = urls
@@ -60,7 +92,7 @@ ${body}
   const outDist = path.resolve(root, 'dist/sitemap.xml');
   if (fs.existsSync(path.dirname(outDist))) fs.writeFileSync(outDist, xml);
 
-  console.log(`[sitemap] wrote ${urls.length} URLs`);
+  console.log(`[sitemap] wrote ${urls.length} URLs (${posts.length} blog)`);
 }
 
 main().catch((e) => {

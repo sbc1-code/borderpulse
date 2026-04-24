@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Border Pulse Blog</title>
+  <link href="https://borderpulse.com/blog" />
+  <link rel="self" href="https://borderpulse.com/rss.xml" />
+  <id>https://borderpulse.com/blog</id>
+  <updated>2026-04-23T12:00:00.000Z</updated>
+  <subtitle>Crossing data, guides, and program explainers for the U.S.-Mexico border.</subtitle>
+  <entry>
+    <title>Best time to cross San Ysidro: hour by hour from 30 days of CBP data</title>
+    <link href="https://borderpulse.com/blog/best-time-to-cross-san-ysidro" />
+    <id>https://borderpulse.com/blog/best-time-to-cross-san-ysidro</id>
+    <updated>2026-04-23T12:00:00.000Z</updated>
+    <published>2026-04-23T12:00:00.000Z</published>
+    <summary>Median wait times for every hour of every day at San Ysidro, pulled from U.S. Customs and Border Protection over the last 30 days. The patterns most travelers miss.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+</feed>

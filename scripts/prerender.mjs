@@ -33,7 +33,7 @@ function faqItems(crossing, aggregate) {
   return items;
 }
 
-function renderHead(crossing, slug, aggregate) {
+function renderCrossingHead(crossing, slug, aggregate) {
   const title = `${crossing.name} wait times | Border Pulse`;
   const desc = `Live ${crossing.name} border wait times from U.S. Customs and Border Protection, refreshed every 15 minutes. Historical patterns, hours, and best times to cross.`;
   const canonical = `${BASE}/crossing/${slug}`;
@@ -80,13 +80,124 @@ function renderHead(crossing, slug, aggregate) {
   };
 }
 
+function renderBlogIndexHead(posts) {
+  const title = 'Border Pulse Blog | Crossing data, guides, and program explainers';
+  const desc = 'Data-driven guides to crossing the U.S.-Mexico border. Hour by hour patterns, neutral program explainers, and trip planning. Every program rule links to the official source.';
+  const canonical = `${BASE}/blog`;
+  const ogImage = `${BASE}/og-card.png`;
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: canonical },
+    ],
+  };
+
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Border Pulse Blog',
+    url: canonical,
+    description: desc,
+    blogPost: posts.slice(0, 20).map((p) => ({
+      '@type': 'BlogPosting',
+      headline: p.title,
+      url: `${BASE}/blog/${p.slug}`,
+      datePublished: p.date,
+      dateModified: p.updated || p.date,
+    })),
+  };
+
+  return {
+    title,
+    desc,
+    canonical,
+    ogImage,
+    jsonLd: [blogJsonLd, breadcrumb],
+  };
+}
+
+function renderBlogPostHead(post, author) {
+  const title = `${post.title} | Border Pulse`;
+  const desc = post.description;
+  const canonical = `${BASE}/blog/${post.slug}`;
+  const ogImage = post.ogImage || `${BASE}/og/blog/${post.slug}.png`;
+  const datePublished = `${post.date}T12:00:00Z`;
+  const dateModified = `${post.updated || post.date}T12:00:00Z`;
+
+  const blogPosting = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: desc,
+    url: canonical,
+    mainEntityOfPage: canonical,
+    datePublished,
+    dateModified,
+    author: {
+      '@type': 'Person',
+      name: author?.name || post.author,
+      url: author?.url,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Border Pulse',
+      url: BASE,
+      logo: { '@type': 'ImageObject', url: `${BASE}/favicon.svg` },
+    },
+    image: [ogImage],
+    inLanguage: post.lang === 'es' ? 'es-MX' : 'en-US',
+    keywords: (post.tags || []).join(', '),
+  };
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
+    ],
+  };
+
+  const jsonLd = [blogPosting, breadcrumb];
+
+  if (post.officialSources && post.officialSources.length) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: post.title,
+      url: canonical,
+      isBasedOn: post.officialSources.map((s) => ({
+        '@type': 'WebPage',
+        name: s.label,
+        url: s.url,
+      })),
+    });
+  }
+
+  return {
+    title,
+    desc,
+    canonical,
+    ogImage,
+    jsonLd,
+    articleMeta: {
+      publishedTime: datePublished,
+      modifiedTime: dateModified,
+      author: author?.name || post.author,
+      tags: post.tags || [],
+    },
+  };
+}
+
 function rewriteIndex(indexHtml, head) {
   let html = indexHtml;
 
-  // <title>
   html = html.replace(/<title>[^<]*<\/title>/i, `<title>${esc(head.title)}</title>`);
 
-  // <meta name="description">
   if (/<meta\s+name=["']description["'][^>]*>/i.test(html)) {
     html = html.replace(
       /<meta\s+name=["']description["'][^>]*>/i,
@@ -99,7 +210,6 @@ function rewriteIndex(indexHtml, head) {
     );
   }
 
-  // canonical
   if (/<link\s+rel=["']canonical["'][^>]*>/i.test(html)) {
     html = html.replace(
       /<link\s+rel=["']canonical["'][^>]*>/i,
@@ -112,7 +222,6 @@ function rewriteIndex(indexHtml, head) {
     );
   }
 
-  // og:title, og:description, og:url, og:image
   const og = [
     ['og:title', head.title],
     ['og:description', head.desc],
@@ -135,7 +244,22 @@ function rewriteIndex(indexHtml, head) {
     }
   }
 
-  // JSON-LD
+  if (head.articleMeta) {
+    const am = head.articleMeta;
+    const tags = ['<meta property="og:type" content="article" />'];
+    tags.push(`<meta property="article:published_time" content="${esc(am.publishedTime)}" />`);
+    tags.push(`<meta property="article:modified_time" content="${esc(am.modifiedTime)}" />`);
+    if (am.author) tags.push(`<meta property="article:author" content="${esc(am.author)}" />`);
+    for (const t of am.tags) tags.push(`<meta property="article:tag" content="${esc(t)}" />`);
+    html = html.replace(
+      /<meta\s+property=["']og:type["'][^>]*>/i,
+      tags.join('\n  '),
+    );
+    if (!/<meta\s+property=["']article:published_time["']/i.test(html)) {
+      html = html.replace(/<\/head>/i, `  ${tags.join('\n  ')}\n  </head>`);
+    }
+  }
+
   const jsonLdTags = head.jsonLd
     .map((obj) => `  <script type="application/ld+json">${JSON.stringify(obj)}</script>`)
     .join('\n');
@@ -144,8 +268,8 @@ function rewriteIndex(indexHtml, head) {
   return html;
 }
 
-function injectCrawlableLinks(html, crossings, portToSlug) {
-  const links = crossings
+function injectCrawlableLinks(html, crossings, portToSlug, posts) {
+  const crossingLinks = crossings
     .map((c) => {
       const slug = portToSlug[c.port_number];
       if (!slug) return null;
@@ -154,24 +278,49 @@ function injectCrawlableLinks(html, crossings, portToSlug) {
     .filter(Boolean)
     .join('\n');
 
+  const postLinks = posts
+    .map((p) => `    <li><a href="/blog/${p.slug}">${esc(p.title)}</a></li>`)
+    .join('\n');
+
   const block = `
 <nav aria-label="All border crossings" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
   <h2>All U.S. border crossings</h2>
   <ul>
-${links}
+${crossingLinks}
   </ul>
+${postLinks ? `  <h2>Border Pulse Blog</h2>\n  <ul>\n${postLinks}\n  </ul>` : ''}
 </nav>
 `;
 
-  // Place it just before </body> so it exists in the static HTML for crawlers.
   return html.replace(/<\/body>/i, `${block}\n  </body>`);
+}
+
+function readBlogPosts() {
+  const indexPath = path.resolve(root, 'public/data/blog/index.json');
+  if (!fs.existsSync(indexPath)) return [];
+  try {
+    const doc = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    return doc.posts || [];
+  } catch {
+    return [];
+  }
+}
+
+function readAuthors() {
+  const p = path.resolve(root, 'src/content/authors.json');
+  if (!fs.existsSync(p)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch {
+    return {};
+  }
 }
 
 async function main() {
   const distDir = path.resolve(root, 'dist');
   const indexPath = path.resolve(distDir, 'index.html');
   if (!fs.existsSync(indexPath)) {
-    console.error('[prerender] dist/index.html not found — run vite build first');
+    console.error('[prerender] dist/index.html not found, run vite build first');
     process.exit(1);
   }
 
@@ -183,12 +332,14 @@ async function main() {
   const crossings = doc.crossings || [];
   const { portToSlug } = slugs.buildSlugMap(crossings);
 
-  // Rewrite the homepage index.html to include a crawlable link nav to all crossings.
-  const indexWithLinks = injectCrawlableLinks(originalIndex, crossings, portToSlug);
+  const posts = readBlogPosts();
+  const authors = readAuthors();
+
+  const indexWithLinks = injectCrawlableLinks(originalIndex, crossings, portToSlug, posts);
   fs.writeFileSync(indexPath, indexWithLinks);
 
   const aggregatesDir = path.resolve(root, 'public/data/aggregates');
-  let pageCount = 0;
+  let crossingCount = 0;
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
@@ -199,15 +350,37 @@ async function main() {
         aggregate = JSON.parse(fs.readFileSync(aggPath, 'utf8'));
       } catch {}
     }
-    const head = renderHead(c, slug, aggregate);
+    const head = renderCrossingHead(c, slug, aggregate);
     const html = rewriteIndex(indexWithLinks, head);
     const outDir = path.resolve(distDir, 'crossing', slug);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
-    pageCount++;
+    crossingCount++;
   }
 
-  console.log(`[prerender] wrote ${pageCount} crossing pages + crawlable nav on homepage`);
+  let blogPageCount = 0;
+  if (posts.length > 0) {
+    const indexHead = renderBlogIndexHead(posts);
+    const indexHtml = rewriteIndex(indexWithLinks, indexHead);
+    const blogIndexDir = path.resolve(distDir, 'blog');
+    fs.mkdirSync(blogIndexDir, { recursive: true });
+    fs.writeFileSync(path.resolve(blogIndexDir, 'index.html'), indexHtml);
+    blogPageCount++;
+
+    for (const p of posts) {
+      const author = authors[p.author];
+      const head = renderBlogPostHead(p, author);
+      const html = rewriteIndex(indexWithLinks, head);
+      const outDir = path.resolve(distDir, 'blog', p.slug);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+      blogPageCount++;
+    }
+  }
+
+  console.log(
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + crawlable nav on homepage`,
+  );
 }
 
 main().catch((e) => {

@@ -1,0 +1,88 @@
+---
+title: "Best time to cross San Ysidro: hour by hour from 30 days of CBP data"
+description: "Median wait times for every hour of every day at San Ysidro, pulled from U.S. Customs and Border Protection over the last 30 days. The patterns most travelers miss."
+slug: best-time-to-cross-san-ysidro
+date: "2026-04-23"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - san-ysidro
+  - tijuana
+  - california
+  - best-time-to-cross
+hero: /og/blog/best-time-to-cross-san-ysidro.png
+relatedCrossings:
+  - "250401"
+  - "250601"
+officialSources:
+  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+San Ysidro is the busiest land border crossing in the Western Hemisphere. On a typical day, the median northbound wait sits at **110 minutes**. The lightest hour all week is **10 AM, with a 30 minute median.** The worst hour, predictably, is Sunday evening.
+
+The chart below is the last 30 days of San Ysidro northbound wait times from U.S. Customs and Border Protection, broken out by day of week and hour of day. Darker red means a longer typical wait. Hover any cell for the median number.
+
+<BestTimeChart slug="san-ysidro" title="San Ysidro: median northbound wait, last 30 days" />
+
+## What the data actually says
+
+Three patterns jump out:
+
+1. **Weekday mornings before 9 AM are the only consistent escape hatch.** Tuesday through Friday from 5 to 8 AM, the standard lane median sits in the 30 to 45 minute range. By 11 AM the wait has typically doubled.
+2. **Sunday afternoon and evening is the trap everyone warns about, and the data backs it up.** From roughly 4 PM Sunday through midnight, medians sit between 110 and 175 minutes. If you can finish your trip by Saturday night or wait until Monday, do.
+3. **The "best hour" shifts by day.** Saturday and Sunday, the lightest window is 9 to 11 AM. Tuesday through Friday, it is 5 to 7 AM. Monday is heavy almost all day, the residual cost of the Sunday backup.
+
+If you want to plan around a specific hour, the [San Ysidro live page](/crossing/san-ysidro) shows the current wait alongside the same 30 day pattern, refreshed every 15 minutes.
+
+## Standard, Ready Lane, and SENTRI: which actually saves time
+
+The chart above shows the standard passenger lane. Two other lanes can change the math:
+
+- **Ready Lane** is open to anyone with an RFID-enabled travel document (U.S. Passport Card, Enhanced Driver's License from a participating state, certain Trusted Traveler cards, and others). It typically runs 30 to 50 percent faster than the standard lane during peak hours.
+- **SENTRI** requires a vetted Trusted Traveler membership and runs in a dedicated lane. During Sunday evening peaks, SENTRI savings vs. standard can exceed 90 minutes. Outside of peaks, the lane is sometimes called "LENTRI" by daily commuters because the savings collapse.
+
+Eligibility and document rules for both programs are CBP's, not ours. Read the official pages before you bank on a lane.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is for travelers with an RFID-enabled travel document. CBP maintains the official list of acceptable documents, lane hours per port, and rules for passengers in the vehicle. Always verify your document is on the current list before you commit to the lane.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, background check, and in-person interview. CBP publishes program eligibility, fees, renewal rules, and the list of approved enrollment centers. Membership is per person, and rules apply to every occupant of the vehicle.
+</OfficialSource>
+
+## The "PedWest vs. drive" question
+
+San Ysidro has two pedestrian crossings (PedWest, near the trolley, and PedEast, on the original alignment) plus the vehicle lanes. When the standard vehicle lane is over 90 minutes and the pedestrian wait is under 45, walking across and using rideshare or the trolley on the U.S. side is often the faster door-to-door option. CBP publishes pedestrian waits in the same feed as vehicle waits, so the same hour-by-hour math applies.
+
+We are working on a "should you walk or drive" decision page that uses both feeds in real time. Until then, the [San Ysidro live page](/crossing/san-ysidro) shows pedestrian and vehicle waits side by side.
+
+## Holidays, advisories, and "weird" weeks
+
+Hour-of-week medians do not capture one-off events. The biggest ones:
+
+- **Semana Santa (Holy Week)** and **Christmas / Paisano season (Dec 1 to Jan 10)** push waits well past the medians shown above.
+- **U.S. federal holidays** can change CBP staffing. Hours posted on the [official port page](https://bwt.cbp.gov/) take precedence.
+- **Construction notices and lane closures** are flagged on the live card. Always check the per-port advisory before you leave.
+
+The DOS travel advisory for Mexico is updated periodically and applies at the state level. Check it before any first trip.
+
+<OfficialSource agency="U.S. Department of State" url="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html">
+  The State Department publishes a travel advisory for Mexico with state-level guidance and a list of restricted areas. Read the full advisory and any active U.S. embassy security alerts before crossing, especially for first time trips or stays outside the immediate border zone.
+</OfficialSource>
+
+## How we compute these numbers
+
+Every 15 minutes, Border Pulse pulls the official CBP wait time for San Ysidro and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. Median is more honest than average for this data because a single 240 minute outlier can drag a true 60 minute typical hour up to 90.
+
+The raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse). Snapshots come from [CBP's public BWT feed](https://bwt.cbp.gov/), which is the canonical source.
+
+## What to do with this
+
+The single most useful thing you can do with this chart: **look at your typical crossing day and hour, then look one or two hours earlier or later.** Most people overestimate how locked in their schedule is and underestimate how much an hour shift saves. At San Ysidro, that shift is often the difference between a 30 minute crossing and a 110 minute one.
