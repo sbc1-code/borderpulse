@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, Menu, X, Moon, Sun, Bell } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import BorderPulseLogo from '@/components/BorderPulseLogo';
 
 const SB_MARK = (
   <span className="inline-flex items-center gap-1 font-semibold">
@@ -57,6 +58,12 @@ export default function Layout({ children }) {
       icon: BarChart3,
       current: location.pathname === '/',
     },
+    {
+      name: 'Blog',
+      href: '/blog',
+      icon: BookOpen,
+      current: location.pathname.startsWith('/blog'),
+    },
   ];
 
   const isDark = theme === 'dark';
@@ -81,10 +88,8 @@ export default function Layout({ children }) {
       <div className={`lg:hidden ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-              <BarChart3 className="w-5 h-5 text-white" />
-            </div>
-            <span className={`text-lg font-bold ${isDark ? 'text-white' : 'bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent'}`}>
+            <BorderPulseLogo size={32} />
+            <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Border Pulse
             </span>
           </Link>
@@ -104,7 +109,7 @@ export default function Layout({ children }) {
                 key={item.name}
                 to={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg ${item.current ? 'bg-blue-100 text-blue-700' : isDark ? 'text-slate-300 hover:bg-gray-800' : 'text-slate-700 hover:bg-slate-100'}`}
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg ${item.current ? isDark ? 'bg-emerald-900/30 text-emerald-300' : 'bg-emerald-50 text-emerald-800' : isDark ? 'text-slate-300 hover:bg-gray-800' : 'text-slate-700 hover:bg-slate-100'}`}
               >
                 <item.icon className="w-5 h-5" />
                 {item.name}
@@ -119,11 +124,9 @@ export default function Layout({ children }) {
         <aside className={`w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex flex-col`}>
           <div className={`p-5 border-b ${isDark ? 'border-gray-800' : 'border-slate-200'}`}>
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                <BarChart3 className="w-5 h-5 text-white" />
-              </div>
+              <BorderPulseLogo size={40} />
               <div>
-                <h1 className={`text-lg font-bold ${isDark ? 'text-white' : 'bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent'}`}>
+                <h1 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Border Pulse
                 </h1>
                 <p className={`text-[11px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
@@ -138,7 +141,7 @@ export default function Layout({ children }) {
                 key={item.name}
                 to={item.href}
                 className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium ${item.current
-                  ? 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700'
+                  ? isDark ? 'bg-emerald-900/30 text-emerald-300' : 'bg-emerald-50 text-emerald-800'
                   : isDark ? 'text-slate-300 hover:bg-gray-800/60' : 'text-slate-700 hover:bg-slate-100'}`}
               >
                 <item.icon className="w-4 h-4" />
