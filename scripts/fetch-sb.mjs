@@ -252,25 +252,44 @@ async function fetchRoute(route, apiKey, fetchedAt) {
   };
 }
 
+async function readExistingPayload() {
+  try {
+    const raw = await fs.readFile(OUT_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
 async function main() {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   const fetchedAt = new Date().toISOString();
-
-  const empty = {
-    source: 'Border Pulse southbound model (Google Maps Platform Distance Matrix API)',
-    source_url: 'https://developers.google.com/maps/documentation/distance-matrix',
-    fetched_at: fetchedAt,
-    coverage: 'Major passenger crossings only',
-    count: 0,
-    crossings: [],
-    note: apiKey
-      ? 'GOOGLE_MAPS_API_KEY was set, but no southbound estimates were produced'
-      : 'GOOGLE_MAPS_API_KEY env var not set — no southbound estimates ingested yet',
-  };
+  const existing = await readExistingPayload();
+  const hasExistingData = existing && Array.isArray(existing.crossings) && existing.crossings.length > 0;
 
   if (!apiKey) {
+    // Preserve prior good data rather than overwriting with an empty snapshot.
+    // CI is expected to have GOOGLE_MAPS_API_KEY in secrets; absence here means
+    // a misconfigured env (local dev, secret rotation, bad workflow). Erasing
+    // the file would degrade the live site.
+    if (hasExistingData) {
+      console.warn('No GOOGLE_MAPS_API_KEY set. Preserving existing southbound snapshot (' + existing.crossings.length + ' crossings).');
+      return;
+    }
+    // First-run case only: write a seed empty payload so downstream readers
+    // have a well-formed file to parse. Never reached after the first success.
+    const empty = {
+      source: 'Border Pulse southbound model (Google Maps Platform Distance Matrix API)',
+      source_url: 'https://developers.google.com/maps/documentation/distance-matrix',
+      fetched_at: fetchedAt,
+      coverage: 'Major passenger crossings only',
+      count: 0,
+      crossings: [],
+      note: 'GOOGLE_MAPS_API_KEY env var not set and no prior snapshot exists. Seed payload only.',
+    };
     await writePayload(empty);
-    console.log('No GOOGLE_MAPS_API_KEY set — wrote empty southbound snapshot.');
+    console.log('No GOOGLE_MAPS_API_KEY set and no existing snapshot. Wrote seed empty payload.');
     return;
   }
 
@@ -290,6 +309,13 @@ async function main() {
       });
       console.warn(`Failed ${route.name}: ${error instanceof Error ? error.message : String(error)}`);
     }
+  }
+
+  // If every route failed but we have prior data, preserve it. A transient
+  // Google Maps outage should not wipe the live site.
+  if (successes.length === 0 && hasExistingData) {
+    console.warn('All southbound fetches failed (' + errors.length + ' errors). Preserving prior snapshot.');
+    process.exit(1);
   }
 
   const payload = {
