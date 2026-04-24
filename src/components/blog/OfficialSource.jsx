@@ -1,6 +1,20 @@
 import { ExternalLink, Shield } from 'lucide-react';
+import { useLang } from '@/lib/LangContext';
+
+const STRINGS = {
+  en: {
+    label: 'Official source',
+    readOn: 'Read on',
+  },
+  es: {
+    label: 'Fuente oficial',
+    readOn: 'Leer en',
+  },
+};
 
 export default function OfficialSource({ agency, url, children }) {
+  const lang = useLang();
+  const t = STRINGS[lang] || STRINGS.en;
   return (
     <aside
       role="note"
@@ -8,7 +22,7 @@ export default function OfficialSource({ agency, url, children }) {
     >
       <div className="flex items-center gap-2 text-xs uppercase tracking-wide font-semibold text-emerald-800 dark:text-emerald-300 mb-2">
         <Shield className="w-3.5 h-3.5" />
-        Official source: {agency}
+        {t.label}: {agency}
       </div>
       <div className="text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
         {children}
@@ -19,7 +33,7 @@ export default function OfficialSource({ agency, url, children }) {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1 mt-2 text-sm font-medium text-emerald-700 dark:text-emerald-400 hover:underline"
       >
-        Read on {new URL(url).hostname}
+        {t.readOn} {new URL(url).hostname}
         <ExternalLink className="w-3.5 h-3.5" />
       </a>
     </aside>

@@ -1,0 +1,90 @@
+---
+title: "San Ysidro vs Otay Mesa: cuál es más rápida según 30 días de datos de CBP"
+description: "Mediana de espera en las dos garitas principales de Tijuana a San Diego, hora por hora, según CBP. Otay gana en general, pero San Ysidro gana el lunes en la madrugada."
+slug: san-ysidro-vs-otay-cual-es-mas-rapida
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: es
+tags:
+  - san-ysidro
+  - otay-mesa
+  - tijuana
+  - california
+  - comparacion
+translationKey: san-ysidro-vs-otay-mesa
+hero: /og/blog/san-ysidro-vs-otay-cual-es-mas-rapida.png
+relatedCrossings:
+  - "250401"
+  - "250601"
+officialSources:
+  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Programa Ready Lane"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP Programa SENTRI"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Si cruzas de Tijuana a San Diego, tienes dos opciones reales: San Ysidro y Otay Mesa. La mayoría escoge por costumbre. Los datos de 30 días dicen que la costumbre se equivoca como la mitad del tiempo. Otay es más rápida en general (mediana de 90 min vs 110 min de San Ysidro), pero San Ysidro gana las horas del lunes en la mañana cuando los traileros congestionan Otay hasta los 240 minutos.
+
+Aquí están los datos de cada una y luego las reglas que salen.
+
+## San Ysidro: la garita más transitada del hemisferio
+
+<BestTimeChart slug="san-ysidro" title="San Ysidro: mediana de espera hacia EE.UU., últimos 30 días" />
+
+La mediana general en San Ysidro es de **110 minutos**. La hora más ligera de la semana es **sábado 10 a. m. con 15 minutos**, con domingo 9 a 10 a. m. en 20 a 30 minutos cerca atrás. La peor hora es **domingo 7 p. m. a medianoche, manteniéndose entre 168 y 175 minutos** cada hora. Es la clásica congestión de regresos familiares de fin de semana.
+
+## Otay Mesa: más ligera en promedio, brutal en una hora específica
+
+<BestTimeChart slug="otay-mesa" title="Otay Mesa: mediana de espera hacia EE.UU., últimos 30 días" />
+
+La mediana general en Otay es de **90 minutos**, casi 18% más ligera que San Ysidro. Las medianas de sábado 9 a 11 a. m. en Otay están en **0 a 5 minutos**, las más bajas de cualquier puerto importante de CA. Pero las medianas de lunes 4 a 6 a. m. llegan a **220-240 minutos**, el peor patrón semanal de cualquier cruce de California. Es la fila de traileros antes de empezar la semana laboral. Los autos pasajeros se quedan atorados en la misma cola.
+
+## Hora por hora: cuándo escoger cada una
+
+| Día y hora | Mediana San Ysidro | Mediana Otay Mesa | Escoger |
+|---|---|---|---|
+| Sáb 10 a. m. | 15 min | 0 min | Otay |
+| Dom 10 a. m. | 30 min | 0 min | Otay |
+| Mié 9 a. m. | 30 min | 10 min | Otay |
+| Lun 4 a. m. | 145 min | 220 min | San Ysidro |
+| Lun 6 a. m. | 140 min | 240 min | San Ysidro |
+| Dom 8 p. m. | 110 min | 110 min | Empate |
+| Dom 10 p. m. | 115 min | 110 min | Empate |
+| Sáb 11 p. m. | 115 min | 140 min | San Ysidro |
+
+El patrón es claro: **Otay gana casi cada hora de la mañana de fin de semana y la mayoría de horas de luz de día entre semana**. **San Ysidro gana las ventanas de noche tarde y lunes en la madrugada** cuando los traileros congestionan Otay.
+
+## Tres reglas prácticas
+
+1. **Default a Otay.** Es más rápida en más horas que San Ysidro y la hora más ligera de cualquier cruce de CA pasa en Otay (sáb 9 a. m. = 0 min).
+2. **Cámbiate a San Ysidro el lunes entre medianoche y 7 a. m.** Es la única ventana consistente donde SY le gana a Otay por un margen significativo. Los traileros formando fila para los carriles comerciales de Otay se desbordan a los carriles de pasajeros.
+3. **Domingo en la noche está mal en las dos.** Si puedes terminar tu viaje a Tijuana el sábado en la noche o quedarte hasta el lunes en la mañana, hazlo.
+
+## ¿Y Tecate?
+
+Tecate es la tercera opción del área de Tijuana. La mediana de 30 días en Tecate es 60 minutos, más ligera que SY y Otay en promedio. Vale la pena considerarla si vas a cruzar bien al este de Tijuana y los kilómetros extra son aceptables. El trade-off: Tecate tiene horarios más cortos y la carretera de aproximación es de un solo carril en partes. Para la mayoría de los que van rumbo a San Diego, SY u Otay son más rápidas puerta a puerta.
+
+## El carril cambia las matemáticas
+
+Los números de arriba son medianas del carril estándar de pasajeros. Si tienes SENTRI o un documento Ready Lane, las cuentas cambian:
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane es para viajeros con documento de viaje habilitado con RFID (U.S. Passport Card, Enhanced Driver's License de ciertos estados, ciertas tarjetas de Trusted Traveler, entre otras). CBP publica la lista oficial de documentos aceptados y la disponibilidad del carril por puerto. Siempre verifica que tu documento esté en la lista actual antes de comprometerte al carril.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI es un Programa de Trusted Traveler. La membresía requiere solicitud, costo, verificación de antecedentes y entrevista en persona en un centro de inscripción. Los carriles SENTRI típicamente ahorran más tiempo en horas pico. Las reglas de membresía aplican para cada ocupante del vehículo.
+</OfficialSource>
+
+Las dos garitas tienen acceso a SENTRI y Ready Lane. El ahorro relativo de SENTRI entre SY y Otay es algo que vamos a publicar en un post de datos futuro cuando tengamos historial por carril con tamaños de muestra estables.
+
+## Cómo calculamos estos números
+
+Cada 15 minutos Border Pulse jala los tiempos de espera oficiales de CBP para los dos puertos y guarda snapshots. La gráfica y tabla de arriba usan la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Usamos mediana, no promedio, porque una sola noche mala puede arrastrar el promedio sin decirte nada de la hora típica. Los números en vivo están en [bwt.cbp.gov](https://bwt.cbp.gov/), y nuestras páginas por puerto ([San Ysidro](/crossing/san-ysidro), [Otay Mesa](/crossing/otay-mesa)) muestran la espera de hoy junto al patrón de 30 días.
+
+## Qué hacer con esto
+
+Abre las dos páginas de puerto en tu celular antes de salir de Tijuana. Cruza la hora de hoy contra la tabla de arriba. Si estás dentro de la ventana lunes 4 a 7 a. m., San Ysidro. Si no, casi siempre Otay.

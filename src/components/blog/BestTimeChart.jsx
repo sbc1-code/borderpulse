@@ -1,6 +1,27 @@
 import { useEffect, useState } from 'react';
+import { useLang } from '@/lib/LangContext';
 
-const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DAYS = {
+  en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  es: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+};
+
+const STRINGS = {
+  en: {
+    noData: (slug) => `No aggregate data available for ${slug}.`,
+    loading: 'Loading 30 day pattern...',
+    cell: (day, hour, val) => `${day} ${hour}: ${val} min`,
+    caption: 'Median northbound wait by hour and day, last 30 days. Darker red = longer wait. Source:',
+    sourceLabel: 'U.S. Customs and Border Protection',
+  },
+  es: {
+    noData: (slug) => `No hay datos agregados para ${slug}.`,
+    loading: 'Cargando el patrón de los últimos 30 días...',
+    cell: (day, hour, val) => `${day} ${hour}: ${val} min`,
+    caption: 'Mediana de espera hacia EE.UU. por hora y día, últimos 30 días. Rojo más oscuro = espera más larga. Fuente:',
+    sourceLabel: 'U.S. Customs and Border Protection',
+  },
+};
 
 function formatHour12(h) {
   const suffix = h >= 12 ? 'PM' : 'AM';
@@ -18,6 +39,9 @@ function colorFor(val) {
 }
 
 export default function BestTimeChart({ slug, title }) {
+  const lang = useLang();
+  const days = DAYS[lang] || DAYS.en;
+  const t = STRINGS[lang] || STRINGS.en;
   const [agg, setAgg] = useState(null);
   const [err, setErr] = useState(false);
 
@@ -35,14 +59,14 @@ export default function BestTimeChart({ slug, title }) {
   if (err) {
     return (
       <div className="not-prose my-6 p-4 text-sm text-slate-500 border border-slate-200 dark:border-gray-700 rounded">
-        No aggregate data available for {slug}.
+        {t.noData(slug)}
       </div>
     );
   }
   if (!agg) {
     return (
       <div className="not-prose my-6 p-4 text-sm text-slate-500 border border-slate-200 dark:border-gray-700 rounded">
-        Loading 30 day pattern...
+        {t.loading}
       </div>
     );
   }
@@ -72,7 +96,7 @@ export default function BestTimeChart({ slug, title }) {
             </tr>
           </thead>
           <tbody>
-            {DAYS.map((day, di) => (
+            {days.map((day, di) => (
               <tr key={day}>
                 <th className="pr-2 py-0.5 text-right text-slate-500 font-normal">{day}</th>
                 {Array.from({ length: 24 }, (_, h) => {
@@ -82,7 +106,7 @@ export default function BestTimeChart({ slug, title }) {
                       <div
                         className="w-5 h-5 rounded-sm"
                         style={{ background: colorFor(v) }}
-                        title={v == null ? '—' : `${DAYS[di]} ${formatHour12(h)}: ${v} min`}
+                        title={v == null ? '—' : t.cell(days[di], formatHour12(h), v)}
                       />
                     </td>
                   );
@@ -93,14 +117,14 @@ export default function BestTimeChart({ slug, title }) {
         </table>
       </div>
       <figcaption className="text-xs text-slate-500 mt-2">
-        Median northbound wait by hour and day, last 30 days. Darker red = longer wait. Source:{' '}
+        {t.caption}{' '}
         <a
           href="https://bwt.cbp.gov/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline"
         >
-          U.S. Customs and Border Protection
+          {t.sourceLabel}
         </a>
         .
       </figcaption>

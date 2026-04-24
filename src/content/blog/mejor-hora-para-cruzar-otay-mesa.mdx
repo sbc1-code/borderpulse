@@ -1,0 +1,68 @@
+---
+title: "Mejor hora para cruzar Otay Mesa: hora por hora con 30 días de datos de CBP"
+description: "Mediana de espera en Otay Mesa por hora y día, según CBP en los últimos 30 días. La hora más ligera: sábado 9 a. m. a 0 minutos. La trampa del lunes en la madrugada."
+slug: mejor-hora-para-cruzar-otay-mesa
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: es
+tags:
+  - otay-mesa
+  - tijuana
+  - california
+  - mejor-hora
+translationKey: otay-mesa-best-time
+hero: /og/blog/mejor-hora-para-cruzar-otay-mesa.png
+relatedCrossings:
+  - "250601"
+  - "250401"
+officialSources:
+  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Programa SENTRI"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Otay Mesa es el segundo cruce comercial más transitado de la frontera EE.UU.-México y el carril de overflow para San Ysidro. La mediana de espera hacia el norte sobre 30 días en Otay es de **90 minutos**, unos 20 minutos más ligero que San Ysidro. La hora más ligera de toda la semana es **sábado 9 a 10 a. m., con mediana de 0 minutos**. El peor patrón es **lunes 4 a 6 a. m. con 220 a 240 minutos**, la fila de los traileros que casi nadie fuera del dispatching menciona.
+
+<BestTimeChart slug="otay-mesa" title="Otay Mesa: mediana de espera hacia EE.UU., últimos 30 días" />
+
+## Lo que dicen los datos
+
+Tres patrones saltan:
+
+1. **Las mañanas de fin de semana están prácticamente vacías.** Sábado de 8 a 11 a. m. la mediana es de 0 a 5 minutos. Domingo 9 a 10 a. m. también está en 0. Si tu viaje es flexible, esta es la hora más barata que vas a encontrar en cualquier puerto importante de California.
+2. **El lunes en la madrugada es la peor hora de cualquier puerto de California, sin discusión.** Lunes 4 a. m. mediana de 220 minutos; lunes 6 a. m. = 240 minutos. Es tráfico comercial formando fila para empezar la semana laboral. Los autos pasajeros se quedan atorados en la misma cola.
+3. **La banda del domingo en la noche existe pero es más suave que en San Ysidro.** Domingo 8 a 11 p. m. en Otay anda en 110 minutos, contra los picos de 170 minutos de San Ysidro. Otay es la mejor opción para regresar el domingo en la noche.
+
+Cada celda (día, hora) se construye con 1 a 3 snapshots muestreados sobre 30 días, así que una sola noche mala puede mover una celda. La forma de la semana es estable; la hora pico exacta puede variar.
+
+## Comparado con San Ysidro
+
+Si tienes que escoger entre Otay y San Ysidro el mismo día:
+
+- **Mañanas entre semana (mar-vie 5 a 9 a. m.):** Otay es más rápida la mayoría de los días. Miércoles 9 a. m. en Otay = 10 minutos; San Ysidro a la misma hora = 30 minutos.
+- **Domingo en la noche:** Otay es notablemente más rápida (110 min vs 170 min en el pico).
+- **Lunes en la madrugada:** San Ysidro gana por un margen amplio. Lunes 4 a. m. en SY = 145 minutos; Otay = 220.
+- **Peatonal:** San Ysidro tiene PedWest más PedEast. Otay tiene un solo cruce peatonal. SY peatonal es la respuesta correcta para tráfico a pie.
+
+Las páginas en vivo de [Otay Mesa](/crossing/otay-mesa) y [San Ysidro](/crossing/san-ysidro) muestran las esperas actuales lado a lado para que decidas en el momento.
+
+## SENTRI y Ready Lane en Otay
+
+Otay tiene carril SENTRI para miembros del Trusted Traveler Program. El carril está abierto en horario de operación, puede moverse mucho más rápido que el estándar en picos, y usa las mismas reglas de elegibilidad que cualquier otro puerto SENTRI.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI es un Programa de Trusted Traveler. La membresía requiere solicitud, costo, verificación de antecedentes, y entrevista en persona en un centro de inscripción. CBP publica las reglas, elegibilidad, costos, cadencia de renovación y lista de centros de inscripción aprobados. Siempre verifica las reglas actuales antes de aplicar o renovar.
+</OfficialSource>
+
+## Qué significa esto para ti
+
+- Si puedes mover tu cruce a **sábado 9 a 11 a. m.** o **mañana entre semana antes de las 9 a. m.**, Otay es el cruce más ligero de la frontera de California.
+- **Evita lunes 4 a 7 a. m. en Otay.** Es el peor patrón semanal de cualquier puerto de CA. Si tu agenda te obliga a ese horario, San Ysidro es mejor opción.
+- **Para regresos en domingo:** Otay le gana a San Ysidro por una hora o más durante el pico de 7 a 10 p. m.
+- **Para tráfico comercial:** los datos de 30 días confirman el patrón semanal del lunes en la madrugada. Planea el dispatching considerando esto.
+
+## Cómo calculamos estos números
+
+Cada 15 minutos el cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Usamos mediana, no promedio, porque un solo outlier de 240 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
