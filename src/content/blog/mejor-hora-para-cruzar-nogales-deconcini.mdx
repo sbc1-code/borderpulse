@@ -1,0 +1,72 @@
+---
+title: "Mejor hora para cruzar Nogales DeConcini: 30 días de datos de CBP"
+description: "Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Múltiples horas de mañana entre semana muestran mediana de 0 minutos. Lunes en la madrugada sube a 180."
+slug: mejor-hora-para-cruzar-nogales-deconcini
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: es
+tags:
+  - nogales
+  - deconcini
+  - arizona
+  - sonora
+  - mejor-hora
+translationKey: nogales-deconcini-best-time
+hero: /og/blog/mejor-hora-para-cruzar-nogales-deconcini.png
+relatedCrossings:
+  - "260401"
+  - "260402"
+officialSources:
+  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Programa SENTRI"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Nogales DeConcini es la garita central de Nogales, Arizona, principalmente para tráfico de pasajeros y peatones. La mediana de espera hacia el norte sobre 30 días es de **40 minutos**, la más ligera de cualquier puerto importante de Arizona. Múltiples horas de mañana entre semana muestran **mediana de 0 minutos**: miércoles 7 a 10 a. m., jueves 8 a 9 a. m., viernes 7 a 10 a. m., sábado 9 a 10 a. m. Las peores horas son madrugadas entre semana con **180 minutos** (lun 4 a. m., jue 5 p. m., vie 4 a. m.).
+
+<BestTimeChart slug="nogales-deconcini" title="Nogales DeConcini: mediana de espera hacia EE.UU., últimos 30 días" />
+
+## Lo que dicen los datos
+
+Tres patrones saltan:
+
+1. **Las mañanas tarde entre semana están prácticamente vacías.** Miércoles, jueves, viernes y sábado todos tienen múltiples horas consecutivas con 0 minutos entre 7 y 11 a. m. Es el patrón más raro que medimos en cualquier puerto importante. Si tu agenda lo permite, cruzas sin esperar.
+2. **Los picos de la madrugada entre semana son agudos.** Lunes 4 a. m. pega 180 minutos; jueves 5 p. m. pega 180; viernes 4 a. m. pega 180. Probablemente son rushes comerciales o de turnos de trabajo que DeConcini absorbe porque Mariposa (el puente enfocado en camiones cercano) está saturada.
+3. **Las noches de fin de semana se quedan debajo de 100 minutos.** Domingo 11 p. m. pega 100, pero el resto del patrón nocturno del fin de semana se queda en el rango de 25 a 65 minutos. Mucho más suave que los equivalentes de San Ysidro o Otay Mesa.
+
+Cada celda (día, hora) son 1 a 3 snapshots muestreados. El patrón general "mañana entre semana está vacía" es estable; las horas pico específicas pueden cambiar de semana en semana.
+
+## DeConcini vs Mariposa
+
+Mariposa es el otro cruce de Nogales, tres millas al oeste, y maneja la mayoría del tráfico comercial de camiones. Para autos pasajeros:
+
+- **DeConcini** es más rápida en la mayoría de las horas. Las ventanas de mañana entre semana con 0 minutos pasan aquí.
+- **Mariposa** es la opción correcta si quieres evitar el manejo urbano del centro de Nogales del lado de EE.UU. Mariposa conecta directo con la I-19 con menos pare y siga.
+- **Para camiones comerciales:** Mariposa, siempre. DeConcini no maneja bien la mayoría del tráfico comercial.
+
+Vamos a publicar un post de datos hora por hora de Mariposa en el siguiente lote cuando tengamos agregados estables de 30 días.
+
+## SENTRI y Ready Lane en DeConcini
+
+DeConcini tiene acceso a carril SENTRI. Las medianas de 0 minutos del carril estándar en mañanas entre semana hacen que el ahorro de SENTRI sea mínimo durante esas ventanas, pero durante los picos del lunes 4 a. m. y jueves 5 p. m., SENTRI es la opción correcta.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI es un Programa de Trusted Traveler. La membresía requiere solicitud, costo, verificación de antecedentes, y entrevista en persona en un centro de inscripción. CBP publica las reglas oficiales, costos, elegibilidad, y la lista de centros de inscripción. Siempre verifica las reglas actuales antes de aplicar.
+</OfficialSource>
+
+## Qué significa esto para ti
+
+- **Mañana tarde entre semana (7 a 11 a. m. mié-sáb) es la hora más ligera de cualquier puerto importante de Arizona.** Si tu agenda lo permite, esta es la mejor ventana en todo el corredor de AZ.
+- **Evita lunes 4 a. m. y viernes 4 a. m.** Son picos de 180 minutos que aparecen consistentemente en los datos.
+- **Domingo en la noche en DeConcini se queda más suave que los equivalentes de CA.** Un regreso familiar de domingo por Nogales es notablemente más fácil que por las garitas de Tijuana.
+- **Para camiones o comercial:** usa Mariposa, no DeConcini.
+
+## Cómo calculamos estos números
+
+Cada 15 minutos el cron de Border Pulse jala el tiempo de espera oficial de CBP para DeConcini y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. La mediana es más honesta que el promedio para estos datos: un solo outlier de 180 minutos del lunes puede inflar un promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), la fuente canónica. La página en vivo de [DeConcini](/crossing/nogales-deconcini) muestra la espera de hoy junto a este patrón de 30 días.
+
+## Qué hacer con esto
+
+Si cruzas Nogales con regularidad, mueve tu horario a **mañana tarde entre semana** cuando puedas. Las medianas de 0 minutos son reales, repetitivas, y únicas a este puerto. Si tu agenda es fija, usa la gráfica de arriba para identificar la hora más ligera en tu día específico y verifica contra la espera en vivo de hoy antes de salir.

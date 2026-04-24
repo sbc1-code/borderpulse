@@ -1,0 +1,72 @@
+---
+title: "Mejor hora para cruzar Paso del Norte: hora por hora con 30 días de datos de CBP"
+description: "Mediana de espera en Paso del Norte (El Paso, TX) por hora y día, según CBP. Miércoles 7 a 9 a. m. con mediana de 1 minuto. La mañana más ligera de cualquier puerto de Texas."
+slug: mejor-hora-para-cruzar-paso-del-norte
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: es
+tags:
+  - paso-del-norte
+  - el-paso
+  - texas
+  - juarez
+  - mejor-hora
+translationKey: paso-del-norte-best-time
+hero: /og/blog/mejor-hora-para-cruzar-paso-del-norte.png
+relatedCrossings:
+  - "240202"
+  - "240201"
+officialSources:
+  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Programa Ready Lane"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+---
+
+Paso del Norte (PDN) es uno de los tres puentes principales de El Paso a Ciudad Juárez y el más cercano al centro de El Paso. La mediana de espera hacia el norte sobre 30 días es de **66 minutos**, más ligero que su puente hermano BOTA. Las horas más ligeras de toda la semana son **miércoles 7 a. m. y miércoles 9 a. m., las dos con mediana de 1 minuto**. Es prácticamente un puente vacío. La peor hora es **domingo medianoche con 120 minutos**.
+
+<BestTimeChart slug="el-paso-paso-del-norte-pdn" title="Paso del Norte: mediana de espera hacia EE.UU., últimos 30 días" />
+
+## Lo que dicen los datos
+
+Tres patrones saltan:
+
+1. **El miércoles en la mañana es la ventana clave.** PDN se queda prácticamente vacío entre las 4 y 9 a. m. los miércoles. Mediana 4 a. m. = 11 min, 5 a. m. = 4 min, 7 a. m. = 1 min, 9 a. m. = 1 min. Nada en el corredor de El Paso le iguala.
+2. **Sábado 9 a. m. es la segunda mejor hora con 10 minutos.** La mañana de fin de semana es la ventana universal más ligera para PDN, igual que para la mayoría de los cruces binacionales.
+3. **Domingo medianoche es la única hora que pasa los 100 minutos.** PDN es puente de pasajeros y peatones sin tráfico comercial, así que no tiene el pico de traileros del lunes en la madrugada que pega en Otay Mesa. Su pico es el regreso familiar del domingo, y aún así está contenido en 120 minutos.
+
+Cada celda (día, hora) está construida con 1 a 3 snapshots muestreados sobre 30 días. La forma es estable; la hora exacta más ligera puede cambiar entre miércoles 7 a. m. y miércoles 9 a. m. de semana en semana.
+
+## Por qué PDN no siempre es la respuesta correcta
+
+PDN es solo para pasajeros y peatones. Si manejas cualquier vehículo que no sea auto particular, necesitas otro puente de El Paso:
+
+- **Carga o comercial:** Bridge of the Americas (BOTA) o el puente comercial Zaragoza.
+- **Camionetas con remolque:** BOTA.
+- **Solo peatonal:** PDN maneja bien el tráfico peatonal. El puente Stanton Street (cercano) también es peatonal-amigable yendo al sur.
+
+Para alguien manejando auto particular en viaje de día, PDN es la opción más rápida por defecto. Para todo lo demás, ve la comparación de puentes de El Paso cuando salga.
+
+## SENTRI y Ready Lane en PDN
+
+PDN tiene acceso a SENTRI y Ready Lane. Los dos reducen la espera notablemente durante las ventanas pico estándar de 9 a. m. a 11 p. m.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane es para viajeros con documento de viaje habilitado con RFID, incluyendo la U.S. Passport Card, Enhanced Driver's Licenses de ciertos estados, y ciertas tarjetas de Trusted Traveler. CBP publica la lista oficial de documentos aceptados y confirma qué carriles están activos en cada puerto. Verifica antes de comprometerte al carril.
+</OfficialSource>
+
+## Qué significa esto para ti
+
+- **Miércoles 7 a 9 a. m. es la mejor hora individual para cruzar en cualquier puente de El Paso.** Si puedes mover tu viaje al miércoles en la mañana, hazlo.
+- **Sábado en la mañana es la mejor opción del fin de semana** en PDN por amplio margen (10 a 35 min vs 50+ min más tarde).
+- **Domingo en la noche tarde es el peor patrón** pero sigue siendo más suave que los equivalentes de San Ysidro o Otay Mesa.
+- **Para tráfico comercial o con remolque:** PDN no es tu puente. Usa BOTA.
+
+## Cómo calculamos estos números
+
+Cada 15 minutos el cron de Border Pulse jala el tiempo de espera oficial de CBP para PDN y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. La mediana es más honesta que el promedio para estos datos: un solo outlier de 120 minutos del domingo puede inflar el promedio de una hora típica de 30 minutos hasta 50. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), la fuente canónica. La página en vivo de [Paso del Norte](/crossing/el-paso-paso-del-norte-pdn) muestra la espera de hoy junto al patrón de 30 días.
+
+## Qué hacer con esto
+
+Si tu semana es flexible: apunta a **miércoles 7 a 9 a. m. en PDN**. Es uno de los patrones de mañana entre semana más ligeros que hemos medido en cualquier puerto. Si tu semana no es flexible: usa la gráfica de arriba para encontrar la hora más ligera en tu día específico, y suma 10 a 20 minutos de margen. Siempre verifica contra la espera en vivo de hoy antes de salir.
