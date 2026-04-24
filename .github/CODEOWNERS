@@ -1,0 +1,5 @@
+# Code owners for BorderPulse.
+# Every PR automatically requests review from sbc1-code.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @sbc1-code
