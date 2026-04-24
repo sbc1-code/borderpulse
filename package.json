@@ -20,6 +20,7 @@
     "prerender": "node scripts/prerender.mjs",
     "anomaly:detect": "node scripts/detect-anomalies.mjs",
     "anomaly:draft": "node scripts/draft-from-anomaly.mjs",
+    "anomaly:draft-llm": "node scripts/draft-from-anomaly-llm.mjs",
     "news:fetch": "node scripts/fetch-news.mjs",
     "news:classify": "node scripts/build-curation-queue.mjs"
   },

@@ -1,8 +1,10 @@
 name: Mode A anomaly scan
 
 on:
-  # Cron disabled until an ANTHROPIC_API_KEY secret is added and Sebastian
-  # opts in. Manual trigger only for now. When ready, uncomment the schedule.
+  # Cron disabled until Sebastian opts in. Manual trigger only.
+  # Uses the free template-based drafter (draft-from-anomaly.mjs), no API key
+  # required. To switch to the LLM drafter later, set USE_LLM_DRAFTER=1 and add
+  # ANTHROPIC_API_KEY secret.
   # schedule:
   #   - cron: '0 14 * * *'
   workflow_dispatch:
@@ -40,10 +42,8 @@ jobs:
           echo "anomaly_count=$COUNT" >> $GITHUB_OUTPUT
           echo "Detected $COUNT anomalies."
 
-      - name: Draft posts from anomalies
+      - name: Draft posts from anomalies (template-based, no API cost)
         if: steps.check.outputs.anomaly_count != '0'
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/draft-from-anomaly.mjs
 
       - name: Commit drafts and open PR
