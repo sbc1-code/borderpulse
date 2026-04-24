@@ -1,0 +1,982 @@
+{
+  "generated_at": "2026-04-24T01:31:58.978Z",
+  "total": 95,
+  "classified": 8,
+  "unmatched": 87,
+  "items_by_port": {
+    "230501": 1,
+    "230502": 3,
+    "250401": 1,
+    "250601": 3
+  },
+  "classified_items": [
+    {
+      "id": "000989910618",
+      "title": "CBP Officers Seize Over 3,000 Pounds of Methamphetamine at Otay Mesa Commercial Facility",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-over-3000-pounds-methamphetamine-otay-mesa",
+      "summary": "SAN DIEGO — U.S. Customs and Border Protection officers at the Otay Mesa Commercial Facility seized over 3,000 pounds of methamphetamine with an estimated street value of $4,924,960, concealed within a cargo trailer. The shipment manifest...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-23T20:41:33.000Z",
+      "port_numbers": [
+        "250601"
+      ]
+    },
+    {
+      "id": "0102f834ad0c",
+      "title": "CBP officers seize more than $1.1 million in cocaine at Pharr International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-more-11-million-cocaine-pharr-international",
+      "summary": "PHARR, Texas—U.S. Customs and Border Protection officers at the Pharr International Bridge cargo facility recently intercepted $1.1 million in suspected cocaine concealed in an empty trailer.“Under the powerful leadership of President...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-21T02:44:08.000Z",
+      "port_numbers": [
+        "230502"
+      ]
+    },
+    {
+      "id": "0b912579093a",
+      "title": "CBP officers seize $1M in cocaine in bus at Hidalgo International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-1m-cocaine-bus-hidalgo-international-bridge",
+      "summary": "HIDALGO, Texas—U.S. Customs and Border Protection officers at the Hidalgo Port of Entry recently seized cocaine valued at more than $1 million hidden within a passenger bus. “This hard narcotics seizure exemplifies CBP’s steadfast effort...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-17T23:01:31.000Z",
+      "port_numbers": [
+        "230501"
+      ]
+    },
+    {
+      "id": "c1d71d65e1d4",
+      "title": "CBP officers seize over $2.8 million in hard narcotics at Otay Mesa Port of Entry in back-to-back busts, saving millions of American lives",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-over-28-million-hard-narcotics-otay-mesa-port",
+      "summary": "OTAY MESA, Calif. — U.S. Customs and Border Protection officers at the Otay Mesa Port of Entry seized more than 430 pounds of cocaine and methamphetamine in two separate enforcement actions last week. The narcotics have a combined...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-16T14:49:01.000Z",
+      "port_numbers": [
+        "250601"
+      ]
+    },
+    {
+      "id": "7ef1aa5c81e6",
+      "title": "San Diego Congressional representatives visit Otay Mesa Detention Center",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/03/san-diego-congressional-representatives-visit-otay-mesa-detention-center",
+      "summary": "Reps. Sara Jacobs and Mike Levin say their offices have received complaints about detainees’ access to medical care and fresh food.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-03T14:49:18.000Z",
+      "port_numbers": [
+        "250601"
+      ]
+    },
+    {
+      "id": "c1fcabe7928e",
+      "title": "CBP officers seize more than $2.6 million in methamphetamine at Pharr International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-more-26-million-methamphetamine-pharr",
+      "summary": "PHARR, Texas—U.S. Customs and Border Protection officers at the Pharr International Bridge cargo facility intercepted $2.6 million in suspected methamphetamine concealed in a shipment manifested as carrots. “The criminal element is always…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-02T14:45:29.000Z",
+      "port_numbers": [
+        "230502"
+      ]
+    },
+    {
+      "id": "7bea0c4e0739",
+      "title": "CBP officers seize fentanyl, heroin at San Ysidro Port of Entry",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-fentanyl-heroin-san-ysidro-port-entry",
+      "summary": "SAN DIEGO — On March 10, U.S. Customs and Border Protection officers at the San Ysidro Port of Entry seized more than 20 pounds of fentanyl and three pounds of heroin concealed within a vehicle.Officers referred a 26-year-old male, Mexican…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-31T20:46:53.000Z",
+      "port_numbers": [
+        "250401"
+      ]
+    },
+    {
+      "id": "b5fe265fe860",
+      "title": "CBP officers seize more than $17 million in methamphetamine at Pharr International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-more-17-million-methamphetamine-pharr",
+      "summary": "PHARR, Texas—U.S. Customs and Border Protection officers at the Pharr International Bridge cargo facility intercepted suspected methamphetamine valued at more than $17 million concealed within a shipment manifested as blackberries. “Our…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-27T20:04:31.000Z",
+      "port_numbers": [
+        "230502"
+      ]
+    }
+  ],
+  "unmatched_items": [
+    {
+      "id": "63aaf47159dc",
+      "title": "Residents unhappy border wall popped up so close to their new homes",
+      "url": "https://www.borderreport.com/border-report-tour/the-border-wall/residents-unhappy-border-wall-popped-up-so-close-to-their-new-homes/",
+      "summary": "Thirty-foot-tall steel panels loom over a new subdivision where several residents said they don't like the dust nor noise, and they're worried this will affect their property values.",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-24T00:20:25.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "e26997ec4725",
+      "title": "House Republicans grumbling about 'skinny' ICE funding package complicates its path",
+      "url": "https://www.borderreport.com/border-report-tour/immigration/house-republicans-grumbling-about-skinny-ice-funding-package-complicates-its-path/",
+      "summary": "House Republicans grumbling about the structure of a “skinny” reconciliation bill to fund immigration enforcement — and their skepticism about prospects for passing another GOP-only funding package this year — are creating hurdles for...",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T22:34:18.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "c4324f0d3992",
+      "title": "Gov. Tim Walz to release 'Good Neighbors,' inspired by ICE surge in Minnesota and the pushback",
+      "url": "https://www.borderreport.com/news/politics/gov-tim-walz-to-release-good-neighbors-inspired-by-ice-surge-in-minnesota-and-the-pushback/",
+      "summary": "Minnesota Gov. Tim Walz is working on a book inspired in part by the massive immigration enforcement surge in the Minneapolis-St. Paul area earlier this year and by the extensive pushback of local residents. “Good Neighbors” will be...",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T22:32:11.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "7824dea5d61c",
+      "title": "California lawmakers seek protections for patients in ICE custody",
+      "url": "https://www.borderreport.com/regions/california/california-lawmakers-seek-protections-for-patients-in-ice-custody/",
+      "summary": "California lawmakers alarmed by the treatment of people brought to hospitals by federal immigration agents want to strengthen protections for detained patients receiving care at medical facilities, including by making it easier for their...",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T22:20:34.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "3dba41158ad5",
+      "title": "Many migrants in caravan no longer aiming for US border",
+      "url": "https://www.borderreport.com/regions/mexico/many-migrants-in-caravan-no-longer-aiming-for-us-border/",
+      "summary": "Hundreds of migrants, most of them from Haiti, left the southern Mexican city of Tapachula on foot Tuesday seeking better living conditions elsewhere in Mexico.",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T21:43:47.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "3c8358e3d3e3",
+      "title": "Appeals court keeps 'Alligator Alcatraz' open, rejecting need for federal environmental review",
+      "url": "https://www.borderreport.com/regions/florida/appeals-court-keeps-alligator-alcatraz-open-rejecting-need-for-federal-environmental-review/",
+      "summary": "ORLANDO, Fla. (AP) — An immigration detention center in the Florida Everglades known as “Alligator Alcatraz” will remain open, an appeals court decided Tuesday, upholding its earlier decision to block a judge's order for the facility to...",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T20:50:02.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "ed99489687f6",
+      "title": "Mexico to beef up security at tourist sites after shooting at pyramids in lead up to World Cup",
+      "url": "https://www.borderreport.com/regions/mexico/mexico-to-beef-up-security-at-tourist-sites-after-shooting-at-pyramids-in-lead-up-to-world-cup/",
+      "summary": "Officers with bomb-sniffing dogs circled cars and searched bags of tourists filing into historic pyramids outside of Mexico City on Wednesday just days after a man opened fire on tourists.",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T17:42:51.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "49dd58651a35",
+      "title": "Mexico's government keeps contradicting itself over role of CIA agents in Chihuahua operation",
+      "url": "https://www.borderreport.com/news/mexicos-government-keeps-contradicting-itself-over-role-of-cia-agents-in-chihuahua-operation/",
+      "summary": "MEXICO CITY (AP) — Mexican authorities on Wednesday continued to muddle the official account over the role of two CIA agents in a counternarcotics operation in northern Mexico and the extent to which Mexico's federal government was aware...",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T17:28:31.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "8e07d8cab0f3",
+      "title": "Abbott tells Texas cities to work with ICE or lose millions in grants",
+      "url": "https://www.borderreport.com/news/politics/abbott-tells-texas-cities-to-work-with-ice-or-lose-millions-in-grants/",
+      "summary": "“I don’t want to lose that grant money,\" Austin Mayor Kirk Watson said. “And I believe we are in compliance.”",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T16:40:44.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "581e5355c777",
+      "title": "49 new Americans sworn in on Lexington’s Battle Green, birthplace of the American Revolution",
+      "url": "https://www.borderreport.com/border-report-tour/immigration/49-new-americans-sworn-in-on-lexingtons-battle-green-birthplace-of-the-american-revolution/",
+      "summary": "“No matter where you come from,” Steve Cole told the people gathered on Lexington’s Battle Green Tuesday morning, “here you belong.”",
+      "source_name": "Border Report",
+      "source_category": "news",
+      "published_at": "2026-04-23T16:37:55.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "3ed296052490",
+      "title": "El Paso elections chief outlines challenges ahead of May votes",
+      "url": "https://elpasomatters.org/2026/04/23/el-paso-county-elections-administrator-lisa-wise-may-runoff-voting-ballots/",
+      "summary": "El Paso County’s Elections Administrator Lisa Wise discusses challenges, transparency and what voters should know ahead of May uniform elections and primary runoffs. The post El Paso elections chief outlines challenges ahead of May votes...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-23T13:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "818f87876ba9",
+      "title": "County Supervisors OK immigrant resource deal with Mexican consulate",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/22/county-supervisors-ok-immigrant-resource-deal-with-mexican-consulate",
+      "summary": "The board authorized county officials to negotiate with the Mexican Consulate on legal services for those who face removal from the United States for being here illegally.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-22T22:44:50.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "9e0e6d953d62",
+      "title": "State board now has rules to distribute Prop. 4 funds for cross-border pollution fixes",
+      "url": "https://www.kpbs.org/news/environment/2026/04/22/state-board-now-has-rules-to-distribute-prop-four-funds-for-cross-border-pollution-fixes",
+      "summary": "Leaders in San Diego and Imperial counties have been making their case for why their regions need the state funding.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-22T22:21:57.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "7ea2b12ce502",
+      "title": "Federal appeals court blocks California law requiring federal agents to wear identification",
+      "url": "https://www.kpbs.org/news/politics/2026/04/22/federal-appeals-court-blocks-california-law-requiring-federal-agents-to-wear-identification",
+      "summary": "The Trump administration filed a lawsuit in November challenging the law, arguing that it would threaten the safety of officers who are facing harassment, doxing, and violence and that it violated the constitution because the state is...",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-22T18:50:55.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "2cac1868398b",
+      "title": "Q&A: U.S. representative candidates for District 16 in May 26 Republican primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-u-s-representative-candidates-for-district-16-in-may-26-republican-primary-runoff-election/",
+      "summary": "Seven candidates are vying for the Republican nomination for the District 16 Congressional seat. The winner will face incumbent Veronica Escobar, who is unopposed in the Democratic primary, in November. The post Q&A: U.S. representative...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:56:59.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "0c6c89d286a8",
+      "title": "Q&A: Justice of the Peace, Precinct 6, Place 2 candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-justice-of-the-peace-precinct-6-place-2-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Incumbent Enedina \"Nina\" Serna and Rosalie Dominguez are in a runoff for the Democratic nomination for justice of the peace in Precinct 6, Place 2. The post Q&A: Justice of the Peace, Precinct 6, Place 2 candidates in May 26 Democratic...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:55:18.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "708ff8729801",
+      "title": "Q&A: Justice of the Peace, Precinct 6, Place 1 candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-justice-of-the-peace-precinct-6-place-1-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Incumbent Ruben Lujan and Dora H. Aguirre are vying for the Democratic nomination for justice of the peace in Precinct 6, Place 1. No Republican candidates filed for the seat. The post Q&A: Justice of the Peace, Precinct 6, Place 1...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:54:13.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "b03042ba5025",
+      "title": "Q&A: Justice of the Peace, Precinct 5 candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-justice-of-the-peace-precinct-5-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Lucilla \"Lucy\" Najera and Dora Oaxaca are in a runoff for the Democratic nomination for justice of the peace in Precinct 5. The post Q&A: Justice of the Peace, Precinct 5 candidates in May 26 Democratic primary runoff election appeared...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:53:08.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "8f10d2731706",
+      "title": "Q&A: Justice of the Peace, Precinct 2 candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-justice-of-the-peace-precinct-2-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Incumbent Brian J. Haggerty and Christie Saiz are running for the Democratic nomination for justice of the peace in Precinct 2. No Republican candidates filed for the seat. The post Q&A: Justice of the Peace, Precinct 2 candidates in May...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:52:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "a036d1a37349",
+      "title": "Q&A: Justice of the Peace, Precinct 1 candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-justice-of-the-peace-precinct-1-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Denise Butterworth and Octavio Dominguez are in a runoff for the Democratic nomination for justice of the peace in Precinct 1. No Republican candidates filed for the seat. The post Q&A: Justice of the Peace, Precinct 1 candidates in May 26...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:50:53.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "15bfae060085",
+      "title": "Q&A: County Court at Law No. 2 judge candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-county-court-at-law-no-2-judge-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Frances Maldonado and Christina Montes are vying for the Democratic nomination for judge of County Court at Law No. 2. No Republican candidates filed for the seat. The post Q&A: County Court at Law No. 2 judge candidates in May 26...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:49:36.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "5b4eec4b9493",
+      "title": "Q&A: 168th District Court judge candidates in May 26 Democratic primary runoff election",
+      "url": "https://elpasomatters.org/2026/04/22/qa-168th-district-court-judge-candidates-in-may-26-democratic-primary-runoff-election/",
+      "summary": "Bernardo Cruz and Enrique A. Holguin are vying for the Democratic nomination for the seat. The winner will face Republican Robert Pritchard in November. The post Q&A: 168th District Court judge candidates in May 26 Democratic primary...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:48:21.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "2e7b14cb5081",
+      "title": "Election 2026 Voter Guide: Everything you need to know about the May 26 primary runoffs in El Paso",
+      "url": "https://elpasomatters.org/2026/04/22/may-26-2026-primary-election-runoffs-el-paso-texas-voter-guide/",
+      "summary": "Who are the candidates in a runoff for 16th Congressional District? When is early voting? What if I didn’t vote in the March primaries? We answer all your election questions. The post Election 2026 Voter Guide: Everything you need to know...",
+      "source_name": "El Paso Matters",
+      "source_category": "news",
+      "published_at": "2026-04-22T16:46:26.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "c204a01bfb5a",
+      "title": "Rep. Juan Vargas denies receiving AIPAC money, contradicting the public record",
+      "url": "https://www.kpbs.org/news/politics/2026/04/22/rep-juan-vargas-denies-receiving-aipac-money-contradicting-the-public-record",
+      "summary": "Campaign finance records show the Democratic member of Congress representing San Diego’s South Bay has received over $200,000 from the pro-Israel group in recent election cycles. But he denies ever receiving a penny.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-22T13:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "4248f4ba57fa",
+      "title": "CBP launches Mobile Passport Control at four land border pedestrian crossings in Washington state",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-launches-mobile-passport-control-four-land-border-pedestrian",
+      "summary": "WASHINGTON — U.S. Customs and Border Protection announced today the expansion of Mobile Passport Control to pedestrian environments at four land ports of entry in Washington state. “This expansion to Blaine Peace Arch, Blaine Pacific…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-20T19:51:54.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "89d85a86e9df",
+      "title": "CBP Fort Lauderdale seizes over 8,500 counterfeit designer brand perfumes valued at over $1 Million",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-fort-lauderdale-seizes-over-8500-counterfeit-designer-brand",
+      "summary": "FORT LAUDERDALE, Fla. – U.S. Customs and Border Protection officers at Port Everglades, Fla., recently seized counterfeit designer perfumes, including well-known brands such as Gucci, Burberry, Armani, and Lancome, that would have been...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-20T18:05:31.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "b6b27310e371",
+      "title": "Border Patrol: Cocaine, meth worth $2.8 million seized at border",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/20/border-patrol-cocaine-meth-worth-2-8-million-seized-at-border",
+      "summary": "The first seizure was on April 7, when officers referred a 51-year-old Mexican national driving a Toyota Prius for a secondary inspection. During the inspection, a CBP canine team alerted to the vehicle, and agents allegedly found 124...",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-20T15:07:26.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "7f6f0a56782b",
+      "title": "Haiti - Level 4: Do Not Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/haiti-travel-advisory.html",
+      "summary": "There was no change to the advisory level or risk indicators. Advisory summary was updated. Do Not Travel to Haiti due to the risk of crime, terrorism, kidnapping, unrest, and limited health care. Read the entire Travel Advisory. Advisory...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-16T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "0e0723bc0acd",
+      "title": "CBP Hosts Record-Setting Recruitment Expo in San Antonio",
+      "url": "https://www.cbp.gov/newsroom/spotlights/cbp-hosts-record-setting-recruitment-expo-san-antonio",
+      "summary": "They say everything is bigger in Texas, and CBP’s March recruitment expo in San Antonio was no exception. Over three days, 517 participants came through the doors, submitting 495 applications—an average of 19 every hour. With a remarkable...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-15T19:27:54.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "f6d3211a3205",
+      "title": "California DACA recipient ordered to travel thousands of miles for court",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/15/ordenan-a-beneficiaria-de-daca-de-sacramento-a-viajar-miles-de-kilometros-para-comparecer-ante-la-corte",
+      "summary": "The Atlanta immigration court in Georgia reopened her case and ordered her to appear in person within days of receiving the notice despite her case being administratively closed in 2014. Valladares said she was not provided a reason for...",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-15T18:33:41.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "f2f02d814bf8",
+      "title": "San Diego CBP Field Office seizes over $14 million in narcotics in March",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/san-diego-cbp-field-office-seizes-over-14-million-narcotics-march",
+      "summary": "SAN DIEGO — U.S. Customs and Border Protection officers in the San Diego Field Office seized 6,130 pounds of narcotics worth over $14 million in March.During enforcement operations, CBP officers seized 4,484 pounds of methamphetamine,...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-15T18:18:10.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "b45c5634cbba",
+      "title": "CBP officers seize more than $150,000 worth of fake electronics",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-seize-more-150000-worth-fake-electronics",
+      "summary": "BUFFALO, N.Y. – U.S. Customs and Border Protection officers at the Buffalo port of entry, Peace Bridge warehouse, seized nearly 1,000 electronic devices bearing counterfeit trademarks on March 30 that if authentic, would have been worth...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-15T15:44:58.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "77e04ebc30b2",
+      "title": "Hungary - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.hun.html",
+      "summary": "Exercise normal precaution in Hungary. Hungary is generally a safe destination for travelers. Most crimes against foreigners are crimes of opportunity, like purse snatching and pickpocketing, especially in tourist areas and major train...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-15T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "24e21c4c791a",
+      "title": "Vuelos de deportación desde San Diego se han disparado desde que Trump asumió el cargo.",
+      "url": "https://www.kpbs.org/news/vuelos-de-deportacion-desde-san-diego-se-han-disparado-desde-que-trump-asumio-el-cargo",
+      "summary": "El año pasado, casi 120 vuelos de deportación despegaron del Aeropuerto Internacional de San Diego y de la Estación Aérea del Cuerpo de Marines Miramar. En 2024, no hubo ninguno.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-14T23:33:43.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "073e9dea96c9",
+      "title": "Deportation flights from San Diego have spiked since Trump took office",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/14/deportation-flights-from-san-diego-have-spiked-since-trump-took-office",
+      "summary": "Last year, nearly 120 deportation flights took off from San Diego International Airport and MCAS Miramar. In 2024, there were zero.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-14T17:30:41.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "69e47b1a3947",
+      "title": "CBP Atlanta officers seize over $372,000 in unreported currency at Atlanta Airport",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-atlanta-officers-seize-over-372000-unreported-currency-atlanta",
+      "summary": "ATLANTA — U.S. Customs and Border Protection officers at Hartsfield-Jackson Atlanta International Airport seized $372,264 in unreported currency from 24 travelers during the first three months of 2026.The following were the three largest…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-13T17:33:02.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "a9ec2d27adac",
+      "title": "Trinidad and Tobago - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.tto.html",
+      "summary": "Reconsider travel in Trinidad and Tobago due to crime, health, and terrorism. Some areas have an increased risk. Read the entire Travel Advisory. State of Emergency On March 2, 2026, the Government of Trinidad and Tobago (GOTT) declared a...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-13T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "e1196c0e3978",
+      "title": "Trinidad and Tobago - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/trinidad-and-tobago-travel-advisory.html",
+      "summary": "There was no change to the advisory level. The “kidnapping” indicator was removed. An area of increased risk was added. Advisory summary was updated. Reconsider travel to Trinidad and Tobago due to crime. There is also a heightened risk of...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-13T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "23f6384d45cd",
+      "title": "Barbados - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/barbados-travel-advisory.html",
+      "summary": "There are no changes to the advisory level or risk indicators. Advisory summary was updated. Exercise normal precautions in Barbados. Barbados is generally a safe destination for travelers. Petty crime is common, especially in popular...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-10T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "c9317daeffaa",
+      "title": "Bermuda - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/bermuda-travel-advisory.html",
+      "summary": "There were no changes to the advisory level or risk indicators. Advisory summary was updated. Advisory summary Bermuda is generally a safe destination for travelers. Review our travel guidance for Bermuda to learn how to prepare for a safe...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-10T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "1a64f240adae",
+      "title": "America, the world’s great melting pot … really?",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/09/is-america-really-a-melting-pot",
+      "summary": "For much of our history, the U.S. has touted itself as a shining example of a place where different cultures happily coexist. But how does that portrayal line up with the facts?",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-09T18:22:03.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "988c89d13bd8",
+      "title": "Oman - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.omn.html",
+      "summary": "Reconsider travel to Oman due to the risk of terrorism and armed conflict. Some areas have increased risk. Read the entire Travel Advisory. On March 13, 2026, the Department of State ordered non-emergency U.S. government employees and U.S....",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-09T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "a6cae3e15418",
+      "title": "Oman - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/oman-travel-advisory.html",
+      "summary": "The advisory level remains at 3. There were no changes to the risk indicators. Advisory summary was updated to reflect changes to U.S. embassy operations. Reconsider travel to Oman due to the risk of terrorism and armed conflict. Some...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-09T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "ee8ea54aed23",
+      "title": "New federal cuts to nutrition assistance target immigrants. City Heights is feeling the effects",
+      "url": "https://www.kpbs.org/news/racial-justice-social-equity/2026/04/08/new-federal-cuts-to-nutrition-assistance-target-immigrants-city-heights-is-feeling-the-effects",
+      "summary": "This month, the Trump administration ended CalFresh nutrition assistance eligibility for many immigrant groups, including asylees and refugees. The cuts apply to nearly 13,000 San Diego County residents.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-09T00:11:03.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "95815a0f802c",
+      "title": "Luxembourg - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.lux.html",
+      "summary": "Exercise normal precaution in Luxembourg. Luxembourg is generally a safe destination for travelers. Petty crime can occur, especially in popular tourist locations. Stay aware of your surroundings. Most crimes against foreigners are crimes...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-08T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "df9b2cec1c76",
+      "title": "São Tomé and Príncipe - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.stp.html",
+      "summary": "Reconsider travel to São Tomé and Príncipe due to unrest and health risks. Since March 24, 2026, U.S. government employees working for the U.S. Mission to Angola and Sao Tome and Principe need special permission to travel to Sao Tome and...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-08T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "9e70eb25a0b2",
+      "title": "Nigeria - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/nigeria-travel-advisory.html",
+      "summary": "There were no changes to the Travel Advisory Level or risk indicators. Advisory summary was updated to reflect changes to U.S. embassy operations. Do not travel to Plateau, Jigawa, Kwara, Niger, Taraba states were added. Reconsider travel...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-08T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "cb7e785dcc61",
+      "title": "CBP Officers at the Port of Buffalo seize $100,000 of noncompliant batteries",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-port-buffalo-seize-100000-noncompliant-batteries",
+      "summary": "BUFFALO, N.Y. – U.S. Customs and Border Protection officers at the Buffalo, N.Y., port of entry seized nearly 350,000 batteries March 26 at the Peace Bridge warehouse that did not comply with child protective packaging standards.On Feb. 9,...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-07T18:08:12.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "21fc288a7393",
+      "title": "With a national spotlight on birthright citizenship and immigration, how does California fit in?",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/06/with-a-national-spotlight-on-birthright-citizenship-and-immigration-how-does-california-fit-in",
+      "summary": "The debate about who should, or should not, be a citizen of the United States has deep roots, and California is a prime case study.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-06T19:31:15.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "f1b6f019cb6d",
+      "title": "CBP officers seize over $1.3M in hard narcotics at Laredo Port of Entry",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-over-13m-hard-narcotics-laredo-port-entry",
+      "summary": "LAREDO, Texas—U.S. Customs and Border Protection officers at Laredo Port of Entry recently seized narcotics valued at more than $1.3 million in two separate enforcement actions.“These two back-to-back seizures of hard narcotics demonstrate...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-06T13:49:41.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "452910d3ceb7",
+      "title": "Se disparan las transferencias de detenidos a ICE en San Diego en 2025",
+      "url": "https://www.kpbs.org/news/se-disparan-las-transferencias-de-detenidos-a-ice-en-san-diego-en-2025",
+      "summary": "El aumento de casi el triple se debe casi por completo al incremento de las órdenes de arresto federales emitidas por ICE contra inmigrantes detenidos. Los activistas reiteraron sus peticiones a la sheriff Kelly Martinez para que ponga fin...",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-03T18:14:57.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "de79a7f33657",
+      "title": "Dangerous human growth hormones stopped by Chicago CBP",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/dangerous-human-growth-hormones-stopped-chicago-cbp",
+      "summary": "CHICAGO – U.S. Customs and Border Protection officers in Chicago had a busy month. During March officers seized 351 shipments in air cargo totaling 455 pounds of unapproved human growth hormones and steroids. These items would have been...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-03T11:07:40.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "68a4a09fcbf2",
+      "title": "Federal judge: Continued Border Patrol sweeps in California violated court order",
+      "url": "https://www.kpbs.org/news/politics/2026/04/02/federal-judge-continued-border-patrol-sweeps-in-california-violated-court-order",
+      "summary": "A federal judge rules that the Border Patrol again broke the rules in California immigration sweeps, saying agents acted “without considering or complying with law Congress enacted.”",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-02T22:29:06.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "85a5150fd7d8",
+      "title": "CBP officers seize over $2.8M in narcotics at Eagle Pass Port of Entry",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-over-28m-narcotics-eagle-pass-port-entry",
+      "summary": "EAGLE PASS, Texas—U.S. Customs and Border Protection officers at Eagle Pass Port of Entry this weekend seized more than $2.8 million in narcotics in two separate enforcement actions.“These two significant hard narcotics seizures with a...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-02T14:32:28.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "00db80f396f2",
+      "title": "Costa Rica - Level 2: Exercise Increased Caution",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.cri.html",
+      "summary": "Exercise increased caution in Costa Rica due to crime. Petty crime is common throughout Costa Rica. Violent crime also affects tourists. This includes armed robbery, homicide, and sexual assault.",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-02T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "62665e83abdf",
+      "title": "San Diego Catholics reaffirm commitment to accompany migrants inside federal courthouse",
+      "url": "https://www.kpbs.org/news/faith-spirituality/2026/04/01/san-diego-catholics-reaffirm-commitment-to-accompany-migrants-inside-federal-courthouse",
+      "summary": "Volunteers said they would continue accompanying migrants to hearings and interviews despite increased restrictions in recent weeks.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-01T23:32:40.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "8a3fa7b47530",
+      "title": "San Diego Sheriff’s inmate transfers to ICE spiked in 2025",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/01/san-diego-sheriffs-inmate-transfers-to-ice-spiked-in-2025",
+      "summary": "The nearly threefold jump is almost entirely due to an increase in federal warrants for jailed immigrants from ICE. Advocates renewed calls for Sheriff Kelly Martinez to end the practice.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-01T13:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "0e7076831cd7",
+      "title": "Latvia - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/latvia-travel-advisory.html",
+      "summary": "There were no changes to the advisory level or risk indicators. Advisory summary was updated. Advisory summary Latvia is generally a safe destination for travelers. Review our travel guidance for Latvia to learn how to prepare for a safe...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-01T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "7e5e1c1eaf41",
+      "title": "Ethiopia - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/ethiopia-travel-advisory.html",
+      "summary": "There was no change to the advisory level. The “other” risk indicator was updated to include exit bans and communication disruptions. The advisory summary was updated. Reconsider travel to Ethiopia due to unrest, crime, kidnapping,...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-04-01T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "3ec21cb645f9",
+      "title": "Cincinnati CBP foils scheme to smuggle over 5,000 unapproved peptides into the U.S.",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cincinnati-cbp-foils-scheme-smuggle-over-5000-unapproved-peptides-us",
+      "summary": "CINCINNATI— U.S. Customs and Border Protection officers at the Port of Cincinnati uncovered a disturbing trend in December of 2025. A shipper in China attempted to clandestinely introduce various types of peptides, particularly the active…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-31T20:18:41.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "5e51b7032302",
+      "title": "Baltimore CBP officers intercept 247 pounds of marijuana in four London-bound smuggling attempts at BWI",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/baltimore-cbp-officers-intercept-247-pounds-marijuana-four-london",
+      "summary": "BALTIMORE – U.S. Customs and Border Protection officers intercepted 247 pounds of marijuana in four London bound smuggling loads recently at Baltimore Washington International Thurgood Marshall Airport.CBP officers discovered 116 pounds of…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-31T18:20:32.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "5fd2efd83526",
+      "title": "CBP officers arrest Canadian citizen wanted by the U.S. Attorney’s Office in Nevada",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-arrest-canadian-citizen-wanted-us-attorney-s-office",
+      "summary": "NIAGARA FALLS, N.Y. – U.S. Customs and Border Protection officers at the Port of Buffalo, Rainbow Bridge border crossing, arrested a Canadian citizen on a warrant from the U.S District Court for the District of Nevada.On March 16, CBP...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-31T14:50:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "b0b87810962c",
+      "title": "Colombia - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.col.html",
+      "summary": "Reconsider travel to Colombia due to crime, terrorism, civil unrest, kidnapping, and natural disasters. Some areas have an increased risk. Read the entire Travel Advisory. Violent crime is common in many areas of Colombia, including...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-31T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "56ea984e94ba",
+      "title": "Nepal - Level 2: Exercise Increased Caution",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.npl.html",
+      "summary": "Exercise increased caution in Nepal due to civil unrest. The nationwide demonstrations that began in September 2025 have stopped, and the security situation is stable. However, demonstrations and local unrest can still happen, particularly...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-31T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "593b22f67f63",
+      "title": "Estonia - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/estonia-travel-advisory.html",
+      "summary": "There were no changes to the advisory level or risk indicators. Advisory summary was updated Exercise normal precautions in Estonia. Advisory Summary Estonia is generally a safe destination for travelers. Review our travel guidance for...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-31T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "6b8e9f540a62",
+      "title": "Corte Suprema de EEUU debate caso de ciudadanía por nacimiento",
+      "url": "https://www.kpbs.org/news/corte-suprema-de-eeuu-debate-caso-de-ciudadania-por-nacimiento",
+      "summary": "El miércoles, la Corte Suprema escuchará los argumentos sobre el futuro de la orden en un caso de New Hampshire. La Decimocuarta Enmienda y la ley federal se han interpretado generalmente en el sentido de que otorgan la ciudadanía a toda...",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-31T00:14:42.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "8a8e74cd5569",
+      "title": "The birthright citizenship case at the Supreme Court hits close to home for this immigrant mother",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/03/30/the-birthright-citizenship-case-at-the-supreme-court-hits-close-to-home-for-this-immigrant-mother",
+      "summary": "The Supreme Court hears arguments over the order's fate Wednesday in a New Hampshire case. The 14th Amendment and federal law have been widely understood to make citizens of everyone born in the country, with narrow exceptions.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-30T19:16:06.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "40bc49afad81",
+      "title": "CBP Officers arrest a Missouri man for illegally possessing firearms as a convicted felon and sex offender",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-arrest-missouri-man-illegally-possessing-firearms",
+      "summary": "BUFFALO, N.Y. – U.S. Customs and Border Protection officers at the Buffalo port of entry arrested a Missouri man and seized two firearms from a commercial vehicle at the Peace Bridge border crossing on March 24.CBP officers encountered a...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-30T13:31:47.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "67354d9a639e",
+      "title": "Gabon - Level 2: Exercise Increased Caution",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.gab.html",
+      "summary": "Exercise increased caution due to unrest, crime, and health. Unrest Demonstrations and protests may occur in Gabon without warning. Protests often occur in Libreville and Port Gentil. Crime Crime is common in Libreville and Port Gentil. It...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-30T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "fee2a6bd89b9",
+      "title": "After immigration arrests, California lawmakers wonder: Are police telling the feds too much?",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/03/27/after-immigration-arrests-california-lawmakers-wonder-are-police-telling-the-feds-too-much",
+      "summary": "Legislators approved an audit of three of the state’s federally-funded fusion centers, citing concerns about civil liberties and privacy.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-27T18:15:43.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "ac21db8264fe",
+      "title": "CBP officers seize commercial quantity of insecticide at Juarez-Lincoln Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-commercial-quantity-insecticide-juarez-lincoln",
+      "summary": "LAREDO, Texas—U.S. Customs and Border Protection officers at Laredo Port of Entry this week intercepted a large quantity of insecticide hidden within a vehicle. CBP officers seize commercial quantity of insecticide at Juarez-Lincoln…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-27T18:10:32.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "4a1f7ce874ad",
+      "title": "¿Por qué una empresa privada y no el sheriff está investigando violaciones en un centro de detención de ICE?",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/03/27/por-que-una-empresa-privada-y-no-el-sheriff-esta-investigando-violaciones-en-un-centro-de-detencion-de-ice",
+      "summary": "El director de un centro de detención de inmigrantes de gestión privada en el condado de San Diego tiene autoridad para decidir cómo investigar las denuncias de violación. Un supervisor del condado quiere revisar el acuerdo que otorga esa...",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-27T17:53:41.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "f43895c85cba",
+      "title": "U.S. Border Patrol receives 15 horses from U.S. Army, saving $105,000",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/us-border-patrol-receives-15-horses-us-army-saving-105000",
+      "summary": "WASHINGTON — U.S. Border Patrol horse patrol units across the Southwest recently received 15 horses from the U.S. Army, an interagency transfer that will save the agency an estimated $105,000.The horses came from U.S. Army posts at Fort...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-27T13:36:58.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "c7817cf2ed9f",
+      "title": "ICE Minneapolis operation eroded trust, hurt local economy, UC San Diego research shows",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/03/25/ice-minneapolis-operation-eroded-trust-hurt-local-economy-uc-san-diego-research-shows",
+      "summary": "A new report from UC San Diego details the effects of this winter’s large-scale immigration enforcement operation in Minnesota.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-25T22:56:50.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "bd3152e885da",
+      "title": "Philadelphia CBP officers intercept two Europe-bound marijuana loads, Troopers arrest two",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/philadelphia-cbp-officers-intercept-two-europe-bound-marijuana-loads",
+      "summary": "PHILADELPHIA – Two women are facing felony drug possession charges after U.S. Customs and Border Protection officers intercepted 97 pounds of marijuana in smuggling attempts on consecutive days this week at Philadelphia International...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-25T18:30:23.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "8f0794e218fb",
+      "title": "Why a private company is investigating rapes at an ICE detention center instead of the sheriff",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/03/24/why-a-private-company-is-investigating-rapes-at-an-ice-detention-center-instead-of-the-sheriff",
+      "summary": "The warden at a privately run immigrant detention center in San Diego County has authority to decide how to investigate rape reports there. A San Diego County supervisor wants to revisit the agreement giving that power to CoreCivic.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-24T22:34:10.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "fcf8794dac8f",
+      "title": "Progreso CBP officers intercept two fugitives wanted for sex-related offenses in 48 hours",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/progreso-cbp-officers-intercept-two-fugitives-wanted-sex-related",
+      "summary": "PROGRESO, Texas—Amid a steady flow of Spring break traffic, U.S. Customs and Border Protection officers assigned to Progreso Port of Entry this weekend apprehended two individuals wanted on outstanding felony warrants for a variety of sex-…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-24T18:07:24.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "d7652faaa2b3",
+      "title": "ICE deployments created chaos for cities and cost them millions, NPR analysis finds",
+      "url": "https://www.kpbs.org/news/national/2026/03/24/ice-deployments-created-chaos-for-cities-and-cost-them-millions-npr-analysis-finds",
+      "summary": "Local leaders report already-strapped police departments racked up overtime bills in the millions while others report a multi-million dollar hit to business during the worst ICE surges.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-24T09:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "ec2d86218a9d",
+      "title": "Markwayne Mullin confirmed as the next secretary of Homeland Security",
+      "url": "https://www.kpbs.org/news/politics/2026/03/23/markwayne-mullin-confirmed-as-the-next-secretary-of-homeland-security",
+      "summary": "The Oklahoma Republican comes to the helm in the midst of a shutdown that has left some 100,000 of the department's more than a quarter-million employees working without pay.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-24T00:26:08.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "1d96b0764a8a",
+      "title": "Trump administration acknowledges it needs immigrant farmworkers as it moves to cut their pay",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/03/23/trump-administration-acknowledges-it-needs-immigrant-farmworkers-as-it-moves-to-cut-their-pay",
+      "summary": "The Trump administration handed down a rule that would cut the minimum wage for immigrants with H-2A visas, including farm workers.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-03-23T20:40:23.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "5c5c35ca148e",
+      "title": "Ireland - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.irl.html",
+      "summary": "Exercise normal precaution in Ireland. Ireland is generally a safe destination for travelers. Travelers should remain vigilant as petty crime is common, especially in popular tourist locations. Stay aware of your surroundings. Most crimes...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-20T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "715c4fb7a25f",
+      "title": "Venezuela - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/tsg_aem/us/en/home/international-travel/travel-advisories/destination.ven.html",
+      "summary": "Reconsider travel to Venezuela due to risk of crime, kidnapping, terrorism, and poor health infrastructure. Some areas have increased risk. Read the entire Travel Advisory. U.S. embassy operations In January 2026, the U.S. Department of...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-19T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "11547ac23e0f",
+      "title": "Saudi Arabia - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/saudi-arabia-travel-advisory.html",
+      "summary": "There were no changes to the advisory level or risk indicators. Advisory summary was updated. Reconsider travel to Saudi Arabia due to risk of Iranian drone and missile targeting of American interests, armed conflict, terrorism, exit bans,...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-13T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "1ce64536366a",
+      "title": "Finland - Level 1: Exercise Normal Precautions",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/finland-travel-advisory.html",
+      "summary": "There were no changes to the advisory level or risk indicators. Advisory summary was updated. Exercise normal precautions in Finland. If you decide to travel to Finland: Enroll in the Smart Traveler Enrollment Program (STEP) to get...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-13T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "c8ac5794f467",
+      "title": "Guatemala - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/guatemala-travel-advisory.html",
+      "summary": "There was no change to the advisory level. The “terrorism” risk indicator was added. Advisory summary was updated. Reconsider travel to Guatemala due to crime and terrorism. Some areas have higher risks. Please read the full Travel...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-12T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "c17a503b3850",
+      "title": "Azerbaijan - Level 3: Reconsider Travel",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/azerbajian-travel-advisory.html",
+      "summary": "The advisory level was increased to 3. There were no changes to the risk indicators. Advisory summary was updated. Reconsider Travel to Azerbaijan due to terrorism, armed conflict, and risk of landmines. Some areas have increased risk....",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-12T07:00:00.000Z",
+      "port_numbers": []
+    },
+    {
+      "id": "e9a3a5a3b987",
+      "title": "Belize - Level 2: Exercise Increased Caution",
+      "url": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/belizetravel-advisory.html",
+      "summary": "There were no changes to the advisory level or risk indicators. Advisory summary was updated. Exercise increased caution in Belize due to crime. Some areas have increased risk. Please read the entire Travel Advisory. Crime Isolated...",
+      "source_name": "US Department of State, Mexico",
+      "source_category": "official",
+      "published_at": "2026-03-12T07:00:00.000Z",
+      "port_numbers": []
+    }
+  ]
+}

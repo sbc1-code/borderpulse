@@ -1,0 +1,20 @@
+{
+  "port_number": "230501",
+  "port_name": "Hidalgo/Pharr - Hidalgo",
+  "slug": "hidalgo-pharr-hidalgo",
+  "updated_at": "2026-04-24T01:31:58.979Z",
+  "entries": [
+    {
+      "id": "0b912579093a",
+      "title": "CBP officers seize $1M in cocaine in bus at Hidalgo International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-1m-cocaine-bus-hidalgo-international-bridge",
+      "summary": "HIDALGO, Texas—U.S. Customs and Border Protection officers at the Hidalgo Port of Entry recently seized cocaine valued at more than $1 million hidden within a passenger bus. “This hard narcotics seizure exemplifies CBP’s steadfast effort...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-17T23:01:31.000Z",
+      "port_numbers": [
+        "230501"
+      ]
+    }
+  ]
+}

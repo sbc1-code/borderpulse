@@ -19,7 +19,9 @@
     "rss": "node scripts/build-rss.mjs",
     "prerender": "node scripts/prerender.mjs",
     "anomaly:detect": "node scripts/detect-anomalies.mjs",
-    "anomaly:draft": "node scripts/draft-from-anomaly.mjs"
+    "anomaly:draft": "node scripts/draft-from-anomaly.mjs",
+    "news:fetch": "node scripts/fetch-news.mjs",
+    "news:classify": "node scripts/build-curation-queue.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
@@ -90,6 +92,7 @@
     "postcss": "^8.5.3",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",
+    "rss-parser": "^3.13.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.2",
     "vite": "^6.1.0"

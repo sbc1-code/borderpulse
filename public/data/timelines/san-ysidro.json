@@ -1,0 +1,20 @@
+{
+  "port_number": "250401",
+  "port_name": "San Ysidro",
+  "slug": "san-ysidro",
+  "updated_at": "2026-04-24T01:31:58.987Z",
+  "entries": [
+    {
+      "id": "7bea0c4e0739",
+      "title": "CBP officers seize fentanyl, heroin at San Ysidro Port of Entry",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-fentanyl-heroin-san-ysidro-port-entry",
+      "summary": "SAN DIEGO — On March 10, U.S. Customs and Border Protection officers at the San Ysidro Port of Entry seized more than 20 pounds of fentanyl and three pounds of heroin concealed within a vehicle.Officers referred a 26-year-old male, Mexican…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-31T20:46:53.000Z",
+      "port_numbers": [
+        "250401"
+      ]
+    }
+  ]
+}

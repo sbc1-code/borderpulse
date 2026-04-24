@@ -1,0 +1,44 @@
+{
+  "port_number": "250601",
+  "port_name": "Otay Mesa",
+  "slug": "otay-mesa",
+  "updated_at": "2026-04-24T01:31:58.987Z",
+  "entries": [
+    {
+      "id": "000989910618",
+      "title": "CBP Officers Seize Over 3,000 Pounds of Methamphetamine at Otay Mesa Commercial Facility",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-over-3000-pounds-methamphetamine-otay-mesa",
+      "summary": "SAN DIEGO — U.S. Customs and Border Protection officers at the Otay Mesa Commercial Facility seized over 3,000 pounds of methamphetamine with an estimated street value of $4,924,960, concealed within a cargo trailer. The shipment manifest...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-23T20:41:33.000Z",
+      "port_numbers": [
+        "250601"
+      ]
+    },
+    {
+      "id": "c1d71d65e1d4",
+      "title": "CBP officers seize over $2.8 million in hard narcotics at Otay Mesa Port of Entry in back-to-back busts, saving millions of American lives",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-over-28-million-hard-narcotics-otay-mesa-port",
+      "summary": "OTAY MESA, Calif. — U.S. Customs and Border Protection officers at the Otay Mesa Port of Entry seized more than 430 pounds of cocaine and methamphetamine in two separate enforcement actions last week. The narcotics have a combined...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-16T14:49:01.000Z",
+      "port_numbers": [
+        "250601"
+      ]
+    },
+    {
+      "id": "7ef1aa5c81e6",
+      "title": "San Diego Congressional representatives visit Otay Mesa Detention Center",
+      "url": "https://www.kpbs.org/news/border-immigration/2026/04/03/san-diego-congressional-representatives-visit-otay-mesa-detention-center",
+      "summary": "Reps. Sara Jacobs and Mike Levin say their offices have received complaints about detainees’ access to medical care and fresh food.",
+      "source_name": "KPBS Border and Immigration",
+      "source_category": "news",
+      "published_at": "2026-04-03T14:49:18.000Z",
+      "port_numbers": [
+        "250601"
+      ]
+    }
+  ]
+}

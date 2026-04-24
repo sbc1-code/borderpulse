@@ -1,0 +1,57 @@
+name: Mode C news curation
+
+on:
+  schedule:
+    # Daily at 15:00 UTC (8am PT, one hour after the Mode A anomaly scan).
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  curate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch feeds
+        run: node scripts/fetch-news.mjs
+        # rss-parser returns non-zero only when every feed fails. Per-feed
+        # failures are logged and reported in latest-feed.json.feed_health.
+
+      - name: Classify and update per-port timelines
+        run: node scripts/build-curation-queue.mjs
+
+      - name: Commit timelines and open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="mode-c/curation-$DATE"
+          git config user.name "borderpulse-bot"
+          git config user.email "207095575+sbc1-code@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add public/data/timelines/ drafts/curation/*.json || true
+          if git diff --cached --quiet; then
+            echo "No curation updates. Nothing to commit."
+            exit 0
+          fi
+          git commit -m "Mode C: curation digest $DATE"
+          git push --set-upstream origin "$BRANCH"
+          gh pr create \
+            --title "Mode C curation $DATE" \
+            --body "Auto-generated news curation digest and per-port timeline updates. Review drafts/curation/$DATE.json, delete any false positives, then merge to update public/data/timelines/." \
+            --label "draft:mode-c" \
+            --base main

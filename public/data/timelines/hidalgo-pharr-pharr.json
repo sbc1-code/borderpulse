@@ -1,0 +1,44 @@
+{
+  "port_number": "230502",
+  "port_name": "Hidalgo/Pharr - Pharr",
+  "slug": "hidalgo-pharr-pharr",
+  "updated_at": "2026-04-24T01:31:58.987Z",
+  "entries": [
+    {
+      "id": "0102f834ad0c",
+      "title": "CBP officers seize more than $1.1 million in cocaine at Pharr International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-more-11-million-cocaine-pharr-international",
+      "summary": "PHARR, Texas—U.S. Customs and Border Protection officers at the Pharr International Bridge cargo facility recently intercepted $1.1 million in suspected cocaine concealed in an empty trailer.“Under the powerful leadership of President...",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-21T02:44:08.000Z",
+      "port_numbers": [
+        "230502"
+      ]
+    },
+    {
+      "id": "c1fcabe7928e",
+      "title": "CBP officers seize more than $2.6 million in methamphetamine at Pharr International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-more-26-million-methamphetamine-pharr",
+      "summary": "PHARR, Texas—U.S. Customs and Border Protection officers at the Pharr International Bridge cargo facility intercepted $2.6 million in suspected methamphetamine concealed in a shipment manifested as carrots. “The criminal element is always…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-04-02T14:45:29.000Z",
+      "port_numbers": [
+        "230502"
+      ]
+    },
+    {
+      "id": "b5fe265fe860",
+      "title": "CBP officers seize more than $17 million in methamphetamine at Pharr International Bridge",
+      "url": "https://www.cbp.gov/newsroom/national-media-release/cbp-officers-seize-more-17-million-methamphetamine-pharr",
+      "summary": "PHARR, Texas—U.S. Customs and Border Protection officers at the Pharr International Bridge cargo facility intercepted suspected methamphetamine valued at more than $17 million concealed within a shipment manifested as blackberries. “Our…",
+      "source_name": "CBP Newsroom",
+      "source_category": "official",
+      "published_at": "2026-03-27T20:04:31.000Z",
+      "port_numbers": [
+        "230502"
+      ]
+    }
+  ]
+}
