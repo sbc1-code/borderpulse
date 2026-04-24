@@ -1,0 +1,75 @@
+---
+title: "Paso Del Norte vs Bridge of the Americas: which El Paso bridge is faster"
+description: "Median wait at El Paso's two main passenger crossings, hour by hour from CBP data. PDN wins overall by 6%, but BOTA is more predictable. Here is the hour-by-hour decision."
+slug: paso-del-norte-vs-bridge-of-the-americas
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - paso-del-norte
+  - bridge-of-the-americas
+  - el-paso
+  - texas
+  - juarez
+  - comparison
+hero: /og/blog/paso-del-norte-vs-bridge-of-the-americas.png
+relatedCrossings:
+  - "240202"
+  - "240201"
+officialSources:
+  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+    url: "https://bwt.cbp.gov/"
+---
+
+Most people in El Paso pick PDN or BOTA by habit. Habit is mostly right but not always. The 30-day data shows **PDN is faster overall (66 min vs BOTA's 70 min)**, but **BOTA is more predictable**, with fewer extreme highs and lows. Here is when each one wins.
+
+## Paso Del Norte (PDN): the faster average
+
+<BestTimeChart slug="el-paso-paso-del-norte-pdn" title="Paso Del Norte: median northbound wait, last 30 days" />
+
+PDN's overall median is **66 minutes**. The lightest hours are **Wednesday 7 to 9 AM at 1 minute**. The worst hour is **Sunday midnight at 120 minutes**. PDN is passenger and pedestrian only, no commercial.
+
+## Bridge of the Americas (BOTA): the steadier choice
+
+<BestTimeChart slug="el-paso-bridge-of-the-americas-bota" title="Bridge of the Americas: median northbound wait, last 30 days" />
+
+BOTA's overall median is **70 minutes**, just 4 minutes higher than PDN. But BOTA's range is narrower: lightest hour is Wed 9 to 10 AM at 5 minutes, worst is Thursday 7 PM at 95 minutes. No 120 minute Sunday peak. BOTA handles passenger vehicles, RVs, and most non-commercial traffic.
+
+## Hour-by-hour: when to pick each
+
+| Day and time | PDN median | BOTA median | Pick |
+|---|---|---|---|
+| Wed 9 AM | 1 min | 5 min | PDN |
+| Wed 7 AM | 1 min | 11 min | PDN |
+| Thu 6 AM | 20 min | 36 min | PDN |
+| Sat 9 AM | 10 min | 90 min | PDN |
+| Sun 12 AM (midnight) | 120 min | 80 min | BOTA |
+| Sun 3 AM | 100 min | 100 min | Tie |
+| Thu 8 PM | 90 min | 95 min | Tie |
+| Sun 7 PM | 67 min | 65 min | Tie |
+| Mon 9 AM | 30 min | 60 min | PDN |
+
+The pattern: **PDN wins almost every weekday morning hour and Saturday morning by a very wide margin**. **BOTA wins late Sunday night** when PDN's family-return spike hits hardest.
+
+## Three rules of thumb
+
+1. **Default to PDN if you have a passenger car.** It wins more hours than BOTA and the absolute lightest hours of the week (Wed 7 to 9 AM at 1 minute) only happen at PDN.
+2. **Switch to BOTA Sunday late night and early Monday.** PDN spikes to 120 minutes at midnight Sunday. BOTA stays at 80.
+3. **BOTA is the right answer if PDN is not an option.** Trailers, RVs, larger vehicles, or cargo cannot use PDN. BOTA accepts them. The Stanton Street bridge is southbound only for passenger vehicles.
+
+## What about Ysleta-Zaragoza?
+
+Ysleta is the third major El Paso bridge, much further east. It serves both passenger and commercial. We do not yet have stable 30-day aggregates for Ysleta to publish a clean comparison, but qualitatively: Ysleta is the right answer if your origin or destination is east of central El Paso, because the drive saves you 15 to 25 minutes versus PDN/BOTA on the El Paso side.
+
+## Both bridges have SENTRI and Ready Lane
+
+Both PDN and BOTA support Ready Lane. SENTRI is available at both as well. The relative SENTRI savings between bridges is not stable enough yet from our 30-day data to publish honest numbers. Future post when we have better lane-level history.
+
+## How we compute these numbers
+
+Every 15 minutes Border Pulse pulls the official CBP wait times for both bridges and stores snapshots. The charts above use the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean because a single Sunday spike can drag a mean without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [PDN page](/crossing/el-paso-paso-del-norte-pdn) and [BOTA page](/crossing/el-paso-bridge-of-the-americas-bota) show today's wait alongside these patterns.
+
+## What to do with this
+
+Open both port pages on your phone before you leave Juárez. If you are crossing weekday morning, PDN almost always. If you are crossing Sunday late night, BOTA. Otherwise the difference is small enough that proximity to your destination on the El Paso side should drive the choice.

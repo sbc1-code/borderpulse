@@ -1,0 +1,89 @@
+---
+title: "San Ysidro vs Otay Mesa: which is faster, and what 30 days of CBP data says"
+description: "Median wait at the two main Tijuana to San Diego crossings, hour by hour, from CBP. Otay wins overall, but San Ysidro wins the Monday morning trucker rush."
+slug: san-ysidro-vs-otay-mesa
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - san-ysidro
+  - otay-mesa
+  - tijuana
+  - california
+  - comparison
+hero: /og/blog/san-ysidro-vs-otay-mesa.png
+relatedCrossings:
+  - "250401"
+  - "250601"
+officialSources:
+  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+If you cross from Tijuana to San Diego, you have two real choices: San Ysidro and Otay Mesa. Most people pick by habit. The 30-day data says habit is wrong about half the time. Otay is faster overall (median 90 min vs San Ysidro's 110 min), but San Ysidro wins the Monday morning hours when commercial truck traffic backs Otay up to 240 minutes.
+
+Here is the data for each, then the rules of thumb that fall out of it.
+
+## San Ysidro: the busiest crossing in the hemisphere
+
+<BestTimeChart slug="san-ysidro" title="San Ysidro: median northbound wait, last 30 days" />
+
+Overall median at San Ysidro is **110 minutes**. The lightest hour all week is **Saturday 10 AM at 15 minutes**, with Sunday 9 to 10 AM at 20 to 30 minutes close behind. The worst hour all week is **Sunday 7 PM to midnight, holding at 168 to 175 minutes** every hour. This is the classic family-return-from-the-weekend backup.
+
+## Otay Mesa: lighter on average, brutal at one specific hour
+
+<BestTimeChart slug="otay-mesa" title="Otay Mesa: median northbound wait, last 30 days" />
+
+Overall median at Otay is **90 minutes**, about 18% lighter than San Ysidro. Saturday 9 to 11 AM medians at Otay sit at **0 to 5 minutes**, the lowest of any major CA port. But Monday 4 to 6 AM medians hit **220 to 240 minutes**, the worst weekly pattern at any California crossing. This is the commercial trucker queue ahead of the work week. Passenger vehicles get caught in the same line.
+
+## Hour-by-hour: when to pick each
+
+| Day and time | San Ysidro median | Otay Mesa median | Pick |
+|---|---|---|---|
+| Sat 10 AM | 15 min | 0 min | Otay |
+| Sun 10 AM | 30 min | 0 min | Otay |
+| Wed 9 AM | 30 min | 10 min | Otay |
+| Mon 4 AM | 145 min | 220 min | San Ysidro |
+| Mon 6 AM | 140 min | 240 min | San Ysidro |
+| Sun 8 PM | 110 min | 110 min | Tie |
+| Sun 10 PM | 115 min | 110 min | Tie |
+| Sat 11 PM | 115 min | 140 min | San Ysidro |
+
+The pattern is clear: **Otay wins almost every weekend morning hour and most weekday daylight hours**. **San Ysidro wins the late-night and Monday early-morning windows** when trucks back Otay up.
+
+## Three rules of thumb
+
+1. **Default to Otay.** It is faster on more hours than San Ysidro and the lightest hour of any CA crossing happens at Otay (Sat 9 AM = 0 min).
+2. **Switch to San Ysidro on Monday between midnight and 7 AM.** This is the only consistent window where SY beats Otay by a meaningful margin. Trucks queueing for Otay's commercial lanes spill over into the passenger lanes.
+3. **Sunday evening is bad at both.** If you can finish your Tijuana trip Saturday night or stay until Monday morning, do.
+
+## What about Tecate?
+
+Tecate is the third Tijuana-area option. 30-day median at Tecate is 60 minutes, lighter than both SY and Otay on average. Worth considering if you are crossing well east of Tijuana and the extra drive is acceptable. The trade-off: Tecate has narrower hours and the approach road is single-lane in spots. For most San Diego-bound travelers, SY or Otay is faster door to door.
+
+## Lane choice changes the math
+
+The numbers above are standard passenger lane medians. If you have SENTRI or a Ready Lane document, the math shifts:
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is open to travelers with an RFID-enabled travel document (U.S. Passport Card, Enhanced Driver's License from a participating state, certain Trusted Traveler cards, and others). CBP publishes the official acceptable document list and per-port lane availability. Always verify your document is on the current list before committing to the lane.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, fee, background check, and in-person interview at an enrollment center. SENTRI lanes typically save the most time during peak hours. Membership rules apply to every occupant of the vehicle.
+</OfficialSource>
+
+Both ports have SENTRI and Ready Lane access. The relative SENTRI savings between SY and Otay is something we will publish in a future data post once we have lane-level history with stable sample sizes.
+
+## How we compute these numbers
+
+Every 15 minutes Border Pulse pulls official CBP wait times for both ports and stores a snapshot. The chart and table above use the **median** wait per (day of week, hour of day) cell across the last 30 days. We use median, not mean, because a single bad evening can drag a mean without telling you anything about the typical hour. The live numbers are at [bwt.cbp.gov](https://bwt.cbp.gov/), and our per-port pages ([San Ysidro](/crossing/san-ysidro), [Otay Mesa](/crossing/otay-mesa)) show today's wait alongside the same 30-day pattern.
+
+## What to do with this
+
+Open both port pages on your phone before you leave Tijuana. Cross-reference today's hour against the table above. If you are inside the Monday 4 to 7 AM window, San Ysidro. Otherwise, almost always Otay.

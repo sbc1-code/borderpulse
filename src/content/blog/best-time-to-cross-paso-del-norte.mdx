@@ -1,0 +1,71 @@
+---
+title: "Best time to cross Paso Del Norte: hour by hour from 30 days of CBP data"
+description: "Median wait at Paso Del Norte (El Paso, TX) by hour and day, pulled from CBP. Wednesday 7 to 9 AM medians of 1 minute. The fastest weekday morning at any Texas port."
+slug: best-time-to-cross-paso-del-norte
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - paso-del-norte
+  - el-paso
+  - texas
+  - juarez
+  - best-time-to-cross
+hero: /og/blog/best-time-to-cross-paso-del-norte.png
+relatedCrossings:
+  - "240202"
+  - "240201"
+officialSources:
+  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+---
+
+Paso Del Norte (PDN) is one of three main El Paso to Ciudad Juárez bridges and the closest one to downtown El Paso. The 30-day median northbound wait is **66 minutes**, lighter than its sister bridge BOTA. The single lightest hours all week are **Wednesday 7 AM and Wednesday 9 AM, both at a median of 1 minute**. That is essentially an empty bridge. The worst hour is **Sunday midnight at 120 minutes**.
+
+<BestTimeChart slug="el-paso-paso-del-norte-pdn" title="Paso Del Norte: median northbound wait, last 30 days" />
+
+## What the data shows
+
+Three patterns stand out:
+
+1. **Wednesday morning is the killer window.** PDN goes essentially empty between 4 AM and 9 AM on Wednesdays. Median 4 AM = 11 min, 5 AM = 4 min, 7 AM = 1 min, 9 AM = 1 min. Nothing else in the El Paso corridor matches this.
+2. **Saturday 9 AM is the second-best hour at 10 minutes.** Weekend morning is the universal best window for PDN, like it is for most binational crossings.
+3. **Sunday midnight is the only hour that breaks 100 minutes.** PDN is a passenger-and-pedestrian bridge with no commercial traffic, so it does not have the Monday early-morning trucker spike that hits Otay Mesa. Its peak is the Sunday family return, and even that is contained at 120 minutes.
+
+Each (day, hour) cell is built from 1 to 3 sampled snapshots over 30 days. The shape is stable; the exact lightest hour can shift between Wed 7 AM and Wed 9 AM week to week.
+
+## Why PDN is not always the right answer
+
+PDN is a passenger and pedestrian bridge only. If you are driving any vehicle other than a passenger car, you need a different El Paso bridge:
+
+- **Cargo or commercial:** Bridge of the Americas (BOTA) or the commercial-only Zaragoza bridge.
+- **Trucks pulling trailers:** BOTA.
+- **Pedestrian only:** PDN handles pedestrian traffic well. Stanton Street bridge nearby is also pedestrian-friendly going south.
+
+For a passenger car driver doing a day trip, PDN is the default fastest option. For everything else, see the El Paso bridge comparison post when it ships.
+
+## SENTRI and Ready Lane at PDN
+
+PDN has both SENTRI and Ready Lane access. Both reduce wait significantly during the standard 9 AM to 11 PM peak windows.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is open to travelers with an RFID-enabled travel document, including the U.S. Passport Card, Enhanced Driver's Licenses from participating states, and certain Trusted Traveler cards. CBP publishes the official acceptable document list and confirms which lanes are active at each port. Verify before you commit to the lane.
+</OfficialSource>
+
+## What this means for you
+
+- **Wednesday 7 to 9 AM is the single best hour to cross at any El Paso bridge.** If you can move your trip to Wednesday morning, do.
+- **Saturday morning is the best weekend option** at PDN by a wide margin (10 to 35 min vs 50+ min later in the day).
+- **Sunday late evening is the worst pattern** but still milder than San Ysidro or Otay Mesa equivalents.
+- **For commercial or trailer traffic:** PDN is not your bridge. Use BOTA.
+
+## How we compute these numbers
+
+Every 15 minutes the Border Pulse cron pulls the official CBP wait time for PDN and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean for this data: a single 120 minute Sunday outlier can drag a true 30 minute typical hour up to 50 minutes if you average. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [Paso Del Norte page](/crossing/el-paso-paso-del-norte-pdn) shows today's current wait alongside the same 30-day pattern.
+
+## What to do with this
+
+If your week is flexible: aim for **Wednesday 7 to 9 AM at PDN**. It is one of the lightest weekday patterns we have measured at any port. If your week is not flexible: use the chart above to find the lightest hour on your specific day, and add 10 to 20 minutes for safety. Always confirm against today's live wait before you leave.

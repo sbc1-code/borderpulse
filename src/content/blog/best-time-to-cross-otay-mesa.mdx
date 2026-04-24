@@ -1,0 +1,67 @@
+---
+title: "Best time to cross Otay Mesa: hour by hour from 30 days of CBP data"
+description: "Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest hour: Saturday 9 AM at 0 minutes. The Monday morning trap nobody talks about."
+slug: best-time-to-cross-otay-mesa
+date: "2026-04-24"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - otay-mesa
+  - tijuana
+  - california
+  - best-time-to-cross
+hero: /og/blog/best-time-to-cross-otay-mesa.png
+relatedCrossings:
+  - "250601"
+  - "250401"
+officialSources:
+  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Otay Mesa is the second-busiest commercial crossing on the U.S.-Mexico border and the de facto overflow lane for San Ysidro. The 30-day median northbound wait at Otay is **90 minutes**, about 20 minutes lighter than San Ysidro overall. The single lightest hour all week is **Saturday 9 to 10 AM, with a median of 0 minutes**. The single worst pattern is **Monday 4 to 6 AM at 220 to 240 minutes**, the commercial trucker rush that almost nobody outside dispatch talks about.
+
+<BestTimeChart slug="otay-mesa" title="Otay Mesa: median northbound wait, last 30 days" />
+
+## What the data shows
+
+Three patterns stand out:
+
+1. **Weekend mornings are essentially empty.** Saturday 8 to 11 AM medians sit at 0 to 5 minutes. Sunday 9 to 10 AM is also at 0 minutes. If your trip is flexible, this is the cheapest hour you will find at any major California crossing.
+2. **Monday early morning is the worst hour at any California port, full stop.** Median wait at Mon 4 AM is 220 minutes; Mon 6 AM is 240 minutes. This is commercial truck traffic queuing for the start of the work week. Passenger vehicles get caught in the same line.
+3. **The Sunday evening band exists but is milder than San Ysidro.** Sunday 8 to 11 PM medians at Otay sit around 110 minutes, versus San Ysidro's 170 minute peaks. Otay is the saner Sunday night choice.
+
+Each (day, hour) cell is built from 1 to 3 sampled snapshots over 30 days, so a single bad evening can move a cell. The shape of the week is stable; the exact peak hour can shift.
+
+## Compared to San Ysidro
+
+If you have the choice between Otay and San Ysidro on the same day:
+
+- **Weekday mornings (Tue-Fri 5 to 9 AM):** Otay is faster on most days. Wed 9 AM at Otay = 10 minutes; San Ysidro at the same hour = 30 minutes.
+- **Sunday evening:** Otay is meaningfully faster (110 min vs 170 min at peak).
+- **Monday early morning:** San Ysidro wins by a large margin. Mon 4 AM at SY = 145 minutes; Otay = 220.
+- **Pedestrian:** San Ysidro has PedWest plus PedEast. Otay has one pedestrian crossing. SY pedestrian is the right answer for foot traffic.
+
+The live [Otay Mesa page](/crossing/otay-mesa) and [San Ysidro page](/crossing/san-ysidro) show current waits side by side so you can decide on the day.
+
+## SENTRI and Ready Lane at Otay
+
+Otay has a SENTRI lane for Trusted Traveler Program members. The lane is open during operating hours, can move significantly faster than standard during peaks, and uses the same eligibility rules as every other SENTRI port.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, fee, background check, and in-person interview at an enrollment center. CBP publishes program rules, eligibility, fees, renewal cadence, and the list of approved enrollment centers. Always confirm current rules before applying or renewing.
+</OfficialSource>
+
+## What this means for you
+
+- If you can shift your crossing to **Saturday 9 to 11 AM** or **weekday early morning before 9 AM**, Otay is the lightest crossing on the California border.
+- **Avoid Monday 4 to 7 AM at Otay.** This is the single worst weekly pattern at any CA port. If your schedule forces it, San Ysidro is a better choice.
+- **For Sunday return trips:** Otay beats San Ysidro by an hour or more during the 7 to 10 PM peak.
+- **Commercial trucking:** the 30-day data confirms the weekly Monday truck approach pattern. Plan dispatch accordingly.
+
+## How we compute these numbers
+
+Every 15 minutes the Border Pulse cron pulls the official CBP wait time for Otay Mesa and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. We use median, not mean, because a single 240 minute outlier can drag the average without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), which is the canonical source.
