@@ -1,5 +1,4 @@
-export default function BorderPulseLogo({ size = 40, className = '', solid = true }) {
-  const radius = size * 0.22;
+export default function BorderPulseLogo({ size = 40, className = '' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,16 +8,10 @@ export default function BorderPulseLogo({ size = 40, className = '', solid = tru
       className={className}
       aria-hidden="true"
     >
-      {solid && <rect width="64" height="64" rx={radius * (64 / size)} fill="#0b0b0b" />}
-      <line x1="10" y1="32" x2="54" y2="32" stroke={solid ? '#2e2e2e' : 'currentColor'} strokeOpacity={solid ? 1 : 0.3} strokeWidth="1.5" />
-      <polyline
-        points="10,32 22,32 26,22 30,42 34,26 38,32 54,32"
-        fill="none"
-        stroke="#8a9a7b"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <rect width="64" height="64" rx="14" fill="#0b0b0b" />
+      <rect x="30" y="12" width="4" height="14" rx="2" fill="#eaeaea" />
+      <circle cx="32" cy="32" r="4" fill="#8a9a7b" />
+      <rect x="30" y="38" width="4" height="14" rx="2" fill="#eaeaea" />
     </svg>
   );
 }
