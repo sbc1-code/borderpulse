@@ -7,18 +7,18 @@
   "background_color": "#ffffff",
   "theme_color": "#0b0b0b",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+    { "src": "/favicon.svg?v=2", "sizes": "any", "type": "image/svg+xml" }
   ],
   "shortcuts": [
     {
       "name": "To US Wait Times",
       "url": "/?dir=northbound",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+      "icons": [{ "src": "/favicon.svg?v=2", "sizes": "any" }]
     },
     {
       "name": "To MX Wait Times",
       "url": "/?dir=southbound",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+      "icons": [{ "src": "/favicon.svg?v=2", "sizes": "any" }]
     }
   ],
   "categories": ["travel", "transportation", "utilities"]
