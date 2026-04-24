@@ -27,6 +27,17 @@ function readBlogPosts() {
   }
 }
 
+function findTwins(posts) {
+  // For each translationKey, build a map of lang -> slug.
+  const byKey = {};
+  for (const p of posts) {
+    if (!p.translationKey) continue;
+    if (!byKey[p.translationKey]) byKey[p.translationKey] = {};
+    byKey[p.translationKey][p.lang] = p.slug;
+  }
+  return byKey;
+}
+
 async function main() {
   const buildSlugMap = await loadSlugBuilder();
   const dataPath = path.resolve(root, 'public/data/crossings.json');
@@ -50,6 +61,7 @@ async function main() {
   }
 
   const posts = readBlogPosts();
+  const twins = findTwins(posts);
   if (posts.length > 0) {
     urls.push({
       loc: `${BASE}/blog`,
@@ -61,28 +73,40 @@ async function main() {
       }, posts[0].updated || posts[0].date),
     });
     for (const p of posts) {
-      urls.push({
+      const url = {
         loc: `${BASE}/blog/${p.slug}`,
         changefreq: 'monthly',
         priority: '0.6',
         lastmod: p.updated || p.date,
-      });
+      };
+      // Attach hreflang alternates if this post has a translation twin.
+      if (p.translationKey && twins[p.translationKey]) {
+        const pair = twins[p.translationKey];
+        url.alternates = [];
+        if (pair.en) url.alternates.push({ lang: 'en', href: `${BASE}/blog/${pair.en}` });
+        if (pair.es) url.alternates.push({ lang: 'es', href: `${BASE}/blog/${pair.es}` });
+        if (pair.en) url.alternates.push({ lang: 'x-default', href: `${BASE}/blog/${pair.en}` });
+      }
+      urls.push(url);
     }
   }
 
   const body = urls
-    .map(
-      (u) => `  <url>
+    .map((u) => {
+      const alt = (u.alternates || [])
+        .map((a) => `    <xhtml:link rel="alternate" hreflang="${esc(a.lang)}" href="${esc(a.href)}" />`)
+        .join('\n');
+      return `  <url>
     <loc>${esc(u.loc)}</loc>
     <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
-  </url>`,
-    )
+    <priority>${u.priority}</priority>${alt ? '\n' + alt : ''}
+  </url>`;
+    })
     .join('\n');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${body}
 </urlset>
 `;
@@ -92,7 +116,8 @@ ${body}
   const outDist = path.resolve(root, 'dist/sitemap.xml');
   if (fs.existsSync(path.dirname(outDist))) fs.writeFileSync(outDist, xml);
 
-  console.log(`[sitemap] wrote ${urls.length} URLs (${posts.length} blog)`);
+  const pairCount = Object.values(twins).filter((t) => t.en && t.es).length;
+  console.log(`[sitemap] wrote ${urls.length} URLs (${posts.length} blog, ${pairCount} bilingual pairs)`);
 }
 
 main().catch((e) => {

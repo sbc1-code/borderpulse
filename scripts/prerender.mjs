@@ -119,13 +119,27 @@ function renderBlogIndexHead(posts) {
   };
 }
 
-function renderBlogPostHead(post, author) {
+function renderBlogPostHead(post, author, allPosts) {
   const title = `${post.title} | Border Pulse`;
   const desc = post.description;
   const canonical = `${BASE}/blog/${post.slug}`;
   const ogImage = post.ogImage || `${BASE}/og/blog/${post.slug}.png`;
   const datePublished = `${post.date}T12:00:00Z`;
   const dateModified = `${post.updated || post.date}T12:00:00Z`;
+
+  // Build hreflang pairs if this post has a translation twin.
+  const hreflangs = [];
+  if (post.translationKey && allPosts) {
+    const en = allPosts.find(
+      (p) => p.translationKey === post.translationKey && p.lang === 'en',
+    );
+    const es = allPosts.find(
+      (p) => p.translationKey === post.translationKey && p.lang === 'es',
+    );
+    if (en) hreflangs.push({ lang: 'en', href: `${BASE}/blog/${en.slug}` });
+    if (es) hreflangs.push({ lang: 'es', href: `${BASE}/blog/${es.slug}` });
+    if (en) hreflangs.push({ lang: 'x-default', href: `${BASE}/blog/${en.slug}` });
+  }
 
   const blogPosting = {
     '@context': 'https://schema.org',
@@ -184,6 +198,7 @@ function renderBlogPostHead(post, author) {
     canonical,
     ogImage,
     jsonLd,
+    hreflangs,
     articleMeta: {
       publishedTime: datePublished,
       modifiedTime: dateModified,
@@ -258,6 +273,16 @@ function rewriteIndex(indexHtml, head) {
     if (!/<meta\s+property=["']article:published_time["']/i.test(html)) {
       html = html.replace(/<\/head>/i, `  ${tags.join('\n  ')}\n  </head>`);
     }
+  }
+
+  // Replace any existing hreflang tags with post-specific ones (the shell has
+  // homepage-default hreflangs from index.html that we must override per page).
+  if (head.hreflangs && head.hreflangs.length) {
+    html = html.replace(/\s*<link\s+rel=["']alternate["']\s+hreflang=[^>]*>/gi, '');
+    const hreflangTags = head.hreflangs
+      .map((h) => `  <link rel="alternate" hreflang="${esc(h.lang)}" href="${esc(h.href)}" />`)
+      .join('\n');
+    html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
   }
 
   const jsonLdTags = head.jsonLd
@@ -369,7 +394,7 @@ async function main() {
 
     for (const p of posts) {
       const author = authors[p.author];
-      const head = renderBlogPostHead(p, author);
+      const head = renderBlogPostHead(p, author, posts);
       const html = rewriteIndex(indexWithLinks, head);
       const outDir = path.resolve(distDir, 'blog', p.slug);
       fs.mkdirSync(outDir, { recursive: true });

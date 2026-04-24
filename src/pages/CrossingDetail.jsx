@@ -99,6 +99,7 @@ export default function CrossingDetail() {
     fetchedAt: null,
   });
   const [aggregate, setAggregate] = useState(null);
+  const [timeline, setTimeline] = useState(null);
   const language = usePersistentLanguage();
 
   useEffect(() => {
@@ -119,6 +120,10 @@ export default function CrossingDetail() {
       .then((r) => (r.ok ? r.json() : null))
       .then(setAggregate)
       .catch(() => setAggregate(null));
+    fetch(`/data/timelines/${slug}.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setTimeline)
+      .catch(() => setTimeline(null));
   }, [slug]);
 
   const { crossing, portToSlug } = useMemo(() => {
@@ -250,6 +255,55 @@ export default function CrossingDetail() {
               )}
             </CardContent>
           </Card>
+        </section>
+      )}
+
+      {timeline && timeline.entries && timeline.entries.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
+            {language === 'en' ? 'Recent at this crossing' : 'Reciente en este cruce'}
+          </h2>
+          <p className="text-xs text-slate-500 mb-3">
+            {language === 'en'
+              ? `Curated from public news and government feeds. ${timeline.entries.length} item${timeline.entries.length === 1 ? '' : 's'}.`
+              : `Curado de noticias públicas y feeds gubernamentales. ${timeline.entries.length} entrada${timeline.entries.length === 1 ? '' : 's'}.`}
+          </p>
+          <div className="space-y-3">
+            {timeline.entries.slice(0, 8).map((e) => (
+              <Card key={e.id || e.url}>
+                <CardContent className="p-4">
+                  <div className="flex items-baseline justify-between gap-3 mb-1">
+                    <span className="text-[11px] uppercase tracking-wide text-emerald-700 dark:text-emerald-400 font-semibold">
+                      {e.source_name}
+                    </span>
+                    {e.published_at && (
+                      <span className="text-[11px] text-slate-500 tabular-nums">
+                        {new Date(e.published_at).toLocaleDateString(
+                          language === 'es' ? 'es-MX' : 'en-US',
+                          { year: 'numeric', month: 'short', day: 'numeric' },
+                        )}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-medium text-sm text-slate-900 dark:text-white mb-1 leading-snug">
+                    <a
+                      href={e.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      {e.title}
+                    </a>
+                  </h3>
+                  {e.summary && (
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {e.summary}
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </section>
       )}
 
