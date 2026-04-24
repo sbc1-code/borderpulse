@@ -1,10 +1,10 @@
 name: Mode A anomaly scan
 
 on:
-  schedule:
-    # Daily at 14:00 UTC (7am PT / 9am ET). Runs after the CBP fetch cron has been
-    # producing snapshots for hours, so aggregates are fresh.
-    - cron: '0 14 * * *'
+  # Cron disabled until an ANTHROPIC_API_KEY secret is added and Sebastian
+  # opts in. Manual trigger only for now. When ready, uncomment the schedule.
+  # schedule:
+  #   - cron: '0 14 * * *'
   workflow_dispatch:
 
 permissions:

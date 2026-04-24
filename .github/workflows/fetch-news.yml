@@ -1,9 +1,11 @@
 name: Mode C news curation
 
 on:
-  schedule:
-    # Daily at 15:00 UTC (8am PT, one hour after the Mode A anomaly scan).
-    - cron: '0 15 * * *'
+  # Cron disabled for initial ship. Mode C is free (no LLM) but we're keeping
+  # the PR noise off until Sebastian opts in. Manual trigger only. When ready,
+  # uncomment the schedule.
+  # schedule:
+  #   - cron: '0 15 * * *'
   workflow_dispatch:
 
 permissions:
