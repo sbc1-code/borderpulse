@@ -1,4 +1,4 @@
-const CACHE_NAME = 'borderpulse-v1';
+const CACHE_NAME = 'borderpulse-v2';
 
 // App shell files to pre-cache on install
 const APP_SHELL = [
@@ -27,6 +27,23 @@ self.addEventListener('activate', (event) => {
     )
   );
   self.clients.claim();
+});
+
+// Handle notification clicks — open or focus the app
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
+      // If the app is already open, focus it
+      for (const client of clients) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // Otherwise open a new window
+      return self.clients.openWindow('/');
+    })
+  );
 });
 
 // Fetch: route requests to the right strategy
@@ -80,7 +97,6 @@ function networkFirstWithTimeout(request, timeoutMs) {
         if (!settled) {
           settled = true;
           clearTimeout(timeoutId);
-          // Cache a clone for next time
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           resolve(response);
@@ -121,7 +137,7 @@ function navigationHandler(request) {
     .catch(() => caches.match('/index.html'));
 }
 
-// Check if a path looks like a static asset with a hash in the filename
+// Check if a path looks like a static asset
 function isStaticAsset(pathname) {
   return /\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$/.test(pathname);
 }

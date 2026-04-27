@@ -1,7 +1,10 @@
 /**
  * notifyService - per-crossing wait-time thresholds using the browser
- * Notification API. No backend, no SMS, no accounts. Persisted in
- * localStorage; evaluated on each data refresh from the Dashboard.
+ * Notification API via ServiceWorker. No backend, no SMS, no accounts.
+ * Persisted in localStorage; evaluated on each data refresh from Dashboard.
+ *
+ * Uses ServiceWorkerRegistration.showNotification() for mobile compatibility
+ * (new Notification() is blocked on most mobile browsers).
  */
 import { getStorageKey, getWaitMinutes } from '@/components/utils/crossingDirection';
 
@@ -34,12 +37,50 @@ export async function requestPermission() {
   if (!('Notification' in window)) return 'unsupported';
   if (Notification.permission === 'granted') return 'granted';
   if (Notification.permission === 'denied') return 'denied';
-  return Notification.requestPermission();
+  const result = await Notification.requestPermission();
+  return result;
 }
 
 export function permission() {
   if (typeof window === 'undefined' || !('Notification' in window)) return 'unsupported';
   return Notification.permission;
+}
+
+/**
+ * Get active service worker registration for sending notifications.
+ * Falls back to null if SW isn't available.
+ */
+async function getSwRegistration() {
+  if (!('serviceWorker' in navigator)) return null;
+  try {
+    return await navigator.serviceWorker.ready;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Show a notification via ServiceWorker (mobile-compatible) with fallback
+ * to new Notification() for desktop browsers without SW.
+ */
+async function showNotification(title, options) {
+  const reg = await getSwRegistration();
+  if (reg) {
+    try {
+      await reg.showNotification(title, options);
+      return true;
+    } catch (e) {
+      console.warn('[notify] SW showNotification failed, trying fallback', e);
+    }
+  }
+  // Fallback for desktop without SW
+  try {
+    new Notification(title, options);
+    return true;
+  } catch (e) {
+    console.warn('[notify] fallback Notification() also failed', e);
+    return false;
+  }
 }
 
 function fire(id, kind, title, body) {
@@ -49,12 +90,14 @@ function fire(id, kind, title, body) {
   if (Date.now() - last < COOLDOWN_MS) return false;
   fired[key] = Date.now();
   write(LAST_FIRED_KEY, fired);
-  try {
-    new Notification(title, { body, icon: '/favicon.svg', tag: key });
-  } catch (e) {
-    console.warn('[notify] fire failed', e);
-    return false;
-  }
+  showNotification(title, {
+    body,
+    icon: '/favicon.svg',
+    tag: key,
+    badge: '/favicon.svg',
+    vibrate: [200, 100, 200],
+    data: { crossingId: id, kind },
+  });
   return true;
 }
 
@@ -62,6 +105,9 @@ export function evaluate(crossings, language = 'en', direction = 'northbound') {
   if (typeof window === 'undefined' || !('Notification' in window)) return;
   if (Notification.permission !== 'granted') return;
   const prefs = read(STORAGE_KEY);
+  const prefKeys = Object.keys(prefs);
+  if (prefKeys.length === 0) return; // no alerts configured, skip
+
   for (const c of crossings) {
     const id = getStorageKey(c.port_number || c.id, direction);
     const pref = id ? prefs[id] : null;
@@ -79,4 +125,14 @@ export function evaluate(crossings, language = 'en', direction = 'northbound') {
         language === 'en' ? `Above your ${pref.threshold} min threshold` : `Sobre tu umbral de ${pref.threshold} min`);
     }
   }
+}
+
+/**
+ * Get summary of active alerts for debugging / UI display.
+ */
+export function getActiveAlerts() {
+  const prefs = read(STORAGE_KEY);
+  return Object.entries(prefs)
+    .filter(([, v]) => v && v.active)
+    .map(([key, v]) => ({ key, ...v }));
 }

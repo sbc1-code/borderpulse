@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select';
-import { setPref, requestPermission, permission as getPermission } from '@/components/utils/notifyService';
+import { setPref, requestPermission, permission as getPermission, getActiveAlerts } from '@/components/utils/notifyService';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 
 /**
@@ -23,13 +23,52 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
   const [threshold, setThreshold] = useState(30);
   const [perm, setPerm] = useState(() => (typeof window !== 'undefined' ? getPermission() : 'default'));
   const [saved, setSaved] = useState(false);
+  const [testSent, setTestSent] = useState(false);
+  const activeCount = getActiveAlerts().length;
 
   const handleOpen = async () => {
     setSaved(false);
+    setTestSent(false);
     setOpen(true);
+    // Re-check permission state on open
+    setPerm(getPermission());
+    if (getPermission() !== 'granted' && getPermission() !== 'denied') {
+      const res = await requestPermission();
+      setPerm(typeof res === 'string' ? res : 'default');
+    }
+  };
+
+  const handleTestNotification = async () => {
     if (perm !== 'granted') {
       const res = await requestPermission();
-      setPerm(res === true ? 'granted' : res);
+      setPerm(typeof res === 'string' ? res : 'default');
+      if (res !== 'granted') return;
+    }
+    // Send a test notification via SW
+    if ('serviceWorker' in navigator) {
+      try {
+        const reg = await navigator.serviceWorker.ready;
+        await reg.showNotification('Border Pulse — Test Alert', {
+          body: language === 'en'
+            ? 'Notifications are working! You\'ll get pinged when thresholds are hit.'
+            : '¡Las notificaciones funcionan! Te avisaremos cuando se cumpla el umbral.',
+          icon: '/favicon.svg',
+          tag: 'test-notification',
+          vibrate: [200, 100, 200],
+        });
+        setTestSent(true);
+      } catch (e) {
+        console.warn('[notify] test failed via SW, trying fallback', e);
+        try {
+          new Notification('Border Pulse — Test Alert', {
+            body: language === 'en' ? 'Notifications are working!' : '¡Las notificaciones funcionan!',
+            icon: '/favicon.svg',
+          });
+          setTestSent(true);
+        } catch (e2) {
+          console.warn('[notify] test notification completely failed', e2);
+        }
+      }
     }
   };
 
@@ -64,9 +103,13 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
                 {language === 'en' ? 'Get Alerted When to Leave' : 'Recibe una Alerta Cuándo Salir'}
               </div>
               <div className="text-[11px] sm:text-xs text-white/80">
-                {language === 'en'
-                  ? `Pick a crossing + threshold. We ping you when ${direction === 'southbound' ? 'southbound estimates' : 'wait times'} hit.`
-                  : `Elige un cruce + umbral. Te avisamos cuando ${direction === 'southbound' ? 'la estimación hacia México' : 'el tiempo de espera'} se cumpla.`}
+                {activeCount > 0
+                  ? (language === 'en'
+                    ? `${activeCount} active alert${activeCount > 1 ? 's' : ''} · Tap to manage`
+                    : `${activeCount} alerta${activeCount > 1 ? 's' : ''} activa${activeCount > 1 ? 's' : ''} · Toca para gestionar`)
+                  : (language === 'en'
+                    ? `Pick a crossing + threshold. We ping you when ${direction === 'southbound' ? 'southbound estimates' : 'wait times'} hit.`
+                    : `Elige un cruce + umbral. Te avisamos cuando ${direction === 'southbound' ? 'la estimación hacia México' : 'el tiempo de espera'} se cumpla.`)}
               </div>
             </div>
           </div>
@@ -155,6 +198,14 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
                   {selectedWait == null ? '—' : `${selectedWait} min`}
                 </span>
               </div>
+            )}
+
+            {perm === 'granted' && (
+              <Button variant="ghost" size="sm" onClick={handleTestNotification} className="w-full text-xs h-8" disabled={testSent}>
+                {testSent
+                  ? (language === 'en' ? 'Test sent — check your notifications' : 'Prueba enviada — revisa tus notificaciones')
+                  : (language === 'en' ? 'Send test notification' : 'Enviar notificación de prueba')}
+              </Button>
             )}
 
             <div className="flex gap-2 pt-2">
