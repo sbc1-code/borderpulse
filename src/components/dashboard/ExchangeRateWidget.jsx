@@ -1,12 +1,40 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, DollarSign, Banknote } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, Banknote, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
+
+const STALE_WARN_MS = 2 * 60 * 60 * 1000;
+const STALE_ERROR_MS = 6 * 60 * 60 * 1000;
+
+function getStaleness(fetchedAt) {
+  if (!fetchedAt) return null;
+  const ts = Date.parse(fetchedAt);
+  if (!Number.isFinite(ts)) return null;
+  const ageMs = Date.now() - ts;
+  if (ageMs >= STALE_ERROR_MS) return { level: 'error', ageMs };
+  if (ageMs >= STALE_WARN_MS) return { level: 'warn', ageMs };
+  return { level: 'fresh', ageMs };
+}
+
+function formatAge(ageMs, language) {
+  const hours = Math.floor(ageMs / 3_600_000);
+  const minutes = Math.floor((ageMs % 3_600_000) / 60_000);
+  if (hours > 0) return language === 'en' ? `${hours}h ${minutes}m ago` : `hace ${hours}h ${minutes}m`;
+  return language === 'en' ? `${minutes}m ago` : `hace ${minutes}m`;
+}
 
 export default function ExchangeRateWidget({ exchangeRate, language, theme }) {
   const isPositive = exchangeRate?.change_percentage > 0;
-  
+  const staleness = getStaleness(exchangeRate?.fetched_at || exchangeRate?.last_updated);
+  const previousAgeHours = exchangeRate?.previous_rate_age_hours;
+  const previousLabel = previousAgeHours
+    ? (language === 'en' ? `${previousAgeHours.toFixed(0)}h ago:` : `hace ${previousAgeHours.toFixed(0)}h:`)
+    : (language === 'en' ? 'Previous:' : 'Anterior:');
+  const changeLabel = previousAgeHours
+    ? (language === 'en' ? `vs ${previousAgeHours.toFixed(0)}h ago` : `vs hace ${previousAgeHours.toFixed(0)}h`)
+    : (language === 'en' ? '24h change' : 'cambio 24h');
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -45,10 +73,10 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme }) {
               </p>
             </div>
 
-            {/* 24h Change */}
-            {exchangeRate?.change_percentage !== undefined && (
+            {/* Change vs prior reference rate */}
+            {exchangeRate?.change_percentage !== null && exchangeRate?.change_percentage !== undefined && (
               <div className="flex items-center justify-center gap-2">
-                <Badge 
+                <Badge
                   variant={isPositive ? "default" : "destructive"}
                   className="flex items-center gap-1"
                 >
@@ -60,7 +88,7 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme }) {
                   {Math.abs(exchangeRate.change_percentage).toFixed(2)}%
                 </Badge>
                 <span className="text-sm text-gray-500">
-                  {language === 'en' ? '24h change' : 'cambio 24h'}
+                  {changeLabel}
                 </span>
               </div>
             )}
@@ -69,21 +97,29 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme }) {
             {exchangeRate?.previous_rate && (
               <div className="text-center pt-2 border-t border-gray-200">
                 <div className="text-sm text-gray-500">
-                  {language === 'en' ? 'Previous:' : 'Anterior:'} ${exchangeRate.previous_rate.toFixed(4)}
+                  {previousLabel} ${exchangeRate.previous_rate.toFixed(4)}
                 </div>
               </div>
             )}
 
-            {/* Last Updated */}
-            {exchangeRate?.last_updated && (
-              <div className="text-center">
-                <span className="text-xs text-gray-400">
-                  {language === 'en' ? 'Updated' : 'Actualizado'} {
-                    new Date(exchangeRate.last_updated).toLocaleTimeString([], { 
-                      hour: '2-digit', 
-                      minute: '2-digit' 
-                    })
-                  }
+            {/* Last Updated + staleness */}
+            {exchangeRate?.last_updated && staleness && (
+              <div className="text-center flex items-center justify-center gap-1.5">
+                {staleness.level !== 'fresh' && (
+                  <AlertTriangle
+                    className={`w-3 h-3 ${staleness.level === 'error' ? 'text-red-500' : 'text-amber-500'}`}
+                  />
+                )}
+                <span
+                  className={`text-xs ${
+                    staleness.level === 'error'
+                      ? 'text-red-500'
+                      : staleness.level === 'warn'
+                      ? 'text-amber-500'
+                      : 'text-gray-400'
+                  }`}
+                >
+                  {language === 'en' ? 'Updated' : 'Actualizado'} {formatAge(staleness.ageMs, language)}
                 </span>
               </div>
             )}
