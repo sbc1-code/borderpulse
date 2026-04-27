@@ -258,24 +258,7 @@ export default function Api() {
         />
       ))}
 
-      <section className="mt-8 border border-emerald-200 dark:border-emerald-900 rounded-lg p-4 bg-emerald-50 dark:bg-emerald-900/20">
-        <h2 className="text-sm font-semibold text-emerald-900 dark:text-emerald-200 mb-1">
-          {language === 'en' ? 'Building something commercial?' : '¿Construyes algo comercial?'}
-        </h2>
-        <p className="text-xs text-emerald-900 dark:text-emerald-200 mb-2">
-          {language === 'en'
-            ? 'These feeds are free for non-commercial and light commercial use. If you are a customs broker, freight forwarder, trucking ops, or border-area business and want SLA, webhooks, historical exports, or higher-volume access — get in touch.'
-            : 'Estos feeds son gratuitos para uso no comercial y comercial ligero. Si eres agente aduanal, agencia de carga, operación de transporte o negocio fronterizo y quieres SLA, webhooks, exportes históricos o mayor volumen — contáctanos.'}
-        </p>
-        <a
-          href="mailto:hello@borderpulse.com"
-          className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800 dark:text-emerald-200 hover:underline"
-        >
-          hello@borderpulse.com →
-        </a>
-      </section>
-
-      <footer className="mt-6 pt-3 border-t border-slate-200 dark:border-gray-700 text-xs text-slate-500 dark:text-slate-400">
+      <footer className="mt-8 pt-3 border-t border-slate-200 dark:border-gray-700 text-xs text-slate-500 dark:text-slate-400">
         {language === 'en'
           ? 'Wait time data is sourced from U.S. Customs and Border Protection. Border Pulse is an independent project, not affiliated with CBP.'
           : 'Los datos provienen de U.S. Customs and Border Protection. Border Pulse es un proyecto independiente, no afiliado a CBP.'}

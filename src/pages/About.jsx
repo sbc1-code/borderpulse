@@ -190,18 +190,6 @@ export default function About() {
         </ul>
       </section>
 
-      {/* Sebastian intro */}
-      <section className="mb-8">
-        <h2 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wide mb-3">
-          {language === 'en' ? 'Who built this' : 'Quién lo construyó'}
-        </h2>
-        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-          {language === 'en'
-            ? 'Border Pulse is built by Sebastian Becerra — bilingual EN/ES, from El Paso / Juárez / San Diego / Tijuana, now in Santa Barbara. The cross-border life is personal. The tooling I had — government sites that timed out, third-party apps loaded with ads, screenshots forwarded over WhatsApp — never matched the experience. So I built what I wanted: fast, clean, bilingual, honest.'
-            : 'Border Pulse lo construye Sebastian Becerra — bilingüe EN/ES, de El Paso / Juárez / San Diego / Tijuana, ahora en Santa Barbara. La vida transfronteriza es personal. Las herramientas que tenía — sitios del gobierno que no respondían, apps de terceros llenas de anuncios, capturas reenviadas por WhatsApp — nunca alcanzaron la experiencia. Así que construí lo que quería: rápido, limpio, bilingüe, honesto.'}
-        </p>
-      </section>
-
       {/* Quick links */}
       <section className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Link

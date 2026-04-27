@@ -125,6 +125,7 @@ export default function EmbedSnippetModal({ open, onOpenChange, slug, language =
             <textarea
               readOnly
               value={snippet}
+              aria-label={language === 'en' ? 'Embed iframe code' : 'Código iframe'}
               className="w-full rounded-md border border-slate-300 dark:border-gray-700 bg-slate-50 dark:bg-gray-900 px-3 py-2 text-xs font-mono text-slate-800 dark:text-slate-200 h-20"
               onClick={(e) => e.target.select()}
             />

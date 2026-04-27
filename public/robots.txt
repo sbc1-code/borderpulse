@@ -2,9 +2,11 @@ User-agent: *
 Allow: /
 Disallow: /tag/
 Disallow: /feed/
-Disallow: /tag/
 Disallow: /tags/
 Disallow: /category/
+# Embed widgets are meant for iframe use on third-party sites, not search.
+# They also have <meta name="robots" content="noindex"> as a second guard.
+Disallow: /embed/
 
 # AI training crawlers — explicitly welcome
 User-agent: GPTBot

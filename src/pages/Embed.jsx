@@ -165,7 +165,7 @@ export default function Embed() {
         <div className="flex items-center justify-between gap-2 min-w-0">
           <div className="flex items-center gap-1.5 min-w-0">
             <span className="text-[13px] font-semibold truncate">{crossing.name}</span>
-            <span className="text-xs flex-shrink-0">{FLAG[crossing.state] || ''}</span>
+            <span className="text-xs flex-shrink-0" aria-hidden="true">{FLAG[crossing.state] || ''}</span>
           </div>
           <span className={`text-[10px] uppercase tracking-wide ${subtext} flex-shrink-0`}>
             {directionLabel}
