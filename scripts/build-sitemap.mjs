@@ -48,6 +48,7 @@ async function main() {
 
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
+    { loc: `${BASE}/api`, changefreq: 'monthly', priority: '0.5', lastmod: today },
   ];
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];

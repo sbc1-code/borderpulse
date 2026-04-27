@@ -187,7 +187,7 @@ export default function Layout({ children }) {
       {/* Footer (all viewports) */}
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
             <a href="https://sbc1-code.github.io/portfolio/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {SB_MARK}
             </a>
@@ -195,6 +195,10 @@ export default function Layout({ children }) {
             <span>
               {language === 'en' ? 'Data: U.S. Customs and Border Protection' : 'Datos: Aduanas y Protección Fronteriza EE.UU.'}
             </span>
+            <span>·</span>
+            <Link to="/api" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'Free public API' : 'API pública gratuita'}
+            </Link>
           </div>
           <span>© {new Date().getFullYear()} Border Pulse</span>
         </div>
