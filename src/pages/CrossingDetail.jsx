@@ -20,7 +20,9 @@ const DAY_LABELS = {
 // to match Date.getDay() and the aggregate `day` field.
 const DAY_PILL_ORDER = [1, 2, 3, 4, 5, 6, 0];
 
-const MIN_SAMPLES = 3;
+// 30-day lookback gives ~4 samples per (day, hour) bucket at best, often
+// just 1 due to refresh-cadence drift; treat any observation as signal.
+const MIN_SAMPLES = 1;
 
 function usePersistentLanguage() {
   const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
