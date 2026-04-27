@@ -83,14 +83,18 @@ async function showNotification(title, options) {
   }
 }
 
-function fire(id, kind, title, body) {
+/**
+ * Fire a notification for a crossing threshold event.
+ * IMPORTANT: cooldown is only written AFTER the notification succeeds,
+ * so a failed send won't silently block retries for the cooldown period.
+ */
+async function fire(id, kind, title, body) {
   const fired = read(LAST_FIRED_KEY);
   const key = `${id}:${kind}`;
   const last = fired[key] || 0;
   if (Date.now() - last < COOLDOWN_MS) return false;
-  fired[key] = Date.now();
-  write(LAST_FIRED_KEY, fired);
-  showNotification(title, {
+
+  const sent = await showNotification(title, {
     body,
     icon: '/favicon.svg',
     tag: key,
@@ -98,10 +102,20 @@ function fire(id, kind, title, body) {
     vibrate: [200, 100, 200],
     data: { crossingId: id, kind },
   });
-  return true;
+
+  // Only record cooldown if the notification actually sent
+  if (sent) {
+    fired[key] = Date.now();
+    write(LAST_FIRED_KEY, fired);
+  }
+  return sent;
 }
 
-export function evaluate(crossings, language = 'en', direction = 'northbound') {
+/**
+ * Evaluate all crossings against user prefs and fire notifications.
+ * Called on each data refresh from Dashboard.
+ */
+export async function evaluate(crossings, language = 'en', direction = 'northbound') {
   if (typeof window === 'undefined' || !('Notification' in window)) return;
   if (Notification.permission !== 'granted') return;
   const prefs = read(STORAGE_KEY);
@@ -116,11 +130,11 @@ export function evaluate(crossings, language = 'en', direction = 'northbound') {
     if (wait == null) continue;
 
     if (pref.kind === 'below' && wait < pref.threshold) {
-      fire(id, 'below',
+      await fire(id, 'below',
         language === 'en' ? `${c.name}: wait dropped to ${wait} min` : `${c.name}: espera bajó a ${wait} min`,
         language === 'en' ? `Below your ${pref.threshold} min threshold` : `Bajo tu umbral de ${pref.threshold} min`);
     } else if (pref.kind === 'above' && wait > pref.threshold) {
-      fire(id, 'above',
+      await fire(id, 'above',
         language === 'en' ? `${c.name}: wait rose to ${wait} min` : `${c.name}: espera subió a ${wait} min`,
         language === 'en' ? `Above your ${pref.threshold} min threshold` : `Sobre tu umbral de ${pref.threshold} min`);
     }
