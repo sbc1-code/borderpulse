@@ -293,6 +293,29 @@ function rewriteIndex(indexHtml, head) {
   return html;
 }
 
+function renderEmbedHead(crossing, slug) {
+  const title = `${crossing.name} wait time | Border Pulse`;
+  const desc = `Live wait time at ${crossing.name}, refreshed every 15 minutes.`;
+  // Canonical points to the full crossing page so search engines consolidate
+  // any accidental indexing on the canonical URL.
+  const canonical = `${BASE}/crossing/${slug}`;
+  const ogImage = `${BASE}/og/${slug}.png`;
+  return { title, desc, canonical, ogImage, jsonLd: [] };
+}
+
+function applyNoindex(html) {
+  if (/<meta\s+name=["']robots["'][^>]*>/i.test(html)) {
+    return html.replace(
+      /<meta\s+name=["']robots["'][^>]*>/i,
+      '<meta name="robots" content="noindex, follow" />',
+    );
+  }
+  return html.replace(
+    /<\/head>/i,
+    '  <meta name="robots" content="noindex, follow" />\n  </head>',
+  );
+}
+
 function renderRedirectPage(targetUrl) {
   return `<!doctype html>
 <html lang="en">
@@ -435,8 +458,20 @@ async function main() {
     aliasPageCount++;
   }
 
+  let embedPageCount = 0;
+  for (const c of crossings) {
+    const slug = portToSlug[c.port_number];
+    if (!slug) continue;
+    const head = renderEmbedHead(c, slug);
+    const html = applyNoindex(rewriteIndex(indexWithLinks, head));
+    const outDir = path.resolve(distDir, 'embed', slug);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+    embedPageCount++;
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + crawlable nav on homepage`,
   );
 }
 

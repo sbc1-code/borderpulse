@@ -7,22 +7,32 @@ import CrossingDetail from '@/pages/CrossingDetail';
 import Blog from '@/pages/Blog';
 import BlogPost from '@/pages/BlogPost';
 import Alerts from '@/pages/Alerts';
+import Embed from '@/pages/Embed';
+
+function LayoutRoutes() {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/crossing/:slug" element={<CrossingDetail />} />
+        <Route path="/status/:id" element={<SharedStatus />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/alerts" element={<Alerts />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
+  );
+}
 
 export default function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
-      <Layout>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/crossing/:slug" element={<CrossingDetail />} />
-          <Route path="/status/:id" element={<SharedStatus />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/alerts" element={<Alerts />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/embed/:slug" element={<Embed />} />
+          <Route path="*" element={<LayoutRoutes />} />
         </Routes>
-      </Layout>
       </ErrorBoundary>
     </BrowserRouter>
   );

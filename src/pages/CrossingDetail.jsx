@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
+import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { getHoursSummary } from '@/components/utils/crossingMeta';
@@ -206,6 +207,7 @@ export default function CrossingDetail() {
   const [aggregate, setAggregate] = useState(null);
   const [timeline, setTimeline] = useState(null);
   const [nearbyAggregates, setNearbyAggregates] = useState({}); // { port_number: aggregate|null }
+  const [embedOpen, setEmbedOpen] = useState(false);
   const language = usePersistentLanguage();
 
   const todayIdx = useMemo(() => new Date().getDay(), []);
@@ -373,7 +375,7 @@ export default function CrossingDetail() {
 
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
-      <div className="mb-3">
+      <div className="mb-3 flex items-center justify-between gap-2">
         <Link to="/">
           <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -382,6 +384,15 @@ export default function CrossingDetail() {
             </span>
           </Button>
         </Link>
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-1 h-8 text-xs"
+          onClick={() => setEmbedOpen(true)}
+        >
+          <Code className="w-3.5 h-3.5" />
+          {language === 'en' ? 'Embed this' : 'Insertar'}
+        </Button>
       </div>
 
       <header className="mb-4">
@@ -649,6 +660,13 @@ export default function CrossingDetail() {
           {state.source?.name || 'U.S. Customs and Border Protection'}
         </a>
       </footer>
+
+      <EmbedSnippetModal
+        open={embedOpen}
+        onOpenChange={setEmbedOpen}
+        slug={canonicalSlug}
+        language={language}
+      />
     </div>
   );
 }
