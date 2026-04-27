@@ -522,7 +522,7 @@ async function main() {
   {
     const aboutHead = {
       title: 'About Border Pulse | The U.S.-Mexico border wait time tracker',
-      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history. No PII collected, no third-party trackers.',
+      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history. No login, no personal data collected.',
       canonical: `${BASE}/about`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
