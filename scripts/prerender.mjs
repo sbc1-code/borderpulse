@@ -458,6 +458,22 @@ async function main() {
     aliasPageCount++;
   }
 
+  // API documentation page — single SEO-friendly entry point for the public
+  // JSON feeds we already serve at /data/*. Indexable.
+  {
+    const apiHead = {
+      title: 'Border Pulse API | Public JSON endpoints for U.S.-Mexico border wait times',
+      desc: 'Free public JSON feeds for U.S.-Mexico border wait times, historical patterns, and per-crossing advisories. No auth, no API key, refreshed every 15 minutes.',
+      canonical: `${BASE}/api`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const apiHtml = rewriteIndex(indexWithLinks, apiHead);
+    const apiDir = path.resolve(distDir, 'api');
+    fs.mkdirSync(apiDir, { recursive: true });
+    fs.writeFileSync(path.resolve(apiDir, 'index.html'), apiHtml);
+  }
+
   let embedPageCount = 0;
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];

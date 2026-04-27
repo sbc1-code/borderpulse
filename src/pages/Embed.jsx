@@ -173,10 +173,16 @@ export default function Embed() {
         </div>
 
         <div className="flex items-baseline gap-2 min-w-0">
-          <span className={`${waitSize} font-bold leading-none tabular-nums`}>
-            {wait != null ? wait : '—'}
-          </span>
-          <span className={`text-xs ${subtext}`}>min</span>
+          {wait != null ? (
+            <>
+              <span className={`${waitSize} font-bold leading-none tabular-nums`}>{wait}</span>
+              <span className={`text-xs ${subtext}`}>min</span>
+            </>
+          ) : (
+            <span className={`text-base font-medium ${subtext} leading-tight`}>
+              {lang === 'es' ? 'Sin tiempo reportado' : 'No current wait reported'}
+            </span>
+          )}
           <span className={`text-[10px] ml-auto ${subtext} flex-shrink-0`}>{sourceLabel}</span>
         </div>
 
@@ -186,8 +192,16 @@ export default function Embed() {
 
         <div className={`mt-auto flex items-center justify-between gap-2 text-[10px] ${subtext}`}>
           <div className="flex items-center gap-1 min-w-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block flex-shrink-0" aria-hidden="true" />
-            <span className="truncate">{lang === 'es' ? 'En vivo' : 'Live'} · {formatRelative(updatedAt, lang)}</span>
+            {wait != null ? (
+              <>
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block flex-shrink-0" aria-hidden="true" />
+                <span className="truncate">{lang === 'es' ? 'En vivo' : 'Live'} · {formatRelative(updatedAt, lang)}</span>
+              </>
+            ) : (
+              <span className="truncate">
+                {lang === 'es' ? 'Esperando datos de CBP' : 'Waiting for CBP data'}
+              </span>
+            )}
           </div>
         </div>
       </div>

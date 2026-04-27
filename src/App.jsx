@@ -8,6 +8,7 @@ import Blog from '@/pages/Blog';
 import BlogPost from '@/pages/BlogPost';
 import Alerts from '@/pages/Alerts';
 import Embed from '@/pages/Embed';
+import Api from '@/pages/Api';
 
 function LayoutRoutes() {
   return (
@@ -19,6 +20,7 @@ function LayoutRoutes() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/alerts" element={<Alerts />} />
+        <Route path="/api" element={<Api />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
