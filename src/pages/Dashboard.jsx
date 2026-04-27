@@ -12,6 +12,7 @@ import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AboutFooter from '@/components/dashboard/AboutFooter';
 import AdConsentCard from '@/components/ads/AdConsentCard';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
+import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
@@ -155,13 +156,16 @@ export default function Dashboard() {
 
   if (state.isLoading) {
     return (
-      <div className="flex items-center justify-center h-[60vh]">
-        <div className="text-center">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-3 text-slate-400" />
+      <div className="p-3 sm:p-4 lg:p-6 max-w-[1600px] mx-auto space-y-3">
+        <div className="flex items-center gap-2 mb-4">
+          <RefreshCw className="w-4 h-4 animate-spin text-slate-400" />
           <p className="text-sm text-slate-500">
             {language === 'en' ? 'Loading border data…' : 'Cargando datos fronterizos…'}
           </p>
         </div>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <SkeletonCard key={i} />
+        ))}
       </div>
     );
   }

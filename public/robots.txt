@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /tag/
+Disallow: /feed/
+Disallow: /tag/
 Disallow: /tags/
 Disallow: /category/
 

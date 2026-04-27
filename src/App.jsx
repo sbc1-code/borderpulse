@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '@/Layout';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import Dashboard from '@/pages/Dashboard';
 import SharedStatus from '@/pages/SharedStatus';
 import CrossingDetail from '@/pages/CrossingDetail';
@@ -9,6 +10,7 @@ import BlogPost from '@/pages/BlogPost';
 export default function App() {
   return (
     <BrowserRouter>
+      <ErrorBoundary>
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
@@ -19,6 +21,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 }
