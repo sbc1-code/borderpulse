@@ -311,6 +311,13 @@ export default function BorderCrossingCard({
                       {language === 'en' ? 'View trends' : 'Ver tendencias'}
                     </DropdownMenuItem>
                   )}
+                  {cardSlug && (
+                    <DropdownMenuItem asChild>
+                      <Link to={`/best-time/${cardSlug}`} className="cursor-pointer">
+                        {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem onSelect={() => setShowLanes((v) => !v)}>
                     {showLanes
                       ? (language === 'en' ? 'Hide lanes' : 'Ocultar carriles')

@@ -518,6 +518,21 @@ async function main() {
     embedPageCount++;
   }
 
+  // /best-time index hub — links to all 43 best-time pages
+  {
+    const indexHead = {
+      title: 'Best time to cross every U.S.-Mexico border crossing | Border Pulse',
+      desc: 'Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. 43 crossings, hour by hour.',
+      canonical: `${BASE}/best-time`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const indexHtml = rewriteIndex(indexWithLinks, indexHead);
+    const outDir = path.resolve(distDir, 'best-time');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), indexHtml);
+  }
+
   let bestTimePageCount = 0;
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];

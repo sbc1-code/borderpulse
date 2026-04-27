@@ -89,6 +89,165 @@ function HourBar({ entry, max, lang, isCurrentHour, isLightestHour }) {
   );
 }
 
+export function BestTimeIndex() {
+  const language = usePersistentLanguage();
+  const [crossings, setCrossings] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [aggregates, setAggregates] = useState({}); // port_number -> aggregate
+
+  useEffect(() => {
+    let cancelled = false;
+    dataService.getBorderData()
+      .then((doc) => { if (!cancelled) { setCrossings(doc?.crossings || []); setLoaded(true); } })
+      .catch(() => { if (!cancelled) setLoaded(true); });
+    return () => { cancelled = true; };
+  }, []);
+
+  const portToSlug = useMemo(() => {
+    if (!crossings.length) return {};
+    return buildSlugMap(crossings).portToSlug;
+  }, [crossings]);
+
+  useEffect(() => {
+    if (!crossings.length) return;
+    let cancelled = false;
+    const slugs = crossings.map((c) => portToSlug[c.port_number]).filter(Boolean);
+    Promise.all(
+      slugs.map((s) =>
+        fetch(`/data/aggregates/${s}.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null)
+          .then((agg) => [s, agg])
+      ),
+    ).then((entries) => {
+      if (cancelled) return;
+      const map = {};
+      for (const [s, agg] of entries) {
+        if (agg) map[s] = agg;
+      }
+      setAggregates(map);
+    });
+    return () => { cancelled = true; };
+  }, [crossings, portToSlug]);
+
+  useEffect(() => {
+    const title = language === 'en'
+      ? 'Best time to cross every U.S.-Mexico border crossing | Border Pulse'
+      : 'Mejor hora para cruzar cada cruce fronterizo EE.UU.-México | Border Pulse';
+    const description = language === 'en'
+      ? 'Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. 43 crossings, hour by hour.'
+      : 'Hora típica más ligera para cada cruce fronterizo EE.UU.-México hoy, basado en los últimos 30 días de tiempos de espera de CBP. 43 cruces, hora por hora.';
+    updatePageMeta({
+      title,
+      description,
+      ogTitle: title,
+      ogDescription: description,
+      ogUrl: 'https://borderpulse.com/best-time',
+      canonical: 'https://borderpulse.com/best-time',
+    });
+    return () => resetPageMeta();
+  }, [language]);
+
+  const today = new Date().getDay();
+  const rows = useMemo(() => {
+    return crossings.map((c) => {
+      const slug = portToSlug[c.port_number];
+      const agg = slug ? aggregates[slug] : null;
+      const light = agg ? lightestHourFor(agg.by_hour, today) : null;
+      const dayMed = agg ? dayMedianFor(agg.by_hour, today) : null;
+      return { crossing: c, slug, light, dayMedian: dayMed };
+    }).filter((r) => r.slug)
+      .sort((a, b) => {
+        // sort by lightest median asc, with no-data at the end
+        const am = a.light?.median;
+        const bm = b.light?.median;
+        if (am == null && bm == null) return a.crossing.name.localeCompare(b.crossing.name);
+        if (am == null) return 1;
+        if (bm == null) return -1;
+        return am - bm;
+      });
+  }, [crossings, portToSlug, aggregates, today]);
+
+  if (!loaded) {
+    return <div className="p-6 max-w-[1100px] mx-auto text-sm text-slate-500">{language === 'en' ? 'Loading…' : 'Cargando…'}</div>;
+  }
+
+  return (
+    <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
+      <div className="mb-3">
+        <Link to="/">
+          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="text-xs">{language === 'en' ? 'All crossings' : 'Todos los cruces'}</span>
+          </Button>
+        </Link>
+      </div>
+
+      <header className="mb-5">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+          {language === 'en'
+            ? `Best time to cross every U.S.-Mexico border crossing today (${DAY_SHORT.en[today]})`
+            : `Mejor hora para cruzar cada cruce EE.UU.-México hoy (${DAY_SHORT.es[today]})`}
+        </h1>
+        <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          {language === 'en'
+            ? 'Sorted by typical lightest-hour median wait. 30-day rolling sample from U.S. Customs and Border Protection.'
+            : 'Ordenado por mediana de espera en la hora más ligera. Muestra rotativa de 30 días de U.S. Customs and Border Protection.'}
+        </p>
+      </header>
+
+      <div className="rounded-lg border border-slate-200 dark:border-gray-700 overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-slate-50 dark:bg-gray-900 text-slate-600 dark:text-slate-300 text-[11px] uppercase tracking-wide">
+            <tr>
+              <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Crossing' : 'Cruce'}</th>
+              <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'State' : 'Estado'}</th>
+              <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Lightest hour today' : 'Hora más ligera hoy'}</th>
+              <th className="text-right px-3 py-2 font-medium">{language === 'en' ? 'Median (min)' : 'Mediana (min)'}</th>
+              <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">{language === 'en' ? 'Day avg' : 'Prom. día'}</th>
+              <th className="px-3 py-2 font-medium" aria-label="link"></th>
+            </tr>
+          </thead>
+          <tbody className="bg-white dark:bg-gray-900/40 divide-y divide-slate-200 dark:divide-gray-800">
+            {rows.map((r) => (
+              <tr key={r.crossing.port_number} className="hover:bg-slate-50 dark:hover:bg-gray-800/40">
+                <td className="px-3 py-2 text-slate-900 dark:text-slate-100">
+                  <Link to={`/best-time/${r.slug}`} className="hover:underline">{r.crossing.name}</Link>
+                </td>
+                <td className="px-3 py-2 text-slate-600 dark:text-slate-400 text-xs">{r.crossing.state}</td>
+                <td className="px-3 py-2 text-slate-900 dark:text-slate-100 tabular-nums">
+                  {r.light ? formatHour12(r.light.hour, language) : '—'}
+                </td>
+                <td className="px-3 py-2 text-right text-slate-900 dark:text-slate-100 tabular-nums">
+                  {r.light?.median ?? '—'}
+                </td>
+                <td className="px-3 py-2 text-right text-slate-600 dark:text-slate-400 tabular-nums hidden sm:table-cell">
+                  {r.dayMedian ?? '—'}
+                </td>
+                <td className="px-3 py-2 text-right">
+                  <Link
+                    to={`/best-time/${r.slug}`}
+                    className="text-emerald-700 dark:text-emerald-400 text-xs font-medium hover:underline"
+                  >
+                    {language === 'en' ? 'View →' : 'Ver →'}
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <footer className="text-xs text-slate-500 border-t border-slate-200 dark:border-gray-700 pt-3 mt-6">
+        {language === 'en' ? 'Source: ' : 'Fuente: '}
+        <a href="https://bwt.cbp.gov/" className="underline" target="_blank" rel="noopener noreferrer">
+          U.S. Customs and Border Protection
+        </a>
+      </footer>
+    </div>
+  );
+}
+
 export default function BestTime() {
   const { slug } = useParams();
   const language = usePersistentLanguage();
