@@ -44,8 +44,8 @@ export default function About() {
       ? 'About Border Pulse | The U.S.-Mexico border wait time tracker'
       : 'Acerca de Border Pulse | Rastreador de tiempos de espera en la frontera EE.UU.-México';
     const description = language === 'en'
-      ? 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history. No login, no personal data collected.'
-      : 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, cada 15 minutos, con un historial rotativo de 30 días. Sin inicio de sesión, sin datos personales recopilados.';
+      ? 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history.'
+      : 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, cada 15 minutos, con un historial rotativo de 30 días.';
     updatePageMeta({
       title,
       description,
@@ -103,8 +103,8 @@ export default function About() {
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'
-            ? 'An independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data. Fast, clear, no login wall.'
-            : 'Un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP. Rápido, claro, sin muro de inicio de sesión.'}
+            ? 'An independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data.'
+            : 'Un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP.'}
         </p>
       </header>
 
@@ -155,42 +155,37 @@ export default function About() {
         </div>
       </section>
 
-      {/* Privacy */}
+      {/* What runs in your browser */}
       <section className="mb-8">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wide mb-3 flex items-center gap-2">
           <Lock className="w-4 h-4 text-emerald-600" />
-          {language === 'en' ? 'Privacy' : 'Privacidad'}
+          {language === 'en' ? 'What runs in your browser' : 'Qué corre en tu navegador'}
         </h2>
         <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300 list-disc pl-5">
           <li>
             {language === 'en'
-              ? 'No login. No email. No account.'
-              : 'Sin inicio de sesión. Sin email. Sin cuenta.'}
+              ? 'The site works without an account.'
+              : 'El sitio funciona sin cuenta.'}
           </li>
           <li>
             {language === 'en'
-              ? 'Anonymous page-view analytics via Umami (privacy-first, cookieless, no individual tracking). No ad pixels, no behavioral fingerprinting.'
-              : 'Analítica anónima de vistas vía Umami (respetuosa, sin cookies, sin rastreo individual). Sin píxeles de anuncios, sin huella digital de comportamiento.'}
+              ? 'Page-view analytics are handled by Umami (anonymous, cookieless).'
+              : 'La analítica de vistas la maneja Umami (anónima, sin cookies).'}
           </li>
           <li>
             {language === 'en'
-              ? 'Ads only load if you opt in, per session. Off by default.'
-              : 'Los anuncios solo cargan si los habilitas, por sesión. Desactivados por defecto.'}
+              ? 'Ads are opt-in and disabled by default.'
+              : 'Los anuncios son opcionales y están desactivados por defecto.'}
           </li>
           <li>
             {language === 'en'
-              ? 'Geolocation (when you tap "Show crossings near you") is processed in your browser — coordinates never leave your device. Only the resulting state filter (e.g., "California") is saved to localStorage.'
-              : 'La geolocalización (cuando tocas "Mostrar cruces cerca de ti") se procesa en tu navegador — las coordenadas nunca salen de tu dispositivo. Solo se guarda el filtro de estado resultante (p.ej., "California") en localStorage.'}
+              ? 'Geolocation runs in the browser; only the resulting state filter (e.g., "California") is saved to localStorage.'
+              : 'La geolocalización corre en el navegador; solo se guarda el filtro de estado resultante (p.ej., "California") en localStorage.'}
           </li>
           <li>
             {language === 'en'
-              ? 'Notification preferences (per-crossing thresholds) live in your browser\'s localStorage. They never get sent anywhere.'
-              : 'Las preferencias de notificación (umbrales por cruce) viven en localStorage de tu navegador. Nunca se envían a ningún lado.'}
-          </li>
-          <li>
-            {language === 'en'
-              ? 'No data sale. No targeted advertising.'
-              : 'Sin venta de datos. Sin publicidad dirigida.'}
+              ? 'Notification thresholds are saved to localStorage in your browser.'
+              : 'Los umbrales de notificación se guardan en localStorage de tu navegador.'}
           </li>
         </ul>
       </section>

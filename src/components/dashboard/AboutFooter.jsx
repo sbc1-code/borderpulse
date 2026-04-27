@@ -102,12 +102,12 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           </div>
           <div>
             <div className="font-medium text-slate-900 dark:text-white">
-              {language === 'en' ? 'Do you track me?' : '¿Rastrean mi actividad?'}
+              {language === 'en' ? 'What runs in your browser?' : '¿Qué corre en tu navegador?'}
             </div>
             <p>
               {language === 'en'
-                ? 'No accounts, no cookies, no personal tracking. We use privacy-first analytics (Umami) that collects only anonymous page views. Your preferences stay in your browser. Ads only load if you opt in, per session.'
-                : 'Sin cuentas, sin cookies, sin rastreo personal. Usamos analítica respetuosa (Umami) que solo recopila vistas anónimas. Tus preferencias quedan en tu navegador. Los anuncios solo cargan si los habilitas, por sesión.'}
+                ? 'The site works without an account. Page-view analytics are handled by Umami (anonymous, cookieless). Preferences are saved to localStorage. Ads are opt-in and disabled by default.'
+                : 'El sitio funciona sin cuenta. La analítica de vistas la maneja Umami (anónima, sin cookies). Las preferencias se guardan en localStorage. Los anuncios son opcionales y están desactivados por defecto.'}
             </p>
           </div>
         </div>
