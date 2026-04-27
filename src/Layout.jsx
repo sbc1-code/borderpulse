@@ -203,6 +203,10 @@ export default function Layout({ children }) {
             <Link to="/api" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'Free public API' : 'API pública gratuita'}
             </Link>
+            <span>·</span>
+            <Link to="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'About' : 'Acerca de'}
+            </Link>
           </div>
           <span>© {new Date().getFullYear()} Border Pulse</span>
         </div>

@@ -18,6 +18,7 @@ const BestTime = lazy(() => import('@/pages/BestTime'));
 const BestTimeIndex = lazy(() =>
   import('@/pages/BestTime').then((m) => ({ default: m.BestTimeIndex })),
 );
+const About = lazy(() => import('@/pages/About'));
 
 function RouteFallback() {
   return (
@@ -41,6 +42,7 @@ function LayoutRoutes() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/api" element={<Api />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

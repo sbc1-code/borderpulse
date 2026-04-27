@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-blog-index.mjs && node scripts/build-sitemap.mjs && node scripts/build-og-cards.mjs && node scripts/build-rss.mjs",
+    "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-blog-index.mjs && node scripts/build-sitemap.mjs && node scripts/build-og-cards.mjs && node scripts/build-rss.mjs && node scripts/build-stats.mjs",
     "build": "vite build",
     "postbuild": "node scripts/prerender.mjs",
     "preview": "vite preview",

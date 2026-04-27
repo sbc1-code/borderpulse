@@ -518,6 +518,21 @@ async function main() {
     embedPageCount++;
   }
 
+  // /about — trust signal page with methodology + public stats + privacy
+  {
+    const aboutHead = {
+      title: 'About Border Pulse | The U.S.-Mexico border wait time tracker',
+      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history. No PII collected, no third-party trackers.',
+      canonical: `${BASE}/about`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const aboutHtml = rewriteIndex(indexWithLinks, aboutHead);
+    const outDir = path.resolve(distDir, 'about');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
+  }
+
   // /best-time index hub — links to all 43 best-time pages
   {
     const indexHead = {
