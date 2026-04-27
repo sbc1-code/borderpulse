@@ -95,7 +95,7 @@ export default function Blog() {
                 className="border-b border-slate-200 dark:border-gray-800 pb-6 last:border-b-0"
               >
                 <div className="flex items-center gap-2 text-xs uppercase tracking-wide font-semibold">
-                  <span className="text-emerald-700 dark:text-emerald-400">{pillarLabel(fm.pillar)}</span>
+                  <span className="text-emerald-700 dark:text-emerald-400">{pillarLabel(fm.pillar, lang)}</span>
                   <span className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-gray-800 text-slate-600 dark:text-slate-300 text-[10px] tracking-normal">
                     {lang.toUpperCase()}
                   </span>

@@ -47,6 +47,12 @@ export default function Layout({ children }) {
     localStorage.setItem('borderPulse_theme', next);
   };
 
+  const changeLanguage = (lang) => {
+    setLanguage(lang);
+    localStorage.setItem('borderPulse_language', lang);
+    window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
+  };
+
   const nav = [
     {
       name: language === 'en' ? 'Dashboard' : 'Panel',
@@ -96,6 +102,10 @@ export default function Layout({ children }) {
             </span>
           </Link>
           <div className="flex items-center gap-1">
+            <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
+              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-7" aria-label="Switch to English">EN</Button>
+              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-7" aria-label="Cambiar a español">ES</Button>
+            </div>
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>

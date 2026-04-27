@@ -101,7 +101,7 @@ export default function InstallPrompt({ language = 'en' }) {
             <p className="text-xs text-slate-500 mt-0.5">
               {language === 'en'
                 ? 'Quick access to real-time border wait times, no app store needed.'
-                : 'Acceso rapido a tiempos de espera en la frontera, sin tienda de apps.'}
+                : 'Acceso rápido a tiempos de espera en la frontera, sin tienda de apps.'}
             </p>
           </div>
           <Button

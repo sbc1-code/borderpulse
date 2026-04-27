@@ -55,7 +55,7 @@ export default function AdConsentCard({ language = 'en' }) {
             onClick={dismiss}
             className="text-[10px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 underline decoration-dotted"
           >
-            {language === 'en' ? 'Hide ads this session' : 'Ocultar anuncios esta sesion'}
+            {language === 'en' ? 'Hide ads this session' : 'Ocultar anuncios esta sesión'}
           </button>
         </div>
       </div>

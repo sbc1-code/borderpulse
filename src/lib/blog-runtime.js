@@ -35,17 +35,22 @@ export function getAuthor(id) {
   return authors[id] || { id, name: id };
 }
 
-export function pillarLabel(pillar) {
-  switch (pillar) {
-    case 'data-analysis':
-      return 'Data';
-    case 'crossing-guides':
-      return 'Crossing guides';
-    case 'policy-programs':
-      return 'Programs';
-    case 'traveler-tips':
-      return 'Traveler tips';
-    default:
-      return pillar;
-  }
+const PILLAR_LABELS = {
+  en: {
+    'data-analysis': 'Data',
+    'crossing-guides': 'Crossing guides',
+    'policy-programs': 'Programs',
+    'traveler-tips': 'Traveler tips',
+  },
+  es: {
+    'data-analysis': 'Datos',
+    'crossing-guides': 'Guías de cruce',
+    'policy-programs': 'Programas',
+    'traveler-tips': 'Consejos de viaje',
+  },
+};
+
+export function pillarLabel(pillar, lang = 'en') {
+  const dict = PILLAR_LABELS[lang] || PILLAR_LABELS.en;
+  return dict[pillar] || pillar;
 }

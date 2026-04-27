@@ -86,7 +86,7 @@ export default function BlogPost() {
 
       <header className="mb-6">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-emerald-700 dark:text-emerald-400 font-semibold">
-          <span>{pillarLabel(fm.pillar)}</span>
+          <span>{pillarLabel(fm.pillar, lang)}</span>
           <span className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-gray-800 text-slate-600 dark:text-slate-300 text-[10px] font-medium tracking-normal">
             {lang.toUpperCase()}
           </span>
