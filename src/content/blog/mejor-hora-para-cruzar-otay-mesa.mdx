@@ -17,7 +17,7 @@ relatedCrossings:
   - "250601"
   - "250401"
 officialSources:
-  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+  - label: "CBP Tiempos de Espera (datos en vivo de CBP)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP Programa SENTRI"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
@@ -65,4 +65,4 @@ Otay tiene carril SENTRI para miembros del Trusted Traveler Program. El carril e
 
 ## Cómo calculamos estos números
 
-Cada 15 minutos el cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Usamos mediana, no promedio, porque un solo outlier de 240 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
+El cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Usamos mediana, no promedio, porque un solo outlier de 240 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.

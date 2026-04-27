@@ -17,7 +17,7 @@ relatedCrossings:
   - "250601"
   - "250401"
 officialSources:
-  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+  - label: "CBP Border Wait Times (live CBP data)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP SENTRI program"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
@@ -65,4 +65,4 @@ Otay has a SENTRI lane for Trusted Traveler Program members. The lane is open du
 
 ## How we compute these numbers
 
-Every 15 minutes the Border Pulse cron pulls the official CBP wait time for Otay Mesa and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. We use median, not mean, because a single 240 minute outlier can drag the average without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), which is the canonical source.
+The Border Pulse cron pulls the official CBP wait time for Otay Mesa and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. We use median, not mean, because a single 240 minute outlier can drag the average without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), which is the canonical source.

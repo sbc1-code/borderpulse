@@ -51,8 +51,8 @@ const ENDPOINTS = [
     path: '/data/crossings.json',
     title: { en: 'All crossings + current wait times', es: 'Todos los cruces + tiempos actuales' },
     desc: {
-      en: 'Every land port of entry on the U.S./Mexico border with the latest CBP wait time, lane breakdown, port hours, and any operational notice. Refreshed every 15 minutes.',
-      es: 'Cada puerto terrestre de entrada en la frontera EE.UU./México con el tiempo de espera más reciente de CBP, desglose de carriles, horario y avisos operativos. Actualizado cada 15 minutos.',
+      en: 'Every land port of entry on the U.S./Mexico border with the latest CBP wait time, lane breakdown, port hours, and any operational notice. Refreshed on a regular schedule.',
+      es: 'Cada puerto terrestre de entrada en la frontera EE.UU./México con el tiempo de espera más reciente de CBP, desglose de carriles, horario y avisos operativos. Actualizado en un horario regular.',
     },
     sample: `{
   "source": "CBP Border Wait Times",
@@ -167,8 +167,8 @@ export default function Api() {
       ? 'Border Pulse API | Public JSON endpoints for border wait times'
       : 'Border Pulse API | Endpoints JSON públicos de tiempos de espera';
     const description = language === 'en'
-      ? 'Free public JSON feeds for U.S.-Mexico border wait times, historical patterns, and per-crossing advisories. No auth, no key, refreshed every 15 minutes.'
-      : 'Endpoints JSON públicos y gratuitos para tiempos de espera en la frontera EE.UU.-México, patrones históricos y avisos por cruce. Sin autenticación, sin API key, actualizados cada 15 minutos.';
+      ? 'Free public JSON feeds for U.S.-Mexico border wait times, historical patterns, and per-crossing advisories. No auth, no key, refreshed on a regular schedule.'
+      : 'Endpoints JSON públicos y gratuitos para tiempos de espera en la frontera EE.UU.-México, patrones históricos y avisos por cruce. Sin autenticación, sin API key, actualizados en un horario regular.';
     updatePageMeta({
       title,
       description,
@@ -200,8 +200,8 @@ export default function Api() {
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'
-            ? 'Free public JSON feeds for U.S.-Mexico border wait times. No auth, no API key, refreshed every 15 minutes. Built on top of the same data we use to render borderpulse.com.'
-            : 'Endpoints JSON públicos y gratuitos para tiempos de espera en la frontera EE.UU.-México. Sin autenticación, sin API key, actualizados cada 15 minutos. Construido sobre los mismos datos que usamos para renderizar borderpulse.com.'}
+            ? 'Free public JSON feeds for U.S.-Mexico border wait times. No auth, no API key, refreshed on a regular schedule. Built on top of the same data we use to render borderpulse.com.'
+            : 'Endpoints JSON públicos y gratuitos para tiempos de espera en la frontera EE.UU.-México. Sin autenticación, sin API key, actualizados en un horario regular. Construido sobre los mismos datos que usamos para renderizar borderpulse.com.'}
         </p>
       </header>
 
@@ -217,7 +217,7 @@ export default function Api() {
             {language === 'en' ? 'Refresh cadence' : 'Frecuencia de actualización'}
           </div>
           <span className="text-xs text-slate-900 dark:text-slate-100">
-            {language === 'en' ? 'Every 15 minutes (CBP feed cadence)' : 'Cada 15 minutos (cadencia de CBP)'}
+            {language === 'en' ? 'Scheduled cron (CBP feed updates every 15 min upstream)' : 'Cron programado (CBP actualiza cada 15 min upstream)'}
           </span>
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-900/40">

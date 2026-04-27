@@ -18,7 +18,7 @@ relatedCrossings:
   - "240202"
   - "240201"
 officialSources:
-  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+  - label: "CBP Border Wait Times (live CBP data)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP Ready Lanes program"
     url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
@@ -65,7 +65,7 @@ PDN has both SENTRI and Ready Lane access. Both reduce wait significantly during
 
 ## How we compute these numbers
 
-Every 15 minutes the Border Pulse cron pulls the official CBP wait time for PDN and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean for this data: a single 120 minute Sunday outlier can drag a true 30 minute typical hour up to 50 minutes if you average. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [Paso Del Norte page](/crossing/el-paso-paso-del-norte-pdn) shows today's current wait alongside the same 30-day pattern.
+The Border Pulse cron pulls the official CBP wait time for PDN and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean for this data: a single 120 minute Sunday outlier can drag a true 30 minute typical hour up to 50 minutes if you average. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [Paso Del Norte page](/crossing/el-paso-paso-del-norte-pdn) shows today's current wait alongside the same 30-day pattern.
 
 ## What to do with this
 

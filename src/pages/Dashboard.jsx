@@ -266,8 +266,8 @@ export default function Dashboard() {
         </motion.h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
           {language === 'en'
-            ? 'Official wait times to the U.S. · Estimated delays to Mexico · Updated every 15 min'
-            : 'Tiempos oficiales hacia EE.UU. · Demoras estimadas hacia México · Actualizado cada 15 min'}
+            ? 'Official wait times to the U.S. · Estimated delays to Mexico · Live CBP data'
+            : 'Tiempos oficiales hacia EE.UU. · Demoras estimadas hacia México · Datos en vivo de CBP'}
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}

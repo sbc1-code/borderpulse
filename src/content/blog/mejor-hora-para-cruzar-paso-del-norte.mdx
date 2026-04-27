@@ -18,7 +18,7 @@ relatedCrossings:
   - "240202"
   - "240201"
 officialSources:
-  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+  - label: "CBP Tiempos de Espera (datos en vivo de CBP)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP Programa Ready Lane"
     url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
@@ -65,7 +65,7 @@ PDN tiene acceso a SENTRI y Ready Lane. Los dos reducen la espera notablemente d
 
 ## Cómo calculamos estos números
 
-Cada 15 minutos el cron de Border Pulse jala el tiempo de espera oficial de CBP para PDN y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. La mediana es más honesta que el promedio para estos datos: un solo outlier de 120 minutos del domingo puede inflar el promedio de una hora típica de 30 minutos hasta 50. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), la fuente canónica. La página en vivo de [Paso del Norte](/crossing/el-paso-paso-del-norte-pdn) muestra la espera de hoy junto al patrón de 30 días.
+El cron de Border Pulse jala el tiempo de espera oficial de CBP para PDN y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. La mediana es más honesta que el promedio para estos datos: un solo outlier de 120 minutos del domingo puede inflar el promedio de una hora típica de 30 minutos hasta 50. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), la fuente canónica. La página en vivo de [Paso del Norte](/crossing/el-paso-paso-del-norte-pdn) muestra la espera de hoy junto al patrón de 30 días.
 
 ## Qué hacer con esto
 

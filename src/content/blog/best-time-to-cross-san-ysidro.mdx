@@ -17,7 +17,7 @@ relatedCrossings:
   - "250401"
   - "250601"
 officialSources:
-  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+  - label: "CBP Border Wait Times (live CBP data)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP Ready Lanes program"
     url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
@@ -39,7 +39,7 @@ Three patterns jump out:
 2. **Sunday afternoon and evening is the trap everyone warns about, and the data backs it up.** From roughly 4 PM Sunday through midnight, medians sit between 110 and 175 minutes. If you can finish your trip by Saturday night or wait until Monday, do.
 3. **The "best hour" shifts by day.** Saturday and Sunday, the lightest window is 9 to 11 AM. Tuesday through Friday, it is 5 to 7 AM. Monday is heavy almost all day, the residual cost of the Sunday backup.
 
-If you want to plan around a specific hour, the [San Ysidro live page](/crossing/san-ysidro) shows the current wait alongside the same 30 day pattern, refreshed every 15 minutes.
+If you want to plan around a specific hour, the [San Ysidro live page](/crossing/san-ysidro) shows the current wait alongside the same 30 day pattern, refreshed on each cycle.
 
 ## Standard, Ready Lane, and SENTRI: which actually saves time
 
@@ -80,7 +80,7 @@ The DOS travel advisory for Mexico is updated periodically and applies at the st
 
 ## How we compute these numbers
 
-Every 15 minutes, Border Pulse pulls the official CBP wait time for San Ysidro and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. Median is more honest than average for this data because a single 240 minute outlier can drag a true 60 minute typical hour up to 90.
+Border Pulse pulls the official CBP wait time for San Ysidro and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. Median is more honest than average for this data because a single 240 minute outlier can drag a true 60 minute typical hour up to 90.
 
 The raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse). Snapshots come from [CBP's public BWT feed](https://bwt.cbp.gov/), which is the canonical source.
 

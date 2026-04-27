@@ -18,7 +18,7 @@ relatedCrossings:
   - "250401"
   - "250601"
 officialSources:
-  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+  - label: "CBP Border Wait Times (live CBP data)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP Ready Lanes program"
     url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
@@ -83,7 +83,7 @@ Both ports have SENTRI and Ready Lane access. The relative SENTRI savings betwee
 
 ## How we compute these numbers
 
-Every 15 minutes Border Pulse pulls official CBP wait times for both ports and stores a snapshot. The chart and table above use the **median** wait per (day of week, hour of day) cell across the last 30 days. We use median, not mean, because a single bad evening can drag a mean without telling you anything about the typical hour. The live numbers are at [bwt.cbp.gov](https://bwt.cbp.gov/), and our per-port pages ([San Ysidro](/crossing/san-ysidro), [Otay Mesa](/crossing/otay-mesa)) show today's wait alongside the same 30-day pattern.
+Border Pulse pulls official CBP wait times for both ports and stores a snapshot. The chart and table above use the **median** wait per (day of week, hour of day) cell across the last 30 days. We use median, not mean, because a single bad evening can drag a mean without telling you anything about the typical hour. The live numbers are at [bwt.cbp.gov](https://bwt.cbp.gov/), and our per-port pages ([San Ysidro](/crossing/san-ysidro), [Otay Mesa](/crossing/otay-mesa)) show today's wait alongside the same 30-day pattern.
 
 ## What to do with this
 

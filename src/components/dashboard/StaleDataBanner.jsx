@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { WifiOff, Clock } from 'lucide-react';
+import { WifiOff } from 'lucide-react';
 
-const STALE_THRESHOLD_MS = 20 * 60 * 1000; // 20 min — data refreshes every 15
-
-export default function StaleDataBanner({ fetchedAt, language = 'en' }) {
-  const [offline, setOffline] = useState(!navigator.onLine);
-  const [stale, setStale] = useState(false);
+// Banner now only shows when the user is actually offline. The previous
+// time-since-fetch "stale" trigger was noise — the CBP refresh runs on
+// GitHub Actions cron which is throttled in practice (often 60+ min vs.
+// the requested 15 min), and there's nothing the user can do about it.
+// Each card surfaces its own updated_at so freshness is visible without
+// a top-level alert.
+export default function StaleDataBanner({ language = 'en' }) {
+  const [offline, setOffline] = useState(typeof navigator !== 'undefined' ? !navigator.onLine : false);
 
   useEffect(() => {
     const goOffline = () => setOffline(true);
@@ -18,39 +21,19 @@ export default function StaleDataBanner({ fetchedAt, language = 'en' }) {
     };
   }, []);
 
-  useEffect(() => {
-    if (!fetchedAt) return;
-    const check = () => {
-      const age = Date.now() - new Date(fetchedAt).getTime();
-      setStale(age > STALE_THRESHOLD_MS);
-    };
-    check();
-    const id = setInterval(check, 30_000);
-    return () => clearInterval(id);
-  }, [fetchedAt]);
+  if (!offline) return null;
 
-  if (!offline && !stale) return null;
-
-  const icon = offline
-    ? <WifiOff className="w-4 h-4 shrink-0" />
-    : <Clock className="w-4 h-4 shrink-0" />;
-
-  const msg = offline
-    ? (language === 'en'
-      ? 'You\'re offline — showing cached data.'
-      : 'Sin conexión — mostrando datos en caché.')
-    : (language === 'en'
-      ? 'Data may be stale — last update was over 20 minutes ago.'
-      : 'Datos posiblemente desactualizados — última actualización hace más de 20 minutos.');
-
-  const colors = offline
-    ? 'border-red-300 bg-red-50 text-red-800 dark:border-red-800 dark:bg-red-950/40 dark:text-red-300'
-    : 'border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300';
+  const msg = language === 'en'
+    ? 'You\'re offline — showing cached data.'
+    : 'Sin conexión — mostrando datos en caché.';
 
   return (
-    <div className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs mb-3 ${colors}`}
-         role="status" aria-live="polite">
-      {icon}
+    <div
+      className="flex items-center gap-2 rounded-lg border border-red-300 bg-red-50 text-red-800 dark:border-red-800 dark:bg-red-950/40 dark:text-red-300 px-3 py-2 text-xs mb-3"
+      role="status"
+      aria-live="polite"
+    >
+      <WifiOff className="w-4 h-4 shrink-0" />
       <span>{msg}</span>
     </div>
   );

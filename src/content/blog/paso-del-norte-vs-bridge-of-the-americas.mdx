@@ -19,7 +19,7 @@ relatedCrossings:
   - "240202"
   - "240201"
 officialSources:
-  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+  - label: "CBP Border Wait Times (live CBP data)"
     url: "https://bwt.cbp.gov/"
 ---
 
@@ -69,7 +69,7 @@ Both PDN and BOTA support Ready Lane. SENTRI is available at both as well. The r
 
 ## How we compute these numbers
 
-Every 15 minutes Border Pulse pulls the official CBP wait times for both bridges and stores snapshots. The charts above use the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean because a single Sunday spike can drag a mean without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [PDN page](/crossing/el-paso-paso-del-norte-pdn) and [BOTA page](/crossing/el-paso-bridge-of-the-americas-bota) show today's wait alongside these patterns.
+Border Pulse pulls the official CBP wait times for both bridges and stores snapshots. The charts above use the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean because a single Sunday spike can drag a mean without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [PDN page](/crossing/el-paso-paso-del-norte-pdn) and [BOTA page](/crossing/el-paso-bridge-of-the-americas-bota) show today's wait alongside these patterns.
 
 ## What to do with this
 

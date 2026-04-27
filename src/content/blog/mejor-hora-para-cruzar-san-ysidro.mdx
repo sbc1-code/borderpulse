@@ -17,7 +17,7 @@ relatedCrossings:
   - "250401"
   - "250601"
 officialSources:
-  - label: "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)"
+  - label: "CBP Tiempos de Espera (datos en vivo de CBP)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP Programa Ready Lane"
     url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
@@ -39,7 +39,7 @@ Tres patrones saltan a la vista:
 2. **La tarde y noche del domingo es la trampa que todos conocen, y los datos lo confirman.** Desde las 4 p. m. del domingo hasta medianoche, las medianas se quedan entre 110 y 175 minutos. Si puedes terminar el viaje el sábado en la noche o esperar hasta el lunes, hazlo.
 3. **La "mejor hora" cambia según el día.** Sábado y domingo, la ventana más ligera es de 9 a 11 a. m. De martes a viernes, es de 5 a 7 a. m. El lunes está pesado casi todo el día, el costo residual del cuello de botella del domingo.
 
-Si quieres planear con una hora específica, la [página en vivo de San Ysidro](/crossing/san-ysidro) muestra la espera actual junto al patrón de 30 días, refrescado cada 15 minutos.
+Si quieres planear con una hora específica, la [página en vivo de San Ysidro](/crossing/san-ysidro) muestra la espera actual junto al patrón de 30 días, actualizado en cada ciclo.
 
 ## Estándar, Ready Lane y SENTRI: cuál realmente ahorra tiempo
 
@@ -80,7 +80,7 @@ La alerta de viaje del DOS para México se actualiza periódicamente y aplica a 
 
 ## Cómo calculamos estos números
 
-Cada 15 minutos, Border Pulse jala el tiempo de espera oficial de CBP para San Ysidro y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días de esas snapshots. Mediana es más honesta que promedio para estos datos porque un solo outlier de 240 minutos puede inflar el promedio de una hora típica de 60 minutos hasta 90.
+Border Pulse jala el tiempo de espera oficial de CBP para San Ysidro y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días de esas snapshots. Mediana es más honesta que promedio para estos datos porque un solo outlier de 240 minutos puede inflar el promedio de una hora típica de 60 minutos hasta 90.
 
 Los datos crudos y la metodología viven en [nuestro repo público](https://github.com/sbc1-code/borderpulse). Las snapshots vienen del [feed público de CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
 

@@ -18,7 +18,7 @@ relatedCrossings:
   - "260401"
   - "260402"
 officialSources:
-  - label: "CBP Border Wait Times (live data, 15 min refresh)"
+  - label: "CBP Border Wait Times (live CBP data)"
     url: "https://bwt.cbp.gov/"
   - label: "CBP SENTRI program"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
@@ -65,7 +65,7 @@ DeConcini has SENTRI lane access. The 0-minute standard lane medians on weekday 
 
 ## How we compute these numbers
 
-Every 15 minutes the Border Pulse cron pulls the official CBP wait time for DeConcini and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean for this data: a single 180 minute Monday outlier can drag an average without telling you about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [DeConcini page](/crossing/nogales-deconcini) shows today's current wait alongside this 30-day pattern.
+The Border Pulse cron pulls the official CBP wait time for DeConcini and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean for this data: a single 180 minute Monday outlier can drag an average without telling you about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [DeConcini page](/crossing/nogales-deconcini) shows today's current wait alongside this 30-day pattern.
 
 ## What to do with this
 

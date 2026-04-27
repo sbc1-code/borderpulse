@@ -44,8 +44,8 @@ export default function About() {
       ? 'About Border Pulse | The U.S.-Mexico border wait time tracker'
       : 'Acerca de Border Pulse | Rastreador de tiempos de espera en la frontera EE.UU.-México';
     const description = language === 'en'
-      ? 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history.'
-      : 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, cada 15 minutos, con un historial rotativo de 30 días.';
+      ? 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, with a 30-day rolling history.'
+      : 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, con un historial rotativo de 30 días.';
     updatePageMeta({
       title,
       description,
@@ -72,9 +72,9 @@ export default function About() {
           : `Rotativa ${stats.lookback_days || 30} días`,
       },
       {
-        value: `${stats.refresh_minutes ?? 15} min`,
-        label: language === 'en' ? 'Refresh cadence' : 'Frecuencia',
-        sub: language === 'en' ? 'CBP feed driven' : 'Según el feed CBP',
+        value: 'CBP',
+        label: language === 'en' ? 'Source of record' : 'Fuente original',
+        sub: language === 'en' ? 'Live upstream feed' : 'Feed en vivo',
       },
       {
         value: stats.blog_posts ?? 12,
@@ -139,8 +139,8 @@ export default function About() {
         <div className="space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
           <p>
             {language === 'en'
-              ? 'Northbound passenger wait times come directly from U.S. Customs and Border Protection (CBP), refreshed every 15 minutes. Each refresh writes a snapshot to /data/crossings.json — the same file the dashboard reads. Snapshots roll up into per-crossing aggregates with a 30-day lookback that power "vs. typical" comparisons and the lightest-hour predictions on every /best-time page.'
-              : 'Los tiempos de espera hacia EE.UU. vienen directamente de U.S. Customs and Border Protection (CBP), actualizados cada 15 minutos. Cada actualización escribe un snapshot en /data/crossings.json — el mismo archivo que lee el panel. Los snapshots se agregan en datos por cruce con un retroceso de 30 días que alimentan las comparaciones "vs. lo normal" y las predicciones de hora más ligera en cada página /best-time.'}
+              ? 'Northbound passenger wait times come directly from U.S. Customs and Border Protection (CBP). A scheduled job pulls the feed and writes a snapshot to /data/crossings.json — the same file the dashboard reads. Snapshots roll up into per-crossing aggregates with a 30-day lookback that power "vs. typical" comparisons and the lightest-hour predictions on every /best-time page.'
+              : 'Los tiempos de espera hacia EE.UU. vienen directamente de U.S. Customs and Border Protection (CBP). Un trabajo programado jala el feed y escribe un snapshot en /data/crossings.json — el mismo archivo que lee el panel. Los snapshots se agregan en datos por cruce con un retroceso de 30 días que alimentan las comparaciones "vs. lo normal" y las predicciones de hora más ligera en cada página /best-time.'}
           </p>
           <p>
             {language === 'en'
