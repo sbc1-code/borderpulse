@@ -43,6 +43,7 @@ export default function Layout({ children }) {
       es: 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real',
     };
     document.title = titles[language] || titles.en;
+    document.documentElement.lang = language;
   }, [language]);
 
   const toggleTheme = () => {
@@ -94,10 +95,10 @@ export default function Layout({ children }) {
             </span>
           </Link>
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="rounded-full">
+            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
@@ -150,7 +151,7 @@ export default function Layout({ children }) {
             ))}
           </nav>
           <div className={`p-3 border-t ${isDark ? 'border-gray-800' : 'border-slate-200'} flex items-center justify-between`}>
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
             <a
@@ -168,7 +169,7 @@ export default function Layout({ children }) {
       </div>
 
       {/* Mobile content */}
-      <div className="lg:hidden">{children}</div>
+      <div id="main-content-mobile" className="lg:hidden">{children}</div>
 
       {/* Footer (all viewports) */}
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>

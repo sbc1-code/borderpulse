@@ -13,6 +13,7 @@ import AboutFooter from '@/components/dashboard/AboutFooter';
 import AdConsentCard from '@/components/ads/AdConsentCard';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
+import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
@@ -224,6 +225,9 @@ export default function Dashboard() {
           </Button>
         </div>
       </header>
+
+      {/* Offline / stale data warning */}
+      <StaleDataBanner fetchedAt={state.fetchedAt} language={language} />
 
       {/* Departure Alert hero */}
       <DepartureAlertBanner crossings={state.crossings} language={language} direction={direction} />
