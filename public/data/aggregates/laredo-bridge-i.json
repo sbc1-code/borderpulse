@@ -1,1 +1,1 @@
-{"port_number":"230401","name":"Laredo - Bridge I","state":"TX","lookback_days":30,"sample_count":1,"overall_median":0,"overall_best_hour":22,"overall_best_median":0,"by_hour":[{"day":0,"hour":22,"median":0,"samples":1}],"generated_at":"2026-04-27T16:36:37.896Z"}
+{"port_number":"230401","name":"Laredo - Bridge I","state":"TX","lookback_days":30,"sample_count":1,"overall_median":0,"overall_best_hour":22,"overall_best_median":0,"by_hour":[{"day":0,"hour":22,"median":0,"samples":1}],"generated_at":"2026-04-27T19:11:38.372Z"}

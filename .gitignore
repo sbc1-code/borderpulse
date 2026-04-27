@@ -39,3 +39,4 @@ drafts/blog/auto-a/queue.json
 # Mode C raw feed snapshot. Per-port timelines and dated digests ARE tracked
 # (those are PR artifacts); the all-items raw feed is regenerated each run.
 drafts/curation/latest-feed.json
+.playwright-mcp/
