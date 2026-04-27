@@ -59,6 +59,12 @@ async function main() {
       priority: '0.9',
       lastmod: today,
     });
+    urls.push({
+      loc: `${BASE}/best-time/${slug}`,
+      changefreq: 'daily',
+      priority: '0.7',
+      lastmod: today,
+    });
   }
 
   const posts = readBlogPosts();

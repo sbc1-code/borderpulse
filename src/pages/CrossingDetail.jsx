@@ -435,18 +435,24 @@ export default function CrossingDetail() {
                 ? `Typical wait by hour (${DAY_LABELS.en[selectedDay]})`
                 : `Espera típica por hora (${DAY_LABELS.es[selectedDay]})`}
             </h2>
-            {bestForSelected && (
-              <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-medium">
-                {isViewingToday
-                  ? (language === 'en'
-                    ? `Best time to cross today: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
-                    : `Mejor hora para cruzar hoy: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)
-                  : (language === 'en'
-                    ? `Lightest hour on ${DAY_LABELS.en[selectedDay]}: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
-                    : `Hora más ligera los ${DAY_LABELS.es[selectedDay]}: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)}
-              </p>
-            )}
+            <Link
+              to={`/best-time/${canonicalSlug}`}
+              className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
+            >
+              {language === 'en' ? 'Best time to cross →' : 'Mejor hora para cruzar →'}
+            </Link>
           </div>
+          {bestForSelected && (
+            <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-medium mb-2">
+              {isViewingToday
+                ? (language === 'en'
+                  ? `Best time to cross today: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
+                  : `Mejor hora para cruzar hoy: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)
+                : (language === 'en'
+                  ? `Lightest hour on ${DAY_LABELS.en[selectedDay]}: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
+                  : `Hora más ligera los ${DAY_LABELS.es[selectedDay]}: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)}
+            </p>
+          )}
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
               ? `Median northbound wait by hour, last 30 days at ${crossing.name}.`

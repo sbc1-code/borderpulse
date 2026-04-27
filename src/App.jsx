@@ -9,6 +9,7 @@ import BlogPost from '@/pages/BlogPost';
 import Alerts from '@/pages/Alerts';
 import Embed from '@/pages/Embed';
 import Api from '@/pages/Api';
+import BestTime from '@/pages/BestTime';
 
 function LayoutRoutes() {
   return (
@@ -16,6 +17,7 @@ function LayoutRoutes() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/crossing/:slug" element={<CrossingDetail />} />
+        <Route path="/best-time/:slug" element={<BestTime />} />
         <Route path="/status/:id" element={<SharedStatus />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />

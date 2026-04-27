@@ -293,6 +293,38 @@ function rewriteIndex(indexHtml, head) {
   return html;
 }
 
+function renderBestTimeHead(crossing, slug, aggregate) {
+  const title = `Best time to cross ${crossing.name} | Border Pulse`;
+  const desc = `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`;
+  const canonical = `${BASE}/best-time/${slug}`;
+  const ogImage = `${BASE}/og/${slug}.png`;
+
+  const place = {
+    '@context': 'https://schema.org',
+    '@type': 'Place',
+    name: crossing.name,
+    description: desc,
+    url: canonical,
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: crossing.state,
+      addressCountry: 'US',
+    },
+  };
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+      { '@type': 'ListItem', position: 2, name: crossing.name, item: `${BASE}/crossing/${slug}` },
+      { '@type': 'ListItem', position: 3, name: 'Best time to cross', item: canonical },
+    ],
+  };
+
+  return { title, desc, canonical, ogImage, jsonLd: [place, breadcrumb] };
+}
+
 function renderEmbedHead(crossing, slug) {
   const title = `${crossing.name} wait time | Border Pulse`;
   const desc = `Live wait time at ${crossing.name}, refreshed every 15 minutes.`;
@@ -486,8 +518,25 @@ async function main() {
     embedPageCount++;
   }
 
+  let bestTimePageCount = 0;
+  for (const c of crossings) {
+    const slug = portToSlug[c.port_number];
+    if (!slug) continue;
+    let aggregate = null;
+    const aggPath = path.resolve(aggregatesDir, `${slug}.json`);
+    if (fs.existsSync(aggPath)) {
+      try { aggregate = JSON.parse(fs.readFileSync(aggPath, 'utf8')); } catch {}
+    }
+    const head = renderBestTimeHead(c, slug, aggregate);
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'best-time', slug);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+    bestTimePageCount++;
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + crawlable nav on homepage`,
   );
 }
 
