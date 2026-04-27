@@ -4,8 +4,129 @@
   <link href="https://borderpulse.com/blog" />
   <link rel="self" href="https://borderpulse.com/rss.xml" />
   <id>https://borderpulse.com/blog</id>
-  <updated>2026-04-23T12:00:00.000Z</updated>
+  <updated>2026-04-24T12:00:00.000Z</updated>
   <subtitle>Crossing data, guides, and program explainers for the U.S.-Mexico border.</subtitle>
+  <entry>
+    <title>Best time to cross Nogales DeConcini: hour by hour from 30 days of CBP data</title>
+    <link href="https://borderpulse.com/blog/best-time-to-cross-nogales-deconcini" />
+    <id>https://borderpulse.com/blog/best-time-to-cross-nogales-deconcini</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Multiple weekday morning hours show median 0 minutes. Monday pre-dawn spikes to 180.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Best time to cross Otay Mesa: hour by hour from 30 days of CBP data</title>
+    <link href="https://borderpulse.com/blog/best-time-to-cross-otay-mesa" />
+    <id>https://borderpulse.com/blog/best-time-to-cross-otay-mesa</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest hour: Saturday 9 AM at 0 minutes. The Monday morning trap nobody talks about.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Best time to cross Paso Del Norte: hour by hour from 30 days of CBP data</title>
+    <link href="https://borderpulse.com/blog/best-time-to-cross-paso-del-norte" />
+    <id>https://borderpulse.com/blog/best-time-to-cross-paso-del-norte</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Median wait at Paso Del Norte (El Paso, TX) by hour and day, pulled from CBP. Wednesday 7 to 9 AM medians of 1 minute. The fastest weekday morning at any Texas port.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Mejor hora para cruzar Nogales DeConcini: 30 días de datos de CBP</title>
+    <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-nogales-deconcini" />
+    <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-nogales-deconcini</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Múltiples horas de mañana entre semana muestran mediana de 0 minutos. Lunes en la madrugada sube a 180.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Mejor hora para cruzar Otay Mesa: hora por hora con 30 días de datos de CBP</title>
+    <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-otay-mesa" />
+    <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-otay-mesa</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Mediana de espera en Otay Mesa por hora y día, según CBP en los últimos 30 días. La hora más ligera: sábado 9 a. m. a 0 minutos. La trampa del lunes en la madrugada.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Mejor hora para cruzar Paso del Norte: hora por hora con 30 días de datos de CBP</title>
+    <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-paso-del-norte" />
+    <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-paso-del-norte</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Mediana de espera en Paso del Norte (El Paso, TX) por hora y día, según CBP. Miércoles 7 a 9 a. m. con mediana de 1 minuto. La mañana más ligera de cualquier puerto de Texas.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Mejor hora para cruzar San Ysidro: hora por hora con 30 días de datos de CBP</title>
+    <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-san-ysidro" />
+    <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-san-ysidro</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Tiempos de espera medianos en San Ysidro por hora y día, sacados directo de U.S. Customs and Border Protection. Lo que la mayoría de los fronterizos ya sabe pero ahora con números.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Paso Del Norte vs Bridge of the Americas: which El Paso bridge is faster</title>
+    <link href="https://borderpulse.com/blog/paso-del-norte-vs-bridge-of-the-americas" />
+    <id>https://borderpulse.com/blog/paso-del-norte-vs-bridge-of-the-americas</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Median wait at El Paso's two main passenger crossings, hour by hour from CBP data. PDN wins overall by 6%, but BOTA is more predictable. Here is the hour-by-hour decision.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Paso del Norte vs Puente de las Américas: cuál puente de El Paso es más rápido</title>
+    <link href="https://borderpulse.com/blog/paso-del-norte-vs-puente-de-las-americas" />
+    <id>https://borderpulse.com/blog/paso-del-norte-vs-puente-de-las-americas</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Mediana de espera en los dos puentes principales de pasajeros de El Paso, hora por hora según CBP. PDN gana en general por 6%, pero BOTA es más predecible.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>San Ysidro vs Otay Mesa: cuál es más rápida según 30 días de datos de CBP</title>
+    <link href="https://borderpulse.com/blog/san-ysidro-vs-otay-cual-es-mas-rapida" />
+    <id>https://borderpulse.com/blog/san-ysidro-vs-otay-cual-es-mas-rapida</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Mediana de espera en las dos garitas principales de Tijuana a San Diego, hora por hora, según CBP. Otay gana en general, pero San Ysidro gana el lunes en la madrugada.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
+  <entry>
+    <title>San Ysidro vs Otay Mesa: which is faster, and what 30 days of CBP data says</title>
+    <link href="https://borderpulse.com/blog/san-ysidro-vs-otay-mesa" />
+    <id>https://borderpulse.com/blog/san-ysidro-vs-otay-mesa</id>
+    <updated>2026-04-24T12:00:00.000Z</updated>
+    <published>2026-04-24T12:00:00.000Z</published>
+    <summary>Median wait at the two main Tijuana to San Diego crossings, hour by hour, from CBP. Otay wins overall, but San Ysidro wins the Monday morning trucker rush.</summary>
+    <author>
+      <name>Sebastian Becerra</name>
+    </author>
+  </entry>
   <entry>
     <title>Best time to cross San Ysidro: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-san-ysidro" />

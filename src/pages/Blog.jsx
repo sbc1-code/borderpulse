@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listPosts, pillarLabel } from '@/lib/blog-runtime';
+import { resetPageMeta, updatePageMeta } from '@/lib/seo';
 
 const STRINGS = {
   en: {
@@ -36,7 +37,17 @@ export default function Blog() {
   const posts = filter === 'en' ? en : filter === 'es' ? es : all;
 
   useEffect(() => {
-    document.title = 'Border Pulse Blog | Crossing data, guides, and program explainers';
+    const title = 'Border Pulse Blog | Crossing data, guides, and program explainers';
+    const description = 'Data-driven guides to crossing the U.S.-Mexico border. Hour by hour patterns, neutral program explainers, and trip planning. Every program rule links to the official source.';
+    updatePageMeta({
+      title,
+      description,
+      ogTitle: title,
+      ogDescription: description,
+      ogUrl: 'https://borderpulse.com/blog',
+      canonical: 'https://borderpulse.com/blog',
+    });
+    return () => resetPageMeta();
   }, []);
 
   const tabClass = (active) =>

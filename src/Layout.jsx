@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 
@@ -38,11 +38,6 @@ export default function Layout({ children }) {
   }, []);
 
   useEffect(() => {
-    const titles = {
-      en: 'Border Pulse | Real-Time US-Mexico Border Wait Times',
-      es: 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real',
-    };
-    document.title = titles[language] || titles.en;
     document.documentElement.lang = language;
   }, [language]);
 
@@ -120,9 +115,8 @@ export default function Layout({ children }) {
         )}
       </div>
 
-      {/* Desktop layout */}
-      <div className="hidden lg:flex min-h-screen">
-        <aside className={`w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex flex-col`}>
+      <div className="lg:flex min-h-screen">
+        <aside className={`hidden lg:flex w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex-col`}>
           <div className={`p-5 border-b ${isDark ? 'border-gray-800' : 'border-slate-200'}`}>
             <Link to="/" className="flex items-center gap-3">
               <BorderPulseLogo size={40} />
@@ -167,9 +161,6 @@ export default function Layout({ children }) {
         </aside>
         <main id="main-content" className="flex-1 overflow-auto">{children}</main>
       </div>
-
-      {/* Mobile content */}
-      <div id="main-content-mobile" className="lg:hidden">{children}</div>
 
       {/* Footer (all viewports) */}
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>

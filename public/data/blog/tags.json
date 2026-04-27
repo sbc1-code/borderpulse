@@ -1,9 +1,23 @@
 {
   "tags": {
-    "san-ysidro": 1,
-    "tijuana": 1,
-    "california": 1,
-    "best-time-to-cross": 1
+    "nogales": 2,
+    "deconcini": 2,
+    "arizona": 2,
+    "sonora": 2,
+    "best-time-to-cross": 4,
+    "otay-mesa": 4,
+    "tijuana": 6,
+    "california": 6,
+    "paso-del-norte": 4,
+    "el-paso": 4,
+    "texas": 4,
+    "juarez": 4,
+    "mejor-hora": 4,
+    "san-ysidro": 4,
+    "bridge-of-the-americas": 1,
+    "comparison": 2,
+    "bota": 1,
+    "comparacion": 2
   },
-  "generated_at": "2026-04-24T00:04:17.336Z"
+  "generated_at": "2026-04-27T16:36:38.026Z"
 }

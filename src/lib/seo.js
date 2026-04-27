@@ -41,9 +41,9 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
  */
 export function resetPageMeta() {
   document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
-  setMeta('description', 'Live wait times at every US-Mexico border crossing. Official CBP data updated every 15 minutes. Bilingual EN/ES.');
+  setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data updated every 15 minutes. Bilingual EN/ES.');
   setMeta('og:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times', 'property');
-  setMeta('og:description', 'Live wait times at every US-Mexico border crossing. Official CBP data, updated every 15 minutes. Bilingual EN/ES.', 'property');
+  setMeta('og:description', 'Live wait times at US-Mexico border crossings. Official CBP data, updated every 15 minutes. Bilingual EN/ES.', 'property');
   setMeta('og:image', 'https://borderpulse.com/og-card.png', 'property');
   setMeta('og:url', 'https://borderpulse.com', 'property');
   const link = document.querySelector('link[rel="canonical"]');

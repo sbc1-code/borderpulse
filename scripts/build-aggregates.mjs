@@ -79,7 +79,8 @@ async function main() {
   const outDir = path.resolve(root, 'public/data/aggregates');
   fs.mkdirSync(outDir, { recursive: true });
 
-  let written = 0;
+  const generatedAt = new Date().toISOString();
+  const aggregateByPort = new Map();
   for (const [port, byDay] of buckets.entries()) {
     const slug = portToSlug[port];
     if (!slug) continue;
@@ -123,7 +124,27 @@ async function main() {
       overall_best_hour: bestHour,
       overall_best_median: Number.isFinite(bestMedian) ? bestMedian : null,
       by_hour: byHour.sort((a, b) => a.day - b.day || a.hour - b.hour),
-      generated_at: new Date().toISOString(),
+      generated_at: generatedAt,
+    };
+    aggregateByPort.set(port, out);
+  }
+
+  let written = 0;
+  for (const c of currentDoc.crossings || []) {
+    const port = String(c.port_number);
+    const slug = portToSlug[port];
+    if (!slug) continue;
+    const out = aggregateByPort.get(port) || {
+      port_number: port,
+      name: c.name || null,
+      state: c.state || null,
+      lookback_days: LOOKBACK_DAYS,
+      sample_count: 0,
+      overall_median: null,
+      overall_best_hour: null,
+      overall_best_median: null,
+      by_hour: [],
+      generated_at: generatedAt,
     };
     fs.writeFileSync(path.resolve(outDir, `${slug}.json`), JSON.stringify(out));
     written++;

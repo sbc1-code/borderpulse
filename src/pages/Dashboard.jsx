@@ -19,6 +19,7 @@ import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { updatePageMeta } from '@/lib/seo';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -104,6 +105,23 @@ export default function Dashboard() {
     return () => dataService.stopAutoRefresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const title = language === 'en'
+      ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
+      : 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real';
+    const description = language === 'en'
+      ? 'Live wait times at US-Mexico border crossings. Official CBP data, updated every 15 minutes. Bilingual EN/ES.'
+      : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados cada 15 minutos. Bilingüe EN/ES.';
+    updatePageMeta({
+      title,
+      description,
+      ogTitle: title,
+      ogDescription: description,
+      ogUrl: 'https://borderpulse.com',
+      canonical: 'https://borderpulse.com',
+    });
+  }, [language]);
 
   const changeLanguage = (lang) => {
     setLanguage(lang);

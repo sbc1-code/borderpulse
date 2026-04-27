@@ -1,6 +1,394 @@
 {
   "posts": [
     {
+      "title": "Best time to cross Nogales DeConcini: hour by hour from 30 days of CBP data",
+      "description": "Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Multiple weekday morning hours show median 0 minutes. Monday pre-dawn spikes to 180.",
+      "slug": "best-time-to-cross-nogales-deconcini",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "nogales",
+        "deconcini",
+        "arizona",
+        "sonora",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-nogales-deconcini.png",
+      "translationKey": "nogales-deconcini-best-time",
+      "relatedCrossings": [
+        "260401",
+        "260402"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Best time to cross Otay Mesa: hour by hour from 30 days of CBP data",
+      "description": "Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest hour: Saturday 9 AM at 0 minutes. The Monday morning trap nobody talks about.",
+      "slug": "best-time-to-cross-otay-mesa",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "otay-mesa",
+        "tijuana",
+        "california",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-otay-mesa.png",
+      "translationKey": "otay-mesa-best-time",
+      "relatedCrossings": [
+        "250601",
+        "250401"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Best time to cross Paso Del Norte: hour by hour from 30 days of CBP data",
+      "description": "Median wait at Paso Del Norte (El Paso, TX) by hour and day, pulled from CBP. Wednesday 7 to 9 AM medians of 1 minute. The fastest weekday morning at any Texas port.",
+      "slug": "best-time-to-cross-paso-del-norte",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "paso-del-norte",
+        "el-paso",
+        "texas",
+        "juarez",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-paso-del-norte.png",
+      "translationKey": "paso-del-norte-best-time",
+      "relatedCrossings": [
+        "240202",
+        "240201"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Ready Lanes program",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar Nogales DeConcini: 30 días de datos de CBP",
+      "description": "Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Múltiples horas de mañana entre semana muestran mediana de 0 minutos. Lunes en la madrugada sube a 180.",
+      "slug": "mejor-hora-para-cruzar-nogales-deconcini",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "nogales",
+        "deconcini",
+        "arizona",
+        "sonora",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-nogales-deconcini.png",
+      "translationKey": "nogales-deconcini-best-time",
+      "relatedCrossings": [
+        "260401",
+        "260402"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar Otay Mesa: hora por hora con 30 días de datos de CBP",
+      "description": "Mediana de espera en Otay Mesa por hora y día, según CBP en los últimos 30 días. La hora más ligera: sábado 9 a. m. a 0 minutos. La trampa del lunes en la madrugada.",
+      "slug": "mejor-hora-para-cruzar-otay-mesa",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "otay-mesa",
+        "tijuana",
+        "california",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-otay-mesa.png",
+      "translationKey": "otay-mesa-best-time",
+      "relatedCrossings": [
+        "250601",
+        "250401"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar Paso del Norte: hora por hora con 30 días de datos de CBP",
+      "description": "Mediana de espera en Paso del Norte (El Paso, TX) por hora y día, según CBP. Miércoles 7 a 9 a. m. con mediana de 1 minuto. La mañana más ligera de cualquier puerto de Texas.",
+      "slug": "mejor-hora-para-cruzar-paso-del-norte",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "paso-del-norte",
+        "el-paso",
+        "texas",
+        "juarez",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-paso-del-norte.png",
+      "translationKey": "paso-del-norte-best-time",
+      "relatedCrossings": [
+        "240202",
+        "240201"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa Ready Lane",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar San Ysidro: hora por hora con 30 días de datos de CBP",
+      "description": "Tiempos de espera medianos en San Ysidro por hora y día, sacados directo de U.S. Customs and Border Protection. Lo que la mayoría de los fronterizos ya sabe pero ahora con números.",
+      "slug": "mejor-hora-para-cruzar-san-ysidro",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "san-ysidro",
+        "tijuana",
+        "california",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-san-ysidro.png",
+      "translationKey": "san-ysidro-best-time",
+      "relatedCrossings": [
+        "250401",
+        "250601"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa Ready Lane",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Paso Del Norte vs Bridge of the Americas: which El Paso bridge is faster",
+      "description": "Median wait at El Paso's two main passenger crossings, hour by hour from CBP data. PDN wins overall by 6%, but BOTA is more predictable. Here is the hour-by-hour decision.",
+      "slug": "paso-del-norte-vs-bridge-of-the-americas",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "paso-del-norte",
+        "bridge-of-the-americas",
+        "el-paso",
+        "texas",
+        "juarez",
+        "comparison"
+      ],
+      "hero": "/og/blog/paso-del-norte-vs-bridge-of-the-americas.png",
+      "translationKey": "paso-del-norte-vs-bota",
+      "relatedCrossings": [
+        "240202",
+        "240201"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "url": "https://bwt.cbp.gov/"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Paso del Norte vs Puente de las Américas: cuál puente de El Paso es más rápido",
+      "description": "Mediana de espera en los dos puentes principales de pasajeros de El Paso, hora por hora según CBP. PDN gana en general por 6%, pero BOTA es más predecible.",
+      "slug": "paso-del-norte-vs-puente-de-las-americas",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "paso-del-norte",
+        "bota",
+        "el-paso",
+        "texas",
+        "juarez",
+        "comparacion"
+      ],
+      "hero": "/og/blog/paso-del-norte-vs-puente-de-las-americas.png",
+      "translationKey": "paso-del-norte-vs-bota",
+      "relatedCrossings": [
+        "240202",
+        "240201"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "url": "https://bwt.cbp.gov/"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "San Ysidro vs Otay Mesa: cuál es más rápida según 30 días de datos de CBP",
+      "description": "Mediana de espera en las dos garitas principales de Tijuana a San Diego, hora por hora, según CBP. Otay gana en general, pero San Ysidro gana el lunes en la madrugada.",
+      "slug": "san-ysidro-vs-otay-cual-es-mas-rapida",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "san-ysidro",
+        "otay-mesa",
+        "tijuana",
+        "california",
+        "comparacion"
+      ],
+      "hero": "/og/blog/san-ysidro-vs-otay-cual-es-mas-rapida.png",
+      "translationKey": "san-ysidro-vs-otay-mesa",
+      "relatedCrossings": [
+        "250401",
+        "250601"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa Ready Lane",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "San Ysidro vs Otay Mesa: which is faster, and what 30 days of CBP data says",
+      "description": "Median wait at the two main Tijuana to San Diego crossings, hour by hour, from CBP. Otay wins overall, but San Ysidro wins the Monday morning trucker rush.",
+      "slug": "san-ysidro-vs-otay-mesa",
+      "date": "2026-04-24",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "san-ysidro",
+        "otay-mesa",
+        "tijuana",
+        "california",
+        "comparison"
+      ],
+      "hero": "/og/blog/san-ysidro-vs-otay-mesa.png",
+      "translationKey": "san-ysidro-vs-otay-mesa",
+      "relatedCrossings": [
+        "250401",
+        "250601"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Ready Lanes program",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
       "title": "Best time to cross San Ysidro: hour by hour from 30 days of CBP data",
       "description": "Median wait times for every hour of every day at San Ysidro, pulled from U.S. Customs and Border Protection over the last 30 days. The patterns most travelers miss.",
       "slug": "best-time-to-cross-san-ysidro",
@@ -15,6 +403,7 @@
         "best-time-to-cross"
       ],
       "hero": "/og/blog/best-time-to-cross-san-ysidro.png",
+      "translationKey": "san-ysidro-best-time",
       "relatedCrossings": [
         "250401",
         "250601"
@@ -38,5 +427,5 @@
       "humanEdited": true
     }
   ],
-  "generated_at": "2026-04-24T00:04:17.335Z"
+  "generated_at": "2026-04-27T16:36:38.025Z"
 }

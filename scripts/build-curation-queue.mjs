@@ -131,6 +131,25 @@ function mergeTimeline(existing, newEntries) {
   return merged.slice(0, MAX_TIMELINE_ENTRIES);
 }
 
+function writeTimelineIndex() {
+  const files = fs.existsSync(TIMELINES_OUT_DIR)
+    ? fs.readdirSync(TIMELINES_OUT_DIR).filter((file) => file.endsWith('.json') && file !== 'index.json')
+    : [];
+  const slugs = files.map((file) => file.replace(/\.json$/, '')).sort();
+  fs.writeFileSync(
+    path.resolve(TIMELINES_OUT_DIR, 'index.json'),
+    JSON.stringify(
+      {
+        generated_at: new Date().toISOString(),
+        count: slugs.length,
+        slugs,
+      },
+      null,
+      2,
+    ),
+  );
+}
+
 async function main() {
   if (!fs.existsSync(LATEST_FEED)) {
     console.error('[curation] no drafts/curation/latest-feed.json. Run fetch-news.mjs first.');
@@ -221,6 +240,7 @@ async function main() {
     );
     portsUpdated += 1;
   }
+  writeTimelineIndex();
 
   console.log(
     `[curation] ${classified.length} classified, ${unmatched.length} unmatched, ${portsUpdated} per-port timelines updated.`,

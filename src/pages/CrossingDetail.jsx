@@ -115,18 +115,6 @@ export default function CrossingDetail() {
     })();
   }, []);
 
-  useEffect(() => {
-    if (!slug) return;
-    fetch(`/data/aggregates/${slug}.json`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then(setAggregate)
-      .catch(() => setAggregate(null));
-    fetch(`/data/timelines/${slug}.json`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then(setTimeline)
-      .catch(() => setTimeline(null));
-  }, [slug]);
-
   const { crossing, portToSlug } = useMemo(() => {
     if (!state.crossings.length) return { crossing: null, portToSlug: {} };
     const { slugToPort, portToSlug } = buildSlugMap(state.crossings);
@@ -135,18 +123,57 @@ export default function CrossingDetail() {
     return { crossing: c, portToSlug };
   }, [state.crossings, slug]);
 
+  const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
+
+  useEffect(() => {
+    if (!slug || !crossing || !canonicalSlug) return;
+    let cancelled = false;
+    setAggregate(null);
+    setTimeline(null);
+
+    fetch(`/data/aggregates/${canonicalSlug}.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled) setAggregate(data);
+      })
+      .catch(() => {
+        if (!cancelled) setAggregate(null);
+      });
+
+    fetch('/data/timelines/index.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((index) => {
+        if (cancelled) return null;
+        const hasTimeline = Array.isArray(index?.slugs) && index.slugs.includes(canonicalSlug);
+        if (!hasTimeline) return null;
+        return fetch(`/data/timelines/${canonicalSlug}.json`);
+      })
+      .then((r) => (r?.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled) setTimeline(data);
+      })
+      .catch(() => {
+        if (!cancelled) setTimeline(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [canonicalSlug, crossing, slug]);
+
   useEffect(() => {
     if (!crossing) return;
+    const hasHistoricalPattern = Array.isArray(aggregate?.by_hour) && aggregate.by_hour.length > 0;
     const title = language === 'en'
       ? `${crossing.name} Wait Times | Border Pulse`
       : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
     const desc = language === 'en'
-      ? `Live ${crossing.name} border wait times updated every 15 min. Official CBP data, historical trends, and best crossing times.`
-      : `Tiempos de espera en ${crossing.name} actualizados cada 15 min. Datos oficiales de CBP, tendencias históricas y mejores horarios para cruzar.`;
-    const url = `https://borderpulse.com/crossing/${slug}`;
+      ? `Live ${crossing.name} border wait times updated every 15 min. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
+      : `Tiempos de espera en ${crossing.name} actualizados cada 15 min. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
+    const url = `https://borderpulse.com/crossing/${canonicalSlug}`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
-  }, [crossing, language, slug]);
+  }, [aggregate, canonicalSlug, crossing, language]);
 
   if (state.isLoading) {
     return (
@@ -163,6 +190,10 @@ export default function CrossingDetail() {
 
   if (!crossing) {
     return <Navigate to="/" replace />;
+  }
+
+  if (canonicalSlug && slug !== canonicalSlug) {
+    return <Navigate to={`/crossing/${canonicalSlug}`} replace />;
   }
 
   const currentNb = getWaitMinutes(crossing, 'northbound');

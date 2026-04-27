@@ -2,6 +2,10 @@ const BASE_OVERRIDES = {
   '240221': 'el-paso-downtown',
 };
 
+export const SLUG_ALIASES = {
+  'bridge-of-the-americas-port-of-entry': '240201',
+};
+
 function baseSlug(name) {
   return String(name || '')
     .toLowerCase()
@@ -27,6 +31,9 @@ export function buildSlugMap(crossings) {
     const slug = counts[b] > 1 ? `${b}-${c.port_number}` : b;
     slugToPort[slug] = c.port_number;
     portToSlug[c.port_number] = slug;
+  }
+  for (const [alias, port] of Object.entries(SLUG_ALIASES)) {
+    if (portToSlug[port]) slugToPort[alias] = port;
   }
   return { slugToPort, portToSlug };
 }

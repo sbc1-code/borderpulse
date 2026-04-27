@@ -30,6 +30,9 @@ dist-ssr
 .env
 .vite
 
+# Claude Code local state (worktrees, hooks, etc.)
+.claude/
+
 # Mode A anomaly queue is a regenerated artifact, not content.
 drafts/blog/auto-a/queue.json
 

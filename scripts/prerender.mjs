@@ -293,6 +293,25 @@ function rewriteIndex(indexHtml, head) {
   return html;
 }
 
+function renderRedirectPage(targetUrl) {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content="0; url=${esc(targetUrl)}" />
+    <link rel="canonical" href="${esc(targetUrl)}" />
+    <title>Redirecting | Border Pulse</title>
+    <script>window.location.replace(${JSON.stringify(targetUrl)});</script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="${esc(targetUrl)}">${esc(targetUrl)}</a>.</p>
+  </body>
+</html>
+`;
+}
+
 function injectCrawlableLinks(html, crossings, portToSlug, posts) {
   const crossingLinks = crossings
     .map((c) => {
@@ -384,6 +403,7 @@ async function main() {
   }
 
   let blogPageCount = 0;
+  let aliasPageCount = 0;
   if (posts.length > 0) {
     const indexHead = renderBlogIndexHead(posts);
     const indexHtml = rewriteIndex(indexWithLinks, indexHead);
@@ -403,8 +423,20 @@ async function main() {
     }
   }
 
+  for (const [alias, portNumber] of Object.entries(slugs.SLUG_ALIASES || {})) {
+    const canonicalSlug = portToSlug[portNumber];
+    if (!canonicalSlug || canonicalSlug === alias) continue;
+    const outDir = path.resolve(distDir, 'crossing', alias);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(
+      path.resolve(outDir, 'index.html'),
+      renderRedirectPage(`${BASE}/crossing/${canonicalSlug}`),
+    );
+    aliasPageCount++;
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + crawlable nav on homepage`,
   );
 }
 
