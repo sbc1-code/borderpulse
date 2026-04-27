@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { getPost, getAuthor, pillarLabel, listPosts } from '@/lib/blog-runtime';
 import { mdxComponents } from '@/components/blog/MdxComponents';
 import { LangContext } from '@/lib/LangContext';
+import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 
 const STRINGS = {
   en: {
@@ -50,8 +51,15 @@ export default function BlogPost() {
   const post = getPost(slug);
 
   useEffect(() => {
-    if (post) document.title = `${post.frontmatter.title} | Border Pulse`;
-  }, [post]);
+    if (!post) return;
+    const fm = post.frontmatter;
+    const title = `${fm.title} | Border Pulse`;
+    const desc = fm.description || fm.title;
+    const url = `https://borderpulse.com/blog/${slug}`;
+    const ogImg = fm.ogImage ? `https://borderpulse.com${fm.ogImage}` : undefined;
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url });
+    return () => resetPageMeta();
+  }, [post, slug]);
 
   if (!post) return <Navigate to="/blog" replace />;
   const fm = post.frontmatter;

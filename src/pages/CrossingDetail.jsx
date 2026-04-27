@@ -8,6 +8,7 @@ import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { getHoursSummary } from '@/components/utils/crossingMeta';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -136,9 +137,16 @@ export default function CrossingDetail() {
 
   useEffect(() => {
     if (!crossing) return;
-    const label = language === 'en' ? 'Border Pulse' : 'Border Pulse';
-    document.title = `${crossing.name} wait times | ${label}`;
-  }, [crossing, language]);
+    const title = language === 'en'
+      ? `${crossing.name} Wait Times | Border Pulse`
+      : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
+    const desc = language === 'en'
+      ? `Live ${crossing.name} border wait times updated every 15 min. Official CBP data, historical trends, and best crossing times.`
+      : `Tiempos de espera en ${crossing.name} actualizados cada 15 min. Datos oficiales de CBP, tendencias históricas y mejores horarios para cruzar.`;
+    const url = `https://borderpulse.com/crossing/${slug}`;
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
+    return () => resetPageMeta();
+  }, [crossing, language, slug]);
 
   if (state.isLoading) {
     return (
