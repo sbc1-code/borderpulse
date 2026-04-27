@@ -16,7 +16,7 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
  * No SMS backend — uses the browser Notification API. Persists prefs
  * in localStorage; the Dashboard evaluates them on each data refresh.
  */
-export default function DepartureAlertBanner({ crossings, language, direction = 'northbound' }) {
+export default function DepartureAlertBanner({ crossings, language, direction = 'northbound', compact = false }) {
   const [open, setOpen] = useState(false);
   const [crossingId, setCrossingId] = useState('');
   const [condition, setCondition] = useState('below');
@@ -87,35 +87,60 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
 
   return (
     <>
-      <motion.button
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        onClick={handleOpen}
-        className="w-full group relative overflow-hidden rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-white p-4 sm:p-5 text-left shadow-md hover:shadow-lg transition-shadow mb-4 sm:mb-6"
-      >
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-              <Bell className="w-5 h-5" />
-            </div>
-            <div className="min-w-0">
-              <div className="text-sm sm:text-base font-semibold">
-                {language === 'en' ? 'Get Alerted When to Leave' : 'Recibe una Alerta Cuándo Salir'}
-              </div>
-              <div className="text-[11px] sm:text-xs text-white/80">
+      {compact ? (
+        <motion.button
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={handleOpen}
+          className="w-full group relative overflow-hidden rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 px-3 py-2 text-left transition-colors"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 min-w-0">
+              <Bell className="w-4 h-4 flex-shrink-0 text-emerald-600" />
+              <span className="text-xs sm:text-sm font-medium truncate">
                 {activeCount > 0
                   ? (language === 'en'
-                    ? `${activeCount} active alert${activeCount > 1 ? 's' : ''} · Tap to manage`
-                    : `${activeCount} alerta${activeCount > 1 ? 's' : ''} activa${activeCount > 1 ? 's' : ''} · Toca para gestionar`)
+                    ? `${activeCount} active alert${activeCount > 1 ? 's' : ''} · Manage`
+                    : `${activeCount} alerta${activeCount > 1 ? 's' : ''} activa${activeCount > 1 ? 's' : ''} · Gestionar`)
                   : (language === 'en'
-                    ? `Pick a crossing + threshold. We ping you when ${direction === 'southbound' ? 'southbound estimates' : 'wait times'} hit.`
-                    : `Elige un cruce + umbral. Te avisamos cuando ${direction === 'southbound' ? 'la estimación hacia México' : 'el tiempo de espera'} se cumpla.`)}
+                    ? 'Get alerted when to leave'
+                    : 'Recibe una alerta cuándo salir')}
+              </span>
+            </div>
+            <ChevronRight className="w-4 h-4 flex-shrink-0 text-emerald-600 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </motion.button>
+      ) : (
+        <motion.button
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={handleOpen}
+          className="w-full group relative overflow-hidden rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 text-white p-4 sm:p-5 text-left shadow-md hover:shadow-lg transition-shadow mb-4 sm:mb-6"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Bell className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-sm sm:text-base font-semibold">
+                  {language === 'en' ? 'Get Alerted When to Leave' : 'Recibe una Alerta Cuándo Salir'}
+                </div>
+                <div className="text-[11px] sm:text-xs text-white/80">
+                  {activeCount > 0
+                    ? (language === 'en'
+                      ? `${activeCount} active alert${activeCount > 1 ? 's' : ''} · Tap to manage`
+                      : `${activeCount} alerta${activeCount > 1 ? 's' : ''} activa${activeCount > 1 ? 's' : ''} · Toca para gestionar`)
+                    : (language === 'en'
+                      ? `Pick a crossing + threshold. We ping you when ${direction === 'southbound' ? 'southbound estimates' : 'wait times'} hit.`
+                      : `Elige un cruce + umbral. Te avisamos cuando ${direction === 'southbound' ? 'la estimación hacia México' : 'el tiempo de espera'} se cumpla.`)}
+                </div>
               </div>
             </div>
+            <ChevronRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
           </div>
-          <ChevronRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
-        </div>
-      </motion.button>
+        </motion.button>
+      )}
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-md">

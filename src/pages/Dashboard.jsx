@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X, Star } from 'lucide-react';
+import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
@@ -20,6 +20,8 @@ import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
+import { buildSlugMap } from '@/lib/slugs';
+import { findNearestCrossing } from '@/lib/geo';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -49,11 +51,20 @@ export default function Dashboard() {
 
   const [language, setLanguage] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
   const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
-  const [region, setRegion] = useState(() => localStorage.getItem('borderPulse_region') || 'ALL');
+  const [region, setRegion] = useState(() => {
+    // Stored region preference takes precedence; otherwise check the geolocation default.
+    const stored = localStorage.getItem('borderPulse_region');
+    if (stored) return stored;
+    const geoDefault = localStorage.getItem('borderPulse_defaultRegion');
+    if (geoDefault) return geoDefault;
+    return 'ALL';
+  });
   const [search, setSearch] = useState('');
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [shareOpen, setShareOpen] = useState(false);
+  const [showGeoPrompt, setShowGeoPrompt] = useState(false);
+  const [geoLocating, setGeoLocating] = useState(false);
   const [favorites, setFavorites] = useState(() => {
     try {
       const stored = localStorage.getItem('borderPulse_favorites');
@@ -106,6 +117,53 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Geolocation prompt for first-visit users (#7).
+  // Skip if the user has explicitly denied, already chose a default region,
+  // or already saved a region preference. Geolocation is only requested on
+  // explicit click (one-tap consent), not silently.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const denied = localStorage.getItem('borderPulse_geoConsent') === 'denied';
+    const defaultRegion = localStorage.getItem('borderPulse_defaultRegion');
+    const savedRegion = localStorage.getItem('borderPulse_region');
+    if (denied || defaultRegion || savedRegion) return;
+    if (!('geolocation' in navigator)) return;
+    setShowGeoPrompt(true);
+  }, []);
+
+  const dismissGeoPrompt = useCallback(() => {
+    localStorage.setItem('borderPulse_geoConsent', 'denied');
+    setShowGeoPrompt(false);
+  }, []);
+
+  const acceptGeoPrompt = useCallback(() => {
+    if (!('geolocation' in navigator)) {
+      setShowGeoPrompt(false);
+      return;
+    }
+    setGeoLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const nearest = findNearestCrossing(state.crossings, latitude, longitude);
+        if (nearest && nearest.state) {
+          localStorage.setItem('borderPulse_defaultRegion', nearest.state);
+          localStorage.setItem('borderPulse_region', nearest.state);
+          setRegion(nearest.state);
+        }
+        setGeoLocating(false);
+        setShowGeoPrompt(false);
+      },
+      () => {
+        // Treat geolocation errors / user cancellation as a denial so we don't re-prompt.
+        localStorage.setItem('borderPulse_geoConsent', 'denied');
+        setGeoLocating(false);
+        setShowGeoPrompt(false);
+      },
+      { timeout: 10000, maximumAge: 600000 },
+    );
+  }, [state.crossings]);
+
   useEffect(() => {
     const title = language === 'en'
       ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
@@ -136,6 +194,12 @@ export default function Dashboard() {
     setRegion(r);
     localStorage.setItem('borderPulse_region', r);
   };
+
+  // Map port_number → slug for /crossing/{slug} links and /data/aggregates/{slug}.json fetches.
+  const portToSlug = useMemo(() => {
+    if (!state.crossings.length) return {};
+    return buildSlugMap(state.crossings).portToSlug;
+  }, [state.crossings]);
 
   // Filter by region + search; then sort heaviest first, keep null waits last.
   const filteredCrossings = useMemo(() => {
@@ -247,9 +311,6 @@ export default function Dashboard() {
       {/* Offline / stale data warning */}
       <StaleDataBanner fetchedAt={state.fetchedAt} language={language} />
 
-      {/* Departure Alert hero */}
-      <DepartureAlertBanner crossings={state.crossings} language={language} direction={direction} />
-
       {/* Direction toggle */}
       <div className="flex rounded-lg p-1 mb-3 max-w-md mx-auto bg-slate-100 dark:bg-gray-800">
         <Button
@@ -298,6 +359,41 @@ export default function Dashboard() {
         </Suspense>
       ) : (
         <>
+          {/* Geolocation prompt — first-visit only (#7). One-tap consent. */}
+          {showGeoPrompt && (
+            <div className="max-w-3xl mx-auto mb-3 flex items-center justify-between gap-3 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 min-w-0">
+                <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                <span className="truncate">
+                  {language === 'en'
+                    ? '📍 Show crossings near you?'
+                    : '📍 ¿Mostrar cruces cerca de ti?'}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 flex-shrink-0">
+                <Button
+                  size="sm"
+                  variant="default"
+                  className="h-7 text-xs px-2.5"
+                  onClick={acceptGeoPrompt}
+                  disabled={geoLocating}
+                >
+                  {geoLocating
+                    ? (language === 'en' ? 'Locating…' : 'Ubicando…')
+                    : (language === 'en' ? 'Yes' : 'Sí')}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 text-xs px-2.5"
+                  onClick={dismissGeoPrompt}
+                >
+                  {language === 'en' ? 'Not now' : 'Ahora no'}
+                </Button>
+              </div>
+            </div>
+          )}
+
           {/* Search + region filter */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 max-w-3xl mx-auto">
             <div className="relative flex-1">
@@ -335,19 +431,8 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <StatsOverview
-            crossings={filteredCrossings}
-            selectedDirection={direction}
-            language={language}
-            theme="light"
-            regionLabel={regionLabelFor(region, language)}
-          />
-
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6 mt-4">
-            <div className="xl:col-span-3 space-y-4">
-              <ExchangeRateWidget exchangeRate={state.exchangeRate} language={language} theme="light" />
-            </div>
-
+          {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
             <div className="xl:col-span-9">
               {visibleCrossings.length === 0 ? (
                 <Card className="border-dashed">
@@ -393,6 +478,11 @@ export default function Dashboard() {
                   {(() => {
                     const favCrossings = visibleCrossings.filter((c) => favoritesSet.has(c.port_number));
                     const restCrossings = visibleCrossings.filter((c) => !favoritesSet.has(c.port_number));
+                    // Insert the compact "Get Alerted" banner after the first batch of cards
+                    // so the first wait card is above the fold while the alert CTA still has prominence.
+                    const INTERSTITIAL_AFTER = 6;
+                    const restBeforeAlert = restCrossings.slice(0, INTERSTITIAL_AFTER);
+                    const restAfterAlert = restCrossings.slice(INTERSTITIAL_AFTER);
                     return (
                       <>
                         {favCrossings.length > 0 && (
@@ -414,6 +504,7 @@ export default function Dashboard() {
                                   selectedDirection={direction}
                                   isFavorite={true}
                                   onToggleFavorite={toggleFavorite}
+                                  slug={portToSlug[crossing.port_number] || crossing.slug}
                                 />
                               ))}
                             </div>
@@ -428,7 +519,7 @@ export default function Dashboard() {
                           </div>
                         )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
-                          {restCrossings.map((crossing, idx) => (
+                          {restBeforeAlert.map((crossing, idx) => (
                             <BorderCrossingCard
                               key={crossing.id || crossing.port_number}
                               crossing={crossing}
@@ -437,15 +528,56 @@ export default function Dashboard() {
                               selectedDirection={direction}
                               isFavorite={false}
                               onToggleFavorite={toggleFavorite}
+                              slug={portToSlug[crossing.port_number] || crossing.slug}
                             />
                           ))}
                         </div>
+                        {restAfterAlert.length > 0 && (
+                          <>
+                            {/* Compact "Get Alerted" interstitial — demoted from full hero (#1). */}
+                            <div className="my-3">
+                              <DepartureAlertBanner
+                                crossings={state.crossings}
+                                language={language}
+                                direction={direction}
+                                compact
+                              />
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
+                              {restAfterAlert.map((crossing, idx) => (
+                                <BorderCrossingCard
+                                  key={crossing.id || crossing.port_number}
+                                  crossing={crossing}
+                                  language={language}
+                                  index={idx + INTERSTITIAL_AFTER}
+                                  selectedDirection={direction}
+                                  isFavorite={false}
+                                  onToggleFavorite={toggleFavorite}
+                                  slug={portToSlug[crossing.port_number] || crossing.slug}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
                       </>
                     );
                   })()}
                 </>
               )}
             </div>
+
+            {/* Sidebar: USD/MXN + stats. xl: shown to the right; mobile: stacked below. */}
+            <aside className="xl:col-span-3 space-y-3">
+              <ExchangeRateWidget exchangeRate={state.exchangeRate} language={language} theme="light" compact />
+              <StatsOverview
+                crossings={filteredCrossings}
+                selectedDirection={direction}
+                language={language}
+                theme="light"
+                regionLabel={regionLabelFor(region, language)}
+                layout="sidebar"
+              />
+            </aside>
           </div>
 
           <PopularCrossings crossings={state.crossings} language={language} />

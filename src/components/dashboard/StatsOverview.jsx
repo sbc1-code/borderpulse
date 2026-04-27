@@ -18,6 +18,7 @@ export default function StatsOverview({
   language,
   theme,
   regionLabel,
+  layout = 'grid', // 'grid' (4-col), 'strip' (single horizontal row), 'sidebar' (vertical stack)
 }) {
   const reportingWaits = crossings
     .map((crossing) => getWaitMinutes(crossing, selectedDirection))
@@ -72,6 +73,78 @@ export default function StatsOverview({
     },
   ];
 
+  // Compact horizontal strip — placed AFTER the wait list begins. Single row, no Card wrapper.
+  if (layout === 'strip') {
+    return (
+      <div className={`flex flex-wrap items-center gap-3 sm:gap-4 px-3 py-2 rounded-lg border ${
+        theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-slate-200'
+      }`}>
+        {stats.map((stat, index) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.04 }}
+            className="flex items-center gap-2 min-w-0"
+          >
+            <div className={`p-1 rounded-md ${stat.bg} flex-shrink-0`}>
+              <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wide leading-tight truncate">
+                {stat.label}
+              </p>
+              <p className={`text-sm font-bold ${
+                theme === 'dark' ? 'text-white' : 'text-slate-900'
+              } leading-tight tabular-nums`}>
+                {stat.value}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    );
+  }
+
+  // Vertical sidebar layout — stacked single-column cards for the right rail.
+  if (layout === 'sidebar') {
+    return (
+      <div className="grid grid-cols-2 gap-2">
+        {stats.map((stat, index) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.04 }}
+          >
+            <Card className={`${
+              theme === 'dark'
+                ? 'bg-gray-800/60 border-gray-700'
+                : 'bg-white border-slate-200'
+            } hover:shadow-md transition-all`}>
+              <CardContent className="p-2.5 flex items-start gap-2">
+                <div className={`p-1 rounded-md ${stat.bg} flex-shrink-0`}>
+                  <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wide truncate leading-tight">
+                    {stat.label}
+                  </p>
+                  <p className={`text-sm font-bold ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  } leading-tight tabular-nums mt-0.5`}>
+                    {stat.value}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    );
+  }
+
+  // Default 4-column grid (original layout, unchanged).
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
       {stats.map((stat, index) => (
