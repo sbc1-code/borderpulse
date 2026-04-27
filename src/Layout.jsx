@@ -196,6 +196,10 @@ export default function Layout({ children }) {
               {language === 'en' ? 'Data: U.S. Customs and Border Protection' : 'Datos: Aduanas y Protección Fronteriza EE.UU.'}
             </span>
             <span>·</span>
+            <Link to="/best-time" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
+            </Link>
+            <span>·</span>
             <Link to="/api" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'Free public API' : 'API pública gratuita'}
             </Link>
