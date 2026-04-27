@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(data): refresh') }}
+    if: "${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(data): refresh') }}"
     runs-on: ubuntu-latest
     environment:
       name: github-pages
