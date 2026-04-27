@@ -184,13 +184,19 @@ export default function BorderCrossingCard({
     const day = now.getDay();
     const hour = now.getHours();
     const entry = byHour.find((h) => h.day === day && h.hour === hour);
-    if (!entry) return null;
-    const samples = typeof entry.sample_count === 'number'
-      ? entry.sample_count
-      : (typeof entry.samples === 'number' ? entry.samples : 0);
-    if (samples < 3) return null;
-    if (typeof entry.median !== 'number') return null;
-    return { delta: wait - entry.median, median: entry.median };
+    if (entry && typeof entry.median === 'number') {
+      const samples = typeof entry.sample_count === 'number'
+        ? entry.sample_count
+        : (typeof entry.samples === 'number' ? entry.samples : 0);
+      if (samples >= 1) return { delta: wait - entry.median, median: entry.median };
+    }
+    // Fallback: use the all-hours overall_median when this hour-bucket is empty
+    // or single-sample. Aggregates have ~30 days of lookback so individual
+    // (day, hour) buckets are sparse; the overall median is a stable reference.
+    if (typeof aggregate?.overall_median === 'number') {
+      return { delta: wait - aggregate.overall_median, median: aggregate.overall_median };
+    }
+    return null;
   }, [aggregate, wait, isSouthbound]);
 
   const lanes = crossing.lanes || {};
