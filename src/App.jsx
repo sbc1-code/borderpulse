@@ -6,6 +6,7 @@ import SharedStatus from '@/pages/SharedStatus';
 import CrossingDetail from '@/pages/CrossingDetail';
 import Blog from '@/pages/Blog';
 import BlogPost from '@/pages/BlogPost';
+import Alerts from '@/pages/Alerts';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/status/:id" element={<SharedStatus />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/alerts" element={<Alerts />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

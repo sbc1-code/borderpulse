@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 
@@ -59,6 +59,12 @@ export default function Layout({ children }) {
       href: '/blog',
       icon: BookOpen,
       current: location.pathname.startsWith('/blog'),
+    },
+    {
+      name: language === 'en' ? 'Alerts' : 'Alertas',
+      href: '/alerts',
+      icon: Bell,
+      current: location.pathname.startsWith('/alerts'),
     },
   ];
 

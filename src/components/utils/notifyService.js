@@ -150,3 +150,63 @@ export function getActiveAlerts() {
     .filter(([, v]) => v && v.active)
     .map(([key, v]) => ({ key, ...v }));
 }
+
+/**
+ * Parse a storage key (e.g. "250401" or "250401:sb") into its parts.
+ */
+function parseKey(key) {
+  if (!key) return { portNumber: null, direction: 'northbound' };
+  const [portNumber, suffix] = String(key).split(':');
+  return {
+    portNumber,
+    direction: suffix === 'sb' ? 'southbound' : 'northbound',
+  };
+}
+
+/**
+ * List every alert subscription (active or paused) for the management UI.
+ * Returns array of { id, portNumber, direction, kind, threshold, active }.
+ * `id` is the localStorage key — pass it back to removeAlert / setAlertEnabled.
+ */
+export function listAlerts() {
+  const prefs = read(STORAGE_KEY);
+  return Object.entries(prefs)
+    .filter(([, v]) => v && typeof v === 'object')
+    .map(([key, v]) => {
+      const { portNumber, direction } = parseKey(key);
+      return {
+        id: key,
+        portNumber,
+        direction,
+        kind: v.kind || 'below',
+        threshold: typeof v.threshold === 'number' ? v.threshold : Number(v.threshold) || 0,
+        active: v.active !== false,
+      };
+    });
+}
+
+/**
+ * Remove an alert subscription by id (the localStorage key returned by listAlerts).
+ */
+export function removeAlert(id) {
+  if (!id) return;
+  const all = read(STORAGE_KEY);
+  if (id in all) {
+    delete all[id];
+    write(STORAGE_KEY, all);
+  }
+}
+
+/**
+ * Toggle the active flag on an alert subscription. Keeps the rest of the
+ * config intact so the user can pause and resume without re-entering the
+ * threshold.
+ */
+export function setAlertEnabled(id, enabled) {
+  if (!id) return;
+  const all = read(STORAGE_KEY);
+  const current = all[id];
+  if (!current) return;
+  all[id] = { ...current, active: !!enabled };
+  write(STORAGE_KEY, all);
+}
