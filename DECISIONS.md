@@ -34,6 +34,15 @@ Format: date · one-line decision · short why.
 - **Markdown (not Notion) for project state on this repo.** AI tools
   read/edit markdown directly; Notion requires copy-paste. Migrate
   if the repo gets a collaborator or ROADMAP hits ~50 open items.
+- **Stop promising "every 15 minutes" cadence anywhere.** GitHub
+  Actions free-tier cron is throttled in practice (workflow scheduled
+  `*/15` fires every 60–90 min). Site-wide language is now
+  "refreshed regularly" or "scheduled cron". Migrate to a more
+  reliable scheduler (Cloudflare cron / external) only if cadence
+  becomes a competitive blocker.
+- **Stale-data banner removed.** A user can't do anything about
+  data being 30 min old, and the banner was firing constantly.
+  Per-card `updated_at` is enough freshness signal.
 
 ---
 

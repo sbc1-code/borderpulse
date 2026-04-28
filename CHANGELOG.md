@@ -71,6 +71,27 @@ Big push day — UX/product sprint phase 1+2, embed widget, /api, /best-time,
   Spanish parity — covered above. Ranked candidates 1–9 of 10 from
   the earlier audit. #10 trip planner deferred (needs design).
 
+### Late-afternoon QC pass — claims hygiene
+- **Stale data banner** stripped to offline-only. The time-since-fetch
+  trigger fired constantly because GitHub Actions cron is throttled in
+  practice (workflow scheduled `*/15` actually fires every 60–90 min on
+  the free tier). The banner was noise, not signal. Each card already
+  surfaces its own `updated_at`.
+- **"Every 15 minutes" cadence claim removed sitewide** — meta tags,
+  OG / Twitter cards, FAQPage JSON-LD, `/api` refresh-cadence card,
+  `/about` stat tile (replaced with "Source of record: CBP"),
+  Dashboard subtitle, `lib/seo` defaults, 6 blog posts. Anywhere we
+  said "every 15 minutes" now says "refreshed regularly" or
+  "scheduled cron". The actual wait-time numbers in blog data tables
+  ("Sat 10 AM | 15 min") were left as-is — those are data, not
+  cadence claims.
+
+### Project-management scaffolding
+- Added `CHANGELOG.md` (this file), `ROADMAP.md`, `DECISIONS.md`,
+  and a project-level `CLAUDE.md` so any future Claude Code session
+  in this repo auto-onboards from the docs instead of needing chat
+  context. User can just say "what's new" tomorrow.
+
 ## Earlier sessions
 
 Before this changelog existed. Use `git log` for archeology.

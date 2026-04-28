@@ -61,6 +61,11 @@ Ranked roughly by leverage. Pick what fits the available time.
 - [ ] **WhatsApp-formatted share card with best time included** —
       enhance the existing `ShareModal` to inline today's lightest
       hour. Small touch; would help share-conversion.
+- [ ] **Migrate CBP fetch off GH Actions cron** — only if cadence
+      reliability becomes a competitive issue. Options: Cloudflare
+      Workers cron, external cron service. Today the cost (worse UX,
+      noisy stale banners) was paid by *removing* the cadence claim
+      sitewide rather than improving the cadence itself.
 
 ---
 
