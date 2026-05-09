@@ -30,6 +30,9 @@ Ranked roughly by leverage. Pick what fits the available time.
 - [ ] **Refactor: extract `useTypicalDelta` hook** — duplicated in
       `BorderCrossingCard.jsx` and `Embed.jsx`. Pull into `src/lib/`
       once a third caller emerges. Low priority, no user impact.
+- [ ] **Refactor: extract `usePersistentLanguage` hook** — six inline
+      copies (Dashboard, CrossingDetail, Api, About, BestTime, Alerts).
+      Pull into `src/lib/useLanguage.js`. Low priority, no user impact.
 - [ ] **Accessibility deep-dive on older pages** — the new pages
       (Embed, Api, BestTime, About) got an a11y pass. Dashboard,
       CrossingDetail, Blog, Alerts have not. Sweep for missing

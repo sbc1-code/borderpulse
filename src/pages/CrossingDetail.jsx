@@ -76,8 +76,8 @@ function faqItems(crossing, aggregate, lang) {
   out.push({
     q: lang === 'en' ? `What are the current wait times at ${name}?` : `¿Cuáles son los tiempos de espera actuales en ${name}?`,
     a: lang === 'en'
-      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection every 15 minutes. Check the card above for the live number.`
-      : `Border Pulse toma el tiempo de espera más reciente de ${name} de U.S. Customs and Border Protection cada 15 minutos. Consulta la tarjeta arriba para ver el número en vivo.`,
+      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the card above for the live number.`
+      : `Border Pulse toma el tiempo de espera más reciente de ${name} de U.S. Customs and Border Protection con regularidad. Consulta la tarjeta arriba para ver el número en vivo.`,
   });
 
   out.push({
@@ -320,8 +320,8 @@ export default function CrossingDetail() {
       ? `${crossing.name} Wait Times | Border Pulse`
       : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
     const desc = language === 'en'
-      ? `Live ${crossing.name} border wait times updated every 15 min. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
-      : `Tiempos de espera en ${crossing.name} actualizados cada 15 min. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
+      ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
+      : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
     const url = `https://borderpulse.com/crossing/${canonicalSlug}`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -411,8 +411,8 @@ export default function CrossingDetail() {
         </p>
         <p className="text-xs text-slate-500 mt-2">
           {language === 'en'
-            ? `Northbound wait times at ${crossing.name} are pulled from U.S. Customs and Border Protection every 15 minutes. Southbound estimates (where available) are derived from Google Maps drive times on the approach segment.`
-            : `Los tiempos de espera hacia EE.UU. en ${crossing.name} se obtienen de U.S. Customs and Border Protection cada 15 minutos. Las estimaciones hacia México (cuando están disponibles) se derivan de tiempos de manejo de Google Maps en el tramo de aproximación.`}
+            ? `Northbound wait times at ${crossing.name} are pulled from U.S. Customs and Border Protection on a regular schedule. Southbound estimates (where available) are derived from Google Maps drive times on the approach segment.`
+            : `Los tiempos de espera hacia EE.UU. en ${crossing.name} se obtienen de U.S. Customs and Border Protection con regularidad. Las estimaciones hacia México (cuando están disponibles) se derivan de tiempos de manejo de Google Maps en el tramo de aproximación.`}
         </p>
       </header>
 

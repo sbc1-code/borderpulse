@@ -18,13 +18,13 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
         <div className="space-y-2 leading-relaxed">
           {language === 'en' ? (
             <>
-              <p>Northbound wait times come from official CBP data and refresh every 15 minutes.</p>
+              <p>Northbound wait times come from official CBP data and refresh regularly via a scheduled job.</p>
               <p>Southbound delays are estimated by Border Pulse at major crossings using live routing conditions and crossing-specific baseline travel times.</p>
               <p>Port status, operating hours, and advisories are shown when available. A crossing can be open even when no current wait time is reported.</p>
             </>
           ) : (
             <>
-              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan cada 15 minutos.</p>
+              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante un job programado.</p>
               <p>Las demoras hacia México son estimadas por Border Pulse en cruces principales usando condiciones de ruta en tiempo real y tiempos base por cruce.</p>
               <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
@@ -54,7 +54,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             {language === 'en' ? 'Refresh rate' : 'Frecuencia'}
           </div>
           <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {language === 'en' ? 'Every 15 minutes' : 'Cada 15 minutos'}
+            {language === 'en' ? 'Regular schedule' : 'Horario regular'}
           </div>
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
@@ -76,8 +76,8 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             </div>
             <p>
               {language === 'en'
-                ? 'Directly from U.S. Customs and Border Protection (CBP). Each port officer reports current conditions; we refresh the feed every 15 minutes.'
-                : 'Directamente de U.S. Customs and Border Protection (CBP). Cada oficial del puerto reporta las condiciones actuales; actualizamos el feed cada 15 minutos.'}
+                ? 'Directly from U.S. Customs and Border Protection (CBP). Each port officer reports current conditions; we refresh the feed regularly via a scheduled job.'
+                : 'Directamente de U.S. Customs and Border Protection (CBP). Cada oficial del puerto reporta las condiciones actuales; actualizamos el feed con regularidad mediante un job programado.'}
             </p>
           </div>
           <div>

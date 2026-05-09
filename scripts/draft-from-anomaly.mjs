@@ -80,7 +80,7 @@ This is a median across ${evidence.samples} sample${evidence.samples === 1 ? '' 
 
 - If you can shift your crossing to ${day} ${hourStr}, expect materially shorter waits than the port's typical day.
 - Peak hours at this port still run much higher. Check the full heatmap above for your actual day and hour.
-- The live [${port_name} page](/crossing/${port_slug}) shows today's current wait alongside the same 30-day pattern, refreshed every 15 minutes.
+- The live [${port_name} page](/crossing/${port_slug}) shows today's current wait alongside the same 30-day pattern, refreshed regularly.
 
 <OfficialSource agency="U.S. Customs and Border Protection" url="https://bwt.cbp.gov/">
   CBP publishes live northbound wait times and the canonical list of port hours and lane types. The data used above comes from this feed. Always check the live number before you commit to a specific hour.
@@ -119,7 +119,7 @@ This uses a median across ${evidence.samples} sample${evidence.samples === 1 ? '
 - The live [${port_name} page](/crossing/${port_slug}) shows today's current wait alongside this 30-day pattern.
 
 <OfficialSource agency="U.S. Customs and Border Protection" url="https://bwt.cbp.gov/">
-  CBP publishes live wait times every 15 minutes for every land POE. The 30-day pattern above is built from those snapshots. Always check the live number for the specific hour you plan to cross.
+  CBP publishes live wait times for every land POE. The 30-day pattern above is built from those snapshots. Always check the live number for the specific hour you plan to cross.
 </OfficialSource>
 `;
 

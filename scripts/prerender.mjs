@@ -17,7 +17,7 @@ function faqItems(crossing, aggregate) {
   const items = [
     {
       q: `What are the current wait times at ${name}?`,
-      a: `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection every 15 minutes.`,
+      a: `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule.`,
     },
     {
       q: `What hours is ${name} open?`,
@@ -35,7 +35,7 @@ function faqItems(crossing, aggregate) {
 
 function renderCrossingHead(crossing, slug, aggregate) {
   const title = `${crossing.name} wait times | Border Pulse`;
-  const desc = `Live ${crossing.name} border wait times from U.S. Customs and Border Protection, refreshed every 15 minutes. Historical patterns, hours, and best times to cross.`;
+  const desc = `Live ${crossing.name} border wait times from U.S. Customs and Border Protection, refreshed regularly. Historical patterns, hours, and best times to cross.`;
   const canonical = `${BASE}/crossing/${slug}`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
@@ -327,7 +327,7 @@ function renderBestTimeHead(crossing, slug, aggregate) {
 
 function renderEmbedHead(crossing, slug) {
   const title = `${crossing.name} wait time | Border Pulse`;
-  const desc = `Live wait time at ${crossing.name}, refreshed every 15 minutes.`;
+  const desc = `Live wait time at ${crossing.name}, refreshed regularly.`;
   // Canonical points to the full crossing page so search engines consolidate
   // any accidental indexing on the canonical URL.
   const canonical = `${BASE}/crossing/${slug}`;
@@ -495,7 +495,7 @@ async function main() {
   {
     const apiHead = {
       title: 'Border Pulse API | Public JSON endpoints for U.S.-Mexico border wait times',
-      desc: 'Free public JSON feeds for U.S.-Mexico border wait times, historical patterns, and per-crossing advisories. No auth, no API key, refreshed every 15 minutes.',
+      desc: 'Free public JSON feeds for U.S.-Mexico border wait times, historical patterns, and per-crossing advisories. No auth, no API key, refreshed regularly via a scheduled job.',
       canonical: `${BASE}/api`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
@@ -522,7 +522,7 @@ async function main() {
   {
     const aboutHead = {
       title: 'About Border Pulse | The U.S.-Mexico border wait time tracker',
-      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, every 15 minutes, with a 30-day rolling history.',
+      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, refreshed regularly, with a 30-day rolling history.',
       canonical: `${BASE}/about`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],

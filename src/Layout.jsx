@@ -166,7 +166,11 @@ export default function Layout({ children }) {
               </Link>
             ))}
           </nav>
-          <div className={`p-3 border-t ${isDark ? 'border-gray-800' : 'border-slate-200'} flex items-center justify-between`}>
+          <div className={`p-3 border-t ${isDark ? 'border-gray-800' : 'border-slate-200'} flex items-center justify-between gap-2`}>
+            <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
+              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-7" aria-label="Switch to English">EN</Button>
+              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-7" aria-label="Cambiar a español">ES</Button>
+            </div>
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>

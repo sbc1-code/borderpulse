@@ -3,6 +3,36 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-09
+
+QC follow-ups from issue #21 — the cleanup `bf348f8` started, finished
+across the surfaces it missed. Plus a UX fix to the language toggle.
+
+### Fixed
+- **15-min cadence claims, surfaces missed by `bf348f8`**: `Dashboard.jsx`
+  meta description, `CrossingDetail.jsx` meta description + body copy +
+  FAQ schema (43 per-crossing pages), `AboutFooter.jsx` (4 strings).
+  All now read "refreshed regularly via a scheduled job" / "con
+  regularidad mediante un job programado", matching the canonical
+  phrasing from `bf348f8`.
+- **Per-crossing pages had no visible language toggle on desktop**.
+  `Dashboard.jsx` carried its own duplicate inline toggle (no
+  `aria-label`); other pages got nothing because Layout's only toggle
+  was in the `lg:hidden` mobile header. Removed the Dashboard duplicate,
+  added the toggle to Layout's desktop sidebar footer (with
+  `aria-label="Switch to English"` / `"Cambiar a español"`). All pages
+  now have a single, consistent, a11y-labeled toggle on both mobile
+  (header) and desktop (sidebar). Resolves issues 1, 2, 3, 4 in #21.
+- **Dashboard.jsx language sync**: the page initialized `language` from
+  localStorage but didn't subscribe to storage events, so changing
+  language elsewhere didn't update it. Switched to the
+  `usePersistentLanguage` pattern used by the other 4 pages.
+
+### Followups
+- Extract `usePersistentLanguage` to `src/lib/` — six inline copies now
+  exist (Dashboard added the sixth). Refactor trigger long since fired,
+  but kept this commit focused on #21.
+
 ## 2026-04-27
 
 Big push day — UX/product sprint phase 1+2, embed widget, /api, /best-time,

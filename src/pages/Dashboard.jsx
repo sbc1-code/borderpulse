@@ -36,6 +36,22 @@ const regionLabelFor = (code, lang) => {
   return r ? (r.label[lang] || r.label.en) : '';
 };
 
+// Mirrors the pattern in CrossingDetail/Api/About/BestTime: read from
+// localStorage, then sync via storage events fired by the language toggle
+// in Layout.jsx. Sixth copy in the codebase — extraction queued as
+// follow-up.
+function usePersistentLanguage() {
+  const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key === 'borderPulse_language' && e.newValue) setLang(e.newValue);
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+  return lang;
+}
+
 export default function Dashboard() {
   const [state, setState] = useState({
     crossings: [],
@@ -49,7 +65,7 @@ export default function Dashboard() {
     fetchedAt: null,
   });
 
-  const [language, setLanguage] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
+  const language = usePersistentLanguage();
   const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
   const [region, setRegion] = useState(() => {
     // Stored region preference takes precedence; otherwise check the geolocation default.
@@ -169,8 +185,8 @@ export default function Dashboard() {
       ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
       : 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real';
     const description = language === 'en'
-      ? 'Live wait times at US-Mexico border crossings. Official CBP data, updated every 15 minutes. Bilingual EN/ES.'
-      : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados cada 15 minutos. Bilingüe EN/ES.';
+      ? 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
+      : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
     updatePageMeta({
       title,
       description,
@@ -181,11 +197,6 @@ export default function Dashboard() {
     });
   }, [language]);
 
-  const changeLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('borderPulse_language', lang);
-    window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
-  };
   const changeDirection = (dir) => {
     setDirection(dir);
     localStorage.setItem('borderPulse_direction', dir);
@@ -289,10 +300,6 @@ export default function Dashboard() {
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
-          <div className="flex items-center bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-0.5">
-            <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2.5 h-7">EN</Button>
-            <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2.5 h-7">ES</Button>
-          </div>
           <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 h-8">
             <Share2 className="w-3.5 h-3.5" />
             <span className="text-xs hidden sm:inline">
