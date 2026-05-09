@@ -1,0 +1,93 @@
+---
+title: "Best time to cross Tecate: hour by hour from 30 days of CBP data"
+description: "Median northbound wait times by hour and day at Tecate, from CBP data. The quietest crossing east of San Diego, with one catch: weekday late nights."
+slug: best-time-to-cross-tecate
+date: "2026-05-09"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - tecate
+  - baja-california
+  - california
+  - best-time-to-cross
+translationKey: tecate-best-time
+hero: /og/blog/best-time-to-cross-tecate.png
+relatedCrossings:
+  - "250401"
+  - "250601"
+officialSources:
+  - label: "CBP Border Wait Times (live CBP data)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Tecate is the quiet alternative to the San Diego crossings. The median northbound wait over the last 30 days sits at **60 minutes**, and the lightest hour all week is **4 AM with a 45 minute median.** The pattern is the opposite of what most San Ysidro veterans assume: Tecate's worst hours are not weekend evenings, they are weekday late-night and pre-dawn windows when the small port runs short-staffed.
+
+The chart below is the last 30 days of Tecate northbound wait times from U.S. Customs and Border Protection, broken out by day of week and hour of day. Darker red means a longer typical wait. Hover any cell for the median number.
+
+<BestTimeChart slug="tecate" title="Tecate: median northbound wait, last 30 days" />
+
+## What the data actually says
+
+Three patterns jump out:
+
+1. **Tuesday morning is the cleanest crossing window of the week.** The 6 AM Tuesday median is 25 minutes, the lowest single-cell median we measured. Sunday 4 AM is a close second at 30 minutes. If you can pick your day and your hour, this is the corner of the heatmap to aim for.
+2. **The "lightest hour" varies wildly by day, more than at bigger ports.** Tecate sees fewer total samples per hour than San Ysidro (~17 per slot vs. ~30+), so the typical hour can shift week to week. Wednesday is lightest at 11 PM (38 min). Monday is lightest at 1 PM (60 min). That is a much wider band than you would see at a high-volume port.
+3. **Late-night and pre-dawn weekday slots are surprisingly heavy.** Monday at midnight medians 150 minutes. Saturday at midnight, 120 minutes. Tuesday at 3 AM, 120 minutes. Tecate is staffed for daytime traffic; the off-hours backlog from a single bus or van can produce the longest waits of the week.
+
+If you want to plan around a specific hour, the [Tecate live page](/crossing/tecate) shows the current wait alongside the same 30 day pattern.
+
+## How Tecate compares to San Ysidro and Otay
+
+The San Diego trio is one trip planner, not three independent ports. Quick rules of thumb from the data:
+
+- **When [San Ysidro](/crossing/san-ysidro) is over 90 minutes during the Sunday peak, Tecate is often under 60.** That gap is the case for using Tecate as a Sunday return route, especially if you are coming back from Valle de Guadalupe or Ensenada anyway and the detour east is short.
+- **For weekday morning commutes, [Otay Mesa](/crossing/otay-mesa) and Tecate are closer.** Otay's standard-lane medians are higher than Tecate's lightest hours, but Otay has SENTRI-equivalent acceleration and Ready Lane hours that Tecate does not advertise as aggressively.
+- **For pure tourist convenience, San Ysidro wins.** Tecate's town side is small and the U.S. side is rural until Highway 94. Going through Tecate adds drive time on both sides versus crossing closer to TIJ airport.
+
+## Standard, Ready Lane, and SENTRI
+
+Tecate is a smaller port and lane availability changes more often than at the big ports.
+
+- **Ready Lane** is open at Tecate but the lane is single-vehicle and operates only during specific posted hours. Always verify the lane is staffed before you commit.
+- **SENTRI** is available, and during the worst-case Tecate hours the SENTRI lane is the difference between 30 minutes and 2 hours.
+
+Eligibility and document rules for both programs are CBP's, not ours. Check the official pages before you plan around a lane.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is for travelers with an RFID-enabled travel document. CBP maintains the official list of acceptable documents, lane hours per port, and rules for passengers in the vehicle. Verify your document is on the current list and the lane is open at Tecate before you commit.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, background check, and in-person interview. CBP publishes program eligibility, fees, renewal rules, and the list of approved enrollment centers.
+</OfficialSource>
+
+## Holidays, advisories, and the small-port quirk
+
+Hour-of-week medians do not capture one-off events. The biggest ones at Tecate:
+
+- **Semana Santa (Holy Week)** and **Christmas / Paisano season (Dec 1 to Jan 10)** push waits well past the medians shown above, especially for the southbound direction (Tecate is a popular Paisano route into Baja).
+- **U.S. federal holidays** can change CBP staffing. Hours posted on the [official port page](https://bwt.cbp.gov/) take precedence.
+- **Single-bus events** matter more here than at bigger ports. A 50-passenger tour bus arriving at 11 PM can quintuple the wait for the next 30 minutes. The official [CBP feed](https://bwt.cbp.gov/) is updated as conditions change; the live card on Border Pulse shows the current snapshot.
+
+The DOS travel advisory for Mexico is updated periodically and applies at the state level. Check it before any first trip.
+
+<OfficialSource agency="U.S. Department of State" url="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html">
+  The State Department publishes a travel advisory for Mexico with state-level guidance and a list of restricted areas. Read the full advisory and any active U.S. embassy security alerts before crossing, especially for first time trips or stays outside the immediate border zone.
+</OfficialSource>
+
+## How we compute these numbers
+
+Border Pulse pulls the official CBP wait time for Tecate and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots, built from 296 individual samples. Median is more honest than average for this data because a single 240 minute outlier can drag a true 60 minute typical hour up to 90.
+
+Tecate has fewer samples per cell than the San Diego majors, so individual cell medians can shift more week to week. The day-of-week patterns above are the stable signal. The exact lightest-hour-by-day call may change as the rolling window updates.
+
+The raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse). Snapshots come from [CBP's public BWT feed](https://bwt.cbp.gov/), which is the canonical source.
+
+## What to do with this
+
+The single most useful thing you can do with this chart at Tecate: **check the live wait first, then check the typical wait for that same hour.** When the gap is large in either direction, that is your decision signal. A live 30-minute wait at an hour where the typical is 90 minutes is a window worth taking; a live 90-minute wait at an hour where the typical is 30 says wait or reroute.

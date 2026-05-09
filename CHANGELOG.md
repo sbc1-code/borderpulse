@@ -10,6 +10,13 @@ across the surfaces it missed. Plus a UX fix to the language toggle and
 per-best-time OG cards for stronger share previews.
 
 ### Added
+- **6 new bilingual best-time posts**: Tecate, Calexico West, and Hidalgo
+  (3 EN + 3 ES). Each post is built from real CBP aggregate data —
+  the actual lightest hour, the actual worst hour, the actual median.
+  Same Data Analysis pillar / shape as the existing 4-port set
+  (San Ysidro, Otay, PdN, Nogales DeConcini), so the blog index now
+  covers 7 ports across both languages. Closes issue #8 (highest-priority
+  content gap on the next-tier crossings). Brings blog total to 18 posts.
 - **Per-best-time OG cards**. `scripts/build-og-cards.mjs` now emits a
   third pass: 43 share-preview PNGs at `/og/best-time/<slug>.png`,
   showing the lightest hour + median for that crossing

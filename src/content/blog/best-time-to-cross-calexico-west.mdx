@@ -1,0 +1,92 @@
+---
+title: "Best time to cross Calexico West: hour by hour from 30 days of CBP data"
+description: "Median northbound wait times by hour and day at Calexico West, from CBP data. The 10 AM commuter window, and the 3 AM Monday spike nobody warns you about."
+slug: best-time-to-cross-calexico-west
+date: "2026-05-09"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - calexico
+  - mexicali
+  - california
+  - imperial-valley
+  - best-time-to-cross
+translationKey: calexico-west-best-time
+hero: /og/blog/best-time-to-cross-calexico-west.png
+relatedCrossings:
+  - "250301"
+officialSources:
+  - label: "CBP Border Wait Times (live CBP data)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Calexico West is the Imperial Valley's downtown crossing, the one most Mexicali daily commuters use to get into California. The median northbound wait over the last 30 days sits at **60 minutes**, and the lightest hour all week is **10 AM with a 15 minute median.** The pattern is shaped almost entirely by the morning commute: heavy through 8 AM, dramatic drop after 9, sweet spot 10 to 11, then a long flat stretch until late-night shift workers return.
+
+The chart below is the last 30 days of Calexico West northbound wait times from U.S. Customs and Border Protection, broken out by day of week and hour of day. Darker red means a longer typical wait. Hover any cell for the median number.
+
+<BestTimeChart slug="calexico-west" title="Calexico West: median northbound wait, last 30 days" />
+
+## What the data actually says
+
+Three patterns jump out:
+
+1. **The 10 AM weekday window is the clearest "best time" of any port we track.** Monday through Friday, 10 AM medians hold at 15 minutes. The 9 AM hour is similar (15 min Tuesday, even 5 min Wednesday). Wait until commuter traffic clears and you cross in a fraction of the daily median.
+2. **Sunday afternoon is also unusually clean.** The 1 PM Sunday median is 5 minutes, the lowest single cell in the dataset. Weekend daytime traffic at Calexico West is much lighter than at the San Diego ports because there is no equivalent tourist destination on the Mexicali side pulling the same weekend volume.
+3. **The pre-dawn weekday hours are brutal.** Monday at 3 AM medians 210 minutes — the worst single cell across the entire 30 day window. Saturday at midnight, 178 minutes. Friday at 10 PM, 150 minutes. These are the late-shift returners and the post-bar weekend crowd. If your schedule allows, do not cross at 3 AM Monday.
+
+If you want to plan around a specific hour, the [Calexico West live page](/crossing/calexico-west) shows the current wait alongside the same 30 day pattern.
+
+## Calexico West vs. Calexico East
+
+Imperial Valley has two CBP crossings, and the choice is not always obvious.
+
+- **Calexico West (downtown)** is the historic crossing and the closer one to downtown Mexicali. Heavier traffic, older infrastructure, but shorter total trip if your destination is in El Centro or central Imperial Valley.
+- **[Calexico East](/crossing/calexico-east)** is newer, designed for cars and commercial traffic, and tends to run shorter waits on weekdays. It is the better choice if you are flexible on the U.S. side route and want predictable times.
+
+Run both live cards in tabs and pick the lower number when you actually leave. The Border Pulse [main dashboard](/) shows them side by side.
+
+## Standard, Ready Lane, and SENTRI
+
+Calexico West has all three lanes, and the lane choice matters more here than at most ports because the standard-lane variance is so wide.
+
+- **Ready Lane** at Calexico West runs a meaningful percentage faster than the standard lane during weekday morning peaks (typically 40 to 60 percent). The lane is well-staffed.
+- **SENTRI** is the safety lane for the 3 AM Monday and Friday-night peaks. During those hours, SENTRI savings vs. standard can exceed two hours.
+
+Eligibility and document rules for both programs are CBP's, not ours. Read the official pages before you bank on a lane.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is for travelers with an RFID-enabled travel document. CBP maintains the official list of acceptable documents, lane hours per port, and rules for passengers in the vehicle.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, background check, and in-person interview. CBP publishes program eligibility, fees, renewal rules, and the list of approved enrollment centers. Membership is per person, and rules apply to every occupant of the vehicle.
+</OfficialSource>
+
+## Holidays, advisories, and the agricultural season
+
+Hour-of-week medians do not capture one-off events. The biggest ones at Calexico:
+
+- **Semana Santa (Holy Week)** and **Christmas / Paisano season (Dec 1 to Jan 10)** push waits well past the medians shown above.
+- **Imperial Valley harvest season** changes the commercial-lane mix and the staffing pattern. Live waits during peak harvest can spike outside the typical pattern.
+- **U.S. federal holidays** can change CBP staffing. Hours posted on the [official port page](https://bwt.cbp.gov/) take precedence.
+
+The DOS travel advisory for Mexico is updated periodically and applies at the state level. Check it before any first trip.
+
+<OfficialSource agency="U.S. Department of State" url="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html">
+  The State Department publishes a travel advisory for Mexico with state-level guidance and a list of restricted areas. Read the full advisory and any active U.S. embassy security alerts before crossing, especially for first time trips or stays outside the immediate border zone.
+</OfficialSource>
+
+## How we compute these numbers
+
+Border Pulse pulls the official CBP wait time for Calexico West and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots, built from 401 individual samples. Median is more honest than average for this data because a single 240 minute outlier can drag a true 60 minute typical hour up to 90.
+
+The raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse). Snapshots come from [CBP's public BWT feed](https://bwt.cbp.gov/), which is the canonical source.
+
+## What to do with this
+
+The single most useful thing you can do with this chart at Calexico West: **if you can shift your crossing to 10 AM or 1 PM, do it.** The savings vs. the rest of the day are large and consistent. Those two windows are also the ones where the standard lane and Ready Lane are nearly tied, so you do not need to pay the cost of a Trusted Traveler enrollment to capture the win.
