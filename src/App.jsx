@@ -19,6 +19,7 @@ const BestTimeIndex = lazy(() =>
   import('@/pages/BestTime').then((m) => ({ default: m.BestTimeIndex })),
 );
 const About = lazy(() => import('@/pages/About'));
+const Compare = lazy(() => import('@/pages/Compare'));
 
 function RouteFallback() {
   return (
@@ -43,6 +44,7 @@ function LayoutRoutes() {
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/api" element={<Api />} />
           <Route path="/about" element={<About />} />
+          <Route path="/compare/:pair" element={<Compare />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

@@ -10,6 +10,18 @@ across the surfaces it missed. Plus a UX fix to the language toggle and
 per-best-time OG cards for stronger share previews.
 
 ### Added
+- **`/compare/<slugA>-vs-<slugB>` programmatic SEO pages.** New
+  `Compare.jsx` page renders two crossings side by side: live wait,
+  today's lightest hour, 30-day median, sample count, plus a
+  computed "right now" callout that names the faster port and the
+  delta. Bilingual EN/ES via the same `usePersistentLanguage` pattern.
+  10 seed pairs prerendered + sitemap'd: san-ysidro vs otay,
+  PdN vs BOTA, Hidalgo vs Pharr, Hidalgo vs Anzalduas, Nogales
+  DeConcini vs Mariposa, Calexico W vs E, Eagle Pass I vs II,
+  Brownsville Gateway vs Veterans, Laredo I vs II, Progreso vs Donna.
+  Targets "X vs Y which is faster" search intent. To add pairs,
+  update both COMPARE_PAIRS arrays in `scripts/prerender.mjs` and
+  `scripts/build-sitemap.mjs`.
 - **6 new bilingual best-time posts**: Tecate, Calexico West, and Hidalgo
   (3 EN + 3 ES). Each post is built from real CBP aggregate data —
   the actual lightest hour, the actual worst hour, the actual median.

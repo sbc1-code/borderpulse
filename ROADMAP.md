@@ -19,9 +19,10 @@ Ranked roughly by leverage. Pick what fits the available time.
       `build-og-cards.mjs` emits 43 per-slug PNGs; prerender wires them
       as og:image / twitter:image.
 - [ ] **OG card for `/about`** — same idea, brand-anchored card.
-- [ ] **Programmatic SEO `/compare/:slugA-vs-:slugB`** — high-traffic
-      pairs (San Ysidro vs Otay, PDN vs BOTA, Hidalgo vs Pharr, etc.).
-      ~6–10 pages. Targets "X vs Y" search intent.
+- [x] **Programmatic SEO `/compare/:slugA-vs-:slugB`** — shipped
+      2026-05-09. 10 seed pairs prerendered + sitemap'd. Add more
+      via the COMPARE_PAIRS arrays in `scripts/prerender.mjs` +
+      `scripts/build-sitemap.mjs`.
 - [ ] **Hreflang for ES variants** — currently EN/ES share the same URL
       and toggle in localStorage. For better ES SEO, consider
       `/mejor-hora/:slug` parallel routes with proper `<link

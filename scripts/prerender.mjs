@@ -571,8 +571,56 @@ async function main() {
     bestTimePageCount++;
   }
 
+  // /compare/<slugA>-vs-<slugB> — programmatic SEO seed pairs.
+  // Hand-picked high-traffic same-region pairs the user actually searches
+  // for ("X vs Y which is faster"). Add more pairs here as the
+  // routing patterns change.
+  const COMPARE_PAIRS = [
+    ['san-ysidro', 'otay-mesa'],
+    ['el-paso-paso-del-norte-pdn', 'el-paso-bridge-of-the-americas-bota'],
+    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-pharr'],
+    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-anzalduas-international-bridge'],
+    ['nogales-deconcini', 'nogales-mariposa'],
+    ['calexico-west', 'calexico-east'],
+    ['eagle-pass-bridge-i', 'eagle-pass-bridge-ii'],
+    ['brownsville-gateway', 'brownsville-veterans-international'],
+    ['laredo-bridge-i', 'laredo-bridge-ii'],
+    ['progreso-progreso-international-bridge', 'progreso-donna-international-bridge'],
+  ];
+  const slugToCrossing = {};
+  for (const c of crossings) {
+    const s = portToSlug[c.port_number];
+    if (s) slugToCrossing[s] = c;
+  }
+  let comparePageCount = 0;
+  for (const [aSlug, bSlug] of COMPARE_PAIRS) {
+    const cA = slugToCrossing[aSlug];
+    const cB = slugToCrossing[bSlug];
+    if (!cA || !cB) continue;
+    const pair = `${aSlug}-vs-${bSlug}`;
+    const title = `${cA.name} vs ${cB.name}: which is faster | Border Pulse`;
+    const desc = `Live wait times, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. Pick the faster crossing right now.`;
+    const canonical = `${BASE}/compare/${pair}`;
+    const ogImage = `${BASE}/og-card.png`;
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+        { '@type': 'ListItem', position: 2, name: cA.name, item: `${BASE}/crossing/${aSlug}` },
+        { '@type': 'ListItem', position: 3, name: `vs ${cB.name}`, item: canonical },
+      ],
+    };
+    const head = { title, desc, canonical, ogImage, jsonLd: [breadcrumb] };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'compare', pair);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+    comparePageCount++;
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + crawlable nav on homepage`,
   );
 }
 

@@ -69,6 +69,31 @@ async function main() {
     });
   }
 
+  // Compare pages — kept in sync with the COMPARE_PAIRS list in
+  // scripts/prerender.mjs. Update both when adding/removing pairs.
+  const COMPARE_PAIRS = [
+    ['san-ysidro', 'otay-mesa'],
+    ['el-paso-paso-del-norte-pdn', 'el-paso-bridge-of-the-americas-bota'],
+    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-pharr'],
+    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-anzalduas-international-bridge'],
+    ['nogales-deconcini', 'nogales-mariposa'],
+    ['calexico-west', 'calexico-east'],
+    ['eagle-pass-bridge-i', 'eagle-pass-bridge-ii'],
+    ['brownsville-gateway', 'brownsville-veterans-international'],
+    ['laredo-bridge-i', 'laredo-bridge-ii'],
+    ['progreso-progreso-international-bridge', 'progreso-donna-international-bridge'],
+  ];
+  const knownSlugs = new Set(Object.values(portToSlug));
+  for (const [a, b] of COMPARE_PAIRS) {
+    if (!knownSlugs.has(a) || !knownSlugs.has(b)) continue;
+    urls.push({
+      loc: `${BASE}/compare/${a}-vs-${b}`,
+      changefreq: 'daily',
+      priority: '0.6',
+      lastmod: today,
+    });
+  }
+
   const posts = readBlogPosts();
   const twins = findTwins(posts);
   if (posts.length > 0) {
