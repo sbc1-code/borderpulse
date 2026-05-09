@@ -6,7 +6,18 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 ## 2026-05-09
 
 QC follow-ups from issue #21 — the cleanup `bf348f8` started, finished
-across the surfaces it missed. Plus a UX fix to the language toggle.
+across the surfaces it missed. Plus a UX fix to the language toggle and
+per-best-time OG cards for stronger share previews.
+
+### Added
+- **Per-best-time OG cards**. `scripts/build-og-cards.mjs` now emits a
+  third pass: 43 share-preview PNGs at `/og/best-time/<slug>.png`,
+  showing the lightest hour + median for that crossing
+  ("8 AM · 30 min median" vs the overall median). Prerender wires them
+  as `og:image` and `twitter:image` for `/best-time/<slug>` pages.
+  Replaces the previous fallback to the generic per-crossing card.
+  Also: per-best-time meta description now leads with the lightest
+  hour + median when known, instead of generic copy.
 
 ### Fixed
 - **15-min cadence claims, surfaces missed by `bf348f8`**: `Dashboard.jsx`

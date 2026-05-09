@@ -72,6 +72,68 @@ function svgForCrossing(crossing) {
 </svg>`;
 }
 
+function formatHour12(h) {
+  if (h == null || !Number.isFinite(h)) return '';
+  const suffix = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 || 12;
+  return `${h12} ${suffix}`;
+}
+
+function svgForBestTime(crossing, aggregate) {
+  const name = crossing.name || crossing.port_name || 'Crossing';
+  const state = crossing.state || '';
+  const bestHour = aggregate?.overall_best_hour;
+  const bestMedian = aggregate?.overall_best_median;
+  const overallMedian = aggregate?.overall_median;
+  const hasBest = bestHour != null && bestMedian != null;
+
+  const titleLines = wrapText(name, 24).slice(0, 2);
+  const titleLineHeight = 76;
+  const titleStartY = 220;
+  const titleTspans = titleLines
+    .map((line, i) => `<tspan x="80" y="${titleStartY + i * titleLineHeight}">${xmlEscape(line)}</tspan>`)
+    .join('');
+
+  const calloutY = titleStartY + titleLines.length * titleLineHeight + 60;
+  const callout = hasBest
+    ? `${formatHour12(bestHour)} · ${bestMedian} min median`
+    : 'See the live page';
+
+  const subFooter = hasBest && overallMedian != null
+    ? `vs ${overallMedian} min overall median · last 30 days`
+    : `Last 30 days of CBP data · ${state}`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <rect width="${W}" height="${H}" fill="${BG}"/>
+  <rect x="0" y="0" width="12" height="${H}" fill="${ACCENT}"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="80" y="100" font-size="34" font-weight="700" fill="${FG}">
+      Border Pulse<tspan dx="10" fill="${ACCENT}">●</tspan>
+    </text>
+
+    <text x="80" y="170" font-size="22" font-weight="700" fill="${ACCENT}" letter-spacing="2">
+      BEST TIME TO CROSS
+    </text>
+
+    <text font-size="68" font-weight="800" fill="${FG}" letter-spacing="-1.5">
+      ${titleTspans}
+    </text>
+
+    <text x="80" y="${calloutY}" font-size="56" font-weight="800" fill="${ACCENT}" letter-spacing="-1">
+      ${xmlEscape(callout)}
+    </text>
+
+    <text x="80" y="${H - 90}" font-size="26" fill="${MUTED}">
+      ${xmlEscape(subFooter)}
+    </text>
+    <text x="80" y="${H - 50}" font-size="26" fill="${ACCENT}">
+      borderpulse.com / best-time
+    </text>
+  </g>
+</svg>`;
+}
+
 function svgForPost(post) {
   const title = post.title || 'Border Pulse';
   const lines = wrapText(title, 28).slice(0, 4);
@@ -146,6 +208,33 @@ async function main() {
     count++;
   }
   console.log(`[og] wrote ${count} per-crossing OG cards`);
+
+  // Per-best-time OG cards. Mirrors the per-crossing loop but reads the
+  // aggregate to surface the lightest hour + median in the share preview.
+  // Falls back to a name-only card if aggregate is missing for a slug.
+  const aggregatesDir = path.resolve(root, 'public/data/aggregates');
+  const bestTimeOgDir = path.resolve(outDir, 'best-time');
+  fs.mkdirSync(bestTimeOgDir, { recursive: true });
+  let bestTimeCount = 0;
+  for (const c of crossings) {
+    const slug = portToSlug[c.port_number];
+    if (!slug) continue;
+    let aggregate = null;
+    const aggPath = path.resolve(aggregatesDir, `${slug}.json`);
+    if (fs.existsSync(aggPath)) {
+      try {
+        aggregate = JSON.parse(fs.readFileSync(aggPath, 'utf8'));
+      } catch {
+        aggregate = null;
+      }
+    }
+    const svg = svgForBestTime(c, aggregate);
+    const resvg = new Resvg(svg, { background: BG, fitTo: { mode: 'width', value: W } });
+    const png = resvg.render().asPng();
+    fs.writeFileSync(path.resolve(bestTimeOgDir, `${slug}.png`), png);
+    bestTimeCount++;
+  }
+  console.log(`[og] wrote ${bestTimeCount} per-best-time OG cards`);
 
   const posts = readBlogPosts();
   if (posts.length > 0) {

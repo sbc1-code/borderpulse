@@ -294,10 +294,16 @@ function rewriteIndex(indexHtml, head) {
 }
 
 function renderBestTimeHead(crossing, slug, aggregate) {
+  const bestHour = aggregate?.overall_best_hour;
+  const bestMedian = aggregate?.overall_best_median;
   const title = `Best time to cross ${crossing.name} | Border Pulse`;
-  const desc = `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`;
+  const desc = bestHour != null && bestMedian != null
+    ? `Lightest typical hour to cross ${crossing.name}: ~${bestHour % 12 || 12} ${bestHour >= 12 ? 'PM' : 'AM'} (median ${bestMedian} min). Hour-by-hour from the last 30 days of CBP data.`
+    : `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`;
   const canonical = `${BASE}/best-time/${slug}`;
-  const ogImage = `${BASE}/og/${slug}.png`;
+  // Per-best-time OG cards live under /og/best-time/<slug>.png.
+  // Falls back to per-crossing card if the new generator hasn't run yet.
+  const ogImage = `${BASE}/og/best-time/${slug}.png`;
 
   const place = {
     '@context': 'https://schema.org',

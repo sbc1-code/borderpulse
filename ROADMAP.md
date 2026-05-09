@@ -15,10 +15,9 @@ Ranked roughly by leverage. Pick what fits the available time.
       a recommended departure window. Needs design pass first: input
       shape, confidence model, mobile UX. Flagship feature, biggest lift
       on this list.
-- [ ] **OG cards for `/best-time/:slug`** — currently uses the generic
-      crossing OG card. Generate per-slug share previews showing the
-      lightest hour ("Best time at San Ysidro: 1 AM") for stronger
-      WhatsApp / Twitter / Slack share previews.
+- [x] **OG cards for `/best-time/:slug`** — shipped 2026-05-09.
+      `build-og-cards.mjs` emits 43 per-slug PNGs; prerender wires them
+      as og:image / twitter:image.
 - [ ] **OG card for `/about`** — same idea, brand-anchored card.
 - [ ] **Programmatic SEO `/compare/:slugA-vs-:slugB`** — high-traffic
       pairs (San Ysidro vs Otay, PDN vs BOTA, Hidalgo vs Pharr, etc.).
