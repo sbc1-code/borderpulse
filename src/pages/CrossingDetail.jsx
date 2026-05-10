@@ -705,6 +705,17 @@ export default function CrossingDetail() {
               })}
             </div>
           )}
+          {(crossing.lanes?.pedestrian_standard || crossing.lanes?.pedestrian_ready) && (
+            <div className="mt-2 text-xs">
+              <Link
+                to={`/walk-or-drive/${canonicalSlug}`}
+                className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium hover:underline"
+              >
+                {language === 'en' ? `Walk or drive across ${crossing.name}?` : `¿Cruzar a pie o en auto en ${crossing.name}?`}
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          )}
         </section>
       )}
 

@@ -94,6 +94,30 @@ async function main() {
     });
   }
 
+  // /walk-or-drive/<slug> seeds — kept in sync with WALK_OR_DRIVE_SLUGS
+  // in scripts/prerender.mjs. Update both when adding a slug.
+  const WALK_OR_DRIVE_SLUGS = [
+    'san-ysidro',
+    'otay-mesa',
+    'el-paso-bridge-of-the-americas-bota',
+    'el-paso-paso-del-norte-pdn',
+    'hidalgo-pharr-hidalgo',
+    'calexico-west',
+    'calexico-east',
+    'brownsville-gateway',
+    'nogales-deconcini',
+    'tecate',
+  ];
+  for (const slug of WALK_OR_DRIVE_SLUGS) {
+    if (!knownSlugs.has(slug)) continue;
+    urls.push({
+      loc: `${BASE}/walk-or-drive/${slug}`,
+      changefreq: 'daily',
+      priority: '0.6',
+      lastmod: today,
+    });
+  }
+
   const posts = readBlogPosts();
   const twins = findTwins(posts);
   if (posts.length > 0) {

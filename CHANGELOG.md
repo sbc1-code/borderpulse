@@ -44,6 +44,22 @@ big chart-readability pass after lay-reader feedback.
   all three when adding a pair).
 
 ### Added
+- **`/walk-or-drive/<slug>` decision page.** Side-by-side comparison
+  of vehicle vs pedestrian wait at the same crossing, with a "Right
+  now" recommendation that names the verdict (Walk / Drive / It's a
+  wash) and the savings. Bakes in 20 min foot overhead for parking
+  + bridge so the math is honest. Surfaces both standard pedestrian
+  and Ready Lane lanes when available; gracefully falls back when
+  data is missing. Includes a "Things this calculation does not
+  include" list (Mexico-side parking, U.S.-side rideshare, whether
+  you actually need the car). Bilingual EN/ES. Pillar #4 in the
+  blog research dossier ("walk vs drive" had no dominant SERP
+  ranker).
+  10 prerendered seed slugs (the high-impact crossings where the
+  walk-vs-drive gap matters most): San Ysidro, Otay Mesa, BOTA, PdN,
+  Hidalgo, Calexico W, Calexico E, Brownsville Gateway, Nogales
+  DeConcini, Tecate. Cross-link added to CrossingDetail's nearby
+  section for any crossing that publishes pedestrian data.
 - **"Best today" pill on every homepage card.** Shows today's
   lightest typical hour and median ("Best today: 7 AM (~20 min)")
   pulled from the same aggregate the "vs typical" line uses (no

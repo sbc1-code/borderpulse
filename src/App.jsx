@@ -20,6 +20,7 @@ const BestTimeIndex = lazy(() =>
 );
 const About = lazy(() => import('@/pages/About'));
 const Compare = lazy(() => import('@/pages/Compare'));
+const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
 
 function RouteFallback() {
   return (
@@ -45,6 +46,7 @@ function LayoutRoutes() {
           <Route path="/api" element={<Api />} />
           <Route path="/about" element={<About />} />
           <Route path="/compare/:pair" element={<Compare />} />
+          <Route path="/walk-or-drive/:slug" element={<WalkOrDrive />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

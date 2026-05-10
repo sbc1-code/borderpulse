@@ -619,8 +619,48 @@ async function main() {
     comparePageCount++;
   }
 
+  // /walk-or-drive/<slug> — programmatic SEO seed pages for crossings
+  // where the walk-vs-drive question matters (i.e. the live wait gap is
+  // typically large and pedestrian data is published).
+  const WALK_OR_DRIVE_SLUGS = [
+    'san-ysidro',
+    'otay-mesa',
+    'el-paso-bridge-of-the-americas-bota',
+    'el-paso-paso-del-norte-pdn',
+    'hidalgo-pharr-hidalgo',
+    'calexico-west',
+    'calexico-east',
+    'brownsville-gateway',
+    'nogales-deconcini',
+    'tecate',
+  ];
+  let walkOrDriveCount = 0;
+  for (const slug of WALK_OR_DRIVE_SLUGS) {
+    const c = slugToCrossing[slug];
+    if (!c) continue;
+    const title = `Walk or drive across ${c.name}? Live decision based on CBP data | Border Pulse`;
+    const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
+    const canonical = `${BASE}/walk-or-drive/${slug}`;
+    const ogImage = `${BASE}/og/${slug}.png`;
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+        { '@type': 'ListItem', position: 2, name: c.name, item: `${BASE}/crossing/${slug}` },
+        { '@type': 'ListItem', position: 3, name: 'Walk or drive', item: canonical },
+      ],
+    };
+    const head = { title, desc, canonical, ogImage, jsonLd: [breadcrumb] };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'walk-or-drive', slug);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+    walkOrDriveCount++;
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + crawlable nav on homepage`,
   );
 }
 
