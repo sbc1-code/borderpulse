@@ -30,10 +30,42 @@ import {
 } from '@/components/utils/crossingMeta';
 
 const STATUS_STYLES = {
-  good: { bar: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: { en: 'Good', es: 'Bueno' }, dot: 'bg-emerald-500' },
-  moderate: { bar: 'bg-amber-500', badge: 'bg-amber-50 text-amber-700 border-amber-200', label: { en: 'Moderate', es: 'Moderado' }, dot: 'bg-amber-500' },
-  heavy: { bar: 'bg-rose-500', badge: 'bg-rose-50 text-rose-700 border-rose-200', label: { en: 'Heavy', es: 'Pesado' }, dot: 'bg-rose-500' },
-  unknown: { bar: 'bg-slate-300', badge: 'bg-slate-50 text-slate-600 border-slate-200', label: { en: 'No wait', es: 'Sin tiempo' }, dot: 'bg-slate-300' },
+  good: {
+    bar: 'bg-emerald-500',
+    badge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    meter: 'border-emerald-200 bg-emerald-50/80',
+    rail: 'bg-emerald-100',
+    waitText: 'text-emerald-950',
+    label: { en: 'Good', es: 'Bueno' },
+    dot: 'bg-emerald-500',
+  },
+  moderate: {
+    bar: 'bg-amber-500',
+    badge: 'bg-amber-50 text-amber-700 border-amber-200',
+    meter: 'border-amber-200 bg-amber-50/80',
+    rail: 'bg-amber-100',
+    waitText: 'text-amber-950',
+    label: { en: 'Moderate', es: 'Moderado' },
+    dot: 'bg-amber-500',
+  },
+  heavy: {
+    bar: 'bg-rose-500',
+    badge: 'bg-rose-50 text-rose-700 border-rose-200',
+    meter: 'border-rose-200 bg-rose-50/80',
+    rail: 'bg-rose-100',
+    waitText: 'text-rose-950',
+    label: { en: 'Heavy', es: 'Pesado' },
+    dot: 'bg-rose-500',
+  },
+  unknown: {
+    bar: 'bg-slate-300',
+    badge: 'bg-slate-50 text-slate-600 border-slate-200',
+    meter: 'border-slate-200 bg-slate-50',
+    rail: 'bg-slate-200',
+    waitText: 'text-slate-900',
+    label: { en: 'No wait', es: 'Sin tiempo' },
+    dot: 'bg-slate-300',
+  },
 };
 
 const PORT_STATUS_STYLES = {
@@ -177,6 +209,12 @@ export default function BorderCrossingCard({
 
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
   const trendColor = trend === 'up' ? 'text-rose-500' : trend === 'down' ? 'text-emerald-500' : 'text-slate-400';
+  const waitFillPct = wait == null ? 0 : Math.min(100, Math.max(8, Math.round((wait / 90) * 100)));
+  const trendLabel = trend === 'up'
+    ? (language === 'en' ? 'Rising' : 'Subiendo')
+    : trend === 'down'
+      ? (language === 'en' ? 'Dropping' : 'Bajando')
+      : (language === 'en' ? 'Steady' : 'Estable');
 
   // Lightest typical hour for today's day-of-week. Surfaces "best time today"
   // as an inline pill so users see actionable guidance without clicking through
@@ -258,8 +296,8 @@ export default function BorderCrossingCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(index * 0.02, 0.3) }}
     >
-      <Card className="h-full flex flex-col overflow-hidden border-slate-200 bg-white hover:shadow-md transition-shadow">
-        <div className={`h-1 ${s.bar}`} />
+      <Card className="h-full flex flex-col overflow-hidden rounded-lg border-slate-200/90 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950">
+        <div className={`h-1.5 ${s.bar}`} />
         <CardContent className="p-3 flex-1 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between gap-2 mb-1.5">
@@ -299,9 +337,6 @@ export default function BorderCrossingCard({
               </div>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
-              <Badge variant="outline" className={`text-[11px] font-medium whitespace-nowrap py-0 ${s.badge}`}>
-                {s.label[language] || s.label.en}
-              </Badge>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -361,72 +396,88 @@ export default function BorderCrossingCard({
           </div>
 
           {/* Wait time */}
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-slate-900 tabular-nums leading-none">
-              {wait == null ? '—' : wait}
-            </span>
-            <span className="text-xs text-slate-500">
-              {wait == null
-                ? (language === 'en'
-                  ? (isSouthbound ? 'no estimate' : 'not reported')
-                  : (isSouthbound ? 'sin estimación' : 'sin reporte'))
-                : 'min'}
-            </span>
-            {wait != null && (
-              <TrendIcon className={`w-3.5 h-3.5 ${trendColor}`} />
-            )}
+          <div className={`mt-2.5 rounded-lg border p-3 ${s.meter}`}>
+            <div className="flex items-end justify-between gap-3">
+              <div className="min-w-0">
+                <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                  {waitMetaLabel}
+                </div>
+                <div className="mt-1 flex items-baseline gap-2">
+                  <span className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>
+                    {wait == null ? '—' : wait}
+                  </span>
+                  <span className="text-xs font-medium text-slate-500">
+                    {wait == null
+                      ? (language === 'en'
+                        ? (isSouthbound ? 'no estimate' : 'not reported')
+                        : (isSouthbound ? 'sin estimación' : 'sin reporte'))
+                      : 'min'}
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col items-end gap-1 text-right">
+                <Badge variant="outline" className={`text-[11px] font-semibold whitespace-nowrap py-0 ${s.badge}`}>
+                  {s.label[language] || s.label.en}
+                </Badge>
+                {wait != null && (
+                  <span className={`inline-flex items-center gap-1 text-[10px] font-medium ${trendColor}`}>
+                    <TrendIcon className="w-3 h-3" />
+                    {trendLabel}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className={`mt-2.5 h-2 overflow-hidden rounded-full ${s.rail}`}>
+              <div
+                className={`h-full rounded-full ${s.bar}`}
+                style={{ width: `${waitFillPct}%` }}
+              />
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] tabular-nums">
+              {typicalDelta && (
+                <>
+                  {typicalDelta.delta > 15 && (
+                    <span className="font-medium text-rose-600">
+                      {language === 'en'
+                        ? `+${typicalDelta.delta} min vs. typical`
+                        : `+${typicalDelta.delta} min vs. lo normal`}
+                    </span>
+                  )}
+                  {typicalDelta.delta < -15 && (
+                    <span className="font-medium text-emerald-600">
+                      {language === 'en'
+                        ? `-${Math.abs(typicalDelta.delta)} min vs. typical`
+                        : `-${Math.abs(typicalDelta.delta)} min vs. lo normal`}
+                    </span>
+                  )}
+                  {typicalDelta.delta >= -15 && typicalDelta.delta <= 15 && (
+                    <span className="text-slate-600">
+                      {language === 'en' ? 'About typical' : 'Cerca de lo normal'}
+                    </span>
+                  )}
+                </>
+              )}
+
+              {showBestTimePill && cardSlug && (
+                <Link
+                  to={`/best-time/${cardSlug}`}
+                  className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 transition-colors hover:bg-white dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60"
+                  title={language === 'en'
+                    ? `Lightest typical hour today opens the full hour-by-hour pattern`
+                    : `Hora más ligera típica hoy abre el patrón hora por hora`}
+                >
+                  {language === 'en'
+                    ? `Best ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median}m)`
+                    : `Mejor ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median}m)`}
+                </Link>
+              )}
+            </div>
           </div>
 
-          {/* "vs. typical" comparison line */}
-          {typicalDelta && (
-            <div className="mt-1 text-[11px] tabular-nums">
-              {typicalDelta.delta > 15 && (
-                <span className="text-rose-600 font-medium">
-                  {language === 'en'
-                    ? `+${typicalDelta.delta} min vs. typical`
-                    : `+${typicalDelta.delta} min vs. lo normal`}
-                </span>
-              )}
-              {typicalDelta.delta < -15 && (
-                <span className="text-emerald-600 font-medium">
-                  {language === 'en'
-                    ? `−${Math.abs(typicalDelta.delta)} min vs. typical`
-                    : `−${Math.abs(typicalDelta.delta)} min vs. lo normal`}
-                </span>
-              )}
-              {typicalDelta.delta >= -15 && typicalDelta.delta <= 15 && (
-                <span className="text-slate-500">
-                  {language === 'en' ? '≈ typical' : '≈ normal'}
-                </span>
-              )}
-            </div>
-          )}
-
-          {/* "Best time today" pill — surfaces today's lightest hour from
-              the same aggregate the typicalDelta uses. Hidden when the
-              user is already in the lightest window (within 1 hour).
-              Suggested in ROADMAP to drive /best-time discovery. */}
-          {showBestTimePill && cardSlug && (
-            <div className="mt-1.5">
-              <Link
-                to={`/best-time/${cardSlug}`}
-                className="inline-flex items-center gap-1 rounded-full border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 text-[10px] font-medium text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 transition-colors"
-                title={language === 'en'
-                  ? `Lightest typical hour today — opens the full hour-by-hour pattern`
-                  : `Hora más ligera típica hoy — abre el patrón hora por hora`}
-              >
-                {language === 'en'
-                  ? `Best today: ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median} min)`
-                  : `Mejor hoy: ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median} min)`}
-              </Link>
-            </div>
-          )}
-
-          <div className="flex items-center gap-1 text-[11px] text-slate-500 mt-1.5">
+          <div className="flex items-center gap-1 text-[11px] text-slate-500 mt-2">
             <Clock className="w-3 h-3" />
-            <span className="truncate">{waitMetaLabel}</span>
+            <span className="truncate">{hoursLabel}</span>
           </div>
-          <div className="text-[11px] text-slate-500 mt-0.5 truncate">{hoursLabel}</div>
           {advisoryText && (
             <div className="mt-2 rounded-md border border-amber-200 bg-amber-50 px-2 py-1.5 text-[11px] text-amber-900">
               <span className="font-medium">{language === 'en' ? 'Advisory:' : 'Aviso:'}</span>{' '}

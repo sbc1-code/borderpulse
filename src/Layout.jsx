@@ -81,9 +81,7 @@ export default function Layout({ children }) {
   ];
 
   const isDark = theme === 'dark';
-  const bgShell = isDark
-    ? 'bg-gray-950'
-    : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50';
+  const bgShell = isDark ? 'bp-shell bp-shell-dark' : 'bp-shell';
   const sidebarClasses = isDark
     ? 'bg-gray-900/80 border-gray-800'
     : 'bg-white/80 border-slate-200';
@@ -99,15 +97,15 @@ export default function Layout({ children }) {
         {language === 'en' ? 'Skip to content' : 'Ir al contenido'}
       </a>
       {/* Mobile header */}
-      <div className={`lg:hidden ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
+      <div className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex min-w-0 items-center gap-2">
             <BorderPulseLogo size={32} />
-            <span className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+            <span className={`hidden truncate text-base font-bold sm:inline sm:text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Border Pulse
             </span>
           </Link>
-          <div className="flex items-center gap-1">
+          <div className="flex shrink-0 items-center gap-1">
             <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
               <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-7" aria-label="Switch to English">EN</Button>
               <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-7" aria-label="Cambiar a español">ES</Button>

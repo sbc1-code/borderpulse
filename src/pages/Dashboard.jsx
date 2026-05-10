@@ -15,6 +15,7 @@ import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
+import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
@@ -235,7 +236,7 @@ export default function Dashboard() {
 
   if (state.isLoading) {
     return (
-      <div className="p-3 sm:p-4 lg:p-6 max-w-[1600px] mx-auto space-y-3">
+      <div className="mx-auto w-full max-w-[1600px] overflow-x-hidden p-3 sm:p-4 lg:p-6 space-y-3">
         <div className="flex items-center gap-2 mb-4">
           <RefreshCw className="w-4 h-4 animate-spin text-slate-400" />
           <p className="text-sm text-slate-500">
@@ -250,7 +251,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-3 sm:p-4 lg:p-6 max-w-[1600px] mx-auto">
+    <div className="mx-auto w-full max-w-[1600px] overflow-x-hidden p-3 sm:p-4 lg:p-6">
       {/* Header */}
       <header className="mb-4 sm:mb-5">
         <motion.h1
@@ -305,7 +306,7 @@ export default function Dashboard() {
       <StaleDataBanner fetchedAt={state.fetchedAt} language={language} />
 
       {/* Direction toggle */}
-      <div className="flex rounded-lg p-1 mb-3 max-w-md mx-auto bg-slate-100 dark:bg-gray-800">
+      <div className="mx-auto mb-3 flex w-full max-w-[calc(100vw-1.5rem)] rounded-lg bg-slate-100 p-1 dark:bg-gray-800 sm:max-w-md">
         <Button
           variant={direction === 'northbound' ? 'default' : 'ghost'}
           size="sm"
@@ -330,7 +331,7 @@ export default function Dashboard() {
       </div>
 
       {direction === 'southbound' && (
-        <div className="max-w-3xl mx-auto mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+        <div className="mx-auto mb-4 w-full max-w-[calc(100vw-1.5rem)] rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900 sm:max-w-3xl">
           {language === 'en'
             ? 'To MX uses Border Pulse estimates at major crossings. Official port status, hours, and advisories are shown when available.'
             : 'Hacia MX usa estimaciones de Border Pulse en cruces principales. El estado oficial del puerto, horarios y avisos se muestran cuando están disponibles.'}
@@ -356,7 +357,7 @@ export default function Dashboard() {
         <>
           {/* Geolocation prompt — first-visit only (#7). One-tap consent. */}
           {showGeoPrompt && (
-            <div className="max-w-3xl mx-auto mb-3 flex items-center justify-between gap-3 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2">
+            <div className="mx-auto mb-3 flex w-full max-w-[calc(100vw-1.5rem)] flex-col gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 sm:max-w-3xl sm:flex-row sm:items-center sm:justify-between sm:gap-3">
               <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 min-w-0">
                 <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
                 <span className="truncate">
@@ -390,7 +391,7 @@ export default function Dashboard() {
           )}
 
           {/* Search + region filter */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 max-w-3xl mx-auto">
+          <div className="mx-auto mb-4 flex w-full max-w-[calc(100vw-1.5rem)] flex-col items-stretch gap-2 sm:max-w-3xl sm:flex-row sm:items-center">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
@@ -419,7 +420,7 @@ export default function Dashboard() {
                   variant={region === r.code ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => changeRegion(r.code)}
-                  className="text-xs h-8 px-3"
+                  className="h-8 shrink-0 px-3 text-xs"
                   aria-pressed={region === r.code}
                 >
                   {r.label[language] || r.label.en}
@@ -427,6 +428,13 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
+
+          <CommuterSnapshot
+            crossings={filteredCrossings}
+            selectedDirection={direction}
+            language={language}
+            regionLabel={regionLabelFor(region, language)}
+          />
 
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
@@ -449,7 +457,7 @@ export default function Dashboard() {
                 </Card>
               ) : (
                 <>
-                  <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
                     <p className="text-xs text-slate-500">
                       {language === 'en'
                         ? `Showing ${visibleCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
@@ -460,7 +468,7 @@ export default function Dashboard() {
                     {offlineCrossings.length > 0 && (
                       <button
                         onClick={() => setShowWithoutCurrentWaits((value) => !value)}
-                        className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white underline decoration-dotted"
+                        className="self-start text-left text-xs text-slate-500 underline decoration-dotted hover:text-slate-900 dark:hover:text-white sm:self-auto sm:text-right"
                       >
                         {showWithoutCurrentWaits
                           ? (language === 'en'

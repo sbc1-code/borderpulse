@@ -3,6 +3,32 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-10
+
+### Changed
+- **Dashboard visual comprehension pass.** Added a commuter-first snapshot
+  above the crossing grid with average wait, longest wait, quickest option,
+  heavy-crossing count, and the same green/amber/red wait scale used across
+  best-time surfaces. Reworked crossing cards so the current wait and severity
+  meter are the dominant visual read instead of buried inline text.
+- **Analytics view now uses semantic wait colors.** Replaced generic purple
+  bars with threshold colors, added a recent-average summary, lightest/peak
+  hour cards, wait-mix strip, bilingual legends, and clearer tooltip copy.
+- **Mobile scanability cleanup.** Location prompt, region filters, offline-wait
+  toggle row, and compact header now wrap/truncate more safely on narrow
+  screens.
+
+### Fixed
+- **Snapshot + analytics hero too tall on mobile.** Commuter snapshot dropped
+  from 490px to 267px on a 390px viewport (3 metric tiles now sit in a row
+  with tighter typography instead of stacking column). Analytics hero dropped
+  from 650px to 326px (4 KPI tiles now 2x2 instead of stacked, dark hero uses
+  inline scope label and tighter padding). First crossing card now lands much
+  closer to the fold for busy-commuter scanning.
+- **Dashboard loading state wrapper.** Matched the post-load wrapper classes
+  (`overflow-x-hidden`, `w-full max-w-[1600px]`) so the skeleton state does
+  not flash a different layout before data resolves.
+
 ## 2026-05-09
 
 QC follow-ups from issue #21 — the cleanup `bf348f8` started, finished
