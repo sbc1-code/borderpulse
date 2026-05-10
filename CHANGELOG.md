@@ -11,6 +11,13 @@ per-best-time OG cards, content + programmatic SEO expansion, and a
 big chart-readability pass after lay-reader feedback.
 
 ### Changed
+- **A11y on Dashboard.** Toggle buttons now carry `aria-pressed`
+  state (Analytics view, direction To US/To MX, region filters), so
+  screen readers announce which option is active. Search input got
+  an explicit `aria-label`. Partial pass on the older surfaces
+  flagged in ROADMAP — CrossingDetail's day pills already had
+  `role="tab"` + `aria-selected`; heatmap cells already had
+  per-cell `aria-label`.
 - **Heatmap chart readability, every surface.** The mono-red gradient
   was hard to skim — every cell looked alarming regardless of value.
   Replaced with a three-tier semantic scale matching the bar UI
@@ -44,6 +51,19 @@ big chart-readability pass after lay-reader feedback.
   all three when adding a pair).
 
 ### Added
+- **"Bringing prescription medication back from Mexico" (EN+ES)**,
+  first post in the `policy-programs` pillar. Plain-English walkthrough
+  of CBP/FDA/DEA rules: the personal-use 90-day standard, FDA approval,
+  prescription documentation, declaration requirement, and the
+  controlled-substance category that breaks the rule (opioids,
+  benzodiazepines, ADHD stimulants, sleep aids, etc.). Six official
+  sources (CBP, FDA, DEA, Drugs@FDA database). Brings the blog to
+  22 posts.
+- **5 new `/compare` seed pairs**: SY vs Tecate, Otay vs Tecate,
+  PdN vs Ysleta, Brownsville Gateway vs B&M, Brownsville Veterans
+  vs Los Indios. 15 compare pages total.
+- **4 new `/walk-or-drive` seed slugs**: Brownsville B&M, Nogales
+  Mariposa, San Luis I, Santa Teresa. 14 walk-or-drive pages total.
 - **Los Algodones border crossing guide (EN+ES)**, the first post
   in the `traveler-tips` pillar. Built from real Andrade aggregate
   data (overall median 15 min; lightest hour 5 AM at 5 min). Covers

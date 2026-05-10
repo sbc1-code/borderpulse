@@ -33,10 +33,11 @@ Ranked roughly by leverage. Pick what fits the available time.
 - [x] **Refactor: extract `usePersistentLanguage` hook** — shipped
       2026-05-09. `src/lib/useLanguage.js` is the single source; six
       inline copies removed.
-- [ ] **Accessibility deep-dive on older pages** — the new pages
-      (Embed, Api, BestTime, About) got an a11y pass. Dashboard,
-      CrossingDetail, Blog, Alerts have not. Sweep for missing
-      aria-labels, focus management, screen-reader friendliness.
+- [~] **Accessibility deep-dive on older pages** — partial pass
+      shipped 2026-05-09: Dashboard now carries `aria-pressed` on
+      toggle buttons + `aria-label` on search; CrossingDetail's
+      day pills + heatmap cells already had ARIA. Blog and Alerts
+      still pending a focused sweep.
 - [ ] **Sitemap submission** — submit `/sitemap.xml` to Google Search
       Console + Bing Webmaster Tools so the 100+ URLs get crawled
       faster. (Not a code task.)

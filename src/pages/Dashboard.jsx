@@ -277,6 +277,7 @@ export default function Dashboard() {
             size="sm"
             onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
             className="gap-1 h-8"
+            aria-pressed={view === 'analytics'}
           >
             <BarChart3 className="w-3.5 h-3.5" />
             <span className="text-xs">
@@ -310,6 +311,7 @@ export default function Dashboard() {
           size="sm"
           onClick={() => changeDirection('northbound')}
           className="flex-1 gap-2 h-9"
+          aria-pressed={direction === 'northbound'}
         >
           <ArrowUp className="w-4 h-4" />
           {language === 'en' ? 'To US' : 'Hacia EE.UU.'}
@@ -319,6 +321,7 @@ export default function Dashboard() {
           size="sm"
           onClick={() => changeDirection('southbound')}
           className="flex-1 gap-2 h-9"
+          aria-pressed={direction === 'southbound'}
           title={language === 'en' ? 'Estimated southbound delay at major crossings' : 'Demora estimada hacia México en cruces principales'}
         >
           <ArrowDown className="w-4 h-4" />
@@ -396,6 +399,7 @@ export default function Dashboard() {
                 placeholder={language === 'en' ? 'Search crossing or city (San Ysidro, Laredo, Nogales…)' : 'Buscar cruce o ciudad…'}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
                 className="w-full h-10 pl-9 pr-9 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
               />
               {search && (
@@ -416,6 +420,7 @@ export default function Dashboard() {
                   size="sm"
                   onClick={() => changeRegion(r.code)}
                   className="text-xs h-8 px-3"
+                  aria-pressed={region === r.code}
                 >
                   {r.label[language] || r.label.en}
                 </Button>

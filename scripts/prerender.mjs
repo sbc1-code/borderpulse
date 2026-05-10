@@ -577,13 +577,18 @@ async function main() {
   // routing patterns change.
   const COMPARE_PAIRS = [
     ['san-ysidro', 'otay-mesa'],
+    ['san-ysidro', 'tecate'],
+    ['otay-mesa', 'tecate'],
     ['el-paso-paso-del-norte-pdn', 'el-paso-bridge-of-the-americas-bota'],
+    ['el-paso-paso-del-norte-pdn', 'el-paso-ysleta'],
     ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-pharr'],
     ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-anzalduas-international-bridge'],
     ['nogales-deconcini', 'nogales-mariposa'],
     ['calexico-west', 'calexico-east'],
     ['eagle-pass-bridge-i', 'eagle-pass-bridge-ii'],
     ['brownsville-gateway', 'brownsville-veterans-international'],
+    ['brownsville-gateway', 'brownsville-b-and-m'],
+    ['brownsville-veterans-international', 'brownsville-los-indios'],
     ['laredo-bridge-i', 'laredo-bridge-ii'],
     ['progreso-progreso-international-bridge', 'progreso-donna-international-bridge'],
   ];
@@ -631,8 +636,12 @@ async function main() {
     'calexico-west',
     'calexico-east',
     'brownsville-gateway',
+    'brownsville-b-and-m',
     'nogales-deconcini',
+    'nogales-mariposa',
     'tecate',
+    'san-luis-san-luis-i',
+    'santa-teresa-santa-teresa-port-of-entry',
   ];
   let walkOrDriveCount = 0;
   for (const slug of WALK_OR_DRIVE_SLUGS) {
