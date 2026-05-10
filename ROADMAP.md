@@ -40,10 +40,9 @@ Ranked roughly by leverage. Pick what fits the available time.
 - [ ] **Sitemap submission** — submit `/sitemap.xml` to Google Search
       Console + Bing Webmaster Tools so the 100+ URLs get crawled
       faster. (Not a code task.)
-- [ ] **Card "best time today" pill** — surface today's lightest hour
-      directly on each homepage card so users discover `/best-time`
-      without going through the `···` menu. Consider this only if the
-      card density doesn't bloat.
+- [x] **Card "best time today" pill** — shipped 2026-05-09. Green
+      pill on each homepage card linking to /best-time/<slug>.
+      Suppressed when the user is already in the lightest window.
 
 ---
 

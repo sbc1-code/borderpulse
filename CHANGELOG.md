@@ -44,6 +44,17 @@ big chart-readability pass after lay-reader feedback.
   all three when adding a pair).
 
 ### Added
+- **"Best today" pill on every homepage card.** Shows today's
+  lightest typical hour and median ("Best today: 7 AM (~20 min)")
+  pulled from the same aggregate the "vs typical" line uses (no
+  extra fetch). Clickable: links to /best-time/<slug>. Suppressed
+  when the user is already in the lightest window (within ±1
+  hour). Drives /best-time discovery from the dashboard's hot path.
+  Closes the matching ROADMAP item.
+- **Desktop sidebar language toggle moved to the header** (under
+  the logo) so it's always visible. The previous bottom-of-sidebar
+  position was below the fold on tall pages — first regression I
+  introduced when I removed the Dashboard inline duplicate.
 - **`/compare/<slugA>-vs-<slugB>` programmatic SEO pages.** New
   `Compare.jsx` page renders two crossings side by side: live wait,
   today's lightest hour, 30-day median, sample count, plus a

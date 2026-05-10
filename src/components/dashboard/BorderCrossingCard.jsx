@@ -51,6 +51,12 @@ function summarizeNotice(text) {
   return `${firstSentence.slice(0, 157)}...`;
 }
 
+function formatHour12(h, lang) {
+  if (h == null) return '';
+  const suffix = h >= 12 ? (lang === 'en' ? 'PM' : 'p. m.') : (lang === 'en' ? 'AM' : 'a. m.');
+  return `${h % 12 || 12} ${suffix}`;
+}
+
 function formatUpdatedAt(value, language) {
   if (!value) return '';
   if (typeof value === 'string' && /T.*Z$/.test(value)) {
@@ -171,6 +177,30 @@ export default function BorderCrossingCard({
 
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
   const trendColor = trend === 'up' ? 'text-rose-500' : trend === 'down' ? 'text-emerald-500' : 'text-slate-400';
+
+  // Lightest typical hour for today's day-of-week. Surfaces "best time today"
+  // as an inline pill so users see actionable guidance without clicking through
+  // to /best-time. Northbound only — same reason as typicalDelta below.
+  const bestTimeToday = useMemo(() => {
+    if (isSouthbound) return null;
+    const byHour = aggregate?.by_hour;
+    if (!Array.isArray(byHour) || !byHour.length) return null;
+    const day = new Date().getDay();
+    const candidates = byHour
+      .filter((h) => h.day === day && typeof h.median === 'number' && (h.samples || h.sample_count || 0) >= 1)
+      .sort((a, b) => a.median - b.median);
+    if (!candidates.length) return null;
+    return { hour: candidates[0].hour, median: candidates[0].median };
+  }, [aggregate, isSouthbound]);
+
+  // Suppress the pill when the current hour IS the lightest hour — pointing
+  // a user to "leave at 8 AM" when it's currently 8 AM is noise. Within ±1
+  // hour we treat it as "you're in the window" and skip.
+  const showBestTimePill = useMemo(() => {
+    if (!bestTimeToday) return false;
+    const currentHour = new Date().getHours();
+    return Math.abs(bestTimeToday.hour - currentHour) > 1;
+  }, [bestTimeToday]);
 
   // "vs. typical" comparison vs. the historical median for this day-of-week + hour.
   // Only compute for northbound (CBP-backed) data; southbound waits are estimates
@@ -369,6 +399,26 @@ export default function BorderCrossingCard({
                   {language === 'en' ? '≈ typical' : '≈ normal'}
                 </span>
               )}
+            </div>
+          )}
+
+          {/* "Best time today" pill — surfaces today's lightest hour from
+              the same aggregate the typicalDelta uses. Hidden when the
+              user is already in the lightest window (within 1 hour).
+              Suggested in ROADMAP to drive /best-time discovery. */}
+          {showBestTimePill && cardSlug && (
+            <div className="mt-1.5">
+              <Link
+                to={`/best-time/${cardSlug}`}
+                className="inline-flex items-center gap-1 rounded-full border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 text-[10px] font-medium text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 transition-colors"
+                title={language === 'en'
+                  ? `Lightest typical hour today — opens the full hour-by-hour pattern`
+                  : `Hora más ligera típica hoy — abre el patrón hora por hora`}
+              >
+                {language === 'en'
+                  ? `Best today: ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median} min)`
+                  : `Mejor hoy: ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median} min)`}
+              </Link>
             </div>
           )}
 
