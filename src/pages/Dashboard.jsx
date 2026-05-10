@@ -22,6 +22,7 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
 import { buildSlugMap } from '@/lib/slugs';
 import { findNearestCrossing } from '@/lib/geo';
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -35,22 +36,6 @@ const regionLabelFor = (code, lang) => {
   const r = REGIONS.find((x) => x.code === code);
   return r ? (r.label[lang] || r.label.en) : '';
 };
-
-// Mirrors the pattern in CrossingDetail/Api/About/BestTime: read from
-// localStorage, then sync via storage events fired by the language toggle
-// in Layout.jsx. Sixth copy in the codebase — extraction queued as
-// follow-up.
-function usePersistentLanguage() {
-  const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === 'borderPulse_language' && e.newValue) setLang(e.newValue);
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-  return lang;
-}
 
 export default function Dashboard() {
   const [state, setState] = useState({

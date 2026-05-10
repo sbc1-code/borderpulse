@@ -6,8 +6,42 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 ## 2026-05-09
 
 QC follow-ups from issue #21 — the cleanup `bf348f8` started, finished
-across the surfaces it missed. Plus a UX fix to the language toggle and
-per-best-time OG cards for stronger share previews.
+across the surfaces it missed. Plus a UX fix to the language toggle,
+per-best-time OG cards, content + programmatic SEO expansion, and a
+big chart-readability pass after lay-reader feedback.
+
+### Changed
+- **Heatmap chart readability, every surface.** The mono-red gradient
+  was hard to skim — every cell looked alarming regardless of value.
+  Replaced with a three-tier semantic scale matching the bar UI
+  on /best-time: green = quick (under 30m), amber = typical (30-60m),
+  red = heavy (60m+), slate = not enough data. Also: hour labels are
+  now compact AM/PM (`12a`, `1a`, ... `12p`) instead of military time
+  (`0`, `1`, ... `23`). Cell labels include unit (`30m` not `30`).
+  Legend shows the value buckets and the ring meanings (Now /
+  Lightest). Applies to:
+  - `CrossingDetail.jsx` hourly heatmap (43 per-crossing pages)
+  - `components/blog/BestTimeChart.jsx` (used in 12 blog posts)
+  - 8 blog post bodies updated: caption changed from
+    "Darker red means a longer typical wait" to
+    "Green = quick (under 30m), amber = typical, red = heavy" (EN+ES)
+- **`/best-time` index gets a "How to read this" anchor card** above
+  the table so first-time visitors have a reference for what
+  "lightest hour" and the median value buckets mean.
+- **CrossingDetail "Compare with nearby" section now surfaces direct
+  links to the dedicated /compare page** when one of the seed pairs
+  matches the current crossing + a nearby one. Discovery layer for
+  the new programmatic SEO pages.
+
+### Refactored
+- **Extracted `usePersistentLanguage` to `src/lib/useLanguage.js`.**
+  Removed six inline copies (Dashboard, CrossingDetail, Api, About,
+  BestTime, Compare). Single source of truth. ROADMAP item closed.
+- **Extracted `comparePairs.js` to `src/lib/`**: `COMPARE_PAIRS`
+  constant + `comparePairsFor(slug)` helper. Mirrored in
+  `scripts/prerender.mjs` and `scripts/build-sitemap.mjs` (.mjs node
+  context can't easily import from src; kept in three places — update
+  all three when adding a pair).
 
 ### Added
 - **`/compare/<slugA>-vs-<slugB>` programmatic SEO pages.** New

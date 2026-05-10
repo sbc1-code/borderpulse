@@ -3,18 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Database, Lock, RefreshCw, BookOpen, Code as CodeIcon, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
-
-function usePersistentLanguage() {
-  const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === 'borderPulse_language' && e.newValue) setLang(e.newValue);
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-  return lang;
-}
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 function StatCard({ value, label, sub }) {
   return (

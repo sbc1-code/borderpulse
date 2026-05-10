@@ -6,6 +6,7 @@ import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings } from '@/lib/geo';
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 const DAY_LABELS = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -17,18 +18,6 @@ const DAY_SHORT = {
 };
 
 const MIN_SAMPLES = 1;
-
-function usePersistentLanguage() {
-  const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === 'borderPulse_language' && e.newValue) setLang(e.newValue);
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-  return lang;
-}
 
 function formatHour12(h, lang) {
   const suffix = h >= 12 ? (lang === 'en' ? 'PM' : 'p. m.') : (lang === 'en' ? 'AM' : 'a. m.');
@@ -195,6 +184,43 @@ export function BestTimeIndex() {
             : 'Ordenado por mediana de espera en la hora más ligera. Muestra rotativa de 30 días de U.S. Customs and Border Protection.'}
         </p>
       </header>
+
+      <div className="mb-4 rounded-lg border border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-900/40 px-4 py-3 text-xs text-slate-700 dark:text-slate-300">
+        <div className="font-semibold text-slate-900 dark:text-white mb-1.5">
+          {language === 'en' ? 'How to read this' : 'Cómo leer esta tabla'}
+        </div>
+        <ul className="space-y-1 list-disc pl-5">
+          <li>
+            {language === 'en'
+              ? 'Lightest hour is the time of day on this day-of-week with the lowest median wait over the last 30 days at that crossing.'
+              : 'La hora más ligera es el momento del día (en este día de la semana) con la mediana de espera más baja sobre los últimos 30 días en ese cruce.'}
+          </li>
+          <li>
+            {language === 'en' ? (
+              <>
+                Median is in minutes:{' '}
+                <span className="inline-flex items-center gap-1"><span className="inline-block w-2 h-2 rounded-full" style={{ background: 'rgb(16 185 129)' }} />under 30m = quick</span>{', '}
+                <span className="inline-flex items-center gap-1"><span className="inline-block w-2 h-2 rounded-full" style={{ background: 'rgb(245 158 11)' }} />30-60m = typical</span>{', '}
+                <span className="inline-flex items-center gap-1"><span className="inline-block w-2 h-2 rounded-full" style={{ background: 'rgb(244 63 94)' }} />60m+ = heavy</span>
+                .
+              </>
+            ) : (
+              <>
+                La mediana es en minutos:{' '}
+                <span className="inline-flex items-center gap-1"><span className="inline-block w-2 h-2 rounded-full" style={{ background: 'rgb(16 185 129)' }} />menos de 30m = rápido</span>{', '}
+                <span className="inline-flex items-center gap-1"><span className="inline-block w-2 h-2 rounded-full" style={{ background: 'rgb(245 158 11)' }} />30-60m = típico</span>{', '}
+                <span className="inline-flex items-center gap-1"><span className="inline-block w-2 h-2 rounded-full" style={{ background: 'rgb(244 63 94)' }} />60m+ = pesado</span>
+                .
+              </>
+            )}
+          </li>
+          <li>
+            {language === 'en'
+              ? 'Click any crossing to see its full hour-by-hour heatmap and the live wait right now.'
+              : 'Haz clic en cualquier cruce para ver el heatmap completo hora por hora y la espera en vivo.'}
+          </li>
+        </ul>
+      </div>
 
       <div className="rounded-lg border border-slate-200 dark:border-gray-700 overflow-hidden">
         <table className="w-full text-sm">

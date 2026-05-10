@@ -11,15 +11,23 @@ const STRINGS = {
     noData: (slug) => `No aggregate data available for ${slug}.`,
     loading: 'Loading 30 day pattern...',
     cell: (day, hour, val) => `${day} ${hour}: ${val} min`,
-    caption: 'Median northbound wait by hour and day, last 30 days. Darker red = longer wait. Source:',
+    caption: 'Median northbound wait by hour and day, last 30 days. Source:',
     sourceLabel: 'U.S. Customs and Border Protection',
+    legendQuick: 'Quick (under 30m)',
+    legendTypical: 'Typical (30 to 60m)',
+    legendHeavy: 'Heavy (60m+)',
+    legendNoData: 'Not enough data',
   },
   es: {
     noData: (slug) => `No hay datos agregados para ${slug}.`,
     loading: 'Cargando el patrón de los últimos 30 días...',
     cell: (day, hour, val) => `${day} ${hour}: ${val} min`,
-    caption: 'Mediana de espera hacia EE.UU. por hora y día, últimos 30 días. Rojo más oscuro = espera más larga. Fuente:',
+    caption: 'Mediana de espera hacia EE.UU. por hora y día, últimos 30 días. Fuente:',
     sourceLabel: 'U.S. Customs and Border Protection',
+    legendQuick: 'Rápido (menos de 30m)',
+    legendTypical: 'Típico (30 a 60m)',
+    legendHeavy: 'Pesado (60m+)',
+    legendNoData: 'Datos insuficientes',
   },
 };
 
@@ -29,13 +37,21 @@ function formatHour12(h) {
   return `${h12}${suffix}`;
 }
 
+// Compact AM/PM label for tight chart cells: "12a", "1a", "12p", "1p", etc.
+function formatHourCompact(h) {
+  const h12 = h % 12 || 12;
+  return `${h12}${h < 12 ? 'a' : 'p'}`;
+}
+
+// Three-tier semantic color for the heatmap. Matches the per-hour bar
+// scheme used in BestTime.jsx and the heatmap on /crossing/:slug so the
+// visual language is consistent across surfaces. Lay readers should be
+// able to skim and see green = quick without reading the legend.
 function colorFor(val) {
-  if (val == null) return 'rgb(241 245 249)';
-  const intensity = Math.min(100, (val / 90) * 100);
-  const r = Math.round(239 - intensity * 0.5);
-  const g = Math.round(68 + (100 - intensity) * 1.5);
-  const b = Math.round(68 + (100 - intensity) * 0.5);
-  return `rgb(${r}, ${g}, ${b})`;
+  if (val == null) return 'rgb(241 245 249)'; // slate-100
+  if (val < 30) return 'rgb(16 185 129)';     // emerald-500 — quick
+  if (val < 60) return 'rgb(245 158 11)';     // amber-500 — typical
+  return 'rgb(244 63 94)';                    // rose-500 — heavy
 }
 
 export default function BestTimeChart({ slug, title }) {
@@ -89,8 +105,8 @@ export default function BestTimeChart({ slug, title }) {
             <tr>
               <th className="w-10"></th>
               {Array.from({ length: 24 }, (_, h) => (
-                <th key={h} className="px-1 py-1 text-slate-500 font-normal text-center">
-                  {h % 3 === 0 ? formatHour12(h) : ''}
+                <th key={h} className="px-0.5 py-1 text-slate-500 font-normal text-center">
+                  {h % 2 === 0 ? formatHourCompact(h) : ''}
                 </th>
               ))}
             </tr>
@@ -115,6 +131,24 @@ export default function BestTimeChart({ slug, title }) {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-2 text-[11px] text-slate-500">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded" style={{ background: 'rgb(16 185 129)' }} />
+          {t.legendQuick}
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded" style={{ background: 'rgb(245 158 11)' }} />
+          {t.legendTypical}
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded" style={{ background: 'rgb(244 63 94)' }} />
+          {t.legendHeavy}
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded bg-slate-200 dark:bg-gray-700" />
+          {t.legendNoData}
+        </span>
       </div>
       <figcaption className="text-xs text-slate-500 mt-2">
         {t.caption}{' '}

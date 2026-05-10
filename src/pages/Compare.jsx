@@ -6,24 +6,13 @@ import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 // /compare/<slugA>-vs-<slugB> — side-by-side live wait + 30-day pattern.
 // The pair is parsed from the single :pair param so we don't have to add a
 // new dynamic-segment shape (and so the URL reads naturally as one slug).
 
 const MIN_SAMPLES = 1;
-
-function usePersistentLanguage() {
-  const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === 'borderPulse_language' && e.newValue) setLang(e.newValue);
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-  return lang;
-}
 
 function formatHour12(h, lang) {
   if (h == null) return '';

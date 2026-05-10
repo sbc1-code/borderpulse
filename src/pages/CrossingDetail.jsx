@@ -11,6 +11,8 @@ import { getHoursSummary } from '@/components/utils/crossingMeta';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings, kmToMiles } from '@/lib/geo';
+import { comparePairsFor } from '@/lib/comparePairs';
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -24,18 +26,6 @@ const DAY_PILL_ORDER = [1, 2, 3, 4, 5, 6, 0];
 // 30-day lookback gives ~4 samples per (day, hour) bucket at best, often
 // just 1 due to refresh-cadence drift; treat any observation as signal.
 const MIN_SAMPLES = 1;
-
-function usePersistentLanguage() {
-  const [lang, setLang] = useState(() => localStorage.getItem('borderPulse_language') || 'en');
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === 'borderPulse_language' && e.newValue) setLang(e.newValue);
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-  return lang;
-}
 
 function pickBestHour(hours, dayIdx) {
   if (!hours || !hours.length) return null;
@@ -55,6 +45,32 @@ function formatHour12(h, lang) {
   const h12 = h % 12 || 12;
   return `${h12} ${suffix}`;
 }
+
+// Compact AM/PM label for tight chart cells: "12a", "1a", "12p", "1p", etc.
+// Same convention in EN and ES so the chart reads at a glance regardless
+// of language.
+function formatHourCompact(h) {
+  const h12 = h % 12 || 12;
+  return `${h12}${h < 12 ? 'a' : 'p'}`;
+}
+
+// Three-tier semantic color for the heatmap. Matches the per-hour bar
+// scheme used in BestTime.jsx so the visual language is consistent across
+// the per-crossing detail and the /best-time hub. Lay readers should be
+// able to skim and see green = good without reading the legend.
+function tierFor(val) {
+  if (val == null) return 'sparse';
+  if (val < 30) return 'good';
+  if (val < 60) return 'typical';
+  return 'heavy';
+}
+
+const TIER_BG = {
+  sparse: 'rgb(241 245 249)',  // slate-100
+  good: 'rgb(16 185 129)',     // emerald-500
+  typical: 'rgb(245 158 11)',  // amber-500
+  heavy: 'rgb(244 63 94)',     // rose-500
+};
 
 function formatDistance(km, lang) {
   if (km == null || !Number.isFinite(km)) return '';
@@ -502,21 +518,20 @@ export default function CrossingDetail() {
                   const val = sparse ? null : slot.median;
                   const isBest = !sparse && bestForSelected && bestForSelected.hour === h;
                   const isCurrent = isViewingToday && h === currentHour;
-                  const intensity = val == null ? 0 : Math.min(100, (val / 90) * 100);
 
-                  // Color: light gray for sparse; otherwise heat-mapped red→amber.
-                  const bg = sparse
-                    ? 'rgb(241 245 249)'
-                    : `rgb(${Math.round(239 - intensity * 0.5)}, ${Math.round(68 + (100 - intensity) * 1.5)}, ${Math.round(68 + (100 - intensity) * 0.5)})`;
-
-                  // White text on filled bars (high contrast); slate on empty.
+                  // Three-tier semantic color: green = quick (under 30m),
+                  // amber = typical (30-60m), red = heavy (60m+). Matches
+                  // the bars on /best-time. Mono-red gradient was hard to
+                  // skim — every cell looked alarming regardless of value.
+                  const tier = tierFor(val);
+                  const bg = TIER_BG[tier];
                   const textColor = sparse ? 'text-slate-400' : 'text-white';
 
                   // Ring layering: current hour (sky) wins; otherwise best (emerald).
                   const ringClass = isCurrent
                     ? 'ring-2 ring-offset-1 ring-sky-500 dark:ring-offset-gray-900'
                     : isBest
-                    ? 'ring-2 ring-emerald-500'
+                    ? 'ring-2 ring-slate-900 dark:ring-white'
                     : '';
 
                   const title = sparse
@@ -532,7 +547,7 @@ export default function CrossingDetail() {
                         aria-label={title}
                       >
                         <span className={`text-[10px] sm:text-xs font-semibold tabular-nums ${textColor}`}>
-                          {sparse ? '' : val}
+                          {sparse ? '' : `${val}m`}
                         </span>
                       </div>
                       <span
@@ -542,25 +557,37 @@ export default function CrossingDetail() {
                             : 'text-slate-500'
                         }`}
                       >
-                        {h}
+                        {formatHourCompact(h)}
                       </span>
                     </div>
                   );
                 })}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 mt-3 text-[11px] text-slate-500">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-3 text-[11px] text-slate-500">
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="inline-block w-3 h-3 rounded ring-2 ring-sky-500" />
-                  {language === 'en' ? 'Current hour' : 'Hora actual'}
+                  <span className="inline-block w-3 h-3 rounded" style={{ background: TIER_BG.good }} />
+                  {language === 'en' ? 'Quick (under 30m)' : 'Rápido (menos de 30m)'}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="inline-block w-3 h-3 rounded ring-2 ring-emerald-500" />
-                  {language === 'en' ? 'Lightest hour' : 'Hora más ligera'}
+                  <span className="inline-block w-3 h-3 rounded" style={{ background: TIER_BG.typical }} />
+                  {language === 'en' ? 'Typical (30 to 60m)' : 'Típico (30 a 60m)'}
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-block w-3 h-3 rounded" style={{ background: TIER_BG.heavy }} />
+                  {language === 'en' ? 'Heavy (60m+)' : 'Pesado (60m+)'}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="inline-block w-3 h-3 rounded bg-slate-200 dark:bg-gray-700" />
                   {language === 'en' ? 'Not enough data' : 'Datos insuficientes'}
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-block w-3 h-3 rounded ring-2 ring-sky-500" />
+                  {language === 'en' ? 'Now' : 'Ahora'}
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-block w-3 h-3 rounded ring-2 ring-slate-900 dark:ring-white" />
+                  {language === 'en' ? 'Lightest' : 'Más ligero'}
                 </span>
               </div>
             </CardContent>
@@ -657,6 +684,27 @@ export default function CrossingDetail() {
               );
             })}
           </div>
+          {comparePairsFor(canonicalSlug).length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+              <span className="text-slate-500">
+                {language === 'en' ? 'Side-by-side comparisons:' : 'Comparaciones lado a lado:'}
+              </span>
+              {comparePairsFor(canonicalSlug).map(({ otherSlug, path }) => {
+                const other = state.crossings.find((c) => portToSlug[c.port_number] === otherSlug);
+                if (!other) return null;
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium hover:underline"
+                  >
+                    {language === 'en' ? 'vs' : 'vs'} {other.name}
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </section>
       )}
 
