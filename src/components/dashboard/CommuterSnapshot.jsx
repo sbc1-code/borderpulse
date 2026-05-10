@@ -1,18 +1,11 @@
 import React, { useMemo } from 'react';
 import { Activity, AlertTriangle, Clock, MapPin, TrendingDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { getStatusForWait, getWaitMinutes } from '@/components/utils/crossingDirection';
 
-function formatWait(wait, language) {
+function formatWait(wait) {
   if (wait == null) return '—';
-  return language === 'en' ? `${wait} min` : `${wait} min`;
-}
-
-function getWaitTier(wait) {
-  if (wait == null) return 'unknown';
-  if (wait < 15) return 'good';
-  if (wait < 45) return 'moderate';
-  return 'heavy';
+  return `${wait} min`;
 }
 
 const TIER_META = {
@@ -95,7 +88,7 @@ export default function CommuterSnapshot({
     const sorted = [...reporting].sort((a, b) => a.wait - b.wait);
     const avg = Math.round(reporting.reduce((sum, row) => sum + row.wait, 0) / reporting.length);
     const counts = reporting.reduce((acc, row) => {
-      acc[getWaitTier(row.wait)] += 1;
+      acc[getStatusForWait(row.wait)] += 1;
       return acc;
     }, { good: 0, moderate: 0, heavy: 0 });
 
@@ -106,7 +99,7 @@ export default function CommuterSnapshot({
       fastest: sorted[0],
       slowest: sorted[sorted.length - 1],
       counts,
-      overallTier: getWaitTier(avg),
+      overallTier: getStatusForWait(avg),
     };
   }, [crossings, selectedDirection]);
 
@@ -142,7 +135,7 @@ export default function CommuterSnapshot({
                 {language === 'en' ? 'Right now' : 'Ahora'}
               </p>
               <p className="mt-0.5 text-3xl font-bold leading-none tabular-nums sm:text-4xl">
-                {formatWait(stats.avg, language)}
+                {formatWait(stats.avg)}
               </p>
             </div>
             <div className="shrink-0 text-right text-[11px] leading-tight text-slate-400">
@@ -165,14 +158,14 @@ export default function CommuterSnapshot({
           <SnapshotMetric
             icon={AlertTriangle}
             label={language === 'en' ? 'Longest wait' : 'Mayor espera'}
-            value={formatWait(stats.slowest?.wait, language)}
+            value={formatWait(stats.slowest?.wait)}
             detail={stats.slowest?.crossing?.name || (language === 'en' ? 'No current report' : 'Sin reporte actual')}
             tone={stats.slowest?.wait >= 45 ? 'rose' : stats.slowest?.wait >= 15 ? 'amber' : 'slate'}
           />
           <SnapshotMetric
             icon={TrendingDown}
             label={language === 'en' ? 'Quickest option' : 'Opción más rápida'}
-            value={formatWait(stats.fastest?.wait, language)}
+            value={formatWait(stats.fastest?.wait)}
             detail={stats.fastest?.crossing?.name || (language === 'en' ? 'No current report' : 'Sin reporte actual')}
             tone="emerald"
           />

@@ -34,9 +34,9 @@ function formatHour(hour, language) {
   return `${hour % 12 || 12}${suffix}`;
 }
 
-function formatWait(wait, language) {
+function formatWait(wait) {
   if (wait == null) return '—';
-  return language === 'en' ? `${wait} min` : `${wait} min`;
+  return `${wait} min`;
 }
 
 function summaryLabel(tier, language) {
