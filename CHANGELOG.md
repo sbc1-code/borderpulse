@@ -11,13 +11,13 @@ per-best-time OG cards, content + programmatic SEO expansion, and a
 big chart-readability pass after lay-reader feedback.
 
 ### Changed
-- **A11y on Dashboard.** Toggle buttons now carry `aria-pressed`
-  state (Analytics view, direction To US/To MX, region filters), so
-  screen readers announce which option is active. Search input got
-  an explicit `aria-label`. Partial pass on the older surfaces
-  flagged in ROADMAP — CrossingDetail's day pills already had
-  `role="tab"` + `aria-selected`; heatmap cells already had
-  per-cell `aria-label`.
+- **A11y on Dashboard + Blog.** Dashboard toggle buttons now carry
+  `aria-pressed` state (Analytics view, direction To US/To MX,
+  region filters); search input got an explicit `aria-label`. Blog
+  filter tabs (All/English/Español) got `aria-pressed` + a
+  `role="group"` with `aria-label="Filter posts by language"`.
+  CrossingDetail and Alerts already had ARIA on their interactive
+  elements (verified during the pass). ROADMAP a11y item now closed.
 - **Heatmap chart readability, every surface.** The mono-red gradient
   was hard to skim — every cell looked alarming regardless of value.
   Replaced with a three-tier semantic scale matching the bar UI
@@ -51,6 +51,16 @@ big chart-readability pass after lay-reader feedback.
   all three when adding a pair).
 
 ### Added
+- **"SENTRI renewal 2026: step by step" (EN+ES)**, third post in
+  `policy-programs`. Walks the actual current TTP-portal flow:
+  6-12 month renewal window, conditional approval (the part most
+  people miss), interview-or-no-interview discretion, the
+  re-fingerprinting at renewal that catches travelers who think
+  they can skip it, common timing failures, denial reasons.
+  Three official sources (CBP SENTRI, TTP DHS portal, CBP TTP hub).
+  Long-tail SEO winner per the blog research dossier (SENTRI
+  renewal step-by-step is in the Top 25 queries). Brings the
+  blog to 26 posts.
 - **"Bringing your dog back from Mexico: 2024 CDC rule" (EN+ES)**,
   second post in the `policy-programs` pillar. Plain-English breakdown
   of the August 2024 CDC change: the U.S.-vs-Mexico vaccination

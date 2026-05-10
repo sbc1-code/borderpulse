@@ -68,14 +68,14 @@ export default function Blog() {
         </p>
       </header>
 
-      <div className="mb-6 flex items-center gap-2">
-        <button onClick={() => setFilter('all')} className={tabClass(filter === 'all')}>
+      <div className="mb-6 flex items-center gap-2" role="group" aria-label="Filter posts by language">
+        <button onClick={() => setFilter('all')} className={tabClass(filter === 'all')} aria-pressed={filter === 'all'}>
           {STRINGS.en.all} ({all.length})
         </button>
-        <button onClick={() => setFilter('en')} className={tabClass(filter === 'en')}>
+        <button onClick={() => setFilter('en')} className={tabClass(filter === 'en')} aria-pressed={filter === 'en'}>
           English ({en.length})
         </button>
-        <button onClick={() => setFilter('es')} className={tabClass(filter === 'es')}>
+        <button onClick={() => setFilter('es')} className={tabClass(filter === 'es')} aria-pressed={filter === 'es'}>
           Español ({es.length})
         </button>
       </div>
