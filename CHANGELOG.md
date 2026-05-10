@@ -44,6 +44,18 @@ big chart-readability pass after lay-reader feedback.
   all three when adding a pair).
 
 ### Added
+- **Los Algodones border crossing guide (EN+ES)**, the first post
+  in the `traveler-tips` pillar. Built from real Andrade aggregate
+  data (overall median 15 min; lightest hour 5 AM at 5 min). Covers
+  the 10 PM port-closure trap, documents needed both directions,
+  prescription rules (CBP-sourced, not the pharmacy's), $800 duty
+  exemption, $10K currency declaration, the 2024 CDC dog rule,
+  Quechan parking, and snowbird-season patterns. Strictly neutral
+  (no clinic affiliations) — directly answers the gap the blog
+  research dossier flagged: every incumbent ranking for "Algodones
+  border crossing" is clinic-owned. Links to 6 official sources
+  (CBP, INM, CDC, DOS) per the source-linking policy. Brings the
+  blog to 20 posts.
 - **`/walk-or-drive/<slug>` decision page.** Side-by-side comparison
   of vehicle vs pedestrian wait at the same crossing, with a "Right
   now" recommendation that names the verdict (Walk / Drive / It's a
