@@ -1,10 +1,26 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Copy, Share2, Check } from 'lucide-react';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 
-function buildStatusText(crossings, language, direction) {
+function formatHourCompact(h) {
+  if (h == null) return '';
+  const h12 = h % 12 || 12;
+  return `${h12}${h < 12 ? 'a' : 'p'}`;
+}
+
+// Pull today's lightest hour for a slug from the aggregate, if loaded.
+function lightestTodayFor(aggregate) {
+  if (!aggregate?.by_hour?.length) return null;
+  const today = new Date().getDay();
+  const candidates = aggregate.by_hour
+    .filter((h) => h.day === today && typeof h.median === 'number' && (h.samples || h.sample_count || 0) >= 1)
+    .sort((a, b) => a.median - b.median);
+  return candidates[0] || null;
+}
+
+function buildStatusText(crossings, language, direction, portToSlug, aggregates) {
   const now = new Date();
   const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const directionLabel = direction === 'southbound'
@@ -13,21 +29,73 @@ function buildStatusText(crossings, language, direction) {
   const header = language === 'en'
     ? `🚦 Border Wait Times ${directionLabel} (${time}):`
     : `🚦 Tiempos de Espera ${directionLabel} (${time}):`;
+  const isNorthbound = direction !== 'southbound';
   const lines = crossings
     .filter((c) => getWaitMinutes(c, direction) != null)
     .slice(0, 17)
-    .map((c) => `${c.name} ${getWaitMinutes(c, direction)}min`);
+    .map((c) => {
+      const wait = getWaitMinutes(c, direction);
+      const slug = portToSlug?.[c.port_number];
+      // "best at Xh" annotation only on northbound (aggregates are NB only)
+      // and only when aggregate has loaded for this slug.
+      let annotation = '';
+      if (isNorthbound && slug && aggregates?.[slug]) {
+        const best = lightestTodayFor(aggregates[slug]);
+        if (best && best.hour != null) {
+          annotation = language === 'en'
+            ? ` (best ${formatHourCompact(best.hour)})`
+            : ` (mejor ${formatHourCompact(best.hour)})`;
+        }
+      }
+      return `${c.name} ${wait}min${annotation}`;
+    });
   const footer = language === 'en'
     ? '📲 Real-time updates: borderpulse.com'
     : '📲 Actualizaciones en vivo: borderpulse.com';
   return [header, '', ...lines, '', footer].join('\n');
 }
 
-export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound' }) {
+export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound', portToSlug }) {
   const [copied, setCopied] = useState(false);
+  const [aggregates, setAggregates] = useState({});
+
+  // Lazy-fetch aggregates for the top 17 NB crossings on open. Browser
+  // cache already has most of these from BorderCrossingCard's per-card
+  // fetch, so this is fast in practice. SB shares skip this since
+  // aggregates are NB-only.
+  useEffect(() => {
+    if (!open || direction === 'southbound' || !portToSlug) return;
+    const slugs = (crossings || [])
+      .filter((c) => getWaitMinutes(c, direction) != null)
+      .slice(0, 17)
+      .map((c) => portToSlug[c.port_number])
+      .filter(Boolean)
+      .filter((s) => !aggregates[s]);
+    if (!slugs.length) return;
+    let cancelled = false;
+    Promise.all(
+      slugs.map((s) =>
+        fetch(`/data/aggregates/${s}.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null)
+          .then((agg) => [s, agg]),
+      ),
+    ).then((entries) => {
+      if (cancelled) return;
+      setAggregates((prev) => {
+        const next = { ...prev };
+        for (const [s, agg] of entries) {
+          if (agg) next[s] = agg;
+        }
+        return next;
+      });
+    });
+    return () => { cancelled = true; };
+  }, [open, direction, crossings, portToSlug, aggregates]);
+
   const text = useMemo(
-    () => buildStatusText(crossings || [], language, direction),
-    [crossings, language, direction],
+    () => buildStatusText(crossings || [], language, direction, portToSlug, aggregates),
+    [crossings, language, direction, portToSlug, aggregates],
   );
 
   const copy = async () => {

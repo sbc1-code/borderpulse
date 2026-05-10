@@ -51,6 +51,20 @@ big chart-readability pass after lay-reader feedback.
   all three when adding a pair).
 
 ### Added
+- **"Bringing your dog back from Mexico: 2024 CDC rule" (EN+ES)**,
+  second post in the `policy-programs` pillar. Plain-English breakdown
+  of the August 2024 CDC change: the U.S.-vs-Mexico vaccination
+  two-track system, the documentation set every dog needs at U.S.
+  land ports (CDC Dog Import Form receipt, ISO microchip, U.S.-issued
+  rabies certificate listing the chip number, age 6 months+), the
+  ISO-microchip detail that turns dogs back, common failure modes,
+  what CBP officers actually check at the booth. Three CDC/CBP
+  sources. Brings the blog to 24 posts.
+- **WhatsApp share now inlines today's lightest hour** per crossing.
+  ShareModal lazy-fetches aggregates on open (browser cache from
+  cards usually serves them) and appends "(best 7a)" / "(mejor 7a)"
+  to each line of the share text. Northbound only (aggregates are
+  NB-only); southbound shares stay clean. ROADMAP item closed.
 - **"Bringing prescription medication back from Mexico" (EN+ES)**,
   first post in the `policy-programs` pillar. Plain-English walkthrough
   of CBP/FDA/DEA rules: the personal-use 90-day standard, FDA approval,

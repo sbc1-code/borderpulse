@@ -61,9 +61,9 @@ Ranked roughly by leverage. Pick what fits the available time.
       per crossing (≈300 EN + 300 ES = 600 pages). Hold until core
       `/best-time/:slug` ranks; then expand only for the high-traffic
       slugs.
-- [ ] **WhatsApp-formatted share card with best time included** —
-      enhance the existing `ShareModal` to inline today's lightest
-      hour. Small touch; would help share-conversion.
+- [x] **WhatsApp-formatted share card with best time included** —
+      shipped 2026-05-09. ShareModal lazy-fetches aggregates and
+      inlines "(best 7a)" per crossing. NB only.
 - [ ] **Migrate CBP fetch off GH Actions cron** — only if cadence
       reliability becomes a competitive issue. Options: Cloudflare
       Workers cron, external cron service. Today the cost (worse UX,

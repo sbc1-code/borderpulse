@@ -597,6 +597,7 @@ export default function Dashboard() {
         crossings={sortedCrossings}
         language={language}
         direction={direction}
+        portToSlug={portToSlug}
       />
     </div>
   );
