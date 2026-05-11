@@ -25,6 +25,26 @@ updates:
           - "react"
           - "react-dom"
           - "react-router-dom"
+    # Ignore major bumps on packages that need intentional migration sprints.
+    # Closed PR #4 (React 18→19, RR 6→7) as proof — those bumps are not drop-ins.
+    # Revisit with explicit migration tickets; remove the ignore when ready.
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-router-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-day-picker"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "date-fns"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "lucide-react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react-dom"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
