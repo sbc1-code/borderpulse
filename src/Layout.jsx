@@ -215,6 +215,13 @@ export default function Layout({ children }) {
             <Link to="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
             </Link>
+            <span>·</span>
+            <Link
+              to={language === 'es' ? '/metodologia' : '/methodology'}
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              {language === 'es' ? 'Metodología' : 'Methodology'}
+            </Link>
           </div>
           <span>© {new Date().getFullYear()} Border Pulse</span>
         </div>

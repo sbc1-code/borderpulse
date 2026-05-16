@@ -19,6 +19,7 @@ const BestTimeIndex = lazy(() =>
   import('@/pages/BestTime').then((m) => ({ default: m.BestTimeIndex })),
 );
 const About = lazy(() => import('@/pages/About'));
+const Methodology = lazy(() => import('@/pages/Methodology'));
 const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
 
@@ -45,6 +46,8 @@ function LayoutRoutes() {
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/api" element={<Api />} />
           <Route path="/about" element={<About />} />
+          <Route path="/methodology" element={<Methodology lang="en" />} />
+          <Route path="/metodologia" element={<Methodology lang="es" />} />
           <Route path="/compare/:pair" element={<Compare />} />
           <Route path="/walk-or-drive/:slug" element={<WalkOrDrive />} />
           <Route path="*" element={<Navigate to="/" replace />} />

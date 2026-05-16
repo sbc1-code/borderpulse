@@ -1,17 +1,23 @@
 name: Mode A anomaly scan
 
 on:
-  # Cron disabled until Sebastian opts in. Manual trigger only.
-  # Uses the free template-based drafter (draft-from-anomaly.mjs), no API key
-  # required. To switch to the LLM drafter later, set USE_LLM_DRAFTER=1 and add
-  # ANTHROPIC_API_KEY secret.
-  # schedule:
-  #   - cron: '0 14 * * *'
+  # Hourly cron drives the inline anomaly callouts on /crossing/<slug>: every
+  # run regenerates public/data/anomalies.json from the latest aggregates and
+  # commits it (chore(data) prefix → deploy.yml skips). The draft-PR flow
+  # stays manual (workflow_dispatch only) so the cron never spams PRs.
+  # To enable LLM drafting later, add ANTHROPIC_API_KEY to repo secrets and
+  # wire draft-from-anomaly-llm.mjs in.
+  schedule:
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
   pull-requests: write
+
+concurrency:
+  group: anomaly-scan
+  cancel-in-progress: false
 
 jobs:
   scan:
@@ -35,7 +41,20 @@ jobs:
       - name: Detect anomalies
         run: node scripts/detect-anomalies.mjs
 
-      - name: Check for anomalies
+      - name: Commit anomalies.json (always)
+        run: |
+          git config user.name "borderpulse-bot"
+          git config user.email "207095575+sbc1-code@users.noreply.github.com"
+          git add public/data/anomalies.json
+          if git diff --cached --quiet; then
+            echo "anomalies.json unchanged. Nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore(data): refresh anomalies"
+          git push
+
+      - name: Check for anomalies (drafter)
+        if: github.event_name == 'workflow_dispatch'
         id: check
         run: |
           COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('drafts/blog/auto-a/queue.json','utf8')); console.log((d.anomalies || []).length);")
@@ -43,18 +62,16 @@ jobs:
           echo "Detected $COUNT anomalies."
 
       - name: Draft posts from anomalies (template-based, no API cost)
-        if: steps.check.outputs.anomaly_count != '0'
+        if: github.event_name == 'workflow_dispatch' && steps.check.outputs.anomaly_count != '0'
         run: node scripts/draft-from-anomaly.mjs
 
       - name: Commit drafts and open PR
-        if: steps.check.outputs.anomaly_count != '0'
+        if: github.event_name == 'workflow_dispatch' && steps.check.outputs.anomaly_count != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           DATE=$(date -u +%Y-%m-%d)
           BRANCH="auto-a/drafts-$DATE"
-          git config user.name "borderpulse-bot"
-          git config user.email "207095575+sbc1-code@users.noreply.github.com"
           git checkout -b "$BRANCH"
           # Only add the generated draft MDX files (queue.json is gitignored).
           git add drafts/blog/auto-a/*.mdx || true
