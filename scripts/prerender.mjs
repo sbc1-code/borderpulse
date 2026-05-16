@@ -564,6 +564,49 @@ async function main() {
     embedPageCount++;
   }
 
+  // /methodology + /metodologia — twin bilingual routes, hreflang-paired.
+  {
+    const enCanonical = `${BASE}/methodology`;
+    const esCanonical = `${BASE}/metodologia`;
+    const hreflangs = [
+      { lang: 'en', href: enCanonical },
+      { lang: 'es', href: esCanonical },
+      { lang: 'x-default', href: enCanonical },
+    ];
+    const breadcrumbFor = (canonical, label) => ({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+        { '@type': 'ListItem', position: 2, name: label, item: canonical },
+      ],
+    });
+    const enHead = {
+      title: 'Methodology | Border Pulse',
+      desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, 15-minute refresh cadence, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
+      canonical: enCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [breadcrumbFor(enCanonical, 'Methodology')],
+      hreflangs,
+    };
+    const esHead = {
+      title: 'Metodología | Border Pulse',
+      desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia de 15 minutos, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
+      canonical: esCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [breadcrumbFor(esCanonical, 'Metodología')],
+      hreflangs,
+    };
+    const enHtml = rewriteIndex(indexWithLinks, enHead);
+    const esHtml = rewriteIndex(indexWithLinks, esHead);
+    const enDir = path.resolve(distDir, 'methodology');
+    const esDir = path.resolve(distDir, 'metodologia');
+    fs.mkdirSync(enDir, { recursive: true });
+    fs.mkdirSync(esDir, { recursive: true });
+    fs.writeFileSync(path.resolve(enDir, 'index.html'), enHtml);
+    fs.writeFileSync(path.resolve(esDir, 'index.html'), esHtml);
+  }
+
   // /about — trust signal page with methodology + public stats + privacy
   {
     const aboutHead = {
