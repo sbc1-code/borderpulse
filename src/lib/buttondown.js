@@ -9,9 +9,22 @@
 const USERNAME = import.meta.env.VITE_BUTTONDOWN_USERNAME || 'Digito-bp';
 const ENDPOINT = `https://buttondown.com/api/emails/embed-subscribe/${USERNAME}`;
 const QUEUE_KEY = 'borderPulse_newsletterQueue_v1';
+// Cap drain runs so a maliciously stuffed queue (e.g. via a separate XSS or
+// shared-device tampering) can't be used to spam Buttondown from our origin.
+const MAX_DRAIN_PER_CALL = 10;
+// Tag values are user-derived (source includes location.pathname). Cap their
+// length defensively before sending to a third party — both to keep payloads
+// small and to avoid forwarding accidentally-long path data.
+const MAX_TAG_LEN = 80;
 
 export function emailValid(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((email || '').trim());
+}
+
+function clampTag(v) {
+  if (v == null) return '';
+  // Strip commas (the tag list is comma-joined) and trim length.
+  return String(v).replace(/,/g, ' ').slice(0, MAX_TAG_LEN);
 }
 
 async function postEmail(email, metadata = {}) {
@@ -19,6 +32,7 @@ async function postEmail(email, metadata = {}) {
   body.set('email', email.trim());
   // Buttondown ignores unknown fields gracefully; tags help downstream segmentation.
   const tags = [metadata.source, metadata.variant, metadata.language]
+    .map(clampTag)
     .filter(Boolean)
     .join(',');
   if (tags) body.set('tags', tags);
@@ -26,6 +40,11 @@ async function postEmail(email, metadata = {}) {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body.toString(),
+    // Explicit: only send our origin to the third party, never the full URL.
+    referrerPolicy: 'origin',
+    // No cookies — we don't have any, and this is a third-party request.
+    credentials: 'omit',
+    mode: 'cors',
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return true;
@@ -34,7 +53,8 @@ async function postEmail(email, metadata = {}) {
 function readQueue() {
   try {
     const raw = localStorage.getItem(QUEUE_KEY);
-    return raw ? JSON.parse(raw) : [];
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
     return [];
   }
@@ -52,26 +72,38 @@ function queueLocally(payload) {
   writeQueue(arr);
 }
 
+let draining = false;
+
 // Best-effort: replay any signups captured before this endpoint existed.
 // Fire-and-forget; we clear items as they succeed so we don't double-post.
+// Caps the number of items posted per call so a stuffed queue can't be turned
+// into a spam cannon on page load.
 export async function drainQueue() {
   if (typeof window === 'undefined') return;
-  const items = readQueue();
-  if (!items.length) return;
-  const remaining = [];
-  for (const item of items) {
-    if (!item || !emailValid(item.email)) continue;
-    try {
-      await postEmail(item.email, {
-        source: item.source,
-        variant: item.variant,
-        language: item.language,
-      });
-    } catch {
-      remaining.push(item);
+  if (draining) return;
+  const all = readQueue();
+  if (!all.length) return;
+  draining = true;
+  try {
+    const toTry = all.slice(0, MAX_DRAIN_PER_CALL);
+    const rest = all.slice(MAX_DRAIN_PER_CALL);
+    const remaining = [];
+    for (const item of toTry) {
+      if (!item || typeof item !== 'object' || !emailValid(item.email)) continue;
+      try {
+        await postEmail(item.email, {
+          source: item.source,
+          variant: item.variant,
+          language: item.language,
+        });
+      } catch {
+        remaining.push(item);
+      }
     }
+    writeQueue([...remaining, ...rest]);
+  } finally {
+    draining = false;
   }
-  writeQueue(remaining);
 }
 
 export async function subscribe(email, metadata = {}) {

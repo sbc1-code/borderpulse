@@ -179,6 +179,45 @@ export default function About() {
         </ul>
       </section>
 
+      {/* Newsletter / email handling */}
+      <section id="newsletter" className="mb-8 scroll-mt-20">
+        <h2 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wide mb-3 flex items-center gap-2">
+          <Lock className="w-4 h-4 text-emerald-600" />
+          {language === 'en' ? 'Newsletter and email' : 'Newsletter y correo'}
+        </h2>
+        <div className="space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p>
+            {language === 'en'
+              ? 'If you subscribe to the Border Pulse newsletter, your email address is sent to Buttondown — the third-party service that hosts the list and delivers the emails. Border Pulse does not run its own mail server.'
+              : 'Si te suscribes al newsletter de Border Pulse, tu correo se envía a Buttondown — el servicio externo que aloja la lista y entrega los correos. Border Pulse no opera su propio servidor de correo.'}
+          </p>
+          <p>
+            {language === 'en' ? (
+              <>
+                What Buttondown receives from your browser: your email address, a short tag describing where on the site you subscribed (e.g. footer, blog post, sticky banner), and the standard request metadata any web server sees (IP address, user agent, the borderpulse.com origin). Their privacy policy is at{' '}
+                <a href="https://buttondown.com/privacy" target="_blank" rel="noopener noreferrer" className="underline text-emerald-700 dark:text-emerald-400">
+                  buttondown.com/privacy
+                </a>
+                .
+              </>
+            ) : (
+              <>
+                Lo que Buttondown recibe de tu navegador: tu correo, una etiqueta corta indicando dónde te suscribiste (p. ej. footer, post, banner), y los metadatos estándar que cualquier servidor web ve (IP, user agent, el origen borderpulse.com). Su política de privacidad está en{' '}
+                <a href="https://buttondown.com/privacy" target="_blank" rel="noopener noreferrer" className="underline text-emerald-700 dark:text-emerald-400">
+                  buttondown.com/privacy
+                </a>
+                .
+              </>
+            )}
+          </p>
+          <p>
+            {language === 'en'
+              ? 'Every email includes a one-click unsubscribe link. We don\'t sell, share, or repurpose the list for anything outside of the newsletter itself.'
+              : 'Cada correo incluye un enlace de baja con un clic. No vendemos, compartimos ni reutilizamos la lista fuera del propio newsletter.'}
+          </p>
+        </div>
+      </section>
+
       {/* Quick links */}
       <section className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Link

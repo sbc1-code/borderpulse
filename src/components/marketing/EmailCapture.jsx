@@ -1,6 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, Loader2, Check } from 'lucide-react';
 import { subscribe, drainQueue } from '@/lib/buttondown';
+
+// Minimum gap between submit attempts on the same form. A trivial speed bump
+// to keep a human (or impatient script) from hammering the third-party
+// endpoint from our page. Buttondown does their own rate-limiting upstream;
+// this is just defense in depth on our side.
+const MIN_SUBMIT_INTERVAL_MS = 2000;
 
 const COPY = {
   inline: {
@@ -62,6 +69,9 @@ export default function EmailCapture({
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
+  // Honeypot: hidden field bots tend to fill. Humans never see/touch it.
+  const [hpUrl, setHpUrl] = useState('');
+  const lastSubmitRef = useRef(0);
 
   // Best-effort flush of any localStorage queue on mount. Runs at most once
   // per page load — harmless if the queue is empty.
@@ -74,6 +84,15 @@ export default function EmailCapture({
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (status === 'loading') return;
+    // Honeypot tripped — silently pretend success so bots don't learn anything.
+    if (hpUrl) {
+      setStatus('success');
+      return;
+    }
+    const now = Date.now();
+    if (now - lastSubmitRef.current < MIN_SUBMIT_INTERVAL_MS) return;
+    lastSubmitRef.current = now;
     setError(null);
     setStatus('loading');
     const result = await subscribe(email, { source, language, variant });
@@ -126,6 +145,19 @@ export default function EmailCapture({
           </div>
         </div>
       )}
+      {/* Honeypot. Hidden from sighted users + assistive tech; bots see and fill it. */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+        <label htmlFor={`hp-url-${variant}-${source}`}>Website</label>
+        <input
+          id={`hp-url-${variant}-${source}`}
+          type="text"
+          name="hp_url"
+          tabIndex={-1}
+          autoComplete="off"
+          value={hpUrl}
+          onChange={(ev) => setHpUrl(ev.target.value)}
+        />
+      </div>
       <div className="flex flex-col gap-2 sm:flex-row">
         <label className="sr-only" htmlFor={`email-${variant}-${source}`}>
           {copy.placeholder}
@@ -156,9 +188,41 @@ export default function EmailCapture({
         </div>
       )}
       <div className="mt-2 text-[11px] text-slate-400 dark:text-slate-500">
-        {language === 'en'
-          ? 'No spam. Unsubscribe in one click.'
-          : 'Sin spam. Cancela con un clic.'}
+        {language === 'en' ? (
+          <>
+            No spam. Unsubscribe in one click. Your email is sent to{' '}
+            <a
+              href="https://buttondown.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-slate-700 dark:hover:text-slate-300"
+            >
+              Buttondown
+            </a>
+            , which delivers the newsletter.{' '}
+            <Link to="/about#newsletter" className="underline hover:text-slate-700 dark:hover:text-slate-300">
+              Details
+            </Link>
+            .
+          </>
+        ) : (
+          <>
+            Sin spam. Cancela con un clic. Tu correo se envía a{' '}
+            <a
+              href="https://buttondown.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-slate-700 dark:hover:text-slate-300"
+            >
+              Buttondown
+            </a>
+            , que entrega el newsletter.{' '}
+            <Link to="/about#newsletter" className="underline hover:text-slate-700 dark:hover:text-slate-300">
+              Detalles
+            </Link>
+            .
+          </>
+        )}
       </div>
     </form>
   );
