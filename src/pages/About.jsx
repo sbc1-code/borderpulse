@@ -209,25 +209,6 @@ export default function About({ forceLanguage } = {}) {
               ? 'The site exists because the official CBP feed is real-time but unfriendly, the data is rich but never aggregated, and nobody publishes a bilingual version. So this does.'
               : 'El sitio existe porque el feed oficial de CBP es en tiempo real pero poco amigable, los datos son ricos pero nunca se agregan, y nadie publica una versión bilingüe. Esto sí.'}
           </p>
-          <p>
-            {language === 'en' ? (
-              <>
-                Cross-border digital operations consulting is available — see{' '}
-                <Link to="/services" className="text-emerald-700 dark:text-emerald-400 underline">
-                  /services
-                </Link>{' '}
-                for the audit.
-              </>
-            ) : (
-              <>
-                Consultoría de operaciones digitales transfronterizas disponible — ve{' '}
-                <Link to="/servicios" className="text-emerald-700 dark:text-emerald-400 underline">
-                  /servicios
-                </Link>{' '}
-                para la auditoría.
-              </>
-            )}
-          </p>
         </div>
       </section>
 

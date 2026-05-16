@@ -17,10 +17,6 @@ Ranked roughly by leverage. Pick what fits the available time.
       (Resend behind a Cloudflare Worker, Buttondown, or ConvertKit
       hosted form) and set the env var in the deploy environment.
       Drain the localStorage queue once on launch.
-- [ ] **Wire Stripe audit checkout.** `/services` reads
-      `VITE_STRIPE_AUDIT_LINK` — set it to a Stripe Payment Link for
-      the $1,500 audit. Until set, the primary CTA falls back to a
-      "reserve a slot" email capture (also works).
 - [ ] **Hreflang for `/best-time/:slug` ES variants** — same pattern
       now in place for `/services` ↔ `/servicios`, `/about` ↔ `/sobre`,
       `/pro` ↔ `/pro-es`. Extend to `/mejor-hora/:slug` next when ES

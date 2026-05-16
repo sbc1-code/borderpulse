@@ -555,43 +555,6 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
   }
 
-  // /services & /servicios — cross-border digital ops audit pitch.
-  {
-    const head = {
-      title: 'Services — Cross-border digital ops audit ($1,500, 10 days, EN+ES) | Border Pulse',
-      desc: 'A 10-day cross-border digital operations audit for freight, maquila, customs brokers, and US companies with Mexican supply chains. Bilingual EN+ES delivery. $1,500 flat.',
-      canonical: `${BASE}/services`,
-      ogImage: `${BASE}/og-card.png`,
-      jsonLd: [{
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        name: 'Cross-border digital ops audit',
-        description: '10-day audit of cross-border digital operations: analytics, conversion paths, freight UX, EN/ES parity. Delivered bilingual.',
-        provider: { '@type': 'Person', name: 'Sebastian Becerra' },
-        areaServed: ['US', 'MX'],
-        offers: { '@type': 'Offer', price: '1500', priceCurrency: 'USD' },
-        url: `${BASE}/services`,
-      }],
-    };
-    const html = rewriteIndex(indexWithLinks, head);
-    const outDir = path.resolve(distDir, 'services');
-    fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
-  }
-  {
-    const head = {
-      title: 'Servicios — Auditoría digital transfronteriza ($1,500, 10 días, EN+ES) | Border Pulse',
-      desc: 'Auditoría digital transfronteriza de 10 días para transporte, maquila, aduanales y empresas EE.UU. con cadena MX. Entregable bilingüe EN+ES, $1,500 plano.',
-      canonical: `${BASE}/servicios`,
-      ogImage: `${BASE}/og-card.png`,
-      jsonLd: [],
-    };
-    const html = rewriteIndex(indexWithLinks, head);
-    const outDir = path.resolve(distDir, 'servicios');
-    fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
-  }
-
   // /pro & /pro-es — coming-soon paid tier + waitlist.
   {
     const head = {

@@ -3,6 +3,59 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-16 (later that day)
+
+Pulled the paid-audit pitch back out — Sebastian wants more value layered
+into the free product before any pricing surface enters the picture.
+Replaced the would-be conversion layer with content-experience wins on
+the blog. Pro waitlist + newsletter capture stay.
+
+### Removed
+- **`/services` + `/servicios`** entirely. `Services.jsx`, both routes,
+  footer links, Stripe `VITE_STRIPE_AUDIT_LINK` env var references,
+  sitemap entries, and the prerendered HTML shells are gone. All
+  $1,500 audit pricing copy stripped. The router catch-all (already
+  in place) redirects stale `/services` links to `/`.
+- **`PostCta` ops branch.** Was: route ops/freight posts to /services,
+  newsletter for everything else. Now: always newsletter. Tag heuristic
+  + `cta: ops` frontmatter check removed.
+- **`EmailCapture` audit variant.** Only consumer was Services; gone
+  with the page. Inline / banner / footer / waitlist variants stay.
+
+### Added (blog content experience)
+- **Reading time** in the blog post header. Computed at runtime from
+  the raw MDX (`?raw` Vite glob), code-blocks + JSX tags stripped,
+  220 wpm. Shows next to the pillar/language pills.
+- **Auto-anchor H2s + table of contents.** The custom `mdxComponents.h2`
+  now emits an `id` derived from the heading text (Spanish accents
+  normalized so `## Mejor hora` → `mejor-hora`). When a post has ≥3
+  H2s, `PostToc` renders sticky on the right at `lg:` breakpoint and
+  collapsible at top of body on mobile. Shorter posts skip the TOC.
+- **Related posts** at the bottom of every post. `getRelatedPosts(slug)`
+  scores other same-language posts by pillar match (×3) + tag overlap,
+  ties broken by recency, top 3 shown in a 3-column grid above the
+  footer disclaimer.
+
+### Kept (from the morning's work)
+- Email capture (inline / banner / footer / waitlist variants).
+- Sticky dismissible newsletter banner mounted in `Layout`.
+- Footer Newsletter + Pro + About + Sobre links.
+- Inline email capture injected after the first H2 of every blog post.
+- Dashboard `#newsletter` footer section.
+- `/pro` + `/pro-es` waitlist pages.
+- `/sobre` Spanish-canonical alias of `/about`.
+- Analytics Peak / Lightest / Heaviest tile bug fix (≥2 populated
+  buckets with ≥2 distinct averages before computing).
+
+### Decisions
+- No pricing surface on the site until the free product earns more
+  trust. Pro waitlist is fine — it's signal collection without a price
+  attached.
+- Reading time + TOC + related posts computed at runtime via `?raw`
+  MDX glob. Blog runtime chunk grew (~56KB gzip) — accepted because it
+  only ships on /blog and /blog/:slug, not in the homepage critical
+  path, and avoids coupling build-blog-index.mjs to the runtime.
+
 ## 2026-05-16
 
 Conversion layer landed. The site is still a data project at the top of the

@@ -21,7 +21,6 @@ const BestTimeIndex = lazy(() =>
 const About = lazy(() => import('@/pages/About'));
 const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
-const Services = lazy(() => import('@/pages/Services'));
 const Pro = lazy(() => import('@/pages/Pro'));
 
 function RouteFallback() {
@@ -49,11 +48,9 @@ function LayoutRoutes() {
           {/* About: /about (EN-canonical) and /sobre (ES-canonical) render the
               same component. The `forceLanguage` prop makes the language match
               the URL on landing while preserving the EN/ES toggle. Same
-              pattern for /services & /servicios and /pro & /pro-es. */}
+              pattern for /pro & /pro-es. */}
           <Route path="/about" element={<About forceLanguage="en" />} />
           <Route path="/sobre" element={<About forceLanguage="es" />} />
-          <Route path="/services" element={<Services forceLanguage="en" />} />
-          <Route path="/servicios" element={<Services forceLanguage="es" />} />
           <Route path="/pro" element={<Pro forceLanguage="en" />} />
           <Route path="/pro-es" element={<Pro forceLanguage="es" />} />
           <Route path="/compare/:pair" element={<Compare />} />

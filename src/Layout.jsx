@@ -213,10 +213,6 @@ export default function Layout({ children }) {
               {language === 'en' ? 'Free public API' : 'API pública gratuita'}
             </Link>
             <span>·</span>
-            <Link to={language === 'es' ? '/servicios' : '/services'} className="hover:text-slate-900 dark:hover:text-white transition-colors">
-              {language === 'en' ? 'Services' : 'Servicios'}
-            </Link>
-            <span>·</span>
             <Link to={language === 'es' ? '/pro-es' : '/pro'} className="hover:text-slate-900 dark:hover:text-white transition-colors">
               Pro
             </Link>

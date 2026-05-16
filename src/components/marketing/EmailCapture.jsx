@@ -74,22 +74,6 @@ const COPY = {
       success: 'En la lista. Te avisamos cuando abramos Pro.',
     },
   },
-  audit: {
-    en: {
-      headline: 'Reserve a slot',
-      sub: '10-day cross-border digital ops audit. $1,500. Bilingual EN+ES delivery.',
-      placeholder: 'work@email.com',
-      cta: 'Request the audit',
-      success: 'Got it. Sebastian will email you within 24h.',
-    },
-    es: {
-      headline: 'Reserva un cupo',
-      sub: 'Auditoría digital transfronteriza de 10 días. $1,500. Entrega bilingüe EN+ES.',
-      placeholder: 'correo@empresa.com',
-      cta: 'Solicitar auditoría',
-      success: 'Recibido. Sebastián te escribe en menos de 24h.',
-    },
-  },
 };
 
 function emailValid(email) {

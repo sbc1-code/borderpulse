@@ -4,6 +4,7 @@ import OfficialSource from './OfficialSource';
 import BestTimeChart from './BestTimeChart';
 import EmailCapture from '../marketing/EmailCapture';
 import { LangContext } from '@/lib/LangContext';
+import { slugifyHeading } from '@/lib/headingSlug';
 
 function CrossingLink({ slug, children }) {
   return (
@@ -25,16 +26,32 @@ export function resetActivePost() {
   renderState = null;
 }
 
+// Best-effort text extraction so we can derive a TOC slug from heading
+// children. MDX may give us nested elements (links, code spans, etc.), so we
+// walk recursively.
+function getTextContent(children) {
+  if (children == null || children === false) return '';
+  if (typeof children === 'string' || typeof children === 'number') return String(children);
+  if (Array.isArray(children)) return children.map(getTextContent).join('');
+  if (children.props && children.props.children) return getTextContent(children.props.children);
+  return '';
+}
+
 function H2WithCapture(props) {
   const ctx = useContext(LangContext);
   const lang = renderState?.lang || ctx || 'en';
-  let injectCapture = false;
+
+  // Auto-anchor: emit an `id` so the TOC links can scroll to this heading.
+  // If the MDX author already set an id, respect it.
+  const text = getTextContent(props.children);
+  const id = props.id || (text ? slugifyHeading(text) : undefined);
+  const h2 = <h2 {...props} id={id} />;
+
   if (renderState && !renderState.seenH2) {
     renderState.seenH2 = true;
-    injectCapture = false; // inject AFTER this H2 by rendering capture below
     return (
       <>
-        <h2 {...props} />
+        {h2}
         <aside
           className="not-prose my-6"
           aria-label={lang === 'en' ? 'Newsletter signup' : 'Suscripción al boletín'}
@@ -48,7 +65,7 @@ function H2WithCapture(props) {
       </>
     );
   }
-  return <h2 {...props} />;
+  return h2;
 }
 
 export const mdxComponents = {

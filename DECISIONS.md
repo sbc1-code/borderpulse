@@ -48,32 +48,41 @@ Format: date · one-line decision · short why.
 
 ## 2026-05-16
 
-- **Conversion layer added, but no top-nav promotion.** Services/Pro/About
-  live in the footer only. The dashboard is still the headline; ops
-  pitch + paid tier are deliberately below-the-fold so the data product
-  remains the front door.
-- **Spanish-canonical URLs over toggle-only routes for new pages.**
-  `/services` vs `/servicios`, `/about` vs `/sobre`, `/pro` vs `/pro-es`.
-  Each route forces its language at mount and emits its own canonical +
-  hreflang pairs in the prerendered shell. Same direction as the
-  ROADMAP "Hreflang for ES variants" item — starting the pattern on
-  marketing pages where ES SEO has the most leverage.
+- **No pricing surface yet.** `/services` + `/servicios` were built and
+  then pulled the same day. Reason: free product needs to earn more
+  trust before any paid offer enters the picture. Pro waitlist stays
+  (signal collection without a price tag is fine).
+- **`/sobre` Spanish-canonical alias of `/about`** — kept. Pattern
+  proven on the marketing pages even though /services + /servicios got
+  pulled; same direction as the ROADMAP "Hreflang for ES variants"
+  item. Worth extending next to `/best-time/:slug` → `/mejor-hora/:slug`
+  when ES organic on best-time pages picks up.
 - **Email capture is wire-compatible, not wired.** `EmailCapture` posts
   to `VITE_NEWSLETTER_ENDPOINT` if set, otherwise queues to
-  localStorage. Reason: GitHub Pages can't hold a Resend API key
-  safely; the form needs to be real on launch day either way. Sebastian
-  picks the provider later (Resend behind a Cloudflare Worker, or
-  Buttondown / ConvertKit hosted form) — no code change required to
-  wire it, just the env var.
-- **Stripe checkout is a placeholder, not a live integration.** Reason:
-  same as above (no place to put the secret). `/services` reads
-  `VITE_STRIPE_AUDIT_LINK` and falls back to a "reserve a slot" email
-  capture when unset. Avoids fake checkout buttons.
+  localStorage (`borderPulse_newsletterQueue_v1`). Reason: GitHub Pages
+  can't hold a Resend API key safely; the form needs to be real on
+  launch day either way. Provider TBD (Resend behind a Cloudflare
+  Worker, Buttondown, or ConvertKit hosted form) — no code change
+  required to wire it, just the env var.
 - **Analytics tiles surface "—" rather than identical peak/lightest.**
-  The fix gates Peak/Lightest/Heaviest behind ≥2 populated buckets
-  with ≥2 distinct averages. Showing the same hour as both peak AND
-  lightest is worse than admitting the data is thin — analytics
-  surfaces need to earn trust on day one.
+  Gates Peak/Lightest/Heaviest behind ≥2 populated buckets with ≥2
+  distinct averages. Showing the same hour as both peak AND lightest
+  is worse than admitting the data is thin — analytics surfaces need
+  to earn trust on day one.
+- **Reading time + TOC + related posts computed at runtime via `?raw`
+  MDX glob.** Blog runtime chunk grew (~56KB gzip) — accepted because
+  it only ships on /blog and /blog/:slug (lazy-loaded, not in the
+  homepage critical path) and avoids coupling build-blog-index.mjs to
+  the runtime via a generated meta file. If the bundle grows past
+  ~200KB gzip, move the precompute into build-blog-index and ship a
+  generated `_meta.js`.
+- **Blog TOC only when ≥3 H2s.** Shorter posts get visual noise from a
+  1-2 entry TOC; the data-analysis posts that benefit all comfortably
+  clear the bar.
+- **Auto-anchor H2 IDs use a shared slugify** (`src/lib/headingSlug.js`)
+  so the same string the MDX h2 emits as `id` is what the TOC builds
+  its `href` from. Spanish accents normalized via NFKD so `## Mejor
+  hora` becomes `mejor-hora`, not `m_ jor-hora` or a query-unsafe id.
 
 ---
 
