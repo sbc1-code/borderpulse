@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
+import EmailCapture from '@/components/marketing/EmailCapture';
+import StickyEmailBanner from '@/components/marketing/StickyEmailBanner';
 
 const SB_MARK = (
   <span className="inline-flex items-center gap-1 font-semibold">
@@ -194,6 +196,9 @@ export default function Layout({ children }) {
 
       {/* Footer (all viewports) */}
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>
+        <div className="max-w-[1600px] mx-auto px-4 pt-4 pb-2">
+          <EmailCapture variant="footer" source={`footer:${location.pathname}`} language={language} className="max-w-xl" />
+        </div>
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
             <a href="https://sbc1-code.github.io/portfolio/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors">
@@ -219,6 +224,7 @@ export default function Layout({ children }) {
           <span>© {new Date().getFullYear()} Border Pulse</span>
         </div>
       </footer>
+      <StickyEmailBanner />
     </div>
   );
 }

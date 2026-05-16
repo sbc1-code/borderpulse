@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { MDXProvider } from '@mdx-js/react';
@@ -7,6 +7,8 @@ import { getPost, getAuthor, pillarLabel, listPosts } from '@/lib/blog-runtime';
 import { mdxComponents } from '@/components/blog/MdxComponents';
 import { LangContext } from '@/lib/LangContext';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
+import EmailCapture from '@/components/marketing/EmailCapture';
+import InlineAfterFirstH2 from '@/components/marketing/InlineAfterFirstH2';
 
 const STRINGS = {
   en: {
@@ -73,6 +75,8 @@ export default function BlogPost() {
   const twin = findTwin(post, allPosts);
   const twinLangLabel = twin?.frontmatter.lang === 'es' ? 'Español' : 'English';
 
+  const proseRef = useRef(null);
+
   return (
     <article className="p-3 sm:p-4 lg:p-6 max-w-[760px] mx-auto" lang={lang}>
       <div className="mb-4">
@@ -109,12 +113,19 @@ export default function BlogPost() {
         )}
       </header>
 
-      <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-a:text-emerald-700 dark:prose-a:text-emerald-400 prose-a:underline">
+      <div
+        ref={proseRef}
+        className="prose prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-a:text-emerald-700 dark:prose-a:text-emerald-400 prose-a:underline"
+      >
         <LangContext.Provider value={lang}>
           <MDXProvider components={mdxComponents}>
             <Body />
           </MDXProvider>
         </LangContext.Provider>
+      </div>
+      <InlineAfterFirstH2 containerRef={proseRef} source={`blog:${slug}`} language={lang} />
+      <div className="mt-8">
+        <EmailCapture variant="inline" source={`blog-end:${slug}`} language={lang} />
       </div>
 
       <footer className="mt-10 border-t border-slate-200 dark:border-gray-800 pt-4 text-xs text-slate-500">
