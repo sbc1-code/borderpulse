@@ -13,6 +13,39 @@ import {
   YAxis,
 } from 'recharts';
 import { getAllHistory } from '@/components/utils/waitTimeHistory';
+import { getStorageKey } from '@/components/utils/crossingDirection';
+
+// Auto-derived volume proxy: sum of CBP-published lanes_open across all lane
+// types in the current snapshot. San Ysidro is ~42 lanes, Andrade ~3, etc. —
+// tracks BTS port-volume rankings closely. CBP republishes lane counts every
+// 15 min so the weight stays current with no manual table to maintain.
+function portWeight(crossing) {
+  const L = crossing?.lanes || {};
+  let total = 0;
+  for (const key in L) {
+    const lane = L[key];
+    if (lane && typeof lane.lanes_open === 'number') total += lane.lanes_open;
+  }
+  return total;
+}
+
+// Weighted median: walk sample-weight pairs sorted by value, return the value
+// where cumulative weight first crosses half the total weight. Median (not
+// mean) matches the rest of the codebase — a 240-min outlier won't drag the
+// signal the way it does with a weighted mean.
+function weightedMedian(pairs) {
+  if (!pairs.length) return null;
+  const sorted = [...pairs].sort((a, b) => a.v - b.v);
+  const totalW = sorted.reduce((s, p) => s + p.w, 0);
+  if (totalW <= 0) return null;
+  const target = totalW / 2;
+  let cum = 0;
+  for (const p of sorted) {
+    cum += p.w;
+    if (cum >= target) return p.v;
+  }
+  return sorted[sorted.length - 1].v;
+}
 
 const WAIT_COLORS = {
   good: '#10b981',
@@ -159,50 +192,73 @@ function ChartLegend({ language }) {
 }
 
 export default function AnalyticsView({ crossings, language, direction = 'northbound' }) {
+  // Map storage key -> port weight from current CBP snapshot. Re-derived on
+  // each crossings update; ports absent from the current feed are skipped
+  // rather than down-weighted to 1, since that would re-introduce the
+  // 43-equal-port flattening bug we're fixing here.
+  const portWeights = useMemo(() => {
+    const out = {};
+    for (const c of crossings || []) {
+      const id = getStorageKey(c.port_number || c.id, direction);
+      if (!id) continue;
+      const w = portWeight(c);
+      if (w > 0) out[id] = w;
+    }
+    return out;
+  }, [crossings, direction]);
+
   const byHour = useMemo(() => {
     const all = getAllHistory(direction);
-    const buckets = Array.from({ length: 24 }, (_, h) => ({ hour: h, sum: 0, n: 0 }));
+    const buckets = Array.from({ length: 24 }, (_, h) => ({ hour: h, pairs: [], n: 0 }));
     for (const id in all) {
+      const w = portWeights[id];
+      if (!w) continue;
       for (const sample of all[id]) {
         const h = new Date(sample.t).getHours();
-        buckets[h].sum += sample.wait;
+        buckets[h].pairs.push({ v: sample.wait, w });
         buckets[h].n += 1;
       }
     }
     return buckets.map((b) => ({
       hour: b.hour,
       hourLabel: formatHour(b.hour, language),
-      avg: b.n ? Math.round(b.sum / b.n) : null,
+      avg: weightedMedian(b.pairs),
       n: b.n,
     }));
-  }, [direction, language]);
+  }, [direction, language, portWeights]);
 
   const byDow = useMemo(() => {
     const all = getAllHistory(direction);
     const names = language === 'en'
       ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
       : ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-    const buckets = Array.from({ length: 7 }, () => ({ sum: 0, n: 0 }));
+    const buckets = Array.from({ length: 7 }, () => ({ pairs: [], n: 0 }));
     for (const id in all) {
+      const w = portWeights[id];
+      if (!w) continue;
       for (const sample of all[id]) {
         const d = new Date(sample.t).getDay();
-        buckets[d].sum += sample.wait;
+        buckets[d].pairs.push({ v: sample.wait, w });
         buckets[d].n += 1;
       }
     }
     return buckets.map((b, i) => ({
       day: names[i],
-      avg: b.n ? Math.round(b.sum / b.n) : null,
+      avg: weightedMedian(b.pairs),
       n: b.n,
     }));
-  }, [direction, language]);
+  }, [direction, language, portWeights]);
 
   const summary = useMemo(() => {
     const populatedHours = byHour.filter((b) => b.avg != null);
     const populatedDays = byDow.filter((b) => b.avg != null);
-    const vals = populatedHours.map((b) => b.avg);
     const totalSamples = populatedHours.reduce((sum, b) => sum + b.n, 0);
-    const avg = vals.length ? Math.round(vals.reduce((sum, val) => sum + val, 0) / vals.length) : null;
+
+    // Overall median across all hour-bucket medians, weighted by raw sample
+    // count per bucket. Keeps the headline consistent with the per-tile math.
+    const overallPairs = populatedHours.map((b) => ({ v: b.avg, w: b.n }));
+    const avg = weightedMedian(overallPairs);
+
     const peak = populatedHours.length
       ? populatedHours.reduce((max, item) => (item.avg > max.avg ? item : max), populatedHours[0])
       : null;
