@@ -267,7 +267,13 @@ export default function CrossingDetail() {
 
   const activeAnomaly = useMemo(() => {
     if (!anomalies || !canonicalSlug) return null;
-    return (anomalies.active || []).find((a) => a.port_slug === canonicalSlug) || null;
+    const list = Array.isArray(anomalies.active) ? anomalies.active : [];
+    const match = list.find((a) => a && a.port_slug === canonicalSlug);
+    if (!match) return null;
+    // Only render when the strings we display are actually strings — guards
+    // against a malformed feed crashing the page.
+    if (typeof match.summary_en !== 'string' || typeof match.summary_es !== 'string') return null;
+    return match;
   }, [anomalies, canonicalSlug]);
 
   // Reset selected day to today's day-of-week whenever the crossing changes.

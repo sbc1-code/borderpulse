@@ -27,12 +27,27 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+// Allowlist for link URL schemes. Anything else (e.g. javascript:, data:,
+// vbscript:, file:) is replaced with "#" so a malicious or careless MDX
+// author can't slip an executable URL into the prerendered HTML, even
+// inside the aria-hidden offscreen <article>.
+function safeHref(url) {
+  if (!url) return '#';
+  // Relative paths and in-page anchors are always fine.
+  if (url.startsWith('/') || url.startsWith('#') || url.startsWith('./') || url.startsWith('../')) {
+    return url;
+  }
+  // For absolute URLs, only allow http(s) and mailto.
+  if (/^(https?:|mailto:)/i.test(url)) return url;
+  return '#';
+}
+
 // Inline markdown -> HTML. Order matters: escape first, then re-introduce tags.
 function renderInline(raw) {
   let s = esc(raw);
   // [text](url) — url may contain entities already escaped; allow ampersands.
   s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, text, url) => {
-    return `<a href="${url}">${text}</a>`;
+    return `<a href="${safeHref(url)}">${text}</a>`;
   });
   // Inline code first so ** inside it isn't matched.
   s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
