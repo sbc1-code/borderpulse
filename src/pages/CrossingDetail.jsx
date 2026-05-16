@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code } from 'lucide-react';
+import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
+import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
@@ -442,6 +443,42 @@ export default function CrossingDetail() {
           onToggleFavorite={() => {}}
         />
       </div>
+
+      {(() => {
+        // "Lanes right now" — always-on per-lane breakout for this port.
+        // Filters to lanes CBP currently reports with a real delay value;
+        // hides "Update Pending" stubs and null lanes that don't apply here.
+        const L = crossing.lanes || {};
+        const isReporting = (d) =>
+          d && typeof d.delay_minutes === 'number' && d.status !== 'Update Pending';
+        const rows = [
+          { key: 'passenger_standard', icon: Car,   label: { en: 'Standard',     es: 'Estándar' },     data: L.passenger_standard },
+          { key: 'passenger_ready',    icon: Car,   label: { en: 'Ready Lane',   es: 'Ready Lane' },   data: L.passenger_ready },
+          { key: 'passenger_sentri',   icon: Car,   label: { en: 'SENTRI',       es: 'SENTRI' },       data: L.passenger_sentri },
+          { key: 'pedestrian_standard',icon: User,  label: { en: 'Pedestrian',   es: 'Peatones' },     data: L.pedestrian_standard },
+          { key: 'pedestrian_ready',   icon: User,  label: { en: 'Pedestrian Ready', es: 'Peatones Ready' }, data: L.pedestrian_ready },
+          { key: 'commercial_standard',icon: Truck, label: { en: 'Commercial',   es: 'Comercial' },    data: L.commercial_standard },
+          { key: 'commercial_fast',    icon: Truck, label: { en: 'FAST',         es: 'FAST' },         data: L.commercial_fast },
+        ].filter((r) => isReporting(r.data));
+        if (rows.length === 0) return null;
+        return (
+          <section className="mb-6">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+              {language === 'en' ? 'Lanes right now' : 'Carriles ahora mismo'}
+            </h2>
+            <p className="text-xs text-slate-500 mb-3">
+              {language === 'en'
+                ? `Per-lane delay and number of lanes open at ${crossing.name}, straight from CBP. Northbound only.`
+                : `Demora por carril y número de carriles abiertos en ${crossing.name}, directo de CBP. Solo hacia EE.UU.`}
+            </p>
+            <div className="rounded-md border border-slate-200 bg-slate-50 p-2.5 divide-y divide-slate-200">
+              {rows.map((r) => (
+                <LaneRow key={r.key} icon={r.icon} label={r.label} data={r.data} language={language} />
+              ))}
+            </div>
+          </section>
+        );
+      })()}
 
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
         <section className="mb-6">
