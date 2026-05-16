@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import matter from 'gray-matter';
+import { mdxBodyToHtml } from './lib/mdx-to-html.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -285,8 +287,14 @@ function rewriteIndex(indexHtml, head) {
     html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
   }
 
+  // Escape any literal "</script" inside the JSON body so a value like
+  // "</script><script>alert(1)</script>" can't break out of the
+  // application/ld+json container.
   const jsonLdTags = head.jsonLd
-    .map((obj) => `  <script type="application/ld+json">${JSON.stringify(obj)}</script>`)
+    .map((obj) => {
+      const body = JSON.stringify(obj).replace(/<\/script/gi, '<\\/script');
+      return `  <script type="application/ld+json">${body}</script>`;
+    })
     .join('\n');
   html = html.replace(/<\/head>/i, `${jsonLdTags}\n  </head>`);
 
@@ -400,6 +408,42 @@ ${postLinks ? `  <h2>Border Pulse Blog</h2>\n  <ul>\n${postLinks}\n  </ul>` : ''
   return html.replace(/<\/body>/i, `${block}\n  </body>`);
 }
 
+// Build an offscreen <article> snapshot of a blog post for crawler discovery.
+// Mirrors the visually-hidden pattern used for the homepage nav so the SPA
+// hydration target (#root) renders the canonical, visible version.
+function renderBlogPostBody(post, author) {
+  const mdxPath = path.resolve(root, 'src/content/blog', `${post.slug}.mdx`);
+  if (!fs.existsSync(mdxPath)) return '';
+  let bodyHtml;
+  try {
+    const raw = fs.readFileSync(mdxPath, 'utf8');
+    const { content } = matter(raw);
+    bodyHtml = mdxBodyToHtml(content);
+  } catch (e) {
+    console.warn(`[prerender] failed to render body for ${post.slug}:`, e.message);
+    return '';
+  }
+
+  const lang = post.lang === 'es' ? 'es' : 'en';
+  const authorName = author?.name || post.author || '';
+  const byline = authorName ? `<p>${esc(authorName)} · ${esc(post.date)}</p>` : '';
+  return `
+<article lang="${lang}" aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+  <header>
+    <h1>${esc(post.title)}</h1>
+    <p>${esc(post.description || '')}</p>
+    ${byline}
+  </header>
+  ${bodyHtml}
+</article>
+`;
+}
+
+function injectBlogBody(html, articleHtml) {
+  if (!articleHtml) return html;
+  return html.replace(/<\/body>/i, `${articleHtml}\n  </body>`);
+}
+
 function readBlogPosts() {
   const indexPath = path.resolve(root, 'public/data/blog/index.json');
   if (!fs.existsSync(indexPath)) return [];
@@ -476,7 +520,9 @@ async function main() {
     for (const p of posts) {
       const author = authors[p.author];
       const head = renderBlogPostHead(p, author, posts);
-      const html = rewriteIndex(indexWithLinks, head);
+      const headHtml = rewriteIndex(indexWithLinks, head);
+      const articleHtml = renderBlogPostBody(p, author);
+      const html = injectBlogBody(headHtml, articleHtml);
       const outDir = path.resolve(distDir, 'blog', p.slug);
       fs.mkdirSync(outDir, { recursive: true });
       fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
@@ -522,6 +568,49 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     embedPageCount++;
+  }
+
+  // /methodology + /metodologia — twin bilingual routes, hreflang-paired.
+  {
+    const enCanonical = `${BASE}/methodology`;
+    const esCanonical = `${BASE}/metodologia`;
+    const hreflangs = [
+      { lang: 'en', href: enCanonical },
+      { lang: 'es', href: esCanonical },
+      { lang: 'x-default', href: enCanonical },
+    ];
+    const breadcrumbFor = (canonical, label) => ({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+        { '@type': 'ListItem', position: 2, name: label, item: canonical },
+      ],
+    });
+    const enHead = {
+      title: 'Methodology | Border Pulse',
+      desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, 15-minute refresh cadence, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
+      canonical: enCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [breadcrumbFor(enCanonical, 'Methodology')],
+      hreflangs,
+    };
+    const esHead = {
+      title: 'Metodología | Border Pulse',
+      desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia de 15 minutos, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
+      canonical: esCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [breadcrumbFor(esCanonical, 'Metodología')],
+      hreflangs,
+    };
+    const enHtml = rewriteIndex(indexWithLinks, enHead);
+    const esHtml = rewriteIndex(indexWithLinks, esHead);
+    const enDir = path.resolve(distDir, 'methodology');
+    const esDir = path.resolve(distDir, 'metodologia');
+    fs.mkdirSync(enDir, { recursive: true });
+    fs.mkdirSync(esDir, { recursive: true });
+    fs.writeFileSync(path.resolve(enDir, 'index.html'), enHtml);
+    fs.writeFileSync(path.resolve(esDir, 'index.html'), esHtml);
   }
 
   // /about — trust signal page with methodology + public stats + privacy
