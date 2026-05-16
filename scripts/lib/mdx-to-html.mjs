@@ -33,8 +33,11 @@ function esc(s) {
 // inside the aria-hidden offscreen <article>.
 function safeHref(url) {
   if (!url) return '#';
-  // Relative paths and in-page anchors are always fine.
-  if (url.startsWith('/') || url.startsWith('#') || url.startsWith('./') || url.startsWith('../')) {
+  // Relative paths and in-page anchors are always fine — but protocol-relative
+  // URLs (//evil.com/...) must NOT be treated as relative; they inherit the
+  // current scheme and would point off-site.
+  if (!url.startsWith('//') &&
+      (url.startsWith('/') || url.startsWith('#') || url.startsWith('./') || url.startsWith('../'))) {
     return url;
   }
   // For absolute URLs, only allow http(s) and mailto.

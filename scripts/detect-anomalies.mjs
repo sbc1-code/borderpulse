@@ -226,27 +226,50 @@ async function main() {
   const publicPath = path.resolve(publicDir, 'anomalies.json');
   fs.mkdirSync(publicDir, { recursive: true });
   const generatedAt = new Date().toISOString();
+
+  // Read the previous file first so we can preserve detected_at on entries
+  // whose evidence is byte-identical — otherwise an hourly cron would churn
+  // 24 no-op commits/day with only the timestamp moving.
+  let existing = null;
+  if (fs.existsSync(publicPath)) {
+    try { existing = JSON.parse(fs.readFileSync(publicPath, 'utf8')); } catch {}
+  }
+  const priorByKey = new Map();
+  for (const a of (existing?.active || [])) {
+    if (!a || !a.port_slug || !a.type) continue;
+    priorByKey.set(`${a.port_slug}::${a.type}::${JSON.stringify(a.evidence || {})}`, a);
+  }
+
   const activeForUi = anomalies.map((a) => {
     const summaries = buildSummaries(a);
+    const key = `${a.port_slug}::${a.type}::${JSON.stringify(a.evidence || {})}`;
+    const prior = priorByKey.get(key);
     return {
       type: a.type,
       port_slug: a.port_slug,
       port_name: a.port_name,
       state: a.state,
       severity: a.severity,
-      detected_at: generatedAt,
+      detected_at: prior?.detected_at || generatedAt,
       summary_en: summaries.summary_en,
       summary_es: summaries.summary_es,
       evidence: a.evidence,
     };
   });
-  let existing = null;
-  if (fs.existsSync(publicPath)) {
-    try { existing = JSON.parse(fs.readFileSync(publicPath, 'utf8')); } catch {}
-  }
   const trailing = mergeTrailing(existing, activeForUi, generatedAt);
+
+  // If active + trailing are byte-identical to the previous file, preserve
+  // the top-level generated_at too so the committed file doesn't churn.
+  const newContentKey = JSON.stringify({ active: activeForUi, trailing_24h: trailing });
+  const oldContentKey = existing
+    ? JSON.stringify({ active: existing.active || [], trailing_24h: existing.trailing_24h || [] })
+    : null;
+  const finalGeneratedAt = (newContentKey === oldContentKey && existing?.generated_at)
+    ? existing.generated_at
+    : generatedAt;
+
   const publicOut = {
-    generated_at: generatedAt,
+    generated_at: finalGeneratedAt,
     snapshot_at: snapshotTimestamp,
     active: activeForUi,
     trailing_24h: trailing,

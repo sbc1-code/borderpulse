@@ -287,8 +287,14 @@ function rewriteIndex(indexHtml, head) {
     html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
   }
 
+  // Escape any literal "</script" inside the JSON body so a value like
+  // "</script><script>alert(1)</script>" can't break out of the
+  // application/ld+json container.
   const jsonLdTags = head.jsonLd
-    .map((obj) => `  <script type="application/ld+json">${JSON.stringify(obj)}</script>`)
+    .map((obj) => {
+      const body = JSON.stringify(obj).replace(/<\/script/gi, '<\\/script');
+      return `  <script type="application/ld+json">${body}</script>`;
+    })
     .join('\n');
   html = html.replace(/<\/head>/i, `${jsonLdTags}\n  </head>`);
 
