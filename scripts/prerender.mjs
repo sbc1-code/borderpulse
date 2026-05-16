@@ -539,6 +539,87 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
   }
 
+  // /sobre — Spanish-canonical alias of /about. Same component, different URL,
+  // language forced via the route's forceLanguage prop in App.jsx.
+  {
+    const head = {
+      title: 'Acerca de Border Pulse | Rastreador de tiempos de espera en la frontera EE.UU.-México',
+      desc: 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, con un historial rotativo de 30 días.',
+      canonical: `${BASE}/sobre`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'sobre');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+  }
+
+  // /services & /servicios — cross-border digital ops audit pitch.
+  {
+    const head = {
+      title: 'Services — Cross-border digital ops audit ($1,500, 10 days, EN+ES) | Border Pulse',
+      desc: 'A 10-day cross-border digital operations audit for freight, maquila, customs brokers, and US companies with Mexican supply chains. Bilingual EN+ES delivery. $1,500 flat.',
+      canonical: `${BASE}/services`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [{
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Cross-border digital ops audit',
+        description: '10-day audit of cross-border digital operations: analytics, conversion paths, freight UX, EN/ES parity. Delivered bilingual.',
+        provider: { '@type': 'Person', name: 'Sebastian Becerra' },
+        areaServed: ['US', 'MX'],
+        offers: { '@type': 'Offer', price: '1500', priceCurrency: 'USD' },
+        url: `${BASE}/services`,
+      }],
+    };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'services');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+  }
+  {
+    const head = {
+      title: 'Servicios — Auditoría digital transfronteriza ($1,500, 10 días, EN+ES) | Border Pulse',
+      desc: 'Auditoría digital transfronteriza de 10 días para transporte, maquila, aduanales y empresas EE.UU. con cadena MX. Entregable bilingüe EN+ES, $1,500 plano.',
+      canonical: `${BASE}/servicios`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'servicios');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+  }
+
+  // /pro & /pro-es — coming-soon paid tier + waitlist.
+  {
+    const head = {
+      title: 'BorderPulse Pro — alerts, history, and freight API (waitlist) | Border Pulse',
+      desc: 'Custom alerts, historical CSV exports, a freight API, and a fleet dashboard. Join the waitlist and get a 30-day free run at launch.',
+      canonical: `${BASE}/pro`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'pro');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+  }
+  {
+    const head = {
+      title: 'BorderPulse Pro — alertas, histórico y API para carga (lista de espera) | Border Pulse',
+      desc: 'Alertas personalizadas, exportes CSV históricos, API para carga y panel para flotillas. Únete a la lista de espera y recibe 30 días gratis al lanzamiento.',
+      canonical: `${BASE}/pro-es`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const html = rewriteIndex(indexWithLinks, head);
+    const outDir = path.resolve(distDir, 'pro-es');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+  }
+
   // /best-time index hub — links to all 43 best-time pages
   {
     const indexHead = {

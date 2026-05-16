@@ -1,6 +1,544 @@
 {
   "posts": [
     {
+      "title": "Best time to cross Calexico West: hour by hour from 30 days of CBP data",
+      "description": "Median northbound wait times by hour and day at Calexico West, from CBP data. The 10 AM commuter window, and the 3 AM Monday spike nobody warns you about.",
+      "slug": "best-time-to-cross-calexico-west",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "calexico",
+        "mexicali",
+        "california",
+        "imperial-valley",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-calexico-west.png",
+      "translationKey": "calexico-west-best-time",
+      "relatedCrossings": [
+        "250301"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live CBP data)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Ready Lanes program",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Best time to cross Hidalgo: hour by hour from 30 days of CBP data",
+      "description": "Median northbound wait times by hour and day at the Hidalgo bridge, from CBP data. Mornings here clear faster than at any San Diego crossing.",
+      "slug": "best-time-to-cross-hidalgo",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "hidalgo",
+        "mcallen",
+        "reynosa",
+        "texas",
+        "rgv",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-hidalgo.png",
+      "translationKey": "hidalgo-best-time",
+      "relatedCrossings": [
+        "230502",
+        "230503"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live CBP data)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Ready Lanes program",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Best time to cross Tecate: hour by hour from 30 days of CBP data",
+      "description": "Median northbound wait times by hour and day at Tecate, from CBP data. The quietest crossing east of San Diego, with one catch: weekday late nights.",
+      "slug": "best-time-to-cross-tecate",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "en",
+      "tags": [
+        "tecate",
+        "baja-california",
+        "california",
+        "best-time-to-cross"
+      ],
+      "hero": "/og/blog/best-time-to-cross-tecate.png",
+      "translationKey": "tecate-best-time",
+      "relatedCrossings": [
+        "250401",
+        "250601"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live CBP data)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Ready Lanes program",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Bringing prescription medication back from Mexico: what CBP actually allows",
+      "description": "What you can and can't bring back from a Mexican pharmacy: FDA approval, controlled substances, the 90-day personal-use rule, and what to declare.",
+      "slug": "bringing-prescription-medication-back-from-mexico",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "policy-programs",
+      "lang": "en",
+      "tags": [
+        "prescriptions",
+        "cbp",
+        "medical-tourism",
+        "los-algodones",
+        "tijuana"
+      ],
+      "hero": "/og/blog/bringing-prescription-medication-back-from-mexico.png",
+      "translationKey": "rx-from-mexico",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "CBP prohibited and restricted items",
+          "url": "https://www.cbp.gov/travel/clearing-customs/prohibited-restricted-items"
+        },
+        {
+          "label": "FDA personal importation policy",
+          "url": "https://www.fda.gov/industry/import-program-food-and-drug-administration-fda/personal-importation"
+        },
+        {
+          "label": "DEA controlled substance schedules",
+          "url": "https://www.dea.gov/drug-information/drug-scheduling"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Bringing your dog back from Mexico: the 2024 CDC rule, plain English",
+      "description": "What changed in August 2024 and what CBP officers actually check at the U.S.-Mexico land border. The CDC Dog Import Form, the microchip rule, and the high-risk-country exception.",
+      "slug": "cdc-dog-import-rule-2024-mexico-border",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "policy-programs",
+      "lang": "en",
+      "tags": [
+        "dogs",
+        "cdc",
+        "cbp",
+        "pets",
+        "mexico-border"
+      ],
+      "hero": "/og/blog/cdc-dog-import-rule-2024-mexico-border.png",
+      "translationKey": "cdc-dog-rule-2024",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "CDC Dog Importation",
+          "url": "https://www.cdc.gov/importation/dogs/index.html"
+        },
+        {
+          "label": "CDC Dog Import Form",
+          "url": "https://www.cdc.gov/importation/dogs/form.html"
+        },
+        {
+          "label": "CBP traveling with pets",
+          "url": "https://www.cbp.gov/travel/clearing-customs/pets"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Cruce Los Algodones 2026: datos, documentos y la trampa de las 10 p. m.",
+      "description": "Planea tu viaje a Los Algodones para dental, farmacia o anteojos. Horarios del puerto Andrade, esperas en vivo, qué declarar y la trampa del cierre a las 10 p. m.",
+      "slug": "guia-cruce-fronterizo-los-algodones",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "los-algodones",
+        "andrade",
+        "turismo-dental",
+        "california",
+        "turismo-medico"
+      ],
+      "hero": "/og/blog/guia-cruce-fronterizo-los-algodones.png",
+      "translationKey": "algodones-guide",
+      "relatedCrossings": [
+        "250201"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP información de aranceles aduanales",
+          "url": "https://www.cbp.gov/travel/international-visitors/know-before-you-visit/customs-duty-information"
+        },
+        {
+          "label": "CBP reglas de medicamentos con receta",
+          "url": "https://www.cbp.gov/travel/clearing-customs/prohibited-restricted-items"
+        },
+        {
+          "label": "INM FMM (permiso turístico mexicano)",
+          "url": "https://www.inm.gob.mx/fmme/publico/en/solicitud.html"
+        },
+        {
+          "label": "CDC reglas de importación de perros (2024)",
+          "url": "https://www.cdc.gov/importation/dogs/index.html"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Los Algodones border crossing guide 2026: data, docs, and the 10 PM trap",
+      "description": "Plan your trip to Los Algodones, Mexico for dental, pharmacy, or eyewear visits. Andrade port hours, live wait times, what to declare, and the 10 PM closing trap.",
+      "slug": "los-algodones-border-crossing-guide",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "los-algodones",
+        "andrade",
+        "dental-tourism",
+        "california",
+        "medical-tourism"
+      ],
+      "hero": "/og/blog/los-algodones-border-crossing-guide.png",
+      "translationKey": "algodones-guide",
+      "relatedCrossings": [
+        "250201"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Border Wait Times (live CBP data)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP customs duty information",
+          "url": "https://www.cbp.gov/travel/international-visitors/know-before-you-visit/customs-duty-information"
+        },
+        {
+          "label": "CBP prescription drug rules",
+          "url": "https://www.cbp.gov/travel/clearing-customs/prohibited-restricted-items"
+        },
+        {
+          "label": "INM FMM (Mexican tourist permit)",
+          "url": "https://www.inm.gob.mx/fmme/publico/en/solicitud.html"
+        },
+        {
+          "label": "CDC dog import rule (2024)",
+          "url": "https://www.cdc.gov/importation/dogs/index.html"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar Calexico West: hora por hora con 30 días de datos de CBP",
+      "description": "Tiempos medianos hacia EE.UU. en Calexico West, hora por hora, con datos de CBP. La ventana del commuter de las 10 a. m. y el pico del lunes a las 3 a. m.",
+      "slug": "mejor-hora-para-cruzar-calexico-west",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "calexico",
+        "mexicali",
+        "california",
+        "imperial-valley",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-calexico-west.png",
+      "translationKey": "calexico-west-best-time",
+      "relatedCrossings": [
+        "250301"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa Ready Lane",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar Hidalgo: hora por hora con 30 días de datos de CBP",
+      "description": "Tiempos medianos hacia EE.UU. en el puente Hidalgo, hora por hora, con datos de CBP. Las mañanas aquí se despejan más rápido que en cualquier garita de San Diego.",
+      "slug": "mejor-hora-para-cruzar-hidalgo",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "hidalgo",
+        "mcallen",
+        "reynosa",
+        "texas",
+        "rgv",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-hidalgo.png",
+      "translationKey": "hidalgo-best-time",
+      "relatedCrossings": [
+        "230502",
+        "230503"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa Ready Lane",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Mejor hora para cruzar Tecate: hora por hora con 30 días de datos de CBP",
+      "description": "Tiempos medianos hacia EE.UU. en Tecate, hora por hora, con datos de CBP. La garita más tranquila al este de San Diego, con una trampa: las madrugadas entre semana.",
+      "slug": "mejor-hora-para-cruzar-tecate",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "data-analysis",
+      "lang": "es",
+      "tags": [
+        "tecate",
+        "baja-california",
+        "california",
+        "mejor-hora"
+      ],
+      "hero": "/og/blog/mejor-hora-para-cruzar-tecate.png",
+      "translationKey": "tecate-best-time",
+      "relatedCrossings": [
+        "250401",
+        "250601"
+      ],
+      "officialSources": [
+        {
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
+          "url": "https://bwt.cbp.gov/"
+        },
+        {
+          "label": "CBP Programa Ready Lane",
+          "url": "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+        },
+        {
+          "label": "CBP Programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Traer tu perro de México: la regla del CDC de 2024, en español plano",
+      "description": "Qué cambió en agosto de 2024 y qué revisan los oficiales de CBP en la frontera EE.UU.-México. El Formulario CDC, el microchip y la excepción de país de alto riesgo.",
+      "slug": "regla-cdc-perros-2024-frontera-mexico",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "policy-programs",
+      "lang": "es",
+      "tags": [
+        "perros",
+        "cdc",
+        "cbp",
+        "mascotas",
+        "frontera-mexico"
+      ],
+      "hero": "/og/blog/regla-cdc-perros-2024-frontera-mexico.png",
+      "translationKey": "cdc-dog-rule-2024",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "CDC Importación de Perros",
+          "url": "https://www.cdc.gov/importation/dogs/index.html"
+        },
+        {
+          "label": "Formulario CDC de Importación de Perros",
+          "url": "https://www.cdc.gov/importation/dogs/form.html"
+        },
+        {
+          "label": "CBP viajar con mascotas",
+          "url": "https://www.cbp.gov/travel/clearing-customs/pets"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Renovación SENTRI 2026: paso a paso, con lo que más detiene renovaciones",
+      "description": "Cómo renovar tu membresía SENTRI en 2026: tiempos, el portal TTP, costos, la ventana de aprobación condicional y la cita de huellas que se les pasa.",
+      "slug": "renovacion-sentri-2026-paso-a-paso",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "policy-programs",
+      "lang": "es",
+      "tags": [
+        "sentri",
+        "cbp",
+        "trusted-traveler",
+        "renovacion"
+      ],
+      "hero": "/og/blog/renovacion-sentri-2026-paso-a-paso.png",
+      "translationKey": "sentri-renewal-2026",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "CBP programa SENTRI",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        },
+        {
+          "label": "Portal TTP DHS",
+          "url": "https://ttp.dhs.gov/"
+        },
+        {
+          "label": "CBP centro de Trusted Traveler Programs",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "SENTRI renewal 2026: step by step, with what trips most renewals",
+      "description": "How to renew your SENTRI membership in 2026: timing, the TTP portal, fees, the conditional approval window, and the fingerprint reschedule that catches people.",
+      "slug": "sentri-renewal-2026-step-by-step",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "policy-programs",
+      "lang": "en",
+      "tags": [
+        "sentri",
+        "cbp",
+        "trusted-traveler",
+        "renewal"
+      ],
+      "hero": "/og/blog/sentri-renewal-2026-step-by-step.png",
+      "translationKey": "sentri-renewal-2026",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "CBP SENTRI program",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+        },
+        {
+          "label": "TTP DHS portal",
+          "url": "https://ttp.dhs.gov/"
+        },
+        {
+          "label": "CBP Trusted Traveler Programs hub",
+          "url": "https://www.cbp.gov/travel/trusted-traveler-programs"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
+      "title": "Traer medicamentos con receta de México: lo que CBP realmente permite",
+      "description": "Qué puedes y no puedes traer de una farmacia mexicana: aprobación de la FDA, sustancias controladas, la regla de 90 días de uso personal y qué declarar.",
+      "slug": "traer-medicamentos-con-receta-de-mexico",
+      "date": "2026-05-09",
+      "author": "sebastian",
+      "pillar": "policy-programs",
+      "lang": "es",
+      "tags": [
+        "medicamentos",
+        "cbp",
+        "turismo-medico",
+        "los-algodones",
+        "tijuana"
+      ],
+      "hero": "/og/blog/traer-medicamentos-con-receta-de-mexico.png",
+      "translationKey": "rx-from-mexico",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "CBP artículos prohibidos y restringidos",
+          "url": "https://www.cbp.gov/travel/clearing-customs/prohibited-restricted-items"
+        },
+        {
+          "label": "FDA política de importación personal",
+          "url": "https://www.fda.gov/industry/import-program-food-and-drug-administration-fda/personal-importation"
+        },
+        {
+          "label": "DEA programación de sustancias controladas",
+          "url": "https://www.dea.gov/drug-information/drug-scheduling"
+        }
+      ],
+      "draft": false,
+      "source": "human",
+      "humanEdited": true
+    },
+    {
       "title": "Best time to cross Nogales DeConcini: hour by hour from 30 days of CBP data",
       "description": "Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Multiple weekday morning hours show median 0 minutes. Monday pre-dawn spikes to 180.",
       "slug": "best-time-to-cross-nogales-deconcini",
@@ -23,7 +561,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "label": "CBP Border Wait Times (live CBP data)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -57,7 +595,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "label": "CBP Border Wait Times (live CBP data)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -92,7 +630,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "label": "CBP Border Wait Times (live CBP data)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -127,7 +665,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -161,7 +699,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -196,7 +734,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -230,7 +768,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -270,7 +808,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "label": "CBP Border Wait Times (live CBP data)",
           "url": "https://bwt.cbp.gov/"
         }
       ],
@@ -302,7 +840,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
           "url": "https://bwt.cbp.gov/"
         }
       ],
@@ -333,7 +871,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Tiempos de Espera (datos en vivo, refresco cada 15 min)",
+          "label": "CBP Tiempos de Espera (datos en vivo de CBP)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -372,7 +910,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "label": "CBP Border Wait Times (live CBP data)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -410,7 +948,7 @@
       ],
       "officialSources": [
         {
-          "label": "CBP Border Wait Times (live data, 15 min refresh)",
+          "label": "CBP Border Wait Times (live CBP data)",
           "url": "https://bwt.cbp.gov/"
         },
         {
@@ -427,5 +965,5 @@
       "humanEdited": true
     }
   ],
-  "generated_at": "2026-04-27T19:11:38.490Z"
+  "generated_at": "2026-05-16T07:43:11.972Z"
 }

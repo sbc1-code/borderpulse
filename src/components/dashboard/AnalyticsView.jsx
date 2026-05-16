@@ -203,15 +203,33 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
     const vals = populatedHours.map((b) => b.avg);
     const totalSamples = populatedHours.reduce((sum, b) => sum + b.n, 0);
     const avg = vals.length ? Math.round(vals.reduce((sum, val) => sum + val, 0) / vals.length) : null;
-    const peak = populatedHours.length
+
+    // Peak / lightest are meaningless when the local history only covers one
+    // hour-of-day bucket (a fresh visitor with a few minutes of samples will
+    // hit this) or when every populated hour happens to round to the same
+    // avg. In both cases the two reduce calls below would return the same
+    // bucket and the UI would show identical "Peak hour" and "Lightest hour"
+    // tiles. Surface a "need more data" state instead — false data is worse
+    // than no data, especially on an analytics surface.
+    const distinctAvgs = new Set(vals);
+    const hasHourDiversity = populatedHours.length >= 2 && distinctAvgs.size >= 2;
+
+    const peak = hasHourDiversity
       ? populatedHours.reduce((max, item) => (item.avg > max.avg ? item : max), populatedHours[0])
       : null;
-    const lightest = populatedHours.length
+    const lightest = hasHourDiversity
       ? populatedHours.reduce((min, item) => (item.avg < min.avg ? item : min), populatedHours[0])
       : null;
-    const heaviestDay = populatedDays.length
+
+    // Same guard for "heaviest day" — needs ≥2 populated days with distinct
+    // averages, otherwise the reduce would just hand back the only entry.
+    const dayVals = populatedDays.map((b) => b.avg);
+    const distinctDayAvgs = new Set(dayVals);
+    const hasDayDiversity = populatedDays.length >= 2 && distinctDayAvgs.size >= 2;
+    const heaviestDay = hasDayDiversity
       ? populatedDays.reduce((max, item) => (item.avg > max.avg ? item : max), populatedDays[0])
       : null;
+
     const counts = populatedHours.reduce((acc, item) => {
       acc[waitTier(item.avg)] += 1;
       return acc;
@@ -224,6 +242,8 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
       heaviestDay,
       totalSamples,
       populatedHourCount: populatedHours.length,
+      hasHourDiversity,
+      hasDayDiversity,
       counts,
       tier: waitTier(avg),
     };
@@ -284,22 +304,28 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
               icon={TrendingUp}
               label={language === 'en' ? 'Peak hour' : 'Hora pico'}
               value={summary.peak ? formatHour(summary.peak.hour, language) : '—'}
-              detail={summary.peak ? formatWait(summary.peak.avg, language) : null}
-              tone={summary.peak?.avg >= 45 ? 'rose' : 'amber'}
+              detail={summary.peak
+                ? formatWait(summary.peak.avg, language)
+                : (language === 'en' ? 'Need more hour samples' : 'Faltan muestras por hora')}
+              tone={summary.peak?.avg >= 45 ? 'rose' : summary.peak ? 'amber' : 'slate'}
             />
             <MetricTile
               icon={TrendingDown}
               label={language === 'en' ? 'Lightest hour' : 'Hora ligera'}
               value={summary.lightest ? formatHour(summary.lightest.hour, language) : '—'}
-              detail={summary.lightest ? formatWait(summary.lightest.avg, language) : null}
-              tone="emerald"
+              detail={summary.lightest
+                ? formatWait(summary.lightest.avg, language)
+                : (language === 'en' ? 'Need more hour samples' : 'Faltan muestras por hora')}
+              tone={summary.lightest ? 'emerald' : 'slate'}
             />
             <MetricTile
               icon={AlertTriangle}
               label={language === 'en' ? 'Heaviest day' : 'Día más pesado'}
               value={summary.heaviestDay?.day || '—'}
-              detail={summary.heaviestDay ? formatWait(summary.heaviestDay.avg, language) : null}
-              tone={summary.heaviestDay?.avg >= 45 ? 'rose' : 'amber'}
+              detail={summary.heaviestDay
+                ? formatWait(summary.heaviestDay.avg, language)
+                : (language === 'en' ? 'Need more day samples' : 'Faltan muestras por día')}
+              tone={summary.heaviestDay?.avg >= 45 ? 'rose' : summary.heaviestDay ? 'amber' : 'slate'}
             />
             <MetricTile
               icon={Database}

@@ -46,4 +46,35 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-05-16
+
+- **Conversion layer added, but no top-nav promotion.** Services/Pro/About
+  live in the footer only. The dashboard is still the headline; ops
+  pitch + paid tier are deliberately below-the-fold so the data product
+  remains the front door.
+- **Spanish-canonical URLs over toggle-only routes for new pages.**
+  `/services` vs `/servicios`, `/about` vs `/sobre`, `/pro` vs `/pro-es`.
+  Each route forces its language at mount and emits its own canonical +
+  hreflang pairs in the prerendered shell. Same direction as the
+  ROADMAP "Hreflang for ES variants" item — starting the pattern on
+  marketing pages where ES SEO has the most leverage.
+- **Email capture is wire-compatible, not wired.** `EmailCapture` posts
+  to `VITE_NEWSLETTER_ENDPOINT` if set, otherwise queues to
+  localStorage. Reason: GitHub Pages can't hold a Resend API key
+  safely; the form needs to be real on launch day either way. Sebastian
+  picks the provider later (Resend behind a Cloudflare Worker, or
+  Buttondown / ConvertKit hosted form) — no code change required to
+  wire it, just the env var.
+- **Stripe checkout is a placeholder, not a live integration.** Reason:
+  same as above (no place to put the secret). `/services` reads
+  `VITE_STRIPE_AUDIT_LINK` and falls back to a "reserve a slot" email
+  capture when unset. Avoids fake checkout buttons.
+- **Analytics tiles surface "—" rather than identical peak/lightest.**
+  The fix gates Peak/Lightest/Heaviest behind ≥2 populated buckets
+  with ≥2 distinct averages. Showing the same hour as both peak AND
+  lightest is worse than admitting the data is thin — analytics
+  surfaces need to earn trust on day one.
+
+---
+
 *Append a new section the next time a non-obvious decision lands.*

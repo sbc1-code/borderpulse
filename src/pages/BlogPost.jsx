@@ -4,9 +4,10 @@ import { ArrowLeft } from 'lucide-react';
 import { MDXProvider } from '@mdx-js/react';
 import { Button } from '@/components/ui/button';
 import { getPost, getAuthor, pillarLabel, listPosts } from '@/lib/blog-runtime';
-import { mdxComponents } from '@/components/blog/MdxComponents';
+import { mdxComponents, setActivePost, resetActivePost } from '@/components/blog/MdxComponents';
 import { LangContext } from '@/lib/LangContext';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
+import PostCta from '@/components/marketing/PostCta';
 
 const STRINGS = {
   en: {
@@ -112,10 +113,19 @@ export default function BlogPost() {
       <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-a:text-emerald-700 dark:prose-a:text-emerald-400 prose-a:underline">
         <LangContext.Provider value={lang}>
           <MDXProvider components={mdxComponents}>
-            <Body />
+            {(() => {
+              // Reset the per-post "have we seen the first H2 yet" flag right
+              // before render so the inline EmailCapture only injects once.
+              setActivePost(slug, lang);
+              return <Body />;
+            })()}
           </MDXProvider>
         </LangContext.Provider>
       </div>
+
+      {/* End-of-post CTA — context-driven by frontmatter (ops/freight posts
+          point at /services, everything else at the newsletter). */}
+      <PostCta frontmatter={{ ...fm, slug }} language={lang} />
 
       <footer className="mt-10 border-t border-slate-200 dark:border-gray-800 pt-4 text-xs text-slate-500">
         {t.footer}{' '}

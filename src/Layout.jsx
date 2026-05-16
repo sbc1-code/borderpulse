@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
+import StickyEmailBanner from '@/components/marketing/StickyEmailBanner';
 
 const SB_MARK = (
   <span className="inline-flex items-center gap-1 font-semibold">
@@ -195,7 +196,7 @@ export default function Layout({ children }) {
       {/* Footer (all viewports) */}
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
-          <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+          <div className="flex items-center gap-x-2 gap-y-1 flex-wrap justify-center sm:justify-start">
             <a href="https://sbc1-code.github.io/portfolio/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {SB_MARK}
             </a>
@@ -212,13 +213,29 @@ export default function Layout({ children }) {
               {language === 'en' ? 'Free public API' : 'API pública gratuita'}
             </Link>
             <span>·</span>
-            <Link to="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+            <Link to={language === 'es' ? '/servicios' : '/services'} className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'Services' : 'Servicios'}
+            </Link>
+            <span>·</span>
+            <Link to={language === 'es' ? '/pro-es' : '/pro'} className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Pro
+            </Link>
+            <span>·</span>
+            <Link to={language === 'es' ? '/sobre' : '/about'} className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
             </Link>
+            <span>·</span>
+            <a href="#newsletter" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'Newsletter' : 'Boletín'}
+            </a>
           </div>
           <span>© {new Date().getFullYear()} Border Pulse</span>
         </div>
       </footer>
+
+      {/* Sticky newsletter banner — dismissible, 30-day cooldown, hidden on
+          /embed and /status pages so iframe / share surfaces stay clean. */}
+      <StickyEmailBanner language={language} />
     </div>
   );
 }

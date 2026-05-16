@@ -10,6 +10,7 @@ import ShareModal from '@/components/dashboard/ShareModal';
 const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
 import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AboutFooter from '@/components/dashboard/AboutFooter';
+import EmailCapture from '@/components/marketing/EmailCapture';
 import AdConsentCard from '@/components/ads/AdConsentCard';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
@@ -589,6 +590,16 @@ export default function Dashboard() {
 
           <InstallPrompt language={language} />
           <AdConsentCard language={language} />
+
+          {/* Newsletter footer on the dashboard — explicit target for the
+              footer "Newsletter" anchor link. */}
+          <section id="newsletter" className="my-6 max-w-[720px] mx-auto scroll-mt-24">
+            <EmailCapture
+              variant="footer"
+              source="dashboard-footer"
+              language={language}
+            />
+          </section>
 
           <AboutFooter
             language={language}

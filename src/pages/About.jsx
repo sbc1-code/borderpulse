@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Database, Lock, RefreshCw, BookOpen, Code as CodeIcon, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Database, Lock, RefreshCw, BookOpen, Code as CodeIcon, ExternalLink, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
@@ -15,9 +15,21 @@ function StatCard({ value, label, sub }) {
   );
 }
 
-export default function About() {
-  const language = usePersistentLanguage();
+export default function About({ forceLanguage } = {}) {
+  const persisted = usePersistentLanguage();
+  const language = forceLanguage || persisted;
   const [stats, setStats] = useState(null);
+
+  // /sobre forces ES at mount; /about forces EN at mount. Keeps the toggle
+  // state in localStorage in sync with the URL the visitor landed on so the
+  // sidebar EN/ES toggle reflects current page.
+  useEffect(() => {
+    if (!forceLanguage) return;
+    try {
+      localStorage.setItem('borderPulse_language', forceLanguage);
+      window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: forceLanguage }));
+    } catch {}
+  }, [forceLanguage]);
 
   useEffect(() => {
     let cancelled = false;
@@ -35,13 +47,14 @@ export default function About() {
     const description = language === 'en'
       ? 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, with a 30-day rolling history.'
       : 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, con un historial rotativo de 30 días.';
+    const canonical = `https://borderpulse.com${language === 'es' ? '/sobre' : '/about'}`;
     updatePageMeta({
       title,
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com/about',
-      canonical: 'https://borderpulse.com/about',
+      ogUrl: canonical,
+      canonical,
     });
     return () => resetPageMeta();
   }, [language]);
@@ -177,6 +190,45 @@ export default function About() {
               : 'Los umbrales de notificación se guardan en localStorage de tu navegador.'}
           </li>
         </ul>
+      </section>
+
+      {/* Operator — small, project-framed (not a personal portfolio). */}
+      <section className="mb-8">
+        <h2 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wide mb-3 flex items-center gap-2">
+          <Briefcase className="w-4 h-4 text-emerald-600" />
+          {language === 'en' ? 'Who runs this' : 'Quién lo opera'}
+        </h2>
+        <div className="space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p>
+            {language === 'en'
+              ? 'Border Pulse is built and maintained by Sebastian Becerra — a marketing analytics and operations practitioner who grew up between El Paso, Ciudad Juárez, and San Diego. Bilingual EN/ES, six years of GA4/GTM infrastructure work, and a habit of shipping things instead of pitching them.'
+              : 'Border Pulse lo construye y mantiene Sebastian Becerra — analista de marketing y operaciones que creció entre El Paso, Ciudad Juárez y San Diego. Bilingüe EN/ES, seis años de infraestructura GA4/GTM, y el hábito de publicar cosas en lugar de pitchearlas.'}
+          </p>
+          <p>
+            {language === 'en'
+              ? 'The site exists because the official CBP feed is real-time but unfriendly, the data is rich but never aggregated, and nobody publishes a bilingual version. So this does.'
+              : 'El sitio existe porque el feed oficial de CBP es en tiempo real pero poco amigable, los datos son ricos pero nunca se agregan, y nadie publica una versión bilingüe. Esto sí.'}
+          </p>
+          <p>
+            {language === 'en' ? (
+              <>
+                Cross-border digital operations consulting is available — see{' '}
+                <Link to="/services" className="text-emerald-700 dark:text-emerald-400 underline">
+                  /services
+                </Link>{' '}
+                for the audit.
+              </>
+            ) : (
+              <>
+                Consultoría de operaciones digitales transfronterizas disponible — ve{' '}
+                <Link to="/servicios" className="text-emerald-700 dark:text-emerald-400 underline">
+                  /servicios
+                </Link>{' '}
+                para la auditoría.
+              </>
+            )}
+          </p>
+        </div>
       </section>
 
       {/* Quick links */}

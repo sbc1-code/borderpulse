@@ -3,6 +3,87 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-16
+
+Conversion layer landed. The site is still a data project at the top of the
+funnel; below the fold it now has email capture, a paid-audit pitch, and a
+waitlist for the eventual Pro tier. Nothing about the existing data UX or
+canonical URLs changed.
+
+### Added
+- **`/services` + `/servicios`** — cross-border digital ops audit pitch.
+  $1,500 flat, 10-day delivery, bilingual EN+ES. Sections: what the audit
+  includes, audience (freight/logistics, maquila, customs brokers, US
+  companies with MX supply chains), proof (SeeScan 6yr GA4/GTM, 281 Los
+  Bravos leads, BorderPulse itself), reserve-a-slot email capture, FAQ
+  accordion. Stripe button is a placeholder that reads `VITE_STRIPE_AUDIT_LINK`
+  and falls back to the email capture when unset. Schema.org Service +
+  Offer JSON-LD in the prerendered head.
+- **`/pro` + `/pro-es`** — "Coming soon" page for the paid tier. Four
+  features (custom SMS/email alerts, historical CSV exports, freight API,
+  fleet dashboard) plus a waitlist email capture. Carries the "30-day free
+  on launch" promise.
+- **`/sobre`** — Spanish-canonical alias of `/about`. Same component, but
+  the route forces ES at mount and the canonical URL is `/sobre`. About
+  also got a small "Who runs this" section so the operator (Sebastian)
+  has a single source of truth on the site, framed project-style not as
+  personal branding (per DECISIONS.md).
+- **Reusable email capture.** `src/components/marketing/EmailCapture.jsx`
+  with 5 variants: `inline`, `banner`, `footer`, `waitlist`, `audit`.
+  Posts to `VITE_NEWSLETTER_ENDPOINT` (Resend-compatible JSON payload);
+  when unset, queues to localStorage so no submission is lost before
+  the provider is wired. Bilingual copy throughout. Honest "no spam,
+  unsubscribe in one click" microcopy.
+- **Sticky dismissible newsletter banner**
+  (`StickyEmailBanner.jsx`) mounted in `Layout.jsx`. Appears 1.5s after
+  navigation (so it doesn't block LCP), hidden on `/embed/*` and
+  `/status/*` (iframe + share surfaces stay clean), dismissed for 30
+  days via localStorage.
+- **Context-driven blog post CTA.** `PostCta.jsx` picks /services for
+  ops/freight/maquila/customs posts (by frontmatter `cta: ops` or tag
+  heuristic) and the newsletter inline form for everything else. Plus a
+  one-time inline email capture injected after the first `<h2>` of every
+  post via a custom `mdxComponents.h2` wrapper.
+- **Dashboard newsletter footer.** `<EmailCapture variant="footer">`
+  above `AboutFooter`, anchored at `#newsletter` so the layout footer's
+  Newsletter link jumps straight to it.
+- **Footer link expansion.** Services / Pro / About / Newsletter links
+  added bilingually to the layout footer. About and Services now route
+  to their language-canonical URL (`/sobre`, `/servicios`, `/pro-es`)
+  when ES is the active language.
+
+### Fixed
+- **Analytics "Peak hour" and "Lightest hour" collapsing to the same
+  value.** Symptom: a fresh visitor with thin localStorage history would
+  see both tiles show identical hour + identical wait. Root cause: both
+  reducers in `AnalyticsView.summary` strict-compare over `populatedHours`,
+  so with only one populated hour bucket — common in the early-history
+  window — they both return `populatedHours[0]`. Same path for
+  "Heaviest day" with only one populated day. Fix: require ≥2 populated
+  hours AND ≥2 distinct hourly avgs before computing peak/lightest;
+  same guard for heaviest day. When the guard trips, the tiles show
+  "—" with a "Need more hour samples" / "Need more day samples" helper
+  line in EN and ES rather than misleading identical values.
+
+### SEO / infra
+- **Sitemap.** Added `/services`, `/servicios`, `/about`, `/sobre`,
+  `/pro`, `/pro-es` with hreflang alternate pairs (en/es/x-default).
+  Total 151 URLs.
+- **Prerendered HTML shells** for all six new routes with per-route
+  `<title>`, description, canonical, OG/twitter tags. /services gets a
+  Schema.org `Service` + `Offer` JSON-LD ($1,500 USD).
+
+### Decisions logged
+- Conversion paths added below-the-fold only, no top-nav promotion —
+  the data product stays the headline.
+- Email capture submissions queue to localStorage when no endpoint is
+  configured, so the form is real on launch day even before Resend (or
+  whatever) is wired. Form ships ready; secrets/keys are out of scope
+  for a GitHub Pages static site.
+- Bilingual URL pattern (`/services` + `/servicios`, etc.) chosen over
+  toggle-only routes for ES SEO — explicit hreflang in the sitemap +
+  per-language canonical in each prerendered shell.
+
 ## 2026-05-10
 
 ### Changed

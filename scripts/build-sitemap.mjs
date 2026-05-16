@@ -46,10 +46,33 @@ async function main() {
   const { portToSlug } = buildSlugMap(crossings);
   const today = new Date().toISOString().slice(0, 10);
 
+  // Conversion-layer pages added 2026-05-16. Pairs with hreflang alternates
+  // so Google understands /servicios is the Spanish twin of /services etc.
+  const aboutAlts = [
+    { lang: 'en', href: `${BASE}/about` },
+    { lang: 'es', href: `${BASE}/sobre` },
+    { lang: 'x-default', href: `${BASE}/about` },
+  ];
+  const servicesAlts = [
+    { lang: 'en', href: `${BASE}/services` },
+    { lang: 'es', href: `${BASE}/servicios` },
+    { lang: 'x-default', href: `${BASE}/services` },
+  ];
+  const proAlts = [
+    { lang: 'en', href: `${BASE}/pro` },
+    { lang: 'es', href: `${BASE}/pro-es` },
+    { lang: 'x-default', href: `${BASE}/pro` },
+  ];
+
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
     { loc: `${BASE}/api`, changefreq: 'monthly', priority: '0.5', lastmod: today },
-    { loc: `${BASE}/about`, changefreq: 'monthly', priority: '0.5', lastmod: today },
+    { loc: `${BASE}/about`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: aboutAlts },
+    { loc: `${BASE}/sobre`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: aboutAlts },
+    { loc: `${BASE}/services`, changefreq: 'monthly', priority: '0.7', lastmod: today, alternates: servicesAlts },
+    { loc: `${BASE}/servicios`, changefreq: 'monthly', priority: '0.7', lastmod: today, alternates: servicesAlts },
+    { loc: `${BASE}/pro`, changefreq: 'monthly', priority: '0.6', lastmod: today, alternates: proAlts },
+    { loc: `${BASE}/pro-es`, changefreq: 'monthly', priority: '0.6', lastmod: today, alternates: proAlts },
     { loc: `${BASE}/best-time`, changefreq: 'daily', priority: '0.7', lastmod: today },
   ];
   for (const c of crossings) {

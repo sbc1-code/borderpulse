@@ -11,6 +11,20 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 Ranked roughly by leverage. Pick what fits the available time.
 
+- [ ] **Wire newsletter endpoint.** `EmailCapture` posts to
+      `VITE_NEWSLETTER_ENDPOINT` if set, otherwise queues to
+      localStorage (`borderPulse_newsletterQueue_v1`). Pick provider
+      (Resend behind a Cloudflare Worker, Buttondown, or ConvertKit
+      hosted form) and set the env var in the deploy environment.
+      Drain the localStorage queue once on launch.
+- [ ] **Wire Stripe audit checkout.** `/services` reads
+      `VITE_STRIPE_AUDIT_LINK` — set it to a Stripe Payment Link for
+      the $1,500 audit. Until set, the primary CTA falls back to a
+      "reserve a slot" email capture (also works).
+- [ ] **Hreflang for `/best-time/:slug` ES variants** — same pattern
+      now in place for `/services` ↔ `/servicios`, `/about` ↔ `/sobre`,
+      `/pro` ↔ `/pro-es`. Extend to `/mejor-hora/:slug` next when ES
+      organic on best-time pages picks up.
 - [ ] **Trip planner v0** — pick crossing + target arrival time → return
       a recommended departure window. Needs design pass first: input
       shape, confidence model, mobile UX. Flagship feature, biggest lift
@@ -23,10 +37,12 @@ Ranked roughly by leverage. Pick what fits the available time.
       2026-05-09. 10 seed pairs prerendered + sitemap'd. Add more
       via the COMPARE_PAIRS arrays in `scripts/prerender.mjs` +
       `scripts/build-sitemap.mjs`.
-- [ ] **Hreflang for ES variants** — currently EN/ES share the same URL
-      and toggle in localStorage. For better ES SEO, consider
-      `/mejor-hora/:slug` parallel routes with proper `<link
-      rel="alternate" hreflang="es">` pointing.
+- [~] **Hreflang for ES variants** — partial 2026-05-16. Pattern in
+      place for marketing pages (`/services` ↔ `/servicios`, `/about`
+      ↔ `/sobre`, `/pro` ↔ `/pro-es`) with alternate pairs in the
+      sitemap and per-language canonicals in prerendered shells.
+      Still open for `/best-time/:slug` → `/mejor-hora/:slug` and
+      `/crossing/:slug` → ES parallel.
 - [ ] **Refactor: extract `useTypicalDelta` hook** — duplicated in
       `BorderCrossingCard.jsx` and `Embed.jsx`. Pull into `src/lib/`
       once a third caller emerges. Low priority, no user impact.
