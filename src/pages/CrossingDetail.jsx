@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck } from 'lucide-react';
+import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck, AlertTriangle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
@@ -225,6 +225,7 @@ export default function CrossingDetail() {
   const [timeline, setTimeline] = useState(null);
   const [nearbyAggregates, setNearbyAggregates] = useState({}); // { port_number: aggregate|null }
   const [embedOpen, setEmbedOpen] = useState(false);
+  const [anomalies, setAnomalies] = useState(null);
   const language = usePersistentLanguage();
 
   const todayIdx = useMemo(() => new Date().getDay(), []);
@@ -243,6 +244,17 @@ export default function CrossingDetail() {
     })();
   }, []);
 
+  // Fetch anomaly feed once; silently skip if it 404s (cron hasn't written
+  // anomalies.json yet) so the page renders normally without it.
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/data/anomalies.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (!cancelled) setAnomalies(d); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
   const { crossing, portToSlug } = useMemo(() => {
     if (!state.crossings.length) return { crossing: null, portToSlug: {} };
     const { slugToPort, portToSlug } = buildSlugMap(state.crossings);
@@ -252,6 +264,11 @@ export default function CrossingDetail() {
   }, [state.crossings, slug]);
 
   const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
+
+  const activeAnomaly = useMemo(() => {
+    if (!anomalies || !canonicalSlug) return null;
+    return (anomalies.active || []).find((a) => a.port_slug === canonicalSlug) || null;
+  }, [anomalies, canonicalSlug]);
 
   // Reset selected day to today's day-of-week whenever the crossing changes.
   useEffect(() => {
@@ -443,6 +460,37 @@ export default function CrossingDetail() {
           onToggleFavorite={() => {}}
         />
       </div>
+
+      {activeAnomaly && (
+        <section
+          className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40 p-3 sm:p-4"
+          aria-live="polite"
+        >
+          <div className="flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 mt-0.5 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+            <div className="min-w-0">
+              <h2 className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
+                {language === 'es' ? 'Hoy vs. el patrón de 30 días' : 'Today vs. the 30-day pattern'}
+              </h2>
+              <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-100 leading-relaxed">
+                {language === 'es' ? activeAnomaly.summary_es : activeAnomaly.summary_en}
+              </p>
+              <p className="mt-2 text-[11px] text-emerald-700 dark:text-emerald-300">
+                {language === 'es' ? 'Última verificación' : 'Last checked'}{' '}
+                {new Date(activeAnomaly.detected_at).toLocaleString(language === 'es' ? 'es-MX' : 'en-US')}{' · '}
+                <a
+                  href="https://bwt.cbp.gov/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  {language === 'es' ? 'Verificar en bwt.cbp.gov' : 'Verify on bwt.cbp.gov'}
+                </a>
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {(() => {
         // "Lanes right now" — always-on per-lane breakout for this port.

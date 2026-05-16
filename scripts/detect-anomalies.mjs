@@ -7,6 +7,59 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DAY_NAMES_EN_FULL = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DAY_NAMES_ES_FULL = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+
+function formatHour12(h) {
+  const hr = h % 12 || 12;
+  const suffix = h >= 12 ? 'PM' : 'AM';
+  return `${hr} ${suffix}`;
+}
+
+// Bilingual one-liner shown on /crossing/<slug>. Server-rendered so the JSON
+// feed is the source of truth and CrossingDetail just reads strings.
+function buildSummaries(anomaly) {
+  const ev = anomaly.evidence || {};
+  if (anomaly.type === 'lowest_today') {
+    const pct = Math.round((1 - ev.best_median / Math.max(1, ev.overall_median)) * 100);
+    const dayEn = DAY_NAMES_EN_FULL[ev.day_of_week];
+    const dayEs = DAY_NAMES_ES_FULL[ev.day_of_week];
+    return {
+      summary_en: `Right now ${anomaly.port_name}'s lightest ${dayEn} hour so far is ${formatHour12(ev.best_hour)} (median ${ev.best_median} min) — ~${pct}% below the 30-day baseline of ${ev.overall_median} min.`,
+      summary_es: `Ahora mismo la hora más ligera del ${dayEs} en ${anomaly.port_name} es ${formatHour12(ev.best_hour)} (mediana ${ev.best_median} min) — ~${pct}% debajo de la base de 30 días de ${ev.overall_median} min.`,
+    };
+  }
+  if (anomaly.type === 'sunday_spike') {
+    const pct = Math.round((ev.ratio || 0) * 100);
+    return {
+      summary_en: `Heads up: ${anomaly.port_name}'s Sunday peak hits ${ev.peak_median} min around ${formatHour12(ev.peak_hour)} — ~${pct}% of the 30-day median. Plan around it.`,
+      summary_es: `Atención: el pico dominical de ${anomaly.port_name} alcanza ${ev.peak_median} min cerca de las ${formatHour12(ev.peak_hour)} — ~${pct}% de la mediana de 30 días. Planea alrededor.`,
+    };
+  }
+  return { summary_en: anomaly.finding || '', summary_es: anomaly.finding || '' };
+}
+
+// Roll prior runs' `active` items into `trailing_24h`, capped at 24h ago.
+// Dedup by (port_slug, type) keeping the newest detected_at. Lets the UI
+// answer "what fired today" without re-running detection.
+function mergeTrailing(existing, newActive, generatedAt) {
+  const cutoff = new Date(generatedAt).getTime() - 24 * 60 * 60 * 1000;
+  const newKeys = new Set(newActive.map((a) => `${a.port_slug}::${a.type}`));
+  const prior = [...(existing?.active || []), ...(existing?.trailing_24h || [])];
+  const dedup = new Map();
+  for (const a of prior) {
+    const k = `${a.port_slug}::${a.type}`;
+    if (newKeys.has(k)) continue; // newer run supersedes
+    const t = new Date(a.detected_at || a.generated_at || 0).getTime();
+    if (t < cutoff) continue;
+    const cur = dedup.get(k);
+    const curT = cur ? new Date(cur.detected_at || 0).getTime() : 0;
+    if (!cur || t > curT) dedup.set(k, a);
+  }
+  return [...dedup.values()].sort((a, b) =>
+    (b.detected_at || '').localeCompare(a.detected_at || ''),
+  );
+}
 
 async function loadSlugMap() {
   const mod = await import(path.resolve(root, 'src/lib/slugs.js'));
@@ -165,8 +218,43 @@ async function main() {
   };
   fs.writeFileSync(path.resolve(outDir, 'queue.json'), JSON.stringify(out, null, 2));
 
+  // Public anomalies.json: feed read by /crossing/<slug> for inline callouts.
+  // Includes ALL detected anomalies (not just the capped top-N intended for
+  // the blog drafter), so every top-port anomaly surfaces in the UI even if
+  // it falls below the daily blog cap.
+  const publicDir = path.resolve(root, 'public/data');
+  const publicPath = path.resolve(publicDir, 'anomalies.json');
+  fs.mkdirSync(publicDir, { recursive: true });
+  const generatedAt = new Date().toISOString();
+  const activeForUi = anomalies.map((a) => {
+    const summaries = buildSummaries(a);
+    return {
+      type: a.type,
+      port_slug: a.port_slug,
+      port_name: a.port_name,
+      state: a.state,
+      severity: a.severity,
+      detected_at: generatedAt,
+      summary_en: summaries.summary_en,
+      summary_es: summaries.summary_es,
+      evidence: a.evidence,
+    };
+  });
+  let existing = null;
+  if (fs.existsSync(publicPath)) {
+    try { existing = JSON.parse(fs.readFileSync(publicPath, 'utf8')); } catch {}
+  }
+  const trailing = mergeTrailing(existing, activeForUi, generatedAt);
+  const publicOut = {
+    generated_at: generatedAt,
+    snapshot_at: snapshotTimestamp,
+    active: activeForUi,
+    trailing_24h: trailing,
+  };
+  fs.writeFileSync(publicPath, JSON.stringify(publicOut, null, 2));
+
   console.log(
-    `[anomaly] detected ${anomalies.length}, capped to ${capped.length} (maxDraftsPerRun=${CFG.maxDraftsPerRun}).`,
+    `[anomaly] detected ${anomalies.length}, capped to ${capped.length} (maxDraftsPerRun=${CFG.maxDraftsPerRun}). public/data/anomalies.json: ${activeForUi.length} active, ${trailing.length} trailing-24h.`,
   );
   if (anomalies.length === 0) {
     console.log('[anomaly] no anomalies tripped thresholds today. This is normal.');
