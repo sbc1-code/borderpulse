@@ -3,6 +3,28 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-16
+
+### Added
+- **Newsletter email capture wired to Buttondown.** New
+  `src/components/marketing/EmailCapture.jsx` posts directly to
+  `https://buttondown.com/api/emails/embed-subscribe/Digito-bp` — no API key
+  in the browser, CORS is `*` so AJAX works from any origin. Three placements:
+  footer strip under the site footer (every page, via `Layout.jsx`), inline
+  block after the first H2 in every blog post and again at post-end (via
+  `InlineAfterFirstH2` portal in `BlogPost.jsx`), and a dismissable sticky
+  bottom banner with a 30-day cooldown (`StickyEmailBanner`). Bilingual EN/ES
+  copy. `src/lib/buttondown.js` handles validation, posting, and draining the
+  pre-existing `borderPulse_newsletterQueue_v1` localStorage queue on any
+  successful signup so nothing captured pre-endpoint is lost.
+- **GitHub repo secret `BUTTONDOWN_API_KEY`** set for any future server-side
+  CI use (RSS-to-email automation, list ops). The web form does not need it.
+
+### Notes
+- RSS-to-email at `https://borderpulse.com/rss.xml` is a manual one-time
+  toggle inside the Buttondown dashboard — no public API surface exists for
+  configuring it. Do that step in the Buttondown UI once the list goes live.
+
 ## 2026-05-10
 
 ### Changed

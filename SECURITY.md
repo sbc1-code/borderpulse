@@ -28,6 +28,8 @@ Out of scope:
   - Umami Cloud analytics
   - Adsterra ad network
   - GitHub Pages hosting
+  - Buttondown (newsletter delivery — receives subscriber email addresses
+    submitted via the embed-subscribe form)
 - Denial of service via the public CBP feed (upstream)
 - Attacks requiring physical access to the maintainer's machine
 
@@ -41,10 +43,15 @@ BorderPulse is a solo project maintained by Sebastian Becerra. Response time ref
 
 ## Data handling
 
-- BorderPulse stores no user accounts and no personal data on a server.
-- Client-side favorites are stored in `localStorage` only; they never leave the browser.
+- BorderPulse runs no application server and stores no user accounts.
+- Client-side favorites and UI preferences are stored in `localStorage` only;
+  they never leave the browser.
 - Analytics is privacy-first (Umami Cloud, no cookies, no personal identifiers).
 - Border wait time data is sourced from the public CBP feed; see [cbp.gov copyright notice](https://www.cbp.gov/site-policy-notices/copyright-notice).
+- Newsletter signups POST the submitted email address directly from the
+  user's browser to Buttondown's embed-subscribe endpoint. BorderPulse does
+  not see, log, or store the address. See `/about#newsletter` for the
+  user-facing version of this disclosure.
 
 ## Credentials and secrets
 
