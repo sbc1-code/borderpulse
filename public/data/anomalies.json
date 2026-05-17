@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-17T09:09:04.356Z",
-  "snapshot_at": "2026-05-17T07:26:57.501Z",
+  "generated_at": "2026-05-17T11:12:03.981Z",
+  "snapshot_at": "2026-05-17T10:50:27.705Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -42,7 +42,7 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-05-17T09:09:04.356Z",
+      "detected_at": "2026-05-17T11:12:03.981Z",
       "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -51,7 +51,7 @@
         "best_hour": 9,
         "best_median": 0,
         "overall_median": 50,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -113,15 +113,15 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9555555555555556,
-      "detected_at": "2026-05-17T09:09:04.356Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 8 AM (median 2 min) — ~96% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 8 AM (mediana 2 min) — ~96% debajo de la base de 30 días de 45 min.",
+      "severity": 1,
+      "detected_at": "2026-05-17T11:12:03.981Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 8,
-        "best_median": 2,
+        "best_hour": 9,
+        "best_median": 0,
         "overall_median": 45,
         "samples": 3
       }
@@ -301,27 +301,27 @@
         "overall_median": 60,
         "samples": 4
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-05-16T17:18:59.133Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 8 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 8 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "severity": 0.5,
+      "detected_at": "2026-05-17T11:12:03.981Z",
+      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 10 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 10 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 8,
-        "best_median": 10,
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 10,
+        "best_median": 45,
         "overall_median": 90,
-        "samples": 3
+        "samples": 5
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
