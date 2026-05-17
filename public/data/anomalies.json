@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-05-17T19:15:44.480Z",
-  "snapshot_at": "2026-05-17T18:09:33.244Z",
+  "generated_at": "2026-05-17T20:59:12.256Z",
+  "snapshot_at": "2026-05-17T20:31:23.690Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 3.5999999999999996,
-      "detected_at": "2026-05-17T09:09:04.356Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 23 min around 10 PM — ~460% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 23 min cerca de las 10 PM — ~460% de la mediana de 30 días. Planea alrededor.",
+      "severity": 6,
+      "detected_at": "2026-05-17T20:59:12.256Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 35 min around 8 PM — ~700% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 35 min cerca de las 8 PM — ~700% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 23,
+        "peak_hour": 20,
+        "peak_median": 35,
         "overall_median": 5,
-        "samples": 4,
-        "ratio": 4.6
+        "samples": 3,
+        "ratio": 7
       }
     },
     {
@@ -233,24 +233,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.7391304347826086,
-      "detected_at": "2026-05-17T13:40:58.382Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 11 AM (median 30 min) — ~74% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 11 AM (mediana 30 min) — ~74% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 11,
-        "best_median": 30,
-        "overall_median": 115,
-        "samples": 8
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -321,5 +303,24 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.7391304347826086,
+      "detected_at": "2026-05-17T13:40:58.382Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 11 AM (median 30 min) — ~74% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 11 AM (mediana 30 min) — ~74% debajo de la base de 30 días de 115 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 11,
+        "best_median": 30,
+        "overall_median": 115,
+        "samples": 8
+      }
+    }
+  ]
 }
