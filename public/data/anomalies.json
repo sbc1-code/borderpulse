@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-17T11:12:03.981Z",
-  "snapshot_at": "2026-05-17T10:50:27.705Z",
+  "generated_at": "2026-05-17T13:40:58.382Z",
+  "snapshot_at": "2026-05-17T11:59:12.659Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -168,16 +168,16 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.8666666666666667,
-      "detected_at": "2026-05-17T09:09:04.356Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 1 PM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 1 PM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-05-17T13:40:58.382Z",
+      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 11 AM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 11 AM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 13,
+        "best_hour": 11,
         "best_median": 8,
         "overall_median": 60,
-        "samples": 4
+        "samples": 8
       }
     },
     {
@@ -238,7 +238,7 @@
       "port_name": "San Ysidro",
       "state": "CA",
       "severity": 0.7391304347826086,
-      "detected_at": "2026-05-17T09:09:04.356Z",
+      "detected_at": "2026-05-17T13:40:58.382Z",
       "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 11 AM (median 30 min) — ~74% below the 30-day baseline of 115 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 11 AM (mediana 30 min) — ~74% debajo de la base de 30 días de 115 min.",
       "evidence": {
@@ -247,7 +247,7 @@
         "best_hour": 11,
         "best_median": 30,
         "overall_median": 115,
-        "samples": 7
+        "samples": 8
       }
     },
     {
