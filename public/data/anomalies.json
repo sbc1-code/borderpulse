@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-17T15:01:05.633Z",
-  "snapshot_at": "2026-05-17T16:00:09.250Z",
+  "generated_at": "2026-05-17T19:15:44.480Z",
+  "snapshot_at": "2026-05-17T18:09:33.244Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -25,14 +25,14 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 1,
-      "detected_at": "2026-05-16T17:18:59.133Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 6 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-05-17T19:15:44.480Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 5 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 5 PM — ~200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 18,
+        "peak_hour": 17,
         "peak_median": 90,
         "overall_median": 45,
-        "samples": 3,
+        "samples": 5,
         "ratio": 2
       }
     },
@@ -321,41 +321,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.6714285714285715,
-      "detected_at": "2026-05-16T17:18:59.133Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 12 PM (median 23 min) — ~67% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 12 PM (mediana 23 min) — ~67% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 12,
-        "best_median": 23,
-        "overall_median": 70,
-        "samples": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-05-16T17:18:59.133Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 10 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 90,
-        "overall_median": 60,
-        "samples": 3,
-        "ratio": 1.5
-      }
-    }
-  ]
+  "trailing_24h": []
 }
