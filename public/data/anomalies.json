@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-18T14:33:00.405Z",
-  "snapshot_at": "2026-05-18T19:12:01.673Z",
+  "generated_at": "2026-05-18T21:16:22.707Z",
+  "snapshot_at": "2026-05-18T20:46:08.508Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -42,15 +42,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-05-18T00:01:19.546Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
+      "detected_at": "2026-05-18T21:16:22.707Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 9,
         "best_median": 0,
-        "overall_median": 50,
+        "overall_median": 60,
         "samples": 3
       }
     },
@@ -92,23 +92,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.9444444444444444,
-      "detected_at": "2026-05-18T14:33:00.405Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 10 PM — ~194% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 10 PM — ~194% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 35,
-        "overall_median": 18,
-        "samples": 5,
-        "ratio": 1.9444444444444444
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -122,23 +105,6 @@
         "overall_median": 60,
         "samples": 5,
         "ratio": 1.8333333333333333
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.8,
-      "detected_at": "2026-05-18T00:01:19.546Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 90 min around 10 PM — ~180% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 90 min cerca de las 10 PM — ~180% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 90,
-        "overall_median": 50,
-        "samples": 5,
-        "ratio": 1.8
       }
     },
     {
@@ -175,6 +141,23 @@
         "best_median": 10,
         "overall_median": 45,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-05-18T21:16:22.707Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 10 PM — ~175% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 10 PM — ~175% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 35,
+        "overall_median": 20,
+        "samples": 5,
+        "ratio": 1.75
       }
     },
     {
@@ -245,6 +228,23 @@
         "overall_median": 75,
         "samples": 5,
         "ratio": 1.6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5,
+      "detected_at": "2026-05-18T21:16:22.707Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 90 min around 10 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 90 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 90,
+        "overall_median": 60,
+        "samples": 5,
+        "ratio": 1.5
       }
     }
   ],
