@@ -351,7 +351,7 @@ export default function Dashboard() {
             </div>
           }
         >
-          <AnalyticsView crossings={state.crossings} language={language} direction={direction} />
+          <AnalyticsView crossings={filteredCrossings} language={language} direction={direction} />
         </Suspense>
       ) : (
         <>

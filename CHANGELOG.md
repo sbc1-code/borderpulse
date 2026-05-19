@@ -3,6 +3,21 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-18
+
+### Fixed
+- **Peak hour / Lightest hour now name a specific crossing.** The old cards
+  collapsed every crossing into one 24-hour bucket, so "Peak hour 11a" was
+  really "average across San Ysidro, Laredo, Hidalgo, Brownsville at 11a":
+  patterns that are inherently crossing-specific. Added a (crossing, hour)
+  grain in `AnalyticsView.jsx` so Peak/Lightest now pull the single
+  crossing-hour with the highest/lowest port-weighted median. Card value
+  is now the crossing name; hour and wait sit in the supporting line.
+- **Analytics view now scopes to the filtered crossings.** `Dashboard.jsx`
+  was passing `state.crossings` (everything ever loaded), so region/search
+  filters did nothing for analytics. Now passes `filteredCrossings`, so the
+  Peak/Lightest cards respect the active region.
+
 ## 2026-05-16
 
 ### Added

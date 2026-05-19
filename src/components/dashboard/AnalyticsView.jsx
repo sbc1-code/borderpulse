@@ -191,6 +191,10 @@ function ChartLegend({ language }) {
   );
 }
 
+function crossingName(c) {
+  return c?.name || c?.port_name || c?.crossing_name || (c?.port_number ? `Port ${c.port_number}` : 'Unknown crossing');
+}
+
 export default function AnalyticsView({ crossings, language, direction = 'northbound' }) {
   // Map storage key -> port weight from current CBP snapshot. Re-derived on
   // each crossings update; ports absent from the current feed are skipped
@@ -205,6 +209,18 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
       if (w > 0) out[id] = w;
     }
     return out;
+  }, [crossings, direction]);
+
+  // Storage key -> display name for the crossing. Used to name the specific
+  // crossing behind Peak/Lightest hour, since border-wide aggregates hide that
+  // patterns are crossing-specific (San Ysidro 9a ≠ Laredo 9a).
+  const keyToName = useMemo(() => {
+    const m = new Map();
+    for (const c of crossings || []) {
+      const id = getStorageKey(c.port_number || c.id, direction);
+      if (id) m.set(id, crossingName(c));
+    }
+    return m;
   }, [crossings, direction]);
 
   const byHour = useMemo(() => {
@@ -249,6 +265,41 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
     }));
   }, [direction, language, portWeights]);
 
+  // Crossing-hour grain: bucket samples by (storage key, hour-of-day) so Peak
+  // and Lightest can name a specific crossing instead of pretending the whole
+  // border shares one peak hour. Border-wide patterns collapse San Ysidro 9a,
+  // Laredo 9a, Brownsville 9a into one number, which destroys the signal.
+  const crossingHourPoints = useMemo(() => {
+    const all = getAllHistory(direction);
+    const buckets = new Map();
+    for (const id in all) {
+      if (!keyToName.has(id)) continue;
+      const w = portWeights[id];
+      if (!w) continue;
+      for (const sample of all[id]) {
+        if (typeof sample?.wait !== 'number' || !sample.t) continue;
+        const h = new Date(sample.t).getHours();
+        const k = `${id}:${h}`;
+        let b = buckets.get(k);
+        if (!b) {
+          b = { storageKey: id, hour: h, crossingName: keyToName.get(id), pairs: [], n: 0 };
+          buckets.set(k, b);
+        }
+        b.pairs.push({ v: sample.wait, w });
+        b.n += 1;
+      }
+    }
+    return Array.from(buckets.values())
+      .map((b) => ({
+        storageKey: b.storageKey,
+        hour: b.hour,
+        crossingName: b.crossingName,
+        avg: weightedMedian(b.pairs),
+        n: b.n,
+      }))
+      .filter((p) => p.avg != null);
+  }, [direction, keyToName, portWeights]);
+
   const summary = useMemo(() => {
     const populatedHours = byHour.filter((b) => b.avg != null);
     const populatedDays = byDow.filter((b) => b.avg != null);
@@ -259,11 +310,14 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
     const overallPairs = populatedHours.map((b) => ({ v: b.avg, w: b.n }));
     const avg = weightedMedian(overallPairs);
 
-    const peak = populatedHours.length
-      ? populatedHours.reduce((max, item) => (item.avg > max.avg ? item : max), populatedHours[0])
+    // Peak/Lightest pulled from crossing-hour grain so each card names *which*
+    // crossing carries the heaviest or lightest sampled hour. A border-wide
+    // 24-bucket argmax averaged over all ports is the bug the user flagged.
+    const peak = crossingHourPoints.length
+      ? crossingHourPoints.reduce((max, item) => (item.avg > max.avg ? item : max), crossingHourPoints[0])
       : null;
-    const lightest = populatedHours.length
-      ? populatedHours.reduce((min, item) => (item.avg < min.avg ? item : min), populatedHours[0])
+    const lightest = crossingHourPoints.length
+      ? crossingHourPoints.reduce((min, item) => (item.avg < min.avg ? item : min), crossingHourPoints[0])
       : null;
     const heaviestDay = populatedDays.length
       ? populatedDays.reduce((max, item) => (item.avg > max.avg ? item : max), populatedDays[0])
@@ -283,7 +337,7 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
       counts,
       tier: waitTier(avg),
     };
-  }, [byHour, byDow]);
+  }, [byHour, byDow, crossingHourPoints]);
 
   const trackedCount = useMemo(() => {
     const all = getAllHistory(direction);
@@ -339,15 +393,19 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
             <MetricTile
               icon={TrendingUp}
               label={language === 'en' ? 'Peak hour' : 'Hora pico'}
-              value={summary.peak ? formatHour(summary.peak.hour, language) : '—'}
-              detail={summary.peak ? formatWait(summary.peak.avg, language) : null}
+              value={summary.peak ? summary.peak.crossingName : '—'}
+              detail={summary.peak
+                ? `${formatHour(summary.peak.hour, language)} · ${formatWait(summary.peak.avg, language)}`
+                : null}
               tone={summary.peak?.avg >= 45 ? 'rose' : 'amber'}
             />
             <MetricTile
               icon={TrendingDown}
               label={language === 'en' ? 'Lightest hour' : 'Hora ligera'}
-              value={summary.lightest ? formatHour(summary.lightest.hour, language) : '—'}
-              detail={summary.lightest ? formatWait(summary.lightest.avg, language) : null}
+              value={summary.lightest ? summary.lightest.crossingName : '—'}
+              detail={summary.lightest
+                ? `${formatHour(summary.lightest.hour, language)} · ${formatWait(summary.lightest.avg, language)}`
+                : null}
               tone="emerald"
             />
             <MetricTile
