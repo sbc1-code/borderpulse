@@ -265,40 +265,40 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
     }));
   }, [direction, language, portWeights]);
 
-  // Crossing-hour grain: bucket samples by (storage key, hour-of-day) so Peak
-  // and Lightest can name a specific crossing instead of pretending the whole
-  // border shares one peak hour. Border-wide patterns collapse San Ysidro 9a,
-  // Laredo 9a, Brownsville 9a into one number, which destroys the signal.
-  const crossingHourPoints = useMemo(() => {
+  // Crossing-grain pool: collapse hours, just rank crossings against each
+  // other by median wait. "Busiest/Quietest crossing" is a location question
+  // and gets a location answer. The time question ("peak hour at X") lives
+  // on the individual crossing page where there's one crossing in scope.
+  const crossingPoints = useMemo(() => {
     const all = getAllHistory(direction);
     const buckets = new Map();
     for (const id in all) {
       if (!keyToName.has(id)) continue;
-      const w = portWeights[id];
-      if (!w) continue;
       for (const sample of all[id]) {
         if (typeof sample?.wait !== 'number' || !sample.t) continue;
-        const h = new Date(sample.t).getHours();
-        const k = `${id}:${h}`;
-        let b = buckets.get(k);
+        let b = buckets.get(id);
         if (!b) {
-          b = { storageKey: id, hour: h, crossingName: keyToName.get(id), pairs: [], n: 0 };
-          buckets.set(k, b);
+          b = { storageKey: id, crossingName: keyToName.get(id), pairs: [], n: 0 };
+          buckets.set(id, b);
         }
-        b.pairs.push({ v: sample.wait, w });
+        // All samples within one crossing share the same port weight, so
+        // weightedMedian here is just median. Keep the weighted shape for
+        // consistency with the rest of the file.
+        b.pairs.push({ v: sample.wait, w: 1 });
         b.n += 1;
       }
     }
+    // Require >=3 samples so a single drive-by reading can't crown a port.
     return Array.from(buckets.values())
+      .filter((b) => b.n >= 3)
       .map((b) => ({
         storageKey: b.storageKey,
-        hour: b.hour,
         crossingName: b.crossingName,
         avg: weightedMedian(b.pairs),
         n: b.n,
       }))
       .filter((p) => p.avg != null);
-  }, [direction, keyToName, portWeights]);
+  }, [direction, keyToName]);
 
   const summary = useMemo(() => {
     const populatedHours = byHour.filter((b) => b.avg != null);
@@ -310,14 +310,14 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
     const overallPairs = populatedHours.map((b) => ({ v: b.avg, w: b.n }));
     const avg = weightedMedian(overallPairs);
 
-    // Peak/Lightest pulled from crossing-hour grain so each card names *which*
-    // crossing carries the heaviest or lightest sampled hour. A border-wide
-    // 24-bucket argmax averaged over all ports is the bug the user flagged.
-    const peak = crossingHourPoints.length
-      ? crossingHourPoints.reduce((max, item) => (item.avg > max.avg ? item : max), crossingHourPoints[0])
+    // Busiest/Quietest are crossing-grain (collapse hours, rank ports against
+    // each other). Hour-of-day analytics live on the per-crossing page where
+    // there's one crossing in scope, not here.
+    const busiestCrossing = crossingPoints.length
+      ? crossingPoints.reduce((max, item) => (item.avg > max.avg ? item : max), crossingPoints[0])
       : null;
-    const lightest = crossingHourPoints.length
-      ? crossingHourPoints.reduce((min, item) => (item.avg < min.avg ? item : min), crossingHourPoints[0])
+    const quietestCrossing = crossingPoints.length
+      ? crossingPoints.reduce((min, item) => (item.avg < min.avg ? item : min), crossingPoints[0])
       : null;
     const heaviestDay = populatedDays.length
       ? populatedDays.reduce((max, item) => (item.avg > max.avg ? item : max), populatedDays[0])
@@ -327,17 +327,23 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
       return acc;
     }, { good: 0, moderate: 0, heavy: 0 });
 
+    // If only one crossing qualified, busiest === quietest. Suppress both
+    // rather than show the same crossing in both tiles (the noise case the
+    // first iteration of this fix shipped with).
+    const distinct = busiestCrossing && quietestCrossing
+      && busiestCrossing.storageKey !== quietestCrossing.storageKey;
+
     return {
       avg,
-      peak,
-      lightest,
+      busiestCrossing: distinct ? busiestCrossing : null,
+      quietestCrossing: distinct ? quietestCrossing : null,
       heaviestDay,
       totalSamples,
       populatedHourCount: populatedHours.length,
       counts,
       tier: waitTier(avg),
     };
-  }, [byHour, byDow, crossingHourPoints]);
+  }, [byHour, byDow, crossingPoints]);
 
   const trackedCount = useMemo(() => {
     const all = getAllHistory(direction);
@@ -392,19 +398,19 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
           <div className="grid grid-cols-2 gap-2.5 p-3 sm:gap-3 sm:p-4 xl:grid-cols-4">
             <MetricTile
               icon={TrendingUp}
-              label={language === 'en' ? 'Peak hour' : 'Hora pico'}
-              value={summary.peak ? summary.peak.crossingName : '—'}
-              detail={summary.peak
-                ? `${formatHour(summary.peak.hour, language)} · ${formatWait(summary.peak.avg, language)}`
+              label={language === 'en' ? 'Busiest crossing' : 'Cruce más pesado'}
+              value={summary.busiestCrossing ? summary.busiestCrossing.crossingName : '—'}
+              detail={summary.busiestCrossing
+                ? `${formatWait(summary.busiestCrossing.avg, language)} · ${summary.busiestCrossing.n} ${language === 'en' ? 'samples' : 'muestras'}`
                 : null}
-              tone={summary.peak?.avg >= 45 ? 'rose' : 'amber'}
+              tone={summary.busiestCrossing?.avg >= 45 ? 'rose' : 'amber'}
             />
             <MetricTile
               icon={TrendingDown}
-              label={language === 'en' ? 'Lightest hour' : 'Hora ligera'}
-              value={summary.lightest ? summary.lightest.crossingName : '—'}
-              detail={summary.lightest
-                ? `${formatHour(summary.lightest.hour, language)} · ${formatWait(summary.lightest.avg, language)}`
+              label={language === 'en' ? 'Quietest crossing' : 'Cruce más ligero'}
+              value={summary.quietestCrossing ? summary.quietestCrossing.crossingName : '—'}
+              detail={summary.quietestCrossing
+                ? `${formatWait(summary.quietestCrossing.avg, language)} · ${summary.quietestCrossing.n} ${language === 'en' ? 'samples' : 'muestras'}`
                 : null}
               tone="emerald"
             />
