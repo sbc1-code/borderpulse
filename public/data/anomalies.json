@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-19T20:50:10.204Z",
-  "snapshot_at": "2026-05-19T20:03:50.605Z",
+  "generated_at": "2026-05-19T22:19:13.411Z",
+  "snapshot_at": "2026-05-19T21:45:12.474Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,11 +8,11 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 6,
-      "detected_at": "2026-05-17T20:59:12.256Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 35 min around 8 PM — ~700% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 35 min cerca de las 8 PM — ~700% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-05-19T22:19:13.411Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 35 min around 9 PM — ~700% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 35 min cerca de las 9 PM — ~700% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 20,
+        "peak_hour": 21,
         "peak_median": 35,
         "overall_median": 5,
         "samples": 3,
@@ -33,6 +33,23 @@
         "peak_median": 90,
         "overall_median": 45,
         "samples": 3,
+        "ratio": 2
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 1,
+      "detected_at": "2026-05-19T22:19:13.411Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 9 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 9 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 120,
+        "overall_median": 60,
+        "samples": 5,
         "ratio": 2
       }
     },
@@ -142,23 +159,6 @@
         "best_median": 5,
         "overall_median": 45,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8333333333333333,
-      "detected_at": "2026-05-18T00:01:19.546Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 110 min around 10 PM — ~183% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 110 min cerca de las 10 PM — ~183% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 110,
-        "overall_median": 60,
-        "samples": 5,
-        "ratio": 1.8333333333333333
       }
     },
     {
@@ -343,7 +343,7 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-05-19T18:09:16.080Z",
+      "detected_at": "2026-05-19T22:19:13.411Z",
       "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Tuesday hour so far is 9 PM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Pharr es 9 PM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
       "evidence": {
@@ -352,7 +352,7 @@
         "best_hour": 21,
         "best_median": 10,
         "overall_median": 20,
-        "samples": 3
+        "samples": 4
       }
     }
   ],
