@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-20T22:00:06.929Z",
-  "snapshot_at": "2026-05-20T21:25:02.397Z",
+  "generated_at": "2026-05-20T23:23:56.178Z",
+  "snapshot_at": "2026-05-20T22:52:22.741Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -147,16 +147,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.95,
-      "detected_at": "2026-05-20T12:28:26.861Z",
-      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 8 AM (median 5 min) — ~95% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 8 AM (mediana 5 min) — ~95% debajo de la base de 30 días de 100 min.",
+      "severity": 0.9444444444444444,
+      "detected_at": "2026-05-20T23:23:56.178Z",
+      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 8 AM (median 5 min) — ~94% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 8 AM (mediana 5 min) — ~94% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 8,
         "best_median": 5,
-        "overall_median": 100,
+        "overall_median": 90,
         "samples": 1
       }
     },
@@ -301,6 +301,23 @@
         "best_median": 5,
         "overall_median": 15,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-05-20T23:23:56.178Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 140 min around 9 PM — ~156% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 140 min cerca de las 9 PM — ~156% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 140,
+        "overall_median": 90,
+        "samples": 5,
+        "ratio": 1.5555555555555556
       }
     },
     {
