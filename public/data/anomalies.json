@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-20T12:28:26.861Z",
-  "snapshot_at": "2026-05-20T11:27:11.340Z",
+  "generated_at": "2026-05-20T22:00:06.929Z",
+  "snapshot_at": "2026-05-20T21:25:02.397Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -38,6 +38,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 1.25,
+      "detected_at": "2026-05-20T22:00:06.929Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 6 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 40,
+        "samples": 3,
+        "ratio": 2.25
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -50,23 +67,6 @@
         "peak_median": 150,
         "overall_median": 75,
         "samples": 4,
-        "ratio": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-05-19T18:09:16.080Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 6 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 45,
-        "samples": 3,
         "ratio": 2
       }
     },
@@ -198,24 +198,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-05-20T00:11:29.781Z",
-      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 12 PM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 12 PM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 12,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -229,6 +211,24 @@
         "best_hour": 6,
         "best_median": 5,
         "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.875,
+      "detected_at": "2026-05-20T22:00:06.929Z",
+      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 12 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 12 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 12,
+        "best_median": 5,
+        "overall_median": 40,
         "samples": 1
       }
     },
@@ -272,16 +272,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.8083333333333333,
-      "detected_at": "2026-05-20T09:42:09.643Z",
-      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 8 AM (median 23 min) — ~81% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 8 AM (mediana 23 min) — ~81% debajo de la base de 30 días de 120 min.",
+      "severity": 0.8,
+      "detected_at": "2026-05-20T22:00:06.929Z",
+      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 8 AM (median 23 min) — ~80% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 8 AM (mediana 23 min) — ~80% debajo de la base de 30 días de 115 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 8,
         "best_median": 23,
-        "overall_median": 120,
+        "overall_median": 115,
         "samples": 2
       }
     },
