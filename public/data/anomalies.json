@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-21T08:35:57.383Z",
-  "snapshot_at": "2026-05-21T08:23:06.594Z",
+  "generated_at": "2026-05-21T12:19:07.430Z",
+  "snapshot_at": "2026-05-21T11:45:28.402Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -165,16 +165,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-05-21T08:35:57.383Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 6 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 6 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "severity": 0.8947368421052632,
+      "detected_at": "2026-05-21T12:19:07.430Z",
+      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 6 AM (median 10 min) — ~89% below the 30-day baseline of 95 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 6 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 95 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 6,
         "best_median": 10,
-        "overall_median": 90,
+        "overall_median": 95,
         "samples": 1
       }
     },
@@ -305,23 +305,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-05-20T23:23:56.178Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 140 min around 9 PM — ~156% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 140 min cerca de las 9 PM — ~156% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 140,
-        "overall_median": 90,
-        "samples": 5,
-        "ratio": 1.5555555555555556
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -355,5 +338,23 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-05-20T23:23:56.178Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 140 min around 9 PM — ~156% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 140 min cerca de las 9 PM — ~156% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 140,
+        "overall_median": 90,
+        "samples": 5,
+        "ratio": 1.5555555555555556
+      }
+    }
+  ]
 }
