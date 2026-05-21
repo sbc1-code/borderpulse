@@ -33,6 +33,9 @@ dist-ssr
 # Claude Code local state (worktrees, hooks, etc.)
 .claude/
 
+# Project-level MCP config — contains BUTTONDOWN_API_KEY, never commit.
+.mcp.json
+
 # Mode A anomaly queue is a regenerated artifact, not content.
 drafts/blog/auto-a/queue.json
 
