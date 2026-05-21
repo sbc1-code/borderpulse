@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-21T16:18:14.271Z",
-  "snapshot_at": "2026-05-21T15:24:56.583Z",
+  "generated_at": "2026-05-21T19:00:35.768Z",
+  "snapshot_at": "2026-05-21T17:36:52.511Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -38,23 +38,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 1.25,
-      "detected_at": "2026-05-20T22:00:06.929Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 6 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 40,
-        "samples": 3,
-        "ratio": 2.25
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -67,6 +50,23 @@
         "peak_median": 150,
         "overall_median": 75,
         "samples": 4,
+        "ratio": 2
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 1,
+      "detected_at": "2026-05-21T19:00:35.768Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 6 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 45,
+        "samples": 3,
         "ratio": 2
       }
     },
@@ -180,6 +180,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-05-21T19:00:35.768Z",
+      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 1 PM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 1 PM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 13,
+        "best_median": 5,
+        "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -194,24 +212,6 @@
         "best_median": 5,
         "overall_median": 45,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.875,
-      "detected_at": "2026-05-21T08:35:57.383Z",
-      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 1 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 1 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 13,
-        "best_median": 5,
-        "overall_median": 40,
-        "samples": 1
       }
     },
     {
