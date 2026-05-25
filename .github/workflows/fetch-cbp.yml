@@ -58,7 +58,7 @@ jobs:
       # every 15 min. Closes the loop on "I saw it in Gmail and forgot."
       - name: Open issue on failure (deduped)
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const label = 'ci-failure';
