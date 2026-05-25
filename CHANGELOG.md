@@ -3,6 +3,30 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-25
+
+### Fixed
+- **CBP refresh + anomaly scan back online after 4-day outage.** Dependabot
+  PR #29 bumped `@vitejs/plugin-react` 4.7.0 → 6.0.1. plugin-react@6 requires
+  `vite@^8` but the repo pinned `vite@^6.1.0`, so every scheduled `npm ci`
+  failed with `ERESOLVE`. Downgraded plugin-react to `^4.7.0`; lockfile
+  regenerated; CBP fetch is green again at 17:50 PDT.
+
+### Added
+- **Auto-file dedup'd issues on workflow failure.** Added a post-job step
+  to `fetch-cbp.yml`, `anomaly-scan.yml`, and `fetch-news.yml` that opens a
+  GitHub issue when a run fails. Dedup'd via label so the same workflow
+  doesn't open a new issue every 15 minutes — first failure files, rest
+  are suppressed until the issue closes. Issues land on the Engineering
+  board with labels `ops`, `ci-failure`, and the workflow slug. Replaces
+  the "buried in Gmail" pattern that hid this outage for 4 days.
+- New labels: `ops`, `ci-failure`, `fetch-cbp`, `anomaly-scan`, `fetch-news`.
+
+### Changed
+- **Dependabot config:** added `vite` group so `vite` + `@vitejs/*` bumps
+  ship together. Ignored major bumps on `vite` and `@vitejs/plugin-react`
+  until an intentional vite@8 migration sprint.
+
 ## 2026-05-19
 
 ### Changed

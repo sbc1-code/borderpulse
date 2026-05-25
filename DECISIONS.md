@@ -8,6 +8,22 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-05-25 · CI failures auto-file deduped issues, never live in Gmail
+
+A 4-day BorderPulse data outage went undetected because the only signal was
+GitHub Action failure emails sitting in a Gmail inbox of 275K messages.
+Added a `failure()` step on every scheduled workflow that opens a labeled
+issue on first failure and suppresses follow-ups until the issue is closed.
+First-class visibility on the Engineering board; no more "I saw the email
+and forgot." Workflow slugs are themselves labels (`fetch-cbp`,
+`anomaly-scan`, `fetch-news`) so each pipeline has its own dedup lane.
+
+## 2026-05-25 · Vite + @vitejs/* must move together in Dependabot
+
+Plugin-react@6 needs vite@^8; a solo bump of either breaks `npm ci`.
+Grouped them in `.github/dependabot.yml` so a future major-version PR
+includes both. Majors still ignored until an explicit migration sprint.
+
 ## 2026-04-27
 
 - **No personal-brand framing on `/about`.** The site reads as a project,
