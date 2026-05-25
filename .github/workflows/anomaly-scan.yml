@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 concurrency:
   group: anomaly-scan
@@ -86,3 +87,38 @@ jobs:
             --body "Auto-generated draft posts from today's anomaly scan. Review each one per drafts/REVIEW_CHECKLIST.md. Merge after rewriting headline and lede, flipping humanEdited:true, and moving the file to src/content/blog/." \
             --label "draft:auto-a" \
             --base main
+
+      # Auto-file an issue on failure, dedup'd by label so we don't spam.
+      - name: Open issue on failure (deduped)
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const label = 'ci-failure';
+            const flow = 'anomaly-scan';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: `${label},${flow}`,
+              state: 'open',
+            });
+            if (existing.data.length > 0) {
+              core.info(`Open ${flow} failure issue already exists (#${existing.data[0].number}). Skipping.`);
+              return;
+            }
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[ops] ${context.workflow} failing on main`,
+              body: [
+                `**Workflow:** \`${context.workflow}\``,
+                `**Commit:** \`${context.sha.substring(0, 7)}\``,
+                `**First failure:** ${new Date().toISOString()}`,
+                ``,
+                `Subsequent failures are suppressed until this issue is closed.`,
+                ``,
+                `[View failed run](${runUrl})`,
+              ].join('\n'),
+              labels: ['ops', label, flow],
+            });

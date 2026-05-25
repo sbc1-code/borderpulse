@@ -25,6 +25,13 @@ updates:
           - "react"
           - "react-dom"
           - "react-router-dom"
+      # Vite and its plugins need to move together — plugin-react@6 requires
+      # vite@^8, plugin-react@5 requires vite@^7. A solo plugin-react bump
+      # (PR #29) silently broke CI for 4 days in May 2026.
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
     # Ignore major bumps on packages that need intentional migration sprints.
     # Closed PR #4 (React 18→19, RR 6→7) as proof — those bumps are not drop-ins.
     # Revisit with explicit migration tickets; remove the ignore when ready.
@@ -48,6 +55,12 @@ updates:
       - dependency-name: "framer-motion"
         update-types: ["version-update:semver-major"]
       - dependency-name: "zod"
+        update-types: ["version-update:semver-major"]
+      # Vite stack — major bumps are coordinated migrations, not drop-ins.
+      # plugin-react@6 → vite@^8 is the next big leap.
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vitejs/plugin-react"
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"

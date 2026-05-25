@@ -11,6 +11,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   curate:
@@ -57,3 +58,38 @@ jobs:
             --body "Auto-generated news curation digest and per-port timeline updates. Review drafts/curation/$DATE.json, delete any false positives, then merge to update public/data/timelines/." \
             --label "draft:mode-c" \
             --base main
+
+      # Auto-file an issue on failure, dedup'd by label.
+      - name: Open issue on failure (deduped)
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const label = 'ci-failure';
+            const flow = 'fetch-news';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: `${label},${flow}`,
+              state: 'open',
+            });
+            if (existing.data.length > 0) {
+              core.info(`Open ${flow} failure issue already exists (#${existing.data[0].number}). Skipping.`);
+              return;
+            }
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[ops] ${context.workflow} failing on main`,
+              body: [
+                `**Workflow:** \`${context.workflow}\``,
+                `**Commit:** \`${context.sha.substring(0, 7)}\``,
+                `**First failure:** ${new Date().toISOString()}`,
+                ``,
+                `Subsequent failures are suppressed until this issue is closed.`,
+                ``,
+                `[View failed run](${runUrl})`,
+              ].join('\n'),
+              labels: ['ops', label, flow],
+            });
