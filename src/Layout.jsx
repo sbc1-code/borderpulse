@@ -6,9 +6,9 @@ import BorderPulseLogo from '@/components/BorderPulseLogo';
 import EmailCapture from '@/components/marketing/EmailCapture';
 import StickyEmailBanner from '@/components/marketing/StickyEmailBanner';
 
-const SB_MARK = (
-  <span className="inline-flex items-center gap-1 font-semibold">
-    <span>SB</span>
+const DIGITO_MARK = (
+  <span className="inline-flex items-center gap-1 font-semibold tracking-wide">
+    <span>DIGITO</span>
     <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#8a9a7b' }} />
   </span>
 );
@@ -181,13 +181,13 @@ export default function Layout({ children }) {
           </nav>
           <div className={`p-3 border-t ${isDark ? 'border-gray-800' : 'border-slate-200'} flex items-center justify-end`}>
             <a
-              href="https://sbc1-code.github.io/portfolio/"
+              href="https://digito.technology"
               target="_blank"
               rel="noopener noreferrer"
               className={`text-xs ${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'} transition-colors`}
-              title="Built by SB"
+              title="A Digito product"
             >
-              {SB_MARK}
+              {DIGITO_MARK}
             </a>
           </div>
         </aside>
@@ -201,8 +201,8 @@ export default function Layout({ children }) {
         </div>
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-            <a href="https://sbc1-code.github.io/portfolio/" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-              {SB_MARK}
+            <a href="https://digito.technology" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors" title="A Digito product">
+              {DIGITO_MARK}
             </a>
             <span>·</span>
             <span>

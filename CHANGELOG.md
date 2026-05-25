@@ -26,6 +26,13 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 - **Dependabot config:** added `vite` group so `vite` + `@vitejs/*` bumps
   ship together. Ignored major bumps on `vite` and `@vitejs/plugin-react`
   until an intentional vite@8 migration sprint.
+- **Brand mark: `SB•` → `DIGITO•`.** `Layout.jsx` now uses `DIGITO_MARK`
+  (uppercase DIGITO + sage dot, per `personal-os/digito/BRAND.md`). Both
+  sidebar and footer attribution links repoint from
+  `sbc1-code.github.io/portfolio/` (personal) to `digito.technology`
+  (studio). `title` attr is `A Digito product`, not `Built by SB`.
+  Closes the rebrand item in `personal-os/OPEN_LOOPS.md` — BorderPulse
+  now reads as a Digito product, which it is.
 
 ## 2026-05-19
 
