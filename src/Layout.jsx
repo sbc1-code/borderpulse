@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import EmailCapture from '@/components/marketing/EmailCapture';
@@ -133,6 +133,18 @@ export default function Layout({ children }) {
                 {item.name}
               </Link>
             ))}
+            <a
+              href="https://digito.technology/tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+                isDark ? 'text-slate-300 hover:bg-gray-800' : 'text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              <ExternalLink className="w-5 h-5" />
+              {language === 'en' ? 'More Digito tools' : 'Más herramientas Digito'}
+            </a>
           </div>
         )}
       </div>
@@ -178,6 +190,17 @@ export default function Layout({ children }) {
                 {item.name}
               </Link>
             ))}
+            <a
+              href="https://digito.technology/tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium ${
+                isDark ? 'text-slate-300 hover:bg-gray-800/60' : 'text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              <ExternalLink className="w-4 h-4" />
+              {language === 'en' ? 'More Digito tools' : 'Más herramientas Digito'}
+            </a>
           </nav>
           <div className={`p-3 border-t ${isDark ? 'border-gray-800' : 'border-slate-200'} flex items-center justify-end`}>
             <a
@@ -202,7 +225,10 @@ export default function Layout({ children }) {
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
             <a href="https://digito.technology" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors" title="A Digito product">
-              {DIGITO_MARK}
+              <span className="inline-flex items-center gap-1">
+                {DIGITO_MARK}
+                <span>{language === 'en' ? 'product' : 'producto'}</span>
+              </span>
             </a>
             <span>·</span>
             <span>

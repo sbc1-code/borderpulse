@@ -3,6 +3,17 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-26
+
+### Changed
+- **BorderPulse now has explicit Digito ecosystem links.** Added "More
+  Digito tools" to the desktop sidebar and mobile menu, pointing to
+  `https://digito.technology/tools`. Footer attribution now reads
+  `DIGITO• product` instead of only showing the mark. This makes the
+  traffic path obvious: BorderPulse visitors can discover the wider Digito
+  catalog, and Digito's catalog links back to BorderPulse as the flagship
+  cross-border product.
+
 ## 2026-05-25
 
 ### Fixed

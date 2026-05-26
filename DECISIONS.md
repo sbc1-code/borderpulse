@@ -8,6 +8,14 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-05-26 · Active products must link back into the Digito ecosystem
+
+BorderPulse is the live traffic asset, but Digito is the product umbrella.
+The site should not bury that relationship in a tiny logo-only attribution.
+Use explicit links such as "More Digito tools" so visitors can move from a
+single utility into the broader catalog. Digito must also link back to each
+active product from `/tools`.
+
 ## 2026-05-25 · CI failures auto-file deduped issues, never live in Gmail
 
 A 4-day BorderPulse data outage went undetected because the only signal was
