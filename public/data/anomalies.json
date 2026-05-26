@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-26T15:50:52.367Z",
-  "snapshot_at": "2026-05-26T14:21:44.649Z",
+  "generated_at": "2026-05-26T18:31:14.379Z",
+  "snapshot_at": "2026-05-26T17:42:23.603Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -34,23 +34,6 @@
         "overall_median": 70,
         "samples": 4,
         "ratio": 2.0714285714285716
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-05-26T15:50:52.367Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 6 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 45,
-        "samples": 3,
-        "ratio": 2
       }
     },
     {
@@ -184,16 +167,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9230769230769231,
-      "detected_at": "2026-05-26T15:50:52.367Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 10 AM (median 5 min) — ~92% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 65 min.",
+      "severity": 0.9242424242424242,
+      "detected_at": "2026-05-26T18:31:14.379Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 10 AM (median 5 min) — ~92% below the 30-day baseline of 66 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 66 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 10,
         "best_median": 5,
-        "overall_median": 65,
+        "overall_median": 66,
         "samples": 1
       }
     },
@@ -202,16 +185,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-05-26T15:50:52.367Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 12 PM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 12 PM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
+      "severity": 0.8837209302325582,
+      "detected_at": "2026-05-26T18:31:14.379Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 12 PM (median 5 min) — ~88% below the 30-day baseline of 43 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 12 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 43 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 12,
         "best_median": 5,
-        "overall_median": 45,
+        "overall_median": 43,
         "samples": 1
       }
     },
@@ -233,6 +216,40 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8604651162790697,
+      "detected_at": "2026-05-26T18:31:14.379Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 80 min around 10 PM — ~186% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 80 min cerca de las 10 PM — ~186% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 80,
+        "overall_median": 43,
+        "samples": 4,
+        "ratio": 1.8604651162790697
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.8333333333333333,
+      "detected_at": "2026-05-26T18:31:14.379Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 165 min around 6 PM — ~183% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 165 min cerca de las 6 PM — ~183% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 165,
+        "overall_median": 90,
+        "samples": 2,
+        "ratio": 1.8333333333333333
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -251,6 +268,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.7777777777777777,
+      "detected_at": "2026-05-26T18:31:14.379Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 6 PM — ~178% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 6 PM — ~178% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 160,
+        "overall_median": 90,
+        "samples": 2,
+        "ratio": 1.7777777777777777
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -266,23 +300,6 @@
         "best_median": 4,
         "overall_median": 15,
         "samples": 4
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-05-25T19:47:59.481Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 150 min around 10 PM — ~167% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 150 min cerca de las 10 PM — ~167% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 150,
-        "overall_median": 90,
-        "samples": 4,
-        "ratio": 1.6666666666666667
       }
     },
     {
@@ -319,23 +336,6 @@
         "best_median": 35,
         "overall_median": 90,
         "samples": 3
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-05-21T16:18:14.271Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 140 min around 9 PM — ~156% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 140 min cerca de las 9 PM — ~156% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 140,
-        "overall_median": 90,
-        "samples": 5,
-        "ratio": 1.5555555555555556
       }
     },
     {
