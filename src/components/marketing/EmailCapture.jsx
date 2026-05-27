@@ -187,7 +187,7 @@ export default function EmailCapture({
           {error}
         </div>
       )}
-      <div className="mt-2 text-[11px] text-slate-400 dark:text-slate-500">
+      <div className="mt-2 text-[11px] text-slate-600 dark:text-slate-300">
         {language === 'en' ? (
           <>
             No spam. Unsubscribe in one click. Your email is sent to{' '}
@@ -195,12 +195,12 @@ export default function EmailCapture({
               href="https://buttondown.com/privacy"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-slate-700 dark:hover:text-slate-300"
+              className="underline text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
             >
               Buttondown
             </a>
             , which delivers the newsletter.{' '}
-            <Link to="/about#newsletter" className="underline hover:text-slate-700 dark:hover:text-slate-300">
+            <Link to="/about#newsletter" className="underline text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white">
               Details
             </Link>
             .
@@ -212,12 +212,12 @@ export default function EmailCapture({
               href="https://buttondown.com/privacy"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-slate-700 dark:hover:text-slate-300"
+              className="underline text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
             >
               Buttondown
             </a>
             , que entrega el newsletter.{' '}
-            <Link to="/about#newsletter" className="underline hover:text-slate-700 dark:hover:text-slate-300">
+            <Link to="/about#newsletter" className="underline text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white">
               Detalles
             </Link>
             .

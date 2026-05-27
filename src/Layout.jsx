@@ -99,7 +99,7 @@ export default function Layout({ children }) {
         {language === 'en' ? 'Skip to content' : 'Ir al contenido'}
       </a>
       {/* Mobile header */}
-      <div className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
+      <header className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
           <Link to="/" className="flex min-w-0 items-center gap-2">
             <BorderPulseLogo size={32} />
@@ -147,7 +147,7 @@ export default function Layout({ children }) {
             </a>
           </div>
         )}
-      </div>
+      </header>
 
       <div className="lg:flex min-h-screen">
         <aside className={`hidden lg:flex w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex-col`}>

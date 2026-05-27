@@ -3,15 +3,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '@/Layout';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Dashboard from '@/pages/Dashboard';
+import Alerts from '@/pages/Alerts';
 
-// Leaf routes are code-split — no reason to ship Blog/Alerts/Api/Embed/BestTime
+// Most leaf routes are code-split — no reason to ship Blog/Api/Embed/BestTime
 // JS for someone who lands on the dashboard. The dashboard is the hot path,
-// everything else loads on demand.
+// and Alerts stays in the shell because it is a small, launch-critical route.
 const SharedStatus = lazy(() => import('@/pages/SharedStatus'));
 const CrossingDetail = lazy(() => import('@/pages/CrossingDetail'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
-const Alerts = lazy(() => import('@/pages/Alerts'));
 const Embed = lazy(() => import('@/pages/Embed'));
 const Api = lazy(() => import('@/pages/Api'));
 const BestTime = lazy(() => import('@/pages/BestTime'));

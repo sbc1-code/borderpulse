@@ -152,7 +152,7 @@ export default function Alerts() {
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             {STRINGS.es.empty}
           </p>
-          <Button asChild size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button asChild size="sm" className="bg-emerald-700 hover:bg-emerald-800 text-white">
             <Link to="/">{t.backToDashboard}</Link>
           </Button>
         </div>
