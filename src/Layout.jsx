@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code, ExternalLink } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code, ExternalLink, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import EmailCapture from '@/components/marketing/EmailCapture';
@@ -67,6 +67,12 @@ export default function Layout({ children }) {
       href: '/blog',
       icon: BookOpen,
       current: location.pathname.startsWith('/blog'),
+    },
+    {
+      name: language === 'en' ? 'Predictions' : 'Predicciones',
+      href: '/predictions',
+      icon: TrendingUp,
+      current: location.pathname.startsWith('/predictions'),
     },
     {
       name: language === 'en' ? 'Alerts' : 'Alertas',
