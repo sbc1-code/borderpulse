@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-27T00:12:43.120Z",
-  "snapshot_at": "2026-05-27T00:10:29.875Z",
+  "generated_at": "2026-05-27T05:20:22.536Z",
+  "snapshot_at": "2026-05-27T04:48:37.149Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -95,7 +95,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-05-27T00:12:43.120Z",
+      "detected_at": "2026-05-27T05:20:22.536Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -104,7 +104,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 4
+        "samples": 5
       }
     },
     {
@@ -219,16 +219,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8484848484848485,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 7 AM (median 10 min) — ~85% below the 30-day baseline of 66 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 7 AM (mediana 10 min) — ~85% debajo de la base de 30 días de 66 min.",
+      "severity": 0.8461538461538461,
+      "detected_at": "2026-05-27T05:20:22.536Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 7 AM (median 10 min) — ~85% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 7 AM (mediana 10 min) — ~85% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 7,
         "best_median": 10,
-        "overall_median": 66,
+        "overall_median": 65,
         "samples": 3
       }
     },
@@ -325,17 +325,17 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 4 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 4 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
+      "severity": 0.5,
+      "detected_at": "2026-05-27T05:20:22.536Z",
+      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 4 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 4 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 4,
-        "best_median": 40,
+        "best_median": 45,
         "overall_median": 90,
-        "samples": 3
+        "samples": 4
       }
     }
   ],
