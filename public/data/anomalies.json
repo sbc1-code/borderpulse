@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-27T05:20:22.536Z",
-  "snapshot_at": "2026-05-27T04:48:37.149Z",
+  "generated_at": "2026-05-27T10:02:39.579Z",
+  "snapshot_at": "2026-05-27T08:38:22.835Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -112,15 +112,15 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9555555555555556,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 7 AM (median 2 min) — ~96% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 2 min) — ~96% debajo de la base de 30 días de 45 min.",
+      "severity": 0.9777777777777777,
+      "detected_at": "2026-05-27T10:02:39.579Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 8 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 8 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
-        "best_hour": 7,
-        "best_median": 2,
+        "best_hour": 8,
+        "best_median": 1,
         "overall_median": 45,
         "samples": 2
       }
@@ -198,24 +198,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.8555555555555556,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 7 AM (median 13 min) — ~86% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 7 AM (mediana 13 min) — ~86% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 7,
-        "best_median": 13,
-        "overall_median": 90,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -234,41 +216,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.8260869565217391,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 8 AM (median 20 min) — ~83% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 8 AM (mediana 20 min) — ~83% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 8,
-        "best_median": 20,
-        "overall_median": 115,
-        "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.7777777777777777,
-      "detected_at": "2026-05-26T18:31:14.379Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 6 PM — ~178% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 6 PM — ~178% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 160,
-        "overall_median": 90,
-        "samples": 2,
-        "ratio": 1.7777777777777777
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -283,6 +230,24 @@
         "best_median": 15,
         "overall_median": 65,
         "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.7391304347826086,
+      "detected_at": "2026-05-27T10:02:39.579Z",
+      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 4 AM (median 30 min) — ~74% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 4 AM (mediana 30 min) — ~74% debajo de la base de 30 días de 115 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 4,
+        "best_median": 30,
+        "overall_median": 115,
+        "samples": 5
       }
     },
     {
@@ -339,5 +304,41 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8555555555555556,
+      "detected_at": "2026-05-27T00:12:43.120Z",
+      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 7 AM (median 13 min) — ~86% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 7 AM (mediana 13 min) — ~86% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 7,
+        "best_median": 13,
+        "overall_median": 90,
+        "samples": 2
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.7777777777777777,
+      "detected_at": "2026-05-26T18:31:14.379Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 6 PM — ~178% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 6 PM — ~178% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 160,
+        "overall_median": 90,
+        "samples": 2,
+        "ratio": 1.7777777777777777
+      }
+    }
+  ]
 }
