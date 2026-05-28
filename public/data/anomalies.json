@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-28T04:01:44.355Z",
-  "snapshot_at": "2026-05-28T03:33:18.358Z",
+  "generated_at": "2026-05-28T08:45:24.311Z",
+  "snapshot_at": "2026-05-28T07:43:06.472Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -95,7 +95,7 @@
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
       "severity": 0.9846153846153847,
-      "detected_at": "2026-05-28T04:01:44.355Z",
+      "detected_at": "2026-05-28T08:45:24.311Z",
       "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 7 AM (median 1 min) — ~98% below the 30-day baseline of 65 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 65 min.",
       "evidence": {
@@ -104,7 +104,7 @@
         "best_hour": 7,
         "best_median": 1,
         "overall_median": 65,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -141,24 +141,6 @@
         "best_median": 3,
         "overall_median": 60,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-05-28T04:01:44.355Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 7 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 7 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 10,
-        "overall_median": 90,
-        "samples": 1
       }
     },
     {
@@ -216,6 +198,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-05-28T08:45:24.311Z",
+      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 4 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 4 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 4,
+        "best_median": 15,
+        "overall_median": 90,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -229,24 +229,6 @@
         "best_hour": 10,
         "best_median": 15,
         "overall_median": 70,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.782608695652174,
-      "detected_at": "2026-05-28T04:01:44.355Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 7 AM (median 25 min) — ~78% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 7 AM (mediana 25 min) — ~78% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 25,
-        "overall_median": 115,
         "samples": 1
       }
     },
@@ -321,5 +303,24 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.782608695652174,
+      "detected_at": "2026-05-28T04:01:44.355Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 7 AM (median 25 min) — ~78% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 7 AM (mediana 25 min) — ~78% debajo de la base de 30 días de 115 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 7,
+        "best_median": 25,
+        "overall_median": 115,
+        "samples": 1
+      }
+    }
+  ]
 }
