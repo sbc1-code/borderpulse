@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-28T08:45:24.311Z",
-  "snapshot_at": "2026-05-28T07:43:06.472Z",
+  "generated_at": "2026-05-28T12:32:44.273Z",
+  "snapshot_at": "2026-05-28T11:24:51.746Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -233,6 +233,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.782608695652174,
+      "detected_at": "2026-05-28T12:32:44.273Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 7 AM (median 25 min) — ~78% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 7 AM (mediana 25 min) — ~78% debajo de la base de 30 días de 115 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 7,
+        "best_median": 25,
+        "overall_median": 115,
+        "samples": 1
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
@@ -303,24 +321,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.782608695652174,
-      "detected_at": "2026-05-28T04:01:44.355Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 7 AM (median 25 min) — ~78% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 7 AM (mediana 25 min) — ~78% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 25,
-        "overall_median": 115,
-        "samples": 1
-      }
-    }
-  ]
+  "trailing_24h": []
 }
