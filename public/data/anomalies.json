@@ -1,56 +1,60 @@
 {
-  "generated_at": "2026-05-28T12:32:44.273Z",
-  "snapshot_at": "2026-05-28T18:11:31.913Z",
-  "active": [
+  "generated_at": "2026-05-28T21:58:40.050Z",
+  "snapshot_at": "2026-05-28T20:37:30.603Z",
+  "active": [],
+  "trailing_24h": [
     {
-      "type": "sunday_spike",
-      "port_slug": "laredo-colombia-solidarity",
-      "port_name": "Laredo - Colombia Solidarity",
-      "state": "TX",
-      "severity": 6,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 35 min around 10 PM — ~700% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 35 min cerca de las 10 PM — ~700% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 35,
-        "overall_median": 5,
-        "samples": 3,
-        "ratio": 7
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.6666666666666665,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 10 PM — ~267% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 10 PM — ~267% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 40,
-        "overall_median": 15,
-        "samples": 3,
-        "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.782608695652174,
+      "detected_at": "2026-05-28T12:32:44.273Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 7 AM (median 25 min) — ~78% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 7 AM (mediana 25 min) — ~78% debajo de la base de 30 días de 115 min.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 180,
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 7,
+        "best_median": 25,
+        "overall_median": 115,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.9846153846153847,
+      "detected_at": "2026-05-28T08:45:24.311Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 7 AM (median 1 min) — ~98% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 65 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 7,
+        "best_median": 1,
+        "overall_median": 65,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-05-28T08:45:24.311Z",
+      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 4 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 4 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 4,
+        "best_median": 15,
         "overall_median": 90,
-        "samples": 3,
-        "ratio": 2
+        "samples": 3
       }
     },
     {
@@ -86,24 +90,6 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.9846153846153847,
-      "detected_at": "2026-05-28T08:45:24.311Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 7 AM (median 1 min) — ~98% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 65 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 1,
-        "overall_median": 65,
         "samples": 3
       }
     },
@@ -180,41 +166,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.875,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 75 min around 8 PM — ~188% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 75 min cerca de las 8 PM — ~188% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 75,
-        "overall_median": 40,
-        "samples": 3,
-        "ratio": 1.875
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-05-28T08:45:24.311Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 4 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 4 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 15,
-        "overall_median": 90,
-        "samples": 3
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -230,41 +181,6 @@
         "best_median": 15,
         "overall_median": 70,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.782608695652174,
-      "detected_at": "2026-05-28T12:32:44.273Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 7 AM (median 25 min) — ~78% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 7 AM (mediana 25 min) — ~78% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 25,
-        "overall_median": 115,
-        "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.7777777777777777,
-      "detected_at": "2026-05-27T18:01:48.464Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 6 PM — ~178% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 6 PM — ~178% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 160,
-        "overall_median": 90,
-        "samples": 2,
-        "ratio": 1.7777777777777777
       }
     },
     {
@@ -302,24 +218,6 @@
         "overall_median": 90,
         "samples": 2
       }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.5714285714285714,
-      "detected_at": "2026-05-27T00:12:43.120Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 110 min around 10 PM — ~157% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 110 min cerca de las 10 PM — ~157% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 110,
-        "overall_median": 70,
-        "samples": 3,
-        "ratio": 1.5714285714285714
-      }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
