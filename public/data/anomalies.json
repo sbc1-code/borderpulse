@@ -1,7 +1,8 @@
 {
-  "generated_at": "2026-05-29T08:44:18.298Z",
-  "snapshot_at": "2026-05-29T07:41:15.343Z",
-  "active": [
+  "generated_at": "2026-05-29T12:19:24.223Z",
+  "snapshot_at": "2026-05-29T10:58:58.789Z",
+  "active": [],
+  "trailing_24h": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
@@ -264,26 +265,6 @@
         "overall_median": 113,
         "samples": 3,
         "ratio": 1.5044247787610618
-      }
-    }
-  ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-05-28T08:45:24.311Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 4 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 4 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 15,
-        "overall_median": 90,
-        "samples": 3
       }
     }
   ]
