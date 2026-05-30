@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-30T09:22:35.528Z",
-  "snapshot_at": "2026-05-30T08:03:56.509Z",
+  "generated_at": "2026-05-30T11:25:00.394Z",
+  "snapshot_at": "2026-05-30T10:17:14.774Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -148,35 +148,17 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.9557522123893806,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 7 AM (median 5 min) — ~96% below the 30-day baseline of 113 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 7 AM (mediana 5 min) — ~96% debajo de la base de 30 días de 113 min.",
+      "severity": 0.9565217391304348,
+      "detected_at": "2026-05-30T11:25:00.394Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 7 AM (median 5 min) — ~96% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 7 AM (mediana 5 min) — ~96% debajo de la base de 30 días de 115 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 7,
         "best_median": 5,
-        "overall_median": 113,
+        "overall_median": 115,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.9538461538461538,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 10 AM (median 3 min) — ~95% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 10 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 65 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 10,
-        "best_median": 3,
-        "overall_median": 65,
-        "samples": 2
       }
     },
     {
@@ -195,6 +177,24 @@
         "best_median": 1,
         "overall_median": 15,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.9230769230769231,
+      "detected_at": "2026-05-30T11:25:00.394Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 9 AM (median 5 min) — ~92% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 9 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 65 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 9,
+        "best_median": 5,
+        "overall_median": 65,
+        "samples": 2
       }
     },
     {
@@ -257,7 +257,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.7857142857142857,
-      "detected_at": "2026-05-30T09:22:35.528Z",
+      "detected_at": "2026-05-30T11:25:00.394Z",
       "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 10 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 10 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
       "evidence": {
@@ -266,7 +266,7 @@
         "best_hour": 10,
         "best_median": 15,
         "overall_median": 70,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -339,23 +339,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5044247787610618,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 170,
-        "overall_median": 113,
-        "samples": 3,
-        "ratio": 1.5044247787610618
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -374,5 +357,23 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5044247787610618,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 170,
+        "overall_median": 113,
+        "samples": 3,
+        "ratio": 1.5044247787610618
+      }
+    }
+  ]
 }
