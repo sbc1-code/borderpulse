@@ -3,6 +3,25 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-05-29
+
+### Fixed
+- **CBP feed localized to Spanish: site showed 0 crossings (SIT-1).** CBP's
+  `bwtpublicmod` feed began returning Spanish field values (`Frontera
+  mexicana`, `Abierto`/`Cerrado`, `Sin demora`/`demora`/`Carriles cerrados`/
+  `Actualización Pendiente`). `fetch-cbp.mjs` filtered only the English
+  `Mexican Border`, so every scheduled run wrote `count: 0` and deployed an
+  empty map, silently, because the Action still reported success. Fix:
+  normalize `border`, `port_status`, and lane `operational_status` from either
+  language to canonical English before processing (`Carriles cerrados` →
+  `Lanes Closed`, so closed lanes null out correctly). Recovered to 43
+  crossings, matching the pre-break snapshot exactly.
+- **Added a nonzero-count guard to `fetch-cbp.mjs`.** It now throws (non-zero
+  exit → fails the Action → opens a tracking issue) if fewer than 35
+  Mexican-border crossings survive dedupe, leaving the last-good snapshot in
+  place instead of overwriting it with zeros. Turns a silent data-quality
+  failure into a loud, self-documenting one.
+
 ## 2026-05-26
 
 ### Changed

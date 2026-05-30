@@ -15,6 +15,53 @@ import path from 'node:path';
 const CBP_URL = 'https://bwt.cbp.gov/api/bwtpublicmod';
 const OUT_PATH = path.join(process.cwd(), 'public', 'data', 'crossings.json');
 
+// Minimum healthy crossing count. CBP's Mexican-border feed yields ~43 distinct
+// crossings after dedupe. If we ever fall below this, something upstream broke
+// (e.g. CBP relabeled/localized fields): refuse to overwrite the last-good
+// snapshot rather than silently publishing an empty map. See DECISIONS.md.
+const MIN_CROSSINGS = 35;
+
+// --- CBP localization normalization -----------------------------------------
+// In May 2026 CBP's bwtpublicmod feed began returning Spanish-localized values
+// ("Frontera mexicana", "Abierto", "Sin demora", ...). The feed can come back
+// in either language depending on CBP's server-side locale, so we normalize
+// every field we depend on to its canonical English form before processing.
+// Keys are accent-stripped + lowercased; values match the strings the site and
+// pre-localization snapshots were built against.
+const normalizeKey = (value) =>
+  (value ?? '').toString().trim().toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, ''); // strip diacritics
+
+const BORDER_MAP = {
+  'mexican border': 'Mexican Border',
+  'frontera mexicana': 'Mexican Border',
+  'canadian border': 'Canadian Border',
+  'frontera canadiense': 'Canadian Border',
+};
+
+const PORT_STATUS_MAP = {
+  'open': 'Open', 'abierto': 'Open',
+  'closed': 'Closed', 'cerrado': 'Closed',
+};
+
+// Lane statuses: lowercase "no delay"/"delay" and title-case "Update Pending"
+// are passed through to the UI; "Lanes Closed" and "N/A" are the two sentinels
+// parseLane treats as "no usable lane".
+const LANE_STATUS_MAP = {
+  'no delay': 'no delay', 'sin demora': 'no delay',
+  'delay': 'delay', 'demora': 'delay',
+  'lanes closed': 'Lanes Closed', 'carriles cerrados': 'Lanes Closed',
+  'update pending': 'Update Pending',
+  'actualizacion pendiente': 'Update Pending', 'actualización pendiente': 'Update Pending',
+  'n/a': 'N/A', 'no aplica': 'N/A',
+};
+
+const passthrough = (v) => (v ?? '').toString().trim();
+const normalizeBorder = (v) => BORDER_MAP[normalizeKey(v)] ?? passthrough(v);
+const normalizePortStatus = (v) => PORT_STATUS_MAP[normalizeKey(v)] ?? passthrough(v);
+const normalizeLaneStatus = (v) => LANE_STATUS_MAP[normalizeKey(v)] ?? passthrough(v);
+const isMexicanBorder = (p) => BORDER_MAP[normalizeKey(p?.border)] === 'Mexican Border';
+
 // CBP uses these as `crossing_name` but they're lane-type labels, not crossings.
 // Drop them from the display name (they'd produce rows like "Otay Mesa - Passenger").
 const LANE_TYPE_LABELS = new Set([
@@ -57,11 +104,13 @@ const stateForPort = (portName) => {
 };
 
 const parseLane = (lane) => {
-  if (!lane || lane.operational_status === 'N/A' || lane.operational_status === 'Lanes Closed') return null;
+  if (!lane) return null;
+  const status = normalizeLaneStatus(lane.operational_status);
+  if (status === 'N/A' || status === 'Lanes Closed') return null;
   const delay = parseInt(lane.delay_minutes, 10);
   const open = parseInt(lane.lanes_open, 10);
   return {
-    status: lane.operational_status || null,
+    status: status || null,
     delay_minutes: Number.isFinite(delay) ? delay : null,
     lanes_open: Number.isFinite(open) ? open : 0,
     update_time: lane.update_time || null,
@@ -109,9 +158,9 @@ const mapPort = (p) => {
     port_name: portName,
     crossing_name: crossingName,
     state,
-    border: p.border,
+    border: normalizeBorder(p.border),
     hours: p.hours,
-    port_status: p.port_status,
+    port_status: normalizePortStatus(p.port_status),
     construction_notice: p.construction_notice || null,
     updated_at: `${p.date} ${p.time}`,
     current_wait_time: primaryDelay,
@@ -202,11 +251,22 @@ async function main() {
   const data = await res.json();
   if (!Array.isArray(data)) throw new Error('CBP response was not an array');
 
-  const mexican = dedupe(
-    data
-      .filter((p) => p.border === 'Mexican Border')
-      .map(mapPort),
-  );
+  const rawMexican = data.filter(isMexicanBorder);
+  const mexican = dedupe(rawMexican.map(mapPort));
+
+  // Fail-safe: never overwrite the last-good snapshot with a near-empty one.
+  // A sudden collapse means CBP changed the feed (labels/locale) and the maps
+  // above need updating, so surface it loudly (non-zero exit fails the Action and
+  // opens a tracking issue) instead of silently publishing an empty map.
+  if (mexican.length < MIN_CROSSINGS) {
+    throw new Error(
+      `Refusing to write crossings.json: ${mexican.length} Mexican-border crossings ` +
+      `after dedupe (expected >= ${MIN_CROSSINGS}). ` +
+      `Raw Mexican rows from CBP: ${rawMexican.length}; total feed rows: ${data.length}. ` +
+      `If raw rows look healthy, CBP likely relabeled/localized fields again; ` +
+      `update the normalization maps in scripts/fetch-cbp.mjs. Last-good snapshot left intact.`,
+    );
+  }
 
   const payload = {
     source: 'U.S. Customs and Border Protection',

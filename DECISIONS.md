@@ -8,6 +8,19 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-05-29 · Normalize CBP locale + refuse empty snapshots
+
+CBP serves its public `bwtpublicmod` feed in Spanish or English depending on
+server-side locale, and it flipped to Spanish on 2026-05-29 with no warning,
+breaking the English-only `border === 'Mexican Border'` filter. Rather than
+chase the locale, `fetch-cbp.mjs` now normalizes every field we depend on
+(`border`, `port_status`, lane `operational_status`) from either language to
+canonical English, so the pipeline is language-agnostic going forward. Paired
+with a hard floor (`MIN_CROSSINGS = 35`): if the deduped count collapses, the
+script throws instead of overwriting `crossings.json`. A near-empty publish is
+never correct, so the right failure mode is keeping the last-good data and
+failing loudly (the Action's deduped failure-issue step), not shipping zeros.
+
 ## 2026-05-26 · Active products must link back into the Digito ecosystem
 
 BorderPulse is the live traffic asset, but Digito is the product umbrella.
