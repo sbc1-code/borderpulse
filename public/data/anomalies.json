@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-30T06:50:29.487Z",
-  "snapshot_at": "2026-05-30T05:29:01.589Z",
+  "generated_at": "2026-05-30T09:22:35.528Z",
+  "snapshot_at": "2026-05-30T08:03:56.509Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -59,7 +59,7 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-05-30T06:50:29.487Z",
+      "detected_at": "2026-05-30T09:22:35.528Z",
       "summary_en": "Right now Nogales - Deconcini's lightest Saturday hour so far is 8 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Deconcini es 8 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -68,7 +68,7 @@
         "best_hour": 8,
         "best_median": 0,
         "overall_median": 60,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -203,7 +203,7 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.8888888888888888,
-      "detected_at": "2026-05-30T06:50:29.487Z",
+      "detected_at": "2026-05-30T09:22:35.528Z",
       "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 8 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 8 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
       "evidence": {
@@ -212,7 +212,7 @@
         "best_hour": 8,
         "best_median": 10,
         "overall_median": 90,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -239,13 +239,13 @@
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "severity": 0.8461538461538461,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 8 AM (median 10 min) — ~85% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 8 AM (mediana 10 min) — ~85% debajo de la base de 30 días de 65 min.",
+      "detected_at": "2026-05-30T09:22:35.528Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 9 AM (median 10 min) — ~85% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 9 AM (mediana 10 min) — ~85% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 8,
+        "best_hour": 9,
         "best_median": 10,
         "overall_median": 65,
         "samples": 2
@@ -257,16 +257,16 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.7857142857142857,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 8 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 8 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
+      "detected_at": "2026-05-30T09:22:35.528Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 10 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 10 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 8,
+        "best_hour": 10,
         "best_median": 15,
         "overall_median": 70,
-        "samples": 1
+        "samples": 2
       }
     },
     {
