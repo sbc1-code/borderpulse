@@ -53,7 +53,6 @@ async function main() {
   ];
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
-    { loc: `${BASE}/api`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/about`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/best-time`, changefreq: 'daily', priority: '0.7', lastmod: today },
     { loc: `${BASE}/methodology`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },

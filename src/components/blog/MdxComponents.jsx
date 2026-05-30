@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import OfficialSource from './OfficialSource';
 import BestTimeChart from './BestTimeChart';
+import CrossingRankings from './CrossingRankings';
 
 function CrossingLink({ slug, children }) {
   return (
@@ -13,6 +14,7 @@ function CrossingLink({ slug, children }) {
 export const mdxComponents = {
   OfficialSource,
   BestTimeChart,
+  CrossingRankings,
   CrossingLink,
   a: (props) => {
     const isExternal = /^https?:\/\//.test(props.href || '');

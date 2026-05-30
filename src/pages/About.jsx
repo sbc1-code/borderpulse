@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Database, Lock, RefreshCw, BookOpen, Code as CodeIcon, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Database, Lock, RefreshCw, BookOpen, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
@@ -234,16 +234,16 @@ export default function About() {
           </div>
         </Link>
         <Link
-          to="/api"
+          to={language === 'es' ? '/metodologia' : '/methodology'}
           className="rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 p-3 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
         >
           <div className="flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white">
-            <CodeIcon className="w-4 h-4 text-emerald-600" />
-            {language === 'en' ? 'Public API' : 'API pública'}
+            <Database className="w-4 h-4 text-emerald-600" />
+            {language === 'en' ? 'Methodology' : 'Metodología'}
             <ArrowRight className="w-3.5 h-3.5 ml-auto text-slate-400" />
           </div>
           <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            {language === 'en' ? 'Free JSON feeds, no key' : 'JSON gratis, sin key'}
+            {language === 'en' ? 'Sources, medians, and limits' : 'Fuentes, medianas y límites'}
           </div>
         </Link>
         <Link

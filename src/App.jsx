@@ -4,7 +4,7 @@ import Layout from '@/Layout';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Dashboard from '@/pages/Dashboard';
 
-// Leaf routes are code-split — no reason to ship Blog/Alerts/Api/Embed/BestTime
+// Leaf routes are code-split: no reason to ship Blog/Alerts/Embed/BestTime
 // JS for someone who lands on the dashboard. The dashboard is the hot path,
 // everything else loads on demand.
 const SharedStatus = lazy(() => import('@/pages/SharedStatus'));
@@ -13,7 +13,6 @@ const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Alerts = lazy(() => import('@/pages/Alerts'));
 const Embed = lazy(() => import('@/pages/Embed'));
-const Api = lazy(() => import('@/pages/Api'));
 const BestTime = lazy(() => import('@/pages/BestTime'));
 const BestTimeIndex = lazy(() =>
   import('@/pages/BestTime').then((m) => ({ default: m.BestTimeIndex })),
@@ -44,7 +43,7 @@ function LayoutRoutes() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/alerts" element={<Alerts />} />
-          <Route path="/api" element={<Api />} />
+          <Route path="/api" element={<Navigate to="/methodology" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/methodology" element={<Methodology lang="en" />} />
           <Route path="/metodologia" element={<Methodology lang="es" />} />

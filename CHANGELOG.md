@@ -5,6 +5,25 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-05-29
 
+### Added
+- **Busiest and fastest crossing rankings.** Added a live `rankings.json`
+  build step plus a bilingual blog pair ranking U.S.-Mexico crossings by
+  30-day median northbound wait. The posts use a reusable
+  `<CrossingRankings />` MDX component, link into the highest-intent crossing
+  and best-time pages, and get generated OG images through the existing blog
+  card pipeline.
+
+### Changed
+- **Removed the public API docs page from the product surface.** The
+  underlying `/data/*.json` files stay in place because the app, embeds, and
+  build scripts depend on them. The visible `/api` page/nav/footer links are
+  gone; old `/api` inbound links redirect to `/methodology` instead of
+  hard-404ing.
+- **Methodology copy no longer promises an exact 15-minute cron cadence.**
+  It now describes scheduled refreshes and points to `/data/` snapshots
+  directly, matching the earlier decision that GitHub Actions cron is
+  throttled in practice.
+
 ### Fixed
 - **CBP feed localized to Spanish: site showed 0 crossings (SIT-1).** CBP's
   `bwtpublicmod` feed began returning Spanish field values (`Frontera

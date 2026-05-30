@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Code, ExternalLink } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import EmailCapture from '@/components/marketing/EmailCapture';
@@ -73,12 +73,6 @@ export default function Layout({ children }) {
       href: '/alerts',
       icon: Bell,
       current: location.pathname.startsWith('/alerts'),
-    },
-    {
-      name: 'API',
-      href: '/api',
-      icon: Code,
-      current: location.pathname.startsWith('/api'),
     },
   ];
 
@@ -238,11 +232,6 @@ export default function Layout({ children }) {
             <Link to="/best-time" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
             </Link>
-            <span>·</span>
-            <Link to="/api" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-              {language === 'en' ? 'Free public API' : 'API pública gratuita'}
-            </Link>
-            <span>·</span>
             <Link to="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
             </Link>

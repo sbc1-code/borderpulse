@@ -61,19 +61,19 @@ const COPY = {
       },
       {
         icon: Clock,
-        title: 'Data refreshes every 15 minutes.',
+        title: 'Data refreshes on a scheduled job.',
         body: (
           <>
             <p>
-              A scheduled GitHub Action runs every 15 minutes, fetches the CBP feed, and writes a new{' '}
+              A scheduled GitHub Action fetches the CBP feed and writes a new{' '}
               <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/crossings.json</code>.
-              Any wait time you see is at most ~15 minutes old, plus whatever lag CBP introduced
-              upstream. We do not interpolate or smooth between refreshes.
+              GitHub's free cron can be delayed, so the site describes the cadence as regular
+              rather than exact. We do not interpolate or smooth between refreshes.
             </p>
             <p>
               The same scheduled job rolls up snapshots into per-port aggregates and refreshes the
-              public JSON feeds at{' '}
-              <Link to="/api" className="underline">/api</Link>.
+              public JSON files under{' '}
+              <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/</code>.
             </p>
           </>
         ),
@@ -166,12 +166,12 @@ const COPY = {
         title: 'Sources.',
         body: (
           <ul className="list-disc pl-5 space-y-1.5">
-            <li><a href="https://bwt.cbp.gov/" target="_blank" rel="noopener noreferrer" className="underline">CBP Border Wait Times feed</a> — bwt.cbp.gov</li>
+            <li><a href="https://bwt.cbp.gov/" target="_blank" rel="noopener noreferrer" className="underline">CBP Border Wait Times feed</a>: bwt.cbp.gov</li>
             <li><a href="https://www.cbp.gov/travel/trusted-traveler-programs/sentri" target="_blank" rel="noopener noreferrer" className="underline">CBP SENTRI program</a></li>
             <li><a href="https://www.cbp.gov/travel/clearing-customs/ready-lanes" target="_blank" rel="noopener noreferrer" className="underline">CBP Ready Lane program</a></li>
-            <li><a href="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html" target="_blank" rel="noopener noreferrer" className="underline">U.S. Department of State — Mexico travel advisory</a></li>
-            <li><a href="https://www.bts.gov/browse-statistical-products-and-data/border-crossing-data/border-crossingentry-data" target="_blank" rel="noopener noreferrer" className="underline">BTS Border Crossing/Entry Data</a> — annual port volume, used to weight network-wide aggregates</li>
-            <li><Link to="/api" className="underline">Border Pulse public JSON feeds</Link></li>
+            <li><a href="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html" target="_blank" rel="noopener noreferrer" className="underline">U.S. Department of State Mexico travel advisory</a></li>
+            <li><a href="https://www.bts.gov/browse-statistical-products-and-data/border-crossing-data/border-crossingentry-data" target="_blank" rel="noopener noreferrer" className="underline">BTS Border Crossing/Entry Data</a>: annual port volume, used to weight network-wide aggregates</li>
+            <li><a href="/data/crossings.json" className="underline">Current Border Pulse JSON snapshot</a></li>
           </ul>
         ),
       },
@@ -222,20 +222,20 @@ const COPY = {
       },
       {
         icon: Clock,
-        title: 'Los datos se refrescan cada 15 minutos.',
+        title: 'Los datos se refrescan con un trabajo programado.',
         body: (
           <>
             <p>
-              Un GitHub Action programado corre cada 15 minutos, jala el feed de CBP y escribe un
+              Un GitHub Action programado jala el feed de CBP y escribe un
               nuevo{' '}
               <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/crossings.json</code>.
-              Cualquier tiempo de espera que veas tiene a lo más ~15 minutos de antigüedad, más el
-              rezago que CBP introduce arriba. No interpolamos ni suavizamos entre refrescos.
+              El cron gratuito de GitHub puede retrasarse, así que el sitio describe la cadencia
+              como regular y no exacta. No interpolamos ni suavizamos entre refrescos.
             </p>
             <p>
               El mismo trabajo programado agrupa los snapshots en agregados por puerto y refresca los
-              feeds públicos en{' '}
-              <Link to="/api" className="underline">/api</Link>.
+              archivos JSON públicos bajo{' '}
+              <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/</code>.
             </p>
           </>
         ),
@@ -330,12 +330,12 @@ const COPY = {
         title: 'Fuentes.',
         body: (
           <ul className="list-disc pl-5 space-y-1.5">
-            <li><a href="https://bwt.cbp.gov/" target="_blank" rel="noopener noreferrer" className="underline">Feed de Border Wait Times de CBP</a> — bwt.cbp.gov</li>
+            <li><a href="https://bwt.cbp.gov/" target="_blank" rel="noopener noreferrer" className="underline">Feed de Border Wait Times de CBP</a>: bwt.cbp.gov</li>
             <li><a href="https://www.cbp.gov/travel/trusted-traveler-programs/sentri" target="_blank" rel="noopener noreferrer" className="underline">Programa SENTRI de CBP</a></li>
             <li><a href="https://www.cbp.gov/travel/clearing-customs/ready-lanes" target="_blank" rel="noopener noreferrer" className="underline">Programa Ready Lane de CBP</a></li>
-            <li><a href="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html" target="_blank" rel="noopener noreferrer" className="underline">Departamento de Estado de EE.UU. — Aviso de viaje a México</a></li>
-            <li><a href="https://www.bts.gov/browse-statistical-products-and-data/border-crossing-data/border-crossingentry-data" target="_blank" rel="noopener noreferrer" className="underline">BTS Border Crossing/Entry Data</a> — volumen anual por puerto, usado para ponderar agregados de la red</li>
-            <li><Link to="/api" className="underline">Feeds públicos JSON de Border Pulse</Link></li>
+            <li><a href="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html" target="_blank" rel="noopener noreferrer" className="underline">Departamento de Estado de EE.UU. Aviso de viaje a México</a></li>
+            <li><a href="https://www.bts.gov/browse-statistical-products-and-data/border-crossing-data/border-crossingentry-data" target="_blank" rel="noopener noreferrer" className="underline">BTS Border Crossing/Entry Data</a>: volumen anual por puerto, usado para ponderar agregados de la red</li>
+            <li><a href="/data/crossings.json" className="underline">Snapshot JSON actual de Border Pulse</a></li>
           </ul>
         ),
       },
@@ -351,8 +351,8 @@ export default function Methodology({ lang = 'en' }) {
       ? 'Metodología | Border Pulse'
       : 'Methodology | Border Pulse';
     const description = lang === 'es'
-      ? 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia de 15 minutos, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.'
-      : 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, 15-minute refresh cadence, median over mean, 30-day rolling window, and what we deliberately don\'t model.';
+      ? 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.'
+      : 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.';
     const canonical = lang === 'es'
       ? 'https://borderpulse.com/metodologia'
       : 'https://borderpulse.com/methodology';

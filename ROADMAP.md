@@ -50,7 +50,8 @@ Ranked roughly by leverage. Pick what fits the available time.
 ## Deferred / blocked on infra
 
 - [ ] **Real `hello@borderpulse.com`** + B2B contact CTA — when the
-      inbox exists, restore the commercial CTA on `/api`.
+      inbox exists, add a lightweight business contact path on `/about`
+      or `/methodology`.
 - [ ] **Embed analytics** — track which sites embed the widget. Needs
       a server (Cloudflare worker or similar). GitHub Pages doesn't
       expose access logs.
@@ -97,17 +98,16 @@ Snapshot of features live on borderpulse.com today.
   crossings
 - `/best-time/:slug` — Per-crossing landing page targeting "best time
   to cross [X]" search intent
-- `/blog` + `/blog/:slug` — 12 bilingual posts, 6 EN / 6 ES
+- `/blog` + `/blog/:slug` — 14 bilingual posts, 7 EN / 7 ES
 - `/alerts` — Notification subscriptions management (toggle / delete
   per row)
-- `/api` — Documentation for the public JSON endpoints
 - `/about` — Stats, methodology, "what runs in your browser"
 - `/embed/:slug` — Iframe-friendly widget with theme/lang/direction
   URL params (intentionally `noindex`)
 - `/status/:id` — Stub (existing, not actively used)
 
 ### Public data feeds
-- `/data/crossings.json` — Live wait times, refreshed every 15 min
+- `/data/crossings.json` — Live wait times, refreshed by scheduled cron
 - `/data/aggregates/{slug}.json` — 30-day rolling per-crossing patterns
 - `/data/timelines/index.json` + `/data/timelines/{slug}.json` —
   Curated advisories per crossing (subset)

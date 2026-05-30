@@ -542,20 +542,12 @@ async function main() {
     aliasPageCount++;
   }
 
-  // API documentation page — single SEO-friendly entry point for the public
-  // JSON feeds we already serve at /data/*. Indexable.
+  // Legacy API docs URL. The visible page was removed; keep a noindex redirect
+  // so old inbound links flow to methodology instead of a hard 404.
   {
-    const apiHead = {
-      title: 'Border Pulse API | Public JSON endpoints for U.S.-Mexico border wait times',
-      desc: 'Free public JSON feeds for U.S.-Mexico border wait times, historical patterns, and per-crossing advisories. No auth, no API key, refreshed regularly via a scheduled job.',
-      canonical: `${BASE}/api`,
-      ogImage: `${BASE}/og-card.png`,
-      jsonLd: [],
-    };
-    const apiHtml = rewriteIndex(indexWithLinks, apiHead);
     const apiDir = path.resolve(distDir, 'api');
     fs.mkdirSync(apiDir, { recursive: true });
-    fs.writeFileSync(path.resolve(apiDir, 'index.html'), apiHtml);
+    fs.writeFileSync(path.resolve(apiDir, 'index.html'), renderRedirectPage(`${BASE}/methodology`));
   }
 
   let embedPageCount = 0;
@@ -589,7 +581,7 @@ async function main() {
     });
     const enHead = {
       title: 'Methodology | Border Pulse',
-      desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, 15-minute refresh cadence, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
+      desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
       canonical: enCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumbFor(enCanonical, 'Methodology')],
@@ -597,7 +589,7 @@ async function main() {
     };
     const esHead = {
       title: 'Metodología | Border Pulse',
-      desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia de 15 minutos, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
+      desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
       canonical: esCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumbFor(esCanonical, 'Metodología')],

@@ -59,7 +59,6 @@ function main() {
     blog_posts_en: blogPostsEn,
     blog_posts_es: blogPostsEs,
     timeline_crossings: timelineCrossings,
-    api_endpoints: 5,
     generated_at: new Date().toISOString(),
   };
 

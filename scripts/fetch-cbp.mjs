@@ -4,7 +4,7 @@
  * and writes a clean JSON snapshot to public/data/crossings.json.
  *
  * CBP feed: https://bwt.cbp.gov/api/bwtpublicmod
- * Runs every 15 minutes via GitHub Actions.
+ * Runs on a scheduled GitHub Action.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';

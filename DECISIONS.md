@@ -21,6 +21,15 @@ script throws instead of overwriting `crossings.json`. A near-empty publish is
 never correct, so the right failure mode is keeping the last-good data and
 failing loudly (the Action's deduped failure-issue step), not shipping zeros.
 
+## 2026-05-29 · Remove visible API docs, keep data feeds as implementation
+
+The `/api` page framed BorderPulse as if it had a supported developer API,
+but the site is a static consumer product and those JSON files are primarily
+its own data layer. Keep `/data/*.json` because the dashboard, embeds, and
+build scripts depend on them. Remove the visible API nav/docs surface and
+redirect old `/api` inbound links to `/methodology`, which explains the data
+model without inviting API-product expectations.
+
 ## 2026-05-26 · Active products must link back into the Digito ecosystem
 
 BorderPulse is the live traffic asset, but Digito is the product umbrella.

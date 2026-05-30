@@ -10,7 +10,7 @@ Real-time US-Mexico border wait times. Static site on GitHub Pages at [borderpul
 - Monetization: Adsterra Native Banner (live on `borderpulse.com`)
 
 ## Data pipeline
-`scripts/fetch-cbp.mjs` runs every 15 min via GitHub Actions. It hits the CBP JSON endpoint, filters `border === "Mexican Border"`, normalizes the shape, and commits `public/data/crossings.json`. Same cadence for `public/data/exchange-rate.json`.
+`scripts/fetch-cbp.mjs` runs on a scheduled GitHub Action. It hits the CBP JSON endpoint, accepts either English or Spanish localized border/status values, normalizes the shape, and commits `public/data/crossings.json`. Same cadence for `public/data/exchange-rate.json`.
 
 `scripts/fetch-sb.mjs` runs on the same cadence and writes `public/data/crossings-sb.json`. It uses `GOOGLE_MAPS_API_KEY` to estimate southbound (US -> MX) delay at major passenger crossings from Google Maps Distance Matrix traffic snapshots. These values are estimates, not an official government feed.
 

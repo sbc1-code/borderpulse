@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-blog-index.mjs && node scripts/build-sitemap.mjs && node scripts/build-og-cards.mjs && node scripts/build-rss.mjs && node scripts/build-stats.mjs",
+    "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-rankings.mjs && node scripts/build-blog-index.mjs && node scripts/build-sitemap.mjs && node scripts/build-og-cards.mjs && node scripts/build-rss.mjs && node scripts/build-stats.mjs",
     "build": "vite build",
     "postbuild": "node scripts/prerender.mjs",
     "preview": "vite preview",
@@ -13,6 +13,7 @@
     "fetch:fx": "node scripts/fetch-fx.mjs",
     "fetch:sb": "node scripts/fetch-sb.mjs",
     "aggregates": "node scripts/build-aggregates.mjs",
+    "rankings": "node scripts/build-rankings.mjs",
     "blog:index": "node scripts/build-blog-index.mjs",
     "sitemap": "node scripts/build-sitemap.mjs",
     "og": "node scripts/build-og-cards.mjs",

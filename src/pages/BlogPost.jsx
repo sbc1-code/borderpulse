@@ -58,7 +58,8 @@ export default function BlogPost() {
     const title = `${fm.title} | Border Pulse`;
     const desc = fm.description || fm.title;
     const url = `https://borderpulse.com/blog/${slug}`;
-    const ogImg = fm.ogImage ? `https://borderpulse.com${fm.ogImage}` : undefined;
+    const imagePath = fm.ogImage || fm.hero;
+    const ogImg = imagePath ? `https://borderpulse.com${imagePath}` : undefined;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url });
     return () => resetPageMeta();
   }, [post, slug]);
