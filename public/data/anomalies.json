@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-30T21:04:25.810Z",
-  "snapshot_at": "2026-05-30T20:56:21.489Z",
+  "generated_at": "2026-05-30T23:03:00.403Z",
+  "snapshot_at": "2026-05-30T22:02:29.100Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -148,16 +148,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.9557522123893806,
-      "detected_at": "2026-05-30T21:04:25.810Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 7 AM (median 5 min) — ~96% below the 30-day baseline of 113 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 7 AM (mediana 5 min) — ~96% debajo de la base de 30 días de 113 min.",
+      "severity": 0.9565217391304348,
+      "detected_at": "2026-05-30T23:03:00.403Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 7 AM (median 5 min) — ~96% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 7 AM (mediana 5 min) — ~96% debajo de la base de 30 días de 115 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 7,
         "best_median": 5,
-        "overall_median": 113,
+        "overall_median": 115,
         "samples": 1
       }
     },
@@ -339,23 +339,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5044247787610618,
-      "detected_at": "2026-05-30T21:04:25.810Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 170,
-        "overall_median": 113,
-        "samples": 3,
-        "ratio": 1.5044247787610618
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -374,5 +357,23 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5044247787610618,
+      "detected_at": "2026-05-30T21:04:25.810Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 170,
+        "overall_median": 113,
+        "samples": 3,
+        "ratio": 1.5044247787610618
+      }
+    }
+  ]
 }
