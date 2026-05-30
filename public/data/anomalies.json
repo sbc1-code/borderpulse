@@ -1,15 +1,14 @@
 {
-  "generated_at": "2026-05-29T12:19:24.223Z",
-  "snapshot_at": "2026-05-29T21:58:40.673Z",
-  "active": [],
-  "trailing_24h": [
+  "generated_at": "2026-05-30T06:50:29.487Z",
+  "snapshot_at": "2026-05-30T05:29:01.589Z",
+  "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 6,
-      "detected_at": "2026-05-29T08:44:18.298Z",
+      "detected_at": "2026-05-30T06:50:29.487Z",
       "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 35 min around 10 PM — ~700% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 35 min cerca de las 10 PM — ~700% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
@@ -26,7 +25,7 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 1.6666666666666665,
-      "detected_at": "2026-05-29T08:44:18.298Z",
+      "detected_at": "2026-05-30T06:50:29.487Z",
       "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 10 PM — ~267% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 10 PM — ~267% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
@@ -43,7 +42,7 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 1,
-      "detected_at": "2026-05-29T08:44:18.298Z",
+      "detected_at": "2026-05-30T06:50:29.487Z",
       "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 10 PM — ~200% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
@@ -60,16 +59,16 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 8 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 8 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Saturday hour so far is 8 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Deconcini es 8 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
+        "day_of_week": 6,
+        "day_label": "Sat",
         "best_hour": 8,
         "best_median": 0,
         "overall_median": 60,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -78,16 +77,34 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 12 PM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 12 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 12,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 13,
         "best_median": 0,
         "overall_median": 60,
-        "samples": 2
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "laredo-bridge-i",
+      "port_name": "Laredo - Bridge I",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Laredo - Bridge I's lightest Saturday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Bridge I es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 0,
+        "overall_median": 10,
+        "samples": 1
       }
     },
     {
@@ -96,16 +113,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 1,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -113,16 +130,34 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 6 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 6 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "severity": 0.9777777777777777,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 3 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 6,
-        "best_median": 0,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 1,
         "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.9557522123893806,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 7 AM (median 5 min) — ~96% below the 30-day baseline of 113 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 7 AM (mediana 5 min) — ~96% debajo de la base de 30 días de 113 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 7,
+        "best_median": 5,
+        "overall_median": 113,
         "samples": 1
       }
     },
@@ -131,70 +166,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9846153846153847,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Friday hour so far is 8 AM (median 1 min) — ~98% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Paso Del Norte (PDN) es 8 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 65 min.",
+      "severity": 0.9538461538461538,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 10 AM (median 3 min) — ~95% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 10 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 65 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 8,
-        "best_median": 1,
-        "overall_median": 65,
-        "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.875,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 75 min around 8 PM — ~188% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 75 min cerca de las 8 PM — ~188% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 75,
-        "overall_median": 40,
-        "samples": 3,
-        "ratio": 1.875
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 10 AM (median 13 min) — ~80% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 13 min) — ~80% debajo de la base de 30 días de 65 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
+        "day_of_week": 6,
+        "day_label": "Sat",
         "best_hour": 10,
-        "best_median": 13,
+        "best_median": 3,
         "overall_median": 65,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.7345132743362832,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 8 AM (median 30 min) — ~73% below the 30-day baseline of 113 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 8 AM (mediana 30 min) — ~73% debajo de la base de 30 días de 113 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 8,
-        "best_median": 30,
-        "overall_median": 113,
-        "samples": 1
       }
     },
     {
@@ -202,17 +184,35 @@
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 4 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 4 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
+      "severity": 0.9333333333333333,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Saturday hour so far is 3 AM (median 1 min) — ~93% below the 30-day baseline of 15 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Pharr es 3 AM (mediana 1 min) — ~93% debajo de la base de 30 días de 15 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 16,
-        "best_median": 5,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 1,
         "overall_median": 15,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 8 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 8 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 8,
+        "best_median": 10,
+        "overall_median": 90,
+        "samples": 2
       }
     },
     {
@@ -220,17 +220,105 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.625,
-      "detected_at": "2026-05-29T08:44:18.298Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 1 AM (median 15 min) — ~63% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 1 AM (mediana 15 min) — ~63% debajo de la base de 30 días de 40 min.",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 3 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 3 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 1,
-        "best_median": 15,
-        "overall_median": 40,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 5,
+        "overall_median": 45,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.8461538461538461,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 8 AM (median 10 min) — ~85% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 8 AM (mediana 10 min) — ~85% debajo de la base de 30 días de 65 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 8,
+        "best_median": 10,
+        "overall_median": 65,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.7857142857142857,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 8 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 8 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 8,
+        "best_median": 15,
+        "overall_median": 70,
+        "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.7777777777777777,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 6 PM — ~178% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 6 PM — ~178% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 160,
+        "overall_median": 90,
+        "samples": 2,
+        "ratio": 1.7777777777777777
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 75 min around 8 PM — ~167% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 75 min cerca de las 8 PM — ~167% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 75,
+        "overall_median": 45,
+        "samples": 3,
+        "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.6,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 9 AM (median 18 min) — ~60% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 9 AM (mediana 18 min) — ~60% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 9,
+        "best_median": 18,
+        "overall_median": 45,
+        "samples": 2
       }
     },
     {
@@ -239,7 +327,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5714285714285714,
-      "detected_at": "2026-05-29T08:44:18.298Z",
+      "detected_at": "2026-05-30T06:50:29.487Z",
       "summary_en": "Heads up: Calexico - West's Sunday peak hits 110 min around 10 PM — ~157% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Calexico - West alcanza 110 min cerca de las 10 PM — ~157% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
@@ -256,7 +344,7 @@
       "port_name": "San Ysidro",
       "state": "CA",
       "severity": 0.5044247787610618,
-      "detected_at": "2026-05-29T08:44:18.298Z",
+      "detected_at": "2026-05-30T06:50:29.487Z",
       "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~150% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
@@ -266,6 +354,25 @@
         "samples": 3,
         "ratio": 1.5044247787610618
       }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-05-30T06:50:29.487Z",
+      "summary_en": "Right now Tecate's lightest Saturday hour so far is 1 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Tecate es 1 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 1,
+        "best_median": 45,
+        "overall_median": 90,
+        "samples": 1
+      }
     }
-  ]
+  ],
+  "trailing_24h": []
 }
