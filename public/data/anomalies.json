@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-31T17:12:43.532Z",
-  "snapshot_at": "2026-05-31T16:46:07.398Z",
+  "generated_at": "2026-05-31T19:23:30.724Z",
+  "snapshot_at": "2026-05-31T18:01:29.901Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -34,23 +34,6 @@
         "overall_median": 15,
         "samples": 3,
         "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 180,
-        "overall_median": 90,
-        "samples": 3,
-        "ratio": 2
       }
     },
     {
@@ -162,6 +145,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.894736842105263,
+      "detected_at": "2026-05-31T19:23:30.724Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 10 PM — ~189% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 10 PM — ~189% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 180,
+        "overall_median": 95,
+        "samples": 3,
+        "ratio": 1.894736842105263
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -232,38 +232,55 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.7777777777777777,
-      "detected_at": "2026-05-30T06:50:29.487Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 6 PM — ~178% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 6 PM — ~178% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 160,
-        "overall_median": 90,
-        "samples": 2,
-        "ratio": 1.7777777777777777
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.6902654867256637,
-      "detected_at": "2026-05-31T17:12:43.532Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 11 AM (median 35 min) — ~69% below the 30-day baseline of 113 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 11 AM (mediana 35 min) — ~69% debajo de la base de 30 días de 113 min.",
+      "severity": 0.6818181818181819,
+      "detected_at": "2026-05-31T19:23:30.724Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 11 AM (median 35 min) — ~68% below the 30-day baseline of 110 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 11 AM (mediana 35 min) — ~68% debajo de la base de 30 días de 110 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 11,
         "best_median": 35,
-        "overall_median": 113,
+        "overall_median": 110,
         "samples": 4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-05-31T19:23:30.724Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 150 min around 9 PM — ~167% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 150 min cerca de las 9 PM — ~167% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 150,
+        "overall_median": 90,
+        "samples": 3,
+        "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-05-31T19:23:30.724Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~155% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~155% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 170,
+        "overall_median": 110,
+        "samples": 3,
+        "ratio": 1.5454545454545454
       }
     },
     {
@@ -282,23 +299,6 @@
         "best_median": 30,
         "overall_median": 65,
         "samples": 4
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5044247787610618,
-      "detected_at": "2026-05-31T17:12:43.532Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 170,
-        "overall_median": 113,
-        "samples": 3,
-        "ratio": 1.5044247787610618
       }
     },
     {
