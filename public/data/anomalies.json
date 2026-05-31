@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-31T19:23:30.724Z",
-  "snapshot_at": "2026-05-31T18:01:29.901Z",
+  "generated_at": "2026-05-31T21:04:44.412Z",
+  "snapshot_at": "2026-05-31T20:42:10.184Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -109,6 +109,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.95,
+      "detected_at": "2026-05-31T21:04:44.412Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 78 min around 8 PM — ~195% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 78 min cerca de las 8 PM — ~195% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 78,
+        "overall_median": 40,
+        "samples": 4,
+        "ratio": 1.95
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -145,23 +162,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.894736842105263,
-      "detected_at": "2026-05-31T19:23:30.724Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 10 PM — ~189% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 10 PM — ~189% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 180,
-        "overall_median": 95,
-        "samples": 3,
-        "ratio": 1.894736842105263
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -177,23 +177,6 @@
         "best_median": 5,
         "overall_median": 40,
         "samples": 4
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.875,
-      "detected_at": "2026-05-30T17:13:40.674Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 75 min around 8 PM — ~188% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 75 min cerca de las 8 PM — ~188% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 75,
-        "overall_median": 40,
-        "samples": 3,
-        "ratio": 1.875
       }
     },
     {
@@ -229,6 +212,23 @@
         "overall_median": 60,
         "samples": 3,
         "ratio": 1.8333333333333333
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.8,
+      "detected_at": "2026-05-31T21:04:44.412Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 10 PM — ~180% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 10 PM — ~180% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 180,
+        "overall_median": 100,
+        "samples": 3,
+        "ratio": 1.8
       }
     },
     {
