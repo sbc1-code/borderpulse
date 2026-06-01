@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-01T04:43:55.706Z",
-  "snapshot_at": "2026-06-01T04:00:52.732Z",
+  "generated_at": "2026-06-01T10:24:24.391Z",
+  "snapshot_at": "2026-06-01T09:35:05.853Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -21,23 +21,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 1.210526315789474,
-      "detected_at": "2026-06-01T04:43:55.706Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 210 min around 10 PM — ~221% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 210 min cerca de las 10 PM — ~221% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 210,
-        "overall_median": 95,
-        "samples": 4,
-        "ratio": 2.210526315789474
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -54,21 +37,20 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-06-01T04:43:55.706Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 1.1,
+      "detected_at": "2026-06-01T10:24:24.391Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 210 min around 10 PM — ~210% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 210 min cerca de las 10 PM — ~210% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 9,
-        "best_median": 0,
-        "overall_median": 60,
-        "samples": 1
+        "peak_hour": 22,
+        "peak_median": 210,
+        "overall_median": 100,
+        "samples": 4,
+        "ratio": 2.1
       }
     },
     {
@@ -161,37 +143,37 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-06-01T04:43:55.706Z",
-      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 9 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 9 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.7777777777777778,
+      "detected_at": "2026-06-01T10:24:24.391Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Monday hour so far is 9 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 9,
-        "best_median": 15,
-        "overall_median": 60,
+        "best_median": 10,
+        "overall_median": 45,
         "samples": 1
       }
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-06-01T04:43:55.706Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Monday hour so far is 8 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Hidalgo es 8 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
+      "detected_at": "2026-06-01T10:24:24.391Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 7 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 7 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 8,
-        "best_median": 15,
-        "overall_median": 45,
+        "best_hour": 7,
+        "best_median": 20,
+        "overall_median": 60,
         "samples": 1
       }
     },
@@ -227,6 +209,24 @@
         "best_hour": 13,
         "best_median": 45,
         "overall_median": 90,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-06-01T10:24:24.391Z",
+      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 10 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 10 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 10,
+        "best_median": 30,
+        "overall_median": 60,
         "samples": 1
       }
     }
