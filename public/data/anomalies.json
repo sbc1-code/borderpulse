@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-02T21:52:22.462Z",
-  "snapshot_at": "2026-06-02T20:19:21.922Z",
+  "generated_at": "2026-06-02T23:50:28.460Z",
+  "snapshot_at": "2026-06-02T22:33:40.088Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -17,6 +17,23 @@
         "overall_median": 5,
         "samples": 2,
         "ratio": 7.6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1.6666666666666665,
+      "detected_at": "2026-06-02T23:50:28.460Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 10 PM — ~267% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 10 PM — ~267% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 40,
+        "overall_median": 15,
+        "samples": 3,
+        "ratio": 2.6666666666666665
       }
     },
     {
@@ -38,36 +55,19 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.2000000000000002,
-      "detected_at": "2026-05-31T23:04:46.597Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 33 min around 10 PM — ~220% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 33 min cerca de las 10 PM — ~220% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 33,
-        "overall_median": 15,
-        "samples": 4,
-        "ratio": 2.2
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 1.1052631578947367,
-      "detected_at": "2026-06-02T21:52:22.462Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 80 min around 8 PM — ~211% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 80 min cerca de las 8 PM — ~211% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.2857142857142856,
+      "detected_at": "2026-06-02T23:50:28.460Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 80 min around 8 PM — ~229% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 80 min cerca de las 8 PM — ~229% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
         "peak_median": 80,
-        "overall_median": 38,
+        "overall_median": 35,
         "samples": 3,
-        "ratio": 2.1052631578947367
+        "ratio": 2.2857142857142856
       }
     },
     {
@@ -165,16 +165,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9285714285714286,
-      "detected_at": "2026-06-02T18:43:47.274Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 10 AM (median 5 min) — ~93% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 70 min.",
+      "severity": 0.927536231884058,
+      "detected_at": "2026-06-02T23:50:28.460Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 10 AM (median 5 min) — ~93% below the 30-day baseline of 69 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 69 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 10,
         "best_median": 5,
-        "overall_median": 70,
+        "overall_median": 69,
         "samples": 1
       }
     },
@@ -183,16 +183,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.868421052631579,
-      "detected_at": "2026-06-02T21:52:22.462Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 12 PM (median 5 min) — ~87% below the 30-day baseline of 38 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 12 PM (mediana 5 min) — ~87% debajo de la base de 30 días de 38 min.",
+      "severity": 0.8571428571428572,
+      "detected_at": "2026-06-02T23:50:28.460Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 12 PM (median 5 min) — ~86% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 12 PM (mediana 5 min) — ~86% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 12,
         "best_median": 5,
-        "overall_median": 38,
+        "overall_median": 35,
         "samples": 1
       }
     },
@@ -201,16 +201,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.8,
-      "detected_at": "2026-06-02T21:52:22.462Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 108 min around 10 PM — ~180% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 108 min cerca de las 10 PM — ~180% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.8333333333333333,
+      "detected_at": "2026-06-02T23:50:28.460Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 110 min around 10 PM — ~183% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 110 min cerca de las 10 PM — ~183% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
-        "peak_median": 108,
+        "peak_median": 110,
         "overall_median": 60,
-        "samples": 4,
-        "ratio": 1.8
+        "samples": 3,
+        "ratio": 1.8333333333333333
       }
     },
     {
@@ -301,7 +301,9 @@
         "overall_median": 68,
         "samples": 1
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
@@ -319,6 +321,5 @@
         "ratio": 1.5
       }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
