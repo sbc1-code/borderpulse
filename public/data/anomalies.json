@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-02T14:09:25.685Z",
-  "snapshot_at": "2026-06-02T12:41:45.357Z",
+  "generated_at": "2026-06-02T18:43:47.274Z",
+  "snapshot_at": "2026-06-02T17:08:13.122Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -113,15 +113,15 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-06-02T14:09:25.685Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 33 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 33 min.",
+      "detected_at": "2026-06-02T18:43:47.274Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 5,
         "best_median": 0,
-        "overall_median": 33,
+        "overall_median": 30,
         "samples": 1
       }
     },
@@ -165,16 +165,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.927536231884058,
-      "detected_at": "2026-06-02T14:09:25.685Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 10 AM (median 5 min) — ~93% below the 30-day baseline of 69 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 69 min.",
+      "severity": 0.9285714285714286,
+      "detected_at": "2026-06-02T18:43:47.274Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 10 AM (median 5 min) — ~93% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 10,
         "best_median": 5,
-        "overall_median": 69,
+        "overall_median": 70,
         "samples": 1
       }
     },
@@ -197,37 +197,20 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8,
-      "detected_at": "2026-05-31T23:04:46.597Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 108 min around 10 PM — ~180% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 108 min cerca de las 10 PM — ~180% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 108,
-        "overall_median": 60,
-        "samples": 4,
-        "ratio": 1.8
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-06-02T09:11:58.608Z",
-      "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 9 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 9 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "severity": 0.7857142857142857,
+      "detected_at": "2026-06-02T18:43:47.274Z",
+      "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 9 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 9 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 9,
         "best_median": 15,
-        "overall_median": 60,
+        "overall_median": 70,
         "samples": 1
       }
     },
@@ -300,6 +283,40 @@
         "best_median": 31,
         "overall_median": 68,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.5428571428571429,
+      "detected_at": "2026-06-02T18:43:47.274Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 108 min around 10 PM — ~154% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 108 min cerca de las 10 PM — ~154% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 108,
+        "overall_median": 70,
+        "samples": 4,
+        "ratio": 1.542857142857143
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-06-02T18:43:47.274Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 45 min around 10 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 45 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 45,
+        "overall_median": 30,
+        "samples": 4,
+        "ratio": 1.5
       }
     }
   ],
