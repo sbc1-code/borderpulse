@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-05T18:04:26.470Z",
-  "snapshot_at": "2026-06-05T16:18:11.082Z",
+  "generated_at": "2026-06-05T20:49:49.234Z",
+  "snapshot_at": "2026-06-05T20:24:55.149Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -215,6 +215,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.7857142857142857,
+      "detected_at": "2026-06-05T20:49:49.234Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 9 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 9 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 9,
+        "best_median": 15,
+        "overall_median": 70,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -321,24 +339,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.7857142857142857,
-      "detected_at": "2026-06-05T12:11:33.117Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 9 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 9 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 9,
-        "best_median": 15,
-        "overall_median": 70,
-        "samples": 1
-      }
-    }
-  ]
+  "trailing_24h": []
 }
