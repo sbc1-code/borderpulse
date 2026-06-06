@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-06T07:51:00.925Z",
-  "snapshot_at": "2026-06-06T07:37:04.923Z",
+  "generated_at": "2026-06-06T10:09:21.744Z",
+  "snapshot_at": "2026-06-06T09:48:35.230Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -126,20 +126,38 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.8857142857142857,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 9 AM (median 8 min) — ~89% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 9 AM (mediana 8 min) — ~89% debajo de la base de 30 días de 70 min.",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.9111111111111111,
+      "detected_at": "2026-06-06T10:09:21.744Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 9 AM (median 8 min) — ~91% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 9 AM (mediana 8 min) — ~91% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 9,
         "best_median": 8,
+        "overall_median": 90,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.8857142857142857,
+      "detected_at": "2026-06-06T10:09:21.744Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 10 AM (median 8 min) — ~89% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 10 AM (mediana 8 min) — ~89% debajo de la base de 30 días de 70 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 10,
+        "best_median": 8,
         "overall_median": 70,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -219,16 +237,33 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 9 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 9 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-06-06T10:09:21.744Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 11 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 11 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 9,
+        "best_hour": 11,
         "best_median": 15,
         "overall_median": 60,
-        "samples": 1
+        "samples": 3
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-06T10:09:21.744Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 150 min around 9 PM — ~167% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 150 min cerca de las 9 PM — ~167% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 150,
+        "overall_median": 90,
+        "samples": 3,
+        "ratio": 1.6666666666666667
       }
     },
     {
@@ -254,16 +289,16 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 6 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 6 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
+      "severity": 0.6428571428571428,
+      "detected_at": "2026-06-06T10:09:21.744Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 6 AM (median 10 min) — ~64% below the 30-day baseline of 28 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 6 AM (mediana 10 min) — ~64% debajo de la base de 30 días de 28 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 6,
         "best_median": 10,
-        "overall_median": 30,
+        "overall_median": 28,
         "samples": 1
       }
     },
@@ -287,24 +322,6 @@
     }
   ],
   "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.9444444444444444,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 9 AM (median 5 min) — ~94% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 9 AM (mediana 5 min) — ~94% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 9,
-        "best_median": 5,
-        "overall_median": 90,
-        "samples": 1
-      }
-    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
