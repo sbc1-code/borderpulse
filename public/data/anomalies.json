@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-06T10:09:21.744Z",
-  "snapshot_at": "2026-06-06T09:48:35.230Z",
+  "generated_at": "2026-06-06T12:08:33.058Z",
+  "snapshot_at": "2026-06-06T11:25:55.446Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -197,24 +197,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.8181818181818181,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 11 AM (median 20 min) — ~82% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 11 AM (mediana 20 min) — ~82% debajo de la base de 30 días de 110 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 11,
-        "best_median": 20,
-        "overall_median": 110,
-        "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -233,11 +215,29 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.7727272727272727,
+      "detected_at": "2026-06-06T12:08:33.058Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 11 AM (median 25 min) — ~77% below the 30-day baseline of 110 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 11 AM (mediana 25 min) — ~77% debajo de la base de 30 días de 110 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 11,
+        "best_median": 25,
+        "overall_median": 110,
+        "samples": 4
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-06-06T10:09:21.744Z",
+      "detected_at": "2026-06-06T12:08:33.058Z",
       "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 11 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 11 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -246,7 +246,7 @@
         "best_hour": 11,
         "best_median": 15,
         "overall_median": 60,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -289,16 +289,16 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.6428571428571428,
-      "detected_at": "2026-06-06T10:09:21.744Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 6 AM (median 10 min) — ~64% below the 30-day baseline of 28 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 6 AM (mediana 10 min) — ~64% debajo de la base de 30 días de 28 min.",
+      "severity": 0.6,
+      "detected_at": "2026-06-06T12:08:33.058Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 6 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 6 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 6,
         "best_median": 10,
-        "overall_median": 28,
+        "overall_median": 25,
         "samples": 1
       }
     },
