@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-06T12:08:33.058Z",
-  "snapshot_at": "2026-06-06T11:25:55.446Z",
+  "generated_at": "2026-06-06T14:45:36.833Z",
+  "snapshot_at": "2026-06-06T14:40:56.680Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -94,16 +94,16 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-06-06T14:45:36.833Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 12 PM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 12 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 13,
+        "best_hour": 12,
         "best_median": 0,
         "overall_median": 60,
-        "samples": 3
+        "samples": 1
       }
     },
     {
@@ -166,7 +166,7 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.875,
-      "detected_at": "2026-06-06T04:56:52.831Z",
+      "detected_at": "2026-06-06T14:45:36.833Z",
       "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 12 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 12 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
@@ -175,7 +175,7 @@
         "best_hour": 12,
         "best_median": 5,
         "overall_median": 40,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -321,24 +321,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-05T12:11:33.117Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 4 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 4 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 16,
-        "best_median": 5,
-        "overall_median": 15,
-        "samples": 1
-      }
-    }
-  ]
+  "trailing_24h": []
 }
