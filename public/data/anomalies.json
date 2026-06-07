@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-07T11:51:45.238Z",
-  "snapshot_at": "2026-06-07T11:47:23.794Z",
+  "generated_at": "2026-06-07T14:03:39.727Z",
+  "snapshot_at": "2026-06-07T13:51:10.297Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -68,6 +68,24 @@
         "overall_median": 40,
         "samples": 3,
         "ratio": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-06-07T14:03:39.727Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Sunday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 13,
+        "best_median": 0,
+        "overall_median": 60,
+        "samples": 3
       }
     },
     {
@@ -140,24 +158,6 @@
         "best_median": 5,
         "overall_median": 40,
         "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-06-07T00:09:03.468Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Sunday hour so far is 1 PM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Mariposa es 1 PM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 13,
-        "best_median": 10,
-        "overall_median": 60,
-        "samples": 2
       }
     },
     {
