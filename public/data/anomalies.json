@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-07T14:03:39.727Z",
-  "snapshot_at": "2026-06-07T13:51:10.297Z",
+  "generated_at": "2026-06-07T16:20:55.694Z",
+  "snapshot_at": "2026-06-07T15:23:52.947Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -183,13 +183,13 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.75,
-      "detected_at": "2026-06-07T11:51:45.238Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-06-07T16:20:55.694Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 3 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 3 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 16,
+        "best_hour": 15,
         "best_median": 5,
         "overall_median": 20,
         "samples": 3
@@ -253,17 +253,17 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.6166666666666667,
-      "detected_at": "2026-06-07T00:09:03.468Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 5 PM (median 23 min) — ~62% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 5 PM (mediana 23 min) — ~62% debajo de la base de 30 días de 60 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-07T16:20:55.694Z",
+      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 3 PM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 3 PM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 17,
-        "best_median": 23,
+        "best_hour": 15,
+        "best_median": 20,
         "overall_median": 60,
-        "samples": 2
+        "samples": 3
       }
     },
     {
