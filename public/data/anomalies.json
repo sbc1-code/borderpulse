@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-07T20:16:15.453Z",
-  "snapshot_at": "2026-06-07T19:46:57.363Z",
+  "generated_at": "2026-06-07T22:08:41.928Z",
+  "snapshot_at": "2026-06-07T21:11:54.064Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,11 +8,11 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 6.6,
-      "detected_at": "2026-06-02T21:52:22.462Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 38 min around 9 PM — ~760% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 38 min cerca de las 9 PM — ~760% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-06-07T22:08:41.928Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 38 min around 8 PM — ~760% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 38 min cerca de las 8 PM — ~760% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 21,
+        "peak_hour": 20,
         "peak_median": 38,
         "overall_median": 5,
         "samples": 2,
@@ -41,16 +41,33 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.3636363636363638,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 260 min around 9 PM — ~236% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 260 min cerca de las 9 PM — ~236% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.4090909090909092,
+      "detected_at": "2026-06-07T22:08:41.928Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 265 min around 9 PM — ~241% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 265 min cerca de las 9 PM — ~241% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
-        "peak_median": 260,
+        "peak_median": 265,
         "overall_median": 110,
-        "samples": 3,
-        "ratio": 2.3636363636363638
+        "samples": 4,
+        "ratio": 2.409090909090909
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 1.1333333333333333,
+      "detected_at": "2026-06-07T22:08:41.928Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 128 min around 9 PM — ~213% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 128 min cerca de las 9 PM — ~213% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 128,
+        "overall_median": 60,
+        "samples": 4,
+        "ratio": 2.1333333333333333
       }
     },
     {
@@ -161,23 +178,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8333333333333333,
-      "detected_at": "2026-06-02T23:50:28.460Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 110 min around 10 PM — ~183% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 110 min cerca de las 10 PM — ~183% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 110,
-        "overall_median": 60,
-        "samples": 3,
-        "ratio": 1.8333333333333333
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
@@ -229,23 +229,6 @@
         "best_median": 4,
         "overall_median": 15,
         "samples": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-06T10:09:21.744Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 150 min around 9 PM — ~167% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 150 min cerca de las 9 PM — ~167% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 150,
-        "overall_median": 90,
-        "samples": 3,
-        "ratio": 1.6666666666666667
       }
     },
     {
