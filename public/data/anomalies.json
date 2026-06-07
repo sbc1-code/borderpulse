@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-07T00:09:03.468Z",
-  "snapshot_at": "2026-06-06T23:44:38.434Z",
+  "generated_at": "2026-06-07T11:51:45.238Z",
+  "snapshot_at": "2026-06-07T11:47:23.794Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,24 +72,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-06-07T00:09:03.468Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 9,
-        "best_median": 0,
-        "overall_median": 60,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
@@ -108,20 +90,38 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-06-07T00:09:03.468Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 9 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.95,
+      "detected_at": "2026-06-07T11:51:45.238Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 12 PM (median 3 min) — ~95% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 12 PM (mediana 3 min) — ~95% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 9,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 1
+        "best_hour": 12,
+        "best_median": 3,
+        "overall_median": 60,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.92,
+      "detected_at": "2026-06-07T11:51:45.238Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 8 AM (median 4 min) — ~92% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 8 AM (mediana 4 min) — ~92% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 8,
+        "best_median": 4,
+        "overall_median": 50,
+        "samples": 2
       }
     },
     {
@@ -182,16 +182,34 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-06-07T00:09:03.468Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
+      "severity": 0.75,
+      "detected_at": "2026-06-07T11:51:45.238Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 16,
         "best_median": 5,
-        "overall_median": 25,
+        "overall_median": 20,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.7428571428571429,
+      "detected_at": "2026-06-07T11:51:45.238Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 11 AM (median 18 min) — ~74% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 11 AM (mediana 18 min) — ~74% debajo de la base de 30 días de 70 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 11,
+        "best_median": 18,
+        "overall_median": 70,
         "samples": 3
       }
     },
@@ -268,29 +286,11 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5714285714285714,
-      "detected_at": "2026-06-07T00:09:03.468Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 12 PM (median 30 min) — ~57% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 12 PM (mediana 30 min) — ~57% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 12,
-        "best_median": 30,
-        "overall_median": 70,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-06-07T00:09:03.468Z",
+      "detected_at": "2026-06-07T11:51:45.238Z",
       "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 11 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 11 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
       "evidence": {
@@ -299,46 +299,26 @@
         "best_hour": 11,
         "best_median": 45,
         "overall_median": 90,
-        "samples": 2
-      }
-    }
-  ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.7857142857142857,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 8 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 8 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 8,
-        "best_median": 15,
-        "overall_median": 70,
         "samples": 3
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5909090909090908,
-      "detected_at": "2026-06-06T00:12:00.957Z",
-      "summary_en": "Right now Tecate's lightest Saturday hour so far is 1 AM (median 45 min) — ~59% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Tecate es 1 AM (mediana 45 min) — ~59% debajo de la base de 30 días de 110 min.",
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-06-07T11:51:45.238Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 30 min around 10 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 30 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 1,
-        "best_median": 45,
-        "overall_median": 110,
-        "samples": 1
+        "peak_hour": 22,
+        "peak_median": 30,
+        "overall_median": 20,
+        "samples": 3,
+        "ratio": 1.5
       }
     }
-  ]
+  ],
+  "trailing_24h": []
 }
