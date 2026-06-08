@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-08T19:23:11.624Z",
-  "snapshot_at": "2026-06-08T18:41:50.581Z",
+  "generated_at": "2026-06-08T21:53:16.979Z",
+  "snapshot_at": "2026-06-08T21:07:55.558Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -160,6 +160,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-06-08T21:53:16.979Z",
+      "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 9 PM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 9 PM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 21,
+        "best_median": 40,
+        "overall_median": 90,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -195,24 +213,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.6090909090909091,
-      "detected_at": "2026-06-07T20:16:15.453Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 12 PM (median 43 min) — ~61% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 12 PM (mediana 43 min) — ~61% debajo de la base de 30 días de 110 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 12,
-        "best_median": 43,
-        "overall_median": 110,
-        "samples": 2
-      }
-    }
-  ]
+  "trailing_24h": []
 }
