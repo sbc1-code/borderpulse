@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-06-09T15:14:21.788Z",
-  "snapshot_at": "2026-06-09T16:47:44.212Z",
+  "generated_at": "2026-06-09T21:02:08.656Z",
+  "snapshot_at": "2026-06-09T19:12:47.791Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 6.6,
-      "detected_at": "2026-06-07T22:08:41.928Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 38 min around 8 PM — ~760% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 38 min cerca de las 8 PM — ~760% de la mediana de 30 días. Planea alrededor.",
+      "severity": 7,
+      "detected_at": "2026-06-09T21:02:08.656Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 40 min around 8 PM — ~800% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 40 min cerca de las 8 PM — ~800% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
-        "peak_median": 38,
+        "peak_median": 40,
         "overall_median": 5,
-        "samples": 2,
-        "ratio": 7.6
+        "samples": 1,
+        "ratio": 8
       }
     },
     {
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.4090909090909092,
-      "detected_at": "2026-06-09T15:14:21.788Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 265 min around 9 PM — ~241% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 265 min cerca de las 9 PM — ~241% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.3451327433628317,
+      "detected_at": "2026-06-09T21:02:08.656Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 265 min around 9 PM — ~235% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 265 min cerca de las 9 PM — ~235% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
         "peak_median": 265,
-        "overall_median": 110,
+        "overall_median": 113,
         "samples": 4,
-        "ratio": 2.409090909090909
+        "ratio": 2.3451327433628317
       }
     },
     {
@@ -213,20 +213,37 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-09T21:02:08.656Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 150 min around 8 PM — ~167% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 150 min cerca de las 8 PM — ~167% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 150,
+        "overall_median": 90,
+        "samples": 2,
+        "ratio": 1.6666666666666667
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.6363636363636364,
-      "detected_at": "2026-06-09T15:14:21.788Z",
-      "summary_en": "Right now Tecate's lightest Tuesday hour so far is 6 AM (median 40 min) — ~64% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 6 AM (mediana 40 min) — ~64% debajo de la base de 30 días de 110 min.",
+      "severity": 0.6460176991150443,
+      "detected_at": "2026-06-09T21:02:08.656Z",
+      "summary_en": "Right now Tecate's lightest Tuesday hour so far is 6 AM (median 40 min) — ~65% below the 30-day baseline of 113 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 6 AM (mediana 40 min) — ~65% debajo de la base de 30 días de 113 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 6,
         "best_median": 40,
-        "overall_median": 110,
+        "overall_median": 113,
         "samples": 1
       }
     },
