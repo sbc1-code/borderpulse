@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-11T21:24:51.357Z",
-  "snapshot_at": "2026-06-11T20:36:49.636Z",
+  "generated_at": "2026-06-11T23:28:17.045Z",
+  "snapshot_at": "2026-06-11T22:28:42.606Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -215,24 +215,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.8260869565217391,
-      "detected_at": "2026-06-11T00:20:13.753Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 4 AM (median 20 min) — ~83% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 4 AM (mediana 20 min) — ~83% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 20,
-        "overall_median": 115,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
@@ -247,6 +229,24 @@
         "best_median": 8,
         "overall_median": 45,
         "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.8181818181818181,
+      "detected_at": "2026-06-11T23:28:17.045Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 4 AM (median 20 min) — ~82% below the 30-day baseline of 110 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 4 AM (mediana 20 min) — ~82% debajo de la base de 30 días de 110 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 4,
+        "best_median": 20,
+        "overall_median": 110,
+        "samples": 1
       }
     },
     {
@@ -335,6 +335,23 @@
         "overall_median": 15,
         "samples": 3,
         "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-06-11T23:28:17.045Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~155% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~155% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 170,
+        "overall_median": 110,
+        "samples": 3,
+        "ratio": 1.5454545454545454
       }
     }
   ],
