@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-11T00:20:13.753Z",
-  "snapshot_at": "2026-06-10T23:07:46.962Z",
+  "generated_at": "2026-06-11T18:19:07.865Z",
+  "snapshot_at": "2026-06-11T18:12:26.922Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -146,16 +146,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.96,
-      "detected_at": "2026-06-11T00:20:13.753Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 8 AM (median 3 min) — ~96% below the 30-day baseline of 75 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 8 AM (mediana 3 min) — ~96% debajo de la base de 30 días de 75 min.",
+      "severity": 0.9583333333333334,
+      "detected_at": "2026-06-11T18:19:07.865Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 8 AM (median 3 min) — ~96% below the 30-day baseline of 72 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 8 AM (mediana 3 min) — ~96% debajo de la base de 30 días de 72 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 8,
         "best_median": 3,
-        "overall_median": 75,
+        "overall_median": 72,
         "samples": 2
       }
     },
@@ -215,42 +215,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-06-11T00:20:13.753Z",
-      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 1 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 1 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 1,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.8636363636363636,
-      "detected_at": "2026-06-11T00:20:13.753Z",
-      "summary_en": "Right now Tecate's lightest Thursday hour so far is 1 AM (median 15 min) — ~86% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 1 AM (mediana 15 min) — ~86% debajo de la base de 30 días de 110 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 1,
-        "best_median": 15,
-        "overall_median": 110,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -269,20 +233,38 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.75,
-      "detected_at": "2026-06-11T00:20:13.753Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 2 PM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 2 PM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8222222222222222,
+      "detected_at": "2026-06-11T18:19:07.865Z",
+      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 1 AM (median 8 min) — ~82% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 1 AM (mediana 8 min) — ~82% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 14,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 1
+        "best_hour": 1,
+        "best_median": 8,
+        "overall_median": 45,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.7909090909090909,
+      "detected_at": "2026-06-11T18:19:07.865Z",
+      "summary_en": "Right now Tecate's lightest Thursday hour so far is 5 AM (median 23 min) — ~79% below the 30-day baseline of 110 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 5 AM (mediana 23 min) — ~79% debajo de la base de 30 días de 110 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 5,
+        "best_median": 23,
+        "overall_median": 110,
+        "samples": 2
       }
     },
     {
@@ -318,6 +300,24 @@
         "overall_median": 90,
         "samples": 2,
         "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-11T18:19:07.865Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 2 PM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 2 PM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 14,
+        "best_median": 20,
+        "overall_median": 60,
+        "samples": 2
       }
     },
     {
