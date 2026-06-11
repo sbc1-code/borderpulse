@@ -89,6 +89,11 @@ includes both. Majors still ignored until an explicit migration sprint.
 - **Stale-data banner removed.** A user can't do anything about
   data being 30 min old, and the banner was firing constantly.
   Per-card `updated_at` is enough freshness signal.
+- **No email capture until a newsletter actually exists (2026-06-11).**
+  Removed all signup forms (footer, sticky banner, blog inline) and the
+  Buttondown client. This extends "no fake contact paths": collecting
+  subscribers for a newsletter nobody is writing is the same false
+  promise. Re-add only when issues are actually being sent.
 
 ---
 

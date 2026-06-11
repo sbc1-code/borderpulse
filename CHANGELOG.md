@@ -3,6 +3,18 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-06-11
+
+### Removed
+- **All newsletter signup capture, site-wide.** The footer form, the sticky
+  bottom banner, and both in-post blog forms are gone, along with the
+  Buttondown client (`src/lib/buttondown.js`) and the marketing components
+  that mounted them (`EmailCapture`, `StickyEmailBanner`,
+  `InlineAfterFirstH2`). The About page's "Newsletter and email" section is
+  deleted too. Reason: no newsletter is actually being written, so the site
+  was collecting addresses for something that doesn't exist. Everything is
+  recoverable from git history if a newsletter ever actually launches.
+
 ## 2026-05-29
 
 ### Added
