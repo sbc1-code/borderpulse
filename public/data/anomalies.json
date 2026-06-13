@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-13T16:17:50.819Z",
-  "snapshot_at": "2026-06-13T17:38:22.613Z",
+  "generated_at": "2026-06-13T20:19:27.352Z",
+  "snapshot_at": "2026-06-13T20:17:47.356Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -17,6 +17,23 @@
         "overall_median": 5,
         "samples": 1,
         "ratio": 8
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 1.5,
+      "detected_at": "2026-06-13T20:19:27.352Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 100 min around 10 PM — ~250% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 100 min cerca de las 10 PM — ~250% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 100,
+        "overall_median": 40,
+        "samples": 3,
+        "ratio": 2.5
       }
     },
     {
@@ -54,37 +71,20 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 1.2222222222222223,
-      "detected_at": "2026-06-09T23:19:37.382Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 100 min around 10 PM — ~222% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 100 min cerca de las 10 PM — ~222% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 100,
-        "overall_median": 45,
-        "samples": 3,
-        "ratio": 2.2222222222222223
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-06-13T16:17:50.819Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-06-13T20:19:27.352Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 13,
         "best_median": 0,
-        "overall_median": 60,
+        "overall_median": 55,
         "samples": 2
       }
     },
@@ -182,16 +182,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-06-13T04:12:46.952Z",
-      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 3 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 3 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
+      "severity": 0.875,
+      "detected_at": "2026-06-13T20:19:27.352Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 3 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 3 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 5,
-        "overall_median": 45,
+        "overall_median": 40,
         "samples": 1
       }
     },
