@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-14T17:23:40.883Z",
-  "snapshot_at": "2026-06-14T19:59:23.431Z",
+  "generated_at": "2026-06-14T23:12:23.569Z",
+  "snapshot_at": "2026-06-14T22:40:18.004Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -21,53 +21,36 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 1.5,
-      "detected_at": "2026-06-09T23:19:37.382Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 150 min around 10 PM — ~250% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 150 min cerca de las 10 PM — ~250% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 150,
-        "overall_median": 60,
-        "samples": 3,
-        "ratio": 2.5
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.4545454545454546,
-      "detected_at": "2026-06-09T23:19:37.382Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 270 min around 10 PM — ~245% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 270 min cerca de las 10 PM — ~245% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.5909090909090908,
+      "detected_at": "2026-06-14T23:12:23.569Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 285 min around 10 PM — ~259% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 285 min cerca de las 10 PM — ~259% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
-        "peak_median": 270,
+        "peak_median": 285,
         "overall_median": 110,
-        "samples": 3,
-        "ratio": 2.4545454545454546
+        "samples": 4,
+        "ratio": 2.590909090909091
       }
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 1.2222222222222223,
-      "detected_at": "2026-06-14T17:23:40.883Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 100 min around 10 PM — ~222% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 100 min cerca de las 10 PM — ~222% de la mediana de 30 días. Planea alrededor.",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1.2000000000000002,
+      "detected_at": "2026-06-14T23:12:23.569Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 33 min around 10 PM — ~220% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 33 min cerca de las 10 PM — ~220% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
-        "peak_median": 100,
-        "overall_median": 45,
-        "samples": 3,
-        "ratio": 2.2222222222222223
+        "peak_median": 33,
+        "overall_median": 15,
+        "samples": 4,
+        "ratio": 2.2
       }
     },
     {
@@ -143,23 +126,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-06-09T23:19:37.382Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 30 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 30 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 30,
-        "overall_median": 15,
-        "samples": 3,
-        "ratio": 2
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
@@ -214,6 +180,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.8833333333333333,
+      "detected_at": "2026-06-14T23:12:23.569Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 113 min around 10 PM — ~188% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 113 min cerca de las 10 PM — ~188% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 113,
+        "overall_median": 60,
+        "samples": 4,
+        "ratio": 1.8833333333333333
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -229,6 +212,23 @@
         "best_median": 2,
         "overall_median": 15,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.7777777777777777,
+      "detected_at": "2026-06-14T23:12:23.569Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 80 min around 10 PM — ~178% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 80 min cerca de las 10 PM — ~178% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 80,
+        "overall_median": 45,
+        "samples": 4,
+        "ratio": 1.7777777777777777
       }
     },
     {
@@ -303,23 +303,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-09T23:19:37.382Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 25 min around 10 PM — ~167% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 25 min cerca de las 10 PM — ~167% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 25,
-        "overall_median": 15,
-        "samples": 3,
-        "ratio": 1.6666666666666667
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
@@ -335,23 +318,6 @@
         "best_median": 28,
         "overall_median": 65,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5454545454545454,
-      "detected_at": "2026-06-11T23:28:17.045Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 10 PM — ~155% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 10 PM — ~155% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 170,
-        "overall_median": 110,
-        "samples": 3,
-        "ratio": 1.5454545454545454
       }
     }
   ],
