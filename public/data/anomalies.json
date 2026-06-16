@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-06-16T15:59:53.309Z",
-  "snapshot_at": "2026-06-16T19:22:40.618Z",
+  "generated_at": "2026-06-16T22:16:48.705Z",
+  "snapshot_at": "2026-06-16T22:00:02.695Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 7,
-      "detected_at": "2026-06-09T21:02:08.656Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 40 min around 8 PM — ~800% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 40 min cerca de las 8 PM — ~800% de la mediana de 30 días. Planea alrededor.",
+      "severity": 3,
+      "detected_at": "2026-06-16T22:16:48.705Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 20 min around 7 PM — ~400% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 20 min cerca de las 7 PM — ~400% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 20,
-        "peak_median": 40,
+        "peak_hour": 19,
+        "peak_median": 20,
         "overall_median": 5,
-        "samples": 1,
-        "ratio": 8
+        "samples": 2,
+        "ratio": 4
       }
     },
     {
@@ -175,23 +175,6 @@
         "best_median": 15,
         "overall_median": 50,
         "samples": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-15T16:20:35.089Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 150 min around 8 PM — ~167% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 150 min cerca de las 8 PM — ~167% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 150,
-        "overall_median": 90,
-        "samples": 2,
-        "ratio": 1.6666666666666667
       }
     },
     {
