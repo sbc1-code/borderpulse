@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-17T21:12:25.954Z",
-  "snapshot_at": "2026-06-17T20:57:19.760Z",
+  "generated_at": "2026-06-17T23:42:31.782Z",
+  "snapshot_at": "2026-06-17T22:47:03.196Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.727272727272727,
-      "detected_at": "2026-06-17T00:21:39.109Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~273% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~273% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.8571428571428572,
+      "detected_at": "2026-06-17T23:42:31.782Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~286% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~286% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 110,
+        "overall_median": 105,
         "samples": 3,
-        "ratio": 2.727272727272727
+        "ratio": 2.857142857142857
       }
     },
     {
@@ -254,16 +254,16 @@
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
-      "severity": 0.6363636363636364,
-      "detected_at": "2026-06-17T00:21:39.109Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Wednesday hour so far is 5 PM (median 20 min) — ~64% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Mariposa es 5 PM (mediana 20 min) — ~64% debajo de la base de 30 días de 55 min.",
+      "severity": 0.6,
+      "detected_at": "2026-06-17T23:42:31.782Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Wednesday hour so far is 5 PM (median 20 min) — ~60% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Mariposa es 5 PM (mediana 20 min) — ~60% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 17,
         "best_median": 20,
-        "overall_median": 55,
+        "overall_median": 50,
         "samples": 1
       }
     },
@@ -272,16 +272,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.5909090909090908,
-      "detected_at": "2026-06-17T00:21:39.109Z",
-      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 5 AM (median 45 min) — ~59% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 5 AM (mediana 45 min) — ~59% debajo de la base de 30 días de 110 min.",
+      "severity": 0.5714285714285714,
+      "detected_at": "2026-06-17T23:42:31.782Z",
+      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 5 AM (median 45 min) — ~57% below the 30-day baseline of 105 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 5 AM (mediana 45 min) — ~57% debajo de la base de 30 días de 105 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 5,
         "best_median": 45,
-        "overall_median": 110,
+        "overall_median": 105,
         "samples": 1
       }
     },
@@ -290,16 +290,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5384615384615384,
-      "detected_at": "2026-06-17T21:12:25.954Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 7 AM (median 30 min) — ~54% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 7 AM (mediana 30 min) — ~54% debajo de la base de 30 días de 65 min.",
+      "severity": 0.5081967213114754,
+      "detected_at": "2026-06-17T23:42:31.782Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 7 AM (median 30 min) — ~51% below the 30-day baseline of 61 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 7 AM (mediana 30 min) — ~51% debajo de la base de 30 días de 61 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 7,
         "best_median": 30,
-        "overall_median": 65,
+        "overall_median": 61,
         "samples": 1
       }
     }
