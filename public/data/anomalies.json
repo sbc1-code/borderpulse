@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-06-18T20:31:14.647Z",
-  "snapshot_at": "2026-06-18T19:09:20.787Z",
+  "generated_at": "2026-06-18T22:57:43.741Z",
+  "snapshot_at": "2026-06-18T21:27:55.378Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 3,
-      "detected_at": "2026-06-16T22:16:48.705Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 20 min around 7 PM — ~400% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 20 min cerca de las 7 PM — ~400% de la mediana de 30 días. Planea alrededor.",
+      "severity": 5.666666666666667,
+      "detected_at": "2026-06-18T22:57:43.741Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 20 min around 7 PM — ~667% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 20 min cerca de las 7 PM — ~667% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
         "peak_median": 20,
-        "overall_median": 5,
+        "overall_median": 3,
         "samples": 2,
-        "ratio": 4
+        "ratio": 6.666666666666667
       }
     },
     {
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.727272727272727,
-      "detected_at": "2026-06-18T13:31:11.007Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~273% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~273% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.8571428571428572,
+      "detected_at": "2026-06-18T22:57:43.741Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~286% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~286% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 110,
+        "overall_median": 105,
         "samples": 3,
-        "ratio": 2.727272727272727
+        "ratio": 2.857142857142857
       }
     },
     {
@@ -42,15 +42,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-06-18T13:31:11.007Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-06-18T22:57:43.741Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 1,
         "best_median": 0,
-        "overall_median": 5,
+        "overall_median": 3,
         "samples": 1
       }
     },
@@ -112,16 +112,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9324324324324325,
-      "detected_at": "2026-06-18T20:31:14.647Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 8 AM (median 5 min) — ~93% below the 30-day baseline of 74 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 8 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 74 min.",
+      "severity": 0.9315068493150684,
+      "detected_at": "2026-06-18T22:57:43.741Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 8 AM (median 5 min) — ~93% below the 30-day baseline of 73 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 8 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 73 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 8,
         "best_median": 5,
-        "overall_median": 74,
+        "overall_median": 73,
         "samples": 1
       }
     },
@@ -272,16 +272,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.5909090909090908,
-      "detected_at": "2026-06-18T13:31:11.007Z",
-      "summary_en": "Right now Tecate's lightest Thursday hour so far is 6 AM (median 45 min) — ~59% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 6 AM (mediana 45 min) — ~59% debajo de la base de 30 días de 110 min.",
+      "severity": 0.5714285714285714,
+      "detected_at": "2026-06-18T22:57:43.741Z",
+      "summary_en": "Right now Tecate's lightest Thursday hour so far is 6 AM (median 45 min) — ~57% below the 30-day baseline of 105 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 6 AM (mediana 45 min) — ~57% debajo de la base de 30 días de 105 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 6,
         "best_median": 45,
-        "overall_median": 110,
+        "overall_median": 105,
         "samples": 1
       }
     },
