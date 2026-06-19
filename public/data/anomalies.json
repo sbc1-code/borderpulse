@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-06-19T20:43:00.512Z",
-  "snapshot_at": "2026-06-19T19:15:22.433Z",
+  "generated_at": "2026-06-19T22:08:14.410Z",
+  "snapshot_at": "2026-06-19T22:03:06.882Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 5.666666666666667,
-      "detected_at": "2026-06-19T20:43:00.512Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 20 min around 7 PM — ~667% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 20 min cerca de las 7 PM — ~667% de la mediana de 30 días. Planea alrededor.",
+      "severity": 3,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 20 min around 7 PM — ~400% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 20 min cerca de las 7 PM — ~400% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
         "peak_median": 20,
-        "overall_median": 3,
+        "overall_median": 5,
         "samples": 2,
-        "ratio": 6.666666666666667
+        "ratio": 4
       }
     },
     {
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.8571428571428572,
-      "detected_at": "2026-06-19T18:59:36.046Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~286% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~286% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.727272727272727,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~273% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~273% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 105,
+        "overall_median": 110,
         "samples": 3,
-        "ratio": 2.857142857142857
+        "ratio": 2.727272727272727
       }
     },
     {
@@ -60,15 +60,15 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-06-19T12:11:39.604Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 12 PM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 12 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 12 PM (median 0 min) — ~100% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 12 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 48 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 12,
         "best_median": 0,
-        "overall_median": 50,
+        "overall_median": 48,
         "samples": 1
       }
     },
@@ -78,15 +78,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-06-19T20:43:00.512Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 0,
-        "overall_median": 3,
+        "overall_median": 5,
         "samples": 1
       }
     },
@@ -130,16 +130,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-06-19T20:43:00.512Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 1 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 1 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
+      "severity": 0.8958333333333334,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 1 AM (median 5 min) — ~90% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 1 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 48 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 1,
         "best_median": 5,
-        "overall_median": 45,
+        "overall_median": 48,
         "samples": 1
       }
     },
@@ -184,16 +184,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.7777777777777777,
-      "detected_at": "2026-06-19T20:43:00.512Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 80 min around 8 PM — ~178% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 80 min cerca de las 8 PM — ~178% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 80 min around 8 PM — ~167% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 80 min cerca de las 8 PM — ~167% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
         "peak_median": 80,
-        "overall_median": 45,
+        "overall_median": 48,
         "samples": 1,
-        "ratio": 1.7777777777777777
+        "ratio": 1.6666666666666667
       }
     },
     {
@@ -254,16 +254,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.64,
-      "detected_at": "2026-06-19T12:11:39.604Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 7 AM (median 18 min) — ~64% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 18 min) — ~64% debajo de la base de 30 días de 50 min.",
+      "severity": 0.6,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 7 AM (median 18 min) — ~60% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 18 min) — ~60% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 7,
         "best_median": 18,
-        "overall_median": 50,
+        "overall_median": 45,
         "samples": 2
       }
     },
@@ -272,17 +272,34 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.5714285714285714,
-      "detected_at": "2026-06-19T18:59:36.046Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 5 AM (median 45 min) — ~57% below the 30-day baseline of 105 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 5 AM (mediana 45 min) — ~57% debajo de la base de 30 días de 105 min.",
+      "severity": 0.5909090909090908,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Right now Tecate's lightest Friday hour so far is 5 AM (median 45 min) — ~59% below the 30-day baseline of 110 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 5 AM (mediana 45 min) — ~59% debajo de la base de 30 días de 110 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 5,
         "best_median": 45,
-        "overall_median": 105,
+        "overall_median": 110,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-06-19T22:08:14.410Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 70 min around 9 PM — ~156% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 70 min cerca de las 9 PM — ~156% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 70,
+        "overall_median": 45,
+        "samples": 3,
+        "ratio": 1.5555555555555556
       }
     },
     {
