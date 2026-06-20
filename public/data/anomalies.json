@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-20T12:00:12.223Z",
-  "snapshot_at": "2026-06-20T11:34:22.632Z",
+  "generated_at": "2026-06-20T14:26:15.475Z",
+  "snapshot_at": "2026-06-20T13:12:49.866Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -34,24 +34,6 @@
         "overall_median": 110,
         "samples": 3,
         "ratio": 2.727272727272727
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-06-20T12:00:12.223Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 13,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 1
       }
     },
     {
@@ -270,6 +252,24 @@
   "trailing_24h": [
     {
       "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-06-20T12:00:12.223Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 13,
+        "best_median": 0,
+        "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -301,42 +301,6 @@
         "best_hour": 5,
         "best_median": 45,
         "overall_median": 110,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-19T12:11:39.604Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 15,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-19T12:11:39.604Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 15,
         "samples": 1
       }
     }
