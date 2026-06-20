@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-20T20:18:49.519Z",
-  "snapshot_at": "2026-06-20T19:57:03.328Z",
+  "generated_at": "2026-06-20T22:13:48.312Z",
+  "snapshot_at": "2026-06-20T21:21:10.639Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -265,42 +265,6 @@
         "best_hour": 13,
         "best_median": 0,
         "overall_median": 45,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-06-19T22:08:14.410Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 7 AM (median 18 min) — ~60% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 18 min) — ~60% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 7,
-        "best_median": 18,
-        "overall_median": 45,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5909090909090908,
-      "detected_at": "2026-06-19T22:08:14.410Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 5 AM (median 45 min) — ~59% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 5 AM (mediana 45 min) — ~59% debajo de la base de 30 días de 110 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 5,
-        "best_median": 45,
-        "overall_median": 110,
         "samples": 1
       }
     }
