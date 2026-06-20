@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-20T14:26:15.475Z",
-  "snapshot_at": "2026-06-20T18:10:57.370Z",
+  "generated_at": "2026-06-20T20:18:49.519Z",
+  "snapshot_at": "2026-06-20T19:57:03.328Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -235,16 +235,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.5416666666666667,
-      "detected_at": "2026-06-20T00:13:38.286Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 10 AM (median 33 min) — ~54% below the 30-day baseline of 72 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 10 AM (mediana 33 min) — ~54% debajo de la base de 30 días de 72 min.",
+      "severity": 0.5352112676056338,
+      "detected_at": "2026-06-20T20:18:49.519Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 10 AM (median 33 min) — ~54% below the 30-day baseline of 71 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 10 AM (mediana 33 min) — ~54% debajo de la base de 30 días de 71 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 10,
         "best_median": 33,
-        "overall_median": 72,
+        "overall_median": 71,
         "samples": 2
       }
     }
