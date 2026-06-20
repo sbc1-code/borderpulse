@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-20T00:13:38.286Z",
-  "snapshot_at": "2026-06-19T23:14:43.866Z",
+  "generated_at": "2026-06-20T12:00:12.223Z",
+  "snapshot_at": "2026-06-20T11:34:22.632Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -42,15 +42,15 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-06-20T00:13:38.286Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
+      "detected_at": "2026-06-20T12:00:12.223Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 13,
         "best_median": 0,
-        "overall_median": 50,
+        "overall_median": 45,
         "samples": 1
       }
     },
@@ -130,34 +130,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-06-20T00:13:38.286Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 9 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 9 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-06-20T12:00:12.223Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 5 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 5 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 9,
-        "best_median": 10,
+        "best_hour": 5,
+        "best_median": 15,
         "overall_median": 90,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.7833333333333333,
-      "detected_at": "2026-06-20T00:13:38.286Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Saturday hour so far is 11 AM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Deconcini es 11 AM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 11,
-        "best_median": 13,
-        "overall_median": 60,
         "samples": 2
       }
     },
@@ -166,17 +148,53 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.7272727272727273,
-      "detected_at": "2026-06-20T00:13:38.286Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 30 min) — ~73% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 30 min) — ~73% debajo de la base de 30 días de 110 min.",
+      "severity": 0.7391304347826086,
+      "detected_at": "2026-06-20T12:00:12.223Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 30 min) — ~74% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 30 min) — ~74% debajo de la base de 30 días de 115 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 30,
-        "overall_median": 110,
+        "overall_median": 115,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-20T12:00:12.223Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Saturday hour so far is 4 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Deconcini es 4 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 20,
+        "overall_median": 60,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-20T12:00:12.223Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 11 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 11 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 11,
+        "best_median": 20,
+        "overall_median": 60,
+        "samples": 3
       }
     },
     {
@@ -211,24 +229,6 @@
         "overall_median": 50,
         "samples": 1,
         "ratio": 1.6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-06-20T00:13:38.286Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 10 AM (median 24 min) — ~60% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 10 AM (mediana 24 min) — ~60% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 10,
-        "best_median": 24,
-        "overall_median": 60,
-        "samples": 2
       }
     },
     {
