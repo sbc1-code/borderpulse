@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-21T17:46:10.928Z",
-  "snapshot_at": "2026-06-21T17:05:43.045Z",
+  "generated_at": "2026-06-21T19:49:47.741Z",
+  "snapshot_at": "2026-06-21T18:51:15.941Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -303,6 +303,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5625,
+      "detected_at": "2026-06-21T19:49:47.741Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~56% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~56% debajo de la base de 30 días de 64 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 28,
+        "overall_median": 64,
+        "samples": 1
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
@@ -317,24 +335,6 @@
         "overall_median": 45,
         "samples": 3,
         "ratio": 1.5555555555555556
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5483870967741935,
-      "detected_at": "2026-06-21T17:46:10.928Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~55% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~55% debajo de la base de 30 días de 62 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 28,
-        "overall_median": 62,
-        "samples": 1
       }
     }
   ],
