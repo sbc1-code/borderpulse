@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-21T06:07:21.544Z",
-  "snapshot_at": "2026-06-21T04:09:51.531Z",
+  "generated_at": "2026-06-21T10:34:03.763Z",
+  "snapshot_at": "2026-06-21T08:41:13.753Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.6548672566371683,
-      "detected_at": "2026-06-21T06:07:21.544Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~265% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~265% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.608695652173913,
+      "detected_at": "2026-06-21T10:34:03.763Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~261% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~261% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 113,
+        "overall_median": 115,
         "samples": 3,
-        "ratio": 2.6548672566371683
+        "ratio": 2.608695652173913
       }
     },
     {
@@ -70,24 +70,6 @@
         "best_median": 0,
         "overall_median": 5,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-06-21T00:12:46.872Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 8 AM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 8 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 8,
-        "best_median": 0,
-        "overall_median": 15,
-        "samples": 1
       }
     },
     {
@@ -251,6 +233,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-06-21T10:34:03.763Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 3 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 3 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 15,
+        "best_median": 5,
+        "overall_median": 15,
+        "samples": 3
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -272,16 +272,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5625,
-      "detected_at": "2026-06-21T06:07:21.544Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~56% below the 30-day baseline of 64 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~56% debajo de la base de 30 días de 64 min.",
+      "severity": 0.5692307692307692,
+      "detected_at": "2026-06-21T10:34:03.763Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~57% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~57% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 5,
         "best_median": 28,
-        "overall_median": 64,
+        "overall_median": 65,
         "samples": 1
       }
     },
