@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-21T13:10:39.266Z",
-  "snapshot_at": "2026-06-21T11:35:22.528Z",
+  "generated_at": "2026-06-21T15:57:11.765Z",
+  "snapshot_at": "2026-06-21T15:26:36.290Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -256,7 +256,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-06-21T10:34:03.763Z",
+      "detected_at": "2026-06-21T15:57:11.765Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 3 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 3 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
       "evidence": {
@@ -265,7 +265,7 @@
         "best_hour": 15,
         "best_median": 5,
         "overall_median": 15,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -290,16 +290,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5692307692307692,
-      "detected_at": "2026-06-21T10:34:03.763Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~57% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~57% debajo de la base de 30 días de 65 min.",
+      "severity": 0.5625,
+      "detected_at": "2026-06-21T15:57:11.765Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~56% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~56% debajo de la base de 30 días de 64 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 5,
         "best_median": 28,
-        "overall_median": 65,
+        "overall_median": 64,
         "samples": 1
       }
     },
