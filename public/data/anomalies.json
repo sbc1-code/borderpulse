@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-21T00:12:46.872Z",
-  "snapshot_at": "2026-06-20T23:50:31.359Z",
+  "generated_at": "2026-06-21T06:07:21.544Z",
+  "snapshot_at": "2026-06-21T04:09:51.531Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.727272727272727,
-      "detected_at": "2026-06-19T22:08:14.410Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~273% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~273% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.6548672566371683,
+      "detected_at": "2026-06-21T06:07:21.544Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~265% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~265% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 110,
+        "overall_median": 113,
         "samples": 3,
-        "ratio": 2.727272727272727
+        "ratio": 2.6548672566371683
       }
     },
     {
@@ -60,7 +60,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-06-21T00:12:46.872Z",
+      "detected_at": "2026-06-21T06:07:21.544Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -69,7 +69,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -149,7 +149,7 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.9,
-      "detected_at": "2026-06-21T00:12:46.872Z",
+      "detected_at": "2026-06-21T06:07:21.544Z",
       "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -158,7 +158,7 @@
         "best_hour": 4,
         "best_median": 5,
         "overall_median": 50,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -268,6 +268,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5625,
+      "detected_at": "2026-06-21T06:07:21.544Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~56% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~56% debajo de la base de 30 días de 64 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 28,
+        "overall_median": 64,
+        "samples": 1
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
@@ -282,24 +300,6 @@
         "overall_median": 45,
         "samples": 3,
         "ratio": 1.5555555555555556
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5483870967741935,
-      "detected_at": "2026-06-21T00:12:46.872Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 28 min) — ~55% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 28 min) — ~55% debajo de la base de 30 días de 62 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 28,
-        "overall_median": 62,
-        "samples": 1
       }
     }
   ],
