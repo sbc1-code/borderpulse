@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-23T00:11:37.597Z",
-  "snapshot_at": "2026-06-23T00:05:25.572Z",
+  "generated_at": "2026-06-23T05:05:51.808Z",
+  "snapshot_at": "2026-06-23T04:20:26.183Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -41,16 +41,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.542372881355932,
-      "detected_at": "2026-06-23T00:11:37.597Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~254% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~254% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.5,
+      "detected_at": "2026-06-23T05:05:51.808Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~250% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~250% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 118,
+        "overall_median": 120,
         "samples": 3,
-        "ratio": 2.542372881355932
+        "ratio": 2.5
       }
     },
     {
@@ -59,7 +59,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-06-23T00:11:37.597Z",
+      "detected_at": "2026-06-23T05:05:51.808Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -68,7 +68,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -215,24 +215,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-06-23T00:11:37.597Z",
-      "summary_en": "Right now Otay Mesa's lightest Tuesday hour so far is 4 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Otay Mesa es 4 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 4,
-        "best_median": 40,
-        "overall_median": 90,
-        "samples": 3
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -285,6 +267,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-06-23T05:05:51.808Z",
+      "summary_en": "Right now Tecate's lightest Tuesday hour so far is 5 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 5 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 5,
+        "best_median": 60,
+        "overall_median": 120,
+        "samples": 1
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -303,6 +303,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-06-23T00:11:37.597Z",
+      "summary_en": "Right now Otay Mesa's lightest Tuesday hour so far is 4 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Otay Mesa es 4 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 4,
+        "best_median": 40,
+        "overall_median": 90,
+        "samples": 3
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "calexico-east",
