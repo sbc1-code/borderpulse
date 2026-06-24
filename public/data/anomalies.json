@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-24T18:53:40.716Z",
-  "snapshot_at": "2026-06-24T17:18:02.999Z",
+  "generated_at": "2026-06-24T20:50:12.980Z",
+  "snapshot_at": "2026-06-24T19:10:01.588Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -41,16 +41,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.5,
-      "detected_at": "2026-06-23T21:01:32.993Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~250% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~250% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.608695652173913,
+      "detected_at": "2026-06-24T20:50:12.980Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~261% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~261% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 120,
+        "overall_median": 115,
         "samples": 3,
-        "ratio": 2.5
+        "ratio": 2.608695652173913
       }
     },
     {
@@ -112,16 +112,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.94,
-      "detected_at": "2026-06-24T10:55:05.536Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 7 AM (median 3 min) — ~94% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 3 min) — ~94% debajo de la base de 30 días de 50 min.",
+      "severity": 0.9375,
+      "detected_at": "2026-06-24T20:50:12.980Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 7 AM (median 3 min) — ~94% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 3 min) — ~94% debajo de la base de 30 días de 48 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 7,
         "best_median": 3,
-        "overall_median": 50,
+        "overall_median": 48,
         "samples": 1
       }
     },
