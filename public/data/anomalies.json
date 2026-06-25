@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-25T15:41:40.590Z",
-  "snapshot_at": "2026-06-25T15:12:42.398Z",
+  "generated_at": "2026-06-25T18:14:06.376Z",
+  "snapshot_at": "2026-06-25T17:24:02.928Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -24,16 +24,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 1.542372881355932,
-      "detected_at": "2026-06-25T12:24:58.964Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~254% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~254% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.5,
+      "detected_at": "2026-06-25T18:14:06.376Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 300 min around 10 PM — ~250% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 300 min cerca de las 10 PM — ~250% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 300,
-        "overall_median": 118,
+        "overall_median": 120,
         "samples": 3,
-        "ratio": 2.542372881355932
+        "ratio": 2.5
       }
     },
     {
@@ -95,16 +95,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.9230769230769231,
-      "detected_at": "2026-06-25T15:41:40.590Z",
-      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 7 AM (median 5 min) — ~92% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 7 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 65 min.",
+      "severity": 0.9285714285714286,
+      "detected_at": "2026-06-25T18:14:06.376Z",
+      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 7 AM (median 5 min) — ~93% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 7 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 7,
         "best_median": 5,
-        "overall_median": 65,
+        "overall_median": 70,
         "samples": 1
       }
     },
@@ -124,6 +124,24 @@
         "best_median": 8,
         "overall_median": 60,
         "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.75,
+      "detected_at": "2026-06-25T18:14:06.376Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 5 PM (median 30 min) — ~75% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 5 PM (mediana 30 min) — ~75% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 17,
+        "best_median": 30,
+        "overall_median": 120,
+        "samples": 1
       }
     },
     {
@@ -199,24 +217,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.6166666666666667,
-      "detected_at": "2026-06-25T00:17:14.413Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 10 PM (median 46 min) — ~62% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 10 PM (mediana 46 min) — ~62% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 22,
-        "best_median": 46,
-        "overall_median": 120,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -285,6 +285,24 @@
         "samples": 1,
         "ratio": 1.5
       }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-06-25T18:14:06.376Z",
+      "summary_en": "Right now Tecate's lightest Thursday hour so far is 2 PM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 2 PM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 14,
+        "best_median": 60,
+        "overall_median": 120,
+        "samples": 2
+      }
     }
   ],
   "trailing_24h": [
@@ -303,24 +321,6 @@
         "overall_median": 60,
         "samples": 4,
         "ratio": 1.5
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.6086956521739131,
-      "detected_at": "2026-06-25T00:17:14.413Z",
-      "summary_en": "Right now Tecate's lightest Thursday hour so far is 6 AM (median 45 min) — ~61% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 6 AM (mediana 45 min) — ~61% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 6,
-        "best_median": 45,
-        "overall_median": 115,
-        "samples": 1
       }
     }
   ]
