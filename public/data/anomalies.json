@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-25T18:14:06.376Z",
-  "snapshot_at": "2026-06-25T17:24:02.928Z",
+  "generated_at": "2026-06-25T21:00:33.815Z",
+  "snapshot_at": "2026-06-25T19:23:36.106Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -113,16 +113,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.8666666666666667,
-      "detected_at": "2026-06-25T12:24:58.964Z",
-      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 1 AM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 1 AM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
+      "severity": 0.84,
+      "detected_at": "2026-06-25T21:00:33.815Z",
+      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 1 AM (median 8 min) — ~84% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 1 AM (mediana 8 min) — ~84% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 1,
         "best_median": 8,
-        "overall_median": 60,
+        "overall_median": 50,
         "samples": 2
       }
     },
@@ -160,6 +160,23 @@
         "best_median": 23,
         "overall_median": 90,
         "samples": 2
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.7,
+      "detected_at": "2026-06-25T21:00:33.815Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 85 min around 8 PM — ~170% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 85 min cerca de las 8 PM — ~170% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 85,
+        "overall_median": 50,
+        "samples": 2,
+        "ratio": 1.7
       }
     },
     {
@@ -220,16 +237,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-06-25T12:24:58.964Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 6 AM (median 26 min) — ~60% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 6 AM (mediana 26 min) — ~60% debajo de la base de 30 días de 65 min.",
+      "severity": 0.59375,
+      "detected_at": "2026-06-25T21:00:33.815Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 6 AM (median 26 min) — ~59% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 6 AM (mediana 26 min) — ~59% debajo de la base de 30 días de 64 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 6,
         "best_median": 26,
-        "overall_median": 65,
+        "overall_median": 64,
         "samples": 1
       }
     },
