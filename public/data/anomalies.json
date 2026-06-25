@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-25T12:24:58.964Z",
-  "snapshot_at": "2026-06-25T12:07:29.805Z",
+  "generated_at": "2026-06-25T15:41:40.590Z",
+  "snapshot_at": "2026-06-25T15:12:42.398Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -95,16 +95,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-06-25T12:24:58.964Z",
-      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 7 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 7 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "severity": 0.9230769230769231,
+      "detected_at": "2026-06-25T15:41:40.590Z",
+      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 7 AM (median 5 min) — ~92% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 7 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 7,
         "best_median": 5,
-        "overall_median": 60,
+        "overall_median": 65,
         "samples": 1
       }
     },
@@ -285,7 +285,9 @@
         "samples": 1,
         "ratio": 1.5
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "sunday_spike",
       "port_slug": "calexico-west",
@@ -302,9 +304,7 @@
         "samples": 4,
         "ratio": 1.5
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "tecate",
