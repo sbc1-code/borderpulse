@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-26T11:47:02.544Z",
-  "snapshot_at": "2026-06-26T11:22:16.728Z",
+  "generated_at": "2026-06-26T14:34:07.637Z",
+  "snapshot_at": "2026-06-26T13:28:23.839Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -32,6 +32,23 @@
         "peak_hour": 22,
         "peak_median": 300,
         "overall_median": 120,
+        "samples": 3,
+        "ratio": 2.5
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1.5,
+      "detected_at": "2026-06-26T14:34:07.637Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 25 min around 10 PM — ~250% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 25 min cerca de las 10 PM — ~250% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 25,
+        "overall_median": 10,
         "samples": 3,
         "ratio": 2.5
       }
@@ -109,37 +126,20 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.9230769230769231,
-      "detected_at": "2026-06-26T11:47:02.544Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 25 min around 10 PM — ~192% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 25 min cerca de las 10 PM — ~192% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 25,
-        "overall_median": 13,
-        "samples": 3,
-        "ratio": 1.9230769230769231
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.9090909090909091,
-      "detected_at": "2026-06-26T11:47:02.544Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 1 AM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 1 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-06-26T14:34:07.637Z",
+      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 1 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 1 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 1,
         "best_median": 5,
-        "overall_median": 55,
+        "overall_median": 60,
         "samples": 1
       }
     },
@@ -199,24 +199,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6153846153846154,
-      "detected_at": "2026-06-26T11:47:02.544Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 5 min) — ~62% below the 30-day baseline of 13 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~62% debajo de la base de 30 días de 13 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 13,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -271,23 +253,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.5454545454545454,
-      "detected_at": "2026-06-26T11:47:02.544Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 85 min around 8 PM — ~155% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 85 min cerca de las 8 PM — ~155% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 85,
-        "overall_median": 55,
-        "samples": 2,
-        "ratio": 1.5454545454545454
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -302,42 +267,42 @@
         "samples": 1,
         "ratio": 1.5
       }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-06-26T14:34:07.637Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 5 min) — ~50% below the 30-day baseline of 10 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~50% debajo de la base de 30 días de 10 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 0,
+        "best_median": 5,
+        "overall_median": 10,
+        "samples": 1
+      }
     }
   ],
   "trailing_24h": [
     {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.7444444444444445,
-      "detected_at": "2026-06-25T12:24:58.964Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 6 AM (median 23 min) — ~74% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 6 AM (mediana 23 min) — ~74% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 6,
-        "best_median": 23,
-        "overall_median": 90,
-        "samples": 2
-      }
-    },
-    {
       "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-06-25T12:24:58.964Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 90 min around 9 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 90 min cerca de las 9 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-06-26T11:47:02.544Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 85 min around 8 PM — ~155% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 85 min cerca de las 8 PM — ~155% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 21,
-        "peak_median": 90,
-        "overall_median": 60,
-        "samples": 4,
-        "ratio": 1.5
+        "peak_hour": 20,
+        "peak_median": 85,
+        "overall_median": 55,
+        "samples": 2,
+        "ratio": 1.5454545454545454
       }
     }
   ]
