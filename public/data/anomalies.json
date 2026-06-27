@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-27T03:52:24.650Z",
-  "snapshot_at": "2026-06-27T03:23:39.078Z",
+  "generated_at": "2026-06-27T06:56:19.003Z",
+  "snapshot_at": "2026-06-27T06:41:38.056Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -76,16 +76,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.9333333333333333,
-      "detected_at": "2026-06-27T03:52:24.650Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 7 AM (median 5 min) — ~93% below the 30-day baseline of 75 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 7 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 75 min.",
+      "severity": 0.9315068493150684,
+      "detected_at": "2026-06-27T06:56:19.003Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 7 AM (median 5 min) — ~93% below the 30-day baseline of 73 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 7 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 73 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 7,
         "best_median": 5,
-        "overall_median": 75,
+        "overall_median": 73,
         "samples": 1
       }
     },
@@ -105,6 +105,24 @@
         "best_median": 5,
         "overall_median": 60,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-06-27T06:56:19.003Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 5 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 5 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 5,
+        "best_median": 15,
+        "overall_median": 90,
+        "samples": 2
       }
     },
     {
@@ -255,16 +273,16 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-06-27T03:52:24.650Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 6 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 6 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-06-27T06:56:19.003Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 9 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 9 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 6,
+        "best_hour": 9,
         "best_median": 10,
         "overall_median": 20,
-        "samples": 1
+        "samples": 2
       }
     }
   ],
