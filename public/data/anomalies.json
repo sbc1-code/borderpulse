@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-27T06:56:19.003Z",
-  "snapshot_at": "2026-06-27T06:41:38.056Z",
+  "generated_at": "2026-06-27T09:32:01.272Z",
+  "snapshot_at": "2026-06-27T09:17:09.719Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -76,16 +76,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.9315068493150684,
-      "detected_at": "2026-06-27T06:56:19.003Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 7 AM (median 5 min) — ~93% below the 30-day baseline of 73 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 7 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 73 min.",
+      "severity": 0.9333333333333333,
+      "detected_at": "2026-06-27T09:32:01.272Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 7 AM (median 5 min) — ~93% below the 30-day baseline of 75 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 7 AM (mediana 5 min) — ~93% debajo de la base de 30 días de 75 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 7,
         "best_median": 5,
-        "overall_median": 73,
+        "overall_median": 75,
         "samples": 1
       }
     },
@@ -145,6 +145,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-06-27T09:32:01.272Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 9 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 9 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 9,
+        "best_median": 15,
+        "overall_median": 60,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
@@ -159,24 +177,6 @@
         "best_median": 20,
         "overall_median": 60,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-27T03:52:24.650Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 11 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 11 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 11,
-        "best_median": 20,
-        "overall_median": 60,
-        "samples": 3
       }
     },
     {
@@ -273,7 +273,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-06-27T06:56:19.003Z",
+      "detected_at": "2026-06-27T09:32:01.272Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 9 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 9 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
       "evidence": {
@@ -282,7 +282,7 @@
         "best_hour": 9,
         "best_median": 10,
         "overall_median": 20,
-        "samples": 2
+        "samples": 3
       }
     }
   ],
@@ -320,24 +320,6 @@
         "overall_median": 55,
         "samples": 2,
         "ratio": 1.5454545454545454
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-06-26T08:32:13.674Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 12 PM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 12 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 12,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 1
       }
     }
   ]
