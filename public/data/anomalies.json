@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-27T15:19:12.887Z",
-  "snapshot_at": "2026-06-27T16:46:28.986Z",
+  "generated_at": "2026-06-27T19:27:02.803Z",
+  "snapshot_at": "2026-06-27T18:02:30.135Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -127,6 +127,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.7540983606557377,
+      "detected_at": "2026-06-27T19:27:02.803Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 9 AM (median 15 min) — ~75% below the 30-day baseline of 61 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 9 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 61 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 9,
+        "best_median": 15,
+        "overall_median": 61,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -141,24 +159,6 @@
         "best_median": 30,
         "overall_median": 120,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-06-27T09:32:01.272Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 9 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 9 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 9,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 3
       }
     },
     {
