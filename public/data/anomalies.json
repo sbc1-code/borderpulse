@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-06-28T19:27:36.950Z",
-  "snapshot_at": "2026-06-28T18:17:56.618Z",
+  "generated_at": "2026-06-28T21:07:09.513Z",
+  "snapshot_at": "2026-06-28T21:00:18.737Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 3.5999999999999996,
-      "detected_at": "2026-06-28T17:18:00.376Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 23 min around 5 PM — ~460% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 23 min cerca de las 5 PM — ~460% de la mediana de 30 días. Planea alrededor.",
+      "severity": 7,
+      "detected_at": "2026-06-28T21:07:09.513Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 40 min around 7 PM — ~800% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 40 min cerca de las 7 PM — ~800% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
-        "peak_median": 23,
+        "peak_hour": 19,
+        "peak_median": 40,
         "overall_median": 5,
-        "samples": 2,
-        "ratio": 4.6
+        "samples": 3,
+        "ratio": 8
       }
     },
     {
@@ -78,14 +78,14 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-06-27T03:52:24.650Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 8 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 8 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-06-28T21:07:09.513Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 9 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 9 PM — ~200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 20,
+        "peak_hour": 21,
         "peak_median": 40,
         "overall_median": 20,
-        "samples": 2,
+        "samples": 5,
         "ratio": 2
       }
     },
