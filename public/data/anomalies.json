@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-28T08:24:29.561Z",
-  "snapshot_at": "2026-06-28T08:20:56.250Z",
+  "generated_at": "2026-06-28T11:11:21.332Z",
+  "snapshot_at": "2026-06-28T10:39:43.551Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -149,7 +149,7 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.9,
-      "detected_at": "2026-06-28T08:24:29.561Z",
+      "detected_at": "2026-06-28T11:11:21.332Z",
       "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 10 AM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 10 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -158,7 +158,7 @@
         "best_hour": 10,
         "best_median": 5,
         "overall_median": 50,
-        "samples": 1
+        "samples": 2
       }
     },
     {
