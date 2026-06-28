@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-28T11:11:21.332Z",
-  "snapshot_at": "2026-06-28T10:39:43.551Z",
+  "generated_at": "2026-06-28T13:57:08.016Z",
+  "snapshot_at": "2026-06-28T12:08:45.103Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -127,24 +127,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-06-28T08:24:29.561Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 12 PM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 12 PM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 12,
-        "best_median": 5,
-        "overall_median": 60,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -163,11 +145,29 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.7833333333333333,
+      "detected_at": "2026-06-28T13:57:08.016Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 12 PM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 12 PM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 12,
+        "best_median": 13,
+        "overall_median": 60,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-06-28T08:24:29.561Z",
+      "detected_at": "2026-06-28T13:57:08.016Z",
       "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 12 PM (median 30 min) — ~75% below the 30-day baseline of 120 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 12 PM (mediana 30 min) — ~75% debajo de la base de 30 días de 120 min.",
       "evidence": {
@@ -176,7 +176,7 @@
         "best_hour": 12,
         "best_median": 30,
         "overall_median": 120,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -217,24 +217,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-06-28T08:24:29.561Z",
-      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 12 PM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 12 PM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 12,
-        "best_median": 30,
-        "overall_median": 90,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -266,6 +248,24 @@
         "overall_median": 15,
         "samples": 3,
         "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5777777777777777,
+      "detected_at": "2026-06-28T13:57:08.016Z",
+      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 12 PM (median 38 min) — ~58% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 12 PM (mediana 38 min) — ~58% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 12,
+        "best_median": 38,
+        "overall_median": 90,
+        "samples": 2
       }
     },
     {
