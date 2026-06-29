@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Heart, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AdsterraBanner from './AdsterraBanner';
+import { track } from '@/lib/analytics';
 
 const SESSION_KEY = 'borderPulse_adConsent';
 
@@ -33,11 +34,13 @@ export default function AdConsentCard({ language = 'en' }) {
   const enable = useCallback(() => {
     setConsent('enabled');
     setStatus('enabled');
+    track('ad-consent', { action: 'enable' });
   }, []);
 
   const dismiss = useCallback(() => {
     setConsent('dismissed');
     setStatus('dismissed');
+    track('ad-consent', { action: 'dismiss' });
   }, []);
 
   // Dismissed: render nothing

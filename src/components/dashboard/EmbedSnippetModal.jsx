@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Copy, Check } from 'lucide-react';
+import { track } from '@/lib/analytics';
 
 const SIZES = [
   { id: 'sm', w: 320, h: 180, labelEn: '320 × 180', labelEs: '320 × 180' },
@@ -46,6 +47,7 @@ export default function EmbedSnippetModal({ open, onOpenChange, slug, language =
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(snippet);
+      track('embed-copy', { slug, theme, lang, direction, size: sizeId });
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch (e) {

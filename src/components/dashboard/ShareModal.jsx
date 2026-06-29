@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Copy, Share2, Check } from 'lucide-react';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { track } from '@/lib/analytics';
 
 function formatHourCompact(h) {
   if (h == null) return '';
@@ -101,6 +102,7 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(text);
+      track('share-status', { direction, method: 'copy' });
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch (e) {
@@ -112,6 +114,7 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
     if (navigator.share) {
       try {
         await navigator.share({ title: 'Border Pulse', text, url: 'https://borderpulse.com' });
+        track('share-status', { direction, method: 'native' });
       } catch {}
     } else {
       copy();
