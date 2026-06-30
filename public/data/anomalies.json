@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-30T15:32:11.813Z",
-  "snapshot_at": "2026-06-30T15:10:38.040Z",
+  "generated_at": "2026-06-30T18:00:48.791Z",
+  "snapshot_at": "2026-06-30T17:16:00.121Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -111,16 +111,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.9,
-      "detected_at": "2026-06-30T15:32:11.813Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 12 PM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 12 PM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
+      "severity": 0.9090909090909091,
+      "detected_at": "2026-06-30T18:00:48.791Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 12 PM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 12 PM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 12,
         "best_median": 5,
-        "overall_median": 50,
+        "overall_median": 55,
         "samples": 1
       }
     },
@@ -140,41 +140,6 @@
         "best_median": 10,
         "overall_median": 50,
         "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.7857142857142857,
-      "detected_at": "2026-06-30T15:32:11.813Z",
-      "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 5 PM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 5 PM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 17,
-        "best_median": 15,
-        "overall_median": 70,
-        "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.7,
-      "detected_at": "2026-06-30T15:32:11.813Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 85 min around 8 PM — ~170% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 85 min cerca de las 8 PM — ~170% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 85,
-        "overall_median": 50,
-        "samples": 2,
-        "ratio": 1.7
       }
     },
     {
@@ -232,6 +197,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-06-30T18:00:48.791Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 85 min around 8 PM — ~155% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 85 min cerca de las 8 PM — ~155% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 85,
+        "overall_median": 55,
+        "samples": 2,
+        "ratio": 1.5454545454545454
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -251,6 +233,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.7857142857142857,
+      "detected_at": "2026-06-30T15:32:11.813Z",
+      "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 5 PM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 5 PM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 17,
+        "best_median": 15,
+        "overall_median": 70,
+        "samples": 1
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
