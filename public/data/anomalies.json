@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-30T20:58:09.565Z",
-  "snapshot_at": "2026-06-30T19:18:22.566Z",
+  "generated_at": "2026-06-30T22:20:18.059Z",
+  "snapshot_at": "2026-06-30T21:14:13.469Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -90,24 +90,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-06-30T00:09:32.990Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 9 PM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 9 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 21,
-        "best_median": 0,
-        "overall_median": 20,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
@@ -140,6 +122,24 @@
         "best_median": 10,
         "overall_median": 50,
         "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-06-30T22:20:18.059Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 1 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 1 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 1,
+        "best_median": 5,
+        "overall_median": 20,
+        "samples": 1
       }
     },
     {
@@ -196,24 +196,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5833333333333333,
-      "detected_at": "2026-06-30T00:09:32.990Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 9 PM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 9 PM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 21,
-        "best_median": 25,
-        "overall_median": 60,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -263,6 +245,24 @@
         "best_median": 60,
         "overall_median": 120,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5,
+      "detected_at": "2026-06-30T22:20:18.059Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 10 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 10 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 10,
+        "best_median": 30,
+        "overall_median": 60,
+        "samples": 2
       }
     }
   ],
