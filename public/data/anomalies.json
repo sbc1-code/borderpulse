@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-30T18:00:48.791Z",
-  "snapshot_at": "2026-06-30T17:16:00.121Z",
+  "generated_at": "2026-06-30T20:58:09.565Z",
+  "snapshot_at": "2026-06-30T19:18:22.566Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -17,6 +17,23 @@
         "overall_median": 5,
         "samples": 3,
         "ratio": 8
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 2,
+      "detected_at": "2026-06-30T20:58:09.565Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 60 min around 8 PM — ~300% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 60 min cerca de las 8 PM — ~300% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 60,
+        "overall_median": 20,
+        "samples": 1,
+        "ratio": 3
       }
     },
     {
@@ -90,23 +107,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-06-28T21:07:09.513Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 9 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 9 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 40,
-        "overall_median": 20,
-        "samples": 5,
-        "ratio": 2
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -161,6 +161,40 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.6363636363636365,
+      "detected_at": "2026-06-30T20:58:09.565Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 8 PM — ~164% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 8 PM — ~164% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 90,
+        "overall_median": 55,
+        "samples": 1,
+        "ratio": 1.6363636363636365
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.6000000000000001,
+      "detected_at": "2026-06-30T20:58:09.565Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 8 PM — ~160% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 8 PM — ~160% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 120,
+        "overall_median": 75,
+        "samples": 1,
+        "ratio": 1.6
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
@@ -198,19 +232,19 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.5454545454545454,
-      "detected_at": "2026-06-30T18:00:48.791Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 85 min around 8 PM — ~155% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 85 min cerca de las 8 PM — ~155% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.5,
+      "detected_at": "2026-06-30T20:58:09.565Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 8 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 8 PM — ~150% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
-        "peak_median": 85,
-        "overall_median": 55,
-        "samples": 2,
-        "ratio": 1.5454545454545454
+        "peak_median": 180,
+        "overall_median": 120,
+        "samples": 1,
+        "ratio": 1.5
       }
     },
     {
@@ -284,24 +318,6 @@
         "best_hour": 5,
         "best_median": 30,
         "overall_median": 65,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-06-29T20:04:37.200Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Monday hour so far is 3 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Eagle Pass - Bridge I es 3 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 15,
-        "best_median": 30,
-        "overall_median": 60,
         "samples": 1
       }
     }
