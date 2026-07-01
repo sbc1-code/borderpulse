@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-01T00:11:21.898Z",
-  "snapshot_at": "2026-06-30T23:51:53.029Z",
+  "generated_at": "2026-07-01T05:25:29.466Z",
+  "snapshot_at": "2026-07-01T03:49:36.920Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -112,13 +112,13 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-01T00:11:21.898Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-07-01T05:25:29.466Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
-        "best_hour": 4,
+        "best_hour": 3,
         "best_median": 0,
         "overall_median": 20,
         "samples": 1
@@ -197,6 +197,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-07-01T05:25:29.466Z",
+      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 3 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 3 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 3,
+        "best_median": 30,
+        "overall_median": 90,
+        "samples": 1
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -246,24 +264,6 @@
         "overall_median": 120,
         "samples": 1,
         "ratio": 1.5
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-07-01T00:11:21.898Z",
-      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 8 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 8 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 8,
-        "best_median": 45,
-        "overall_median": 90,
-        "samples": 1
       }
     },
     {
