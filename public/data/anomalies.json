@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-07-01T15:45:42.519Z",
-  "snapshot_at": "2026-07-01T13:54:35.645Z",
+  "generated_at": "2026-07-01T18:01:26.662Z",
+  "snapshot_at": "2026-07-01T16:26:22.434Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 7,
-      "detected_at": "2026-06-28T21:07:09.513Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 40 min around 7 PM — ~800% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 40 min cerca de las 7 PM — ~800% de la mediana de 30 días. Planea alrededor.",
+      "severity": 12.333333333333334,
+      "detected_at": "2026-07-01T18:01:26.662Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 40 min around 7 PM — ~1333% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 40 min cerca de las 7 PM — ~1333% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
         "peak_median": 40,
-        "overall_median": 5,
+        "overall_median": 3,
         "samples": 3,
-        "ratio": 8
+        "ratio": 13.333333333333334
       }
     },
     {
@@ -94,15 +94,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-01T00:11:21.898Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-07-01T18:01:26.662Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
         "best_median": 0,
-        "overall_median": 5,
+        "overall_median": 3,
         "samples": 1
       }
     },
@@ -147,16 +147,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.9272727272727272,
-      "detected_at": "2026-07-01T15:45:42.519Z",
-      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 9 PM (median 4 min) — ~93% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 9 PM (mediana 4 min) — ~93% debajo de la base de 30 días de 55 min.",
+      "severity": 0.9333333333333333,
+      "detected_at": "2026-07-01T18:01:26.662Z",
+      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 9 PM (median 4 min) — ~93% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 9 PM (mediana 4 min) — ~93% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 21,
         "best_median": 4,
-        "overall_median": 55,
+        "overall_median": 60,
         "samples": 1
       }
     },
@@ -212,23 +212,6 @@
         "best_median": 30,
         "overall_median": 90,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.6363636363636365,
-      "detected_at": "2026-07-01T15:45:42.519Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 8 PM — ~164% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 8 PM — ~164% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 90,
-        "overall_median": 55,
-        "samples": 1,
-        "ratio": 1.6363636363636365
       }
     },
     {
@@ -335,6 +318,23 @@
         "best_median": 60,
         "overall_median": 120,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-07-01T18:01:26.662Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 8 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 8 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 90,
+        "overall_median": 60,
+        "samples": 1,
+        "ratio": 1.5
       }
     }
   ],
