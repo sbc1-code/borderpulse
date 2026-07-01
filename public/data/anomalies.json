@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-01T05:25:29.466Z",
-  "snapshot_at": "2026-07-01T03:49:36.920Z",
+  "generated_at": "2026-07-01T09:56:57.638Z",
+  "snapshot_at": "2026-07-01T08:12:30.492Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -68,24 +68,6 @@
         "overall_median": 120,
         "samples": 3,
         "ratio": 2.5833333333333335
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-07-01T00:11:21.898Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 8 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 8 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 8,
-        "best_median": 0,
-        "overall_median": 60,
-        "samples": 1
       }
     },
     {
@@ -165,16 +147,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9117647058823529,
-      "detected_at": "2026-07-01T00:11:21.898Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 7 AM (median 6 min) — ~91% below the 30-day baseline of 68 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 6 min) — ~91% debajo de la base de 30 días de 68 min.",
+      "severity": 0.9076923076923077,
+      "detected_at": "2026-07-01T09:56:57.638Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 7 AM (median 6 min) — ~91% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 6 min) — ~91% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 7,
         "best_median": 6,
-        "overall_median": 68,
+        "overall_median": 65,
         "samples": 1
       }
     },
@@ -198,20 +180,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-01T05:25:29.466Z",
-      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 3 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 3 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.6166666666666667,
+      "detected_at": "2026-07-01T09:56:57.638Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 8 AM (median 23 min) — ~62% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 8 AM (mediana 23 min) — ~62% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
-        "best_hour": 3,
-        "best_median": 30,
-        "overall_median": 90,
-        "samples": 1
+        "best_hour": 8,
+        "best_median": 23,
+        "overall_median": 60,
+        "samples": 2
       }
     },
     {
@@ -233,20 +215,38 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5384615384615384,
+      "detected_at": "2026-07-01T09:56:57.638Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 7 AM (median 30 min) — ~54% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 7 AM (mediana 30 min) — ~54% debajo de la base de 30 días de 65 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 7,
+        "best_median": 30,
+        "overall_median": 65,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-07-01T00:11:21.898Z",
-      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 8 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 8 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "severity": 0.5166666666666666,
+      "detected_at": "2026-07-01T09:56:57.638Z",
+      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 8 AM (median 58 min) — ~52% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 8 AM (mediana 58 min) — ~52% debajo de la base de 30 días de 120 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 8,
-        "best_median": 60,
+        "best_median": 58,
         "overall_median": 120,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -285,6 +285,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-07-01T05:25:29.466Z",
+      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 3 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 3 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 3,
+        "best_median": 30,
+        "overall_median": 90,
+        "samples": 1
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
