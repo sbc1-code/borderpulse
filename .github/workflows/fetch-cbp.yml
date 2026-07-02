@@ -51,14 +51,16 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
-      # Pages deploys can sit in deployment_queued when GitHub's queue is
-      # congested (2026-07-02: the 10 min timeout hit while still queued).
-      # The action caps timeout at its 10 min default, so a single retry is
-      # the fix: it doubles tolerance to 20 min instead of failing the whole
-      # fetch run over an infra flake.
+      # Pages backend flakes two ways (both seen 2026-07-02): deployments
+      # rot in deployment_queued past the 10 min timeout (which the action
+      # caps at its default, so raising it is not an option), or get killed
+      # in seconds with "Deployment failed, try again later". Wait 30s and
+      # retry once instead of failing the whole fetch run over an infra flake.
       - id: deployment
         uses: actions/deploy-pages@v5
         continue-on-error: true
+      - if: steps.deployment.outcome == 'failure'
+        run: sleep 30
       - id: deployment-retry
         if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5

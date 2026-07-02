@@ -16,6 +16,17 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   to 20 minutes (the action caps its timeout input at the 10 minute
   default, so a longer timeout is not an option). Auto-filed issue #42
   closed after a green verification run.
+- **Same retry hardening applied to `deploy.yml`, plus a 30s pause before
+  retry in both workflows.** Follow-up: the two push-triggered deploy runs
+  for the fix commits above failed with a second Pages backend flake mode,
+  "Deployment failed, try again later", seconds after deployment creation.
+  A controlled `workflow_dispatch` of `deploy.yml` immediately after was
+  green in 49s, confirming transient infra rather than a broken workflow
+  (the site itself never went stale; fetch-cbp's green deploys carried the
+  same content). Both workflows now share the identical deploy pattern:
+  one attempt, 30s pause on failure, one retry.
+
+## 2026-06-11
 
 ### Removed
 - **All newsletter signup capture, site-wide.** The footer form, the sticky
