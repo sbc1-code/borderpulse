@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-02T12:10:49.070Z",
-  "snapshot_at": "2026-07-02T11:54:03.718Z",
+  "generated_at": "2026-07-02T15:19:55.265Z",
+  "snapshot_at": "2026-07-02T13:58:38.336Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -91,6 +91,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.95,
+      "detected_at": "2026-07-02T15:19:55.265Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 1 PM (median 1 min) — ~95% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 1 PM (mediana 1 min) — ~95% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 13,
+        "best_median": 1,
+        "overall_median": 20,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
@@ -123,24 +141,6 @@
         "best_median": 30,
         "overall_median": 120,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-07-02T12:10:49.070Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 5 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 5 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 5,
-        "best_median": 5,
-        "overall_median": 20,
-        "samples": 3
       }
     },
     {
