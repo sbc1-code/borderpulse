@@ -37,6 +37,17 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   (the site itself never went stale; fetch-cbp's green deploys carried the
   same content). Both workflows now share the identical deploy pattern:
   one attempt, 30s pause on failure, one retry.
+- **Pages deploy race between deploy.yml and fetch-cbp.yml eliminated.**
+  Running both workflows at once produced mutual "Deployment failed, try
+  again later" kills (concurrent Pages deployments supersede each other,
+  and the synchronized 30s retry pauses kept them colliding in lockstep).
+  Both workflows now share concurrency group `pages` with
+  `cancel-in-progress: false`, so deployments queue instead of racing.
+- **Anomaly-scan drafter PR step fixed: the `draft:auto-a` label it passes
+  to `gh pr create` never existed in the repo.** Latent since the drafter
+  shipped; only fires on workflow_dispatch runs that find anomalies. Label
+  created, and the orphaned drafts branch from today's failed run opened
+  manually as PR #45 (3 Sunday-spike drafts).
 
 ## 2026-06-11
 

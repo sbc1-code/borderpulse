@@ -11,8 +11,12 @@ permissions:
   id-token: write
   issues: write
 
+# Shares the "pages" group with deploy.yml: concurrent Pages deployments
+# from the two workflows kill each other with "Deployment failed, try
+# again later" (proven 2026-07-02). Serialization is the fix; the retry
+# steps below only cover genuine backend flakes.
 concurrency:
-  group: fetch-cbp
+  group: pages
   cancel-in-progress: false
 
 jobs:

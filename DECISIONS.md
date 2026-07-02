@@ -95,6 +95,14 @@ includes both. Majors still ignored until an explicit migration sprint.
   subscribers for a newsletter nobody is writing is the same false
   promise. Re-add only when issues are actually being sent.
 
+- **Pages deployments are serialized via a shared concurrency group
+  (2026-07-02).** deploy.yml and fetch-cbp.yml both share group `pages`
+  with `cancel-in-progress: false`. Concurrent Pages deployments from the
+  two workflows kill each other with "Deployment failed, try again later"
+  (proven when a push-triggered deploy and a dispatched fetch ran at the
+  same time). Don't split them back into separate groups, and don't set
+  cancel-in-progress back to true (it would kill mid-flight fetch runs).
+
 ---
 
 *Append a new section the next time a non-obvious decision lands.*
