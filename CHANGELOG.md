@@ -5,6 +5,18 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-07-02
 
+### Changed
+- **Node 20 deprecation cleared across all four workflows.** The runner was
+  annotating every run because `setup-node@v4` (and `github-script@v7`, which
+  only fires on failure paths) still target the Node 20 action runtime.
+  Bumped `setup-node` v4 to v6, `github-script` v7 to v9, and the workflow
+  `node-version` from EOL 20 to 22 LTS in `anomaly-scan`, `deploy`,
+  `fetch-cbp`, and `fetch-news`. The repo's issue-filing scripts only use
+  `github.rest.issues` / `context` / `core`, so none of github-script v9's
+  breaking changes (ESM-only `@actions/github`, injected `getOctokit`)
+  apply. No `engines` field or `.nvmrc` constrains Node, and deploy +
+  fetch-cbp + anomaly-scan verification runs came back green on Node 22.
+
 ### Fixed
 - **Fetch CBP wait times workflow hardened against Pages deploy queue
   congestion.** The 16:08 UTC scheduled run failed because
