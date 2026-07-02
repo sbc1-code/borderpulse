@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-02T19:37:31.425Z",
-  "snapshot_at": "2026-07-02T18:01:39.774Z",
+  "generated_at": "2026-07-02T21:13:23.566Z",
+  "snapshot_at": "2026-07-02T21:06:10.283Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -180,23 +180,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.6000000000000001,
-      "detected_at": "2026-06-30T20:58:09.565Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 8 PM — ~160% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 8 PM — ~160% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 120,
-        "overall_median": 75,
-        "samples": 1,
-        "ratio": 1.6
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
@@ -298,6 +281,23 @@
         "peak_hour": 20,
         "peak_median": 90,
         "overall_median": 60,
+        "samples": 1,
+        "ratio": 1.5
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-07-02T21:13:23.566Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 8 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 8 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 120,
+        "overall_median": 80,
         "samples": 1,
         "ratio": 1.5
       }
