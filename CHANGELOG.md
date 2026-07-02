@@ -11,9 +11,11 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   `actions/deploy-pages` sat in `deployment_queued` for the full default
   10 minute timeout and aborted (GitHub-side infra flake; the data fetch and
   commit had already succeeded). `fetch-cbp.yml` now uses the same
-  `configure-pages@v6` / `deploy-pages@v5` versions as `deploy.yml`, raises
-  the deploy timeout to 15 minutes, and retries the deploy once before
-  failing the run. Auto-filed issue #42 closed after a verification run.
+  `configure-pages@v6` / `deploy-pages@v5` versions as `deploy.yml` and
+  retries the deploy once before failing the run, doubling queue tolerance
+  to 20 minutes (the action caps its timeout input at the 10 minute
+  default, so a longer timeout is not an option). Auto-filed issue #42
+  closed after a green verification run.
 
 ### Removed
 - **All newsletter signup capture, site-wide.** The footer form, the sticky
