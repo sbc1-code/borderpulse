@@ -3,7 +3,17 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
-## 2026-06-11
+## 2026-07-02
+
+### Fixed
+- **Fetch CBP wait times workflow hardened against Pages deploy queue
+  congestion.** The 16:08 UTC scheduled run failed because
+  `actions/deploy-pages` sat in `deployment_queued` for the full default
+  10 minute timeout and aborted (GitHub-side infra flake; the data fetch and
+  commit had already succeeded). `fetch-cbp.yml` now uses the same
+  `configure-pages@v6` / `deploy-pages@v5` versions as `deploy.yml`, raises
+  the deploy timeout to 15 minutes, and retries the deploy once before
+  failing the run. Auto-filed issue #42 closed after a verification run.
 
 ### Removed
 - **All newsletter signup capture, site-wide.** The footer form, the sticky

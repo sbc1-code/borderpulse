@@ -47,12 +47,24 @@ jobs:
           fi
       - name: Build static site
         run: npm run build
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
+      # Pages deploys can sit in deployment_queued when GitHub's queue is
+      # congested (2026-07-02: default 10 min timeout hit while still queued).
+      # 15 min timeout plus one retry rides out transient backups instead of
+      # failing the whole fetch run over an infra flake.
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+        with:
+          timeout: 900000
+      - id: deployment-retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v5
+        with:
+          timeout: 900000
 
       # Auto-file an issue on failure, dedup'd by label so we don't spam
       # every 15 min. Closes the loop on "I saw it in Gmail and forgot."
