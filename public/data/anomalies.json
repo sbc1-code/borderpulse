@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-07-03T21:12:06.345Z",
-  "snapshot_at": "2026-07-03T20:03:12.703Z",
+  "generated_at": "2026-07-03T23:08:47.409Z",
+  "snapshot_at": "2026-07-03T22:42:13.175Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 3,
-      "detected_at": "2026-07-02T23:12:10.955Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 60 min around 8 PM — ~400% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 60 min cerca de las 8 PM — ~400% de la mediana de 30 días. Planea alrededor.",
+      "severity": 2.3333333333333335,
+      "detected_at": "2026-07-03T23:08:47.409Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 60 min around 8 PM — ~333% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 60 min cerca de las 8 PM — ~333% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
         "peak_median": 60,
-        "overall_median": 15,
+        "overall_median": 18,
         "samples": 1,
-        "ratio": 4
+        "ratio": 3.3333333333333335
       }
     },
     {
@@ -59,15 +59,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-07-03T21:12:06.345Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 10 AM (median 0 min) — ~100% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 10 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 55 min.",
+      "detected_at": "2026-07-03T23:08:47.409Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 10 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 10 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 10,
         "best_median": 0,
-        "overall_median": 55,
+        "overall_median": 60,
         "samples": 1
       }
     },
@@ -181,6 +181,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.7222222222222222,
+      "detected_at": "2026-07-03T23:08:47.409Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 5 AM (median 5 min) — ~72% below the 30-day baseline of 18 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 5 AM (mediana 5 min) — ~72% debajo de la base de 30 días de 18 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 5,
+        "best_median": 5,
+        "overall_median": 18,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -199,42 +217,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-03T12:58:42.990Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 5 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 5 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 5,
-        "best_median": 5,
-        "overall_median": 15,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.6363636363636364,
-      "detected_at": "2026-07-03T12:58:42.990Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 9 AM (median 20 min) — ~64% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 20 min) — ~64% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 9,
-        "best_median": 20,
-        "overall_median": 55,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -248,6 +230,24 @@
         "best_hour": 10,
         "best_median": 30,
         "overall_median": 80,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.6226415094339622,
+      "detected_at": "2026-07-03T23:08:47.409Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 9 AM (median 20 min) — ~62% below the 30-day baseline of 53 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 20 min) — ~62% debajo de la base de 30 días de 53 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 9,
+        "best_median": 20,
+        "overall_median": 53,
         "samples": 1
       }
     },
