@@ -10,14 +10,14 @@ Notes: SD sub can be skeptical of promos. Keep it genuine, lead with utility. Ch
 
 If you cross to TJ (or know people who do), the eternal question: San Ysidro or Otay Mesa?
 
-I built borderpulse.com to make that comparison easy. It shows official CBP wait times for both crossings side by side, updated every 15 minutes. You can see standard lanes, SENTRI, and Ready Lane all in one place.
+I built borderpulse.com to make that comparison easy. It shows official CBP wait times for both crossings side by side, refreshed automatically throughout the day. You can see standard lanes, SENTRI, and Ready Lane all in one place.
 
 What else it does:
 - Covers all 43 US-Mexico crossings (not just SD, but CA, AZ, NM, TX)
-- Estimates southbound delays (US to Mexico), which CBP doesn't publish anywhere
+- Estimates southbound delays (US to Mexico), which CBP doesn't publish
 - Fully bilingual, English and Spanish
 - Works on your phone, no app needed
-- No accounts, no cookies, no tracking
+- No account needed
 
 The southbound estimates use real-time traffic data to give you a sense of the delay heading into Mexico. Not exact, but better than guessing.
 

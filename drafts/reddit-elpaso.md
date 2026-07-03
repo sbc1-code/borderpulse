@@ -22,11 +22,11 @@ I built borderpulse.com to make that easier. It shows real-time wait times for a
 Plus every other crossing along the border, 43 total across CA, AZ, NM, and TX.
 
 A few things worth mentioning:
-- Data comes straight from CBP, updates every 15 minutes
+- Data comes straight from CBP and refreshes automatically throughout the day
 - It also estimates southbound delays (US to Mexico), which CBP doesn't publish
 - You can pin your usual crossing as a favorite so it shows up first
 - Works on your phone browser, no app to install
-- Free, no accounts, no tracking
+- Free, no account needed
 
 It's a personal project, not a company. Just something I wanted to exist for people who actually cross.
 

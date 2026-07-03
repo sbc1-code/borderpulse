@@ -15,11 +15,11 @@ Crecí cruzando entre El Paso, Juárez, San Diego y Tijuana. Una cosa que siempr
 Hice borderpulse.com para resolver eso.
 
 Lo que hace:
-- Tiempos de espera oficiales de CBP (hacia EE.UU.) para los 43 cruces, actualizados cada 15 minutos
-- Estimados de demora hacia México en los cruces principales (esto no existe en ningún otro lado)
+- Tiempos de espera oficiales de CBP (hacia EE.UU.) para los 43 cruces, actualizados automáticamente durante el día
+- Estimados de demora hacia México en los cruces principales (algo que casi nadie más ofrece)
 - Totalmente bilingüe, inglés y español
 - Funciona en el navegador de tu celular, no necesitas bajar nada
-- Sin cuentas, sin cookies, sin rastreo
+- Sin cuenta, sin app que instalar
 
 Los estimados hacia el sur no son datos del gobierno (CBP no publica eso). Border Pulse los calcula usando condiciones de tráfico en tiempo real. No son perfectos, pero te dan una idea antes de salir de casa.
 
@@ -34,11 +34,11 @@ I grew up crossing between EP, Juárez, SD, and TJ. One thing that always bugged
 I built borderpulse.com to fix that.
 
 What it does:
-- Official CBP wait times (northbound) for all 43 crossings, updated every 15 min
-- Southbound delay estimates at major crossings (this doesn't exist anywhere else)
+- Official CBP wait times (northbound) for all 43 crossings, refreshed automatically throughout the day
+- Southbound delay estimates at major crossings (something almost nothing else offers)
 - Fully bilingual, EN/ES
 - Works in your phone browser, no download
-- No accounts, no cookies, no tracking
+- No account needed, no app to install
 
 The southbound estimates aren't government data (CBP doesn't publish that). Border Pulse calculates them using real-time traffic conditions. Not perfect, but gives you a sense before you leave the house.
 
