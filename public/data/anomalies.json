@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-03T19:35:25.350Z",
-  "snapshot_at": "2026-07-03T18:38:50.423Z",
+  "generated_at": "2026-07-03T21:12:06.345Z",
+  "snapshot_at": "2026-07-03T20:03:12.703Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -59,15 +59,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-07-03T12:58:42.990Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 10 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 10 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
+      "detected_at": "2026-07-03T21:12:06.345Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 10 AM (median 0 min) — ~100% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 10 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 10,
         "best_median": 0,
-        "overall_median": 50,
+        "overall_median": 55,
         "samples": 1
       }
     },
@@ -252,6 +252,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.6166666666666667,
+      "detected_at": "2026-07-03T21:12:06.345Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 8 AM (median 23 min) — ~62% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 8 AM (mediana 23 min) — ~62% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 8,
+        "best_median": 23,
+        "overall_median": 60,
+        "samples": 2
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
@@ -319,7 +337,9 @@
         "samples": 1,
         "ratio": 1.5
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
@@ -335,26 +355,6 @@
         "overall_median": 50,
         "samples": 3,
         "ratio": 1.5
-      }
-    }
-  ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.6166666666666667,
-      "detected_at": "2026-07-03T17:37:03.218Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 8 AM (median 23 min) — ~62% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 8 AM (mediana 23 min) — ~62% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 8,
-        "best_median": 23,
-        "overall_median": 60,
-        "samples": 2
       }
     }
   ]
