@@ -1,0 +1,79 @@
+---
+title: "Summer Sunday returns: what 30 days of CBP data say about crossing back"
+description: "Sunday northbound waits at San Ysidro, Otay Mesa, Tecate, Paso del Norte and Nogales, hour by hour. The trap is bigger than the 5 PM rush, and the escape window closes early."
+slug: summer-sunday-border-waits
+date: "2026-07-03"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - san-ysidro
+  - otay-mesa
+  - tecate
+  - sunday
+  - summer
+  - best-time-to-cross
+translationKey: summer-sunday-2026
+hero: /og/blog/summer-sunday-border-waits.png
+relatedCrossings:
+  - "250401"
+  - "250601"
+  - "250501"
+  - "240202"
+  - "260401"
+officialSources:
+  - label: "CBP Border Wait Times (live CBP data)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Every summer Sunday, the same plan fails at the same hour. Finish the weekend in Tijuana, Tecate or Juárez, have a late lunch, get in line around 4 or 5 PM, lose the evening. The 30-day medians from U.S. Customs and Border Protection say the problem starts earlier than most people think, and at some ports it never really clears.
+
+All times below are the port's local time, medians over the last 30 days of CBP snapshots for the standard vehicle lane.
+
+## The Sunday shape, port by port
+
+**San Ysidro is heavy from mid-morning on.** By 8 AM the Sunday median is already 150 minutes, and it stays between 130 and 180 through the entire day and evening. The 1 PM median is 180 minutes, the worst Sunday hour. There is no afternoon dip to aim for. The only light Sunday windows in the data are pre-dawn: 30 to 45 minutes around 3 to 5 AM.
+
+<BestTimeChart slug="san-ysidro" title="San Ysidro: median northbound wait, last 30 days" />
+
+**Otay Mesa gives you a real morning window, then punishes the evening.** Sunday mornings run 45 to 75 minutes through 9 AM. From 6 PM it goes vertical: 155 at 6 PM, 190 at 7 PM, 200 at 9 PM, still 170 at 11 PM. If you are choosing between San Ysidro and Otay on a Sunday morning, Otay wins comfortably. On a Sunday night, neither wins, but Otay's late peak is the single worst number in the San Diego data.
+
+<BestTimeChart slug="otay-mesa" title="Otay Mesa: median northbound wait, last 30 days" />
+
+**Tecate is the sleeper trap.** People route through Tecate assuming the small port is the smart move. On summer Sundays the data says otherwise: 255 minutes median at 2 PM, 310 at 3 PM, 275 at 4 PM, still 200 or more into the evening. Tecate's Sunday morning is fine (about 60 minutes at 6 to 7 AM), but from midday on it posts the worst medians of any port in this comparison. Remember it also closes at 10 PM.
+
+**Paso del Norte stays civilized.** El Paso's downtown bridge holds a 60 to 85 minute plateau through Sunday afternoon and evening, with a genuinely light pre-dawn window of 15 to 20 minutes around 4 to 6 AM. The Sunday problem is much smaller here than in California.
+
+**Nogales DeConcini is light all day, until it is not.** Sunday daytime medians sit between 20 and 50 minutes. The spike lands late: 90 minutes at 7 PM, 120 at 9 PM, and then Monday pre-dawn stays ugly (120 to 180 minutes between midnight and 5 AM as the Monday commute forms). Waiting out the evening rush by crossing at 2 AM does not work here.
+
+## The three rules the data supports
+
+1. **Cross back before noon.** At every port in this comparison except San Ysidro, Sunday morning is half the wait of Sunday evening or better. At Otay that is 45 to 75 minutes instead of 190 to 200.
+2. **Do not "wait it out" into the night.** The evening peak does not clear at 10 PM. At Otay, Nogales and Calexico the medians at 9 to 11 PM are as bad or worse than 6 PM, and Monday pre-dawn inherits the backlog.
+3. **Pick the port by the hour, not by habit.** Sunday 9 AM: Otay over San Ysidro. Sunday 3 PM: anything over Tecate. Sunday night in Arizona: DeConcini is 24 hours, but expect the Monday pre-dawn numbers above.
+
+This holiday weekend compresses all of that. When a Saturday holiday like July 4th pushes the weekend crowd's return into Sunday and Monday, the medians above are the floor, not the ceiling. CBP also posts holiday advisories per port on the [official feed](https://bwt.cbp.gov/).
+
+## Lanes still beat timing
+
+The medians above are the standard vehicle lane. In the live feed, Ready Lane typically runs meaningfully below standard and SENTRI runs far below both. On a Sunday evening the lane you qualify for matters more than the hour you pick.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is for travelers with an RFID-enabled travel document. CBP maintains the official list of acceptable documents, lane hours per port, and rules for passengers in the vehicle.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program requiring an application, background check, and interview. CBP publishes eligibility, fees, and enrollment center locations. Rules apply to every occupant of the vehicle.
+</OfficialSource>
+
+## How we compute these numbers
+
+Border Pulse stores CBP's published wait time for each port on a scheduled refresh. Each number above is the median for that (day of week, hour of day) cell over the last 30 days, in the port's local time zone. Medians resist the single 4-hour outlier that drags averages up. The full pattern for any port is on its [best-time page](/best-time/), and the raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse).
+
+## What to do with this
+
+If you remember one number: **at 9 AM the worst port in this data is at 150; by 3 PM the worst is at 310.** The Sunday you save starts before lunch, not after it.

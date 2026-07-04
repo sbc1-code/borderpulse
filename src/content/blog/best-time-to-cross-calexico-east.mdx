@@ -1,0 +1,72 @@
+---
+title: "Best time to cross Calexico East: hour by hour from 30 days of CBP data"
+description: "Median northbound waits by hour and day at Calexico East, from CBP data. The 6 AM opening window, the late-morning double hump, and the evening dip most drivers miss."
+slug: best-time-to-cross-calexico-east
+date: "2026-07-03"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - calexico
+  - mexicali
+  - california
+  - imperial-valley
+  - best-time-to-cross
+translationKey: calexico-east-best-time
+hero: /og/blog/best-time-to-cross-calexico-east.png
+relatedCrossings:
+  - "250301"
+officialSources:
+  - label: "CBP Border Wait Times (live CBP data)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Calexico East is the newer, highway-oriented crossing of the Imperial Valley pair, built for cars and commercial traffic on the SR-7 corridor. The median northbound wait over the last 30 days is **60 minutes**, and the clearest light window all week is **right at the 6 AM opening, with 5 minute medians.** All times below are Pacific time, standard vehicle lane.
+
+The chart is the last 30 days of Calexico East northbound waits from U.S. Customs and Border Protection, broken out by day of week and hour of day. Green = quick (under 30m), amber = typical, red = heavy.
+
+<BestTimeChart slug="calexico-east" title="Calexico East: median northbound wait, last 30 days" />
+
+## What the data actually says
+
+1. **Be there when the gates open.** Calexico East runs 6 AM to 10 PM, and the 5 to 6 AM medians on weekdays sit at 5 minutes. That is not a typo against a 60 minute overall median. The commuter wave builds after 7, and by 8 AM you are at the daily median.
+2. **Late morning is the trap, not the rush hour.** The weekday medians spike at 11 AM (110) and again around 1 PM (105 to 120). Tuesday at 3 PM posted the single worst cell of the window at 140 minutes. If you cannot make the opening, waiting until after lunch does not help; waiting until the early evening does.
+3. **The evening dip is real and nobody uses it.** Weekday medians drop to 15 minutes at 6 PM and about 20 at 8 PM before the port closes at 10. Against a midday median of 105 to 120, the 6 PM window is the best-kept secret in the Imperial Valley data.
+
+If you want the live number next to this pattern, the [Calexico East live page](/crossing/calexico-east/) shows both.
+
+## East vs. West: the Imperial Valley choice
+
+- **[Calexico West](/crossing/calexico-west/)** (downtown, 24 hours) carries the walking traffic and the downtown Mexicali commute. Its overall median over the same window is 80 minutes, against East's 60.
+- **Calexico East** wins on predictability and on the opening-hour window, and it is the natural route if you are headed to I-8 or the eastern valley.
+- After 10 PM the decision makes itself: West is the only option.
+
+The [East vs. West comparison page](/compare/calexico-west-vs-calexico-east/) runs both live cards side by side.
+
+## Standard, Ready Lane, and SENTRI
+
+Calexico East reports standard, Ready Lane and SENTRI passenger lanes. The medians above are standard-lane only; in the live feed, Ready Lane consistently runs below standard during the late-morning hump. Program eligibility and documents are CBP's rules, linked below, not ours.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is for travelers with an RFID-enabled travel document. CBP maintains the official list of acceptable documents, lane hours per port, and rules for passengers in the vehicle.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, background check, and in-person interview. CBP publishes program eligibility, fees, renewal rules, and enrollment centers. Membership rules apply to every occupant of the vehicle.
+</OfficialSource>
+
+## Holidays and the harvest season
+
+Hour-of-week medians do not capture one-off events. Semana Santa, the Christmas and paisano season (December 1 to January 10), and U.S. federal holidays all push waits past the medians shown here. Imperial Valley harvest season changes the commercial mix at East specifically, since it is the valley's truck crossing. Hours posted on the [official CBP feed](https://bwt.cbp.gov/) take precedence.
+
+## How we compute these numbers
+
+Border Pulse stores CBP's published wait for Calexico East on a scheduled refresh. The chart shows the **median** wait per (day of week, hour of day) cell across the last 30 days of snapshots, 207 samples in this window, in Pacific time. Median beats average here because one 4-hour outlier would otherwise drag a typical hour far off its real value. Raw data and methodology are in [our public repo](https://github.com/sbc1-code/borderpulse).
+
+## What to do with this
+
+Two moves cover almost every case at Calexico East: **cross at the 6 AM opening, or cross at 6 PM.** Both windows run 5 to 15 minute medians against a midday that regularly exceeds 100. If your schedule forces midday, check the [live page](/crossing/calexico-east/) first and consider [West](/crossing/calexico-west/) as the fallback.

@@ -1,0 +1,69 @@
+---
+title: "Best time to cross back from Los Algodones: 30 days of Andrade data"
+description: "Median northbound waits at Andrade by hour, from CBP data. Waits are short all day, then triple in the final hours before the 10 PM close. Time the dentist, not the line."
+slug: best-time-to-cross-back-from-los-algodones
+date: "2026-07-03"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - los-algodones
+  - andrade
+  - medical-tourism
+  - dental
+  - california
+  - best-time-to-cross
+translationKey: algodones-return-best-time
+hero: /og/blog/best-time-to-cross-back-from-los-algodones.png
+relatedCrossings:
+  - "250201"
+officialSources:
+  - label: "CBP Border Wait Times (live CBP data)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP: Prohibited and restricted items"
+    url: "https://www.cbp.gov/travel/us-citizens/know-before-you-go/prohibited-and-restricted-items"
+  - label: "FDA: Personal importation of medication"
+    url: "https://www.fda.gov/industry/import-basics/personal-importation"
+---
+
+Los Algodones runs on a different clock than the rest of the border. The town fills with dental and pharmacy visitors in the morning, empties in the late afternoon, and the Andrade port of entry closes at 10 PM Pacific. The 30-day CBP data says the line home is rarely the problem, with one exception that catches people who cut it close.
+
+All times below are Pacific time, standard vehicle lane at Andrade.
+
+## The shape of the day
+
+The overall median at Andrade over the last 30 days is just **15 minutes**, the lightest of any California crossing we track. Mid-morning through late afternoon, the weekday medians sit between 10 and 25 minutes. The daytime line simply is not the bottleneck of an Algodones trip.
+
+<BestTimeChart slug="andrade" title="Andrade: median northbound wait, last 30 days" />
+
+Then the exception: **the last hours before the close.** Weekday medians around 9 PM jump to roughly 75 minutes, five times the daytime number, with the worst cells in the window hitting 88 to 100 minutes between 9 and 11 PM. Everyone who stayed for dinner is in the same line, and the port's lane staffing is winding down toward the 10 PM close.
+
+1. **Cross back between 9 AM and 6 PM and the data says you barely wait.** Medians of 10 to 25 minutes all through that stretch.
+2. **Do not aim for 9 PM.** The 9 to 10 PM window is the single worst time to return, and if the line outruns the clock you are sleeping in Yuma or Mexicali.
+3. **Winter will be heavier than this.** These are summer numbers. Algodones peak season is November through April, when a town of a few thousand hosts hundreds of dental offices at full capacity. The pattern (light days, heavy close) holds, but the levels rise.
+
+The [Andrade live page](/crossing/andrade/) shows the current wait next to this pattern before you head to the line.
+
+## What you are actually declaring
+
+Most Algodones returns involve medication or dental work, and the crossing itself goes fastest when the paperwork side is boring. Declare everything, keep prescriptions in original packaging with the pharmacy receipt, and know that what counts as a personal quantity is CBP's and FDA's call, not the pharmacy's. Our [prescription medication guide](/blog/bringing-prescription-medication-back-from-mexico/) walks the rules with official links; the two sources below are the canon.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/us-citizens/know-before-you-go/prohibited-and-restricted-items">
+  CBP publishes the rules on what can cross, declaration requirements, and duty exemptions. Medication rules are specific and enforcement is at the officer's discretion.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Food and Drug Administration" url="https://www.fda.gov/industry/import-basics/personal-importation">
+  The FDA defines when personally imported medication is generally not objected to, including quantity limits and the requirement that it be for personal use with a valid prescription.
+</OfficialSource>
+
+## Getting there and parking
+
+Andrade is a walking crossing for nearly everyone: park on the U.S. side at the Quechan tribe's paid lot next to the port, walk into Los Algodones, walk back. That is why the vehicle-lane medians above stay so low. If you do drive through, the same clock logic applies, and our [Los Algodones crossing guide](/blog/los-algodones-border-crossing-guide/) covers the full logistics, hours, and the walking route.
+
+## How we compute these numbers
+
+Border Pulse stores CBP's published wait for Andrade on a scheduled refresh. Each number is the median per (day of week, hour of day) cell over the last 30 days of snapshots, 252 samples in this window, in Pacific time. Raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse).
+
+## What to do with this
+
+Book the dentist for the morning, have lunch, and cross back before 6 PM: the data says that trip never sees a real line. The only way to lose an evening at Andrade is to spend it in the 9 PM queue watching the 10 PM close get closer.

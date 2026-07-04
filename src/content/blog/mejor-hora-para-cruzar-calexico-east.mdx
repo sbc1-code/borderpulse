@@ -1,0 +1,72 @@
+---
+title: "Mejor hora para cruzar Calexico East: hora por hora con 30 días de datos de CBP"
+description: "Esperas medianas hacia EE.UU. en Calexico East, hora por hora, con datos de CBP. La ventana de las 6 AM, la joroba de media mañana y el bajón de la tarde que casi nadie usa."
+slug: mejor-hora-para-cruzar-calexico-east
+date: "2026-07-03"
+author: sebastian
+pillar: data-analysis
+lang: es
+tags:
+  - calexico
+  - mexicali
+  - california
+  - imperial-valley
+  - mejor-hora
+translationKey: calexico-east-best-time
+hero: /og/blog/mejor-hora-para-cruzar-calexico-east.png
+relatedCrossings:
+  - "250301"
+officialSources:
+  - label: "CBP Tiempos de Espera (datos en vivo de CBP)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Programa Ready Lane"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP Programa SENTRI"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Calexico East es la garita nueva del par del Valle Imperial, la orientada a carretera, construida para autos y tráfico comercial sobre el corredor de la SR-7. La espera mediana hacia EE.UU. en los últimos 30 días es de **60 minutos**, y la ventana ligera más clara de toda la semana es **justo al abrir a las 6 AM, con medianas de 5 minutos.** Todas las horas de abajo son hora del Pacífico, carril estándar de vehículos.
+
+La gráfica son los últimos 30 días de esperas hacia EE.UU. en Calexico East según U.S. Customs and Border Protection, divididos por día de la semana y hora del día. Verde = rápido (menos de 30m), ámbar = típico, rojo = pesado.
+
+<BestTimeChart slug="calexico-east" title="Calexico East: mediana de espera hacia EE.UU., últimos 30 días" />
+
+## Lo que dicen los datos
+
+1. **Llega cuando abren la puerta.** Calexico East opera de 6 AM a 10 PM, y las medianas de 5 a 6 AM entre semana están en 5 minutos. No es error contra una mediana general de 60. La ola del commuter se forma después de las 7, y a las 8 AM ya estás en la mediana del día.
+2. **La trampa es media mañana, no la hora pico.** Las medianas entre semana se disparan a las 11 AM (110) y otra vez alrededor de la 1 PM (105 a 120). El martes a las 3 PM registró la peor celda de la ventana: 140 minutos. Si no alcanzas la apertura, esperarte a después de comer no ayuda; esperarte a la tarde-noche sí.
+3. **El bajón de la tarde es real y nadie lo usa.** Las medianas entre semana caen a 15 minutos a las 6 PM y a unos 20 a las 8 PM antes del cierre de las 10. Contra un mediodía de 105 a 120, la ventana de las 6 PM es el secreto mejor guardado de los datos del Valle Imperial.
+
+Si quieres el número en vivo junto a este patrón, la [página en vivo de Calexico East](/crossing/calexico-east/) muestra los dos.
+
+## East vs West: la decisión del Valle Imperial
+
+- **[Calexico West](/crossing/calexico-west/)** (centro, 24 horas) carga con el tráfico peatonal y el commute del centro de Mexicali. Su mediana general en la misma ventana es de 80 minutos, contra 60 de East.
+- **Calexico East** gana en predictibilidad y en la ventana de apertura, y es la ruta natural si vas hacia la I-8 o el este del valle.
+- Después de las 10 PM la decisión se toma sola: West es la única opción.
+
+La [página de comparación East vs West](/compare/calexico-west-vs-calexico-east/) corre las dos tarjetas en vivo lado a lado.
+
+## Estándar, Ready Lane y SENTRI
+
+Calexico East reporta carriles estándar, Ready Lane y SENTRI. Las medianas de arriba son solo del carril estándar; en el feed en vivo, Ready Lane corre consistentemente por debajo del estándar durante la joroba de media mañana. La elegibilidad y los documentos son reglas de CBP, enlazadas abajo, no nuestras.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane es para viajeros con documento de viaje con chip RFID. CBP mantiene la lista oficial de documentos aceptados, horarios del carril por garita, y reglas para los pasajeros del vehículo.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI es un programa de Viajero Confiable. Requiere solicitud, revisión de antecedentes y entrevista en persona. CBP publica elegibilidad, costos, reglas de renovación y centros de inscripción. Las reglas aplican a cada ocupante del vehículo.
+</OfficialSource>
+
+## Festivos y la temporada de cosecha
+
+Las medianas por hora no capturan eventos aislados. Semana Santa, la temporada navideña y paisano (1 de diciembre al 10 de enero), y los festivos federales de EE.UU. empujan las esperas por encima de lo que ves aquí. La temporada de cosecha del Valle Imperial cambia la mezcla comercial en East específicamente, porque es la garita de camiones del valle. El horario publicado en el [feed oficial de CBP](https://bwt.cbp.gov/) manda.
+
+## Cómo calculamos estos números
+
+Border Pulse guarda la espera publicada por CBP para Calexico East con una actualización programada. La gráfica muestra la **mediana** por celda (día de la semana, hora del día) sobre los últimos 30 días de snapshots, 207 muestras en esta ventana, en hora del Pacífico. La mediana le gana al promedio porque un atorón aislado de 4 horas jalaría una hora típica lejos de su valor real. Los datos crudos y la metodología están en [nuestro repo público](https://github.com/sbc1-code/borderpulse).
+
+## Qué hacer con esto
+
+Dos jugadas cubren casi todos los casos en Calexico East: **cruza al abrir a las 6 AM, o cruza a las 6 PM.** Las dos ventanas corren medianas de 5 a 15 minutos contra un mediodía que seguido pasa de 100. Si tu horario te obliga al mediodía, revisa primero la [página en vivo](/crossing/calexico-east/) y considera [West](/crossing/calexico-west/) como plan B.

@@ -1,0 +1,78 @@
+---
+title: "Nogales DeConcini vs Mariposa: cuál usar, según los datos de CBP"
+description: "30 días de medianas de CBP para las dos garitas de Nogales. Mariposa gana las mañanas de calle, DeConcini se queda con la noche por default, y el viernes es otro animal."
+slug: nogales-deconcini-vs-mariposa-cual-usar
+date: "2026-07-03"
+author: sebastian
+pillar: data-analysis
+lang: es
+tags:
+  - nogales
+  - arizona
+  - deconcini
+  - mariposa
+  - mejor-hora
+  - comparacion
+translationKey: nogales-deconcini-vs-mariposa
+hero: /og/blog/nogales-deconcini-vs-mariposa-cual-usar.png
+relatedCrossings:
+  - "260401"
+  - "260402"
+officialSources:
+  - label: "CBP Tiempos de Espera (datos en vivo de CBP)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Programa Ready Lane"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP Programa SENTRI"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Nogales te da dos entradas a Arizona y se comportan como garitas distintas. DeConcini es el cruce del centro: 24 horas, tráfico peatonal, todo a pie en los dos lados. Mariposa es el cruce de carretera sobre el libramiento de camiones: de 6 AM a 10 PM, hecho para volumen, directo a la I-19. En los últimos 30 días de datos de CBP, las medianas del carril estándar son **60 minutos en DeConcini y 45 en Mariposa**. Todas las horas de abajo son hora de Arizona.
+
+## Donde gana Mariposa: las mañanas, sin discusión
+
+La mañana de Mariposa es la mejor ventana confiable de Nogales. La mediana de las 6 AM es de **0 minutos** (varias muestras, no es una celda suertuda), de 7 a 10 AM corre entre 25 y 38 minutos, y toda la mañana se queda debajo de la mediana de la propia garita. Las mañanas de DeConcini están bien (medianas de unos 40) pero nunca tocan cero.
+
+<BestTimeChart slug="nogales-mariposa" title="Nogales Mariposa: mediana de espera hacia EE.UU., últimos 30 días" />
+
+Si vas a cruzar entre 6 y 10 de la mañana y vas en auto, los datos dicen Mariposa, punto.
+
+## Donde gana DeConcini: a pie y de noche
+
+<BestTimeChart slug="nogales-deconcini" title="Nogales DeConcini: mediana de espera hacia EE.UU., últimos 30 días" />
+
+- **De madrugada, DeConcini es la única opción.** Mariposa cierra a las 10 PM. Las medianas nocturnas de DeConcini (30 a 50 minutos) son manejables, con una advertencia: la madrugada del lunes corre de 60 a 180 mientras se forma el commute de la semana.
+- **A pie, DeConcini es el cruce.** Está en el centro de los dos lados; Mariposa es un entronque de carretera sin nada caminable alrededor.
+- **La noche también se inclina a DeConcini.** Sus celdas de las 9 PM de viernes y sábado (medianas de 20 minutos) le ganan a los números de cierre de Mariposa.
+
+## El problema del viernes
+
+El viernes por la tarde es cuando DeConcini deja de ser un default razonable. De 11 AM a 5 PM, las medianas del viernes en DeConcini se sostienen en **120 minutos, con la peor celda en 180 (2 PM)**. Es el bloque pesado más constante de los datos de Nogales. El viernes de Mariposa corre bastante más ligero en esas mismas horas. Si es viernes por la tarde y vas manejando, Mariposa no es una preferencia, es la jugada.
+
+## La regla de una línea
+
+- **En auto, de 6 AM a 10 PM:** Mariposa, sobre todo en la mañana y los viernes.
+- **A pie, a cualquier hora:** DeConcini.
+- **Después de las 10 PM:** DeConcini, porque es la única puerta abierta. Evita la madrugada del lunes si puedes.
+
+La [página de comparación en vivo](/compare/nogales-deconcini-vs-nogales-mariposa/) corre las dos tarjetas lado a lado, y el patrón completo de cada garita está en su página de mejor hora: [DeConcini](/best-time/nogales-deconcini/), [Mariposa](/best-time/nogales-mariposa/).
+
+## Carriles
+
+Las dos garitas reportan Ready Lane además del estándar, y DeConcini reporta SENTRI. Las medianas de arriba son solo del carril estándar. En los bloques pesados del viernes, la diferencia entre carriles en el feed en vivo suele ser la diferencia entre perder la tarde y un cruce normal; las reglas de elegibilidad son de CBP, enlazadas abajo.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane es para viajeros con documento de viaje con chip RFID. CBP mantiene la lista oficial de documentos aceptados, horarios del carril por garita, y reglas para los pasajeros del vehículo.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI es un programa de Viajero Confiable. Requiere solicitud, revisión de antecedentes y entrevista en persona. CBP publica elegibilidad, costos, reglas de renovación y centros de inscripción.
+</OfficialSource>
+
+## Cómo calculamos estos números
+
+Border Pulse guarda la espera publicada por CBP para las dos garitas de Nogales con una actualización programada. Cada número es la mediana por celda (día de la semana, hora del día) sobre los últimos 30 días, en hora de Arizona (sin horario de verano): 288 muestras en DeConcini, 249 en Mariposa en esta ventana. Los datos crudos y la metodología viven en [nuestro repo público](https://github.com/sbc1-code/borderpulse).
+
+## Qué hacer con esto
+
+Deja de elegir por memoria muscular. Las medianas de 30 días dicen lo mismo cada semana: Mariposa es dueña de la mañana, DeConcini es dueña de la banqueta y de la noche, y el viernes por la tarde el puente del centro te cuesta una o dos horas extra que el libramiento no.

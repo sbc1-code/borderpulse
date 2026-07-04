@@ -1,0 +1,78 @@
+---
+title: "Nogales DeConcini vs Mariposa: which crossing to use, per CBP data"
+description: "30 days of CBP medians for both Nogales crossings. Mariposa wins mornings outright, DeConcini owns the night by default, and Friday is a different animal entirely."
+slug: nogales-deconcini-vs-mariposa
+date: "2026-07-03"
+author: sebastian
+pillar: data-analysis
+lang: en
+tags:
+  - nogales
+  - arizona
+  - deconcini
+  - mariposa
+  - best-time-to-cross
+  - comparison
+translationKey: nogales-deconcini-vs-mariposa
+hero: /og/blog/nogales-deconcini-vs-mariposa.png
+relatedCrossings:
+  - "260401"
+  - "260402"
+officialSources:
+  - label: "CBP Border Wait Times (live CBP data)"
+    url: "https://bwt.cbp.gov/"
+  - label: "CBP Ready Lanes program"
+    url: "https://www.cbp.gov/travel/clearing-customs/ready-lanes"
+  - label: "CBP SENTRI program"
+    url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+---
+
+Nogales gives you two ways into Arizona and they behave like different ports. DeConcini is the downtown crossing: 24 hours, pedestrian traffic, walking distance to everything on both sides. Mariposa is the highway crossing on the truck bypass: 6 AM to 10 PM, built for volume, straight onto I-19. Over the last 30 days of CBP data, the standard-lane medians are **60 minutes at DeConcini and 45 at Mariposa**. All times below are Arizona time.
+
+## Where Mariposa wins: mornings, clearly
+
+The Mariposa morning is the best reliable window in Nogales. The 6 AM median is **0 minutes** (multiple samples, not a fluke cell), 7 to 10 AM runs 25 to 38 minutes, and the whole morning stays under the port's own median. DeConcini's mornings are fine (40-ish medians) but never touch zero.
+
+<BestTimeChart slug="nogales-mariposa" title="Nogales Mariposa: median northbound wait, last 30 days" />
+
+If you are crossing between 6 and 10 AM and you are in a car, the data says take Mariposa, period.
+
+## Where DeConcini wins: feet and the night
+
+<BestTimeChart slug="nogales-deconcini" title="Nogales DeConcini: median northbound wait, last 30 days" />
+
+- **Overnight, DeConcini is the only option.** Mariposa closes at 10 PM. DeConcini's overnight medians (30 to 50 minutes) are serviceable, with one warning: Monday pre-dawn runs 60 to 180 as the week's commute forms early.
+- **On foot, DeConcini is the crossing.** It sits downtown on both sides; Mariposa is a highway interchange with nothing walkable around it.
+- **Late evening leans DeConcini too.** Its 9 PM Friday and Saturday cells (20 minute medians) beat Mariposa's closing-hour numbers.
+
+## The Friday problem
+
+Friday afternoon is when DeConcini stops being a reasonable default. From 11 AM through 5 PM, Friday medians at DeConcini hold at **120 minutes, with the worst cell at 180 (2 PM)**. That is the heaviest recurring block in the Nogales data. Mariposa's Friday runs meaningfully lighter through the same hours. If it is Friday afternoon and you are driving, Mariposa is not a preference, it is the move.
+
+## The one-line decision rule
+
+- **Driving, 6 AM to 10 PM:** Mariposa, especially mornings and Fridays.
+- **Walking, any time:** DeConcini.
+- **After 10 PM:** DeConcini, because it is the only door open. Avoid Monday pre-dawn if you can.
+
+The [live comparison page](/compare/nogales-deconcini-vs-nogales-mariposa/) runs both cards side by side, and each port's full pattern is on its best-time page: [DeConcini](/best-time/nogales-deconcini/), [Mariposa](/best-time/nogales-mariposa/).
+
+## Lanes
+
+Both crossings report Ready Lane alongside standard, and DeConcini reports SENTRI. The medians above are standard-lane only. On the heavy Friday blocks, the live per-lane gap is usually the difference between an afternoon lost and a normal crossing; eligibility rules are CBP's, linked below.
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/clearing-customs/ready-lanes">
+  Ready Lane is for travelers with an RFID-enabled travel document. CBP maintains the official list of acceptable documents, lane hours per port, and rules for passengers in the vehicle.
+</OfficialSource>
+
+<OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
+  SENTRI is a Trusted Traveler Program. Membership requires an application, background check, and in-person interview. CBP publishes program eligibility, fees, renewal rules, and enrollment centers.
+</OfficialSource>
+
+## How we compute these numbers
+
+Border Pulse stores CBP's published wait for both Nogales ports on a scheduled refresh. Each number is the median per (day of week, hour of day) cell over the last 30 days, in Arizona time (no DST): 288 samples at DeConcini, 249 at Mariposa in this window. Raw data and methodology live in [our public repo](https://github.com/sbc1-code/borderpulse).
+
+## What to do with this
+
+Stop choosing by muscle memory. The 30-day medians say the same three things every week: Mariposa owns the morning, DeConcini owns the sidewalk and the night, and on Friday afternoon the downtown bridge costs you an extra hour or two that the bypass does not.
