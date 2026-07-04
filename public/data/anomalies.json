@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-04T09:25:42.879Z",
-  "snapshot_at": "2026-07-04T08:05:07.151Z",
+  "generated_at": "2026-07-04T11:36:14.546Z",
+  "snapshot_at": "2026-07-04T10:25:06.181Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -145,16 +145,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.9411764705882353,
-      "detected_at": "2026-07-04T09:25:42.879Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 12 AM (median 5 min) — ~94% below the 30-day baseline of 85 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 12 AM (mediana 5 min) — ~94% debajo de la base de 30 días de 85 min.",
+      "severity": 0.9444444444444444,
+      "detected_at": "2026-07-04T11:36:14.546Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 12 AM (median 5 min) — ~94% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 12 AM (mediana 5 min) — ~94% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 0,
         "best_median": 5,
-        "overall_median": 85,
+        "overall_median": 90,
         "samples": 1
       }
     },
@@ -177,23 +177,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8823529411764706,
-      "detected_at": "2026-07-04T09:25:42.879Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 160 min around 7 PM — ~188% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 160 min cerca de las 7 PM — ~188% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 160,
-        "overall_median": 85,
-        "samples": 1,
-        "ratio": 1.8823529411764706
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
@@ -212,21 +195,20 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-07-04T06:50:21.418Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 5 AM (median 10 min) — ~80% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 10 min) — ~80% debajo de la base de 30 días de 50 min.",
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.7777777777777777,
+      "detected_at": "2026-07-04T11:36:14.546Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 160 min around 7 PM — ~178% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 160 min cerca de las 7 PM — ~178% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 5,
-        "best_median": 10,
-        "overall_median": 50,
-        "samples": 1
+        "peak_hour": 19,
+        "peak_median": 160,
+        "overall_median": 90,
+        "samples": 1,
+        "ratio": 1.7777777777777777
       }
     },
     {
@@ -234,16 +216,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.7540983606557377,
-      "detected_at": "2026-07-04T06:50:21.418Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 15 min) — ~75% below the 30-day baseline of 61 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 61 min.",
+      "severity": 0.75,
+      "detected_at": "2026-07-04T11:36:14.546Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 15,
-        "overall_median": 61,
+        "overall_median": 60,
         "samples": 3
       }
     },
@@ -284,6 +266,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5416666666666667,
+      "detected_at": "2026-07-04T11:36:14.546Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 55 min) — ~54% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 55 min) — ~54% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 55,
+        "overall_median": 120,
+        "samples": 2
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -304,19 +304,19 @@
   "trailing_24h": [
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.75,
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.8,
       "detected_at": "2026-07-04T06:50:21.418Z",
-      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 2 AM (median 30 min) — ~75% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 2 AM (mediana 30 min) — ~75% debajo de la base de 30 días de 120 min.",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 5 AM (median 10 min) — ~80% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 10 min) — ~80% debajo de la base de 30 días de 50 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 2,
-        "best_median": 30,
-        "overall_median": 120,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 5,
+        "best_median": 10,
+        "overall_median": 50,
         "samples": 1
       }
     },
