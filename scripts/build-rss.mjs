@@ -56,7 +56,7 @@ async function main() {
 
   const entries = posts
     .map((p) => {
-      const url = `${BASE}/blog/${p.slug}`;
+      const url = `${BASE}/blog/${p.slug}/`;
       const author = authors[p.author];
       return `  <entry>
     <title>${esc(p.title)}</title>
@@ -75,7 +75,7 @@ async function main() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Border Pulse Blog</title>
-  <link href="${BASE}/blog" />
+  <link href="${BASE}/blog/" />
   <link rel="self" href="${BASE}/rss.xml" />
   <id>${BASE}/blog</id>
   <updated>${toIso(lastBuild)}</updated>

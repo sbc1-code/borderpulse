@@ -27,18 +27,22 @@ function faqItems(crossing, aggregate) {
     },
   ];
   if (aggregate && aggregate.overall_best_hour != null) {
+    const h = aggregate.overall_best_hour;
+    const hourLabel = `${h % 12 || 12} ${h >= 12 ? 'PM' : 'AM'}`;
     items.push({
       q: `What is the best time to cross at ${name}?`,
-      a: `Based on the last 30 days of CBP data, the lightest typical wait at ${name} is around hour ${aggregate.overall_best_hour} of the day (median ${aggregate.overall_best_median} min).`,
+      a: `Based on the last 30 days of CBP data, the lightest typical wait at ${name} is around ${hourLabel} (median ${aggregate.overall_best_median} min).`,
     });
   }
   return items;
 }
 
 function renderCrossingHead(crossing, slug, aggregate) {
-  const title = `${crossing.name} wait times | Border Pulse`;
-  const desc = `Live ${crossing.name} border wait times from U.S. Customs and Border Protection, refreshed regularly. Historical patterns, hours, and best times to cross.`;
-  const canonical = `${BASE}/crossing/${slug}`;
+  // Title pattern matches what wins these SERPs: keyword-first, "today"/live
+  // freshness signal, current year. Brand goes last where truncation is cheap.
+  const title = `${crossing.name} Border Wait Time Today: Live CBP Data (2026) | Border Pulse`;
+  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
+  const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
   const place = {
@@ -85,7 +89,7 @@ function renderCrossingHead(crossing, slug, aggregate) {
 function renderBlogIndexHead(posts) {
   const title = 'Border Pulse Blog | Crossing data, guides, and program explainers';
   const desc = 'Data-driven guides to crossing the U.S.-Mexico border. Hour by hour patterns, neutral program explainers, and trip planning. Every program rule links to the official source.';
-  const canonical = `${BASE}/blog`;
+  const canonical = `${BASE}/blog/`;
   const ogImage = `${BASE}/og-card.png`;
 
   const breadcrumb = {
@@ -106,7 +110,7 @@ function renderBlogIndexHead(posts) {
     blogPost: posts.slice(0, 20).map((p) => ({
       '@type': 'BlogPosting',
       headline: p.title,
-      url: `${BASE}/blog/${p.slug}`,
+      url: `${BASE}/blog/${p.slug}/`,
       datePublished: p.date,
       dateModified: p.updated || p.date,
     })),
@@ -124,7 +128,7 @@ function renderBlogIndexHead(posts) {
 function renderBlogPostHead(post, author, allPosts) {
   const title = `${post.title} | Border Pulse`;
   const desc = post.description;
-  const canonical = `${BASE}/blog/${post.slug}`;
+  const canonical = `${BASE}/blog/${post.slug}/`;
   const ogImage = post.ogImage || `${BASE}/og/blog/${post.slug}.png`;
   const datePublished = `${post.date}T12:00:00Z`;
   const dateModified = `${post.updated || post.date}T12:00:00Z`;
@@ -138,9 +142,9 @@ function renderBlogPostHead(post, author, allPosts) {
     const es = allPosts.find(
       (p) => p.translationKey === post.translationKey && p.lang === 'es',
     );
-    if (en) hreflangs.push({ lang: 'en', href: `${BASE}/blog/${en.slug}` });
-    if (es) hreflangs.push({ lang: 'es', href: `${BASE}/blog/${es.slug}` });
-    if (en) hreflangs.push({ lang: 'x-default', href: `${BASE}/blog/${en.slug}` });
+    if (en) hreflangs.push({ lang: 'en', href: `${BASE}/blog/${en.slug}/` });
+    if (es) hreflangs.push({ lang: 'es', href: `${BASE}/blog/${es.slug}/` });
+    if (en) hreflangs.push({ lang: 'x-default', href: `${BASE}/blog/${en.slug}/` });
   }
 
   const blogPosting = {
@@ -173,7 +177,7 @@ function renderBlogPostHead(post, author, allPosts) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE}/blog` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE}/blog/` },
       { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
     ],
   };
@@ -304,11 +308,11 @@ function rewriteIndex(indexHtml, head) {
 function renderBestTimeHead(crossing, slug, aggregate) {
   const bestHour = aggregate?.overall_best_hour;
   const bestMedian = aggregate?.overall_best_median;
-  const title = `Best time to cross ${crossing.name} | Border Pulse`;
+  const title = `Best Time to Cross ${crossing.name}: Hour-by-Hour CBP Data (2026) | Border Pulse`;
   const desc = bestHour != null && bestMedian != null
     ? `Lightest typical hour to cross ${crossing.name}: ~${bestHour % 12 || 12} ${bestHour >= 12 ? 'PM' : 'AM'} (median ${bestMedian} min). Hour-by-hour from the last 30 days of CBP data.`
     : `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`;
-  const canonical = `${BASE}/best-time/${slug}`;
+  const canonical = `${BASE}/best-time/${slug}/`;
   // Per-best-time OG cards live under /og/best-time/<slug>.png.
   // Falls back to per-crossing card if the new generator hasn't run yet.
   const ogImage = `${BASE}/og/best-time/${slug}.png`;
@@ -331,7 +335,7 @@ function renderBestTimeHead(crossing, slug, aggregate) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
-      { '@type': 'ListItem', position: 2, name: crossing.name, item: `${BASE}/crossing/${slug}` },
+      { '@type': 'ListItem', position: 2, name: crossing.name, item: `${BASE}/crossing/${slug}/` },
       { '@type': 'ListItem', position: 3, name: 'Best time to cross', item: canonical },
     ],
   };
@@ -344,7 +348,7 @@ function renderEmbedHead(crossing, slug) {
   const desc = `Live wait time at ${crossing.name}, refreshed regularly.`;
   // Canonical points to the full crossing page so search engines consolidate
   // any accidental indexing on the canonical URL.
-  const canonical = `${BASE}/crossing/${slug}`;
+  const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
   return { title, desc, canonical, ogImage, jsonLd: [] };
 }
@@ -386,13 +390,13 @@ function injectCrawlableLinks(html, crossings, portToSlug, posts) {
     .map((c) => {
       const slug = portToSlug[c.port_number];
       if (!slug) return null;
-      return `    <li><a href="/crossing/${slug}">${esc(c.name)} wait times</a></li>`;
+      return `    <li><a href="/crossing/${slug}/">${esc(c.name)} wait times</a></li>`;
     })
     .filter(Boolean)
     .join('\n');
 
   const postLinks = posts
-    .map((p) => `    <li><a href="/blog/${p.slug}">${esc(p.title)}</a></li>`)
+    .map((p) => `    <li><a href="/blog/${p.slug}/">${esc(p.title)}</a></li>`)
     .join('\n');
 
   const block = `
@@ -537,7 +541,7 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(
       path.resolve(outDir, 'index.html'),
-      renderRedirectPage(`${BASE}/crossing/${canonicalSlug}`),
+      renderRedirectPage(`${BASE}/crossing/${canonicalSlug}/`),
     );
     aliasPageCount++;
   }
@@ -547,7 +551,7 @@ async function main() {
   {
     const apiDir = path.resolve(distDir, 'api');
     fs.mkdirSync(apiDir, { recursive: true });
-    fs.writeFileSync(path.resolve(apiDir, 'index.html'), renderRedirectPage(`${BASE}/methodology`));
+    fs.writeFileSync(path.resolve(apiDir, 'index.html'), renderRedirectPage(`${BASE}/methodology/`));
   }
 
   let embedPageCount = 0;
@@ -564,8 +568,8 @@ async function main() {
 
   // /methodology + /metodologia — twin bilingual routes, hreflang-paired.
   {
-    const enCanonical = `${BASE}/methodology`;
-    const esCanonical = `${BASE}/metodologia`;
+    const enCanonical = `${BASE}/methodology/`;
+    const esCanonical = `${BASE}/metodologia/`;
     const hreflangs = [
       { lang: 'en', href: enCanonical },
       { lang: 'es', href: esCanonical },
@@ -610,7 +614,7 @@ async function main() {
     const aboutHead = {
       title: 'About Border Pulse | The U.S.-Mexico border wait time tracker',
       desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, refreshed regularly, with a 30-day rolling history.',
-      canonical: `${BASE}/about`,
+      canonical: `${BASE}/about/`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
     };
@@ -625,7 +629,7 @@ async function main() {
     const indexHead = {
       title: 'Best time to cross every U.S.-Mexico border crossing | Border Pulse',
       desc: 'Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. 43 crossings, hour by hour.',
-      canonical: `${BASE}/best-time`,
+      canonical: `${BASE}/best-time/`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
     };
@@ -684,16 +688,16 @@ async function main() {
     const cB = slugToCrossing[bSlug];
     if (!cA || !cB) continue;
     const pair = `${aSlug}-vs-${bSlug}`;
-    const title = `${cA.name} vs ${cB.name}: which is faster | Border Pulse`;
+    const title = `${cA.name} vs ${cB.name}: Which Crossing Is Faster? (2026 Data) | Border Pulse`;
     const desc = `Live wait times, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. Pick the faster crossing right now.`;
-    const canonical = `${BASE}/compare/${pair}`;
+    const canonical = `${BASE}/compare/${pair}/`;
     const ogImage = `${BASE}/og-card.png`;
     const breadcrumb = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
-        { '@type': 'ListItem', position: 2, name: cA.name, item: `${BASE}/crossing/${aSlug}` },
+        { '@type': 'ListItem', position: 2, name: cA.name, item: `${BASE}/crossing/${aSlug}/` },
         { '@type': 'ListItem', position: 3, name: `vs ${cB.name}`, item: canonical },
       ],
     };
@@ -728,16 +732,16 @@ async function main() {
   for (const slug of WALK_OR_DRIVE_SLUGS) {
     const c = slugToCrossing[slug];
     if (!c) continue;
-    const title = `Walk or drive across ${c.name}? Live decision based on CBP data | Border Pulse`;
+    const title = `Walk or Drive Across ${c.name}? Live Wait Comparison (2026) | Border Pulse`;
     const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
-    const canonical = `${BASE}/walk-or-drive/${slug}`;
+    const canonical = `${BASE}/walk-or-drive/${slug}/`;
     const ogImage = `${BASE}/og/${slug}.png`;
     const breadcrumb = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
-        { '@type': 'ListItem', position: 2, name: c.name, item: `${BASE}/crossing/${slug}` },
+        { '@type': 'ListItem', position: 2, name: c.name, item: `${BASE}/crossing/${slug}/` },
         { '@type': 'ListItem', position: 3, name: 'Walk or drive', item: canonical },
       ],
     };

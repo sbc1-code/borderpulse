@@ -47,28 +47,28 @@ async function main() {
   const today = new Date().toISOString().slice(0, 10);
 
   const methodologyAlternates = [
-    { lang: 'en', href: `${BASE}/methodology` },
-    { lang: 'es', href: `${BASE}/metodologia` },
-    { lang: 'x-default', href: `${BASE}/methodology` },
+    { lang: 'en', href: `${BASE}/methodology/` },
+    { lang: 'es', href: `${BASE}/metodologia/` },
+    { lang: 'x-default', href: `${BASE}/methodology/` },
   ];
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
-    { loc: `${BASE}/about`, changefreq: 'monthly', priority: '0.5', lastmod: today },
-    { loc: `${BASE}/best-time`, changefreq: 'daily', priority: '0.7', lastmod: today },
-    { loc: `${BASE}/methodology`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
-    { loc: `${BASE}/metodologia`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
+    { loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.5', lastmod: today },
+    { loc: `${BASE}/best-time/`, changefreq: 'daily', priority: '0.7', lastmod: today },
+    { loc: `${BASE}/methodology/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
+    { loc: `${BASE}/metodologia/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
   ];
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
     urls.push({
-      loc: `${BASE}/crossing/${slug}`,
+      loc: `${BASE}/crossing/${slug}/`,
       changefreq: 'hourly',
       priority: '0.9',
       lastmod: today,
     });
     urls.push({
-      loc: `${BASE}/best-time/${slug}`,
+      loc: `${BASE}/best-time/${slug}/`,
       changefreq: 'daily',
       priority: '0.7',
       lastmod: today,
@@ -98,7 +98,7 @@ async function main() {
   for (const [a, b] of COMPARE_PAIRS) {
     if (!knownSlugs.has(a) || !knownSlugs.has(b)) continue;
     urls.push({
-      loc: `${BASE}/compare/${a}-vs-${b}`,
+      loc: `${BASE}/compare/${a}-vs-${b}/`,
       changefreq: 'daily',
       priority: '0.6',
       lastmod: today,
@@ -126,7 +126,7 @@ async function main() {
   for (const slug of WALK_OR_DRIVE_SLUGS) {
     if (!knownSlugs.has(slug)) continue;
     urls.push({
-      loc: `${BASE}/walk-or-drive/${slug}`,
+      loc: `${BASE}/walk-or-drive/${slug}/`,
       changefreq: 'daily',
       priority: '0.6',
       lastmod: today,
@@ -137,7 +137,7 @@ async function main() {
   const twins = findTwins(posts);
   if (posts.length > 0) {
     urls.push({
-      loc: `${BASE}/blog`,
+      loc: `${BASE}/blog/`,
       changefreq: 'weekly',
       priority: '0.7',
       lastmod: posts.reduce((acc, p) => {
@@ -147,7 +147,7 @@ async function main() {
     });
     for (const p of posts) {
       const url = {
-        loc: `${BASE}/blog/${p.slug}`,
+        loc: `${BASE}/blog/${p.slug}/`,
         changefreq: 'monthly',
         priority: '0.6',
         lastmod: p.updated || p.date,
@@ -156,9 +156,9 @@ async function main() {
       if (p.translationKey && twins[p.translationKey]) {
         const pair = twins[p.translationKey];
         url.alternates = [];
-        if (pair.en) url.alternates.push({ lang: 'en', href: `${BASE}/blog/${pair.en}` });
-        if (pair.es) url.alternates.push({ lang: 'es', href: `${BASE}/blog/${pair.es}` });
-        if (pair.en) url.alternates.push({ lang: 'x-default', href: `${BASE}/blog/${pair.en}` });
+        if (pair.en) url.alternates.push({ lang: 'en', href: `${BASE}/blog/${pair.en}/` });
+        if (pair.es) url.alternates.push({ lang: 'es', href: `${BASE}/blog/${pair.es}/` });
+        if (pair.en) url.alternates.push({ lang: 'x-default', href: `${BASE}/blog/${pair.en}/` });
       }
       urls.push(url);
     }

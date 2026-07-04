@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0b0b" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="canonical" href="https://borderpulse.com" />
+    <link rel="canonical" href="https://borderpulse.com/" />
 
     <title>Border Pulse | Real-Time US-Mexico Border Crossing Wait Times (CBP)</title>
     <meta name="description" content="Live wait times at US-Mexico border crossings. Official U.S. Customs and Border Protection (CBP) data refreshed regularly. Covers California, Arizona, New Mexico, and Texas. Bilingual EN/ES." />
@@ -18,7 +18,7 @@
     <meta property="og:site_name" content="Border Pulse" />
     <meta property="og:title" content="Border Pulse | Real-Time US-Mexico Border Crossing Wait Times" />
     <meta property="og:description" content="Live wait times at every US-Mexico border crossing. Official CBP data, refreshed regularly. Bilingual EN/ES." />
-    <meta property="og:url" content="https://borderpulse.com" />
+    <meta property="og:url" content="https://borderpulse.com/" />
     <meta property="og:image" content="https://borderpulse.com/og-card.png" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="es_MX" />
@@ -28,9 +28,11 @@
     <meta name="twitter:description" content="Live wait times at every US-Mexico border crossing. Official CBP data, refreshed regularly." />
     <meta name="twitter:image" content="https://borderpulse.com/og-card.png" />
 
-    <link rel="alternate" hreflang="en" href="https://borderpulse.com" />
-    <link rel="alternate" hreflang="es" href="https://borderpulse.com" />
-    <link rel="alternate" hreflang="x-default" href="https://borderpulse.com" />
+    <!-- No es hreflang here: the language toggle is client-side and there is no
+         distinct Spanish URL for the dashboard yet. Pointing es at the same URL
+         tells Google a Spanish document exists where it does not. -->
+    <link rel="alternate" hreflang="en" href="https://borderpulse.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://borderpulse.com/" />
 
     <script type="application/ld+json">
     {
@@ -61,9 +63,19 @@
         },
         {
           "@type": "Organization",
+          "@id": "https://borderpulse.com/#org",
           "name": "Border Pulse",
-          "url": "https://borderpulse.com",
-          "logo": "https://borderpulse.com/favicon.svg"
+          "url": "https://borderpulse.com/",
+          "logo": "https://borderpulse.com/favicon.svg",
+          "sameAs": ["https://github.com/sbc1-code/borderpulse"]
+        },
+        {
+          "@type": "WebSite",
+          "name": "Border Pulse",
+          "alternateName": "BorderPulse",
+          "url": "https://borderpulse.com/",
+          "publisher": { "@id": "https://borderpulse.com/#org" },
+          "inLanguage": ["en-US", "es-MX"]
         },
         {
           "@type": "FAQPage",

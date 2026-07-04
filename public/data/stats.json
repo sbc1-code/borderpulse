@@ -1,14 +1,13 @@
 {
-  "crossings": 43,
-  "aggregates": 44,
-  "aggregates_with_data": 35,
-  "total_samples": 6683,
+  "crossings": 44,
+  "aggregates": 46,
+  "aggregates_with_data": 38,
+  "total_samples": 8678,
   "lookback_days": 30,
   "refresh_minutes": 15,
-  "blog_posts": 12,
-  "blog_posts_en": 6,
-  "blog_posts_es": 6,
+  "blog_posts": 36,
+  "blog_posts_en": 18,
+  "blog_posts_es": 18,
   "timeline_crossings": 4,
-  "api_endpoints": 5,
-  "generated_at": "2026-04-27T22:02:58.645Z"
+  "generated_at": "2026-07-04T05:50:31.261Z"
 }
