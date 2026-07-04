@@ -3,6 +3,51 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-07-03
+
+### Fixed
+- **Aggregate wait-time buckets are now port-local, not UTC.** The single
+  biggest correctness bug found to date: `build-aggregates.mjs` bucketed
+  by `getUTCDay()/getUTCHours()` while every consumer (BestTime,
+  CrossingDetail heatmap, card pills, Compare, Embed, ShareModal, blog
+  BestTimeChart, prerender FAQ) displayed those buckets as local clock
+  time. Every published "best hour" was shifted 5 to 7 hours per port;
+  the "Monday 3 AM spike" in the Calexico West posts is actually the
+  Sunday 8 PM return peak. Aggregates now bucket by the port's IANA
+  timezone (via exported `getPortTimezone`), carry a `timezone` field,
+  and all now-vs-bucket lookups go through `nowInTz`/`nowInPortTz`.
+  Mode A's sunday-spike detector 16-22h window now means real evening
+  hours. FOLLOW-UP: hour claims in the pre-existing best-time/compare
+  blog posts still quote the old shifted hours and need a rewrite pass.
+- Legacy rebase conflict resolved: EmailCapture removal honored, alerts
+  a11y fixes and corrected distribution drafts pushed (were stranded
+  local-only while the repo sat 575 commits behind origin).
+
+### Changed
+- **SEO title patterns.** Crossing pages: "X Border Wait Time Today:
+  Live CBP Data (2026)". Best-time: "Best Time to Cross X: Hour-by-Hour
+  CBP Data (2026)". Compare: "X vs Y: Which Crossing Is Faster? (2026
+  Data)". Walk-or-drive: "Walk or Drive Across X? Live Wait Comparison
+  (2026)". Pattern mirrors what outranks us on these SERPs
+  (border-times.com et al.): keyword first, freshness signal, year.
+- **Trailing-slash URL canon.** Canonicals, sitemap, hreflang, RSS, and
+  the crawlable nav all use the trailing-slash form GitHub Pages serves
+  with 200 (non-trailing 301s there; Google indexed the slash form
+  against non-slash canonicals).
+- index.html: removed the es hreflang that pointed at the same URL,
+  added WebSite JSON-LD + Organization sameAs (brand entity for the
+  diluted "borderpulse" brand SERP).
+
+### Added
+- **4 bilingual blog pairs (8 posts, all from corrected port-local
+  data):** summer Sunday returns (timed for July 4th weekend), best
+  time Calexico East, best time back from Los Algodones/Andrade,
+  Nogales DeConcini vs Mariposa.
+
+### Removed
+- 10 stale Claude worktrees and 22 dead local branches (all merged or
+  superseded; Buttondown MCP branch dead since the newsletter removal).
+
 ## 2026-07-02
 
 ### Changed

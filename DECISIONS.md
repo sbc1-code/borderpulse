@@ -103,6 +103,22 @@ includes both. Majors still ignored until an explicit migration sprint.
   same time). Don't split them back into separate groups, and don't set
   cancel-in-progress back to true (it would kill mid-flight fetch runs).
 
+## 2026-07-03 · Aggregates are port-local; never compare browser-now to buckets
+
+`by_hour` buckets in `/data/aggregates/*.json` are in the PORT's local
+day/hour and each file carries a `timezone` field. Any "what bucket is
+it right now" lookup must use `nowInTz(aggregate.timezone)` or
+`nowInPortTz(crossing)` from `crossingMeta.js`, never bare
+`new Date().getDay()/getHours()` (browser tz) or `getUTC*` (the old,
+wrong bucketing). Blog prose that quotes specific hours must be
+computed from the port-local aggregates.
+
+## 2026-07-03 · URL canon is trailing-slash
+
+GitHub Pages serves `/dir/` with 200 and 301s `/dir` onto it. All
+generated canonicals/sitemap/hreflang/RSS/internal nav links use the
+trailing-slash form. New link-emitting code should too.
+
 ---
 
 *Append a new section the next time a non-obvious decision lands.*
