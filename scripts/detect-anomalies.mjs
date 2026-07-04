@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ANOMALY_CONFIG as CFG } from './lib/anomaly-config.mjs';
+import { nowInTz } from '../src/components/utils/crossingMeta.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -97,7 +98,9 @@ function crossingById(crossings, portNumber) {
 // Data-only signal. The model decides whether it's a story.
 function detectLowestToday(aggregate, portMeta) {
   if (!aggregate || !aggregate.by_hour) return [];
-  const today = new Date().getUTCDay();
+  // Buckets are port-local (see build-aggregates.mjs); "today" must be the
+  // port's day. The old getUTCDay() matched the old UTC buckets.
+  const today = aggregate.timezone ? nowInTz(aggregate.timezone).day : new Date().getUTCDay();
   const todayCells = aggregate.by_hour
     .filter((s) => s.day === today && s.samples >= CFG.minSamplesPerCell && s.median != null);
   if (todayCells.length === 0) return [];

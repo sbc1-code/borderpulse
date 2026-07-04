@@ -1,1 +1,1 @@
-{"port_number":"240204","name":"El Paso - Stanton DCL","state":"TX","lookback_days":30,"sample_count":0,"overall_median":null,"overall_best_hour":null,"overall_best_median":null,"by_hour":[],"generated_at":"2026-04-27T19:11:38.372Z"}
+{"port_number":"240204","name":"El Paso - Stanton DCL","state":"TX","timezone":"America/Denver","lookback_days":30,"sample_count":1,"overall_median":1,"overall_best_hour":3,"overall_best_median":1,"by_hour":[{"day":4,"hour":3,"median":1,"samples":1}],"generated_at":"2026-07-04T05:47:59.731Z"}

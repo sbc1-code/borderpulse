@@ -24,11 +24,25 @@ async function main() {
   const since = new Date(Date.now() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
   const slugMod = await import(path.resolve(root, 'src/lib/slugs.js'));
+  const metaMod = await import(path.resolve(root, 'src/components/utils/crossingMeta.js'));
   const currentDoc = JSON.parse(fs.readFileSync(path.resolve(root, DATA_FILE), 'utf8'));
   const { portToSlug } = slugMod.buildSlugMap(currentDoc.crossings || []);
   const portToMeta = new Map();
   for (const c of currentDoc.crossings || []) {
-    portToMeta.set(String(c.port_number), { name: c.name, state: c.state });
+    portToMeta.set(String(c.port_number), {
+      name: c.name,
+      state: c.state,
+      timezone: metaMod.getPortTimezone(c),
+    });
+  }
+
+  // Memoized port-local (day, hour) per (timestamp, timezone). Only four
+  // distinct timezones exist along the border, so the cache stays small.
+  const tzCache = new Map();
+  function localDayHour(ts, tz) {
+    const key = `${ts.getTime()}|${tz}`;
+    if (!tzCache.has(key)) tzCache.set(key, metaMod.nowInTz(tz, ts));
+    return tzCache.get(key);
   }
 
   let log;
@@ -66,12 +80,15 @@ async function main() {
 
     const ts = doc.fetched_at ? new Date(doc.fetched_at) : null;
     if (!ts || Number.isNaN(ts.getTime())) continue;
-    // Use UTC day/hour — callers interpret in local context; good enough for "typical pattern".
-    const dayIdx = ts.getUTCDay();
-    const hour = ts.getUTCHours();
-
+    // Bucket by PORT-LOCAL day/hour. The original UTC bucketing shifted
+    // every published "best hour" by 5-7 hours once the UI labeled buckets
+    // as local clock time: a "Monday 3 AM spike" at a California port was
+    // actually the Sunday 8 PM return peak.
     for (const c of doc.crossings || []) {
       const w = typeof c.current_wait_time === 'number' ? c.current_wait_time : null;
+      const meta = portToMeta.get(String(c.port_number));
+      const tz = meta?.timezone || metaMod.getPortTimezone(c);
+      const { day: dayIdx, hour } = localDayHour(ts, tz);
       addSample(String(c.port_number), dayIdx, hour, w);
     }
   }
@@ -118,6 +135,7 @@ async function main() {
       port_number: port,
       name: meta.name || null,
       state: meta.state || null,
+      timezone: meta.timezone || null,
       lookback_days: LOOKBACK_DAYS,
       sample_count: allWaits.length,
       overall_median: median(allWaits),
@@ -138,6 +156,7 @@ async function main() {
       port_number: port,
       name: c.name || null,
       state: c.state || null,
+      timezone: metaMod.getPortTimezone(c),
       lookback_days: LOOKBACK_DAYS,
       sample_count: 0,
       overall_median: null,

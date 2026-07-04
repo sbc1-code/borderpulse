@@ -8,7 +8,7 @@ import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
-import { getHoursSummary } from '@/components/utils/crossingMeta';
+import { getHoursSummary, nowInPortTz } from '@/components/utils/crossingMeta';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings, kmToMiles } from '@/lib/geo';
@@ -105,7 +105,8 @@ function faqItems(crossing, aggregate, lang) {
   });
 
   if (aggregate && aggregate.by_hour && aggregate.by_hour.length) {
-    const today = new Date().getDay();
+    // Buckets are port-local; "today" must be the port's day, not the browser's.
+    const today = nowInPortTz(crossing).day;
     const best = pickBestHour(aggregate.by_hour, today);
     if (best) {
       out.push({
@@ -228,9 +229,9 @@ export default function CrossingDetail() {
   const [anomalies, setAnomalies] = useState(null);
   const language = usePersistentLanguage();
 
-  const todayIdx = useMemo(() => new Date().getDay(), []);
-  const currentHour = useMemo(() => new Date().getHours(), []);
-  const [selectedDay, setSelectedDay] = useState(todayIdx);
+  // Initial guess is browser-local; once the crossing loads, todayIdx below
+  // switches to the port's timezone and the reset effect re-syncs selectedDay.
+  const [selectedDay, setSelectedDay] = useState(() => new Date().getDay());
 
   useEffect(() => {
     (async () => {
@@ -264,6 +265,13 @@ export default function CrossingDetail() {
   }, [state.crossings, slug]);
 
   const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
+
+  // Aggregate buckets are port-local; evaluate "today"/"now" in the port's
+  // timezone once the crossing is known.
+  const { day: todayIdx, hour: currentHour } = useMemo(
+    () => (crossing ? nowInPortTz(crossing) : { day: new Date().getDay(), hour: new Date().getHours() }),
+    [crossing],
+  );
 
   const activeAnomaly = useMemo(() => {
     if (!anomalies || !canonicalSlug) return null;

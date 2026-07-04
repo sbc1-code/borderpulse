@@ -7,6 +7,7 @@ import { buildSlugMap } from '@/lib/slugs';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { nowInPortTz } from '@/components/utils/crossingMeta';
 
 const DAY_LABELS = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -137,11 +138,12 @@ export function BestTimeIndex() {
     return () => resetPageMeta();
   }, [language]);
 
-  const today = new Date().getDay();
+  // Aggregate buckets are port-local; "today" must be evaluated per port.
   const rows = useMemo(() => {
     return crossings.map((c) => {
       const slug = portToSlug[c.port_number];
       const agg = slug ? aggregates[slug] : null;
+      const { day: today } = nowInPortTz(c);
       const light = agg ? lightestHourFor(agg.by_hour, today) : null;
       const dayMed = agg ? dayMedianFor(agg.by_hour, today) : null;
       return { crossing: c, slug, light, dayMedian: dayMed };
@@ -155,7 +157,7 @@ export function BestTimeIndex() {
         if (bm == null) return -1;
         return am - bm;
       });
-  }, [crossings, portToSlug, aggregates, today]);
+  }, [crossings, portToSlug, aggregates]);
 
   if (!loaded) {
     return <div className="p-6 max-w-[1100px] mx-auto text-sm text-slate-500">{language === 'en' ? 'Loading…' : 'Cargando…'}</div>;
@@ -332,8 +334,8 @@ export default function BestTime() {
     return () => resetPageMeta();
   }, [crossing, language, canonicalSlug]);
 
-  const today = new Date().getDay();
-  const currentHour = new Date().getHours();
+  // Buckets are port-local; evaluate "today"/"now" in the port's timezone.
+  const { day: today, hour: currentHour } = crossing ? nowInPortTz(crossing) : { day: new Date().getDay(), hour: new Date().getHours() };
   const todayLight = aggregate ? lightestHourFor(aggregate.by_hour, today) : null;
   const todayMedian = aggregate ? dayMedianFor(aggregate.by_hour, today) : null;
 

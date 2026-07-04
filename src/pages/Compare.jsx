@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { nowInTz } from '@/components/utils/crossingMeta';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 
@@ -34,9 +35,10 @@ function parsePair(pair) {
   return { a, b };
 }
 
-function todayLightest(byHour) {
+function todayLightest(byHour, timezone) {
   if (!Array.isArray(byHour) || !byHour.length) return null;
-  const today = new Date().getDay();
+  // Buckets are port-local; the aggregate carries its port's timezone.
+  const today = timezone ? nowInTz(timezone).day : new Date().getDay();
   const todays = byHour
     .filter((h) => h.day === today && typeof h.median === 'number' && (h.samples || 0) >= MIN_SAMPLES)
     .sort((a, b) => a.median - b.median);
@@ -49,7 +51,7 @@ function todayLightest(byHour) {
 function CrossingPanel({ crossing, slug, aggregate, language }) {
   const wait = getWaitMinutes(crossing, 'northbound');
   const overallMedian = aggregate?.overall_median;
-  const lightest = todayLightest(aggregate?.by_hour);
+  const lightest = todayLightest(aggregate?.by_hour, aggregate?.timezone);
   const sampleCount = aggregate?.sample_count;
 
   return (

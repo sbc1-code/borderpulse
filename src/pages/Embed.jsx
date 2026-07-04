@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { dataService } from '@/components/utils/dataService';
 import { crossingForSlug, buildSlugMap } from '@/lib/slugs';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { nowInTz } from '@/components/utils/crossingMeta';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 
 const FLAG = { CA: '🇺🇸', AZ: '🇺🇸', NM: '🇺🇸', TX: '🇺🇸' };
@@ -73,9 +74,10 @@ export default function Embed() {
     if (wait == null) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || byHour.length === 0) return null;
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours();
+    // Buckets are port-local; the aggregate carries its port's timezone.
+    const { day, hour } = aggregate?.timezone
+      ? nowInTz(aggregate.timezone)
+      : { day: new Date().getDay(), hour: new Date().getHours() };
     const entry = byHour.find((h) => h.day === day && h.hour === hour);
     if (entry && typeof entry.median === 'number') {
       const samples = typeof entry.sample_count === 'number'

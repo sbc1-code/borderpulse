@@ -28,6 +28,7 @@ import {
   getOperationalNotice,
   getPortStatus,
   hasOperationalAdvisory,
+  nowInPortTz,
 } from '@/components/utils/crossingMeta';
 
 const STATUS_STYLES = {
@@ -206,22 +207,23 @@ export default function BorderCrossingCard({
     if (isSouthbound) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || !byHour.length) return null;
-    const day = new Date().getDay();
+    // Buckets are port-local; evaluate "today" in the port's timezone.
+    const { day } = nowInPortTz(crossing);
     const candidates = byHour
       .filter((h) => h.day === day && typeof h.median === 'number' && (h.samples || h.sample_count || 0) >= 1)
       .sort((a, b) => a.median - b.median);
     if (!candidates.length) return null;
     return { hour: candidates[0].hour, median: candidates[0].median };
-  }, [aggregate, isSouthbound]);
+  }, [aggregate, isSouthbound, crossing]);
 
   // Suppress the pill when the current hour IS the lightest hour — pointing
   // a user to "leave at 8 AM" when it's currently 8 AM is noise. Within ±1
   // hour we treat it as "you're in the window" and skip.
   const showBestTimePill = useMemo(() => {
     if (!bestTimeToday) return false;
-    const currentHour = new Date().getHours();
+    const currentHour = nowInPortTz(crossing).hour;
     return Math.abs(bestTimeToday.hour - currentHour) > 1;
-  }, [bestTimeToday]);
+  }, [bestTimeToday, crossing]);
 
   // "vs. typical" comparison vs. the historical median for this day-of-week + hour.
   // Only compute for northbound (CBP-backed) data; southbound waits are estimates
@@ -231,9 +233,7 @@ export default function BorderCrossingCard({
     if (wait == null) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || byHour.length === 0) return null;
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours();
+    const { day, hour } = nowInPortTz(crossing);
     const entry = byHour.find((h) => h.day === day && h.hour === hour);
     if (entry && typeof entry.median === 'number') {
       const samples = typeof entry.sample_count === 'number'
@@ -248,7 +248,7 @@ export default function BorderCrossingCard({
       return { delta: wait - aggregate.overall_median, median: aggregate.overall_median };
     }
     return null;
-  }, [aggregate, wait, isSouthbound]);
+  }, [aggregate, wait, isSouthbound, crossing]);
 
   const lanes = crossing.lanes || {};
 

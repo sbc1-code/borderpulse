@@ -36,7 +36,7 @@ const MOUNTAIN_TZ_PORTS = [
   'Marcelino Serna',
 ];
 
-function getPortTimezone(crossing) {
+export function getPortTimezone(crossing) {
   const name = `${crossing?.name || ''} ${crossing?.port_name || ''}`;
   if (crossing?.state === 'CA') return 'America/Los_Angeles';
   if (crossing?.state === 'AZ') return 'America/Phoenix';
@@ -45,6 +45,44 @@ function getPortTimezone(crossing) {
     return 'America/Denver';
   }
   return 'America/Chicago';
+}
+
+// Aggregate by_hour buckets are stored in PORT-LOCAL day/hour (see
+// scripts/build-aggregates.mjs). Any "which bucket is it right now" lookup
+// must be computed in the port's timezone, not the browser's: a viewer in
+// El Paso looking at San Ysidro is an hour off otherwise, and a remote
+// viewer can land on the wrong day entirely.
+const WEEKDAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+const tzFormatterCache = new Map();
+
+function tzFormatter(tz) {
+  if (!tzFormatterCache.has(tz)) {
+    tzFormatterCache.set(
+      tz,
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        weekday: 'short',
+        hour: 'numeric',
+        hourCycle: 'h23',
+      }),
+    );
+  }
+  return tzFormatterCache.get(tz);
+}
+
+export function nowInTz(tz, date = new Date()) {
+  const parts = tzFormatter(tz).formatToParts(date);
+  let day = 0;
+  let hour = 0;
+  for (const p of parts) {
+    if (p.type === 'weekday') day = WEEKDAY_INDEX[p.value] ?? 0;
+    if (p.type === 'hour') hour = Number(p.value) % 24;
+  }
+  return { day, hour };
+}
+
+export function nowInPortTz(crossing, date = new Date()) {
+  return nowInTz(getPortTimezone(crossing), date);
 }
 
 function parseTimeToken(token) {
