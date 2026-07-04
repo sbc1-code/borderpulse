@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-04T11:36:14.546Z",
-  "snapshot_at": "2026-07-04T10:25:06.181Z",
+  "generated_at": "2026-07-04T13:42:34.629Z",
+  "snapshot_at": "2026-07-04T13:23:37.038Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -182,7 +182,7 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.8333333333333334,
-      "detected_at": "2026-07-04T09:25:42.879Z",
+      "detected_at": "2026-07-04T13:42:34.629Z",
       "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 4 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 4 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
       "evidence": {
@@ -191,7 +191,7 @@
         "best_hour": 4,
         "best_median": 15,
         "overall_median": 90,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -353,24 +353,6 @@
         "best_hour": 9,
         "best_median": 2,
         "overall_median": 64,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-03T12:58:42.990Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 15,
         "samples": 1
       }
     }
