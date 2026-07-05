@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-05T10:19:30.483Z",
-  "snapshot_at": "2026-07-05T10:11:43.300Z",
+  "generated_at": "2026-07-05T12:19:22.157Z",
+  "snapshot_at": "2026-07-05T11:48:29.505Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -232,6 +232,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.8125,
+      "detected_at": "2026-07-05T12:19:22.157Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 5 AM (median 12 min) — ~81% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 5 AM (mediana 12 min) — ~81% debajo de la base de 30 días de 64 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 12,
+        "overall_median": 64,
+        "samples": 4
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
@@ -280,24 +298,6 @@
         "overall_median": 90,
         "samples": 1,
         "ratio": 1.7777777777777777
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.7692307692307692,
-      "detected_at": "2026-07-05T10:19:30.483Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 6 AM (median 15 min) — ~77% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 6 AM (mediana 15 min) — ~77% debajo de la base de 30 días de 65 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 6,
-        "best_median": 15,
-        "overall_median": 65,
-        "samples": 1
       }
     },
     {
@@ -355,24 +355,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-07-04T11:36:14.546Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 3
-      }
-    }
-  ]
+  "trailing_24h": []
 }
