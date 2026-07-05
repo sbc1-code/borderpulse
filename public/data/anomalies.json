@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-05T12:19:22.157Z",
-  "snapshot_at": "2026-07-05T11:48:29.505Z",
+  "generated_at": "2026-07-05T14:46:46.775Z",
+  "snapshot_at": "2026-07-05T13:37:03.509Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -254,7 +254,7 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.8,
-      "detected_at": "2026-07-05T10:19:30.483Z",
+      "detected_at": "2026-07-05T14:46:46.775Z",
       "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 6 AM (median 10 min) — ~80% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 6 AM (mediana 10 min) — ~80% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -263,7 +263,7 @@
         "best_hour": 6,
         "best_median": 10,
         "overall_median": 50,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -342,7 +342,7 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-07-05T10:19:30.483Z",
+      "detected_at": "2026-07-05T14:46:46.775Z",
       "summary_en": "Right now Tecate's lightest Sunday hour so far is 6 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Tecate es 6 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
       "evidence": {
@@ -351,7 +351,7 @@
         "best_hour": 6,
         "best_median": 60,
         "overall_median": 120,
-        "samples": 3
+        "samples": 4
       }
     }
   ],
