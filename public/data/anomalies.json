@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-06T17:46:36.079Z",
-  "snapshot_at": "2026-07-06T17:20:10.679Z",
+  "generated_at": "2026-07-06T20:03:25.542Z",
+  "snapshot_at": "2026-07-06T19:15:25.931Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -163,16 +163,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.875,
-      "detected_at": "2026-07-06T17:46:36.079Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 7 PM — ~188% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 7 PM — ~188% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.8,
+      "detected_at": "2026-07-06T20:03:25.542Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 7 PM — ~180% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 7 PM — ~180% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
         "peak_median": 90,
-        "overall_median": 48,
+        "overall_median": 50,
         "samples": 1,
-        "ratio": 1.875
+        "ratio": 1.8
       }
     },
     {
@@ -233,16 +233,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.5833333333333333,
-      "detected_at": "2026-07-06T17:46:36.079Z",
-      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 4 AM (median 20 min) — ~58% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 4 AM (mediana 20 min) — ~58% debajo de la base de 30 días de 48 min.",
+      "severity": 0.6,
+      "detected_at": "2026-07-06T20:03:25.542Z",
+      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 4 AM (median 20 min) — ~60% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 4 AM (mediana 20 min) — ~60% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 4,
         "best_median": 20,
-        "overall_median": 48,
+        "overall_median": 50,
         "samples": 1
       }
     },
