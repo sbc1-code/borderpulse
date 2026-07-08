@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T10:22:49.705Z",
-  "snapshot_at": "2026-07-08T09:39:38.900Z",
+  "generated_at": "2026-07-08T12:23:03.489Z",
+  "snapshot_at": "2026-07-08T11:30:28.947Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -69,24 +69,6 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-07-08T07:31:21.968Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 6 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 6 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 6,
-        "best_median": 0,
-        "overall_median": 25,
         "samples": 1
       }
     },
@@ -180,6 +162,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.6,
+      "detected_at": "2026-07-08T12:23:03.489Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 3 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 3 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 3,
+        "best_median": 10,
+        "overall_median": 25,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -233,24 +233,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5161290322580645,
-      "detected_at": "2026-07-08T10:22:49.705Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 30 min) — ~52% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 30 min) — ~52% debajo de la base de 30 días de 62 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 1,
-        "best_median": 30,
-        "overall_median": 62,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -284,6 +266,24 @@
         "overall_median": 90,
         "samples": 2
       }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-07-08T12:23:03.489Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 1,
+        "best_median": 30,
+        "overall_median": 60,
+        "samples": 2
+      }
     }
   ],
   "trailing_24h": [
@@ -302,24 +302,6 @@
         "overall_median": 25,
         "samples": 1,
         "ratio": 1.6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-07T11:54:50.179Z",
-      "summary_en": "Right now Otay Mesa's lightest Tuesday hour so far is 8 PM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Otay Mesa es 8 PM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 20,
-        "best_median": 30,
-        "overall_median": 90,
-        "samples": 1
       }
     }
   ]
