@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T07:31:21.968Z",
-  "snapshot_at": "2026-07-08T07:14:33.321Z",
+  "generated_at": "2026-07-08T10:22:49.705Z",
+  "snapshot_at": "2026-07-08T09:39:38.900Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -162,24 +162,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.7777777777777778,
-      "detected_at": "2026-07-08T07:31:21.968Z",
-      "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 2 AM (median 20 min) — ~78% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 2 AM (mediana 20 min) — ~78% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 20,
-        "overall_median": 90,
-        "samples": 1
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
@@ -197,6 +179,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-07-08T10:22:49.705Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 3 AM (median 25 min) — ~55% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 25 min) — ~55% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 3,
+        "best_median": 25,
+        "overall_median": 55,
+        "samples": 2
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
@@ -211,24 +211,6 @@
         "overall_median": 55,
         "samples": 3,
         "ratio": 1.5454545454545454
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.53125,
-      "detected_at": "2026-07-08T07:31:21.968Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 30 min) — ~53% below the 30-day baseline of 64 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 30 min) — ~53% debajo de la base de 30 días de 64 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 1,
-        "best_median": 30,
-        "overall_median": 64,
-        "samples": 2
       }
     },
     {
@@ -251,6 +233,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5161290322580645,
+      "detected_at": "2026-07-08T10:22:49.705Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 30 min) — ~52% below the 30-day baseline of 62 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 30 min) — ~52% debajo de la base de 30 días de 62 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 1,
+        "best_median": 30,
+        "overall_median": 62,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -265,6 +265,24 @@
         "best_median": 60,
         "overall_median": 120,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-07-08T10:22:49.705Z",
+      "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 1 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 1 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 1,
+        "best_median": 45,
+        "overall_median": 90,
+        "samples": 2
       }
     }
   ],
