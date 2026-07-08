@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T17:41:25.485Z",
-  "snapshot_at": "2026-07-08T17:08:35.728Z",
+  "generated_at": "2026-07-08T19:39:09.386Z",
+  "snapshot_at": "2026-07-08T18:44:45.766Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -215,6 +215,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.6,
+      "detected_at": "2026-07-08T19:39:09.386Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 8 AM (median 30 min) — ~60% below the 30-day baseline of 75 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 8 AM (mediana 30 min) — ~60% debajo de la base de 30 días de 75 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 8,
+        "best_median": 30,
+        "overall_median": 75,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -318,24 +336,6 @@
         "best_median": 30,
         "overall_median": 60,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-07-08T17:41:25.485Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 8 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 8 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 8,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 1
       }
     }
   ],
