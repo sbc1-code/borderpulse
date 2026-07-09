@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-09T07:40:37.677Z",
-  "snapshot_at": "2026-07-09T06:44:34.175Z",
+  "generated_at": "2026-07-09T11:07:40.429Z",
+  "snapshot_at": "2026-07-09T10:14:39.297Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -108,6 +108,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.95,
+      "detected_at": "2026-07-09T11:07:40.429Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~95% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 4,
+        "best_median": 3,
+        "overall_median": 60,
+        "samples": 1
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -129,16 +147,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-07-09T07:40:37.677Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 10 AM (median 10 min) — ~80% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 10 AM (mediana 10 min) — ~80% debajo de la base de 30 días de 50 min.",
+      "severity": 0.7916666666666666,
+      "detected_at": "2026-07-09T11:07:40.429Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 5 AM (median 10 min) — ~79% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 10 min) — ~79% debajo de la base de 30 días de 48 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 10,
+        "best_hour": 5,
         "best_median": 10,
-        "overall_median": 50,
+        "overall_median": 48,
         "samples": 1
       }
     },
@@ -174,6 +192,24 @@
         "day_label": "Thu",
         "best_hour": 8,
         "best_median": 25,
+        "overall_median": 90,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-07-09T11:07:40.429Z",
+      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 3 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 3 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 3,
+        "best_median": 30,
         "overall_median": 90,
         "samples": 1
       }
@@ -268,24 +304,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-07-09T07:40:37.677Z",
-      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 7 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 7 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 45,
-        "overall_median": 90,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
@@ -338,24 +356,6 @@
         "best_median": 30,
         "overall_median": 90,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-07-08T12:23:03.489Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 1,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 2
       }
     }
   ]
