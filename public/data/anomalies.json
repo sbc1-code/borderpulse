@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T23:11:55.927Z",
-  "snapshot_at": "2026-07-08T22:43:29.707Z",
+  "generated_at": "2026-07-09T03:41:32.439Z",
+  "snapshot_at": "2026-07-09T02:55:29.965Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -129,16 +129,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-07-08T23:11:55.927Z",
-      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 2 PM (median 4 min) — ~92% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 2 PM (mediana 4 min) — ~92% debajo de la base de 30 días de 48 min.",
+      "severity": 0.9111111111111111,
+      "detected_at": "2026-07-09T03:41:32.439Z",
+      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 2 PM (median 4 min) — ~91% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 2 PM (mediana 4 min) — ~91% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 14,
         "best_median": 4,
-        "overall_median": 48,
+        "overall_median": 45,
         "samples": 1
       }
     },
