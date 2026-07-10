@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-10T07:39:55.165Z",
-  "snapshot_at": "2026-07-10T06:50:31.334Z",
+  "generated_at": "2026-07-10T11:08:20.036Z",
+  "snapshot_at": "2026-07-10T10:22:56.974Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -34,6 +34,24 @@
         "overall_median": 90,
         "samples": 1,
         "ratio": 2.2222222222222223
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-07-10T11:08:20.036Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 3,
+        "best_median": 0,
+        "overall_median": 60,
+        "samples": 1
       }
     },
     {
@@ -201,15 +219,15 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-10T07:39:55.165Z",
-      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 11 PM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 11 PM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "severity": 0.7222222222222222,
+      "detected_at": "2026-07-10T11:08:20.036Z",
+      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 3 AM (median 25 min) — ~72% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 3 AM (mediana 25 min) — ~72% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 23,
-        "best_median": 30,
+        "best_hour": 3,
+        "best_median": 25,
         "overall_median": 90,
         "samples": 1
       }
@@ -317,60 +335,6 @@
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 10,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-07-09T07:40:37.677Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Thursday hour so far is 6 PM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Bridge I es 6 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 18,
-        "best_median": 0,
-        "overall_median": 3,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-09T07:40:37.677Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 7 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 7 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 19,
-        "best_median": 5,
-        "overall_median": 15,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5,
-      "detected_at": "2026-07-09T07:40:37.677Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 7 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 7 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
         "best_median": 30,
         "overall_median": 60,
         "samples": 1
