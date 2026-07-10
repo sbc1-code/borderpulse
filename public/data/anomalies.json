@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-10T20:26:37.903Z",
-  "snapshot_at": "2026-07-10T18:59:44.326Z",
+  "generated_at": "2026-07-10T22:08:59.936Z",
+  "snapshot_at": "2026-07-10T21:41:59.174Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -165,16 +165,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.9,
-      "detected_at": "2026-07-10T07:39:55.165Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 5 AM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 5 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-07-10T22:08:59.936Z",
+      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 5 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 5 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 5,
         "best_median": 5,
-        "overall_median": 50,
+        "overall_median": 60,
         "samples": 1
       }
     },
@@ -254,16 +254,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5964912280701755,
-      "detected_at": "2026-07-10T18:39:33.427Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~60% below the 30-day baseline of 57 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~60% debajo de la base de 30 días de 57 min.",
+      "severity": 0.603448275862069,
+      "detected_at": "2026-07-10T22:08:59.936Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~60% below the 30-day baseline of 58 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~60% debajo de la base de 30 días de 58 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 23,
-        "overall_median": 57,
+        "overall_median": 58,
         "samples": 2
       }
     },
