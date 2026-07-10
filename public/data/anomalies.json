@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-10T14:36:48.374Z",
-  "snapshot_at": "2026-07-10T15:19:54.825Z",
+  "generated_at": "2026-07-10T18:39:33.427Z",
+  "snapshot_at": "2026-07-10T17:17:51.257Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -254,16 +254,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5818181818181818,
-      "detected_at": "2026-07-10T07:39:55.165Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~58% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~58% debajo de la base de 30 días de 55 min.",
+      "severity": 0.5964912280701755,
+      "detected_at": "2026-07-10T18:39:33.427Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~60% below the 30-day baseline of 57 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~60% debajo de la base de 30 días de 57 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 23,
-        "overall_median": 55,
+        "overall_median": 57,
         "samples": 2
       }
     },
@@ -301,23 +301,6 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5454545454545454,
-      "detected_at": "2026-07-06T14:29:42.011Z",
-      "summary_en": "Heads up: El Paso - Bridge of the Americas (BOTA)'s Sunday peak hits 85 min around 7 PM — ~155% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Bridge of the Americas (BOTA) alcanza 85 min cerca de las 7 PM — ~155% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 85,
-        "overall_median": 55,
-        "samples": 3,
-        "ratio": 1.5454545454545454
       }
     },
     {
