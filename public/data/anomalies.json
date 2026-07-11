@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-11T09:41:52.209Z",
-  "snapshot_at": "2026-07-11T08:28:16.181Z",
+  "generated_at": "2026-07-11T11:09:09.559Z",
+  "snapshot_at": "2026-07-11T10:01:10.390Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -130,16 +130,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8305084745762712,
-      "detected_at": "2026-07-11T09:41:52.209Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~83% below the 30-day baseline of 59 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 59 min.",
+      "severity": 0.8275862068965517,
+      "detected_at": "2026-07-11T11:09:09.559Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~83% below the 30-day baseline of 58 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 58 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 10,
-        "overall_median": 59,
+        "overall_median": 58,
         "samples": 2
       }
     },
@@ -177,7 +177,9 @@
         "samples": 1,
         "ratio": 1.6666666666666667
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "san-ysidro",
@@ -195,9 +197,7 @@
         "overall_median": 120,
         "samples": 2
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
@@ -266,24 +266,6 @@
         "day_label": "Fri",
         "best_hour": 7,
         "best_median": 30,
-        "overall_median": 60,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-07-10T11:08:20.036Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 3,
-        "best_median": 0,
         "overall_median": 60,
         "samples": 1
       }
