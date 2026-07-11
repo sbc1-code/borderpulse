@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-11T13:36:11.738Z",
-  "snapshot_at": "2026-07-11T12:12:26.846Z",
+  "generated_at": "2026-07-11T14:58:13.229Z",
+  "snapshot_at": "2026-07-11T14:53:53.847Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -130,16 +130,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8245614035087719,
-      "detected_at": "2026-07-11T13:36:11.738Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~82% below the 30-day baseline of 57 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 10 min) — ~82% debajo de la base de 30 días de 57 min.",
+      "severity": 0.8305084745762712,
+      "detected_at": "2026-07-11T14:58:13.229Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~83% below the 30-day baseline of 59 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 59 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 10,
-        "overall_median": 57,
+        "overall_median": 59,
         "samples": 2
       }
     },
@@ -249,24 +249,6 @@
         "best_hour": 6,
         "best_median": 60,
         "overall_median": 120,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-07-10T14:36:48.374Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 7 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 7 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 7,
-        "best_median": 30,
-        "overall_median": 60,
         "samples": 1
       }
     }
