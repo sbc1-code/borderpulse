@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-10T22:08:59.936Z",
-  "snapshot_at": "2026-07-10T21:41:59.174Z",
+  "generated_at": "2026-07-11T00:02:08.279Z",
+  "snapshot_at": "2026-07-10T23:39:26.124Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -86,6 +86,24 @@
         "best_hour": 5,
         "best_median": 0,
         "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "laredo-bridge-i",
+      "port_name": "Laredo - Bridge I",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-07-11T00:02:08.279Z",
+      "summary_en": "Right now Laredo - Bridge I's lightest Friday hour so far is 5 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Bridge I es 5 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 17,
+        "best_median": 0,
+        "overall_median": 0,
         "samples": 1
       }
     },
@@ -254,16 +272,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.603448275862069,
-      "detected_at": "2026-07-10T22:08:59.936Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~60% below the 30-day baseline of 58 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~60% debajo de la base de 30 días de 58 min.",
+      "severity": 0.6101694915254237,
+      "detected_at": "2026-07-11T00:02:08.279Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~61% below the 30-day baseline of 59 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~61% debajo de la base de 30 días de 59 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 23,
-        "overall_median": 58,
+        "overall_median": 59,
         "samples": 2
       }
     },
