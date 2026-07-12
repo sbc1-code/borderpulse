@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-12T13:36:01.130Z",
-  "snapshot_at": "2026-07-12T14:14:13.849Z",
+  "generated_at": "2026-07-12T17:03:06.260Z",
+  "snapshot_at": "2026-07-12T16:27:20.919Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -290,16 +290,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.609375,
-      "detected_at": "2026-07-12T13:36:01.130Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 7 AM (median 25 min) — ~61% below the 30-day baseline of 64 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 25 min) — ~61% debajo de la base de 30 días de 64 min.",
+      "severity": 0.5901639344262295,
+      "detected_at": "2026-07-12T17:03:06.260Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 7 AM (median 25 min) — ~59% below the 30-day baseline of 61 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 25 min) — ~59% debajo de la base de 30 días de 61 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 7,
         "best_median": 25,
-        "overall_median": 64,
+        "overall_median": 61,
         "samples": 3
       }
     },
@@ -322,24 +322,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-07-11T16:02:20.629Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 10,
-        "overall_median": 60,
-        "samples": 2
-      }
-    }
-  ]
+  "trailing_24h": []
 }
