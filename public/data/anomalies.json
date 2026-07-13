@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-13T19:40:30.828Z",
-  "snapshot_at": "2026-07-13T18:58:06.960Z",
+  "generated_at": "2026-07-13T21:00:08.223Z",
+  "snapshot_at": "2026-07-13T20:19:13.025Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -51,24 +51,6 @@
         "overall_median": 45,
         "samples": 1,
         "ratio": 2.2222222222222223
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-07-13T15:43:13.173Z",
-      "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 13,
-        "best_median": 0,
-        "overall_median": 90,
-        "samples": 1
       }
     },
     {
@@ -268,5 +250,24 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1,
+      "detected_at": "2026-07-13T15:43:13.173Z",
+      "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 13,
+        "best_median": 0,
+        "overall_median": 90,
+        "samples": 1
+      }
+    }
+  ]
 }
