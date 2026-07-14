@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T13:53:35.954Z",
-  "snapshot_at": "2026-07-14T12:02:12.355Z",
+  "generated_at": "2026-07-14T15:26:01.490Z",
+  "snapshot_at": "2026-07-14T14:13:07.541Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -146,17 +146,17 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.84,
-      "detected_at": "2026-07-14T09:07:07.443Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 9 AM (median 8 min) — ~84% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 8 min) — ~84% debajo de la base de 30 días de 50 min.",
+      "severity": 0.8,
+      "detected_at": "2026-07-14T15:26:01.490Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 3 AM (median 10 min) — ~80% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 10 min) — ~80% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 9,
-        "best_median": 8,
+        "best_hour": 3,
+        "best_median": 10,
         "overall_median": 50,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -230,27 +230,27 @@
         "overall_median": 60,
         "samples": 2
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-07-13T15:43:13.173Z",
-      "summary_en": "Right now Tecate's lightest Monday hour so far is 7 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Tecate es 7 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "detected_at": "2026-07-14T15:26:01.490Z",
+      "summary_en": "Right now Tecate's lightest Tuesday hour so far is 7 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 7 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
+        "day_of_week": 2,
+        "day_label": "Tue",
         "best_hour": 7,
         "best_median": 60,
         "overall_median": 120,
-        "samples": 1
+        "samples": 3
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "laredo-bridge-i",
