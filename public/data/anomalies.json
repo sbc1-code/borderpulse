@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T11:27:09.964Z",
-  "snapshot_at": "2026-07-14T10:44:58.556Z",
+  "generated_at": "2026-07-14T13:53:35.954Z",
+  "snapshot_at": "2026-07-14T12:02:12.355Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -129,13 +129,13 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.9166666666666666,
-      "detected_at": "2026-07-14T09:07:07.443Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 5 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 5 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-07-14T13:53:35.954Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 8 PM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 8 PM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 5,
+        "best_hour": 20,
         "best_median": 5,
         "overall_median": 60,
         "samples": 1
@@ -157,24 +157,6 @@
         "best_median": 8,
         "overall_median": 50,
         "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.75,
-      "detected_at": "2026-07-14T09:07:07.443Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 5 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 5 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 5,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 1
       }
     },
     {
@@ -229,6 +211,24 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5333333333333333,
+      "detected_at": "2026-07-14T13:53:35.954Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 5 AM (median 28 min) — ~53% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 5 AM (mediana 28 min) — ~53% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 5,
+        "best_median": 28,
+        "overall_median": 60,
+        "samples": 2
       }
     }
   ],
