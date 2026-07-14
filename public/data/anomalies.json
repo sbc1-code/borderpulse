@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T09:07:07.443Z",
-  "snapshot_at": "2026-07-14T08:54:23.529Z",
+  "generated_at": "2026-07-14T11:27:09.964Z",
+  "snapshot_at": "2026-07-14T10:44:58.556Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -17,6 +17,23 @@
         "overall_median": 15,
         "samples": 5,
         "ratio": 2.6666666666666665
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1.25,
+      "detected_at": "2026-07-14T11:27:09.964Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 225,
+        "overall_median": 100,
+        "samples": 1,
+        "ratio": 2.25
       }
     },
     {
@@ -162,6 +179,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.7,
+      "detected_at": "2026-07-14T11:27:09.964Z",
+      "summary_en": "Right now Otay Mesa's lightest Tuesday hour so far is 8 PM (median 30 min) — ~70% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Otay Mesa es 8 PM (mediana 30 min) — ~70% debajo de la base de 30 días de 100 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 20,
+        "best_median": 30,
+        "overall_median": 100,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -199,23 +234,6 @@
   ],
   "trailing_24h": [
     {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.3684210526315788,
-      "detected_at": "2026-07-13T23:56:57.487Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~237% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~237% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 225,
-        "overall_median": 95,
-        "samples": 1,
-        "ratio": 2.3684210526315788
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -248,24 +266,6 @@
         "best_hour": 7,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-07-13T15:43:13.173Z",
-      "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 1 PM (median 0 min) — ~100% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 1 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 13,
-        "best_median": 0,
-        "overall_median": 90,
         "samples": 1
       }
     }
