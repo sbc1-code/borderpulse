@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T06:14:53.655Z",
-  "snapshot_at": "2026-07-14T04:16:50.848Z",
+  "generated_at": "2026-07-14T09:07:07.443Z",
+  "snapshot_at": "2026-07-14T08:54:23.529Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -17,23 +17,6 @@
         "overall_median": 15,
         "samples": 5,
         "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.3684210526315788,
-      "detected_at": "2026-07-13T23:56:57.487Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~237% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~237% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 225,
-        "overall_median": 95,
-        "samples": 1,
-        "ratio": 2.3684210526315788
       }
     },
     {
@@ -125,17 +108,35 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-07-14T09:07:07.443Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 5 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 5 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 5,
+        "best_median": 5,
+        "overall_median": 60,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.84,
-      "detected_at": "2026-07-14T06:14:53.655Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 3 AM (median 8 min) — ~84% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 8 min) — ~84% debajo de la base de 30 días de 50 min.",
+      "detected_at": "2026-07-14T09:07:07.443Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 9 AM (median 8 min) — ~84% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 9 AM (mediana 8 min) — ~84% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 3,
+        "best_hour": 9,
         "best_median": 8,
         "overall_median": 50,
         "samples": 2
@@ -143,17 +144,17 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
       "severity": 0.75,
-      "detected_at": "2026-07-13T15:43:13.173Z",
-      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 5 PM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 5 PM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-07-14T09:07:07.443Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 5 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 5 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 17,
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 5,
         "best_median": 15,
         "overall_median": 60,
         "samples": 1
@@ -161,19 +162,19 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-13T19:40:30.828Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 11 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 11 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-14T09:07:07.443Z",
+      "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 8 PM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 8 PM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 11,
-        "best_median": 20,
-        "overall_median": 60,
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 20,
+        "best_median": 40,
+        "overall_median": 90,
         "samples": 1
       }
     },
@@ -182,17 +183,36 @@
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-13T15:43:13.173Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Monday hour so far is 7 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Mariposa es 7 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-14T09:07:07.443Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Tuesday hour so far is 10 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Mariposa es 10 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 7,
-        "best_median": 15,
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 22,
+        "best_median": 20,
         "overall_median": 45,
         "samples": 1
+      }
+    }
+  ],
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1.3684210526315788,
+      "detected_at": "2026-07-13T23:56:57.487Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~237% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~237% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 225,
+        "overall_median": 95,
+        "samples": 1,
+        "ratio": 2.3684210526315788
       }
     },
     {
@@ -213,26 +233,6 @@
         "samples": 1
       }
     },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-07-13T15:43:13.173Z",
-      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 4 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 4 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 4,
-        "best_median": 45,
-        "overall_median": 90,
-        "samples": 1
-      }
-    }
-  ],
-  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "laredo-bridge-i",
