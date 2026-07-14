@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T17:18:11.550Z",
-  "snapshot_at": "2026-07-14T18:17:43.558Z",
+  "generated_at": "2026-07-14T21:03:45.762Z",
+  "snapshot_at": "2026-07-14T20:59:16.009Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -107,23 +107,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.9166666666666667,
-      "detected_at": "2026-07-08T07:31:21.968Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~192% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~192% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 230,
-        "overall_median": 120,
-        "samples": 3,
-        "ratio": 1.9166666666666667
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -139,6 +122,23 @@
         "best_median": 5,
         "overall_median": 60,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.8400000000000001,
+      "detected_at": "2026-07-14T21:03:45.762Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~184% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~184% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 230,
+        "overall_median": 125,
+        "samples": 3,
+        "ratio": 1.84
       }
     },
     {
@@ -236,16 +236,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-07-14T15:26:01.490Z",
-      "summary_en": "Right now Tecate's lightest Tuesday hour so far is 7 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 7 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "severity": 0.52,
+      "detected_at": "2026-07-14T21:03:45.762Z",
+      "summary_en": "Right now Tecate's lightest Tuesday hour so far is 7 AM (median 60 min) — ~52% below the 30-day baseline of 125 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 7 AM (mediana 60 min) — ~52% debajo de la base de 30 días de 125 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 7,
         "best_median": 60,
-        "overall_median": 120,
+        "overall_median": 125,
         "samples": 3
       }
     }
