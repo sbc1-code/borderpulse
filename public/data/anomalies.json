@@ -1,39 +1,22 @@
 {
-  "generated_at": "2026-07-14T22:59:44.400Z",
-  "snapshot_at": "2026-07-14T22:05:51.614Z",
+  "generated_at": "2026-07-15T00:00:54.287Z",
+  "snapshot_at": "2026-07-14T23:10:52.567Z",
   "active": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.6666666666666665,
-      "detected_at": "2026-07-13T00:01:14.934Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 6 PM — ~267% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 6 PM — ~267% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 40,
-        "overall_median": 15,
-        "samples": 5,
-        "ratio": 2.6666666666666665
-      }
-    },
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 1.5,
-      "detected_at": "2026-07-14T22:59:44.400Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 9 PM — ~250% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 9 PM — ~250% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.6666666666666665,
+      "detected_at": "2026-07-15T00:00:54.287Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 9 PM — ~267% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 9 PM — ~267% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
         "peak_median": 120,
-        "overall_median": 48,
+        "overall_median": 45,
         "samples": 1,
-        "ratio": 2.5
+        "ratio": 2.6666666666666665
       }
     },
     {
@@ -139,6 +122,23 @@
         "best_median": 5,
         "overall_median": 60,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.8666666666666667,
+      "detected_at": "2026-07-15T00:00:54.287Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 28 min around 6 PM — ~187% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 28 min cerca de las 6 PM — ~187% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 28,
+        "overall_median": 15,
+        "samples": 4,
+        "ratio": 1.8666666666666667
       }
     },
     {
