@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-15T12:18:35.038Z",
-  "snapshot_at": "2026-07-15T11:57:58.830Z",
+  "generated_at": "2026-07-15T14:55:33.865Z",
+  "snapshot_at": "2026-07-15T13:55:51.021Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -112,16 +112,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9193548387096774,
-      "detected_at": "2026-07-15T12:18:35.038Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 62 min.",
+      "severity": 0.921875,
+      "detected_at": "2026-07-15T14:55:33.865Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 64 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
         "best_median": 5,
-        "overall_median": 62,
+        "overall_median": 64,
         "samples": 2
       }
     },
@@ -131,7 +131,7 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.9166666666666666,
-      "detected_at": "2026-07-15T07:17:18.487Z",
+      "detected_at": "2026-07-15T14:55:33.865Z",
       "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 6 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 6 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -140,7 +140,7 @@
         "best_hour": 6,
         "best_median": 5,
         "overall_median": 60,
-        "samples": 1
+        "samples": 2
       }
     },
     {
