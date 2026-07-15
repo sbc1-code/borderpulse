@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-15T14:55:33.865Z",
-  "snapshot_at": "2026-07-15T13:55:51.021Z",
+  "generated_at": "2026-07-15T16:26:57.573Z",
+  "snapshot_at": "2026-07-15T15:26:11.945Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -105,24 +105,6 @@
         "best_median": 3,
         "overall_median": 50,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.921875,
-      "detected_at": "2026-07-15T14:55:33.865Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 64 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 64 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 5,
-        "overall_median": 64,
-        "samples": 2
       }
     },
     {
@@ -340,6 +322,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.921875,
+      "detected_at": "2026-07-15T14:55:33.865Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 64 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 2,
+        "best_median": 5,
+        "overall_median": 64,
+        "samples": 2
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "san-ysidro",
