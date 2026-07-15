@@ -1,7 +1,24 @@
 {
-  "generated_at": "2026-07-15T10:06:21.667Z",
-  "snapshot_at": "2026-07-15T08:29:06.275Z",
+  "generated_at": "2026-07-15T12:18:35.038Z",
+  "snapshot_at": "2026-07-15T11:57:58.830Z",
   "active": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1.25,
+      "detected_at": "2026-07-15T12:18:35.038Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 225,
+        "overall_median": 100,
+        "samples": 1,
+        "ratio": 2.25
+      }
+    },
     {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
@@ -95,16 +112,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.921875,
-      "detected_at": "2026-07-15T10:06:21.667Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 64 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 64 min.",
+      "severity": 0.9193548387096774,
+      "detected_at": "2026-07-15T12:18:35.038Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 62 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 62 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
         "best_median": 5,
-        "overall_median": 64,
+        "overall_median": 62,
         "samples": 2
       }
     },
@@ -183,17 +200,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.7166666666666667,
-      "detected_at": "2026-07-15T10:06:21.667Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 2 AM (median 17 min) — ~72% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 17 min) — ~72% debajo de la base de 30 días de 60 min.",
+      "severity": 0.75,
+      "detected_at": "2026-07-15T12:18:35.038Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 4 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 17,
+        "best_hour": 4,
+        "best_median": 15,
         "overall_median": 60,
-        "samples": 2
+        "samples": 1
       }
     },
     {
@@ -248,6 +265,24 @@
         "best_median": 38,
         "overall_median": 90,
         "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.55,
+      "detected_at": "2026-07-15T12:18:35.038Z",
+      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 2 AM (median 45 min) — ~55% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 2 AM (mediana 45 min) — ~55% debajo de la base de 30 días de 100 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 2,
+        "best_median": 45,
+        "overall_median": 100,
+        "samples": 1
       }
     },
     {
@@ -307,24 +342,6 @@
   "trailing_24h": [
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.55,
-      "detected_at": "2026-07-15T07:17:18.487Z",
-      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 2 AM (median 45 min) — ~55% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 2 AM (mediana 45 min) — ~55% debajo de la base de 30 días de 100 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 45,
-        "overall_median": 100,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -339,23 +356,6 @@
         "best_median": 55,
         "overall_median": 120,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.25,
-      "detected_at": "2026-07-14T11:27:09.964Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~225% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 225,
-        "overall_median": 100,
-        "samples": 1,
-        "ratio": 2.25
       }
     }
   ]
