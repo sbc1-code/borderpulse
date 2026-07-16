@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-16T12:23:04.125Z",
-  "snapshot_at": "2026-07-16T11:12:27.844Z",
+  "generated_at": "2026-07-16T15:05:53.364Z",
+  "snapshot_at": "2026-07-16T15:01:07.075Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -112,16 +112,34 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9464285714285714,
-      "detected_at": "2026-07-16T12:23:04.125Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~95% below the 30-day baseline of 56 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 56 min.",
+      "severity": 0.9454545454545454,
+      "detected_at": "2026-07-16T15:05:53.364Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~95% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 4,
         "best_median": 3,
-        "overall_median": 56,
+        "overall_median": 55,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-07-16T15:05:53.364Z",
+      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 5 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 5 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 5,
+        "best_median": 5,
+        "overall_median": 60,
         "samples": 1
       }
     },
@@ -215,19 +233,37 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.7111111111111111,
+      "detected_at": "2026-07-16T15:05:53.364Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 5 AM (median 13 min) — ~71% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 5 AM (mediana 13 min) — ~71% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 5,
+        "best_median": 13,
+        "overall_median": 45,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-16T07:25:15.476Z",
-      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 3 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 3 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "severity": 0.6470588235294117,
+      "detected_at": "2026-07-16T15:05:53.364Z",
+      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 3 AM (median 30 min) — ~65% below the 30-day baseline of 85 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 3 AM (mediana 30 min) — ~65% debajo de la base de 30 días de 85 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 3,
         "best_median": 30,
-        "overall_median": 90,
+        "overall_median": 85,
         "samples": 1
       }
     },
@@ -301,24 +337,6 @@
         "best_hour": 2,
         "best_median": 5,
         "overall_median": 65,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-07-15T14:55:33.865Z",
-      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 6 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 6 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 6,
-        "best_median": 5,
-        "overall_median": 60,
         "samples": 2
       }
     }
