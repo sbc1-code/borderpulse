@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-15T20:13:50.424Z",
-  "snapshot_at": "2026-07-15T21:39:58.618Z",
+  "generated_at": "2026-07-16T00:02:00.362Z",
+  "snapshot_at": "2026-07-15T23:40:54.147Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -179,23 +179,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.7692307692307692,
-      "detected_at": "2026-07-15T04:07:49.469Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~177% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~177% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 230,
-        "overall_median": 130,
-        "samples": 3,
-        "ratio": 1.7692307692307692
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
@@ -229,6 +212,23 @@
         "best_median": 13,
         "overall_median": 45,
         "samples": 2
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.7037037037037037,
+      "detected_at": "2026-07-16T00:02:00.362Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~170% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~170% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 230,
+        "overall_median": 135,
+        "samples": 3,
+        "ratio": 1.7037037037037037
       }
     },
     {
@@ -269,6 +269,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-16T00:02:00.362Z",
+      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 6 AM (median 60 min) — ~56% below the 30-day baseline of 135 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 6 AM (mediana 60 min) — ~56% debajo de la base de 30 días de 135 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 6,
+        "best_median": 60,
+        "overall_median": 135,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -282,24 +300,6 @@
         "best_hour": 2,
         "best_median": 45,
         "overall_median": 100,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5384615384615384,
-      "detected_at": "2026-07-15T07:17:18.487Z",
-      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 6 AM (median 60 min) — ~54% below the 30-day baseline of 130 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 6 AM (mediana 60 min) — ~54% debajo de la base de 30 días de 130 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 6,
-        "best_median": 60,
-        "overall_median": 130,
         "samples": 1
       }
     },
