@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-16T07:25:15.476Z",
-  "snapshot_at": "2026-07-16T09:03:20.143Z",
+  "generated_at": "2026-07-16T12:23:04.125Z",
+  "snapshot_at": "2026-07-16T11:12:27.844Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -95,13 +95,13 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.96,
-      "detected_at": "2026-07-16T07:25:15.476Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 6 AM (median 1 min) — ~96% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 6 AM (mediana 1 min) — ~96% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-07-16T12:23:04.125Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 8 AM (median 1 min) — ~96% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 8 AM (mediana 1 min) — ~96% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 6,
+        "best_hour": 8,
         "best_median": 1,
         "overall_median": 25,
         "samples": 1
@@ -112,16 +112,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9473684210526316,
-      "detected_at": "2026-07-16T07:25:15.476Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~95% below the 30-day baseline of 57 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 57 min.",
+      "severity": 0.9464285714285714,
+      "detected_at": "2026-07-16T12:23:04.125Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~95% below the 30-day baseline of 56 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 56 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 4,
         "best_median": 3,
-        "overall_median": 57,
+        "overall_median": 56,
         "samples": 1
       }
     },
