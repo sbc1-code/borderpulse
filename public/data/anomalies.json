@@ -1,7 +1,24 @@
 {
-  "generated_at": "2026-07-16T19:18:31.201Z",
-  "snapshot_at": "2026-07-16T19:08:33.204Z",
+  "generated_at": "2026-07-16T21:05:27.020Z",
+  "snapshot_at": "2026-07-16T20:11:39.998Z",
   "active": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "laredo-colombia-solidarity",
+      "port_name": "Laredo - Colombia Solidarity",
+      "state": "TX",
+      "severity": 19,
+      "detected_at": "2026-07-16T21:05:27.020Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 6 PM — ~2000% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 6 PM — ~2000% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 60,
+        "overall_median": 3,
+        "samples": 4,
+        "ratio": 20
+      }
+    },
     {
       "type": "sunday_spike",
       "port_slug": "otay-mesa",
@@ -77,15 +94,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-16T07:25:15.476Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-07-16T21:05:27.020Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 0,
+        "overall_median": 3,
         "samples": 1
       }
     },
@@ -112,16 +129,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9454545454545454,
-      "detected_at": "2026-07-16T15:05:53.364Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~95% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~95% debajo de la base de 30 días de 55 min.",
+      "severity": 0.9444444444444444,
+      "detected_at": "2026-07-16T21:05:27.020Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 4 AM (median 3 min) — ~94% below the 30-day baseline of 54 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 3 min) — ~94% debajo de la base de 30 días de 54 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 4,
         "best_median": 3,
-        "overall_median": 55,
+        "overall_median": 54,
         "samples": 1
       }
     },
@@ -183,16 +200,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-07-16T07:25:15.476Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 5 PM (median 30 min) — ~75% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 5 PM (mediana 30 min) — ~75% debajo de la base de 30 días de 120 min.",
+      "severity": 0.7560975609756098,
+      "detected_at": "2026-07-16T21:05:27.020Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 5 PM (median 30 min) — ~76% below the 30-day baseline of 123 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 5 PM (mediana 30 min) — ~76% debajo de la base de 30 días de 123 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 17,
         "best_median": 30,
-        "overall_median": 120,
+        "overall_median": 123,
         "samples": 1
       }
     },
@@ -269,6 +286,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.6153846153846154,
+      "detected_at": "2026-07-16T21:05:27.020Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 2 PM (median 25 min) — ~62% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 2 PM (mediana 25 min) — ~62% debajo de la base de 30 días de 65 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 14,
+        "best_median": 25,
+        "overall_median": 65,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -282,6 +317,24 @@
         "best_hour": 21,
         "best_median": 60,
         "overall_median": 135,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-16T21:05:27.020Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 1 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 1 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 13,
+        "best_median": 20,
+        "overall_median": 45,
         "samples": 1
       }
     },
@@ -321,24 +374,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.9230769230769231,
-      "detected_at": "2026-07-15T20:13:50.424Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 65 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 5,
-        "overall_median": 65,
-        "samples": 2
-      }
-    }
-  ]
+  "trailing_24h": []
 }
