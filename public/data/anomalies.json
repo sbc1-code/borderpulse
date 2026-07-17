@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-17T08:16:39.127Z",
-  "snapshot_at": "2026-07-17T06:37:34.212Z",
+  "generated_at": "2026-07-17T10:50:26.421Z",
+  "snapshot_at": "2026-07-17T08:57:44.392Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -237,16 +237,16 @@
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.6428571428571428,
-      "detected_at": "2026-07-16T23:00:49.849Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~164% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~164% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.7037037037037037,
+      "detected_at": "2026-07-17T10:50:26.421Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~170% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~170% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 18,
         "peak_median": 230,
-        "overall_median": 140,
+        "overall_median": 135,
         "samples": 3,
-        "ratio": 1.6428571428571428
+        "ratio": 1.7037037037037037
       }
     },
     {
@@ -269,37 +269,19 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.6290322580645161,
-      "detected_at": "2026-07-17T08:16:39.127Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 23 min) — ~63% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 23 min) — ~63% debajo de la base de 30 días de 62 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 2,
-        "best_median": 23,
-        "overall_median": 62,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
-      "severity": 0.6214285714285714,
-      "detected_at": "2026-07-17T08:16:39.127Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 11 AM (median 53 min) — ~62% below the 30-day baseline of 140 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 11 AM (mediana 53 min) — ~62% debajo de la base de 30 días de 140 min.",
+      "severity": 0.6074074074074074,
+      "detected_at": "2026-07-17T10:50:26.421Z",
+      "summary_en": "Right now Tecate's lightest Friday hour so far is 11 AM (median 53 min) — ~61% below the 30-day baseline of 135 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 11 AM (mediana 53 min) — ~61% debajo de la base de 30 días de 135 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 11,
         "best_median": 53,
-        "overall_median": 140,
+        "overall_median": 135,
         "samples": 2
       }
     },
@@ -319,6 +301,24 @@
         "best_median": 8,
         "overall_median": 20,
         "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5483870967741935,
+      "detected_at": "2026-07-17T10:50:26.421Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 4 AM (median 28 min) — ~55% below the 30-day baseline of 62 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 4 AM (mediana 28 min) — ~55% debajo de la base de 30 días de 62 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 4,
+        "best_median": 28,
+        "overall_median": 62,
+        "samples": 1
       }
     },
     {
