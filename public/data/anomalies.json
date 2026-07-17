@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-16T23:00:49.849Z",
-  "snapshot_at": "2026-07-16T22:28:49.282Z",
+  "generated_at": "2026-07-17T02:56:13.797Z",
+  "snapshot_at": "2026-07-17T01:04:37.516Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -272,16 +272,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6153846153846154,
-      "detected_at": "2026-07-16T21:05:27.020Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 2 PM (median 25 min) — ~62% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 2 PM (mediana 25 min) — ~62% debajo de la base de 30 días de 65 min.",
+      "severity": 0.609375,
+      "detected_at": "2026-07-17T02:56:13.797Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 2 PM (median 25 min) — ~61% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 2 PM (mediana 25 min) — ~61% debajo de la base de 30 días de 64 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 14,
         "best_median": 25,
-        "overall_median": 65,
+        "overall_median": 64,
         "samples": 1
       }
     },
@@ -323,23 +323,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-07-16T23:00:49.849Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 28 min around 6 PM — ~156% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 28 min cerca de las 6 PM — ~156% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 28,
-        "overall_median": 18,
-        "samples": 4,
-        "ratio": 1.5555555555555556
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -353,6 +336,24 @@
         "overall_median": 25,
         "samples": 4,
         "ratio": 1.52
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-07-17T02:56:13.797Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 7 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 7 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 7,
+        "best_median": 10,
+        "overall_median": 20,
+        "samples": 3
       }
     },
     {
@@ -374,5 +375,23 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-16T23:00:49.849Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 28 min around 6 PM — ~156% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 28 min cerca de las 6 PM — ~156% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 28,
+        "overall_median": 18,
+        "samples": 4,
+        "ratio": 1.5555555555555556
+      }
+    }
+  ]
 }
