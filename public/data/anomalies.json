@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-17T14:46:16.953Z",
-  "snapshot_at": "2026-07-17T15:39:13.349Z",
+  "generated_at": "2026-07-17T18:09:01.476Z",
+  "snapshot_at": "2026-07-17T18:04:52.646Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,6 +143,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.9166666666666667,
+      "detected_at": "2026-07-17T18:09:01.476Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~192% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~192% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 230,
+        "overall_median": 120,
+        "samples": 3,
+        "ratio": 1.9166666666666667
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -176,23 +193,6 @@
         "best_median": 5,
         "overall_median": 25,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.7692307692307692,
-      "detected_at": "2026-07-17T12:13:07.147Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 6 PM — ~177% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 6 PM — ~177% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 230,
-        "overall_median": 130,
-        "samples": 3,
-        "ratio": 1.7692307692307692
       }
     },
     {
@@ -268,24 +268,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5923076923076923,
-      "detected_at": "2026-07-17T12:13:07.147Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 11 AM (median 53 min) — ~59% below the 30-day baseline of 130 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 11 AM (mediana 53 min) — ~59% debajo de la base de 30 días de 130 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 11,
-        "best_median": 53,
-        "overall_median": 130,
-        "samples": 2
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
@@ -307,34 +289,34 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5161290322580645,
-      "detected_at": "2026-07-17T12:13:07.147Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 30 min) — ~52% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 30 min) — ~52% debajo de la base de 30 días de 62 min.",
+      "severity": 0.5081967213114754,
+      "detected_at": "2026-07-17T18:09:01.476Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 2 AM (median 30 min) — ~51% below the 30-day baseline of 61 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 30 min) — ~51% debajo de la base de 30 días de 61 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 30,
-        "overall_median": 62,
+        "overall_median": 61,
         "samples": 3
       }
     },
     {
       "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-07-17T05:46:52.164Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 7 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 7 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-07-17T18:09:01.476Z",
+      "summary_en": "Right now Tecate's lightest Friday hour so far is 1 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 1 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 7,
-        "best_median": 30,
-        "overall_median": 60,
+        "best_hour": 1,
+        "best_median": 60,
+        "overall_median": 120,
         "samples": 1
       }
     }
@@ -355,6 +337,24 @@
         "best_hour": 3,
         "best_median": 0,
         "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-07-17T05:46:52.164Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 7 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 7 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 7,
+        "best_median": 30,
+        "overall_median": 60,
         "samples": 1
       }
     },
