@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-18T10:21:21.231Z",
-  "snapshot_at": "2026-07-18T09:56:15.114Z",
+  "generated_at": "2026-07-18T11:55:08.297Z",
+  "snapshot_at": "2026-07-18T11:04:56.797Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -129,7 +129,7 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.85,
-      "detected_at": "2026-07-18T08:50:35.746Z",
+      "detected_at": "2026-07-18T11:55:08.297Z",
       "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 4 AM (median 15 min) — ~85% below the 30-day baseline of 100 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 4 AM (mediana 15 min) — ~85% debajo de la base de 30 días de 100 min.",
       "evidence": {
@@ -138,7 +138,7 @@
         "best_hour": 4,
         "best_median": 15,
         "overall_median": 100,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -161,6 +161,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.7777777777777778,
+      "detected_at": "2026-07-18T11:55:08.297Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 4 AM (median 20 min) — ~78% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 4 AM (mediana 20 min) — ~78% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 20,
+        "overall_median": 90,
+        "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -175,24 +193,6 @@
         "best_median": 15,
         "overall_median": 60,
         "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.7222222222222222,
-      "detected_at": "2026-07-18T08:50:35.746Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 4 AM (median 25 min) — ~72% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 4 AM (mediana 25 min) — ~72% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 4,
-        "best_median": 25,
-        "overall_median": 90,
-        "samples": 4
       }
     },
     {
