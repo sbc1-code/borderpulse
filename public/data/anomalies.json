@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-18T08:50:35.746Z",
-  "snapshot_at": "2026-07-18T08:19:03.040Z",
+  "generated_at": "2026-07-18T10:21:21.231Z",
+  "snapshot_at": "2026-07-18T09:56:15.114Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,24 +143,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-07-18T06:08:25.494Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 10,
-        "overall_median": 60,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -174,6 +156,24 @@
         "best_hour": 23,
         "best_median": 5,
         "overall_median": 25,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-07-18T10:21:21.231Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 15,
+        "overall_median": 60,
         "samples": 3
       }
     },
