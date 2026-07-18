@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-18T14:57:47.304Z",
-  "snapshot_at": "2026-07-18T14:51:30.706Z",
+  "generated_at": "2026-07-18T16:03:19.843Z",
+  "snapshot_at": "2026-07-18T15:56:21.532Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -164,16 +164,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.7647058823529411,
-      "detected_at": "2026-07-18T14:57:47.304Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 4 AM (median 20 min) — ~76% below the 30-day baseline of 85 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 4 AM (mediana 20 min) — ~76% debajo de la base de 30 días de 85 min.",
+      "severity": 0.75,
+      "detected_at": "2026-07-18T16:03:19.843Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 4 AM (median 20 min) — ~75% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 4 AM (mediana 20 min) — ~75% debajo de la base de 30 días de 80 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 4,
         "best_median": 20,
-        "overall_median": 85,
+        "overall_median": 80,
         "samples": 5
       }
     },
