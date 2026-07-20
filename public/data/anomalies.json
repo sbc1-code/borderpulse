@@ -1,24 +1,7 @@
 {
-  "generated_at": "2026-07-20T15:53:08.538Z",
-  "snapshot_at": "2026-07-20T14:32:44.518Z",
+  "generated_at": "2026-07-20T18:07:58.854Z",
+  "snapshot_at": "2026-07-20T16:14:25.979Z",
   "active": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "laredo-colombia-solidarity",
-      "port_name": "Laredo - Colombia Solidarity",
-      "state": "TX",
-      "severity": 19,
-      "detected_at": "2026-07-20T15:53:08.538Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 6 PM — ~2000% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 6 PM — ~2000% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 60,
-        "overall_median": 3,
-        "samples": 5,
-        "ratio": 20
-      }
-    },
     {
       "type": "sunday_spike",
       "port_slug": "otay-mesa",
@@ -111,15 +94,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-20T15:53:08.538Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 11 PM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 11 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
+      "detected_at": "2026-07-20T18:07:58.854Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 11 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 11 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 23,
         "best_median": 0,
-        "overall_median": 3,
+        "overall_median": 0,
         "samples": 2
       }
     },
@@ -218,20 +201,37 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-07-20T06:51:12.428Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Monday hour so far is 8 PM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Brownsville - Gateway es 8 PM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-07-20T18:07:58.854Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Monday hour so far is 11 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Brownsville - Gateway es 11 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 20,
+        "best_hour": 11,
         "best_median": 10,
         "overall_median": 20,
-        "samples": 3
+        "samples": 1
       }
     }
   ],
   "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "laredo-colombia-solidarity",
+      "port_name": "Laredo - Colombia Solidarity",
+      "state": "TX",
+      "severity": 19,
+      "detected_at": "2026-07-20T15:53:08.538Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 6 PM — ~2000% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 6 PM — ~2000% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 60,
+        "overall_median": 3,
+        "samples": 5,
+        "ratio": 20
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
