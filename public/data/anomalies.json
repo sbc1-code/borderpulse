@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-20T18:07:58.854Z",
-  "snapshot_at": "2026-07-20T16:14:25.979Z",
+  "generated_at": "2026-07-20T20:24:23.456Z",
+  "snapshot_at": "2026-07-20T20:06:02.721Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -161,24 +161,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-07-20T10:14:59.720Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 11 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 11 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 11,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -230,6 +212,24 @@
         "overall_median": 3,
         "samples": 5,
         "ratio": 20
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-20T10:14:59.720Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 11 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 11 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 11,
+        "best_median": 20,
+        "overall_median": 45,
+        "samples": 1
       }
     },
     {
