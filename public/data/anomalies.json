@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-19T23:01:59.488Z",
-  "snapshot_at": "2026-07-19T22:51:07.207Z",
+  "generated_at": "2026-07-20T03:33:13.065Z",
+  "snapshot_at": "2026-07-20T03:15:29.635Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,14 +8,14 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 11,
-      "detected_at": "2026-07-16T23:00:49.849Z",
+      "detected_at": "2026-07-20T03:33:13.065Z",
       "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 6 PM — ~1200% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 6 PM — ~1200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 18,
         "peak_median": 60,
         "overall_median": 5,
-        "samples": 4,
+        "samples": 5,
         "ratio": 12
       }
     },
@@ -24,16 +24,33 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.5,
-      "detected_at": "2026-07-18T21:54:46.703Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~250% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~250% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.25,
+      "detected_at": "2026-07-20T03:33:13.065Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 225 min around 7 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 225 min cerca de las 7 PM — ~225% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
         "peak_median": 225,
-        "overall_median": 90,
+        "overall_median": 100,
         "samples": 1,
-        "ratio": 2.5
+        "ratio": 2.25
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1.25,
+      "detected_at": "2026-07-20T03:33:13.065Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 45 min around 10 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 45 min cerca de las 10 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 45,
+        "overall_median": 20,
+        "samples": 1,
+        "ratio": 2.25
       }
     },
     {
@@ -179,24 +196,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-07-19T23:01:59.488Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 8 PM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 8 PM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 20,
-        "best_median": 5,
-        "overall_median": 25,
-        "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -208,6 +207,24 @@
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 6,
+        "best_median": 5,
+        "overall_median": 20,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-07-20T03:33:13.065Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 8 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 8 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 20,
         "best_median": 5,
         "overall_median": 20,
         "samples": 3
@@ -251,6 +268,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.62,
+      "detected_at": "2026-07-20T03:33:13.065Z",
+      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 5 AM (median 38 min) — ~62% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 5 AM (mediana 38 min) — ~62% debajo de la base de 30 días de 100 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 38,
+        "overall_median": 100,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
@@ -264,24 +299,6 @@
         "best_hour": 6,
         "best_median": 18,
         "overall_median": 45,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5777777777777777,
-      "detected_at": "2026-07-19T09:07:08.635Z",
-      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 5 AM (median 38 min) — ~58% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 5 AM (mediana 38 min) — ~58% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 38,
-        "overall_median": 90,
         "samples": 2
       }
     },
