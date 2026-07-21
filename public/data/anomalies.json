@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-21T11:49:41.303Z",
-  "snapshot_at": "2026-07-21T10:00:42.849Z",
+  "generated_at": "2026-07-21T16:25:23.865Z",
+  "snapshot_at": "2026-07-21T15:54:17.555Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -236,17 +236,17 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.5333333333333333,
-      "detected_at": "2026-07-21T11:49:41.303Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 5 AM (median 28 min) — ~53% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 5 AM (mediana 28 min) — ~53% debajo de la base de 30 días de 60 min.",
+      "severity": 0.5833333333333333,
+      "detected_at": "2026-07-21T16:25:23.865Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 7 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 7 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 5,
-        "best_median": 28,
+        "best_hour": 7,
+        "best_median": 25,
         "overall_median": 60,
-        "samples": 2
+        "samples": 4
       }
     },
     {
@@ -255,7 +255,7 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-07-21T11:49:41.303Z",
+      "detected_at": "2026-07-21T16:25:23.865Z",
       "summary_en": "Right now Tecate's lightest Tuesday hour so far is 7 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Tecate es 7 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
       "evidence": {
@@ -264,27 +264,9 @@
         "best_hour": 7,
         "best_median": 60,
         "overall_median": 120,
-        "samples": 3
+        "samples": 4
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "laredo-colombia-solidarity",
-      "port_name": "Laredo - Colombia Solidarity",
-      "state": "TX",
-      "severity": 19,
-      "detected_at": "2026-07-20T15:53:08.538Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 6 PM — ~2000% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 6 PM — ~2000% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 60,
-        "overall_median": 3,
-        "samples": 5,
-        "ratio": 20
-      }
-    }
-  ]
+  "trailing_24h": []
 }
