@@ -1,7 +1,24 @@
 {
-  "generated_at": "2026-07-21T16:25:23.865Z",
-  "snapshot_at": "2026-07-21T17:18:12.218Z",
+  "generated_at": "2026-07-21T20:20:07.178Z",
+  "snapshot_at": "2026-07-21T20:18:08.241Z",
   "active": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "laredo-colombia-solidarity",
+      "port_name": "Laredo - Colombia Solidarity",
+      "state": "TX",
+      "severity": 19,
+      "detected_at": "2026-07-21T20:20:07.178Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 6 PM — ~2000% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 6 PM — ~2000% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 60,
+        "overall_median": 3,
+        "samples": 5,
+        "ratio": 20
+      }
+    },
     {
       "type": "sunday_spike",
       "port_slug": "otay-mesa",
@@ -76,15 +93,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-21T11:49:41.303Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-07-21T20:20:07.178Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 0,
+        "overall_median": 3,
         "samples": 1
       }
     },
