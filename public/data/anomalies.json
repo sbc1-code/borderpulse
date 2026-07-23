@@ -1,24 +1,7 @@
 {
-  "generated_at": "2026-07-23T21:08:32.725Z",
-  "snapshot_at": "2026-07-23T20:11:21.896Z",
+  "generated_at": "2026-07-23T23:00:10.167Z",
+  "snapshot_at": "2026-07-23T22:32:18.417Z",
   "active": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "laredo-colombia-solidarity",
-      "port_name": "Laredo - Colombia Solidarity",
-      "state": "TX",
-      "severity": 20,
-      "detected_at": "2026-07-23T17:26:36.771Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 8 PM — ~2100% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 8 PM — ~2100% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 63,
-        "overall_median": 3,
-        "samples": 2,
-        "ratio": 21
-      }
-    },
     {
       "type": "sunday_spike",
       "port_slug": "otay-mesa",
@@ -110,15 +93,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-23T17:26:36.771Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
+      "detected_at": "2026-07-23T23:00:10.167Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 1,
         "best_median": 0,
-        "overall_median": 3,
+        "overall_median": 0,
         "samples": 1
       }
     },
@@ -340,6 +323,23 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "laredo-colombia-solidarity",
+      "port_name": "Laredo - Colombia Solidarity",
+      "state": "TX",
+      "severity": 20,
+      "detected_at": "2026-07-23T17:26:36.771Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 8 PM — ~2100% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 8 PM — ~2100% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 63,
+        "overall_median": 3,
+        "samples": 2,
+        "ratio": 21
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "nogales-deconcini",
