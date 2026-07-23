@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-23T17:26:36.771Z",
-  "snapshot_at": "2026-07-23T17:22:16.957Z",
+  "generated_at": "2026-07-23T19:23:47.836Z",
+  "snapshot_at": "2026-07-23T18:45:35.868Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -336,6 +336,24 @@
         "best_median": 60,
         "overall_median": 120,
         "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-07-23T19:23:47.836Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Thursday hour so far is 8 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Eagle Pass - Bridge I es 8 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 8,
+        "best_median": 30,
+        "overall_median": 60,
+        "samples": 1
       }
     }
   ],
