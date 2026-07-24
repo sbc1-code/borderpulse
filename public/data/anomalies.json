@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-24T12:22:25.494Z",
-  "snapshot_at": "2026-07-24T11:41:18.234Z",
+  "generated_at": "2026-07-24T14:59:14.561Z",
+  "snapshot_at": "2026-07-24T13:06:07.480Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -93,7 +93,7 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-07-24T07:34:57.584Z",
+      "detected_at": "2026-07-24T14:59:14.561Z",
       "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 6 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 6 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -102,7 +102,7 @@
         "best_hour": 6,
         "best_median": 0,
         "overall_median": 50,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -178,38 +178,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.9444444444444444,
-      "detected_at": "2026-07-24T10:23:12.024Z",
-      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 6 AM (median 5 min) — ~94% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 6 AM (mediana 5 min) — ~94% debajo de la base de 30 días de 90 min.",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-07-24T14:59:14.561Z",
+      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 6 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 6 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 6,
         "best_median": 5,
-        "overall_median": 90,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-07-24T07:34:57.584Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 7 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 7 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 7,
-        "best_median": 5,
         "overall_median": 60,
-        "samples": 1
+        "samples": 3
       }
     },
     {
@@ -232,6 +214,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-07-24T14:59:14.561Z",
+      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 6 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 6 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 6,
+        "best_median": 10,
+        "overall_median": 90,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -250,6 +250,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.75,
+      "detected_at": "2026-07-24T14:59:14.561Z",
+      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 6 AM (median 30 min) — ~75% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 6 AM (mediana 30 min) — ~75% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 6,
+        "best_median": 30,
+        "overall_median": 120,
+        "samples": 3
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -263,24 +281,6 @@
         "best_hour": 0,
         "best_median": 5,
         "overall_median": 20,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-24T10:23:12.024Z",
-      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 2 AM (median 40 min) — ~67% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 2 AM (mediana 40 min) — ~67% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 2,
-        "best_median": 40,
-        "overall_median": 120,
         "samples": 1
       }
     },
@@ -304,24 +304,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-07-24T12:22:25.494Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 8 AM (median 8 min) — ~60% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 8 AM (mediana 8 min) — ~60% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 8,
-        "best_median": 8,
-        "overall_median": 20,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -336,6 +318,24 @@
         "best_median": 60,
         "overall_median": 120,
         "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-07-24T14:59:14.561Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 6 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 6 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 6,
+        "best_median": 10,
+        "overall_median": 20,
+        "samples": 2
       }
     },
     {
