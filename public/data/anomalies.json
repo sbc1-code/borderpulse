@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-07-24T10:23:12.024Z",
-  "snapshot_at": "2026-07-24T09:53:52.552Z",
+  "generated_at": "2026-07-24T12:22:25.494Z",
+  "snapshot_at": "2026-07-24T11:41:18.234Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 20,
-      "detected_at": "2026-07-24T10:23:12.024Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 8 PM — ~2100% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 8 PM — ~2100% de la mediana de 30 días. Planea alrededor.",
+      "severity": 11.6,
+      "detected_at": "2026-07-24T12:22:25.494Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 8 PM — ~1260% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 8 PM — ~1260% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
         "peak_median": 63,
-        "overall_median": 3,
+        "overall_median": 5,
         "samples": 2,
-        "ratio": 21
+        "ratio": 12.6
       }
     },
     {
@@ -146,15 +146,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-24T10:23:12.024Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
+      "detected_at": "2026-07-24T12:22:25.494Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 3,
+        "overall_median": 5,
         "samples": 1
       }
     },
@@ -232,19 +232,19 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-07-24T07:34:57.584Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 6 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 6 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "severity": 0.8148148148148149,
+      "detected_at": "2026-07-24T12:22:25.494Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Friday hour so far is 1 AM (median 10 min) — ~81% below the 30-day baseline of 54 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 10 min) — ~81% debajo de la base de 30 días de 54 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 6,
-        "best_median": 5,
-        "overall_median": 20,
+        "best_hour": 1,
+        "best_median": 10,
+        "overall_median": 54,
         "samples": 1
       }
     },
@@ -304,6 +304,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.6,
+      "detected_at": "2026-07-24T12:22:25.494Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 8 AM (median 8 min) — ~60% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 8 AM (mediana 8 min) — ~60% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 8,
+        "best_median": 8,
+        "overall_median": 20,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -339,24 +357,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.8148148148148149,
-      "detected_at": "2026-07-24T07:34:57.584Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Friday hour so far is 1 AM (median 10 min) — ~81% below the 30-day baseline of 54 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 10 min) — ~81% debajo de la base de 30 días de 54 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 1,
-        "best_median": 10,
-        "overall_median": 54,
-        "samples": 1
-      }
-    }
-  ]
+  "trailing_24h": []
 }
