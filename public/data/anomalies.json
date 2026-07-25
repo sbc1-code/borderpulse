@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-25T11:14:20.882Z",
-  "snapshot_at": "2026-07-25T10:26:05.492Z",
+  "generated_at": "2026-07-25T13:43:26.631Z",
+  "snapshot_at": "2026-07-25T12:46:36.250Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -196,6 +196,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-07-25T13:43:26.631Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 4 AM (median 20 min) — ~83% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 4 AM (mediana 20 min) — ~83% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 20,
+        "overall_median": 120,
+        "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -214,38 +232,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-25T11:14:20.882Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 40 min) — ~67% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 40 min) — ~67% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 40,
-        "overall_median": 120,
-        "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-25T07:21:32.628Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 4 AM (median 25 min) — ~67% below the 30-day baseline of 75 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 4 AM (mediana 25 min) — ~67% debajo de la base de 30 días de 75 min.",
+      "severity": 0.7333333333333334,
+      "detected_at": "2026-07-25T13:43:26.631Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 4 AM (median 20 min) — ~73% below the 30-day baseline of 75 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 4 AM (mediana 20 min) — ~73% debajo de la base de 30 días de 75 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 4,
-        "best_median": 25,
+        "best_median": 20,
         "overall_median": 75,
-        "samples": 4
+        "samples": 5
       }
     },
     {
@@ -271,17 +271,17 @@
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-07-25T07:21:32.628Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Saturday hour so far is 6 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Pharr es 6 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "severity": 0.6,
+      "detected_at": "2026-07-25T13:43:26.631Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Saturday hour so far is 6 AM (median 8 min) — ~60% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Pharr es 6 AM (mediana 8 min) — ~60% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 6,
-        "best_median": 10,
+        "best_median": 8,
         "overall_median": 20,
-        "samples": 1
+        "samples": 2
       }
     }
   ],
