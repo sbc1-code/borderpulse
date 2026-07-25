@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-25T07:21:32.628Z",
-  "snapshot_at": "2026-07-25T06:39:37.626Z",
+  "generated_at": "2026-07-25T09:53:01.312Z",
+  "snapshot_at": "2026-07-25T08:50:51.505Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -164,16 +164,16 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.8888888888888888,
-      "detected_at": "2026-07-25T07:21:32.628Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 6 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 6 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "detected_at": "2026-07-25T09:53:01.312Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 1 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 1 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 6,
+        "best_hour": 1,
         "best_median": 10,
         "overall_median": 90,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -319,42 +319,6 @@
         "best_hour": 4,
         "best_median": 1,
         "overall_median": 55,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-07-24T07:34:57.584Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Friday hour so far is 5 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Bridge I es 5 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 17,
-        "best_median": 0,
-        "overall_median": 0,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-07-24T07:34:57.584Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 7 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 7 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 7,
-        "best_median": 30,
-        "overall_median": 60,
         "samples": 1
       }
     }
