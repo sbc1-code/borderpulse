@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-25T20:57:14.573Z",
-  "snapshot_at": "2026-07-25T21:25:23.738Z",
+  "generated_at": "2026-07-26T00:02:45.420Z",
+  "snapshot_at": "2026-07-25T23:32:05.132Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -236,16 +236,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-07-25T11:14:20.882Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 4 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 4 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "severity": 0.6774193548387097,
+      "detected_at": "2026-07-26T00:02:45.420Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 4 AM (median 20 min) — ~68% below the 30-day baseline of 62 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 4 AM (mediana 20 min) — ~68% debajo de la base de 30 días de 62 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 4,
         "best_median": 20,
-        "overall_median": 60,
+        "overall_median": 62,
         "samples": 3
       }
     },
