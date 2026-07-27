@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-27T15:44:51.480Z",
-  "snapshot_at": "2026-07-27T13:53:08.907Z",
+  "generated_at": "2026-07-27T17:45:50.805Z",
+  "snapshot_at": "2026-07-27T16:18:03.706Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,23 +72,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1.2222222222222223,
-      "detected_at": "2026-07-27T04:39:25.588Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 100 min around 7 PM — ~222% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 100 min cerca de las 7 PM — ~222% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 100,
-        "overall_median": 45,
-        "samples": 1,
-        "ratio": 2.2222222222222223
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
@@ -110,16 +93,33 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-07-27T15:44:51.480Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Monday hour so far is 6 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Mariposa es 6 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "detected_at": "2026-07-27T17:45:50.805Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Monday hour so far is 6 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Mariposa es 6 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 6,
         "best_median": 0,
-        "overall_median": 45,
+        "overall_median": 50,
         "samples": 1
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-07-27T17:45:50.805Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 100 min around 7 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 100 min cerca de las 7 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 100,
+        "overall_median": 50,
+        "samples": 1,
+        "ratio": 2
       }
     },
     {
@@ -146,16 +146,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-07-27T08:34:26.481Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 11 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 11 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-07-27T17:45:50.805Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 11 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 11 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 23,
+        "best_hour": 11,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 2
+        "samples": 1
       }
     },
     {
