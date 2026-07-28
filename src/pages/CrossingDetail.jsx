@@ -630,9 +630,17 @@ export default function CrossingDetail() {
                     ? 'ring-2 ring-slate-900 dark:ring-white'
                     : '';
 
+                  // Name the smoothing window in the tooltip when one was used.
+                  // The cell is labelled with a single hour but the estimate can
+                  // pool up to two hours either side, and the number of samples
+                  // only makes sense next to the span it was drawn from.
+                  const w = slot?.window_hours || 0;
+                  const span = w > 0
+                    ? `${formatHour12((h - w + 24) % 24, language)}-${formatHour12((h + w) % 24, language)}`
+                    : formatHour12(h, language);
                   const title = sparse
                     ? (language === 'en' ? 'Not enough data' : 'Datos insuficientes')
-                    : `${formatHour12(h, language)} · ${language === 'en' ? 'median' : 'mediana'} ${val} min · n=${samples}`;
+                    : `${formatHour12(h, language)} · ${language === 'en' ? 'median' : 'mediana'} ${val} min · n=${samples}${w > 0 ? ` (${span})` : ''}`;
 
                   return (
                     <div key={h} className="flex flex-col items-center gap-1">

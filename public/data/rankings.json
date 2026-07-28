@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T00:32:56.827Z",
+  "generated_at": "2026-07-28T01:01:08.495Z",
   "lookback_days": 30,
   "source": "U.S. Customs and Border Protection",
   "count": 35,
@@ -12,7 +12,7 @@
       "overall_median": 120,
       "best_hour": 6,
       "best_median": 83,
-      "sample_count": 386
+      "sample_count": 387
     },
     {
       "slug": "tecate",
@@ -22,7 +22,7 @@
       "overall_median": 120,
       "best_hour": 7,
       "best_median": 60,
-      "sample_count": 310
+      "sample_count": 311
     },
     {
       "slug": "otay-mesa",
@@ -30,9 +30,9 @@
       "name": "Otay Mesa",
       "state": "CA",
       "overall_median": 90,
-      "best_hour": 2,
-      "best_median": 48,
-      "sample_count": 358
+      "best_hour": 6,
+      "best_median": 60,
+      "sample_count": 359
     },
     {
       "slug": "calexico-west",
@@ -40,9 +40,9 @@
       "name": "Calexico - West",
       "state": "CA",
       "overall_median": 70,
-      "best_hour": 20,
-      "best_median": 35,
-      "sample_count": 383
+      "best_hour": 4,
+      "best_median": 45,
+      "sample_count": 384
     },
     {
       "slug": "el-paso-bridge-of-the-americas-bota",
@@ -50,9 +50,9 @@
       "name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "overall_median": 65,
-      "best_hour": 1,
-      "best_median": 13,
-      "sample_count": 356
+      "best_hour": 3,
+      "best_median": 25,
+      "sample_count": 357
     },
     {
       "slug": "calexico-east",
@@ -62,7 +62,7 @@
       "overall_median": 60,
       "best_hour": 6,
       "best_median": 5,
-      "sample_count": 283
+      "sample_count": 284
     },
     {
       "slug": "eagle-pass-bridge-i",
@@ -70,8 +70,8 @@
       "name": "Eagle Pass - Bridge I",
       "state": "TX",
       "overall_median": 60,
-      "best_hour": 8,
-      "best_median": 30,
+      "best_hour": 10,
+      "best_median": 45,
       "sample_count": 30
     },
     {
@@ -80,9 +80,9 @@
       "name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "overall_median": 55,
-      "best_hour": 21,
+      "best_hour": 8,
       "best_median": 20,
-      "sample_count": 377
+      "sample_count": 378
     },
     {
       "slug": "santa-teresa-santa-teresa-port-of-entry",
@@ -90,9 +90,9 @@
       "name": "Santa Teresa - Santa Teresa Port of Entry",
       "state": "NM",
       "overall_median": 55,
-      "best_hour": 21,
-      "best_median": 33,
-      "sample_count": 295
+      "best_hour": 6,
+      "best_median": 38,
+      "sample_count": 296
     },
     {
       "slug": "el-paso-paso-del-norte-pdn",
@@ -102,7 +102,7 @@
       "overall_median": 54,
       "best_hour": 4,
       "best_median": 25,
-      "sample_count": 377
+      "sample_count": 378
     },
     {
       "slug": "laredo-bridge-ii",
@@ -111,8 +111,8 @@
       "state": "TX",
       "overall_median": 50,
       "best_hour": 4,
-      "best_median": 3,
-      "sample_count": 387
+      "best_median": 0,
+      "sample_count": 388
     },
     {
       "slug": "nogales-mariposa",
@@ -122,7 +122,7 @@
       "overall_median": 50,
       "best_hour": 6,
       "best_median": 0,
-      "sample_count": 316
+      "sample_count": 317
     },
     {
       "slug": "hidalgo-pharr-anzalduas-international-bridge",
@@ -132,7 +132,7 @@
       "overall_median": 50,
       "best_hour": 6,
       "best_median": 10,
-      "sample_count": 264
+      "sample_count": 265
     },
     {
       "slug": "nogales-deconcini",
@@ -140,9 +140,9 @@
       "name": "Nogales - Deconcini",
       "state": "AZ",
       "overall_median": 45,
-      "best_hour": 5,
-      "best_median": 27,
-      "sample_count": 386
+      "best_hour": 8,
+      "best_median": 30,
+      "sample_count": 387
     },
     {
       "slug": "brownsville-veterans-international",
@@ -151,8 +151,8 @@
       "state": "TX",
       "overall_median": 45,
       "best_hour": 7,
-      "best_median": 12,
-      "sample_count": 338
+      "best_median": 13,
+      "sample_count": 339
     },
     {
       "slug": "progreso-donna-international-bridge",
@@ -160,9 +160,9 @@
       "name": "Progreso - Donna International Bridge",
       "state": "TX",
       "overall_median": 45,
-      "best_hour": 4,
-      "best_median": 8,
-      "sample_count": 294
+      "best_hour": 6,
+      "best_median": 15,
+      "sample_count": 295
     },
     {
       "slug": "eagle-pass-bridge-ii",
@@ -172,7 +172,7 @@
       "overall_median": 40,
       "best_hour": 3,
       "best_median": 10,
-      "sample_count": 388
+      "sample_count": 389
     },
     {
       "slug": "douglas-raul-hector-castro",
@@ -182,7 +182,7 @@
       "overall_median": 35,
       "best_hour": 0,
       "best_median": 1,
-      "sample_count": 387
+      "sample_count": 388
     },
     {
       "slug": "del-rio",
@@ -192,7 +192,7 @@
       "overall_median": 30,
       "best_hour": 2,
       "best_median": 0,
-      "sample_count": 375
+      "sample_count": 376
     },
     {
       "slug": "san-luis-san-luis-i",
@@ -200,9 +200,9 @@
       "name": "San Luis - San Luis I",
       "state": "AZ",
       "overall_median": 25,
-      "best_hour": 6,
-      "best_median": 14,
-      "sample_count": 388
+      "best_hour": 2,
+      "best_median": 5,
+      "sample_count": 389
     },
     {
       "slug": "marcelino-serna-tornillo",
@@ -212,7 +212,7 @@
       "overall_median": 25,
       "best_hour": 22,
       "best_median": 10,
-      "sample_count": 303
+      "sample_count": 304
     },
     {
       "slug": "presidio-presidio-port-of-entry",
@@ -220,9 +220,9 @@
       "name": "Presidio - PRESIDIO PORT OF ENTRY",
       "state": "TX",
       "overall_median": 20,
-      "best_hour": 2,
+      "best_hour": 6,
       "best_median": 0,
-      "sample_count": 388
+      "sample_count": 389
     },
     {
       "slug": "brownsville-gateway",
@@ -232,7 +232,7 @@
       "overall_median": 20,
       "best_hour": 23,
       "best_median": 5,
-      "sample_count": 381
+      "sample_count": 382
     },
     {
       "slug": "brownsville-b-and-m",
@@ -242,7 +242,7 @@
       "overall_median": 20,
       "best_hour": 23,
       "best_median": 5,
-      "sample_count": 380
+      "sample_count": 381
     },
     {
       "slug": "brownsville-los-indios",
@@ -251,8 +251,8 @@
       "state": "TX",
       "overall_median": 20,
       "best_hour": 6,
-      "best_median": 3,
-      "sample_count": 242
+      "best_median": 0,
+      "sample_count": 243
     },
     {
       "slug": "hidalgo-pharr-pharr",
@@ -270,9 +270,9 @@
       "name": "Progreso - Progreso International Bridge",
       "state": "TX",
       "overall_median": 15,
-      "best_hour": 3,
-      "best_median": 4,
-      "sample_count": 331
+      "best_hour": 4,
+      "best_median": 3,
+      "sample_count": 332
     },
     {
       "slug": "andrade",
@@ -282,7 +282,7 @@
       "overall_median": 15,
       "best_hour": 12,
       "best_median": 10,
-      "sample_count": 318
+      "sample_count": 319
     },
     {
       "slug": "naco",
@@ -292,7 +292,7 @@
       "overall_median": 10,
       "best_hour": 21,
       "best_median": 1,
-      "sample_count": 316
+      "sample_count": 317
     },
     {
       "slug": "columbus",
@@ -300,9 +300,9 @@
       "name": "Columbus",
       "state": "NM",
       "overall_median": 5,
-      "best_hour": 1,
+      "best_hour": 5,
       "best_median": 0,
-      "sample_count": 385
+      "sample_count": 386
     },
     {
       "slug": "roma",
@@ -312,7 +312,7 @@
       "overall_median": 5,
       "best_hour": 6,
       "best_median": 0,
-      "sample_count": 347
+      "sample_count": 348
     },
     {
       "slug": "rio-grande-city",
@@ -320,9 +320,9 @@
       "name": "Rio Grande City",
       "state": "TX",
       "overall_median": 5,
-      "best_hour": 6,
+      "best_hour": 23,
       "best_median": 0,
-      "sample_count": 298
+      "sample_count": 299
     },
     {
       "slug": "fort-hancock",
@@ -332,17 +332,17 @@
       "overall_median": 5,
       "best_hour": 18,
       "best_median": 5,
-      "sample_count": 295
+      "sample_count": 296
     },
     {
       "slug": "laredo-colombia-solidarity",
       "port_number": "230403",
       "name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "overall_median": 3,
+      "overall_median": 5,
       "best_hour": 23,
       "best_median": 0,
-      "sample_count": 292
+      "sample_count": 293
     },
     {
       "slug": "lukeville",
@@ -352,7 +352,7 @@
       "overall_median": 2,
       "best_hour": 11,
       "best_median": 0,
-      "sample_count": 275
+      "sample_count": 276
     }
   ]
 }

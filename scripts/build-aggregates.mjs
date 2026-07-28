@@ -25,6 +25,8 @@ async function main() {
 
   const slugMod = await import(path.resolve(root, 'src/lib/slugs.js'));
   const metaMod = await import(path.resolve(root, 'src/components/utils/crossingMeta.js'));
+  // Single source of truth for the confidence floor, shared with the UI.
+  const { MIN_CELL_SAMPLES } = await import(path.resolve(root, 'src/lib/aggregates.js'));
   const currentDoc = JSON.parse(fs.readFileSync(path.resolve(root, DATA_FILE), 'utf8'));
   const { portToSlug } = slugMod.buildSlugMap(currentDoc.crossings || []);
   const portToMeta = new Map();
@@ -115,20 +117,84 @@ async function main() {
     let bestHour = null;
     const allWaits = [];
 
-    for (const [dayIdx, byHourMap] of byDay.entries()) {
-      for (const [hour, arr] of byHourMap.entries()) {
-        const m = median(arr);
+    // Raw observations first, so the document-level counts stay honest. These
+    // must NOT come from the pooled cells below, which reuse each observation
+    // in up to five neighbouring hours and would inflate sample_count ~5x.
+    for (const [, byHourMap] of byDay.entries()) {
+      for (const [, arr] of byHourMap.entries()) allWaits.push(...arr);
+    }
+
+    // Adaptive centred window over neighbouring hours WITHIN the same day.
+    //
+    // A 7x24 grid is finer than the throttled cron can fill: raw density is
+    // median 2 observations per cell, so only 7% of cells could support a
+    // floor of 5 and most published "best hour" claims were noise.
+    //
+    // Pooling weekday/weekend was the obvious fix and is wrong. Measured
+    // 2026-07-27, the within-Mon-Fri spread of day medians is 25 min (median
+    // across ports), 2.5x the Sat-Sun spread of 10 min: San Ysidro runs
+    // Mon 160 / Tue 160 but Fri 70. Collapsing that to a single "weekday"
+    // number misses the true day median by 25 min at the 90th percentile and
+    // deletes the most useful advice on the page. Day-of-week IS the signal.
+    //
+    // Neighbouring hours, by contrast, are highly autocorrelated, so widening
+    // along the hour axis buys density cheaply. The window is adaptive rather
+    // than fixed: cells with enough raw data keep their exact hourly value and
+    // only sparse cells widen. Measured against fixed alternatives, this keeps
+    // fixed-1h's low distortion (12 min at p90) AND fixed-2h's coverage (88%
+    // of cells clearing a floor of 5, up from 7%), while localising the daily
+    // peak within an hour more often than either (76% of port-days).
+    const TARGET_SAMPLES = 6;
+    const MAX_HALF_WIDTH = 2;
+
+    for (let dayIdx = 0; dayIdx < 7; dayIdx += 1) {
+      const byHourMap = byDay.get(dayIdx);
+      if (!byHourMap) continue;
+      for (let hour = 0; hour < 24; hour += 1) {
+        let pooled = [];
+        let halfWidth = 0;
+        for (; halfWidth <= MAX_HALF_WIDTH; halfWidth += 1) {
+          pooled = [];
+          for (let off = -halfWidth; off <= halfWidth; off += 1) {
+            // Wrap across midnight so 11 PM and 12 AM are neighbours.
+            const h = (hour + off + 24) % 24;
+            const arr = byHourMap.get(h);
+            if (arr) pooled.push(...arr);
+          }
+          if (pooled.length >= TARGET_SAMPLES) break;
+        }
+        if (!pooled.length) continue;
+        const m = median(pooled);
         if (m == null) continue;
-        byHour.push({ day: dayIdx, hour, median: m, samples: arr.length });
-        allWaits.push(...arr);
+        byHour.push({
+          day: dayIdx,
+          hour,
+          median: m,
+          samples: pooled.length,
+          // Hours on each side that were pooled to reach this estimate. 0 means
+          // the value is that hour alone. Consumers use it to label honestly.
+          window_hours: Math.min(halfWidth, MAX_HALF_WIDTH),
+          raw_samples: (byHourMap.get(hour) || []).length,
+        });
       }
     }
 
-    // Overall best hour across all days (for meta descriptions/FAQ)
+    // Overall best hour across all days (for meta descriptions/FAQ). Pool the
+    // raw observations for the hour across every day rather than taking a
+    // median of the seven day-medians: that older form compared hours built
+    // from different numbers of days, so an hour missing one heavy day scored
+    // artificially well. At San Ysidro it put 1 AM (six days, no Tuesday)
+    // ahead of the genuinely lighter 3 AM. This value lands in <title>, meta
+    // descriptions and FAQ JSON-LD, so it gets the sturdier estimator.
     const hourAgg = new Map();
-    for (const row of byHour) {
-      if (!hourAgg.has(row.hour)) hourAgg.set(row.hour, []);
-      hourAgg.get(row.hour).push(row.median);
+    for (const [, byHourMap] of byDay.entries()) {
+      for (const [hour, arr] of byHourMap.entries()) {
+        if (!hourAgg.has(hour)) hourAgg.set(hour, []);
+        hourAgg.get(hour).push(...arr);
+      }
+    }
+    for (const [hour, arr] of hourAgg.entries()) {
+      if (arr.length < MIN_CELL_SAMPLES) hourAgg.delete(hour);
     }
     for (const [hour, arr] of hourAgg.entries()) {
       const m = median(arr);

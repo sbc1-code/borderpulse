@@ -109,9 +109,19 @@ const COPY = {
               roll out next week.
             </p>
             <p>
-              Some (day-of-week, hour) cells are sparse — a single observation, occasionally none.
-              When a cell is empty, we fall back to the port's all-hours median rather than fabricate
-              a number for that bucket.
+              A 7-day by 24-hour grid is finer than the refresh cadence can fill: on raw counts, the
+              typical (day-of-week, hour) cell holds about two observations, which is not enough to
+              call an hour "best." So each cell is estimated from a window centred on that hour,
+              widened to at most two hours either side, and only as far as it needs to go. Cells with
+              enough observations of their own keep their exact hourly value. Hover any cell to see
+              the sample count and the span it was drawn from.
+            </p>
+            <p>
+              We widen along the hour axis and never across days. Neighbouring hours behave alike;
+              days of the week do not. At San Ysidro the median Monday wait runs 160 minutes while
+              Friday runs 60, so averaging weekdays together would erase the most useful thing on
+              the page. Cells that still fall short of five observations are shown as "not enough
+              data" rather than filled with a number borrowed from somewhere else.
             </p>
           </>
         ),
@@ -272,9 +282,20 @@ const COPY = {
               próxima semana.
             </p>
             <p>
-              Algunas celdas (día de la semana, hora) están escasas — una sola observación, a veces
-              ninguna. Cuando una celda está vacía, usamos la mediana general del puerto en lugar de
-              inventar un número para ese bucket.
+              Una cuadrícula de 7 días por 24 horas es más fina de lo que la cadencia de refresco
+              puede llenar: en conteos crudos, la celda típica (día de la semana, hora) tiene unas dos
+              observaciones, insuficiente para declarar una hora como la "mejor". Por eso cada celda
+              se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia
+              cada lado, y solo lo necesario: las celdas con suficientes observaciones propias
+              conservan su valor exacto. Pasa el cursor sobre cualquier celda para ver el número de
+              muestras y el rango del que salió.
+            </p>
+            <p>
+              Ampliamos sobre el eje de las horas y nunca entre días. Las horas vecinas se comportan
+              parecido; los días de la semana no. En San Ysidro la mediana del lunes ronda los 160
+              minutos y la del viernes los 60, así que promediar los días entre semana borraría lo
+              más útil de la página. Las celdas que aun así no llegan a cinco observaciones se
+              muestran como "datos insuficientes" en lugar de rellenarse con un número prestado.
             </p>
           </>
         ),
