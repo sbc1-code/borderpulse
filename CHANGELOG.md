@@ -27,14 +27,12 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 - Methodology paragraphs in those posts described the old per-cell median and,
   in some, a fallback removed earlier that day. They now describe the window.
 
-### Added
+### Added (content tooling)
 - `scripts/verify-blog-claims.mjs` asserts all 172 published figures against the
   aggregate files the charts read. It caught 11 stale values on the first pass
   and is the gate to re-run before editing these posts again.
 
-## 2026-07-27
-
-### Added
+### Added (data pipeline)
 - **Adaptive hour-window aggregates; confidence floor raised 2 -> 5.**
   A 7x24 grid is finer than the throttled cron can fill (raw density: median
   2 observations per cell), so only 7% of cells could support a floor of 5.
