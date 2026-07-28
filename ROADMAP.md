@@ -11,15 +11,15 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 Ranked roughly by leverage. Pick what fits the available time.
 
-- [ ] **Re-bucket the aggregate grid to weekday/weekend x hour.** The 7x24
-      grid is finer than the data supports: measured 2026-07-27 across 389
-      snapshots, per-cell density is median 2, mean 2.6, max 6, so most
-      cells are noise and `MIN_CELL_SAMPLES` is pinned at 2 to avoid
-      blanking the heatmap. Pooling to 2x24 roughly triples density and
-      makes a real floor (5+) viable without touching the "last 30 days"
-      copy that appears across 14 blog posts and 44 pages. Widening
-      `LOOKBACK_DAYS` to 60-90 is the alternative but invalidates that copy.
-      Blocks any further confidence work on best-time claims.
+- [x] **Re-bucket the aggregate grid** — shipped 2026-07-27, but NOT as
+      weekday/weekend. That plan was measured and rejected: within-Mon-Fri
+      spread of day medians is 25 min, 2.5x the Sat-Sun spread of 10 min
+      (San Ysidro runs Mon 160 / Tue 160 / Fri 60), so pooling weekdays
+      misses the true day median by 25 min at p90 and deletes the page's
+      most useful advice. Day-of-week is the signal. Widened along the
+      hour axis instead via an adaptive centred window (target 6 samples,
+      cap +/-2h). Density median 2 -> 7, 86% of cells clear a floor of 5,
+      `MIN_CELL_SAMPLES` raised 2 -> 5. "Last 30 days" copy still holds.
 - [ ] **Re-verify the unshipped best-time blog edits.** 13 modified `.mdx`
       files (7 EN + 6 ES "best time to cross" posts) are stashed locally
       from 2026-07-03. Their hardcoded hour claims were derived before the

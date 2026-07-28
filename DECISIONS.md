@@ -8,6 +8,26 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-07-27 · Pool along hours, never across days
+
+Density fixes must not buy samples with signal. Weekday/weekend pooling was
+the obvious way to thicken the aggregate grid and it is rejected on measured
+grounds: the within-Mon-Fri spread of day medians is 25 min, 2.5x the Sat-Sun
+spread of 10 min, because Monday is the heaviest day and Friday the lightest
+at most ports. Day-of-week is the product's core signal. Neighbouring hours,
+by contrast, are highly autocorrelated, so the hour axis is where widening is
+cheap. The window is adaptive (target 6 samples, cap +/-2h) so well-supported
+cells keep their exact hourly value; a fixed wide window flattens peaks and
+misplaces them. If you change the bucketing, re-measure coverage, distortion
+AND peak localisation before shipping. Do not pick a scheme from intuition.
+
+## 2026-07-27 · Derived counts never come from pooled cells
+
+A pooled cell reuses each observation in up to five neighbouring hours, so any
+document-level count summed from `by_hour` is inflated ~4x. `sample_count` and
+`overall_median` accumulate from raw observations. This matters because
+`build-rankings.mjs` gates inclusion on `sample_count`.
+
 ## 2026-07-27 · Any workflow that builds the site must clone full history
 
 `build-aggregates.mjs` derives the 30-day window from `git log`, so the

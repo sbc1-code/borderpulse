@@ -5,7 +5,41 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-07-27
 
+### Added
+- **Adaptive hour-window aggregates; confidence floor raised 2 -> 5.**
+  A 7x24 grid is finer than the throttled cron can fill (raw density: median
+  2 observations per cell), so only 7% of cells could support a floor of 5.
+  The planned fix was pooling weekday/weekend x hour. Measured first, and it
+  was wrong: within-Mon-Fri spread of day medians is 25 min, 2.5x the Sat-Sun
+  spread of 10 min. San Ysidro runs Mon 160 / Tue 160 but Fri 60 — collapsing
+  that to one "weekday" number misses the true day median by 25 min at p90
+  and deletes the most useful advice on the page. Day-of-week is the signal.
+  Widened along the hour axis instead, where autocorrelation is high, using an
+  adaptive centred window (target 6 samples, cap +/-2h): dense cells keep their
+  exact hourly value, only sparse cells widen. Beats both fixed alternatives —
+  fixed +/-1h gives 64% coverage; fixed +/-2h gives 88% but localises the daily
+  peak within an hour in only 57% of port-days; adaptive gives 88% coverage,
+  +/-1h's 12 min p90 distortion, and 76% peak localisation. Density is now
+  median 7/cell with 86% clearing the floor. San Ysidro renders 24/24 hours at
+  n>=6 (was 16/24 at n>=2); sparse ports still decline honestly, Hidalgo/Pharr
+  showing 19/24 as "not enough data". `by_hour` rows gained `window_hours` and
+  `raw_samples`; the heatmap tooltip names the span behind each estimate.
+- **`overall_best_hour` uses a sturdier estimator.** It pooled seven
+  day-medians, so hours built from fewer days scored artificially well — at
+  San Ysidro that put 1 AM (six days, no Tuesday) ahead of the genuinely
+  lighter 6 AM. Now pools raw observations for the hour across all days. This
+  value lands in `<title>`, meta descriptions and FAQ JSON-LD.
+
 ### Fixed
+- **Document-level counts could have been inflated ~5x by pooling.**
+  `sample_count` and `overall_median` now accumulate from raw observations
+  rather than from the pooled cells, which reuse each observation in up to
+  five neighbouring hours. `build-rankings.mjs` gates on `sample_count`, so
+  this would have silently promoted thin ports into the rankings.
+- **Methodology page described behaviour that no longer existed.** It still
+  claimed empty cells fall back to the port's all-hours median; that fallback
+  was removed earlier the same day. Rewritten in both languages to describe
+  the window, why it never crosses days, and the "not enough data" state.
 - **Shallow clone silently collapsed every aggregate to ~2 samples.**
   `fetch-cbp.yml` became the workflow that actually builds and deploys the
   site, but its `actions/checkout` had no `fetch-depth`, so the default
