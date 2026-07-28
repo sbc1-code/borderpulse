@@ -1,8 +1,9 @@
 ---
 title: "Mejor hora para cruzar Otay Mesa: hora por hora con 30 días de datos de CBP"
-description: "Mediana de espera en Otay Mesa por hora y día, según CBP en los últimos 30 días. La hora más ligera: sábado 9 a. m. a 0 minutos. La trampa del lunes en la madrugada."
+description: "Mediana de espera en Otay Mesa por hora y día, según CBP. La ventana más ligera: sábado de 5 a 7 a. m. con 10 minutos. El pico del domingo en la noche llega a 210."
 slug: mejor-hora-para-cruzar-otay-mesa
 date: "2026-04-24"
+updated: "2026-07-27"
 author: sebastian
 pillar: data-analysis
 lang: es
@@ -23,7 +24,7 @@ officialSources:
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
 
-Otay Mesa es el segundo cruce comercial más transitado de la frontera EE.UU.-México y el carril de overflow para San Ysidro. La mediana de espera hacia el norte sobre 30 días en Otay es de **90 minutos**, unos 20 minutos más ligero que San Ysidro. La hora más ligera de toda la semana es **sábado 9 a 10 a. m., con mediana de 0 minutos**. El peor patrón es **lunes 4 a 6 a. m. con 220 a 240 minutos**, la fila de los traileros que casi nadie fuera del dispatching menciona.
+Otay Mesa es el segundo cruce comercial más transitado de la frontera EE.UU.-México y el carril de overflow para San Ysidro. La mediana de espera hacia el norte sobre 30 días en Otay es de **90 minutos**, 30 minutos completos por debajo de San Ysidro. La ventana más barata de toda la semana es la madrugada del sábado: **las 5, 6 y 7 a. m. tienen mediana de 10 minutos**, y juntando los siete días la hora más ligera del reloj son las 6 a. m. con 60. La peor ventana es el **pico de regreso del domingo en la noche, donde las 7, 8 y 9 p. m. tienen mediana de 210 minutos**. El sábado en la noche, en cambio, está tranquilo: las 7 p. m. andan en 60.
 
 <BestTimeChart slug="otay-mesa" title="Otay Mesa: mediana de espera hacia EE.UU., últimos 30 días" />
 
@@ -31,19 +32,20 @@ Otay Mesa es el segundo cruce comercial más transitado de la frontera EE.UU.-M�
 
 Tres patrones saltan:
 
-1. **Las mañanas de fin de semana están prácticamente vacías.** Sábado de 8 a 11 a. m. la mediana es de 0 a 5 minutos. Domingo 9 a 10 a. m. también está en 0. Si tu viaje es flexible, esta es la hora más barata que vas a encontrar en cualquier puerto importante de California.
-2. **El lunes en la madrugada es la peor hora de cualquier puerto de California, sin discusión.** Lunes 4 a. m. mediana de 220 minutos; lunes 6 a. m. = 240 minutos. Es tráfico comercial formando fila para empezar la semana laboral. Los autos pasajeros se quedan atorados en la misma cola.
-3. **La banda del domingo en la noche existe pero es más suave que en San Ysidro.** Domingo 8 a 11 p. m. en Otay anda en 110 minutos, contra los picos de 170 minutos de San Ysidro. Otay es la mejor opción para regresar el domingo en la noche.
+1. **La madrugada del sábado es la ventana más barata de toda la frontera de California.** El sábado de 1 a 7 a. m. las medianas andan entre **10 y 13 minutos**, y el tramo de 5, 6 y 7 a. m. se queda clavado en 10. La mañana del viernes es la segunda mejor, con **20 minutos a las 7 a. m. y 23 a las 5 a. m.** Nada más en ninguna garita importante de California se acerca.
+2. **La noche del domingo es la peor ventana de la semana, y es solo el domingo.** Las **7, 8 y 9 p. m. del domingo tienen mediana de 210 minutos**, con las 6 p. m. en 195 y de 4 a 5 p. m. en 180. Es el tráfico de regreso hacia San Diego al cerrar el fin de semana. El sábado en la noche no hace lo mismo: las 7 p. m. del sábado tienen mediana de 60.
+3. **El viernes es el día más ligero, el martes el más pesado, y el miércoles es más raro que los dos.** Las medianas por día corren así: martes 150, lunes 105, miércoles 103, domingo 100, jueves 90, sábado 53 y viernes 50. El martes sostiene un **170 parejo de 2 a 6 p. m.** El miércoles es el raro: está tranquilo de madrugada en 60, y luego brinca a **210 de 7 a 9 a. m. y otra vez de 12 a 2 p. m.**, una forma de pico que los demás días entre semana no comparten.
 
-Cada celda (día, hora) se construye con 1 a 3 snapshots muestreados sobre 30 días, así que una sola noche mala puede mover una celda. La forma de la semana es estable; la hora pico exacta puede variar.
+Cada celda citada arriba descansa en al menos cinco observaciones, y la mayoría en ocho a doce. Eso alcanza para confiar en la forma de la semana y en el tamaño del pico del domingo en la noche. No alcanza para tratar ninguna hora individual como garantía, y el pico del miércoles en particular parece un puñado de días malos más que un patrón fijo.
 
 ## Comparado con San Ysidro
 
 Si tienes que escoger entre Otay y San Ysidro el mismo día:
 
-- **Mañanas entre semana (mar-vie 5 a 9 a. m.):** Otay es más rápida la mayoría de los días. Miércoles 9 a. m. en Otay = 10 minutos; San Ysidro a la misma hora = 30 minutos.
-- **Domingo en la noche:** Otay es notablemente más rápida (110 min vs 170 min en el pico).
-- **Lunes en la madrugada:** San Ysidro gana por un margen amplio. Lunes 4 a. m. en SY = 145 minutos; Otay = 220.
+- **Viernes y sábado:** Otay gana de calle. Las medianas del viernes son 50 en Otay contra 60 en San Ysidro, pero las mañanas se separan duro: Otay a las 7 a. m. está en 20 minutos contra 40 de San Ysidro. El sábado es la paliza, con Otay en mediana diaria de 53 contra 90 de San Ysidro, y Otay de 5 a 7 a. m. en 10 minutos contra 50 a 80 de San Ysidro.
+- **Domingo en la noche:** ahora San Ysidro es la mejor apuesta, lo cual voltea el consejo anterior. Las celdas de 7 a 9 p. m. en Otay tienen mediana de 210 contra el 170 parejo de San Ysidro. Otay solo va adelante más temprano, donde sus 9 a. m. están en 90 contra 100 de San Ysidro.
+- **Martes y miércoles:** gana San Ysidro. La mediana del martes en Otay es 150 contra 159 de San Ysidro, pero la tarde de Otay está peor, y el miércoles es el volteo claro: Otay a las 9 a. m. tiene mediana de 210 contra 120 de San Ysidro.
+- **Lunes:** gana Otay cómodo. Las medianas del lunes son 105 en Otay contra 160 en San Ysidro, y las celdas de madrugada apuntan igual (lunes 4 a. m.: Otay 85, San Ysidro 165).
 - **Peatonal:** San Ysidro tiene PedWest más PedEast. Otay tiene un solo cruce peatonal. SY peatonal es la respuesta correcta para tráfico a pie.
 
 Las páginas en vivo de [Otay Mesa](/crossing/otay-mesa) y [San Ysidro](/crossing/san-ysidro) muestran las esperas actuales lado a lado para que decidas en el momento.
@@ -58,11 +60,11 @@ Otay tiene carril SENTRI para miembros del Trusted Traveler Program. El carril e
 
 ## Qué significa esto para ti
 
-- Si puedes mover tu cruce a **sábado 9 a 11 a. m.** o **mañana entre semana antes de las 9 a. m.**, Otay es el cruce más ligero de la frontera de California.
-- **Evita lunes 4 a 7 a. m. en Otay.** Es el peor patrón semanal de cualquier puerto de CA. Si tu agenda te obliga a ese horario, San Ysidro es mejor opción.
-- **Para regresos en domingo:** Otay le gana a San Ysidro por una hora o más durante el pico de 7 a 10 p. m.
-- **Para tráfico comercial:** los datos de 30 días confirman el patrón semanal del lunes en la madrugada. Planea el dispatching considerando esto.
+- Si puedes mover tu cruce a **la madrugada del sábado**, hazlo. La banda de 1 a 7 a. m. tiene medianas de 10 a 13 minutos, lo que hace de Otay la garita más ligera de la frontera de California por mucho.
+- **Evita el domingo en la noche específicamente.** De 4 a 9 p. m. las medianas corren entre 180 y 210 minutos. El sábado en la noche no es la misma trampa: de 5 a 8 p. m. las medianas andan entre 60 y 65.
+- **Para regresos en domingo:** cruza antes de las 9 a. m., cuando las medianas andan entre 50 y 60 minutos, o asume la noche. Una vez que la tarde empieza a subir a las 3 p. m. no suelta hasta las 11 p. m.
+- **Para tráfico comercial:** el martes es el día entre semana más pesado con mediana diaria de 150 y el viernes el más ligero con 50. Planea el dispatching considerando esto.
 
 ## Cómo calculamos estos números
 
-El cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Usamos mediana, no promedio, porque un solo outlier de 240 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
+El cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica de arriba siempre refleja la ventana actual. Usamos mediana, no promedio, porque un solo outlier de 200 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.

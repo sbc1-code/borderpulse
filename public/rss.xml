@@ -4,7 +4,7 @@
   <link href="https://borderpulse.com/blog/" />
   <link rel="self" href="https://borderpulse.com/rss.xml" />
   <id>https://borderpulse.com/blog</id>
-  <updated>2026-07-03T12:00:00.000Z</updated>
+  <updated>2026-07-27T12:00:00.000Z</updated>
   <subtitle>Crossing data, guides, and program explainers for the U.S.-Mexico border.</subtitle>
   <entry>
     <title>Best time to cross back from Los Algodones: 30 days of Andrade data</title>
@@ -120,9 +120,9 @@
     <title>Best time to cross Calexico West: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-calexico-west/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-calexico-west/</id>
-    <updated>2026-05-09T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>Median northbound wait times by hour and day at Calexico West, from CBP data. The 10 AM commuter window, and the 3 AM Monday spike nobody warns you about.</summary>
+    <summary>Median northbound wait times by hour and day at Calexico West, from CBP data. The early weekend morning window, and the weekday midday wall nobody plans around.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -131,7 +131,7 @@
     <title>Best time to cross Hidalgo: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-hidalgo/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-hidalgo/</id>
-    <updated>2026-05-09T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-05-09T12:00:00.000Z</published>
     <summary>Median northbound wait times by hour and day at the Hidalgo bridge, from CBP data. Mornings here clear faster than at any San Diego crossing.</summary>
     <author>
@@ -142,9 +142,9 @@
     <title>Best time to cross Tecate: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-tecate/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-tecate/</id>
-    <updated>2026-05-09T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>Median northbound wait times by hour and day at Tecate, from CBP data. The quietest crossing east of San Diego, with one catch: weekday late nights.</summary>
+    <summary>Median northbound wait times by hour and day at Tecate, from CBP data. Mornings run near an hour; Monday evening peaks at 260 minutes.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -197,9 +197,9 @@
     <title>Mejor hora para cruzar Calexico West: hora por hora con 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-calexico-west/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-calexico-west/</id>
-    <updated>2026-05-09T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>Tiempos medianos hacia EE.UU. en Calexico West, hora por hora, con datos de CBP. La ventana del commuter de las 10 a. m. y el pico del lunes a las 3 a. m.</summary>
+    <summary>Tiempos medianos hacia EE.UU. en Calexico West, hora por hora, con datos de CBP. La ventana de la madrugada del fin de semana y el muro del mediodía entre semana.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -208,7 +208,7 @@
     <title>Mejor hora para cruzar Hidalgo: hora por hora con 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-hidalgo/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-hidalgo/</id>
-    <updated>2026-05-09T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-05-09T12:00:00.000Z</published>
     <summary>Tiempos medianos hacia EE.UU. en el puente Hidalgo, hora por hora, con datos de CBP. Las mañanas aquí se despejan más rápido que en cualquier garita de San Diego.</summary>
     <author>
@@ -219,9 +219,9 @@
     <title>Mejor hora para cruzar Tecate: hora por hora con 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-tecate/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-tecate/</id>
-    <updated>2026-05-09T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-05-09T12:00:00.000Z</published>
-    <summary>Tiempos medianos hacia EE.UU. en Tecate, hora por hora, con datos de CBP. La garita más tranquila al este de San Diego, con una trampa: las madrugadas entre semana.</summary>
+    <summary>Tiempos medianos hacia EE.UU. en Tecate, hora por hora, con datos de CBP. Las mañanas rondan la hora; el domingo por la tarde la mediana sube a cuatro o cinco horas.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -274,9 +274,9 @@
     <title>Best time to cross Nogales DeConcini: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-nogales-deconcini/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-nogales-deconcini/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
-    <summary>Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Multiple weekday morning hours show median 0 minutes. Monday pre-dawn spikes to 180.</summary>
+    <summary>Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Overall median 45 minutes. Monday is the wall; Wednesday 1 AM medians 0.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -285,9 +285,9 @@
     <title>Best time to cross Otay Mesa: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-otay-mesa/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-otay-mesa/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
-    <summary>Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest hour: Saturday 9 AM at 0 minutes. The Monday morning trap nobody talks about.</summary>
+    <summary>Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest window: Saturday 5 to 7 AM at a 10 minute median. The Sunday evening peak to plan around.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -296,9 +296,9 @@
     <title>Best time to cross Paso Del Norte: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-paso-del-norte/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-paso-del-norte/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
-    <summary>Median wait at Paso Del Norte (El Paso, TX) by hour and day, pulled from CBP. Wednesday 7 to 9 AM medians of 1 minute. The fastest weekday morning at any Texas port.</summary>
+    <summary>Median wait at Paso Del Norte (El Paso, TX) by hour and day, from CBP. Overall median 54 minutes. Wednesday 2 AM medians 24; Saturday afternoon hits 85.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -307,9 +307,9 @@
     <title>Mejor hora para cruzar Nogales DeConcini: 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-nogales-deconcini/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-nogales-deconcini/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
-    <summary>Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Múltiples horas de mañana entre semana muestran mediana de 0 minutos. Lunes en la madrugada sube a 180.</summary>
+    <summary>Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Mediana general de 45 minutos. El lunes es la pared; el miércoles a la 1 a. m. marca 0.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -318,9 +318,9 @@
     <title>Mejor hora para cruzar Otay Mesa: hora por hora con 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-otay-mesa/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-otay-mesa/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
-    <summary>Mediana de espera en Otay Mesa por hora y día, según CBP en los últimos 30 días. La hora más ligera: sábado 9 a. m. a 0 minutos. La trampa del lunes en la madrugada.</summary>
+    <summary>Mediana de espera en Otay Mesa por hora y día, según CBP. La ventana más ligera: sábado de 5 a 7 a. m. con 10 minutos. El pico del domingo en la noche llega a 210.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -329,9 +329,9 @@
     <title>Mejor hora para cruzar Paso del Norte: hora por hora con 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-paso-del-norte/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-paso-del-norte/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
-    <summary>Mediana de espera en Paso del Norte (El Paso, TX) por hora y día, según CBP. Miércoles 7 a 9 a. m. con mediana de 1 minuto. La mañana más ligera de cualquier puerto de Texas.</summary>
+    <summary>Mediana de espera en Paso del Norte (El Paso, TX) por hora y día, según CBP. Mediana general de 54 minutos. Miércoles 2 a. m. marca 24; sábado en la tarde llega a 85.</summary>
     <author>
       <name>Sebastian Becerra</name>
     </author>
@@ -340,7 +340,7 @@
     <title>Mejor hora para cruzar San Ysidro: hora por hora con 30 días de datos de CBP</title>
     <link href="https://borderpulse.com/blog/mejor-hora-para-cruzar-san-ysidro/" />
     <id>https://borderpulse.com/blog/mejor-hora-para-cruzar-san-ysidro/</id>
-    <updated>2026-04-24T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-24T12:00:00.000Z</published>
     <summary>Tiempos de espera medianos en San Ysidro por hora y día, sacados directo de U.S. Customs and Border Protection. Lo que la mayoría de los fronterizos ya sabe pero ahora con números.</summary>
     <author>
@@ -395,7 +395,7 @@
     <title>Best time to cross San Ysidro: hour by hour from 30 days of CBP data</title>
     <link href="https://borderpulse.com/blog/best-time-to-cross-san-ysidro/" />
     <id>https://borderpulse.com/blog/best-time-to-cross-san-ysidro/</id>
-    <updated>2026-04-23T12:00:00.000Z</updated>
+    <updated>2026-07-27T12:00:00.000Z</updated>
     <published>2026-04-23T12:00:00.000Z</published>
     <summary>Median wait times for every hour of every day at San Ysidro, pulled from U.S. Customs and Border Protection over the last 30 days. The patterns most travelers miss.</summary>
     <author>

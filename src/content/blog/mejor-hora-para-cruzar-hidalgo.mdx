@@ -3,6 +3,7 @@ title: "Mejor hora para cruzar Hidalgo: hora por hora con 30 días de datos de C
 description: "Tiempos medianos hacia EE.UU. en el puente Hidalgo, hora por hora, con datos de CBP. Las mañanas aquí se despejan más rápido que en cualquier garita de San Diego."
 slug: mejor-hora-para-cruzar-hidalgo
 date: "2026-05-09"
+updated: "2026-07-27"
 author: sebastian
 pillar: data-analysis
 lang: es
@@ -27,7 +28,7 @@ officialSources:
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
 
-El puente internacional Hidalgo es el caballo de batalla de McAllen / Reynosa, y los datos cuentan una historia distinta a la de las garitas de California con las que la mayoría de los viajeros lo comparan. La espera mediana hacia EE.UU. sobre los últimos 30 días es de **40 minutos**, más baja que cualquier garita grande del sur de California. La hora más ligera de toda la semana es **8 a. m. con mediana de 3 minutos** — y las medianas matutinas entre semana frecuentemente llegan a cero. El patrón es el del Valle del Río Grande: muy rápido en la mañana, subiendo a mediodía, pico en la tarde-noche de miércoles a viernes.
+El puente internacional Hidalgo es el caballo de batalla de McAllen / Reynosa, y los datos cuentan una historia distinta a la de las garitas de California con las que la mayoría de los viajeros lo comparan. La espera mediana hacia EE.UU. sobre los últimos 30 días es de **55 minutos**, más baja que cualquier garita grande del sur de California. La hora más ligera de toda la semana es **8 a. m. con mediana de 20 minutos**, y el bloque temprano corre ligero todos los días: de las 2 a las 9 a. m. las medianas por hora se quedan entre 15 y 40 minutos. El patrón es menos un pico que un muro: la espera sube desde media mañana y se sostiene entre 50 y 65 minutos desde como las 10 a. m. hasta la noche, los siete días de la semana.
 
 La gráfica de abajo son los últimos 30 días de tiempos de espera hacia EE.UU. en Hidalgo según CBP, divididos por día de la semana y hora del día. Verde = rápido (menos de 30m), ámbar = típico, rojo = pesado. Pasa el cursor sobre cualquier celda para ver el número.
 
@@ -37,9 +38,9 @@ La gráfica de abajo son los últimos 30 días de tiempos de espera hacia EE.UU.
 
 Tres patrones saltan a la vista:
 
-1. **Las mañanas entre semana son esencialmente gratis.** Martes a las 7 a. m., mediana de 0 minutos. Miércoles a las 8 a. m., 0 minutos. Viernes a las 6 a. m., 0 minutos. Son medianas reales, no outliers, construidas con 20+ muestras por celda. Si tu agenda te deja cruzar antes de las 9 a. m. de martes a viernes, puedes planear pasar de largo.
-2. **El pico es a mediodía-noche de miércoles a viernes.** Miércoles a las 2 a. m., mediana de 90 minutos (un pequeño bump nocturno), pero la presión más constante es jueves a la 1 p. m. (80 min), viernes a las 8 p. m. (73 min), y lunes a las 7 p. m. (60 min). El tráfico del Valle es manejado por compras y servicios entre semana; las tardes-noches de fin de semana son más ligeras que en el trío de SD.
-3. **La mediana general de Hidalgo (40 min) es menor que la de San Ysidro, Otay o Calexico West.** El volumen y la estructura de carriles hacen que Hidalgo absorba mejor el tráfico. El trade-off: cuando hay backup en Hidalgo, suele ser más difícil de predecir porque viene de un evento puntual (alerta, cierre de carril, clima) en lugar de una curva de commute estable.
+1. **Las mañanas temprano cuestan como una cuarta parte de la tarde.** Lo que destaca es el **miércoles, donde de 6 a 9 a. m. todas las horas marcan 15 minutos**, contra una mediana de 55 alrededor del reloj. El viernes a las 6 y 7 a. m. está en **18**, y el domingo a las 6 y 7 a. m. en **20**. El patrón se sostiene todos los días: antes de las 9 a. m. pagas una fracción de lo que cuesta la tarde, y en Hidalgo esa brecha es más ancha que en cualquier garita de California.
+2. **El pico es una meseta, no un pico.** De como las 10 a. m. a las 10 p. m., las medianas por hora se sostienen entre 50 y 65 minutos casi todos los días, y la noche apenas suelta. Las peores celdas son el **lunes a las 4 p. m. con 75 y a las 3 p. m. con 73**, con el lunes a las 5 p. m. en 70 sobre quince observaciones, el mayor respaldo de la cuadrícula. El fin de semana solo da un respiro chico: las tardes del domingo aflojan a 50 después de las 3 p. m. Por día, el viernes y el miércoles son los más pesados (60) y el domingo y el martes los más ligeros (45).
+3. **La mediana general de Hidalgo (55 min) queda bastante debajo de San Ysidro (120), Otay Mesa (90) o Calexico West (70).** El volumen y la estructura de carriles hacen que Hidalgo absorba mejor el tráfico. El trade-off: cuando hay backup en Hidalgo, suele ser más difícil de predecir porque viene de un evento puntual (alerta, cierre de carril, clima) en lugar de una curva de commute estable.
 
 Si quieres planear con una hora específica, la [página en vivo de Hidalgo](/crossing/hidalgo-pharr-hidalgo) muestra la espera actual junto al patrón de 30 días.
 
@@ -58,7 +59,7 @@ Para una comparación más amplia en el Valle, también revisa las esperas en vi
 Hidalgo tiene carriles estándar, Ready Lane y SENTRI. La economía es distinta a la de las garitas de alta presión de CA:
 
 - **Carril estándar** es lo suficientemente rápido en mañanas entre semana (frecuentemente el número titular es de un solo dígito) como para que el ahorro de Ready Lane se reduzca. El ahorro aparece durante los picos de la tarde-noche miércoles-viernes.
-- **Ready Lane** es la red de seguridad para los bumps del jueves a la 1 p. m. y viernes 8 p. m. Vale la pena usarlo si tienes documento con RFID; no es necesario el martes a las 7 a. m.
+- **Ready Lane** es la red de seguridad para la meseta de la tarde, sobre todo el lunes de 3 a 5 p. m. Vale la pena usarlo si tienes documento con RFID; no es necesario el miércoles a las 7 a. m.
 - **SENTRI** es excesivo para el patrón típico de Hidalgo a menos que cruces a diario en las peores horas.
 
 Las reglas de elegibilidad y documentos de los dos programas son de CBP, no nuestras. Lee las páginas oficiales antes de apostarle a un carril.
@@ -76,11 +77,11 @@ Las reglas de elegibilidad y documentos de los dos programas son de CBP, no nues
 Las medianas hora-de-la-semana no capturan eventos puntuales. Los más grandes en Hidalgo:
 
 - **Spring Break** trae aumentos significativos hacia el norte y el sur en todas las garitas del Valle. Las medianas mostradas no se sostienen en semanas pico.
-- **Temporada del Paisano (1 dic al 10 ene)** sube las esperas mucho más allá de las medianas, sobre todo hacia el sur — Hidalgo es un corredor mayor del Paisano.
+- **Temporada del Paisano (1 dic al 10 ene)** sube las esperas mucho más allá de las medianas, sobre todo hacia el sur, ya que Hidalgo es un corredor mayor del Paisano.
 - **Días festivos federales de EE.UU.** pueden cambiar el personal de CBP. Los horarios publicados en la [página oficial del puerto](https://bwt.cbp.gov/) mandan.
 - **Clima y cierres de puente** son riesgos únicos del Valle durante temporada de huracanes y después de lluvias fuertes. Siempre revisa la alerta del puerto antes de salir.
 
-La alerta de viaje del DOS para México se actualiza periódicamente y aplica a nivel estatal. Tamaulipas en particular ha tenido alertas elevadas — lee el texto actual antes de cualquier primer viaje.
+La alerta de viaje del DOS para México se actualiza periódicamente y aplica a nivel estatal. Tamaulipas en particular ha tenido alertas elevadas, así que lee el texto actual antes de cualquier primer viaje.
 
 <OfficialSource agency="U.S. Department of State" url="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html">
   El Departamento de Estado publica una alerta de viaje para México con guía a nivel estatal y lista de áreas restringidas. Lee la alerta completa y cualquier alerta activa de seguridad de la embajada de EE.UU. antes de cruzar a Tamaulipas.
@@ -88,10 +89,10 @@ La alerta de viaje del DOS para México se actualiza periódicamente y aplica a 
 
 ## Cómo calculamos estos números
 
-Border Pulse jala el tiempo de espera oficial de CBP para Hidalgo y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, construida con 389 muestras individuales. Mediana es más honesta que promedio porque un solo outlier de 240 minutos infla el promedio de una hora típica de 60 minutos hasta 90.
+Border Pulse jala el tiempo de espera oficial de CBP para Hidalgo y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, construida con unas 380 muestras individuales. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica de arriba siempre refleja la ventana actual. Mediana es más honesta que promedio porque un solo outlier de 240 minutos infla el promedio de una hora típica de 60 minutos hasta 90.
 
 Los datos crudos y la metodología viven en [nuestro repo público](https://github.com/sbc1-code/borderpulse). Las snapshots vienen del [feed público de CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
 
 ## Qué hacer con esto
 
-Lo más útil que puedes hacer con esta gráfica en Hidalgo: **confía en las ventanas de mañana entre semana.** Son reales, son estables, y las garitas alternativas cercanas no las igualan. Si puedes cruzar entre 6 y 9 a. m. de martes a viernes, prácticamente estás en una ventana sin espera. Guarda el ahorro de carril (Ready, SENTRI) para cuando realmente lo necesites — tardes de miércoles a viernes.
+Lo más útil que puedes hacer con esta gráfica en Hidalgo: **confía en la ventana de la mañana temprano, pero escoge tu día.** El miércoles de 6 a 9 a. m. marca 15 minutos y el viernes de 6 a 7 a. m. marca 18, lo más cercano a un cruce sin espera que da esta frontera. La mañana del jueves no es el mismo trato, con 50, y la del sábado anda en 43. Guarda el ahorro de carril (Ready, SENTRI) para cuando realmente lo necesites, que es la tarde del lunes.

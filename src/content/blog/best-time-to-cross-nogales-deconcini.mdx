@@ -1,8 +1,9 @@
 ---
 title: "Best time to cross Nogales DeConcini: hour by hour from 30 days of CBP data"
-description: "Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Multiple weekday morning hours show median 0 minutes. Monday pre-dawn spikes to 180."
+description: "Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Overall median 45 minutes. Monday is the wall; Wednesday 1 AM medians 0."
 slug: best-time-to-cross-nogales-deconcini
 date: "2026-04-24"
+updated: "2026-07-27"
 author: sebastian
 pillar: data-analysis
 lang: en
@@ -24,7 +25,7 @@ officialSources:
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
 
-Nogales DeConcini is the central Nogales, Arizona crossing, primarily for passenger and pedestrian traffic. The 30-day median northbound wait is **40 minutes**, the lightest of any major Arizona port. Multiple weekday morning hours show **median 0 minutes**: Wednesday 7 to 10 AM, Thursday 8 to 9 AM, Friday 7 to 10 AM, Saturday 9 to 10 AM. The worst hours are pre-dawn weekdays at **180 minutes** (Mon 4 AM, Thu 5 PM, Fri 4 AM).
+Nogales DeConcini is the central Nogales, Arizona crossing, primarily for passenger and pedestrian traffic. The 30-day median northbound wait is **45 minutes**, still the heaviest of the Arizona ports we track (Mariposa runs 50 overall but is lighter through the morning, Douglas 35, San Luis 25, Naco 10). The lightest reliable window is **Wednesday before dawn, where 1 AM medians 0 minutes and 2 and 3 AM both hold 10**. The block to avoid is **Monday before dawn**: midnight and 1 AM both median 120 minutes, the heaviest cells at this port. All times are Arizona time.
 
 <BestTimeChart slug="nogales-deconcini" title="Nogales DeConcini: median northbound wait, last 30 days" />
 
@@ -32,25 +33,25 @@ Nogales DeConcini is the central Nogales, Arizona crossing, primarily for passen
 
 Three patterns stand out:
 
-1. **Weekday late mornings are essentially empty.** Wed, Thu, Fri, and Sat all have multiple consecutive hours at 0 minutes between 7 AM and 11 AM. This is the rarest pattern we measure at any major port. If your schedule allows it, you cross with no wait.
-2. **Pre-dawn weekday spikes are sharp.** Monday 4 AM hits 180 minutes; Thursday 5 PM hits 180; Friday 4 AM hits 180. These are likely commercial or shift-worker rushes that DeConcini absorbs because Mariposa (the truck-focused bridge nearby) is overloaded.
-3. **Weekend evenings stay below 100 minutes.** Sunday 11 PM hits 100, but the rest of the weekend evening pattern stays in the 25 to 65 minute range. Much milder than San Ysidro or Otay Mesa equivalents.
+1. **Monday is the wall, and it starts before midnight.** Monday's day median runs **85 to 90 minutes** against 35 to 48 for every other day. It opens at **120 at midnight and 1 AM**, eases through the morning to 60, then rebuilds to **90 from 3 PM through 11 PM**. Nothing else in the grid comes close. The old Friday afternoon spike has flattened out: Friday's worst cells are now 3 and 4 PM at 90.
+2. **Wednesday before dawn is the genuine light window.** **Wednesday 1 AM medians 0 minutes**, with 2 and 3 AM at 10 and midnight at 23. Sunday runs the same shape slightly heavier, bottoming at **10 at 4 AM and 15 at 3 AM**. Both are well supported. Pooled across all seven days, the best hour on the clock is 8 AM at 30.
+3. **Thursday is the lightest full day, and Saturday is the flattest.** Thursday medians **35** across the day and never breaks 48, which makes it the easiest day to plan around. Saturday sits at a monotonous 60 to 75 from midnight to midnight, with no useful window and no real peak either.
 
-Each (day, hour) cell is 1 to 3 sampled snapshots. The general "weekday morning is empty" pattern is stable; the specific spike hours can shift week to week.
+The port logged about 390 snapshots in this window, and every cell quoted above rests on at least five observations. The Monday wall and the Wednesday pre-dawn window are the stable shapes; the exact lightest hour on a given day can still shift as the rolling window updates.
 
 ## DeConcini vs Mariposa
 
 Mariposa is the other Nogales crossing, three miles west, and it handles most commercial truck traffic. For passenger vehicles:
 
-- **DeConcini** is faster on most hours. The 0-minute weekday morning windows happen here.
-- **Mariposa** is the right choice if you are trying to avoid central Nogales urban driving on the U.S. side. Mariposa connects directly to I-19 with less stop-and-go.
+- **Mariposa is the better morning port**, though the full-day numbers are now close: a 50-minute 30-day median against DeConcini's 45, but its best hour is 6 AM at 0 minutes and its Friday 6 AM cell medians 10 against DeConcini's 45. Driving in the morning, especially on a Monday, Mariposa is usually the better call. It also connects directly to I-19 with less stop-and-go.
+- **DeConcini wins on foot and after dark.** It sits downtown on both sides, and it is the only Nogales crossing open past 10 PM.
 - **For commercial trucks:** Mariposa, always. DeConcini does not handle most commercial traffic well.
 
-We will publish a Mariposa hour-by-hour data post in the next batch once we have stable 30-day aggregates.
+We break the two ports down cell by cell in [DeConcini vs Mariposa](/blog/nogales-deconcini-vs-mariposa/).
 
 ## SENTRI and Ready Lane at DeConcini
 
-DeConcini has SENTRI lane access. The 0-minute standard lane medians on weekday mornings make SENTRI savings minimal during those windows, but during the Mon 4 AM and Thu 5 PM spikes, SENTRI is the right call.
+DeConcini has SENTRI lane access. During the Wednesday and Sunday pre-dawn windows, standard-lane medians of 0 to 20 minutes make SENTRI savings essentially nil. On Monday, when the standard lane opens at 120 minutes and holds at 90 through the evening, SENTRI is the right call.
 
 <OfficialSource agency="U.S. Customs and Border Protection" url="https://www.cbp.gov/travel/trusted-traveler-programs/sentri">
   SENTRI is a Trusted Traveler Program. Membership requires an application, fee, background check, and in-person interview at an enrollment center. CBP publishes the official rules, fees, eligibility, and enrollment center list. Always verify current rules before applying.
@@ -58,15 +59,15 @@ DeConcini has SENTRI lane access. The 0-minute standard lane medians on weekday 
 
 ## What this means for you
 
-- **Weekday late morning (7 to 11 AM Wed-Sat) is the lightest hour at any major Arizona port.** If your schedule allows it, this is the best window in the entire AZ corridor.
-- **Avoid Monday 4 AM and Friday 4 AM.** These are 180-minute spikes that show up consistently in the data.
-- **Sunday evening at DeConcini stays milder than CA equivalents.** A Sunday family return through Nogales is meaningfully easier than through Tijuana ports.
+- **Wednesday before dawn is the play.** 1 AM medians 0 minutes and 2 to 3 AM hold 10, the lightest reliable window this port has. Sunday 3 to 5 AM is the runner-up at 10 to 20.
+- **Avoid Monday.** It is the only day with a day median near 90 minutes, it opens at 120 before dawn, and it holds 90 from mid-afternoon to midnight. No other day at this port behaves that way.
+- **A weekend return through Nogales is still far easier than through Tijuana ports.** San Ysidro's 30-day median of 120 minutes is nearly triple DeConcini's 45.
 - **For trucks or commercial:** use Mariposa, not DeConcini.
 
 ## How we compute these numbers
 
-The Border Pulse cron pulls the official CBP wait time for DeConcini and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days. Median is more honest than mean for this data: a single 180 minute Monday outlier can drag an average without telling you about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [DeConcini page](/crossing/nogales-deconcini) shows today's current wait alongside this 30-day pattern.
+The Border Pulse cron pulls the official CBP wait time for DeConcini and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days, in Arizona time (no DST). Because a 7 by 24 grid is finer than the refresh cadence can fill, each cell is estimated from a window centred on that hour, widened to at most two hours either side and only as far as it needs to go. Cells that still fall short of five observations are shown as "not enough data" instead of a number. We never pool across days, because the day of week is the pattern. The window is rolling, so these figures move as new snapshots arrive and older ones age out. The numbers quoted on this page were recomputed on July 27, 2026; the live chart above always reflects the current window. Median is more honest than mean for this data: a single 180-minute outlier can drag an average without telling you about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), the canonical source. The live [DeConcini page](/crossing/nogales-deconcini) shows today's current wait alongside this 30-day pattern.
 
 ## What to do with this
 
-If you cross Nogales regularly, time-shift to **weekday mid-morning** whenever possible. The 0-minute medians are real, repeating, and unique to this port. If your schedule is fixed, use the chart above to identify the lightest hour on your specific day and confirm against today's live wait before leaving.
+If you cross Nogales regularly, time-shift to **Wednesday or Sunday before dawn** whenever possible, and keep Monday off the table. If your schedule is fixed, use the chart above to identify the lightest hour on your specific day and confirm against today's live wait before leaving.

@@ -5,6 +5,35 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-07-27
 
+### Changed
+- **Regenerated every figure in the 14 best-time posts** (7 EN + 7 ES) against
+  the corrected aggregates. These carried the July 3 numbers, which predated
+  both the shallow-clone fix and the re-bucketing, so most were wrong and some
+  inverted the advice. Notable reversals: Otay Mesa was telling readers to
+  prefer it over San Ysidro on Sunday evening, when Otay now runs 210 against
+  San Ysidro's 170. Nogales DeConcini claimed a Friday afternoon wall peaking
+  at 180; the Friday peak is now 90 and the real wall is Monday. Paso Del Norte
+  sold Sunday pre-dawn as the escape hatch, but Sunday is now its heaviest day
+  and Wednesday is the lightest. Tecate's Sunday afternoon was quoted at 255 to
+  310, now a flat 180. Overall medians moved too: Calexico West 80 to 70,
+  Nogales 60 to 45, PDN 64 to 54, Hidalgo 50 to 55.
+- **Numbers now carry a recompute date and hedged sample counts.** A rolling
+  30-day window means a hardcoded figure starts drifting immediately, which is
+  what put these posts three weeks out of date in the first place. Each post
+  now states when its figures were recomputed and notes the window moves.
+  Exact snapshot counts became "about N", and the most volatile single-cell
+  superlatives were softened to ranges, since an n=7 cell can swing 30 minutes
+  on one new observation.
+- Methodology paragraphs in those posts described the old per-cell median and,
+  in some, a fallback removed earlier that day. They now describe the window.
+
+### Added
+- `scripts/verify-blog-claims.mjs` asserts all 172 published figures against the
+  aggregate files the charts read. It caught 11 stale values on the first pass
+  and is the gate to re-run before editing these posts again.
+
+## 2026-07-27
+
 ### Added
 - **Adaptive hour-window aggregates; confidence floor raised 2 -> 5.**
   A 7x24 grid is finer than the throttled cron can fill (raw density: median
