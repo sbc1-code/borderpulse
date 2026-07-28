@@ -41,7 +41,7 @@ the clone cost is not worth optimizing against this failure mode.
 
 `public/data/aggregates/` is wiped and rewritten each run. Files there ship
 from `public/` and are consumed by directory scan, so a stale slug left by
-a CBP rename keeps being served and can outrank live pages — `presidio.json`
+a CBP rename keeps being served and can outrank live pages. `presidio.json`
 survived three months that way and ended up the sole entry in `rankings.json`
 pointing at a 404. Anything generated per-slug gets the same treatment.
 
@@ -50,7 +50,7 @@ pointing at a 404. Anything generated per-slug gets the same treatment.
 The `(day, hour)` confidence floor lives in `src/lib/aggregates.js` as
 `MIN_CELL_SAMPLES` and nowhere else. It was previously duplicated across
 five call sites at 1, with fallbacks that dropped the floor entirely when
-nothing qualified — which is strictly worse than showing nothing, because
+nothing qualified, which is strictly worse than showing nothing, because
 it publishes the noisiest cell with the most confident wording. Pickers
 now return null and the UI renders its existing sparse state. Set to 2 as
 a floor the current data density can support; raising it requires

@@ -11,12 +11,12 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   2 observations per cell), so only 7% of cells could support a floor of 5.
   The planned fix was pooling weekday/weekend x hour. Measured first, and it
   was wrong: within-Mon-Fri spread of day medians is 25 min, 2.5x the Sat-Sun
-  spread of 10 min. San Ysidro runs Mon 160 / Tue 160 but Fri 60 — collapsing
+  spread of 10 min. San Ysidro runs Mon 160 / Tue 160 but Fri 60. Collapsing
   that to one "weekday" number misses the true day median by 25 min at p90
   and deletes the most useful advice on the page. Day-of-week is the signal.
   Widened along the hour axis instead, where autocorrelation is high, using an
   adaptive centred window (target 6 samples, cap +/-2h): dense cells keep their
-  exact hourly value, only sparse cells widen. Beats both fixed alternatives —
+  exact hourly value, only sparse cells widen. Beats both fixed alternatives:
   fixed +/-1h gives 64% coverage; fixed +/-2h gives 88% but localises the daily
   peak within an hour in only 57% of port-days; adaptive gives 88% coverage,
   +/-1h's 12 min p90 distortion, and 76% peak localisation. Density is now
@@ -25,7 +25,7 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   showing 19/24 as "not enough data". `by_hour` rows gained `window_hours` and
   `raw_samples`; the heatmap tooltip names the span behind each estimate.
 - **`overall_best_hour` uses a sturdier estimator.** It pooled seven
-  day-medians, so hours built from fewer days scored artificially well — at
+  day-medians, so hours built from fewer days scored artificially well. At
   San Ysidro that put 1 AM (six days, no Tuesday) ahead of the genuinely
   lighter 6 AM. Now pools raw observations for the hour across all days. This
   value lands in `<title>`, meta descriptions and FAQ JSON-LD.
@@ -59,12 +59,12 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   renames, and `build-rankings.mjs` reads the whole directory. That is how
   `presidio.json` (generated 2026-04-27, orphaned when the port became
   `presidio-presidio-port-of-entry`) became the *only* entry in
-  `rankings.json` — pointing at a URL that 404s. `build-aggregates.mjs`
+  `rankings.json`, pointing at a URL that 404s. `build-aggregates.mjs`
   now rebuilds the directory from scratch each run. Pruned 3 orphans.
 - **A single CBP reading could be published as a recommendation.** The
   `(day, hour)` sample floor was declared separately in CrossingDetail,
   BestTime and Compare, all at 1, and the first two had fallbacks that
-  re-ran the sort with the floor *removed* — Compare's also widened to
+  re-ran the sort with the floor *removed*. Compare's also widened to
   every day of the week while keeping a "Today's lightest" label.
   San Ysidro was advertising "best time to cross today: 6 AM, 75 min" off
   one observation; it now says 12 PM / 120 min off three. Floor moved to
@@ -78,7 +78,7 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   (389 snapshots, 4,385 populated cells): per-cell density is median 2,
   mean 2.6, max 6. A 7x24 grid is finer than the throttled ~13-commits/day
   cron supports. A floor of 5 would blank 93% of the grid. Raising the
-  floor is gated on re-bucketing to weekday/weekend x hour — see ROADMAP.
+  floor is gated on re-bucketing to weekday/weekend x hour (see ROADMAP).
 
 ## 2026-07-03
 
