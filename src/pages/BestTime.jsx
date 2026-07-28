@@ -8,6 +8,7 @@ import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { nowInPortTz } from '@/components/utils/crossingMeta';
+import { isSparseCell } from '@/lib/aggregates';
 
 const DAY_LABELS = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -18,22 +19,20 @@ const DAY_SHORT = {
   es: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
 };
 
-const MIN_SAMPLES = 1;
-
 function formatHour12(h, lang) {
   const suffix = h >= 12 ? (lang === 'en' ? 'PM' : 'p. m.') : (lang === 'en' ? 'AM' : 'a. m.');
   return `${h % 12 || 12} ${suffix}`;
 }
 
+// Null when no hour that day clears the confidence floor. The previous
+// fallback re-ran this with the floor removed, so a one-observation cell
+// could be published as the lightest hour of the day.
 function lightestHourFor(byHour, day) {
   if (!Array.isArray(byHour) || !byHour.length) return null;
   const candidates = byHour
-    .filter((h) => h.day === day && typeof h.median === 'number' && (h.samples || 0) >= MIN_SAMPLES)
+    .filter((h) => h.day === day && !isSparseCell(h))
     .sort((a, b) => a.median - b.median);
-  if (candidates.length) return candidates[0];
-  // Fallback: ignore the sample floor
-  const loose = byHour.filter((h) => h.day === day && typeof h.median === 'number').sort((a, b) => a.median - b.median);
-  return loose[0] || null;
+  return candidates[0] || null;
 }
 
 function dayMedianFor(byHour, day) {
@@ -46,7 +45,7 @@ function dayMedianFor(byHour, day) {
 
 function HourBar({ entry, max, lang, isCurrentHour, isLightestHour }) {
   const median = entry?.median;
-  const sparse = !entry || median == null || (entry.samples || 0) < MIN_SAMPLES;
+  const sparse = isSparseCell(entry);
   const widthPct = sparse || max === 0 ? 0 : Math.max(8, Math.round((median / max) * 100));
   const filledColor = sparse
     ? 'bg-slate-200 dark:bg-gray-700'

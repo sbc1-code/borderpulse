@@ -8,6 +8,34 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-07-27 · Any workflow that builds the site must clone full history
+
+`build-aggregates.mjs` derives the 30-day window from `git log`, so the
+build is only as correct as the clone depth. When `fetch-cbp.yml` took over
+deployment, its shallow checkout silently truncated every aggregate to ~2
+samples for weeks while the Action stayed green. If a workflow runs
+`npm run build`, it needs `fetch-depth: 0`. Repo is 1,838 commits / 26 MB;
+the clone cost is not worth optimizing against this failure mode.
+
+## 2026-07-27 · Generated data directories are rebuilt, never appended
+
+`public/data/aggregates/` is wiped and rewritten each run. Files there ship
+from `public/` and are consumed by directory scan, so a stale slug left by
+a CBP rename keeps being served and can outrank live pages — `presidio.json`
+survived three months that way and ended up the sole entry in `rankings.json`
+pointing at a 404. Anything generated per-slug gets the same treatment.
+
+## 2026-07-27 · One sample is not a recommendation
+
+The `(day, hour)` confidence floor lives in `src/lib/aggregates.js` as
+`MIN_CELL_SAMPLES` and nowhere else. It was previously duplicated across
+five call sites at 1, with fallbacks that dropped the floor entirely when
+nothing qualified — which is strictly worse than showing nothing, because
+it publishes the noisiest cell with the most confident wording. Pickers
+now return null and the UI renders its existing sparse state. Set to 2 as
+a floor the current data density can support; raising it requires
+re-bucketing first, not just changing the constant.
+
 ## 2026-05-29 · Normalize CBP locale + refuse empty snapshots
 
 CBP serves its public `bwtpublicmod` feed in Spanish or English depending on

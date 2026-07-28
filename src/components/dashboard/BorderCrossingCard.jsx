@@ -17,6 +17,7 @@ import {
 import { getPreviousWait } from '@/components/utils/waitTimeHistory';
 import LaneRow from '@/components/dashboard/LaneRow';
 import { getPrefForCrossing, setPref, permission, requestPermission } from '@/components/utils/notifyService';
+import { isSparseCell } from '@/lib/aggregates';
 import {
   getStatusForDirection,
   getUpdatedAtForDirection,
@@ -210,7 +211,7 @@ export default function BorderCrossingCard({
     // Buckets are port-local; evaluate "today" in the port's timezone.
     const { day } = nowInPortTz(crossing);
     const candidates = byHour
-      .filter((h) => h.day === day && typeof h.median === 'number' && (h.samples || h.sample_count || 0) >= 1)
+      .filter((h) => h.day === day && !isSparseCell(h))
       .sort((a, b) => a.median - b.median);
     if (!candidates.length) return null;
     return { hour: candidates[0].hour, median: candidates[0].median };
@@ -236,10 +237,7 @@ export default function BorderCrossingCard({
     const { day, hour } = nowInPortTz(crossing);
     const entry = byHour.find((h) => h.day === day && h.hour === hour);
     if (entry && typeof entry.median === 'number') {
-      const samples = typeof entry.sample_count === 'number'
-        ? entry.sample_count
-        : (typeof entry.samples === 'number' ? entry.samples : 0);
-      if (samples >= 1) return { delta: wait - entry.median, median: entry.median };
+      if (!isSparseCell(entry)) return { delta: wait - entry.median, median: entry.median };
     }
     // Fallback: use the all-hours overall_median when this hour-bucket is empty
     // or single-sample. Aggregates have ~30 days of lookback so individual

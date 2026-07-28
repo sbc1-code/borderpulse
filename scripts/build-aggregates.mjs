@@ -93,7 +93,14 @@ async function main() {
     }
   }
 
+  // Rebuild the directory from scratch each run. These files ship from
+  // public/, and build-rankings.mjs reads whatever is in here — so a stale
+  // slug left behind by a CBP rename keeps being published and can outrank
+  // its live siblings. That is exactly how presidio.json (generated
+  // 2026-04-27, orphaned when the port became presidio-presidio-port-of-entry)
+  // ended up as the only entry in rankings.json, pointing at a 404.
   const outDir = path.resolve(root, 'public/data/aggregates');
+  fs.rmSync(outDir, { recursive: true, force: true });
   fs.mkdirSync(outDir, { recursive: true });
 
   const generatedAt = new Date().toISOString();

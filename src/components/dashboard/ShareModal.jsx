@@ -5,6 +5,7 @@ import { Copy, Share2, Check } from 'lucide-react';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { track } from '@/lib/analytics';
+import { isSparseCell } from '@/lib/aggregates';
 
 function formatHourCompact(h) {
   if (h == null) return '';
@@ -18,7 +19,7 @@ function lightestTodayFor(aggregate) {
   // Buckets are port-local; the aggregate carries its port's timezone.
   const today = aggregate.timezone ? nowInTz(aggregate.timezone).day : new Date().getDay();
   const candidates = aggregate.by_hour
-    .filter((h) => h.day === today && typeof h.median === 'number' && (h.samples || h.sample_count || 0) >= 1)
+    .filter((h) => h.day === today && !isSparseCell(h))
     .sort((a, b) => a.median - b.median);
   return candidates[0] || null;
 }

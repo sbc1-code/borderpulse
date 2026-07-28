@@ -8,12 +8,11 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { isSparseCell } from '@/lib/aggregates';
 
 // /compare/<slugA>-vs-<slugB> — side-by-side live wait + 30-day pattern.
 // The pair is parsed from the single :pair param so we don't have to add a
 // new dynamic-segment shape (and so the URL reads naturally as one slug).
-
-const MIN_SAMPLES = 1;
 
 function formatHour12(h, lang) {
   if (h == null) return '';
@@ -40,12 +39,13 @@ function todayLightest(byHour, timezone) {
   // Buckets are port-local; the aggregate carries its port's timezone.
   const today = timezone ? nowInTz(timezone).day : new Date().getDay();
   const todays = byHour
-    .filter((h) => h.day === today && typeof h.median === 'number' && (h.samples || 0) >= MIN_SAMPLES)
+    .filter((h) => h.day === today && !isSparseCell(h))
     .sort((a, b) => a.median - b.median);
-  if (todays.length) return todays[0];
-  // Fall back to the overall lightest if today has no data.
-  const loose = byHour.filter((h) => typeof h.median === 'number').sort((a, b) => a.median - b.median);
-  return loose[0] || null;
+  // No fallback. The old one dropped the sample floor *and* widened to every
+  // day of the week, then rendered the result under a "Today's lightest"
+  // label -- so a Tuesday cell with one observation could be presented as
+  // Sunday's lightest hour. The card renders a dash when this returns null.
+  return todays[0] || null;
 }
 
 function CrossingPanel({ crossing, slug, aggregate, language }) {

@@ -5,6 +5,7 @@ import { crossingForSlug, buildSlugMap } from '@/lib/slugs';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
+import { isSparseCell } from '@/lib/aggregates';
 
 const FLAG = { CA: '🇺🇸', AZ: '🇺🇸', NM: '🇺🇸', TX: '🇺🇸' };
 
@@ -80,10 +81,7 @@ export default function Embed() {
       : { day: new Date().getDay(), hour: new Date().getHours() };
     const entry = byHour.find((h) => h.day === day && h.hour === hour);
     if (entry && typeof entry.median === 'number') {
-      const samples = typeof entry.sample_count === 'number'
-        ? entry.sample_count
-        : (typeof entry.samples === 'number' ? entry.samples : 0);
-      if (samples >= 1) return { delta: wait - entry.median };
+      if (!isSparseCell(entry)) return { delta: wait - entry.median };
     }
     if (typeof aggregate?.overall_median === 'number') {
       return { delta: wait - aggregate.overall_median };

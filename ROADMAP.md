@@ -11,6 +11,20 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 Ranked roughly by leverage. Pick what fits the available time.
 
+- [ ] **Re-bucket the aggregate grid to weekday/weekend x hour.** The 7x24
+      grid is finer than the data supports: measured 2026-07-27 across 389
+      snapshots, per-cell density is median 2, mean 2.6, max 6, so most
+      cells are noise and `MIN_CELL_SAMPLES` is pinned at 2 to avoid
+      blanking the heatmap. Pooling to 2x24 roughly triples density and
+      makes a real floor (5+) viable without touching the "last 30 days"
+      copy that appears across 14 blog posts and 44 pages. Widening
+      `LOOKBACK_DAYS` to 60-90 is the alternative but invalidates that copy.
+      Blocks any further confidence work on best-time claims.
+- [ ] **Re-verify the unshipped best-time blog edits.** 13 modified `.mdx`
+      files (7 EN + 6 ES "best time to cross" posts) are stashed locally
+      from 2026-07-03. Their hardcoded hour claims were derived before the
+      shallow-clone fix and will not match current aggregates. Regenerate
+      the figures, then ship.
 - [ ] **Trip planner v0** — pick crossing + target arrival time → return
       a recommended departure window. Needs design pass first: input
       shape, confidence model, mobile UX. Flagship feature, biggest lift

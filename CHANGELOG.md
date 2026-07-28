@@ -3,6 +3,49 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-07-27
+
+### Fixed
+- **Shallow clone silently collapsed every aggregate to ~2 samples.**
+  `fetch-cbp.yml` became the workflow that actually builds and deploys the
+  site, but its `actions/checkout` had no `fetch-depth`, so the default
+  depth-1 clone left `build-aggregates.mjs` with a single commit to walk.
+  Its `git log --since` reconstruction of the 30-day window returned one
+  snapshot instead of 389. Result: every `/crossing/:slug` heatmap, every
+  "best time to cross", `/best-time`, `/compare` and the blog rankings
+  tables were rendering from **2 observations** while the copy said
+  "30 days of CBP data". `rankings.json` had fallen from 34 entries to 1.
+  `deploy.yml` sets `fetch-depth: 0` correctly but is skipped for every
+  `chore(data): refresh` push, so it had not run since 2026-07-04 and the
+  broken builder overwrote the site every cycle. Same class of failure as
+  the 2026-05-29 locale bug: the Action stayed green throughout.
+  Added `fetch-depth: 0`. Rankings recovered 1 → 35.
+- **Orphan aggregates were being published and outranking live pages.**
+  `public/data/aggregates/` accumulated stale-slug files across CBP
+  renames, and `build-rankings.mjs` reads the whole directory. That is how
+  `presidio.json` (generated 2026-04-27, orphaned when the port became
+  `presidio-presidio-port-of-entry`) became the *only* entry in
+  `rankings.json` — pointing at a URL that 404s. `build-aggregates.mjs`
+  now rebuilds the directory from scratch each run. Pruned 3 orphans.
+- **A single CBP reading could be published as a recommendation.** The
+  `(day, hour)` sample floor was declared separately in CrossingDetail,
+  BestTime and Compare, all at 1, and the first two had fallbacks that
+  re-ran the sort with the floor *removed* — Compare's also widened to
+  every day of the week while keeping a "Today's lightest" label.
+  San Ysidro was advertising "best time to cross today: 6 AM, 75 min" off
+  one observation; it now says 12 PM / 120 min off three. Floor moved to
+  a single shared `MIN_CELL_SAMPLES` in `src/lib/aggregates.js`, set to 2,
+  and the floor-bypassing fallbacks are gone. Applied to the two
+  additional consumers that had their own `>= 1` gates
+  (BorderCrossingCard, ShareModal) and to Embed.
+
+### Notes
+- 2 is a deliberate floor, not a target. Measured against the real window
+  (389 snapshots, 4,385 populated cells): per-cell density is median 2,
+  mean 2.6, max 6. A 7x24 grid is finer than the throttled ~13-commits/day
+  cron supports. A floor of 5 would blank 93% of the grid. Raising the
+  floor is gated on re-bucketing to weekday/weekend x hour — see ROADMAP.
+
 ## 2026-07-03
 
 ### Fixed

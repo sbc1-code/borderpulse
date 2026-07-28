@@ -14,6 +14,7 @@ import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings, kmToMiles } from '@/lib/geo';
 import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { isSparseCell } from '@/lib/aggregates';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -24,21 +25,17 @@ const DAY_LABELS = {
 // to match Date.getDay() and the aggregate `day` field.
 const DAY_PILL_ORDER = [1, 2, 3, 4, 5, 6, 0];
 
-// 30-day lookback gives ~4 samples per (day, hour) bucket at best, often
-// just 1 due to refresh-cadence drift; treat any observation as signal.
-const MIN_SAMPLES = 1;
-
+// Returns the lightest hour for a day, or null when no hour that day clears
+// the confidence floor. There used to be a fallback here that re-ran the sort
+// with the floor removed, which meant a single CBP reading could be published
+// as "Best time to cross today". Returning null and rendering nothing is the
+// honest answer; the day and overall medians (hundreds of samples) still show.
 function pickBestHour(hours, dayIdx) {
   if (!hours || !hours.length) return null;
   const scored = hours
-    .filter((h) => h.day === dayIdx && h.median != null && (h.samples || 0) >= MIN_SAMPLES)
+    .filter((h) => h.day === dayIdx && !isSparseCell(h))
     .sort((a, b) => a.median - b.median);
-  // Fall back to any hour if nothing meets the sample floor.
-  if (scored.length) return scored[0];
-  const loose = hours
-    .filter((h) => h.day === dayIdx && h.median != null)
-    .sort((a, b) => a.median - b.median);
-  return loose[0] || null;
+  return scored[0] || null;
 }
 
 function formatHour12(h, lang) {
@@ -410,7 +407,7 @@ export default function CrossingDetail() {
     const agg = nearbyAggregates[c.port_number];
     const slot = lookupSlot(agg?.by_hour, todayIdx, currentHour);
     let vsTypical = null;
-    if (slot && slot.samples >= MIN_SAMPLES && wait != null) {
+    if (slot && !isSparseCell(slot) && wait != null) {
       vsTypical = { median: slot.median, samples: slot.samples, delta: wait - slot.median };
     }
     return {
@@ -613,7 +610,7 @@ export default function CrossingDetail() {
                 {Array.from({ length: 24 }, (_, h) => {
                   const slot = dayHours.find((x) => x.hour === h);
                   const samples = slot?.samples || 0;
-                  const sparse = !slot || slot.median == null || samples < MIN_SAMPLES;
+                  const sparse = isSparseCell(slot);
                   const val = sparse ? null : slot.median;
                   const isBest = !sparse && bestForSelected && bestForSelected.hour === h;
                   const isCurrent = isViewingToday && h === currentHour;
