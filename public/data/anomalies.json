@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-30T10:28:55.350Z",
-  "snapshot_at": "2026-07-30T09:42:24.756Z",
+  "generated_at": "2026-07-30T12:47:54.272Z",
+  "snapshot_at": "2026-07-30T11:33:26.357Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -74,24 +74,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.9,
-      "detected_at": "2026-07-30T07:36:57.449Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 4 AM (median 2 min) — ~90% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 4 AM (mediana 2 min) — ~90% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 2,
-        "overall_median": 20,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -141,6 +123,42 @@
         "best_median": 25,
         "overall_median": 60,
         "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-30T12:47:54.272Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 5 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 5 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 5,
+        "best_median": 20,
+        "overall_median": 45,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.55,
+      "detected_at": "2026-07-30T12:47:54.272Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 4 AM (median 9 min) — ~55% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 4 AM (mediana 9 min) — ~55% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 4,
+        "best_median": 9,
+        "overall_median": 20,
+        "samples": 2
       }
     },
     {
@@ -250,24 +268,6 @@
         "best_median": 18,
         "overall_median": 55,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-07-29T10:42:32.218Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 1,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 7
       }
     }
   ]
