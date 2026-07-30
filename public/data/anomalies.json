@@ -1,7 +1,24 @@
 {
-  "generated_at": "2026-07-30T07:36:57.449Z",
-  "snapshot_at": "2026-07-30T07:11:42.354Z",
+  "generated_at": "2026-07-30T10:28:55.350Z",
+  "snapshot_at": "2026-07-30T09:42:24.756Z",
   "active": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1.3333333333333335,
+      "detected_at": "2026-07-30T10:28:55.350Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 9 PM — ~233% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 9 PM — ~233% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 210,
+        "overall_median": 90,
+        "samples": 6,
+        "ratio": 2.3333333333333335
+      }
+    },
     {
       "type": "sunday_spike",
       "port_slug": "tecate",
@@ -109,6 +126,42 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5833333333333333,
+      "detected_at": "2026-07-30T10:28:55.350Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 1 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 1,
+        "best_median": 25,
+        "overall_median": 60,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5272727272727273,
+      "detected_at": "2026-07-30T10:28:55.350Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 2 AM (median 26 min) — ~53% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 26 min) — ~53% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 2,
+        "best_median": 26,
+        "overall_median": 55,
+        "samples": 6
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
@@ -145,24 +198,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-07-30T07:36:57.449Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 1 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 1,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 5
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "eagle-pass-bridge-i",
       "port_name": "Eagle Pass - Bridge I",
       "state": "TX",
@@ -181,24 +216,6 @@
     }
   ],
   "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.7272727272727273,
-      "detected_at": "2026-07-29T21:00:17.141Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 3 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 3,
-        "best_median": 15,
-        "overall_median": 55,
-        "samples": 6
-      }
-    },
     {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
@@ -251,41 +268,6 @@
         "best_median": 0,
         "overall_median": 45,
         "samples": 7
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.3333333333333335,
-      "detected_at": "2026-07-29T07:45:57.561Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 9 PM — ~233% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 9 PM — ~233% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 210,
-        "overall_median": 90,
-        "samples": 6,
-        "ratio": 2.3333333333333335
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-07-29T07:45:57.561Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Bridge I es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 0,
-        "best_median": 0,
-        "overall_median": 0,
-        "samples": 1
       }
     }
   ]
