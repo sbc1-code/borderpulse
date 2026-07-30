@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-30T15:14:04.709Z",
-  "snapshot_at": "2026-07-30T13:14:56.465Z",
+  "generated_at": "2026-07-30T17:39:43.973Z",
+  "snapshot_at": "2026-07-30T16:59:33.574Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -127,6 +127,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.6,
+      "detected_at": "2026-07-30T17:39:43.973Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 6 AM (median 18 min) — ~60% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 6 AM (mediana 18 min) — ~60% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 6,
+        "best_median": 18,
+        "overall_median": 45,
+        "samples": 8
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -159,24 +177,6 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-07-30T15:14:04.709Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 6 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 6 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 6,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 7
       }
     },
     {
@@ -251,24 +251,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.6727272727272727,
-      "detected_at": "2026-07-29T15:50:45.601Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 7 AM (median 18 min) — ~67% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 7 AM (mediana 18 min) — ~67% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 7,
-        "best_median": 18,
-        "overall_median": 55,
-        "samples": 10
-      }
-    }
-  ]
+  "trailing_24h": []
 }
