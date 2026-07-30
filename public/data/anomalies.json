@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-30T12:47:54.272Z",
-  "snapshot_at": "2026-07-30T11:33:26.357Z",
+  "generated_at": "2026-07-30T15:14:04.709Z",
+  "snapshot_at": "2026-07-30T13:14:56.465Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -91,6 +91,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.7,
+      "detected_at": "2026-07-30T15:14:04.709Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 10 AM (median 6 min) — ~70% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 10 AM (mediana 6 min) — ~70% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 10,
+        "best_median": 6,
+        "overall_median": 20,
+        "samples": 2
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
@@ -131,7 +149,7 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 0.5555555555555556,
-      "detected_at": "2026-07-30T12:47:54.272Z",
+      "detected_at": "2026-07-30T15:14:04.709Z",
       "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 5 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 5 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -140,25 +158,25 @@
         "best_hour": 5,
         "best_median": 20,
         "overall_median": 45,
-        "samples": 7
+        "samples": 8
       }
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.55,
-      "detected_at": "2026-07-30T12:47:54.272Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 4 AM (median 9 min) — ~55% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 4 AM (mediana 9 min) — ~55% debajo de la base de 30 días de 20 min.",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-07-30T15:14:04.709Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 6 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 6 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 9,
-        "overall_median": 20,
-        "samples": 2
+        "best_hour": 6,
+        "best_median": 20,
+        "overall_median": 45,
+        "samples": 7
       }
     },
     {
@@ -234,24 +252,6 @@
     }
   ],
   "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-07-29T15:50:45.601Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Wednesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 4,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 3
-      }
-    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
