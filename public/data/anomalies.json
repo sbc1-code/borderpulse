@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-31T09:48:40.984Z",
-  "snapshot_at": "2026-07-31T09:33:10.254Z",
+  "generated_at": "2026-07-31T12:03:44.028Z",
+  "snapshot_at": "2026-07-31T11:47:59.313Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -132,16 +132,16 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.7272727272727273,
-      "detected_at": "2026-07-31T09:48:40.984Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 6 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 6 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
+      "detected_at": "2026-07-31T12:03:44.028Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 5 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 6,
+        "best_hour": 5,
         "best_median": 15,
         "overall_median": 55,
-        "samples": 9
+        "samples": 6
       }
     },
     {
@@ -149,17 +149,17 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.725,
-      "detected_at": "2026-07-31T09:48:40.984Z",
-      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 5 AM (median 33 min) — ~73% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 5 AM (mediana 33 min) — ~73% debajo de la base de 30 días de 120 min.",
+      "severity": 0.7083333333333333,
+      "detected_at": "2026-07-31T12:03:44.028Z",
+      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 5 AM (median 35 min) — ~71% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 5 AM (mediana 35 min) — ~71% debajo de la base de 30 días de 120 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 5,
-        "best_median": 33,
+        "best_median": 35,
         "overall_median": 120,
-        "samples": 6
+        "samples": 7
       }
     },
     {
@@ -202,16 +202,16 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.5652173913043479,
-      "detected_at": "2026-07-31T09:48:40.984Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 10 min) — ~57% below the 30-day baseline of 23 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 10 min) — ~57% debajo de la base de 30 días de 23 min.",
+      "severity": 0.6,
+      "detected_at": "2026-07-31T12:03:44.028Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 0,
         "best_median": 10,
-        "overall_median": 23,
+        "overall_median": 25,
         "samples": 6
       }
     },
@@ -304,24 +304,6 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5272727272727273,
-      "detected_at": "2026-07-30T10:28:55.350Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 2 AM (median 26 min) — ~53% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 26 min) — ~53% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 2,
-        "best_median": 26,
-        "overall_median": 55,
-        "samples": 6
       }
     }
   ]
