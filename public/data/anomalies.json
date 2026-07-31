@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-31T12:03:44.028Z",
-  "snapshot_at": "2026-07-31T11:47:59.313Z",
+  "generated_at": "2026-07-31T15:22:36.143Z",
+  "snapshot_at": "2026-07-31T14:03:39.161Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -110,24 +110,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.7777777777777778,
-      "detected_at": "2026-07-31T09:48:40.984Z",
-      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 7 AM (median 20 min) — ~78% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 7 AM (mediana 20 min) — ~78% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 7,
-        "best_median": 20,
-        "overall_median": 90,
-        "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -142,6 +124,24 @@
         "best_median": 15,
         "overall_median": 55,
         "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.7222222222222222,
+      "detected_at": "2026-07-31T15:22:36.143Z",
+      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 7 AM (median 25 min) — ~72% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 7 AM (mediana 25 min) — ~72% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 7,
+        "best_median": 25,
+        "overall_median": 90,
+        "samples": 8
       }
     },
     {
@@ -216,24 +216,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5245901639344263,
-      "detected_at": "2026-07-31T09:48:40.984Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 3 AM (median 29 min) — ~52% below the 30-day baseline of 61 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 29 min) — ~52% debajo de la base de 30 días de 61 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 3,
-        "best_median": 29,
-        "overall_median": 61,
-        "samples": 6
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
@@ -290,20 +272,20 @@
   "trailing_24h": [
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-07-30T15:14:04.709Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 5 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 5 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5245901639344263,
+      "detected_at": "2026-07-31T09:48:40.984Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 3 AM (median 29 min) — ~52% below the 30-day baseline of 61 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 29 min) — ~52% debajo de la base de 30 días de 61 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 5,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 8
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 3,
+        "best_median": 29,
+        "overall_median": 61,
+        "samples": 6
       }
     }
   ]
