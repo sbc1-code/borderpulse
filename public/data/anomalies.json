@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-01T20:58:54.006Z",
-  "snapshot_at": "2026-08-01T20:52:08.982Z",
+  "generated_at": "2026-08-01T22:03:35.231Z",
+  "snapshot_at": "2026-08-01T21:54:52.196Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -130,16 +130,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6984126984126984,
-      "detected_at": "2026-08-01T20:58:54.006Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~70% below the 30-day baseline of 63 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~70% debajo de la base de 30 días de 63 min.",
+      "severity": 0.7076923076923076,
+      "detected_at": "2026-08-01T22:03:35.231Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~71% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~71% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 19,
-        "overall_median": 63,
+        "overall_median": 65,
         "samples": 10
       }
     },
@@ -179,20 +179,21 @@
       }
     },
     {
-      "type": "sunday_spike",
+      "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
-      "severity": 0.5111111111111111,
-      "detected_at": "2026-07-28T16:43:25.553Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 68 min around 9 PM — ~151% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 68 min cerca de las 9 PM — ~151% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.54,
+      "detected_at": "2026-08-01T22:03:35.231Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 6 AM (median 23 min) — ~54% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 6 AM (mediana 23 min) — ~54% debajo de la base de 30 días de 50 min.",
       "evidence": {
-        "peak_hour": 21,
-        "peak_median": 68,
-        "overall_median": 45,
-        "samples": 6,
-        "ratio": 1.511111111111111
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 6,
+        "best_median": 23,
+        "overall_median": 50,
+        "samples": 10
       }
     },
     {
