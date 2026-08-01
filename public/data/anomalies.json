@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-01T15:03:55.343Z",
-  "snapshot_at": "2026-08-01T16:30:25.406Z",
+  "generated_at": "2026-08-01T19:14:29.500Z",
+  "snapshot_at": "2026-08-01T18:41:04.205Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -130,16 +130,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6833333333333333,
-      "detected_at": "2026-08-01T11:20:00.121Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~68% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~68% debajo de la base de 30 días de 60 min.",
+      "severity": 0.6935483870967742,
+      "detected_at": "2026-08-01T19:14:29.500Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~69% below the 30-day baseline of 62 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~69% debajo de la base de 30 días de 62 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 19,
-        "overall_median": 60,
+        "overall_median": 62,
         "samples": 10
       }
     },
@@ -165,16 +165,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.5614035087719298,
-      "detected_at": "2026-08-01T15:03:55.343Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 3 AM (median 25 min) — ~56% below the 30-day baseline of 57 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 25 min) — ~56% debajo de la base de 30 días de 57 min.",
+      "severity": 0.5833333333333333,
+      "detected_at": "2026-08-01T19:14:29.500Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 3 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 25,
-        "overall_median": 57,
+        "overall_median": 60,
         "samples": 9
       }
     },
