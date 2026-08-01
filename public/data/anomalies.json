@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-01T19:14:29.500Z",
-  "snapshot_at": "2026-08-01T18:41:04.205Z",
+  "generated_at": "2026-08-01T20:58:54.006Z",
+  "snapshot_at": "2026-08-01T20:52:08.982Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -130,16 +130,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6935483870967742,
-      "detected_at": "2026-08-01T19:14:29.500Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~69% below the 30-day baseline of 62 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~69% debajo de la base de 30 días de 62 min.",
+      "severity": 0.6984126984126984,
+      "detected_at": "2026-08-01T20:58:54.006Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~70% below the 30-day baseline of 63 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~70% debajo de la base de 30 días de 63 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 19,
-        "overall_median": 62,
+        "overall_median": 63,
         "samples": 10
       }
     },
@@ -231,24 +231,6 @@
         "best_median": 28,
         "overall_median": 75,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-07-31T19:39:44.129Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 2 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 2 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 2,
-        "best_median": 60,
-        "overall_median": 120,
-        "samples": 2
       }
     }
   ]
