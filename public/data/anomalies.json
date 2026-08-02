@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-02T03:45:02.344Z",
-  "snapshot_at": "2026-08-02T03:14:46.860Z",
+  "generated_at": "2026-08-02T06:36:47.902Z",
+  "snapshot_at": "2026-08-02T06:13:39.067Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -55,20 +55,38 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "laredo-bridge-i",
+      "port_name": "Laredo - Bridge I",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-08-02T06:36:47.902Z",
+      "summary_en": "Right now Laredo - Bridge I's lightest Sunday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Bridge I es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 0,
+        "overall_median": 0,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-02T03:45:02.344Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-08-02T06:36:47.902Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
+        "day_of_week": 0,
+        "day_label": "Sun",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 7
+        "samples": 3
       }
     },
     {
@@ -94,17 +112,17 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-08-01T09:08:55.722Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 12 AM (median 10 min) — ~89% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 12 AM (mediana 10 min) — ~89% debajo de la base de 30 días de 90 min.",
+      "severity": 0.8555555555555556,
+      "detected_at": "2026-08-02T06:36:47.902Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 5 AM (median 13 min) — ~86% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 5 AM (mediana 13 min) — ~86% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 0,
-        "best_median": 10,
+        "best_hour": 5,
+        "best_median": 13,
         "overall_median": 90,
-        "samples": 5
+        "samples": 9
       }
     },
     {
@@ -127,20 +145,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
-      "severity": 0.7076923076923076,
-      "detected_at": "2026-08-01T22:03:35.231Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~71% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~71% debajo de la base de 30 días de 65 min.",
+      "severity": 0.75,
+      "detected_at": "2026-08-02T06:36:47.902Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 6 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 6 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 19,
-        "overall_median": 65,
-        "samples": 10
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 6,
+        "best_median": 5,
+        "overall_median": 20,
+        "samples": 7
       }
     },
     {
@@ -165,35 +183,17 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-08-02T03:45:02.344Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 11 PM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 11 PM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
+      "severity": 0.6428571428571428,
+      "detected_at": "2026-08-02T06:36:47.902Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 10 min) — ~64% below the 30-day baseline of 28 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 10 min) — ~64% debajo de la base de 30 días de 28 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 23,
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 16,
         "best_median": 10,
-        "overall_median": 25,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5833333333333333,
-      "detected_at": "2026-08-01T19:14:29.500Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 3 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 25,
-        "overall_median": 60,
-        "samples": 9
+        "overall_median": 28,
+        "samples": 11
       }
     },
     {
@@ -231,25 +231,44 @@
         "overall_median": 63,
         "samples": 7
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-08-01T13:36:28.278Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Saturday hour so far is 4 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Pharr es 4 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "severity": 0.7076923076923076,
+      "detected_at": "2026-08-01T22:03:35.231Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~71% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~71% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 4,
-        "best_median": 10,
-        "overall_median": 20,
-        "samples": 3
+        "best_hour": 3,
+        "best_median": 19,
+        "overall_median": 65,
+        "samples": 10
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5833333333333333,
+      "detected_at": "2026-08-01T19:14:29.500Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 3 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 25,
+        "overall_median": 60,
+        "samples": 9
       }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
