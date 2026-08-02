@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-01T22:03:35.231Z",
-  "snapshot_at": "2026-08-01T23:56:44.881Z",
+  "generated_at": "2026-08-02T03:45:02.344Z",
+  "snapshot_at": "2026-08-02T03:14:46.860Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -59,7 +59,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-01T06:33:11.359Z",
+      "detected_at": "2026-08-02T03:45:02.344Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -68,7 +68,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 6
+        "samples": 7
       }
     },
     {
@@ -162,6 +162,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.6,
+      "detected_at": "2026-08-02T03:45:02.344Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 11 PM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 11 PM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 23,
+        "best_median": 10,
+        "overall_median": 25,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -198,6 +216,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.5238095238095238,
+      "detected_at": "2026-08-02T03:45:02.344Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 8 PM (median 30 min) — ~52% below the 30-day baseline of 63 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 8 PM (mediana 30 min) — ~52% debajo de la base de 30 días de 63 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 20,
+        "best_median": 30,
+        "overall_median": 63,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -215,24 +251,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.6266666666666667,
-      "detected_at": "2026-08-01T09:08:55.722Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 5 AM (median 28 min) — ~63% below the 30-day baseline of 75 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 5 AM (mediana 28 min) — ~63% debajo de la base de 30 días de 75 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 5,
-        "best_median": 28,
-        "overall_median": 75,
-        "samples": 10
-      }
-    }
-  ]
+  "trailing_24h": []
 }
