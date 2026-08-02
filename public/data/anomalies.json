@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-02T11:19:06.048Z",
-  "snapshot_at": "2026-08-02T10:19:53.833Z",
+  "generated_at": "2026-08-02T13:36:56.143Z",
+  "snapshot_at": "2026-08-02T12:42:18.772Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -91,19 +91,19 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.8222222222222222,
-      "detected_at": "2026-08-02T11:19:06.048Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 4 AM (median 8 min) — ~82% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 4 AM (mediana 8 min) — ~82% debajo de la base de 30 días de 45 min.",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.7857142857142857,
+      "detected_at": "2026-08-02T13:36:56.143Z",
+      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 5 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 5 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 8,
-        "overall_median": 45,
+        "best_hour": 5,
+        "best_median": 15,
+        "overall_median": 70,
         "samples": 10
       }
     },
@@ -127,56 +127,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-08-02T06:36:47.902Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 6 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 6 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.7777777777777778,
+      "detected_at": "2026-08-02T13:36:56.143Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 3 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 3 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 6,
-        "best_median": 5,
-        "overall_median": 20,
-        "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.7142857142857143,
-      "detected_at": "2026-08-02T11:19:06.048Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 5 AM (median 20 min) — ~71% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 5 AM (mediana 20 min) — ~71% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 20,
-        "overall_median": 70,
-        "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-02T11:19:06.048Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 4 AM (median 40 min) — ~67% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 4 AM (mediana 40 min) — ~67% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 40,
-        "overall_median": 120,
-        "samples": 10
+        "best_hour": 3,
+        "best_median": 10,
+        "overall_median": 45,
+        "samples": 11
       }
     },
     {
@@ -201,17 +165,35 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.6428571428571428,
-      "detected_at": "2026-08-02T11:19:06.048Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 10 min) — ~64% below the 30-day baseline of 28 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 10 min) — ~64% debajo de la base de 30 días de 28 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-02T13:36:56.143Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 16,
         "best_median": 10,
-        "overall_median": 28,
+        "overall_median": 30,
         "samples": 11
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5416666666666667,
+      "detected_at": "2026-08-02T13:36:56.143Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 4 AM (median 55 min) — ~54% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 4 AM (mediana 55 min) — ~54% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 4,
+        "best_median": 55,
+        "overall_median": 120,
+        "samples": 12
       }
     },
     {
@@ -230,6 +212,24 @@
         "best_median": 60,
         "overall_median": 120,
         "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-08-02T13:36:56.143Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 1 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 1 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 1,
+        "best_median": 10,
+        "overall_median": 20,
+        "samples": 3
       }
     }
   ],
