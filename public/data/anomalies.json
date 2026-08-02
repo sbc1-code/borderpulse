@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-02T21:00:11.757Z",
-  "snapshot_at": "2026-08-02T19:58:32.151Z",
+  "generated_at": "2026-08-02T22:04:42.531Z",
+  "snapshot_at": "2026-08-02T21:03:04.681Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -166,7 +166,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.6,
-      "detected_at": "2026-08-02T21:00:11.757Z",
+      "detected_at": "2026-08-02T22:04:42.531Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
       "evidence": {
@@ -175,7 +175,7 @@
         "best_hour": 16,
         "best_median": 10,
         "overall_median": 25,
-        "samples": 11
+        "samples": 12
       }
     },
     {
@@ -250,42 +250,6 @@
         "best_median": 13,
         "overall_median": 90,
         "samples": 9
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.54,
-      "detected_at": "2026-08-01T22:03:35.231Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 6 AM (median 23 min) — ~54% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 6 AM (mediana 23 min) — ~54% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 6,
-        "best_median": 23,
-        "overall_median": 50,
-        "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.7076923076923076,
-      "detected_at": "2026-08-01T22:03:35.231Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 19 min) — ~71% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 19 min) — ~71% debajo de la base de 30 días de 65 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 19,
-        "overall_median": 65,
-        "samples": 10
       }
     }
   ]
