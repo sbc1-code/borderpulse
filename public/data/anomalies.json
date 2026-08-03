@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-02T22:04:42.531Z",
-  "snapshot_at": "2026-08-02T21:03:04.681Z",
+  "generated_at": "2026-08-03T00:01:28.817Z",
+  "snapshot_at": "2026-08-02T23:10:56.644Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,14 +8,14 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 11,
-      "detected_at": "2026-07-31T19:39:44.129Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 7 PM — ~1200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 7 PM — ~1200% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-03T00:01:28.817Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 8 PM — ~1200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 8 PM — ~1200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 19,
+        "peak_hour": 20,
         "peak_median": 60,
         "overall_median": 5,
-        "samples": 6,
+        "samples": 9,
         "ratio": 12
       }
     },
@@ -166,7 +166,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.6,
-      "detected_at": "2026-08-02T22:04:42.531Z",
+      "detected_at": "2026-08-03T00:01:28.817Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 PM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 PM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
       "evidence": {
@@ -175,7 +175,7 @@
         "best_hour": 16,
         "best_median": 10,
         "overall_median": 25,
-        "samples": 12
+        "samples": 13
       }
     },
     {
