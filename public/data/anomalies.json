@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-03T12:29:11.909Z",
-  "snapshot_at": "2026-08-03T10:54:30.308Z",
+  "generated_at": "2026-08-03T17:54:49.341Z",
+  "snapshot_at": "2026-08-03T16:07:57.201Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -95,7 +95,7 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-08-03T08:32:05.608Z",
+      "detected_at": "2026-08-03T17:54:49.341Z",
       "summary_en": "Right now Calexico - East's lightest Monday hour so far is 4 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 4 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -104,7 +104,25 @@
         "best_hour": 4,
         "best_median": 15,
         "overall_median": 60,
-        "samples": 1
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.7,
+      "detected_at": "2026-08-03T17:54:49.341Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Monday hour so far is 5 AM (median 15 min) — ~70% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Mariposa es 5 AM (mediana 15 min) — ~70% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 5,
+        "best_median": 15,
+        "overall_median": 50,
+        "samples": 5
       }
     },
     {
@@ -127,29 +145,11 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-08-03T08:32:05.608Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Monday hour so far is 6 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Mariposa es 6 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 6,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 5
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-03T08:32:05.608Z",
+      "detected_at": "2026-08-03T17:54:49.341Z",
       "summary_en": "Right now Tecate's lightest Monday hour so far is 5 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
       "summary_es": "Ahora mismo la hora más ligera del lunes en Tecate es 5 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
       "evidence": {
@@ -158,82 +158,9 @@
         "best_hour": 5,
         "best_median": 60,
         "overall_median": 120,
-        "samples": 2
-      }
-    }
-  ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.7857142857142857,
-      "detected_at": "2026-08-02T17:04:34.207Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 5 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 5 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 15,
-        "overall_median": 70,
-        "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.7777777777777778,
-      "detected_at": "2026-08-02T13:36:56.143Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 3 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 3 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 3,
-        "best_median": 10,
-        "overall_median": 45,
-        "samples": 11
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5416666666666667,
-      "detected_at": "2026-08-02T13:36:56.143Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 4 AM (median 55 min) — ~54% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 4 AM (mediana 55 min) — ~54% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 55,
-        "overall_median": 120,
-        "samples": 12
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-08-02T13:36:56.143Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 1 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 1 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 1,
-        "best_median": 10,
-        "overall_median": 20,
         "samples": 3
       }
     }
-  ]
+  ],
+  "trailing_24h": []
 }
