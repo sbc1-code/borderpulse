@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-03T21:08:05.587Z",
-  "snapshot_at": "2026-08-04T01:05:53.164Z",
+  "generated_at": "2026-08-04T05:52:05.206Z",
+  "snapshot_at": "2026-08-04T04:30:03.121Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -59,13 +59,13 @@
       "port_name": "Laredo - Bridge I",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-03T08:32:05.608Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Monday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Bridge I es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-08-04T05:52:05.206Z",
+      "summary_en": "Right now Laredo - Bridge I's lightest Tuesday hour so far is 3 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Bridge I es 3 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 5,
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 15,
         "best_median": 0,
         "overall_median": 0,
         "samples": 1
@@ -77,16 +77,34 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-03T21:08:05.587Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
+      "detected_at": "2026-08-04T05:52:05.206Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
+        "day_of_week": 2,
+        "day_label": "Tue",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 10,
-        "samples": 3
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.85,
+      "detected_at": "2026-08-04T05:52:05.206Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Tuesday hour so far is 12 AM (median 3 min) — ~85% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Pharr es 12 AM (mediana 3 min) — ~85% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 0,
+        "best_median": 3,
+        "overall_median": 20,
+        "samples": 1
       }
     },
     {
@@ -130,17 +148,17 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.6799999999999999,
-      "detected_at": "2026-08-03T08:32:05.608Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Monday hour so far is 12 AM (median 8 min) — ~68% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Brownsville - Gateway es 12 AM (mediana 8 min) — ~68% debajo de la base de 30 días de 25 min.",
+      "severity": 0.6,
+      "detected_at": "2026-08-04T05:52:05.206Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 2 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 2 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
       "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 0,
-        "best_median": 8,
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 2,
+        "best_median": 10,
         "overall_median": 25,
-        "samples": 4
+        "samples": 5
       }
     },
     {
