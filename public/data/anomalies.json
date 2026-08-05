@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-05T10:40:06.143Z",
-  "snapshot_at": "2026-08-05T10:06:37.617Z",
+  "generated_at": "2026-08-05T12:56:46.123Z",
+  "snapshot_at": "2026-08-05T12:16:04.711Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -217,6 +217,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.7391304347826086,
+      "detected_at": "2026-08-05T12:56:46.123Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 4 PM — ~174% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 4 PM — ~174% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 40,
+        "overall_median": 23,
+        "samples": 6,
+        "ratio": 1.7391304347826086
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
@@ -230,23 +247,6 @@
         "overall_median": 45,
         "samples": 6,
         "ratio": 1.6666666666666667
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6000000000000001,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 4 PM — ~160% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 4 PM — ~160% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
-        "peak_median": 40,
-        "overall_median": 25,
-        "samples": 6,
-        "ratio": 1.6
       }
     },
     {
