@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-05T15:20:49.983Z",
-  "snapshot_at": "2026-08-05T18:10:39.779Z",
+  "generated_at": "2026-08-05T21:15:44.569Z",
+  "snapshot_at": "2026-08-05T21:06:17.161Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -130,16 +130,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8787878787878788,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 8 min) — ~88% below the 30-day baseline of 66 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 8 min) — ~88% debajo de la base de 30 días de 66 min.",
+      "severity": 0.8769230769230769,
+      "detected_at": "2026-08-05T21:15:44.569Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 8 min) — ~88% below the 30-day baseline of 65 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 8 min) — ~88% debajo de la base de 30 días de 65 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 1,
         "best_median": 8,
-        "overall_median": 66,
+        "overall_median": 65,
         "samples": 5
       }
     },
@@ -198,6 +198,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.7413793103448276,
+      "detected_at": "2026-08-05T21:15:44.569Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 5 AM (median 15 min) — ~74% below the 30-day baseline of 58 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 15 min) — ~74% debajo de la base de 30 días de 58 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 5,
+        "best_median": 15,
+        "overall_median": 58,
+        "samples": 9
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -212,24 +230,6 @@
         "overall_median": 23,
         "samples": 6,
         "ratio": 1.7391304347826086
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.7272727272727273,
-      "detected_at": "2026-08-05T15:20:49.983Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 5 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 5,
-        "best_median": 15,
-        "overall_median": 55,
-        "samples": 9
       }
     },
     {
@@ -302,24 +302,6 @@
         "best_median": 3,
         "overall_median": 23,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.5714285714285714,
-      "detected_at": "2026-08-04T20:27:17.380Z",
-      "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 2 AM (median 30 min) — ~57% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 2 AM (mediana 30 min) — ~57% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 2,
-        "best_median": 30,
-        "overall_median": 70,
-        "samples": 6
       }
     }
   ]
