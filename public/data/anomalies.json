@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-05T00:07:35.282Z",
-  "snapshot_at": "2026-08-04T23:45:19.835Z",
+  "generated_at": "2026-08-05T07:42:50.423Z",
+  "snapshot_at": "2026-08-05T07:18:01.507Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,49 +8,51 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 15,
-      "detected_at": "2026-08-05T00:07:35.282Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 80 min around 7 PM — ~1600% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 80 min cerca de las 7 PM — ~1600% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 80 min around 8 PM — ~1600% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 80 min cerca de las 8 PM — ~1600% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 19,
+        "peak_hour": 20,
         "peak_median": 80,
         "overall_median": 5,
-        "samples": 7,
+        "samples": 9,
         "ratio": 16
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.3333333333333335,
-      "detected_at": "2026-08-04T11:27:28.665Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 9 PM — ~233% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 9 PM — ~233% de la mediana de 30 días. Planea alrededor.",
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
-        "peak_hour": 21,
-        "peak_median": 210,
-        "overall_median": 90,
-        "samples": 7,
-        "ratio": 2.3333333333333335
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 1,
+        "best_median": 0,
+        "overall_median": 45,
+        "samples": 7
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
+      "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-08-03T04:33:05.977Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 7 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 7 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Wednesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
       "evidence": {
-        "peak_hour": 19,
-        "peak_median": 240,
-        "overall_median": 120,
-        "samples": 7,
-        "ratio": 2
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 4,
+        "best_median": 0,
+        "overall_median": 50,
+        "samples": 2
       }
     },
     {
@@ -59,13 +61,13 @@
       "port_name": "Laredo - Bridge I",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-04T05:52:05.206Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Tuesday hour so far is 3 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Bridge I es 3 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Laredo - Bridge I's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Bridge I es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 15,
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 0,
         "best_median": 0,
         "overall_median": 0,
         "samples": 1
@@ -77,18 +79,196 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-04T18:40:51.312Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
+        "day_of_week": 3,
+        "day_label": "Wed",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
+        "samples": 3
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.9166666666666667,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 7 PM — ~192% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 7 PM — ~192% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 230,
+        "overall_median": 120,
+        "samples": 6,
+        "ratio": 1.9166666666666667
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.8787878787878788,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 8 min) — ~88% below the 30-day baseline of 66 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 8 min) — ~88% debajo de la base de 30 días de 66 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 1,
+        "best_median": 8,
+        "overall_median": 66,
+        "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.8,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 12 AM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 12 AM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 0,
+        "best_median": 5,
+        "overall_median": 25,
         "samples": 7
       }
     },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.75,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 5 PM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 5 PM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 17,
+        "best_median": 15,
+        "overall_median": 60,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 1,
+        "best_median": 15,
+        "overall_median": 60,
+        "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.7,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 5 AM (median 18 min) — ~70% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 18 min) — ~70% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 5,
+        "best_median": 18,
+        "overall_median": 60,
+        "samples": 8
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 75 min around 9 PM — ~167% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 75 min cerca de las 9 PM — ~167% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 75,
+        "overall_median": 45,
+        "samples": 6,
+        "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.6000000000000001,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 4 PM — ~160% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 4 PM — ~160% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 40,
+        "overall_median": 25,
+        "samples": 6,
+        "ratio": 1.6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.5,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 75 min around 8 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 75 min cerca de las 8 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 75,
+        "overall_median": 50,
+        "samples": 5,
+        "ratio": 1.5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 6 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 6 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 6,
+        "best_median": 30,
+        "overall_median": 60,
+        "samples": 1
+      }
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
@@ -105,95 +285,6 @@
         "best_median": 3,
         "overall_median": 23,
         "samples": 1
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.7391304347826086,
-      "detected_at": "2026-08-05T00:07:35.282Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 4 PM — ~174% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 4 PM — ~174% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
-        "peak_median": 40,
-        "overall_median": 23,
-        "samples": 6,
-        "ratio": 1.7391304347826086
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.7,
-      "detected_at": "2026-08-04T08:44:10.910Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Tuesday hour so far is 5 AM (median 15 min) — ~70% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Mariposa es 5 AM (mediana 15 min) — ~70% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 5,
-        "best_median": 15,
-        "overall_median": 50,
-        "samples": 5
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.6799999999999999,
-      "detected_at": "2026-08-04T08:44:10.910Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 2 AM (median 8 min) — ~68% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 2 AM (mediana 8 min) — ~68% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 2,
-        "best_median": 8,
-        "overall_median": 25,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.6727272727272727,
-      "detected_at": "2026-08-04T11:27:28.665Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 4 AM (median 18 min) — ~67% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 18 min) — ~67% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 4,
-        "best_median": 18,
-        "overall_median": 55,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-04T11:27:28.665Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 2 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 2,
-        "best_median": 20,
-        "overall_median": 60,
-        "samples": 8
       }
     },
     {
@@ -215,41 +306,21 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5,
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1.3333333333333335,
       "detected_at": "2026-08-04T11:27:28.665Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 4 AM (median 34 min) — ~50% below the 30-day baseline of 68 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 4 AM (mediana 34 min) — ~50% debajo de la base de 30 días de 68 min.",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 9 PM — ~233% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 9 PM — ~233% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 4,
-        "best_median": 34,
-        "overall_median": 68,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-08-04T16:55:18.083Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Tuesday hour so far is 5 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Eagle Pass - Bridge I es 5 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 5,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 1
+        "peak_hour": 21,
+        "peak_median": 210,
+        "overall_median": 90,
+        "samples": 7,
+        "ratio": 2.3333333333333335
       }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
