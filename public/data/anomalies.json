@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-05T12:56:46.123Z",
-  "snapshot_at": "2026-08-05T12:16:04.711Z",
+  "generated_at": "2026-08-05T15:20:49.983Z",
+  "snapshot_at": "2026-08-05T14:54:27.352Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -198,24 +198,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-08-05T10:40:06.143Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 5 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 5,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 9
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -230,6 +212,24 @@
         "overall_median": 23,
         "samples": 6,
         "ratio": 1.7391304347826086
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.7272727272727273,
+      "detected_at": "2026-08-05T15:20:49.983Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 5 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 5,
+        "best_median": 15,
+        "overall_median": 55,
+        "samples": 9
       }
     },
     {
