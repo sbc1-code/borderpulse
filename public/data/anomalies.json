@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-06T11:26:33.241Z",
-  "snapshot_at": "2026-08-06T09:38:32.499Z",
+  "generated_at": "2026-08-06T14:21:59.571Z",
+  "snapshot_at": "2026-08-06T14:05:49.475Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -70,6 +70,23 @@
         "best_median": 0,
         "overall_median": 5,
         "samples": 5
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-08-06T14:21:59.571Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 4 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 4 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 40,
+        "overall_median": 20,
+        "samples": 6,
+        "ratio": 2
       }
     },
     {
@@ -162,41 +179,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.7391304347826086,
-      "detected_at": "2026-08-06T05:53:37.943Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 10 AM (median 6 min) — ~74% below the 30-day baseline of 23 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 10 AM (mediana 6 min) — ~74% debajo de la base de 30 días de 23 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 10,
-        "best_median": 6,
-        "overall_median": 23,
-        "samples": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.7391304347826086,
-      "detected_at": "2026-08-05T12:56:46.123Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 4 PM — ~174% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 4 PM — ~174% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
-        "peak_median": 40,
-        "overall_median": 23,
-        "samples": 6,
-        "ratio": 1.7391304347826086
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
@@ -250,6 +232,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.5333333333333333,
+      "detected_at": "2026-08-06T14:21:59.571Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 6 AM (median 28 min) — ~53% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 6 AM (mediana 28 min) — ~53% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 6,
+        "best_median": 28,
+        "overall_median": 60,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -268,20 +268,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-08-06T05:53:37.943Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 2 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-06T14:21:59.571Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 10 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 10 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 2,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 5
+        "best_hour": 10,
+        "best_median": 10,
+        "overall_median": 20,
+        "samples": 3
       }
     },
     {
