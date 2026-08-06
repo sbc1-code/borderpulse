@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-06T02:52:45.913Z",
-  "snapshot_at": "2026-08-06T00:54:41.317Z",
+  "generated_at": "2026-08-06T05:53:37.943Z",
+  "snapshot_at": "2026-08-06T04:11:10.511Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -74,38 +74,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Bridge I es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 0,
-        "best_median": 0,
-        "overall_median": 0,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-08-06T05:53:37.943Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
+        "day_of_week": 4,
+        "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 3
+        "samples": 5
       }
     },
     {
@@ -185,12 +167,12 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.8,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 12 AM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 12 AM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-08-06T05:53:37.943Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
       "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
+        "day_of_week": 4,
+        "day_label": "Thu",
         "best_hour": 0,
         "best_median": 5,
         "overall_median": 25,
@@ -199,20 +181,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-08-05T23:03:54.432Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 5 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "severity": 0.7391304347826086,
+      "detected_at": "2026-08-06T05:53:37.943Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 10 AM (median 6 min) — ~74% below the 30-day baseline of 23 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 10 AM (mediana 6 min) — ~74% debajo de la base de 30 días de 23 min.",
       "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 5,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 9
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 10,
+        "best_median": 6,
+        "overall_median": 23,
+        "samples": 2
       }
     },
     {
@@ -268,16 +250,34 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-08-06T05:53:37.943Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 2 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 2,
+        "best_median": 30,
+        "overall_median": 60,
+        "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "eagle-pass-bridge-i",
       "port_name": "Eagle Pass - Bridge I",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 6 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 6 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-06T05:53:37.943Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Thursday hour so far is 6 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Eagle Pass - Bridge I es 6 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
+        "day_of_week": 4,
+        "day_label": "Thu",
         "best_hour": 6,
         "best_median": 30,
         "overall_median": 60,
@@ -285,5 +285,24 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "laredo-bridge-i",
+      "port_name": "Laredo - Bridge I",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-08-05T07:42:50.423Z",
+      "summary_en": "Right now Laredo - Bridge I's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Bridge I es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 0,
+        "best_median": 0,
+        "overall_median": 0,
+        "samples": 1
+      }
+    }
+  ]
 }
