@@ -131,8 +131,8 @@ export function BestTimeIndex() {
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com/best-time',
-      canonical: 'https://borderpulse.com/best-time',
+      ogUrl: 'https://borderpulse.com/best-time/',
+      canonical: 'https://borderpulse.com/best-time/',
     });
     return () => resetPageMeta();
   }, [language]);
@@ -239,7 +239,7 @@ export function BestTimeIndex() {
             {rows.map((r) => (
               <tr key={r.crossing.port_number} className="hover:bg-slate-50 dark:hover:bg-gray-800/40">
                 <td className="px-3 py-2 text-slate-900 dark:text-slate-100">
-                  <Link to={`/best-time/${r.slug}`} className="hover:underline">{r.crossing.name}</Link>
+                  <Link to={`/best-time/${r.slug}/`} className="hover:underline">{r.crossing.name}</Link>
                 </td>
                 <td className="px-3 py-2 text-slate-600 dark:text-slate-400 text-xs">{r.crossing.state}</td>
                 <td className="px-3 py-2 text-slate-900 dark:text-slate-100 tabular-nums">
@@ -253,7 +253,7 @@ export function BestTimeIndex() {
                 </td>
                 <td className="px-3 py-2 text-right">
                   <Link
-                    to={`/best-time/${r.slug}`}
+                    to={`/best-time/${r.slug}/`}
                     className="text-emerald-700 dark:text-emerald-400 text-xs font-medium hover:underline"
                   >
                     {language === 'en' ? 'View →' : 'Ver →'}
@@ -321,7 +321,7 @@ export default function BestTime() {
     const description = language === 'en'
       ? `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`
       : `Hora típica más ligera para cruzar ${crossing.name} basado en los últimos 30 días de tiempos de espera de CBP, hora por hora, cada día de la semana.`;
-    const url = `https://borderpulse.com/best-time/${canonicalSlug}`;
+    const url = `https://borderpulse.com/best-time/${canonicalSlug}/`;
     updatePageMeta({
       title,
       description,
@@ -509,7 +509,7 @@ export default function BestTime() {
       {/* See current wait CTA */}
       <section className="mb-6">
         <Link
-          to={`/crossing/${canonicalSlug}`}
+          to={`/crossing/${canonicalSlug}/`}
           className="inline-flex items-center gap-2 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
         >
           <Clock className="w-4 h-4 text-emerald-600" />
@@ -533,7 +533,7 @@ export default function BestTime() {
               return (
                 <Link
                   key={c.port_number}
-                  to={`/best-time/${s}`}
+                  to={`/best-time/${s}/`}
                   className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 px-3 py-2 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
                 >
                   <div className="text-sm font-medium text-slate-900 dark:text-slate-100">{c.name}</div>

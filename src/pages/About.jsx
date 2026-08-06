@@ -40,8 +40,8 @@ export default function About() {
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com/about',
-      canonical: 'https://borderpulse.com/about',
+      ogUrl: 'https://borderpulse.com/about/',
+      canonical: 'https://borderpulse.com/about/',
     });
     return () => resetPageMeta();
   }, [language]);
@@ -182,7 +182,7 @@ export default function About() {
       {/* Quick links */}
       <section className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Link
-          to="/best-time"
+          to="/best-time/"
           className="rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 p-3 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
         >
           <div className="flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white">
@@ -195,7 +195,7 @@ export default function About() {
           </div>
         </Link>
         <Link
-          to={language === 'es' ? '/metodologia' : '/methodology'}
+          to={language === 'es' ? '/metodologia/' : '/methodology/'}
           className="rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 p-3 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
         >
           <div className="flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white">
@@ -208,7 +208,7 @@ export default function About() {
           </div>
         </Link>
         <Link
-          to="/blog"
+          to="/blog/"
           className="rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 p-3 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
         >
           <div className="flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white">

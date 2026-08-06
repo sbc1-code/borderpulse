@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { mdxBodyToHtml } from './lib/mdx-to-html.mjs';
+import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
+import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -199,6 +201,7 @@ function renderBlogPostHead(post, author, allPosts) {
   }
 
   return {
+    lang: post.lang === 'es' ? 'es' : 'en',
     title,
     desc,
     canonical,
@@ -216,6 +219,12 @@ function renderBlogPostHead(post, author, allPosts) {
 
 function rewriteIndex(indexHtml, head) {
   let html = indexHtml;
+
+  if (head.lang) {
+    html = html.replace(/<html\b[^>]*\blang=["'][^"']*["'][^>]*>/i, (tag) =>
+      tag.replace(/\blang=["'][^"']*["']/i, `lang="${esc(head.lang)}"`),
+    );
+  }
 
   html = html.replace(/<title>[^<]*<\/title>/i, `<title>${esc(head.title)}</title>`);
 
@@ -537,12 +546,34 @@ async function main() {
   for (const [alias, portNumber] of Object.entries(slugs.SLUG_ALIASES || {})) {
     const canonicalSlug = portToSlug[portNumber];
     if (!canonicalSlug || canonicalSlug === alias) continue;
-    const outDir = path.resolve(distDir, 'crossing', alias);
+    const crossing = crossings.find((c) => c.port_number === portNumber);
+    const aliasRoutes = [
+      ['crossing', `${BASE}/crossing/${canonicalSlug}/`],
+      ['best-time', `${BASE}/best-time/${canonicalSlug}/`],
+    ];
+    if (hasPedestrianLane(crossing)) {
+      aliasRoutes.push(['walk-or-drive', `${BASE}/walk-or-drive/${canonicalSlug}/`]);
+    }
+    for (const [route, target] of aliasRoutes) {
+      const outDir = path.resolve(distDir, route, alias);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), renderRedirectPage(target));
+      aliasPageCount++;
+    }
+  }
+
+  // High-confidence legacy URLs seen in Search Console. Preserve link equity
+  // without turning unrelated or spam-shaped 404s into valid pages.
+  const legacyRedirects = [
+    ['home', `${BASE}/`],
+    ['Dashboard', `${BASE}/`],
+    ['compare/el-paso-paso-del-norte-pdn-vs-el-paso-ysleta', `${BASE}/compare/el-paso-paso-del-norte-pdn-vs-ysleta/`],
+    ['walk-or-drive/eagle-pass-bridge-ii', `${BASE}/crossing/eagle-pass-bridge-ii/`],
+  ];
+  for (const [legacyPath, target] of legacyRedirects) {
+    const outDir = path.resolve(distDir, ...legacyPath.split('/'));
     fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(
-      path.resolve(outDir, 'index.html'),
-      renderRedirectPage(`${BASE}/crossing/${canonicalSlug}/`),
-    );
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), renderRedirectPage(target));
     aliasPageCount++;
   }
 
@@ -584,6 +615,7 @@ async function main() {
       ],
     });
     const enHead = {
+      lang: 'en',
       title: 'Methodology | Border Pulse',
       desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
       canonical: enCanonical,
@@ -592,6 +624,7 @@ async function main() {
       hreflangs,
     };
     const esHead = {
+      lang: 'es',
       title: 'Metodología | Border Pulse',
       desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
       canonical: esCanonical,
@@ -660,23 +693,6 @@ async function main() {
   // Hand-picked high-traffic same-region pairs the user actually searches
   // for ("X vs Y which is faster"). Add more pairs here as the
   // routing patterns change.
-  const COMPARE_PAIRS = [
-    ['san-ysidro', 'otay-mesa'],
-    ['san-ysidro', 'tecate'],
-    ['otay-mesa', 'tecate'],
-    ['el-paso-paso-del-norte-pdn', 'el-paso-bridge-of-the-americas-bota'],
-    ['el-paso-paso-del-norte-pdn', 'el-paso-ysleta'],
-    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-pharr'],
-    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-anzalduas-international-bridge'],
-    ['nogales-deconcini', 'nogales-mariposa'],
-    ['calexico-west', 'calexico-east'],
-    ['eagle-pass-bridge-i', 'eagle-pass-bridge-ii'],
-    ['brownsville-gateway', 'brownsville-veterans-international'],
-    ['brownsville-gateway', 'brownsville-b-and-m'],
-    ['brownsville-veterans-international', 'brownsville-los-indios'],
-    ['laredo-bridge-i', 'laredo-bridge-ii'],
-    ['progreso-progreso-international-bridge', 'progreso-donna-international-bridge'],
-  ];
   const slugToCrossing = {};
   for (const c of crossings) {
     const s = portToSlug[c.port_number];
@@ -709,29 +725,12 @@ async function main() {
     comparePageCount++;
   }
 
-  // /walk-or-drive/<slug> — programmatic SEO seed pages for crossings
-  // where the walk-vs-drive question matters (i.e. the live wait gap is
-  // typically large and pedestrian data is published).
-  const WALK_OR_DRIVE_SLUGS = [
-    'san-ysidro',
-    'otay-mesa',
-    'el-paso-bridge-of-the-americas-bota',
-    'el-paso-paso-del-norte-pdn',
-    'hidalgo-pharr-hidalgo',
-    'calexico-west',
-    'calexico-east',
-    'brownsville-gateway',
-    'brownsville-b-and-m',
-    'nogales-deconcini',
-    'nogales-mariposa',
-    'tecate',
-    'san-luis-san-luis-i',
-    'santa-teresa-santa-teresa-port-of-entry',
-  ];
+  // /walk-or-drive/<slug> — generate every route the crossing detail UI can
+  // link to, including ports whose CBP lane is temporarily Update Pending.
   let walkOrDriveCount = 0;
-  for (const slug of WALK_OR_DRIVE_SLUGS) {
-    const c = slugToCrossing[slug];
-    if (!c) continue;
+  for (const c of crossings.filter(hasPedestrianLane)) {
+    const slug = portToSlug[c.port_number];
+    if (!slug) continue;
     const title = `Walk or Drive Across ${c.name}? Live Wait Comparison (2026) | Border Pulse`;
     const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
     const canonical = `${BASE}/walk-or-drive/${slug}/`;

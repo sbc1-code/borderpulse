@@ -98,7 +98,7 @@ export default function Embed() {
   const text = isDark ? 'text-slate-100' : 'text-slate-900';
   const subtext = isDark ? 'text-slate-400' : 'text-slate-500';
   const border = isDark ? 'border-gray-800' : 'border-slate-200';
-  const cardLink = `https://borderpulse.com/crossing/${canonicalSlug}`;
+  const cardLink = `https://borderpulse.com/crossing/${canonicalSlug}/`;
 
   if (!loaded) {
     return (

@@ -178,8 +178,8 @@ export default function Dashboard() {
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com',
-      canonical: 'https://borderpulse.com',
+      ogUrl: 'https://borderpulse.com/',
+      canonical: 'https://borderpulse.com/',
     });
   }, [language]);
 

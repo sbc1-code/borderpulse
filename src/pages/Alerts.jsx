@@ -93,7 +93,7 @@ export default function Alerts() {
       description: t.subtitle,
       ogTitle: title,
       ogDescription: t.subtitle,
-      canonical: 'https://borderpulse.com/alerts',
+      canonical: 'https://borderpulse.com/alerts/',
     });
     return () => resetPageMeta();
   }, [language]);
@@ -175,7 +175,7 @@ export default function Alerts() {
                   <div className="flex items-center gap-2 flex-wrap">
                     {slug ? (
                       <Link
-                        to={`/crossing/${slug}`}
+                        to={`/crossing/${slug}/`}
                         className="text-sm font-semibold text-slate-900 dark:text-white hover:underline truncate"
                       >
                         {name}

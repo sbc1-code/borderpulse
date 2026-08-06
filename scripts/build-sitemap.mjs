@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
+import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -75,25 +77,6 @@ async function main() {
     });
   }
 
-  // Compare pages — kept in sync with the COMPARE_PAIRS list in
-  // scripts/prerender.mjs. Update both when adding/removing pairs.
-  const COMPARE_PAIRS = [
-    ['san-ysidro', 'otay-mesa'],
-    ['san-ysidro', 'tecate'],
-    ['otay-mesa', 'tecate'],
-    ['el-paso-paso-del-norte-pdn', 'el-paso-bridge-of-the-americas-bota'],
-    ['el-paso-paso-del-norte-pdn', 'el-paso-ysleta'],
-    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-pharr'],
-    ['hidalgo-pharr-hidalgo', 'hidalgo-pharr-anzalduas-international-bridge'],
-    ['nogales-deconcini', 'nogales-mariposa'],
-    ['calexico-west', 'calexico-east'],
-    ['eagle-pass-bridge-i', 'eagle-pass-bridge-ii'],
-    ['brownsville-gateway', 'brownsville-veterans-international'],
-    ['brownsville-gateway', 'brownsville-b-and-m'],
-    ['brownsville-veterans-international', 'brownsville-los-indios'],
-    ['laredo-bridge-i', 'laredo-bridge-ii'],
-    ['progreso-progreso-international-bridge', 'progreso-donna-international-bridge'],
-  ];
   const knownSlugs = new Set(Object.values(portToSlug));
   for (const [a, b] of COMPARE_PAIRS) {
     if (!knownSlugs.has(a) || !knownSlugs.has(b)) continue;
@@ -105,26 +88,10 @@ async function main() {
     });
   }
 
-  // /walk-or-drive/<slug> seeds — kept in sync with WALK_OR_DRIVE_SLUGS
-  // in scripts/prerender.mjs. Update both when adding a slug.
-  const WALK_OR_DRIVE_SLUGS = [
-    'san-ysidro',
-    'otay-mesa',
-    'el-paso-bridge-of-the-americas-bota',
-    'el-paso-paso-del-norte-pdn',
-    'hidalgo-pharr-hidalgo',
-    'calexico-west',
-    'calexico-east',
-    'brownsville-gateway',
-    'brownsville-b-and-m',
-    'nogales-deconcini',
-    'nogales-mariposa',
-    'tecate',
-    'san-luis-san-luis-i',
-    'santa-teresa-santa-teresa-port-of-entry',
-  ];
-  for (const slug of WALK_OR_DRIVE_SLUGS) {
-    if (!knownSlugs.has(slug)) continue;
+  // Keep the sitemap in lockstep with the crossing-detail links and prerender.
+  for (const c of crossings.filter(hasPedestrianLane)) {
+    const slug = portToSlug[c.port_number];
+    if (!slug) continue;
     urls.push({
       loc: `${BASE}/walk-or-drive/${slug}/`,
       changefreq: 'daily',

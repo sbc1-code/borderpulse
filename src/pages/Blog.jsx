@@ -44,8 +44,8 @@ export default function Blog() {
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com/blog',
-      canonical: 'https://borderpulse.com/blog',
+      ogUrl: 'https://borderpulse.com/blog/',
+      canonical: 'https://borderpulse.com/blog/',
     });
     return () => resetPageMeta();
   }, []);
@@ -101,7 +101,7 @@ export default function Blog() {
                   </span>
                 </div>
                 <h2 className="mt-1 text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
-                  <Link to={`/blog/${p.slug}`} className="hover:underline" lang={lang}>
+                  <Link to={`/blog/${p.slug}/`} className="hover:underline" lang={lang}>
                     {fm.title}
                   </Link>
                 </h2>

@@ -120,7 +120,7 @@ export default function WalkOrDrive() {
     const desc = language === 'en'
       ? `Compare live pedestrian and vehicle wait times at ${crossing.name} from CBP. See whether walking saves enough minutes to be worth parking.`
       : `Compara tiempos en vivo a pie y en vehículo en ${crossing.name} con datos de CBP. Ve si caminar te ahorra suficiente tiempo para que valga estacionar.`;
-    const url = `https://borderpulse.com/walk-or-drive/${canonicalSlug}`;
+    const url = `https://borderpulse.com/walk-or-drive/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
   }, [crossing, canonicalSlug, language]);
@@ -150,7 +150,7 @@ export default function WalkOrDrive() {
             ? `CBP doesn't publish a pedestrian wait time for ${crossing.name}, so the walk-vs-drive question can't be answered from data. Some ports don't have pedestrian lanes; others have them but don't report. Check the live page for what is published.`
             : `CBP no publica tiempo de espera peatonal para ${crossing.name}, así que la pregunta caminar-vs-manejar no se puede responder con datos. Algunos puertos no tienen carriles peatonales; otros sí pero no reportan. Revisa la página en vivo para ver lo que sí se publica.`}
         </p>
-        <Link to={`/crossing/${canonicalSlug}`} className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400 hover:underline">
+        <Link to={`/crossing/${canonicalSlug}/`} className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400 hover:underline">
           {language === 'en' ? `Open ${crossing.name} live page` : `Abrir página en vivo de ${crossing.name}`} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
@@ -287,13 +287,13 @@ export default function WalkOrDrive() {
 
       <div className="mb-6 flex flex-wrap gap-3 text-sm">
         <Link
-          to={`/crossing/${canonicalSlug}`}
+          to={`/crossing/${canonicalSlug}/`}
           className="inline-flex items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400 hover:underline"
         >
           {language === 'en' ? `${crossing.name} live page` : `Página en vivo de ${crossing.name}`} <ArrowRight className="w-4 h-4" />
         </Link>
         <Link
-          to={`/best-time/${canonicalSlug}`}
+          to={`/best-time/${canonicalSlug}/`}
           className="inline-flex items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400 hover:underline"
         >
           {language === 'en' ? `Best time to cross ${crossing.name}` : `Mejor hora para cruzar ${crossing.name}`} <ArrowRight className="w-4 h-4" />

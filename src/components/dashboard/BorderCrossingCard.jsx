@@ -286,7 +286,7 @@ export default function BorderCrossingCard({
               <div className="flex items-center gap-1.5 mb-0.5">
                 <h3 className="text-sm font-semibold text-slate-900 truncate" title={crossing.name}>
                   {cardSlug ? (
-                    <Link to={`/crossing/${cardSlug}`} className="hover:underline">
+                    <Link to={`/crossing/${cardSlug}/`} className="hover:underline">
                       {crossing.name || crossing.port_name}
                     </Link>
                   ) : (
@@ -348,7 +348,7 @@ export default function BorderCrossingCard({
                 <DropdownMenuContent align="end" className="w-44">
                   {cardSlug ? (
                     <DropdownMenuItem asChild>
-                      <Link to={`/crossing/${cardSlug}`} className="cursor-pointer">
+                      <Link to={`/crossing/${cardSlug}/`} className="cursor-pointer">
                         {language === 'en' ? 'View trends' : 'Ver tendencias'}
                       </Link>
                     </DropdownMenuItem>
@@ -359,7 +359,7 @@ export default function BorderCrossingCard({
                   )}
                   {cardSlug && (
                     <DropdownMenuItem asChild>
-                      <Link to={`/best-time/${cardSlug}`} className="cursor-pointer">
+                      <Link to={`/best-time/${cardSlug}/`} className="cursor-pointer">
                         {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
                       </Link>
                     </DropdownMenuItem>
@@ -441,7 +441,7 @@ export default function BorderCrossingCard({
 
               {showBestTimePill && cardSlug && (
                 <Link
-                  to={`/best-time/${cardSlug}`}
+                  to={`/best-time/${cardSlug}/`}
                   className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 transition-colors hover:bg-white dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60"
                   title={language === 'en'
                     ? `Lightest typical hour today opens the full hour-by-hour pattern`

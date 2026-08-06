@@ -119,7 +119,7 @@ export default function CrossingRankings({ title }) {
                 <td className="py-2 pl-3 pr-2 text-slate-400 font-medium">{i + 1}</td>
                 <td className="py-2 px-2">
                   <Link
-                    to={`/crossing/${c.slug}`}
+                    to={`/crossing/${c.slug}/`}
                     className="text-emerald-700 dark:text-emerald-400 hover:underline font-medium"
                   >
                     {c.name}

@@ -3,6 +3,30 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-08-05
+
+### Fixed
+- **Search Console 404s from route-generator drift.** The crossing UI linked
+  every port with a pedestrian lane to `/walk-or-drive/:slug`, but prerender
+  and sitemap builds used a separate 14-port list. Both now share the same
+  pedestrian-lane rule, producing 30 matching build outputs and sitemap entries,
+  including Laredo Bridge I, Presidio, and Roma.
+- **Legacy crossing URLs now preserve high-confidence traffic.** Added
+  noindex redirects for former Presidio, Roma, San Ysidro PedWest, and Ysleta
+  slugs across the relevant route families, plus the old PDN-vs-Ysleta compare
+  URL and two former root paths. Spam-shaped and unrelated 404s remain 404s.
+- **Spanish prerenders declared the wrong document language.** Spanish blog
+  posts and `/metodologia/` now emit `<html lang="es">`; English counterparts
+  emit `lang="en"`, and client-side metadata preserves the route language.
+- **Client canonicals conflicted with the trailing-slash URL policy.** SPA
+  canonicals, crawlable UI links, and internal blog links now use the same
+  trailing-slash form as prerenders and the sitemap.
+
+### Changed
+- `/compare` seed pairs now have one source of truth in
+  `src/lib/comparePairs.js`; the stale `el-paso-ysleta` seed now uses the live
+  `ysleta` slug. Sitemap output is 175 unique canonical URLs.
+
 ## 2026-07-27
 
 ### Changed

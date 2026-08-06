@@ -15,6 +15,7 @@ import { nearestCrossings, kmToMiles } from '@/lib/geo';
 import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { isSparseCell } from '@/lib/aggregates';
+import { hasPedestrianLane } from '@/lib/crossingAvailability';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -165,7 +166,7 @@ function CompareRow({ entry, language, slug }) {
 
   return (
     <Link
-      to={`/crossing/${slug}`}
+      to={`/crossing/${slug}/`}
       className="block group"
     >
       <div className="flex items-center justify-between gap-3 p-3 rounded-md border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors">
@@ -367,7 +368,7 @@ export default function CrossingDetail() {
     const desc = language === 'en'
       ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
       : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
-    const url = `https://borderpulse.com/crossing/${canonicalSlug}`;
+    const url = `https://borderpulse.com/crossing/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
   }, [aggregate, canonicalSlug, crossing, language]);
@@ -390,7 +391,7 @@ export default function CrossingDetail() {
   }
 
   if (canonicalSlug && slug !== canonicalSlug) {
-    return <Navigate to={`/crossing/${canonicalSlug}`} replace />;
+    return <Navigate to={`/crossing/${canonicalSlug}/`} replace />;
   }
 
   const hoursSummary = getHoursSummary(crossing, language);
@@ -548,7 +549,7 @@ export default function CrossingDetail() {
                 : `Espera típica por hora (${DAY_LABELS.es[selectedDay]})`}
             </h2>
             <Link
-              to={`/best-time/${canonicalSlug}`}
+              to={`/best-time/${canonicalSlug}/`}
               className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-medium hover:underline inline-flex items-center gap-1"
             >
               {language === 'en' ? 'Best time to cross →' : 'Mejor hora para cruzar →'}
@@ -809,10 +810,10 @@ export default function CrossingDetail() {
               })}
             </div>
           )}
-          {(crossing.lanes?.pedestrian_standard || crossing.lanes?.pedestrian_ready) && (
+          {hasPedestrianLane(crossing) && (
             <div className="mt-2 text-xs">
               <Link
-                to={`/walk-or-drive/${canonicalSlug}`}
+                to={`/walk-or-drive/${canonicalSlug}/`}
                 className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium hover:underline"
               >
                 {language === 'en' ? `Walk or drive across ${crossing.name}?` : `¿Cruzar a pie o en auto en ${crossing.name}?`}

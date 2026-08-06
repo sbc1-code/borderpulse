@@ -38,8 +38,12 @@ export default function Layout({ children }) {
   }, []);
 
   useEffect(() => {
+    const pageOwnsLanguage =
+      /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
+      /^\/(methodology|metodologia)\/?$/.test(location.pathname);
+    if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
-  }, [language]);
+  }, [language, location.pathname]);
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -62,13 +66,13 @@ export default function Layout({ children }) {
     },
     {
       name: 'Blog',
-      href: '/blog',
+      href: '/blog/',
       icon: BookOpen,
       current: location.pathname.startsWith('/blog'),
     },
     {
       name: language === 'en' ? 'Alerts' : 'Alertas',
-      href: '/alerts',
+      href: '/alerts/',
       icon: Bell,
       current: location.pathname.startsWith('/alerts'),
     },
@@ -224,15 +228,15 @@ export default function Layout({ children }) {
               {language === 'en' ? 'Data: U.S. Customs and Border Protection' : 'Datos: Aduanas y Protección Fronteriza EE.UU.'}
             </span>
             <span>·</span>
-            <Link to="/best-time" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+            <Link to="/best-time/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
             </Link>
-            <Link to="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+            <Link to="/about/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
             </Link>
             <span>·</span>
             <Link
-              to={language === 'es' ? '/metodologia' : '/methodology'}
+              to={language === 'es' ? '/metodologia/' : '/methodology/'}
               className="hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               {language === 'es' ? 'Metodología' : 'Methodology'}

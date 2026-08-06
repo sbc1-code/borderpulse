@@ -5,7 +5,7 @@ import CrossingRankings from './CrossingRankings';
 
 function CrossingLink({ slug, children }) {
   return (
-    <Link to={`/crossing/${slug}`} className="text-emerald-700 dark:text-emerald-400 underline">
+    <Link to={`/crossing/${slug}/`} className="text-emerald-700 dark:text-emerald-400 underline">
       {children}
     </Link>
   );

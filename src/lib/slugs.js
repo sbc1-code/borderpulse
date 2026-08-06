@@ -4,6 +4,10 @@ const BASE_OVERRIDES = {
 
 export const SLUG_ALIASES = {
   'bridge-of-the-americas-port-of-entry': '240201',
+  'el-paso-ysleta': '240104',
+  'presidio': '240301',
+  'roma-texas': '231001',
+  'san-ysidro-pedwest': '250401',
 };
 
 function baseSlug(name) {

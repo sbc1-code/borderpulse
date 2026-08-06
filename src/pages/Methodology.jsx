@@ -375,8 +375,8 @@ export default function Methodology({ lang = 'en' }) {
       ? 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.'
       : 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.';
     const canonical = lang === 'es'
-      ? 'https://borderpulse.com/metodologia'
-      : 'https://borderpulse.com/methodology';
+      ? 'https://borderpulse.com/metodologia/'
+      : 'https://borderpulse.com/methodology/';
     updatePageMeta({
       title,
       description,
@@ -384,6 +384,7 @@ export default function Methodology({ lang = 'en' }) {
       ogDescription: description,
       ogUrl: canonical,
       canonical,
+      lang,
     });
     return () => resetPageMeta();
   }, [lang]);

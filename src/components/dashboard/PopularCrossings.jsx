@@ -36,7 +36,7 @@ export default function PopularCrossings({ crossings, language = 'en' }) {
         {items.map((c) => (
           <li key={c.port_number} className="text-xs">
             <Link
-              to={`/crossing/${c.slug}`}
+              to={`/crossing/${c.slug}/`}
               className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:underline"
             >
               {language === 'en' ? `${c.name} wait times` : `${c.name} tiempos de espera`}

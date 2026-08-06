@@ -34,9 +34,8 @@ Ranked roughly by leverage. Pick what fits the available time.
       as og:image / twitter:image.
 - [ ] **OG card for `/about`** — same idea, brand-anchored card.
 - [x] **Programmatic SEO `/compare/:slugA-vs-:slugB`** — shipped
-      2026-05-09. 10 seed pairs prerendered + sitemap'd. Add more
-      via the COMPARE_PAIRS arrays in `scripts/prerender.mjs` +
-      `scripts/build-sitemap.mjs`.
+      2026-05-09. 15 seed pairs prerendered + sitemap'd. Add more
+      via the single `COMPARE_PAIRS` inventory in `src/lib/comparePairs.js`.
 - [ ] **Hreflang for ES variants** — currently EN/ES share the same URL
       and toggle in localStorage. For better ES SEO, consider
       `/mejor-hora/:slug` parallel routes with proper `<link
@@ -52,9 +51,11 @@ Ranked roughly by leverage. Pick what fits the available time.
       search has `aria-label`; Blog filter tabs got `aria-pressed`
       + `role="group"`; CrossingDetail and Alerts were already
       labeled. Verified live.
-- [ ] **Sitemap submission** — submit `/sitemap.xml` to Google Search
-      Console + Bing Webmaster Tools so the 100+ URLs get crawled
-      faster. (Not a code task.)
+- [x] **Google Search Console sitemap submission** — verified 2026-08-05:
+      `/sitemap.xml` is successful, was read that day, and reported 158 URLs
+      before this release expanded the sitemap to 175.
+- [ ] **Bing Webmaster Tools sitemap submission** — submit `/sitemap.xml`.
+      (Not a code task.)
 - [x] **Card "best time today" pill** — shipped 2026-05-09. Green
       pill on each homepage card linking to /best-time/<slug>.
       Suppressed when the user is already in the lightest window.
@@ -103,16 +104,18 @@ Ranked roughly by leverage. Pick what fits the available time.
 Snapshot of features live on borderpulse.com today.
 
 ### Pages
-- `/` — Dashboard with 43 wait cards, vs-typical comparison, geo prompt,
+- `/` — Dashboard with 44 wait cards, vs-typical comparison, geo prompt,
   region filters, search, direction toggle, right-rail stats + USD/MXN
 - `/crossing/:slug` — Per-crossing detail with hourly chart (7-day
   selector), lightest-hour callout, recent advisories timeline,
   FAQs, nearby crossings compare, "Embed this" snippet generator
-- `/best-time` — Hub table sorted by lightest-hour median across all 43
+- `/best-time` — Hub table sorted by lightest-hour median across all 44
   crossings
 - `/best-time/:slug` — Per-crossing landing page targeting "best time
   to cross [X]" search intent
-- `/blog` + `/blog/:slug` — 14 bilingual posts, 7 EN / 7 ES
+- `/compare/:pair` — 15 hand-picked same-region crossing comparisons
+- `/walk-or-drive/:slug` — 30 pedestrian-vs-vehicle decision pages
+- `/blog` + `/blog/:slug` — 36 bilingual posts, 18 EN / 18 ES
 - `/alerts` — Notification subscriptions management (toggle / delete
   per row)
 - `/about` — Stats, methodology, "what runs in your browser"
@@ -131,7 +134,7 @@ Snapshot of features live on borderpulse.com today.
 ### Infra
 - GitHub Pages deploy via `.github/workflows/deploy.yml`
 - Scheduled CBP refresh + redeploy via `.github/workflows/fetch-cbp.yml`
-- Sitemap (~104 URLs) + RSS (12 entries) regenerated each prebuild
+- Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild
 - Code-split leaf routes (main bundle ~161 KB)
 - Robots.txt allows AI crawlers, disallows `/embed/`
 - Anonymous page-view analytics via Umami

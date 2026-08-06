@@ -104,7 +104,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
           )}
 
           <Link
-            to={`/crossing/${slug}`}
+            to={`/crossing/${slug}/`}
             className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 dark:text-emerald-400 hover:underline"
           >
             {language === 'en' ? 'Open full page' : 'Abrir página completa'} <ArrowRight className="w-3.5 h-3.5" />
@@ -172,7 +172,7 @@ export default function Compare() {
     const desc = language === 'en'
       ? `Live wait times, today's lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side. Pick the faster crossing right now.`
       : `Tiempos en vivo, hora más ligera de hoy y patrones de 30 días en ${crossingA.name} y ${crossingB.name} lado a lado. Elige la garita más rápida ahora.`;
-    const url = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}`;
+    const url = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
   }, [crossingA, crossingB, aSlug, bSlug, language]);

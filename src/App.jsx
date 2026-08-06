@@ -43,7 +43,7 @@ function LayoutRoutes() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/alerts" element={<Alerts />} />
-          <Route path="/api" element={<Navigate to="/methodology" replace />} />
+          <Route path="/api" element={<Navigate to="/methodology/" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/methodology" element={<Methodology lang="en" />} />
           <Route path="/metodologia" element={<Methodology lang="es" />} />

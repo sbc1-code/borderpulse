@@ -18,7 +18,8 @@ function setMeta(name, content, attr = 'name') {
  * Update page-level SEO tags. Call from useEffect in each page component.
  * Pass null/undefined for any field to skip it.
  */
-export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical }) {
+export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical, lang }) {
+  if (lang) document.documentElement.lang = lang;
   if (title) document.title = title;
   if (description) setMeta('description', description);
   if (ogTitle) setMeta('og:title', ogTitle, 'property');
@@ -40,12 +41,13 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
  * Reset meta tags to defaults (call on unmount or route change).
  */
 export function resetPageMeta() {
+  document.documentElement.lang = 'en';
   document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
   setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
   setMeta('og:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times', 'property');
   setMeta('og:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
   setMeta('og:image', 'https://borderpulse.com/og-card.png', 'property');
-  setMeta('og:url', 'https://borderpulse.com', 'property');
+  setMeta('og:url', 'https://borderpulse.com/', 'property');
   const link = document.querySelector('link[rel="canonical"]');
-  if (link) link.setAttribute('href', 'https://borderpulse.com');
+  if (link) link.setAttribute('href', 'https://borderpulse.com/');
 }

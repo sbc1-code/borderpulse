@@ -55,14 +55,14 @@ export default function BlogPost() {
     const fm = post.frontmatter;
     const title = `${fm.title} | Border Pulse`;
     const desc = fm.description || fm.title;
-    const url = `https://borderpulse.com/blog/${slug}`;
+    const url = `https://borderpulse.com/blog/${slug}/`;
     const imagePath = fm.ogImage || fm.hero;
     const ogImg = imagePath ? `https://borderpulse.com${imagePath}` : undefined;
-    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url });
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url, lang: fm.lang || 'en' });
     return () => resetPageMeta();
   }, [post, slug]);
 
-  if (!post) return <Navigate to="/blog" replace />;
+  if (!post) return <Navigate to="/blog/" replace />;
   const fm = post.frontmatter;
   const lang = fm.lang || 'en';
   const t = STRINGS[lang] || STRINGS.en;
@@ -77,7 +77,7 @@ export default function BlogPost() {
   return (
     <article className="p-3 sm:p-4 lg:p-6 max-w-[760px] mx-auto" lang={lang}>
       <div className="mb-4">
-        <Link to="/blog">
+        <Link to="/blog/">
           <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{t.allPosts}</span>
@@ -103,7 +103,7 @@ export default function BlogPost() {
         {twin && (
           <p className="mt-2 text-xs text-slate-500">
             {t.alsoIn}{' '}
-            <Link to={`/blog/${twin.slug}`} className="text-emerald-700 dark:text-emerald-400 underline">
+            <Link to={`/blog/${twin.slug}/`} className="text-emerald-700 dark:text-emerald-400 underline">
               {twinLangLabel}
             </Link>
           </p>

@@ -108,7 +108,7 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
             <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
           </button>
           <Link
-            to="/alerts"
+            to="/alerts/"
             className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
           >
             <Settings className="w-3 h-3" />
@@ -148,7 +148,7 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
           </motion.button>
           <div className="mt-2 flex justify-end">
             <Link
-              to="/alerts"
+              to="/alerts/"
               className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
             >
               <Settings className="w-3 h-3" />
