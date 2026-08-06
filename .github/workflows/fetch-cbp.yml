@@ -7,16 +7,10 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
   issues: write
 
-# Shares the "pages" group with deploy.yml: concurrent Pages deployments
-# from the two workflows kill each other with "Deployment failed, try
-# again later" (proven 2026-07-02). Serialization is the fix; the retry
-# steps below only cover genuine backend flakes.
 concurrency:
-  group: pages
+  group: fetch-data
   cancel-in-progress: false
 
 jobs:
@@ -60,23 +54,6 @@ jobs:
           fi
       - name: Build static site
         run: npm run build
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
-      # Pages backend flakes two ways (both seen 2026-07-02): deployments
-      # rot in deployment_queued past the 10 min timeout (which the action
-      # caps at its default, so raising it is not an option), or get killed
-      # in seconds with "Deployment failed, try again later". Wait 30s and
-      # retry once instead of failing the whole fetch run over an infra flake.
-      - id: deployment
-        uses: actions/deploy-pages@v5
-        continue-on-error: true
-      - if: steps.deployment.outcome == 'failure'
-        run: sleep 30
-      - id: deployment-retry
-        if: steps.deployment.outcome == 'failure'
-        uses: actions/deploy-pages@v5
 
       # Auto-file an issue on failure, dedup'd by label so we don't spam
       # every 15 min. Closes the loop on "I saw it in Gmail and forgot."

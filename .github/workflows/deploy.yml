@@ -10,21 +10,19 @@ permissions:
   pages: write
   id-token: write
 
-# fetch-cbp.yml shares this group so Pages deployments are serialized
-# (concurrent deployments kill each other; see 2026-07-02 in CHANGELOG).
-# cancel-in-progress stays false so a push never kills a mid-flight
-# fetch run; it just queues behind it for about a minute.
+# Only this workflow deploys Pages. Scheduled data fetches commit their
+# snapshots and arrive here through the normal push trigger, so there is one
+# deployment path instead of two workflows competing for the Pages queue.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
   build-and-deploy:
-    if: "${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(data): refresh') }}"
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url || steps.deployment-retry.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -39,15 +37,5 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
-      # Pages backend intermittently kills fresh deployments with
-      # "Deployment failed, try again later" (2026-07-02, twice) or lets
-      # them rot in deployment_queued. Wait 30s and retry once instead of
-      # failing the run over an infra flake.
       - id: deployment
-        uses: actions/deploy-pages@v5
-        continue-on-error: true
-      - if: steps.deployment.outcome == 'failure'
-        run: sleep 30
-      - id: deployment-retry
-        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5
