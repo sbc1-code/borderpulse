@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-06T14:21:59.571Z",
-  "snapshot_at": "2026-08-06T14:05:49.475Z",
+  "generated_at": "2026-08-07T00:42:19.889Z",
+  "snapshot_at": "2026-08-07T00:15:09.557Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -144,38 +144,38 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-08-06T05:53:37.943Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 25,
-        "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.7833333333333333,
-      "detected_at": "2026-08-06T11:26:33.241Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 2 AM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
+      "severity": 0.7719298245614035,
+      "detected_at": "2026-08-07T00:42:19.889Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 2 AM (median 13 min) — ~77% below the 30-day baseline of 57 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 13 min) — ~77% debajo de la base de 30 días de 57 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 2,
         "best_median": 13,
-        "overall_median": 60,
+        "overall_median": 57,
         "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-08-07T00:42:19.889Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 0,
+        "best_median": 5,
+        "overall_median": 20,
+        "samples": 7
       }
     },
     {
