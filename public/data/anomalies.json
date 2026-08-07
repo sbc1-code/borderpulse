@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-07T13:12:29.844Z",
-  "snapshot_at": "2026-08-07T13:09:32.137Z",
+  "generated_at": "2026-08-07T14:56:08.805Z",
+  "snapshot_at": "2026-08-07T14:18:38.495Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -238,13 +238,13 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-08-07T13:12:29.844Z",
-      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 7 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 7 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "detected_at": "2026-08-07T14:56:08.805Z",
+      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 10 PM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 10 PM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 7,
+        "best_hour": 22,
         "best_median": 30,
         "overall_median": 90,
         "samples": 7
@@ -356,24 +356,6 @@
         "best_median": 3,
         "overall_median": 20,
         "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-08-06T14:21:59.571Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 10 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 10 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 10,
-        "best_median": 10,
-        "overall_median": 20,
-        "samples": 3
       }
     }
   ]
