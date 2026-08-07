@@ -11,6 +11,21 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 Ranked roughly by leverage. Pick what fits the available time.
 
+### Active execution queue — 2026-08-06 audit
+
+The GitHub roadmap issue is [#56](https://github.com/sbc1-code/borderpulse/issues/56).
+Work top to bottom; restore product trust before expanding the URL inventory.
+
+- [ ] **P0 — restore scheduled data deployment** — [#57](https://github.com/sbc1-code/borderpulse/issues/57).
+- [ ] **P0 — fix the live `/best-time/` hub and add route smoke tests** — [#61](https://github.com/sbc1-code/borderpulse/issues/61).
+- [ ] **P1 — exclude closed hours from best-time recommendations** — [#65](https://github.com/sbc1-code/borderpulse/issues/65).
+- [ ] **P1 — make freshness and missing-data states honest** — [#58](https://github.com/sbc1-code/borderpulse/issues/58).
+- [ ] **P1 — reconcile sitemap aliases and Search Console indexing** — [#59](https://github.com/sbc1-code/borderpulse/issues/59).
+- [ ] **P1 — improve CTR on the proven organic landing pages** — [#64](https://github.com/sbc1-code/borderpulse/issues/64).
+- [ ] **P1 — instrument the core Umami decision funnel** — [#60](https://github.com/sbc1-code/borderpulse/issues/60).
+- [ ] **P2 — simplify first-use and mobile crossing selection** — [#62](https://github.com/sbc1-code/borderpulse/issues/62).
+- [ ] **P2 — clear vulnerable dependencies and add a CI gate** — [#63](https://github.com/sbc1-code/borderpulse/issues/63).
+
 - [x] **Re-bucket the aggregate grid** — shipped 2026-07-27, but NOT as
       weekday/weekend. That plan was measured and rejected: within-Mon-Fri
       spread of day medians is 25 min, 2.5x the Sat-Sun spread of 10 min
@@ -20,11 +35,9 @@ Ranked roughly by leverage. Pick what fits the available time.
       hour axis instead via an adaptive centred window (target 6 samples,
       cap +/-2h). Density median 2 -> 7, 86% of cells clear a floor of 5,
       `MIN_CELL_SAMPLES` raised 2 -> 5. "Last 30 days" copy still holds.
-- [ ] **Re-verify the unshipped best-time blog edits.** 13 modified `.mdx`
-      files (7 EN + 6 ES "best time to cross" posts) are stashed locally
-      from 2026-07-03. Their hardcoded hour claims were derived before the
-      shallow-clone fix and will not match current aggregates. Regenerate
-      the figures, then ship.
+- [x] **Re-verify the best-time blog edits** — shipped 2026-07-27.
+      All 14 posts (7 EN + 7 ES) were regenerated against the corrected
+      aggregates, and `verify-blog-claims.mjs` now guards 172 figures.
 - [ ] **Trip planner v0** — pick crossing + target arrival time → return
       a recommended departure window. Needs design pass first: input
       shape, confidence model, mobile UX. Flagship feature, biggest lift
@@ -133,8 +146,9 @@ Snapshot of features live on borderpulse.com today.
 
 ### Infra
 - GitHub Pages deploy via `.github/workflows/deploy.yml`
-- Scheduled CBP refresh + redeploy via `.github/workflows/fetch-cbp.yml`
-- Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild
+- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; explicit deploy
+  handoff is pending #57
+- Sitemap (178 URLs) + RSS (36 entries) regenerated each prebuild
 - Code-split leaf routes (main bundle ~161 KB)
 - Robots.txt allows AI crawlers, disallows `/embed/`
 - Anonymous page-view analytics via Umami

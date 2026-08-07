@@ -8,6 +8,24 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-08-06 · Reliability and current-page quality gate SEO expansion
+
+Do not mass-produce `/best-time/:slug/:day` or other programmatic variants
+yet. Search Console shows real demand (102,223 impressions and 1,836 clicks in
+the latest 28-day window), but the existing cohort averages 1.8% CTR, many
+best-time pages have only early impressions, and the promoted hub currently
+crashes. Restore fresh-data delivery, recommendation accuracy, route smoke
+coverage, indexing, and useful-action measurement first. Expand only after the
+current cohort earns sustained impressions and downstream use.
+
+## 2026-08-06 · One workflow owns Pages; data refreshes explicitly dispatch it
+
+This supersedes the 2026-07-02 shared-`pages`-group note below. `deploy.yml` is
+the sole Pages deployer; `fetch-cbp.yml` must not deploy directly. Because a
+push made with the workflow `GITHUB_TOKEN` does not start another workflow,
+the fetch job must explicitly dispatch `deploy.yml` after a changed, validated
+snapshot is pushed. Issue #57 owns implementation and two-cycle verification.
+
 ## 2026-07-27 · Pool along hours, never across days
 
 Density fixes must not buy samples with signal. Weekday/weekend pooling was

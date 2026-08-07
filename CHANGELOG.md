@@ -3,6 +3,26 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-08-06
+
+### Changed
+- **Pages deployment ownership was reduced to one workflow.** Scheduled data
+  fetches no longer deploy directly; `deploy.yml` is the only workflow that
+  deploys GitHub Pages. The duplicate deploy/retry path that was contending in
+  `deployment_queued` was removed in `da6a23c`.
+- **Best time / Mejor hora is now primary navigation.** The planning hub is no
+  longer discoverable only through footer/internal links.
+
+### Audit follow-ups
+- The post-ship audit found that `GITHUB_TOKEN` data pushes do not trigger the
+  push deployment workflow; [#57](https://github.com/sbc1-code/borderpulse/issues/57)
+  tracks the explicit dispatch fix before the next data cycle is trusted.
+- The live `/best-time/` hub throws `ReferenceError: today is not defined`;
+  [#61](https://github.com/sbc1-code/borderpulse/issues/61) tracks the hotfix
+  and route-smoke coverage.
+- Search Console, product analytics, recommendation accuracy, mobile UX, and
+  dependency findings were split into issues #58–#65 under roadmap #56.
+
 ## 2026-08-05
 
 ### Fixed
