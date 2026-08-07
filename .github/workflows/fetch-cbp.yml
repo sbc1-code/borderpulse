@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
   issues: write
 
@@ -17,8 +18,8 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      # fetch-depth: 0 is load-bearing, not hygiene. This workflow builds and
-      # deploys the site, and `npm run build` runs build-aggregates.mjs, which
+      # fetch-depth: 0 is load-bearing, not hygiene. This workflow validates a
+      # full site build, and `npm run build` runs build-aggregates.mjs, which
       # reconstructs the 30-day window with `git log --since=... -- crossings.json`.
       # Under the default depth-1 clone that log returns one commit, so every
       # aggregate silently collapsed to ~2 samples while the pages kept claiming
@@ -41,19 +42,37 @@ jobs:
         run: node scripts/fetch-sb.mjs
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-      - name: Commit data snapshot
+      - name: Validate static site
+        run: npm run build
+      - name: Commit validated data snapshot
+        id: snapshot
         run: |
           git config user.name  "borderpulse-bot"
           git config user.email "borderpulse-bot@users.noreply.github.com"
           git add public/data/crossings.json public/data/exchange-rate.json public/data/crossings-sb.json
           if git diff --cached --quiet; then
             echo "No data changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "chore(data): refresh CBP + FX + SB snapshot"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
-      - name: Build static site
-        run: npm run build
+      - name: Dispatch exact snapshot to the sole Pages deployer
+        if: steps.snapshot.outputs.changed == 'true'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main',
+              inputs: {
+                commit_sha: '${{ steps.snapshot.outputs.commit_sha }}',
+              },
+            });
 
       # Auto-file an issue on failure, dedup'd by label so we don't spam
       # every 15 min. Closes the loop on "I saw it in Gmail and forgot."

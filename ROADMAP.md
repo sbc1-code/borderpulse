@@ -16,8 +16,12 @@ Ranked roughly by leverage. Pick what fits the available time.
 The GitHub roadmap issue is [#56](https://github.com/sbc1-code/borderpulse/issues/56).
 Work top to bottom; restore product trust before expanding the URL inventory.
 
-- [ ] **P0 — restore scheduled data deployment** — [#57](https://github.com/sbc1-code/borderpulse/issues/57).
-- [ ] **P0 — fix the live `/best-time/` hub and add route smoke tests** — [#61](https://github.com/sbc1-code/borderpulse/issues/61).
+- [~] **P0 — restore scheduled data deployment** — implementation shipped
+      2026-08-06; keep [#57](https://github.com/sbc1-code/borderpulse/issues/57)
+      open until two bot-only cycles publish their exact snapshot commits.
+- [x] **P0 — fix the live `/best-time/` hub and add route smoke tests** —
+      shipped 2026-08-06. The deploy gate now checks all 175 canonical and 20
+      alias routes at desktop and mobile sizes (390 browser navigations).
 - [ ] **P1 — exclude closed hours from best-time recommendations** — [#65](https://github.com/sbc1-code/borderpulse/issues/65).
 - [ ] **P1 — make freshness and missing-data states honest** — [#58](https://github.com/sbc1-code/borderpulse/issues/58).
 - [ ] **P1 — reconcile sitemap aliases and Search Console indexing** — [#59](https://github.com/sbc1-code/borderpulse/issues/59).
@@ -146,9 +150,10 @@ Snapshot of features live on borderpulse.com today.
 
 ### Infra
 - GitHub Pages deploy via `.github/workflows/deploy.yml`
-- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; explicit deploy
-  handoff is pending #57
-- Sitemap (178 URLs) + RSS (36 entries) regenerated each prebuild
+- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; changed,
+  validated snapshots explicitly dispatch the sole deployer with their SHA
+- Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild
+- Desktop/mobile browser smoke gate covers every sitemap URL and generated alias
 - Code-split leaf routes (main bundle ~161 KB)
 - Robots.txt allows AI crawlers, disallows `/embed/`
 - Anonymous page-view analytics via Umami

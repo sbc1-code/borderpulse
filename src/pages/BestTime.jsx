@@ -123,9 +123,10 @@ export function BestTimeIndex() {
     const title = language === 'en'
       ? 'Best time to cross every U.S.-Mexico border crossing | Border Pulse'
       : 'Mejor hora para cruzar cada cruce fronterizo EE.UU.-México | Border Pulse';
+    const crossingCount = crossings.length;
     const description = language === 'en'
-      ? 'Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. 43 crossings, hour by hour.'
-      : 'Hora típica más ligera para cada cruce fronterizo EE.UU.-México hoy, basado en los últimos 30 días de tiempos de espera de CBP. 43 cruces, hora por hora.';
+      ? `Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data.${crossingCount ? ` ${crossingCount} crossings, hour by hour.` : ''}`
+      : `Hora típica más ligera para cada cruce fronterizo EE.UU.-México hoy, basado en los últimos 30 días de tiempos de espera de CBP.${crossingCount ? ` ${crossingCount} cruces, hora por hora.` : ''}`;
     updatePageMeta({
       title,
       description,
@@ -135,16 +136,20 @@ export function BestTimeIndex() {
       canonical: 'https://borderpulse.com/best-time/',
     });
     return () => resetPageMeta();
-  }, [language]);
+  }, [language, crossings.length]);
+
+  // The heading is visitor-facing, while every recommendation below is still
+  // calculated in that port's local timezone.
+  const visitorToday = new Date().getDay();
 
   // Aggregate buckets are port-local; "today" must be evaluated per port.
   const rows = useMemo(() => {
     return crossings.map((c) => {
       const slug = portToSlug[c.port_number];
       const agg = slug ? aggregates[slug] : null;
-      const { day: today } = nowInPortTz(c);
-      const light = agg ? lightestHourFor(agg.by_hour, today) : null;
-      const dayMed = agg ? dayMedianFor(agg.by_hour, today) : null;
+      const { day: portToday } = nowInPortTz(c);
+      const light = agg ? lightestHourFor(agg.by_hour, portToday) : null;
+      const dayMed = agg ? dayMedianFor(agg.by_hour, portToday) : null;
       return { crossing: c, slug, light, dayMedian: dayMed };
     }).filter((r) => r.slug)
       .sort((a, b) => {
@@ -176,8 +181,8 @@ export function BestTimeIndex() {
       <header className="mb-5">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
           {language === 'en'
-            ? `Best time to cross every U.S.-Mexico border crossing today (${DAY_SHORT.en[today]})`
-            : `Mejor hora para cruzar cada cruce EE.UU.-México hoy (${DAY_SHORT.es[today]})`}
+            ? `Best time to cross every U.S.-Mexico border crossing today (${DAY_SHORT.en[visitorToday]})`
+            : `Mejor hora para cruzar cada cruce EE.UU.-México hoy (${DAY_SHORT.es[visitorToday]})`}
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'

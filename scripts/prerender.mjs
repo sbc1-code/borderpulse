@@ -376,16 +376,21 @@ function applyNoindex(html) {
 }
 
 function renderRedirectPage(targetUrl) {
+  // Keep navigation same-origin so aliases are testable in preview and do not
+  // make an unnecessary cross-origin round trip in production. Canonical SEO
+  // signals stay absolute.
+  const target = new URL(targetUrl);
+  const localTarget = `${target.pathname}${target.search}${target.hash}`;
   return `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, follow" />
-    <meta http-equiv="refresh" content="0; url=${esc(targetUrl)}" />
+    <meta http-equiv="refresh" content="0; url=${esc(localTarget)}" />
     <link rel="canonical" href="${esc(targetUrl)}" />
     <title>Redirecting | Border Pulse</title>
-    <script>window.location.replace(${JSON.stringify(targetUrl)});</script>
+    <script>window.location.replace(${JSON.stringify(localTarget)});</script>
   </head>
   <body>
     <p>Redirecting to <a href="${esc(targetUrl)}">${esc(targetUrl)}</a>.</p>
@@ -657,14 +662,38 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
   }
 
-  // /best-time index hub — links to all 43 best-time pages
+  // /best-time index hub — links to every generated best-time page.
   {
+    const canonical = `${BASE}/best-time/`;
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Best time to cross', item: canonical },
+      ],
+    };
+    const itemList = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Best times to cross U.S.-Mexico border crossings',
+      numberOfItems: crossings.length,
+      itemListElement: crossings.map((crossing, index) => {
+        const slug = portToSlug[crossing.port_number];
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crossing.name,
+          url: `${BASE}/best-time/${slug}/`,
+        };
+      }),
+    };
     const indexHead = {
       title: 'Best time to cross every U.S.-Mexico border crossing | Border Pulse',
-      desc: 'Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. 43 crossings, hour by hour.',
-      canonical: `${BASE}/best-time/`,
+      desc: `Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. ${crossings.length} crossings, hour by hour.`,
+      canonical,
       ogImage: `${BASE}/og-card.png`,
-      jsonLd: [],
+      jsonLd: [breadcrumb, itemList],
     };
     const indexHtml = rewriteIndex(indexWithLinks, indexHead);
     const outDir = path.resolve(distDir, 'best-time');

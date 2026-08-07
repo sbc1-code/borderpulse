@@ -1,18 +1,24 @@
 name: Deploy to GitHub Pages
+run-name: Deploy ${{ inputs.commit_sha || github.sha }}
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Exact commit to build and deploy
+        required: false
+        type: string
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Only this workflow deploys Pages. Scheduled data fetches commit their
-# snapshots and arrive here through the normal push trigger, so there is one
-# deployment path instead of two workflows competing for the Pages queue.
+# Only this workflow deploys Pages. Scheduled data fetches explicitly dispatch
+# this workflow with their validated snapshot SHA because pushes made by the
+# workflow GITHUB_TOKEN do not trigger another workflow.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -27,12 +33,15 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          ref: ${{ inputs.commit_sha || github.sha }}
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      - name: Smoke-test every canonical and alias route
+        run: npm run test:routes
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

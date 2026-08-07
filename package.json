@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "npm run test:routes",
+    "test:routes": "node scripts/smoke-routes.mjs",
     "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-rankings.mjs && node scripts/build-blog-index.mjs && node scripts/build-sitemap.mjs && node scripts/build-og-cards.mjs && node scripts/build-rss.mjs && node scripts/build-stats.mjs",
     "build": "vite build",
     "postbuild": "node scripts/prerender.mjs",
@@ -91,6 +93,7 @@
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.20",
     "gray-matter": "^4.0.3",
+    "playwright-core": "^1.62.1",
     "postcss": "^8.5.3",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",

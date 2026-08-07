@@ -5,6 +5,24 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-06
 
+### Fixed
+- **Scheduled snapshots now reach the sole Pages deployer.** The fetch workflow
+  validates a full build before committing, records whether the source snapshot
+  changed, and explicitly dispatches `deploy.yml` with the exact new commit SHA.
+  Unchanged cycles do not deploy. The handoff uses the minimum `actions: write`
+  permission required by GitHub's workflow-dispatch endpoint.
+- **The `/best-time/` hub no longer crashes.** Its heading now uses a defined
+  visitor-local day while each recommendation remains port-timezone-local. The
+  stale hard-coded 43-crossing metadata is generated from the live 44-crossing
+  inventory, with matching BreadcrumbList and ItemList structured data.
+
+### Added
+- **A production-route browser gate.** `npm test` now opens all 175 sitemap
+  canonicals and 20 generated aliases in both desktop and 390px mobile Chromium,
+  failing on route HTTP errors, uncaught page errors, ErrorBoundary output,
+  bad canonicals, invalid JSON-LD, or Best-time metadata/schema drift. The same
+  390-navigation suite runs after every Pages build and before artifact upload.
+
 ### Changed
 - **Pages deployment ownership was reduced to one workflow.** Scheduled data
   fetches no longer deploy directly; `deploy.yml` is the only workflow that
