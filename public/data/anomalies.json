@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-08T13:49:34.441Z",
-  "snapshot_at": "2026-08-08T13:11:52.115Z",
+  "generated_at": "2026-08-08T14:35:25.949Z",
+  "snapshot_at": "2026-08-08T13:57:23.728Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -34,6 +34,24 @@
         "overall_median": 90,
         "samples": 6,
         "ratio": 2.3333333333333335
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-08-08T14:35:25.949Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 5,
+        "best_median": 0,
+        "overall_median": 45,
+        "samples": 7
       }
     },
     {
@@ -178,24 +196,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-08T13:49:34.441Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 6 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 6 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 6,
-        "best_median": 15,
-        "overall_median": 45,
-        "samples": 9
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
@@ -246,6 +246,24 @@
         "best_median": 25,
         "overall_median": 60,
         "samples": 10
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-08-08T14:35:25.949Z",
+      "summary_en": "Right now Tecate's lightest Saturday hour so far is 4 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Tecate es 4 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 60,
+        "overall_median": 120,
+        "samples": 3
       }
     },
     {
