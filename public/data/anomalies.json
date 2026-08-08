@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-08T14:35:25.949Z",
-  "snapshot_at": "2026-08-08T16:12:30.432Z",
+  "generated_at": "2026-08-08T17:34:26.700Z",
+  "snapshot_at": "2026-08-08T17:28:29.974Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -129,16 +129,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.725,
-      "detected_at": "2026-08-08T12:56:02.326Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 4 AM (median 33 min) — ~73% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 4 AM (mediana 33 min) — ~73% debajo de la base de 30 días de 120 min.",
+      "severity": 0.7317073170731707,
+      "detected_at": "2026-08-08T17:34:26.700Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 4 AM (median 33 min) — ~73% below the 30-day baseline of 123 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 4 AM (mediana 33 min) — ~73% debajo de la base de 30 días de 123 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 4,
         "best_median": 33,
-        "overall_median": 120,
+        "overall_median": 123,
         "samples": 6
       }
     },
