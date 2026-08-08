@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-08T12:56:02.326Z",
-  "snapshot_at": "2026-08-08T12:02:52.424Z",
+  "generated_at": "2026-08-08T13:49:34.441Z",
+  "snapshot_at": "2026-08-08T13:11:52.115Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -178,6 +178,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-08T13:49:34.441Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 6 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 6 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 6,
+        "best_median": 15,
+        "overall_median": 45,
+        "samples": 9
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
@@ -266,60 +284,6 @@
         "best_median": 30,
         "overall_median": 65,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-08-07T13:12:29.844Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 4,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 2
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-08-07T13:12:29.844Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 4 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 4 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 4,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 9
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5833333333333333,
-      "detected_at": "2026-08-07T13:12:29.844Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 6 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 6 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 6,
-        "best_median": 25,
-        "overall_median": 60,
-        "samples": 2
       }
     }
   ]
