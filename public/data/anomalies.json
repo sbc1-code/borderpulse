@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-08T17:34:26.700Z",
-  "snapshot_at": "2026-08-08T17:28:29.974Z",
+  "generated_at": "2026-08-08T18:42:40.157Z",
+  "snapshot_at": "2026-08-08T17:59:20.310Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -129,16 +129,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.7317073170731707,
-      "detected_at": "2026-08-08T17:34:26.700Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 4 AM (median 33 min) — ~73% below the 30-day baseline of 123 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 4 AM (mediana 33 min) — ~73% debajo de la base de 30 días de 123 min.",
+      "severity": 0.736,
+      "detected_at": "2026-08-08T18:42:40.157Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 4 AM (median 33 min) — ~74% below the 30-day baseline of 125 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 4 AM (mediana 33 min) — ~74% debajo de la base de 30 días de 125 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 4,
         "best_median": 33,
-        "overall_median": 123,
+        "overall_median": 125,
         "samples": 6
       }
     },
@@ -165,16 +165,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.7,
-      "detected_at": "2026-08-08T12:56:02.326Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 5 AM (median 18 min) — ~70% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 18 min) — ~70% debajo de la base de 30 días de 60 min.",
+      "severity": 0.6727272727272727,
+      "detected_at": "2026-08-08T18:42:40.157Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 5 AM (median 18 min) — ~67% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 18 min) — ~67% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 5,
         "best_median": 18,
-        "overall_median": 60,
+        "overall_median": 55,
         "samples": 12
       }
     },
