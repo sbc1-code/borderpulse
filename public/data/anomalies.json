@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-09T13:54:36.736Z",
-  "snapshot_at": "2026-08-09T13:49:01.305Z",
+  "generated_at": "2026-08-09T14:38:28.600Z",
+  "snapshot_at": "2026-08-09T14:32:58.179Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,6 +143,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.75,
+      "detected_at": "2026-08-09T14:38:28.600Z",
+      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 5 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 5 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 15,
+        "overall_median": 60,
+        "samples": 7
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
@@ -174,24 +192,6 @@
         "overall_median": 45,
         "samples": 5,
         "ratio": 1.6666666666666667
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.6166666666666667,
-      "detected_at": "2026-08-09T13:54:36.736Z",
-      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 23 min) — ~62% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 23 min) — ~62% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 23,
-        "overall_median": 60,
-        "samples": 2
       }
     },
     {
@@ -284,24 +284,6 @@
         "best_median": 33,
         "overall_median": 125,
         "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-08-08T14:35:25.949Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 5,
-        "best_median": 0,
-        "overall_median": 45,
-        "samples": 7
       }
     }
   ]
