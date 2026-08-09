@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-09T22:35:14.163Z",
-  "snapshot_at": "2026-08-09T22:29:29.992Z",
+  "generated_at": "2026-08-09T23:34:45.185Z",
+  "snapshot_at": "2026-08-09T23:01:22.559Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,14 +8,14 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 15,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 80 min around 8 PM — ~1600% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 80 min cerca de las 8 PM — ~1600% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-09T23:34:45.185Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 80 min around 7 PM — ~1600% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 80 min cerca de las 7 PM — ~1600% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 20,
+        "peak_hour": 19,
         "peak_median": 80,
         "overall_median": 5,
-        "samples": 9,
+        "samples": 7,
         "ratio": 16
       }
     },
@@ -145,23 +145,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-08-09T22:35:14.163Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 5 PM — ~175% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 5 PM — ~175% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 35,
-        "overall_median": 20,
-        "samples": 11,
-        "ratio": 1.75
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
@@ -250,6 +233,23 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-08-09T22:35:14.163Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 5 PM — ~175% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 5 PM — ~175% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 17,
+        "peak_median": 35,
+        "overall_median": 20,
+        "samples": 11,
+        "ratio": 1.75
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "nogales-deconcini",
