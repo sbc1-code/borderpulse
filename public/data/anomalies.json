@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-08T23:32:49.856Z",
-  "snapshot_at": "2026-08-09T01:47:17.852Z",
+  "generated_at": "2026-08-09T04:20:19.338Z",
+  "snapshot_at": "2026-08-09T03:41:13.563Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -60,7 +60,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-08T05:01:06.574Z",
+      "detected_at": "2026-08-09T04:20:19.338Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -69,7 +69,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 6
+        "samples": 7
       }
     },
     {
