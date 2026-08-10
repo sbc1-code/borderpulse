@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-10T10:20:05.216Z",
-  "snapshot_at": "2026-08-10T09:56:59.660Z",
+  "generated_at": "2026-08-10T11:50:34.390Z",
+  "snapshot_at": "2026-08-10T11:11:14.436Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -284,24 +284,6 @@
         "best_median": 10,
         "overall_median": 20,
         "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.7777777777777778,
-      "detected_at": "2026-08-09T11:33:11.564Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 4 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 4 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 10,
-        "overall_median": 45,
-        "samples": 13
       }
     }
   ]
