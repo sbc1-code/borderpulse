@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-08-09T23:34:45.185Z",
-  "snapshot_at": "2026-08-09T23:01:22.559Z",
+  "generated_at": "2026-08-10T02:05:59.248Z",
+  "snapshot_at": "2026-08-10T01:42:53.825Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 15,
-      "detected_at": "2026-08-09T23:34:45.185Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 80 min around 7 PM — ~1600% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 80 min cerca de las 7 PM — ~1600% de la mediana de 30 días. Planea alrededor.",
+      "severity": 11,
+      "detected_at": "2026-08-10T02:05:59.248Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 7 PM — ~1200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 7 PM — ~1200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
-        "peak_median": 80,
+        "peak_median": 60,
         "overall_median": 5,
-        "samples": 7,
-        "ratio": 16
+        "samples": 9,
+        "ratio": 12
       }
     },
     {
@@ -34,6 +34,23 @@
         "overall_median": 90,
         "samples": 6,
         "ratio": 2.3333333333333335
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 1,
+      "detected_at": "2026-08-10T02:05:59.248Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 7 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 7 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 240,
+        "overall_median": 120,
+        "samples": 7,
+        "ratio": 2
       }
     },
     {
@@ -70,23 +87,6 @@
         "best_median": 0,
         "overall_median": 5,
         "samples": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.9166666666666667,
-      "detected_at": "2026-08-05T07:42:50.423Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 230 min around 7 PM — ~192% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 230 min cerca de las 7 PM — ~192% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 230,
-        "overall_median": 120,
-        "samples": 6,
-        "ratio": 1.9166666666666667
       }
     },
     {
@@ -162,19 +162,19 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-06T02:52:45.913Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 75 min around 8 PM — ~167% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 75 min cerca de las 8 PM — ~167% de la mediana de 30 días. Planea alrededor.",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.6333333333333333,
+      "detected_at": "2026-08-10T02:05:59.248Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 98 min around 4 PM — ~163% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 98 min cerca de las 4 PM — ~163% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 20,
-        "peak_median": 75,
-        "overall_median": 45,
-        "samples": 5,
-        "ratio": 1.6666666666666667
+        "peak_hour": 16,
+        "peak_median": 98,
+        "overall_median": 60,
+        "samples": 6,
+        "ratio": 1.6333333333333333
       }
     },
     {
@@ -193,6 +193,23 @@
         "best_median": 30,
         "overall_median": 63,
         "samples": 6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.5111111111111111,
+      "detected_at": "2026-08-10T02:05:59.248Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 68 min around 9 PM — ~151% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 68 min cerca de las 9 PM — ~151% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 68,
+        "overall_median": 45,
+        "samples": 6,
+        "ratio": 1.511111111111111
       }
     },
     {
