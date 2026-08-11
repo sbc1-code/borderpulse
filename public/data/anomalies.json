@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-11T09:02:03.343Z",
-  "snapshot_at": "2026-08-11T08:53:40.497Z",
+  "generated_at": "2026-08-11T10:53:11.940Z",
+  "snapshot_at": "2026-08-11T09:59:34.900Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -91,6 +91,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.9090909090909091,
+      "detected_at": "2026-08-11T10:53:11.940Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 3 AM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 3,
+        "best_median": 5,
+        "overall_median": 55,
+        "samples": 11
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
@@ -127,18 +145,36 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.7833333333333333,
-      "detected_at": "2026-08-11T09:02:03.343Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 3 AM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
+      "severity": 0.84375,
+      "detected_at": "2026-08-11T10:53:11.940Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 2 AM (median 10 min) — ~84% below the 30-day baseline of 64 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 10 min) — ~84% debajo de la base de 30 días de 64 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 3,
-        "best_median": 13,
+        "best_hour": 2,
+        "best_median": 10,
+        "overall_median": 64,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-08-11T10:53:11.940Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 2 AM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 2,
+        "best_median": 10,
         "overall_median": 60,
         "samples": 6
       }
@@ -163,24 +199,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.765625,
-      "detected_at": "2026-08-11T09:02:03.343Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 2 AM (median 15 min) — ~77% below the 30-day baseline of 64 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 15 min) — ~77% debajo de la base de 30 días de 64 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 2,
-        "best_median": 15,
-        "overall_median": 64,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -195,24 +213,6 @@
         "best_median": 8,
         "overall_median": 30,
         "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.6727272727272727,
-      "detected_at": "2026-08-11T09:02:03.343Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 3 AM (median 18 min) — ~67% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 18 min) — ~67% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 3,
-        "best_median": 18,
-        "overall_median": 55,
-        "samples": 10
       }
     },
     {
@@ -238,7 +238,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-11T09:02:03.343Z",
+      "detected_at": "2026-08-11T10:53:11.940Z",
       "summary_en": "Right now Calexico - West's lightest Tuesday hour so far is 2 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - West es 2 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -247,7 +247,7 @@
         "best_hour": 2,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 6
+        "samples": 7
       }
     }
   ],
