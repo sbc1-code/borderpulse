@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-11T17:00:13.567Z",
-  "snapshot_at": "2026-08-11T16:35:14.900Z",
+  "generated_at": "2026-08-11T18:02:28.719Z",
+  "snapshot_at": "2026-08-11T17:40:32.255Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -181,6 +181,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.7777777777777778,
+      "detected_at": "2026-08-11T18:02:28.719Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Tuesday hour so far is 10 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Eagle Pass - Bridge I es 10 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 10,
+        "best_median": 10,
+        "overall_median": 45,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -230,24 +248,6 @@
         "overall_median": 60,
         "samples": 6,
         "ratio": 1.6333333333333333
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-08-11T17:00:13.567Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Tuesday hour so far is 10 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Eagle Pass - Bridge I es 10 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 10,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 6
       }
     },
     {
