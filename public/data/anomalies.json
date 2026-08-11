@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-11T20:01:31.741Z",
-  "snapshot_at": "2026-08-11T19:45:39.822Z",
+  "generated_at": "2026-08-11T21:52:47.341Z",
+  "snapshot_at": "2026-08-11T21:29:04.948Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -177,6 +177,23 @@
         "best_median": 10,
         "overall_median": 45,
         "samples": 6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-08-11T21:52:47.341Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 4 PM — ~175% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 4 PM — ~175% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 35,
+        "overall_median": 20,
+        "samples": 7,
+        "ratio": 1.75
       }
     },
     {
