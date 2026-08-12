@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-08-12T15:00:53.300Z",
-  "snapshot_at": "2026-08-12T14:35:31.274Z",
+  "generated_at": "2026-08-12T16:59:26.897Z",
+  "snapshot_at": "2026-08-12T16:36:05.095Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 11.6,
-      "detected_at": "2026-08-12T04:50:17.536Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 7 PM — ~1260% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 7 PM — ~1260% de la mediana de 30 días. Planea alrededor.",
+      "severity": 5.3,
+      "detected_at": "2026-08-12T16:59:26.897Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 7 PM — ~630% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 7 PM — ~630% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
         "peak_median": 63,
-        "overall_median": 5,
+        "overall_median": 10,
         "samples": 8,
-        "ratio": 12.6
+        "ratio": 6.3
       }
     },
     {
@@ -113,15 +113,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-12T06:17:22.919Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-08-12T16:59:26.897Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 5,
+        "overall_median": 10,
         "samples": 4
       }
     },
@@ -147,16 +147,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-08-12T13:18:14.830Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "severity": 0.9180327868852459,
+      "detected_at": "2026-08-12T16:59:26.897Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~92% below the 30-day baseline of 61 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 61 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 1,
         "best_median": 5,
-        "overall_median": 60,
+        "overall_median": 61,
         "samples": 5
       }
     },
@@ -247,6 +247,24 @@
         "overall_median": 60,
         "samples": 8,
         "ratio": 1.5833333333333333
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-08-12T16:59:26.897Z",
+      "summary_en": "Right now Tecate's lightest Wednesday hour so far is 10 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 10 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 10,
+        "best_median": 60,
+        "overall_median": 120,
+        "samples": 9
       }
     },
     {
