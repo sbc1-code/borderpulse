@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-08-11T22:48:50.325Z",
-  "snapshot_at": "2026-08-11T23:11:57.348Z",
+  "generated_at": "2026-08-12T04:50:17.536Z",
+  "snapshot_at": "2026-08-12T04:27:52.948Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 5,
-      "detected_at": "2026-08-11T17:00:13.567Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 60 min around 7 PM — ~600% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 60 min cerca de las 7 PM — ~600% de la mediana de 30 días. Planea alrededor.",
+      "severity": 11.6,
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 63 min around 7 PM — ~1260% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 63 min cerca de las 7 PM — ~1260% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
-        "peak_median": 60,
-        "overall_median": 10,
-        "samples": 9,
-        "ratio": 6
+        "peak_median": 63,
+        "overall_median": 5,
+        "samples": 8,
+        "ratio": 12.6
       }
     },
     {
@@ -24,16 +24,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.2222222222222223,
-      "detected_at": "2026-08-10T06:12:28.443Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 200 min around 7 PM — ~222% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 200 min cerca de las 7 PM — ~222% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.1666666666666665,
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 195 min around 9 PM — ~217% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 195 min cerca de las 9 PM — ~217% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 19,
-        "peak_median": 200,
+        "peak_hour": 21,
+        "peak_median": 195,
         "overall_median": 90,
-        "samples": 8,
-        "ratio": 2.2222222222222223
+        "samples": 6,
+        "ratio": 2.1666666666666665
       }
     },
     {
@@ -42,14 +42,14 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 1,
-      "detected_at": "2026-08-10T06:12:28.443Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 7 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 7 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 8 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 8 PM — ~200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 19,
+        "peak_hour": 20,
         "peak_median": 240,
         "overall_median": 120,
-        "samples": 8,
+        "samples": 7,
         "ratio": 2
       }
     },
@@ -77,16 +77,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-11T17:00:13.567Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 10,
-        "samples": 6
+        "overall_median": 5,
+        "samples": 7
       }
     },
     {
@@ -165,15 +165,33 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-08-11T15:01:33.741Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 2 AM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
+      "severity": 0.8245614035087719,
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 2 AM (median 10 min) — ~82% below the 30-day baseline of 57 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 10 min) — ~82% debajo de la base de 30 días de 57 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 2,
         "best_median": 10,
+        "overall_median": 57,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.7833333333333333,
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 6 PM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 6 PM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 18,
+        "best_median": 13,
         "overall_median": 60,
         "samples": 6
       }
@@ -220,16 +238,16 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.7333333333333334,
-      "detected_at": "2026-08-11T09:02:03.343Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 12 AM (median 8 min) — ~73% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 12 AM (mediana 8 min) — ~73% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 2 AM (median 8 min) — ~73% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 2 AM (mediana 8 min) — ~73% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 0,
+        "best_hour": 2,
         "best_median": 8,
         "overall_median": 30,
-        "samples": 8
+        "samples": 6
       }
     },
     {
@@ -255,34 +273,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.6333333333333333,
-      "detected_at": "2026-08-10T02:05:59.248Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 98 min around 4 PM — ~163% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 98 min cerca de las 4 PM — ~163% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.5833333333333333,
+      "detected_at": "2026-08-12T04:50:17.536Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 95 min around 5 PM — ~158% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 95 min cerca de las 5 PM — ~158% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 16,
-        "peak_median": 98,
+        "peak_hour": 17,
+        "peak_median": 95,
         "overall_median": 60,
-        "samples": 6,
-        "ratio": 1.6333333333333333
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.5333333333333333,
-      "detected_at": "2026-08-11T15:01:33.741Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 6 AM (median 28 min) — ~53% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 6 AM (mediana 28 min) — ~53% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 6,
-        "best_median": 28,
-        "overall_median": 60,
-        "samples": 6
+        "samples": 8,
+        "ratio": 1.5833333333333333
       }
     }
   ],
