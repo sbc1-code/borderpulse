@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-12T16:59:26.897Z",
-  "snapshot_at": "2026-08-12T16:36:05.095Z",
+  "generated_at": "2026-08-12T18:01:38.021Z",
+  "snapshot_at": "2026-08-12T17:42:11.825Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -165,16 +165,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9107142857142857,
-      "detected_at": "2026-08-12T15:00:53.300Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~91% below the 30-day baseline of 56 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 56 min.",
+      "severity": 0.9090909090909091,
+      "detected_at": "2026-08-12T18:01:38.021Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 1,
         "best_median": 5,
-        "overall_median": 56,
+        "overall_median": 55,
         "samples": 5
       }
     },
@@ -255,7 +255,7 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-12T16:59:26.897Z",
+      "detected_at": "2026-08-12T18:01:38.021Z",
       "summary_en": "Right now Tecate's lightest Wednesday hour so far is 10 AM (median 60 min) — ~50% below the 30-day baseline of 120 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Tecate es 10 AM (mediana 60 min) — ~50% debajo de la base de 30 días de 120 min.",
       "evidence": {
@@ -264,7 +264,7 @@
         "best_hour": 10,
         "best_median": 60,
         "overall_median": 120,
-        "samples": 9
+        "samples": 10
       }
     },
     {
