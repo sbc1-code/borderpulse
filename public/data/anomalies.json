@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-13T10:11:27.818Z",
-  "snapshot_at": "2026-08-13T10:03:48.831Z",
+  "generated_at": "2026-08-13T11:50:56.341Z",
+  "snapshot_at": "2026-08-13T11:11:06.243Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -233,6 +233,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-08-13T11:50:56.341Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 6 AM (median 25 min) — ~55% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 6 AM (mediana 25 min) — ~55% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 6,
+        "best_median": 25,
+        "overall_median": 55,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -303,24 +321,6 @@
         "best_median": 8,
         "overall_median": 30,
         "samples": 4
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.8181818181818181,
-      "detected_at": "2026-08-12T15:00:53.300Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 4 AM (median 10 min) — ~82% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 10 min) — ~82% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 4,
-        "best_median": 10,
-        "overall_median": 55,
-        "samples": 7
       }
     }
   ]
