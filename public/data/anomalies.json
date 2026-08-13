@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-12T23:47:02.875Z",
-  "snapshot_at": "2026-08-12T23:09:39.890Z",
+  "generated_at": "2026-08-13T04:54:29.188Z",
+  "snapshot_at": "2026-08-13T04:24:31.921Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -113,7 +113,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-12T20:00:52.915Z",
+      "detected_at": "2026-08-13T04:54:29.188Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -122,7 +122,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 4
+        "samples": 5
       }
     },
     {
@@ -165,35 +165,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9090909090909091,
-      "detected_at": "2026-08-12T18:01:38.021Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
+      "severity": 0.9074074074074074,
+      "detected_at": "2026-08-13T04:54:29.188Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~91% below the 30-day baseline of 54 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 54 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 1,
         "best_median": 5,
-        "overall_median": 55,
+        "overall_median": 54,
         "samples": 5
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-08-12T23:47:02.875Z",
-      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 5 PM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 5 PM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 17,
-        "best_median": 10,
-        "overall_median": 60,
-        "samples": 9
       }
     },
     {
@@ -202,7 +184,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.8333333333333334,
-      "detected_at": "2026-08-12T06:17:22.919Z",
+      "detected_at": "2026-08-13T04:54:29.188Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 12 AM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 12 AM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
       "evidence": {
@@ -211,7 +193,7 @@
         "best_hour": 0,
         "best_median": 5,
         "overall_median": 30,
-        "samples": 6
+        "samples": 7
       }
     },
     {
@@ -248,6 +230,24 @@
         "best_median": 8,
         "overall_median": 30,
         "samples": 4
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.7,
+      "detected_at": "2026-08-13T04:54:29.188Z",
+      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 5 PM (median 18 min) — ~70% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 5 PM (mediana 18 min) — ~70% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 17,
+        "best_median": 18,
+        "overall_median": 60,
+        "samples": 10
       }
     },
     {
