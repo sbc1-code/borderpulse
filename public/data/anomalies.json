@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-14T13:14:27.102Z",
-  "snapshot_at": "2026-08-14T12:24:16.392Z",
+  "generated_at": "2026-08-14T14:55:07.583Z",
+  "snapshot_at": "2026-08-14T14:49:59.158Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -59,7 +59,7 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-08-14T08:18:53.319Z",
+      "detected_at": "2026-08-14T14:55:07.583Z",
       "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -68,7 +68,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 45,
-        "samples": 2
+        "samples": 3
       }
     },
     {
@@ -254,7 +254,7 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-14T13:14:27.102Z",
+      "detected_at": "2026-08-14T14:55:07.583Z",
       "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 6 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 6 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
       "evidence": {
@@ -263,7 +263,7 @@
         "best_hour": 6,
         "best_median": 45,
         "overall_median": 90,
-        "samples": 7
+        "samples": 9
       }
     },
     {
@@ -302,24 +302,6 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-08-13T13:20:10.698Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 6 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 6 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 6,
-        "best_median": 10,
-        "overall_median": 20,
-        "samples": 7
       }
     }
   ]
