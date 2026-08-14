@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-14T11:47:47.143Z",
-  "snapshot_at": "2026-08-14T11:29:08.877Z",
+  "generated_at": "2026-08-14T13:14:27.102Z",
+  "snapshot_at": "2026-08-14T12:24:16.392Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -112,16 +112,16 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.9166666666666666,
-      "detected_at": "2026-08-14T08:18:53.319Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 4 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 4 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-14T13:14:27.102Z",
+      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 3 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 3 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 4,
+        "best_hour": 3,
         "best_median": 5,
         "overall_median": 60,
-        "samples": 2
+        "samples": 1
       }
     },
     {
@@ -254,16 +254,16 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-14T10:07:07.274Z",
-      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 10 PM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 10 PM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
+      "detected_at": "2026-08-14T13:14:27.102Z",
+      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 6 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 6 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 22,
+        "best_hour": 6,
         "best_median": 45,
         "overall_median": 90,
-        "samples": 8
+        "samples": 7
       }
     },
     {
@@ -272,16 +272,16 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-14T11:47:47.143Z",
-      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 4 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 4 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-14T13:14:27.102Z",
+      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 9 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 9 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 4,
+        "best_hour": 21,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 9
+        "samples": 6
       }
     }
   ],
