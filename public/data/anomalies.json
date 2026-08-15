@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T02:54:31.864Z",
-  "snapshot_at": "2026-08-15T02:19:01.745Z",
+  "generated_at": "2026-08-15T03:42:14.484Z",
+  "snapshot_at": "2026-08-15T03:11:58.625Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -94,7 +94,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-14T06:17:08.540Z",
+      "detected_at": "2026-08-15T03:42:14.484Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -103,7 +103,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -184,16 +184,16 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-08-15T02:54:31.864Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 7 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 7 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
+      "detected_at": "2026-08-15T03:42:14.484Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 19,
+        "best_hour": 0,
         "best_median": 5,
         "overall_median": 15,
-        "samples": 10
+        "samples": 1
       }
     },
     {
@@ -202,16 +202,16 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-08-14T10:07:07.274Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 1 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 1 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-08-15T03:42:14.484Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 1,
+        "best_hour": 0,
         "best_median": 10,
         "overall_median": 30,
-        "samples": 8
+        "samples": 9
       }
     },
     {
@@ -219,16 +219,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.656,
-      "detected_at": "2026-08-14T10:07:07.274Z",
-      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 10 PM (median 43 min) — ~66% below the 30-day baseline of 125 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 10 PM (mediana 43 min) — ~66% debajo de la base de 30 días de 125 min.",
+      "severity": 0.6504065040650406,
+      "detected_at": "2026-08-15T03:42:14.484Z",
+      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 10 PM (median 43 min) — ~65% below the 30-day baseline of 123 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 10 PM (mediana 43 min) — ~65% debajo de la base de 30 días de 123 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 22,
         "best_median": 43,
-        "overall_median": 125,
+        "overall_median": 123,
         "samples": 8
       }
     },
@@ -250,20 +250,38 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-08-15T03:42:14.484Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 9 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 9 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 21,
+        "best_median": 20,
+        "overall_median": 45,
+        "samples": 7
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.504,
-      "detected_at": "2026-08-14T10:07:07.274Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 188 min around 5 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 188 min cerca de las 5 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.5284552845528456,
+      "detected_at": "2026-08-15T03:42:14.484Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 188 min around 5 PM — ~153% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 188 min cerca de las 5 PM — ~153% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 17,
         "peak_median": 188,
-        "overall_median": 125,
+        "overall_median": 123,
         "samples": 8,
-        "ratio": 1.504
+        "ratio": 1.5284552845528456
       }
     },
     {
@@ -290,7 +308,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-15T02:54:31.864Z",
+      "detected_at": "2026-08-15T03:42:14.484Z",
       "summary_en": "Right now Calexico - West's lightest Friday hour so far is 8 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 8 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -299,7 +317,7 @@
         "best_hour": 20,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 7
+        "samples": 8
       }
     },
     {
@@ -321,24 +339,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-08-14T10:07:07.274Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 3 AM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 3 AM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 3,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 10
-      }
-    }
-  ]
+  "trailing_24h": []
 }
