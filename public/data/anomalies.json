@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T13:32:52.053Z",
-  "snapshot_at": "2026-08-15T13:28:51.390Z",
+  "generated_at": "2026-08-15T14:26:42.539Z",
+  "snapshot_at": "2026-08-15T14:20:44.700Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -21,6 +21,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 1.6666666666666665,
+      "detected_at": "2026-08-15T14:26:42.539Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 8 PM — ~267% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 8 PM — ~267% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 20,
+        "peak_median": 240,
+        "overall_median": 90,
+        "samples": 6,
+        "ratio": 2.6666666666666665
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -34,23 +51,6 @@
         "overall_median": 15,
         "samples": 6,
         "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 1.4,
-      "detected_at": "2026-08-14T04:51:23.635Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 8 PM — ~240% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 8 PM — ~240% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 20,
-        "peak_median": 240,
-        "overall_median": 100,
-        "samples": 6,
-        "ratio": 2.4
       }
     },
     {
