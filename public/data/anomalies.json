@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T09:29:32.503Z",
-  "snapshot_at": "2026-08-15T09:24:10.477Z",
+  "generated_at": "2026-08-15T10:26:31.176Z",
+  "snapshot_at": "2026-08-15T10:20:45.312Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -108,6 +108,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.9814814814814815,
+      "detected_at": "2026-08-15T10:26:31.176Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 54 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 54 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 2,
+        "best_median": 1,
+        "overall_median": 54,
+        "samples": 11
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
@@ -144,6 +162,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-08-15T10:26:31.176Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 20 min) — ~83% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 20 min) — ~83% debajo de la base de 30 días de 120 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 20,
+        "overall_median": 120,
+        "samples": 13
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -158,42 +194,6 @@
         "best_median": 10,
         "overall_median": 50,
         "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.7916666666666666,
-      "detected_at": "2026-08-15T09:29:32.503Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 25 min) — ~79% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 25 min) — ~79% debajo de la base de 30 días de 120 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 25,
-        "overall_median": 120,
-        "samples": 11
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.7592592592592593,
-      "detected_at": "2026-08-15T09:29:32.503Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 1 AM (median 13 min) — ~76% below the 30-day baseline of 54 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 13 min) — ~76% debajo de la base de 30 días de 54 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 1,
-        "best_median": 13,
-        "overall_median": 54,
-        "samples": 10
       }
     },
     {
@@ -272,16 +272,16 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-15T09:29:32.503Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 3 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 3 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-15T10:26:31.176Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 2 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 2 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 3,
+        "best_hour": 2,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 11
+        "samples": 15
       }
     }
   ],
