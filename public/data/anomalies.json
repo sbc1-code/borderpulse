@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T06:44:01.593Z",
-  "snapshot_at": "2026-08-15T06:00:04.250Z",
+  "generated_at": "2026-08-15T07:33:56.143Z",
+  "snapshot_at": "2026-08-15T07:29:15.862Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -76,16 +76,16 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-08-14T14:55:07.583Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "detected_at": "2026-08-15T07:33:56.143Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 4,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
         "best_median": 0,
         "overall_median": 45,
-        "samples": 3
+        "samples": 1
       }
     },
     {
@@ -112,34 +112,16 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.9166666666666666,
-      "detected_at": "2026-08-14T13:14:27.102Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 3 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 3 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 3,
-        "best_median": 5,
-        "overall_median": 60,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-08-15T05:28:35.456Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 11 PM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 11 PM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-08-15T07:33:56.143Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 3 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 3 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 23,
+        "best_hour": 3,
         "best_median": 5,
-        "overall_median": 30,
-        "samples": 7
+        "overall_median": 60,
+        "samples": 2
       }
     },
     {
@@ -162,38 +144,56 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.7777777777777778,
-      "detected_at": "2026-08-15T05:28:35.456Z",
-      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 8 PM (median 20 min) — ~78% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 8 PM (mediana 20 min) — ~78% debajo de la base de 30 días de 90 min.",
+      "severity": 0.7666666666666666,
+      "detected_at": "2026-08-15T07:33:56.143Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 28 min) — ~77% below the 30-day baseline of 120 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 28 min) — ~77% debajo de la base de 30 días de 120 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 20,
-        "best_median": 20,
-        "overall_median": 90,
-        "samples": 11
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 28,
+        "overall_median": 120,
+        "samples": 10
       }
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.7083333333333333,
-      "detected_at": "2026-08-15T06:44:01.593Z",
-      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 10 PM (median 35 min) — ~71% below the 30-day baseline of 120 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 10 PM (mediana 35 min) — ~71% debajo de la base de 30 días de 120 min.",
+      "severity": 0.7222222222222222,
+      "detected_at": "2026-08-15T07:33:56.143Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 25 min) — ~72% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 25 min) — ~72% debajo de la base de 30 días de 90 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 22,
-        "best_median": 35,
-        "overall_median": 120,
-        "samples": 12
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 25,
+        "overall_median": 90,
+        "samples": 10
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-15T07:33:56.143Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 9 PM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 9 PM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 21,
+        "best_median": 10,
+        "overall_median": 30,
+        "samples": 8
       }
     },
     {
@@ -232,24 +232,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-08-15T05:28:35.456Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 8 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 8 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 20,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 11
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -272,20 +254,38 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-15T04:35:10.383Z",
-      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 7 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 7 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-15T07:33:56.143Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 3 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 3 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 19,
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 9
+        "samples": 10
       }
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-08-15T05:28:35.456Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 8 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 8 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 20,
+        "best_median": 20,
+        "overall_median": 45,
+        "samples": 11
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
