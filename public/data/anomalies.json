@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T11:23:28.594Z",
-  "snapshot_at": "2026-08-15T11:18:39.623Z",
+  "generated_at": "2026-08-15T12:43:37.946Z",
+  "snapshot_at": "2026-08-15T11:58:49.900Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -220,16 +220,16 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-08-15T07:33:56.143Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 9 PM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 9 PM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-08-15T12:43:37.946Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 5 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 5 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 21,
+        "best_hour": 5,
         "best_median": 10,
         "overall_median": 30,
-        "samples": 8
+        "samples": 17
       }
     },
     {
