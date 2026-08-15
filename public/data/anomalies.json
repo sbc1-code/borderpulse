@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T01:25:53.486Z",
-  "snapshot_at": "2026-08-15T01:09:35.599Z",
+  "generated_at": "2026-08-15T02:54:31.864Z",
+  "snapshot_at": "2026-08-15T02:19:01.745Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -184,7 +184,7 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-08-15T01:25:53.486Z",
+      "detected_at": "2026-08-15T02:54:31.864Z",
       "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 7 PM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 7 PM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
       "evidence": {
@@ -193,7 +193,7 @@
         "best_hour": 19,
         "best_median": 5,
         "overall_median": 15,
-        "samples": 9
+        "samples": 10
       }
     },
     {
@@ -290,16 +290,16 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-14T13:14:27.102Z",
-      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 9 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 9 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-15T02:54:31.864Z",
+      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 8 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 8 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 21,
+        "best_hour": 20,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 6
+        "samples": 7
       }
     },
     {
