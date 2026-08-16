@@ -13,6 +13,13 @@ permissions:
   pull-requests: write
   issues: write
 
+# Keep all workflows that publish generated repository state behind the same
+# writer queue. This workflow currently writes a branch, but may be scheduled
+# later and should not race the main-data writers when that happens.
+concurrency:
+  group: repository-writer
+  cancel-in-progress: false
+
 jobs:
   curate:
     runs-on: ubuntu-latest

@@ -16,8 +16,10 @@ permissions:
   pull-requests: write
   issues: write
 
+# This workflow and fetch-cbp.yml both commit generated data to main. They must
+# share one writer queue or a scheduled run can push against a newer main.
 concurrency:
-  group: anomaly-scan
+  group: repository-writer
   cancel-in-progress: false
 
 jobs:
@@ -52,7 +54,17 @@ jobs:
             exit 0
           fi
           git commit -m "chore(data): refresh anomalies"
-          git push
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "Unable to push anomaly snapshot after $attempt attempts."
+              exit 1
+            fi
+            git fetch origin main
+            git rebase origin/main
+          done
 
       - name: Check for anomalies (drafter)
         if: github.event_name == 'workflow_dispatch'
@@ -122,3 +134,32 @@ jobs:
               ].join('\n'),
               labels: ['ops', label, flow],
             });
+
+      - name: Close recovered failure issue
+        if: success()
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const label = 'ci-failure';
+            const flow = 'anomaly-scan';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: `${label},${flow}`,
+              state: 'open',
+            });
+            for (const issue of existing.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Recovered by successful run ${context.runId}.`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+                state_reason: 'completed',
+              });
+            }
