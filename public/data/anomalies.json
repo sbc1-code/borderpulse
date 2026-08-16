@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T21:24:01.032Z",
-  "snapshot_at": "2026-08-16T21:18:26.558Z",
+  "generated_at": "2026-08-16T22:25:10.289Z",
+  "snapshot_at": "2026-08-16T21:58:40.475Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -34,23 +34,6 @@
         "overall_median": 90,
         "samples": 6,
         "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.3333333333333335,
-      "detected_at": "2026-08-16T21:24:01.032Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 5 PM — ~233% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 5 PM — ~233% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 35,
-        "overall_median": 15,
-        "samples": 11,
-        "ratio": 2.3333333333333335
       }
     },
     {
@@ -89,6 +72,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-08-16T22:25:10.289Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 30 min around 6 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 30 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 30,
+        "overall_median": 15,
+        "samples": 10,
+        "ratio": 2
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
@@ -111,16 +111,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.7692307692307692,
-      "detected_at": "2026-08-16T21:24:01.032Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 4 AM (median 15 min) — ~77% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 4 AM (mediana 15 min) — ~77% debajo de la base de 30 días de 65 min.",
+      "severity": 0.7794117647058824,
+      "detected_at": "2026-08-16T22:25:10.289Z",
+      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 4 AM (median 15 min) — ~78% below the 30-day baseline of 68 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 4 AM (mediana 15 min) — ~78% debajo de la base de 30 días de 68 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 4,
         "best_median": 15,
-        "overall_median": 65,
+        "overall_median": 68,
         "samples": 7
       }
     },
