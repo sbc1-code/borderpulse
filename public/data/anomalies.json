@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T07:33:58.988Z",
-  "snapshot_at": "2026-08-16T06:58:25.910Z",
+  "generated_at": "2026-08-16T08:33:34.472Z",
+  "snapshot_at": "2026-08-16T07:59:43.845Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -166,14 +166,14 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5833333333333333,
-      "detected_at": "2026-08-12T04:50:17.536Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 95 min around 5 PM — ~158% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 95 min cerca de las 5 PM — ~158% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-16T08:33:34.472Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 95 min around 10 PM — ~158% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 95 min cerca de las 10 PM — ~158% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
+        "peak_hour": 22,
         "peak_median": 95,
         "overall_median": 60,
-        "samples": 8,
+        "samples": 10,
         "ratio": 1.5833333333333333
       }
     },
@@ -200,16 +200,16 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.5,
-      "detected_at": "2026-08-16T07:33:58.988Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 12 AM (median 15 min) — ~50% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 12 AM (mediana 15 min) — ~50% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-08-16T08:33:34.472Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 8 PM (median 15 min) — ~50% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 8 PM (mediana 15 min) — ~50% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 0,
+        "best_hour": 20,
         "best_median": 15,
         "overall_median": 30,
-        "samples": 9
+        "samples": 11
       }
     }
   ],
