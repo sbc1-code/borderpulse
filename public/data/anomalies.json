@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T14:26:35.769Z",
-  "snapshot_at": "2026-08-16T14:21:04.169Z",
+  "generated_at": "2026-08-16T15:25:08.100Z",
+  "snapshot_at": "2026-08-16T15:20:10.284Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -93,35 +93,17 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.8958333333333334,
-      "detected_at": "2026-08-16T14:26:35.769Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 4 AM (median 5 min) — ~90% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 48 min.",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-08-16T15:25:08.100Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 4 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 4,
         "best_median": 5,
-        "overall_median": 48,
+        "overall_median": 45,
         "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-08-16T14:26:35.769Z",
-      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 15,
-        "overall_median": 60,
-        "samples": 4
       }
     },
     {
@@ -140,6 +122,24 @@
         "best_median": 15,
         "overall_median": 60,
         "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.7,
+      "detected_at": "2026-08-16T15:25:08.100Z",
+      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 15 min) — ~70% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 15 min) — ~70% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 4,
+        "best_median": 15,
+        "overall_median": 50,
+        "samples": 4
       }
     },
     {
@@ -196,6 +196,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.537037037037037,
+      "detected_at": "2026-08-16T15:25:08.100Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 7 AM (median 25 min) — ~54% below the 30-day baseline of 54 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 25 min) — ~54% debajo de la base de 30 días de 54 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 7,
+        "best_median": 25,
+        "overall_median": 54,
+        "samples": 14
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -214,24 +232,6 @@
     }
   ],
   "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.6296296296296297,
-      "detected_at": "2026-08-16T06:45:30.104Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 6 AM (median 20 min) — ~63% below the 30-day baseline of 54 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 6 AM (mediana 20 min) — ~63% debajo de la base de 30 días de 54 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 6,
-        "best_median": 20,
-        "overall_median": 54,
-        "samples": 10
-      }
-    },
     {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
