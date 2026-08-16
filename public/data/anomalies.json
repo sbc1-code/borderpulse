@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T21:24:56.273Z",
-  "snapshot_at": "2026-08-15T23:58:40.992Z",
+  "generated_at": "2026-08-16T03:03:37.858Z",
+  "snapshot_at": "2026-08-16T02:58:31.933Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -180,6 +180,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-08-16T03:03:37.858Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 10 PM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 10 PM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 22,
+        "best_median": 5,
+        "overall_median": 30,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -212,24 +230,6 @@
         "best_median": 15,
         "overall_median": 60,
         "samples": 16
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-15T12:43:37.946Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 5 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 5 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 5,
-        "best_median": 10,
-        "overall_median": 30,
-        "samples": 17
       }
     },
     {
