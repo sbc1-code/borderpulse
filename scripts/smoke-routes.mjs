@@ -271,8 +271,40 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     }
   }
 
+  // The dashboard's Analytics view is a lazy-loaded chunk, so a route-only
+  // sweep cannot prove its asset is present in the deploy artifact. Exercise
+  // the toggle once per viewport and fail on the same ErrorBoundary users see.
+  activeErrors = [];
+  try {
+    const response = await page.goto(new URL('/', baseUrl).href, {
+      waitUntil: 'domcontentloaded',
+      timeout: 15_000,
+    });
+    await settle(page);
+    if (!response || response.status() >= 400) {
+      throw new Error(`HTTP ${response?.status() || 'no response'}`);
+    }
+    await page.getByRole('button', { name: 'Analytics', exact: true }).click();
+    await page.waitForFunction(() => {
+      const body = document.body?.innerText || '';
+      return body.includes('Analytics populate as you use the app.')
+        || body.includes('Average wait by hour')
+        || body.includes('Something went wrong');
+    }, null, { timeout: 5_000 });
+    const rendered = await inspectRenderedPage(page);
+    if (rendered.body.includes('Something went wrong') || rendered.body.includes('Border Pulse encountered an error')) {
+      throw new Error('ErrorBoundary rendered');
+    }
+    if (!rendered.body.includes('Analytics populate as you use the app.') && !rendered.body.includes('Average wait by hour')) {
+      throw new Error('Analytics view did not render');
+    }
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} dashboard analytics: ${error.message}`);
+  }
+
   await context.close();
-  console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes`);
+  console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);
   return failures;
 }
 
@@ -298,7 +330,7 @@ async function main() {
       process.exitCode = 1;
       return;
     }
-    console.log(`[routes] PASS: ${profiles.length * (manifest.canonicals.length + manifest.aliases.length)} browser navigations`);
+    console.log(`[routes] PASS: ${profiles.length * (manifest.canonicals.length + manifest.aliases.length + 1)} browser navigations`);
   } finally {
     if (browser) await browser.close();
     if (preview) preview.kill('SIGTERM');

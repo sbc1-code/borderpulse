@@ -1,15 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Clock3, ExternalLink } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Bell, Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
-
-const DIGITO_MARK = (
-  <span className="inline-flex items-center gap-1 font-semibold tracking-wide">
-    <span>DIGITO</span>
-    <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#8a9a7b' }} />
-  </span>
-);
 
 export default function Layout({ children }) {
   const location = useLocation();
@@ -135,18 +128,6 @@ export default function Layout({ children }) {
                 {item.name}
               </Link>
             ))}
-            <a
-              href="https://digito.technology/tools"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileOpen(false)}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
-                isDark ? 'text-slate-300 hover:bg-gray-800' : 'text-slate-700 hover:bg-slate-100'
-              }`}
-            >
-              <ExternalLink className="w-5 h-5" />
-              {language === 'en' ? 'More Digito tools' : 'Más herramientas Digito'}
-            </a>
           </div>
         )}
       </header>
@@ -192,29 +173,7 @@ export default function Layout({ children }) {
                 {item.name}
               </Link>
             ))}
-            <a
-              href="https://digito.technology/tools"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium ${
-                isDark ? 'text-slate-300 hover:bg-gray-800/60' : 'text-slate-700 hover:bg-slate-100'
-              }`}
-            >
-              <ExternalLink className="w-4 h-4" />
-              {language === 'en' ? 'More Digito tools' : 'Más herramientas Digito'}
-            </a>
           </nav>
-          <div className={`p-3 border-t ${isDark ? 'border-gray-800' : 'border-slate-200'} flex items-center justify-end`}>
-            <a
-              href="https://digito.technology"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`text-xs ${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'} transition-colors`}
-              title="A Digito product"
-            >
-              {DIGITO_MARK}
-            </a>
-          </div>
         </aside>
         <main id="main-content" className="flex-1 overflow-auto">{children}</main>
       </div>
@@ -223,13 +182,6 @@ export default function Layout({ children }) {
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-            <a href="https://digito.technology" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white transition-colors" title="A Digito product">
-              <span className="inline-flex items-center gap-1">
-                {DIGITO_MARK}
-                <span>{language === 'en' ? 'product' : 'producto'}</span>
-              </span>
-            </a>
-            <span>·</span>
             <span>
               {language === 'en' ? 'Data: U.S. Customs and Border Protection' : 'Datos: Aduanas y Protección Fronteriza EE.UU.'}
             </span>

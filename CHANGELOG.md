@@ -3,6 +3,19 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-08-16
+
+### Fixed
+- **Dashboard Analytics now recovers from a GitHub Pages rollout cleanly.** The
+  service worker no longer caches failed static-asset responses, and its cache
+  version advances to v3 so a returning visitor drops any previously cached
+  404 for the lazy-loaded Analytics chunk. Route smoke tests now exercise the
+  dashboard Analytics toggle at desktop and mobile sizes.
+
+### Changed
+- **BorderPulse now stands on its own.** Removed all DIGITO attribution and
+  outbound catalog links from the desktop sidebar, mobile menu, and footer.
+
 ## 2026-08-06
 
 ### Fixed

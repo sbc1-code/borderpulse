@@ -8,6 +8,13 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-08-16 · BorderPulse is a standalone product surface
+
+Remove all DIGITO attribution and outbound catalog links from BorderPulse.
+Visitors come for border-crossing intelligence, and the unrelated cross-promotion
+adds cognitive overhead without helping that job. This supersedes the 2026-05-26
+Digito-ecosystem linking decision.
+
 ## 2026-08-06 · Reliability and current-page quality gate SEO expansion
 
 Do not mass-produce `/best-time/:slug/:day` or other programmatic variants

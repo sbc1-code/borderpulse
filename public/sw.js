@@ -1,4 +1,4 @@
-const CACHE_NAME = 'borderpulse-v2';
+const CACHE_NAME = 'borderpulse-v3';
 
 // App shell files to pre-cache on install
 const APP_SHELL = [
@@ -114,13 +114,18 @@ function networkFirstWithTimeout(request, timeoutMs) {
   });
 }
 
-// Cache-first: serve from cache if available, otherwise fetch and cache
+// Cache-first: serve from cache if available, otherwise fetch and cache a
+// successful response. GitHub Pages can briefly return a 404 for a newly
+// deployed hashed asset; saving that response would make a lazy-loaded view
+// fail forever for the affected visitor.
 function cacheFirst(request) {
   return caches.match(request).then((cached) => {
     if (cached) return cached;
     return fetch(request).then((response) => {
-      const clone = response.clone();
-      caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+      if (response.ok) {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+      }
       return response;
     });
   });
