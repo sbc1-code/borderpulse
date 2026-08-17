@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T23:23:05.353Z",
-  "snapshot_at": "2026-08-16T23:18:21.826Z",
+  "generated_at": "2026-08-17T01:35:18.104Z",
+  "snapshot_at": "2026-08-16T23:58:56.860Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -58,16 +58,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.1111111111111112,
-      "detected_at": "2026-08-14T10:07:07.274Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 190 min around 7 PM — ~211% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 190 min cerca de las 7 PM — ~211% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.2222222222222223,
+      "detected_at": "2026-08-17T01:35:18.104Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 200 min around 5 PM — ~222% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 200 min cerca de las 5 PM — ~222% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 19,
-        "peak_median": 190,
+        "peak_hour": 17,
+        "peak_median": 200,
         "overall_median": 90,
-        "samples": 7,
-        "ratio": 2.111111111111111
+        "samples": 11,
+        "ratio": 2.2222222222222223
       }
     },
     {
@@ -148,14 +148,14 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.7142857142857142,
-      "detected_at": "2026-08-16T23:23:05.353Z",
+      "detected_at": "2026-08-17T01:35:18.104Z",
       "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 4 PM — ~171% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 4 PM — ~171% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 16,
         "peak_median": 120,
         "overall_median": 70,
-        "samples": 6,
+        "samples": 8,
         "ratio": 1.7142857142857142
       }
     },
@@ -178,23 +178,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5416666666666667,
-      "detected_at": "2026-08-16T23:23:05.353Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 185 min around 5 PM — ~154% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 185 min cerca de las 5 PM — ~154% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 185,
-        "overall_median": 120,
-        "samples": 9,
-        "ratio": 1.5416666666666667
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
@@ -210,6 +193,23 @@
         "best_median": 25,
         "overall_median": 54,
         "samples": 14
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-08-17T01:35:18.104Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 9 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 9 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 180,
+        "overall_median": 120,
+        "samples": 7,
+        "ratio": 1.5
       }
     },
     {
