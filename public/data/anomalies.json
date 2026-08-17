@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-17T01:35:18.104Z",
-  "snapshot_at": "2026-08-16T23:58:56.860Z",
+  "generated_at": "2026-08-17T03:03:23.016Z",
+  "snapshot_at": "2026-08-17T02:58:17.333Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -25,14 +25,14 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 1.6666666666666665,
-      "detected_at": "2026-08-15T14:26:42.539Z",
+      "detected_at": "2026-08-17T03:03:23.016Z",
       "summary_en": "Heads up: Tecate's Sunday peak hits 240 min around 8 PM — ~267% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Tecate alcanza 240 min cerca de las 8 PM — ~267% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
         "peak_median": 240,
         "overall_median": 90,
-        "samples": 6,
+        "samples": 8,
         "ratio": 2.6666666666666665
       }
     },
@@ -59,14 +59,14 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 1.2222222222222223,
-      "detected_at": "2026-08-17T01:35:18.104Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 200 min around 5 PM — ~222% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 200 min cerca de las 5 PM — ~222% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-08-17T03:03:23.016Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 200 min around 6 PM — ~222% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 200 min cerca de las 6 PM — ~222% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
+        "peak_hour": 18,
         "peak_median": 200,
         "overall_median": 90,
-        "samples": 11,
+        "samples": 16,
         "ratio": 2.2222222222222223
       }
     },
@@ -194,7 +194,9 @@
         "overall_median": 54,
         "samples": 14
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "sunday_spike",
       "port_slug": "san-ysidro",
@@ -229,9 +231,7 @@
         "overall_median": 30,
         "samples": 7
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
