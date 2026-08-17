@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-17T11:29:54.830Z",
-  "snapshot_at": "2026-08-17T11:23:34.394Z",
+  "generated_at": "2026-08-17T12:51:08.538Z",
+  "snapshot_at": "2026-08-17T12:40:54.755Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -161,6 +161,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.7142857142857143,
+      "detected_at": "2026-08-17T12:51:08.538Z",
+      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 4 AM (median 20 min) — ~71% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 4 AM (mediana 20 min) — ~71% debajo de la base de 30 días de 70 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 4,
+        "best_median": 20,
+        "overall_median": 70,
+        "samples": 10
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -175,24 +193,6 @@
         "overall_median": 70,
         "samples": 8,
         "ratio": 1.7142857142857142
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.6428571428571428,
-      "detected_at": "2026-08-17T11:29:54.830Z",
-      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 4 AM (median 25 min) — ~64% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 4 AM (mediana 25 min) — ~64% debajo de la base de 30 días de 70 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 4,
-        "best_median": 25,
-        "overall_median": 70,
-        "samples": 8
       }
     },
     {
