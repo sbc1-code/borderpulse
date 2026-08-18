@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-18T14:36:53.376Z",
-  "snapshot_at": "2026-08-18T14:08:28.614Z",
+  "generated_at": "2026-08-18T15:35:01.268Z",
+  "snapshot_at": "2026-08-18T15:30:05.070Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -58,16 +58,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.210526315789474,
-      "detected_at": "2026-08-18T14:36:53.376Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 10 PM — ~221% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 10 PM — ~221% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.1,
+      "detected_at": "2026-08-18T15:35:01.268Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 10 PM — ~210% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 10 PM — ~210% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 210,
-        "overall_median": 95,
+        "overall_median": 100,
         "samples": 7,
-        "ratio": 2.210526315789474
+        "ratio": 2.1
       }
     },
     {
@@ -146,16 +146,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9807692307692307,
-      "detected_at": "2026-08-18T11:28:37.255Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 52 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 52 min.",
+      "severity": 0.9811320754716981,
+      "detected_at": "2026-08-18T15:35:01.268Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 53 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 53 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 1,
         "best_median": 1,
-        "overall_median": 52,
+        "overall_median": 53,
         "samples": 7
       }
     },
