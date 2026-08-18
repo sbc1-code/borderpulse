@@ -31,6 +31,7 @@ import {
   hasOperationalAdvisory,
   nowInPortTz,
 } from '@/components/utils/crossingMeta';
+import { pickLightestHour } from '@/lib/recommendations';
 
 const STATUS_STYLES = {
   good: {
@@ -210,11 +211,9 @@ export default function BorderCrossingCard({
     if (!Array.isArray(byHour) || !byHour.length) return null;
     // Buckets are port-local; evaluate "today" in the port's timezone.
     const { day } = nowInPortTz(crossing);
-    const candidates = byHour
-      .filter((h) => h.day === day && !isSparseCell(h))
-      .sort((a, b) => a.median - b.median);
-    if (!candidates.length) return null;
-    return { hour: candidates[0].hour, median: candidates[0].median };
+    const best = pickLightestHour(crossing, byHour, day);
+    if (!best) return null;
+    return { hour: best.hour, median: best.median };
   }, [aggregate, isSouthbound, crossing]);
 
   // Suppress the pill when the current hour IS the lightest hour — pointing

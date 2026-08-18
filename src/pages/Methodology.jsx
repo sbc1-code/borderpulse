@@ -123,6 +123,13 @@ const COPY = {
               the page. Cells that still fall short of five observations are shown as "not enough
               data" rather than filled with a number borrowed from somewhere else.
             </p>
+            <p>
+              Best-time recommendations are also limited to the crossing's official operating
+              hours from CBP. The chart may retain historical observations outside those hours for
+              transparency, but a closed or ambiguous hour is never selected as the recommended
+              time. When CBP does not provide an unambiguous schedule, the page shows the pattern
+              without publishing a best-hour answer.
+            </p>
           </>
         ),
       },

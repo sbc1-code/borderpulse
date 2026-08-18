@@ -5,7 +5,7 @@ import { Copy, Share2, Check } from 'lucide-react';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { track } from '@/lib/analytics';
-import { isSparseCell } from '@/lib/aggregates';
+import { pickLightestHour } from '@/lib/recommendations';
 
 function formatHourCompact(h) {
   if (h == null) return '';
@@ -14,14 +14,11 @@ function formatHourCompact(h) {
 }
 
 // Pull today's lightest hour for a slug from the aggregate, if loaded.
-function lightestTodayFor(aggregate) {
+function lightestTodayFor(crossing, aggregate) {
   if (!aggregate?.by_hour?.length) return null;
   // Buckets are port-local; the aggregate carries its port's timezone.
   const today = aggregate.timezone ? nowInTz(aggregate.timezone).day : new Date().getDay();
-  const candidates = aggregate.by_hour
-    .filter((h) => h.day === today && !isSparseCell(h))
-    .sort((a, b) => a.median - b.median);
-  return candidates[0] || null;
+  return pickLightestHour(crossing, aggregate.by_hour, today);
 }
 
 function buildStatusText(crossings, language, direction, portToSlug, aggregates) {
@@ -44,7 +41,7 @@ function buildStatusText(crossings, language, direction, portToSlug, aggregates)
       // and only when aggregate has loaded for this slug.
       let annotation = '';
       if (isNorthbound && slug && aggregates?.[slug]) {
-        const best = lightestTodayFor(aggregates[slug]);
+        const best = lightestTodayFor(c, aggregates[slug]);
         if (best && best.hour != null) {
           annotation = language === 'en'
             ? ` (best ${formatHourCompact(best.hour)})`

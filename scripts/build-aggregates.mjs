@@ -30,7 +30,9 @@ async function main() {
   const currentDoc = JSON.parse(fs.readFileSync(path.resolve(root, DATA_FILE), 'utf8'));
   const { portToSlug } = slugMod.buildSlugMap(currentDoc.crossings || []);
   const portToMeta = new Map();
+  const portToCrossing = new Map();
   for (const c of currentDoc.crossings || []) {
+    portToCrossing.set(String(c.port_number), c);
     portToMeta.set(String(c.port_number), {
       name: c.name,
       state: c.state,
@@ -111,6 +113,7 @@ async function main() {
     const slug = portToSlug[port];
     if (!slug) continue;
     const meta = portToMeta.get(port) || {};
+    const crossing = portToCrossing.get(port) || null;
 
     const byHour = [];
     let bestMedian = Infinity;
@@ -187,8 +190,9 @@ async function main() {
     // ahead of the genuinely lighter 3 AM. This value lands in <title>, meta
     // descriptions and FAQ JSON-LD, so it gets the sturdier estimator.
     const hourAgg = new Map();
-    for (const [, byHourMap] of byDay.entries()) {
+    for (const [dayIdx, byHourMap] of byDay.entries()) {
       for (const [hour, arr] of byHourMap.entries()) {
+        if (!metaMod.isHourWithinOperatingHours(crossing, dayIdx, hour)) continue;
         if (!hourAgg.has(hour)) hourAgg.set(hour, []);
         hourAgg.get(hour).push(...arr);
       }

@@ -85,9 +85,32 @@ export function nowInPortTz(crossing, date = new Date()) {
   return nowInTz(getPortTimezone(crossing), date);
 }
 
-function parseTimeToken(token) {
+const DAY_NAMES = {
+  sun: 0,
+  sunday: 0,
+  mon: 1,
+  monday: 1,
+  tue: 2,
+  tues: 2,
+  tuesday: 2,
+  wed: 3,
+  weds: 3,
+  wednesday: 3,
+  thu: 4,
+  thur: 4,
+  thurs: 4,
+  thursday: 4,
+  fri: 5,
+  friday: 5,
+  sat: 6,
+  saturday: 6,
+};
+
+const TIME_RANGE_RE = /((?:\d{1,2})(?::\d{2})?\s*(?:am|pm)|midnight)\s*(?:-|–|—|to)\s*((?:\d{1,2})(?::\d{2})?\s*(?:am|pm)|midnight)/i;
+
+function parseTimeToken(token, position = 'start') {
   const clean = token.trim().toLowerCase();
-  if (clean === 'midnight') return 24 * 60;
+  if (clean === 'midnight') return position === 'start' ? 0 : 24 * 60;
 
   const match = clean.match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/);
   if (!match) return null;
@@ -98,19 +121,118 @@ function parseTimeToken(token) {
   return hour * 60 + minute;
 }
 
-function parseHours(hours) {
-  if (!hours) return null;
-  const clean = hours.trim();
-  if (/24\s*hrs\/day/i.test(clean)) return { kind: 'always' };
+function parseDayToken(token) {
+  return DAY_NAMES[token.trim().toLowerCase()] ?? null;
+}
 
-  const parts = clean.split('-');
-  if (parts.length !== 2) return null;
+function expandDayRange(startToken, endToken) {
+  const start = parseDayToken(startToken);
+  const end = parseDayToken(endToken);
+  if (start == null || end == null) return [];
+  const days = [];
+  let day = start;
+  do {
+    days.push(day);
+    day = (day + 1) % 7;
+  } while (day !== (end + 1) % 7 && days.length <= 7);
+  return days;
+}
 
-  const start = parseTimeToken(parts[0]);
-  const end = parseTimeToken(parts[1]);
+function parseDaySelector(prefix) {
+  const clean = prefix.trim().replace(/[:;,]+$/, '').trim();
+  if (!clean) return [0, 1, 2, 3, 4, 5, 6];
+
+  const normalized = clean.replace(/\s+to\s+/i, '-').replace(/\s*[-–—]\s*/g, '-');
+  const tokens = normalized.split('-').map((token) => token.trim()).filter(Boolean);
+  if (tokens.length === 1) {
+    const day = parseDayToken(tokens[0]);
+    return day == null ? null : [day];
+  }
+  if (tokens.length === 2) return expandDayRange(tokens[0], tokens[1]);
+  return null;
+}
+
+function addWindow(windowsByDay, day, start, end) {
+  if (start == null || end == null || start < 0 || end < 0 || start > 24 * 60 || end > 24 * 60) return false;
+  if (start === end) return false;
+
+  if (end > start) {
+    windowsByDay[day].push({ start, end });
+    return true;
+  }
+
+  // A closing time earlier than the opening time is an overnight schedule.
+  windowsByDay[day].push({ start, end: 24 * 60 });
+  windowsByDay[(day + 1) % 7].push({ start: 0, end });
+  return true;
+}
+
+function parseScheduleSegment(segment) {
+  const match = segment.match(TIME_RANGE_RE);
+  if (!match) return null;
+
+  const prefix = segment.slice(0, match.index).trim();
+  const days = parseDaySelector(prefix);
+  if (!days) return null;
+
+  const start = parseTimeToken(match[1], 'start');
+  const end = parseTimeToken(match[2], 'end');
   if (start == null || end == null) return null;
+  return { days, start, end };
+}
 
-  return { kind: 'window', start, end };
+export function parseOperatingHours(hours) {
+  const clean = String(hours || '').trim();
+  const windowsByDay = Array.from({ length: 7 }, () => []);
+  if (!clean) return { kind: 'unknown', windowsByDay };
+
+  if (/^(?:open\s*)?(?:24\s*(?:hrs?|hours?)\s*(?:\/|per\s*)?day|24\/7|always\s*open)$/i.test(clean)) {
+    for (const dayWindows of windowsByDay) dayWindows.push({ start: 0, end: 24 * 60 });
+    return { kind: 'always', windowsByDay };
+  }
+
+  // A seasonal label without an active date or an explicit day binding is not
+  // safe to interpret as today's schedule. Keep the heatmap, but suppress the
+  // recommendation until the feed gives us an unambiguous window.
+  if (/season|holiday|varies|call for|appointment/i.test(clean) && !/^(?:sun|mon|tue|wed|thu|fri|sat|monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i.test(clean)) {
+    return { kind: 'unknown', windowsByDay };
+  }
+
+  const segments = clean
+    .replace(/\r?\n/g, ';')
+    .split(/[;|]+/)
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+  if (!segments.length) return { kind: 'unknown', windowsByDay };
+
+  for (const segment of segments) {
+    const parsed = parseScheduleSegment(segment);
+    if (!parsed) return { kind: 'unknown', windowsByDay };
+    for (const day of parsed.days) {
+      if (!addWindow(windowsByDay, day, parsed.start, parsed.end)) {
+        return { kind: 'unknown', windowsByDay: Array.from({ length: 7 }, () => []) };
+      }
+    }
+  }
+
+  if (!windowsByDay.some((dayWindows) => dayWindows.length)) {
+    return { kind: 'unknown', windowsByDay };
+  }
+  return { kind: 'windows', windowsByDay };
+}
+
+export function isHourWithinOperatingHours(crossing, day, hour) {
+  if (!Number.isInteger(hour) || hour < 0 || hour > 23) return false;
+  const schedule = parseOperatingHours(crossing?.hours);
+  if (schedule.kind === 'always') return true;
+  if (schedule.kind !== 'windows' || !Number.isInteger(day) || day < 0 || day > 6) return false;
+
+  // Aggregate cells represent a full clock hour. Require the full hour to be
+  // inside the published window so a 6:30 AM opening cannot produce a "6 AM"
+  // recommendation, and a 10 PM closing cannot produce a "10 PM" one.
+  const hourStart = hour * 60;
+  const hourEnd = hourStart + 60;
+  return schedule.windowsByDay[day].some(({ start, end }) => hourStart >= start && hourEnd <= end);
 }
 
 function currentMinutesInZone(timeZone) {
@@ -145,8 +267,8 @@ export function getHoursSummary(crossing, language = 'en') {
     return language === 'en' ? 'Official hours unavailable' : 'Horario oficial no disponible';
   }
 
-  const schedule = parseHours(hours);
-  if (!schedule) {
+  const schedule = parseOperatingHours(hours);
+  if (schedule.kind === 'unknown') {
     return `${language === 'en' ? 'Official hours' : 'Horario oficial'}: ${hours}`;
   }
 
@@ -156,19 +278,22 @@ export function getHoursSummary(crossing, language = 'en') {
 
   const timeZone = getPortTimezone(crossing);
   const now = currentMinutesInZone(timeZone);
-  const isWithinSchedule = now >= schedule.start && now < schedule.end;
+  const day = nowInTz(timeZone).day;
+  const activeWindow = schedule.windowsByDay[day].find(({ start, end }) => now >= start && now < end);
   const portStatus = getPortStatus(crossing);
 
   if (portStatus === 'closed') {
+    const nextOpening = schedule.windowsByDay[day].find(({ start }) => start > now)?.start
+      ?? schedule.windowsByDay[(day + 1) % 7][0]?.start;
     return language === 'en'
-      ? `Closed now · next opening ${formatMinutes(schedule.start, language)}`
-      : `Cerrado ahora · próxima apertura ${formatMinutes(schedule.start, language)}`;
+      ? `Closed now${nextOpening != null ? ` · next opening ${formatMinutes(nextOpening, language)}` : ''}`
+      : `Cerrado ahora${nextOpening != null ? ` · próxima apertura ${formatMinutes(nextOpening, language)}` : ''}`;
   }
 
-  if (portStatus === 'open' && isWithinSchedule) {
+  if (portStatus === 'open' && activeWindow) {
     return language === 'en'
-      ? `Open now · next closing ${formatMinutes(schedule.end, language)}`
-      : `Abierto ahora · próximo cierre ${formatMinutes(schedule.end, language)}`;
+      ? `Open now · next closing ${formatMinutes(activeWindow.end, language)}`
+      : `Abierto ahora · próximo cierre ${formatMinutes(activeWindow.end, language)}`;
   }
 
   return `${language === 'en' ? 'Official hours' : 'Horario oficial'}: ${hours}`;

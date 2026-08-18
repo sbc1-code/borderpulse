@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "npm run test:routes",
+    "test": "npm run test:hours && npm run test:routes",
+    "test:hours": "node --test scripts/test-operating-hours.mjs",
+    "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "test:routes": "node scripts/smoke-routes.mjs",
     "prebuild": "node scripts/build-aggregates.mjs && node scripts/build-rankings.mjs && node scripts/build-blog-index.mjs && node scripts/build-sitemap.mjs && node scripts/build-og-cards.mjs && node scripts/build-rss.mjs && node scripts/build-stats.mjs",
     "build": "vite build",

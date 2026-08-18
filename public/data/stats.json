@@ -2,12 +2,12 @@
   "crossings": 44,
   "aggregates": 44,
   "aggregates_with_data": 37,
-  "total_samples": 11436,
+  "total_samples": 16110,
   "lookback_days": 30,
   "refresh_minutes": 15,
   "blog_posts": 36,
   "blog_posts_en": 18,
   "blog_posts_es": 18,
   "timeline_crossings": 4,
-  "generated_at": "2026-07-28T01:39:12.670Z"
+  "generated_at": "2026-08-18T21:20:51.267Z"
 }

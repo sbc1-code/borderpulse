@@ -22,7 +22,8 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [x] **P0 — fix the live `/best-time/` hub and add route smoke tests** —
       shipped 2026-08-06. The deploy gate now checks all 175 canonical and 20
       alias routes at desktop and mobile sizes (390 browser navigations).
-- [ ] **P1 — exclude closed hours from best-time recommendations** — [#65](https://github.com/sbc1-code/borderpulse/issues/65).
+- [x] **P1 — exclude closed hours from best-time recommendations** — shipped
+      2026-08-18 in [#65](https://github.com/sbc1-code/borderpulse/issues/65).
 - [ ] **P1 — make freshness and missing-data states honest** — [#58](https://github.com/sbc1-code/borderpulse/issues/58).
 - [ ] **P1 — reconcile sitemap aliases and Search Console indexing** — [#59](https://github.com/sbc1-code/borderpulse/issues/59).
 - [ ] **P1 — improve CTR on the proven organic landing pages** — [#64](https://github.com/sbc1-code/borderpulse/issues/64).

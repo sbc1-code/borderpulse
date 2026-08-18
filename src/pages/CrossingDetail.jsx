@@ -16,6 +16,7 @@ import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
+import { pickLightestHour } from '@/lib/recommendations';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -25,19 +26,6 @@ const DAY_LABELS = {
 // Selector pill order Mon–Sun for ergonomics, but indices stay 0=Sun..6=Sat
 // to match Date.getDay() and the aggregate `day` field.
 const DAY_PILL_ORDER = [1, 2, 3, 4, 5, 6, 0];
-
-// Returns the lightest hour for a day, or null when no hour that day clears
-// the confidence floor. There used to be a fallback here that re-ran the sort
-// with the floor removed, which meant a single CBP reading could be published
-// as "Best time to cross today". Returning null and rendering nothing is the
-// honest answer; the day and overall medians (hundreds of samples) still show.
-function pickBestHour(hours, dayIdx) {
-  if (!hours || !hours.length) return null;
-  const scored = hours
-    .filter((h) => h.day === dayIdx && !isSparseCell(h))
-    .sort((a, b) => a.median - b.median);
-  return scored[0] || null;
-}
 
 function formatHour12(h, lang) {
   const suffix = h >= 12 ? (lang === 'en' ? 'PM' : 'p. m.') : (lang === 'en' ? 'AM' : 'a. m.');
@@ -105,7 +93,7 @@ function faqItems(crossing, aggregate, lang) {
   if (aggregate && aggregate.by_hour && aggregate.by_hour.length) {
     // Buckets are port-local; "today" must be the port's day, not the browser's.
     const today = nowInPortTz(crossing).day;
-    const best = pickBestHour(aggregate.by_hour, today);
+    const best = pickLightestHour(crossing, aggregate.by_hour, today);
     if (best) {
       out.push({
         q: lang === 'en' ? `What is the best time to cross at ${name} today?` : `¿Cuál es la mejor hora para cruzar en ${name} hoy?`,
@@ -399,7 +387,7 @@ export default function CrossingDetail() {
 
   // Hourly chart data for the selected day.
   const dayHours = aggregate?.by_hour?.filter((h) => h.day === selectedDay) || [];
-  const bestForSelected = pickBestHour(aggregate?.by_hour, selectedDay);
+  const bestForSelected = pickLightestHour(crossing, aggregate?.by_hour, selectedDay);
   const isViewingToday = selectedDay === todayIdx;
 
   // Build the 2 nearby compare entries with current wait + vs-typical delta.

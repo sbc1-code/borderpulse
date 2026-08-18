@@ -9,6 +9,7 @@ import { nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { nowInPortTz } from '@/components/utils/crossingMeta';
 import { isSparseCell } from '@/lib/aggregates';
+import { pickLightestHour } from '@/lib/recommendations';
 
 const DAY_LABELS = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -22,17 +23,6 @@ const DAY_SHORT = {
 function formatHour12(h, lang) {
   const suffix = h >= 12 ? (lang === 'en' ? 'PM' : 'p. m.') : (lang === 'en' ? 'AM' : 'a. m.');
   return `${h % 12 || 12} ${suffix}`;
-}
-
-// Null when no hour that day clears the confidence floor. The previous
-// fallback re-ran this with the floor removed, so a one-observation cell
-// could be published as the lightest hour of the day.
-function lightestHourFor(byHour, day) {
-  if (!Array.isArray(byHour) || !byHour.length) return null;
-  const candidates = byHour
-    .filter((h) => h.day === day && !isSparseCell(h))
-    .sort((a, b) => a.median - b.median);
-  return candidates[0] || null;
 }
 
 function dayMedianFor(byHour, day) {
@@ -148,7 +138,7 @@ export function BestTimeIndex() {
       const slug = portToSlug[c.port_number];
       const agg = slug ? aggregates[slug] : null;
       const { day: portToday } = nowInPortTz(c);
-      const light = agg ? lightestHourFor(agg.by_hour, portToday) : null;
+      const light = agg ? pickLightestHour(c, agg.by_hour, portToday) : null;
       const dayMed = agg ? dayMedianFor(agg.by_hour, portToday) : null;
       return { crossing: c, slug, light, dayMedian: dayMed };
     }).filter((r) => r.slug)
@@ -340,7 +330,7 @@ export default function BestTime() {
 
   // Buckets are port-local; evaluate "today"/"now" in the port's timezone.
   const { day: today, hour: currentHour } = crossing ? nowInPortTz(crossing) : { day: new Date().getDay(), hour: new Date().getHours() };
-  const todayLight = aggregate ? lightestHourFor(aggregate.by_hour, today) : null;
+  const todayLight = aggregate ? pickLightestHour(crossing, aggregate.by_hour, today) : null;
   const todayMedian = aggregate ? dayMedianFor(aggregate.by_hour, today) : null;
 
   const todayHours = useMemo(() => {
@@ -360,10 +350,10 @@ export default function BestTime() {
     if (!aggregate?.by_hour) return [];
     return [0, 1, 2, 3, 4, 5, 6].map((d) => ({
       day: d,
-      light: lightestHourFor(aggregate.by_hour, d),
+      light: pickLightestHour(crossing, aggregate.by_hour, d),
       median: dayMedianFor(aggregate.by_hour, d),
     }));
-  }, [aggregate]);
+  }, [aggregate, crossing]);
 
   const nearby = useMemo(() => {
     if (!crossing || !crossings.length) return [];

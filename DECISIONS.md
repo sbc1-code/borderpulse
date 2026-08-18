@@ -194,4 +194,16 @@ trailing-slash form. New link-emitting code should too.
 
 ---
 
+## 2026-08-18 · Best-time recommendations require an eligible operating hour
+
+Official CBP hours are now a hard eligibility filter for every generated and
+runtime "best time" recommendation. Hour buckets use half-open boundaries: the
+opening hour is eligible when the full hour is open, while the closing hour is
+not. Overnight schedules spill into the following local day. Ambiguous,
+malformed, or seasonally unresolved schedules suppress the recommendation but
+leave the historical heatmap visible. Issue [#65](https://github.com/sbc1-code/borderpulse/issues/65)
+is the implementation record.
+
+---
+
 *Append a new section the next time a non-obvious decision lands.*

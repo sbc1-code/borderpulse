@@ -3,6 +3,19 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-08-18
+
+### Fixed
+- **Best-time recommendations now respect official operating hours.** Added a
+  shared parser and eligibility rule for 24-hour, daytime, overnight, midnight,
+  and day-specific schedules. Ambiguous schedules now show the pattern without
+  publishing a potentially unusable recommendation. Aggregate, card, detail,
+  share, ranking, OG, FAQ, and structured-data surfaces use the same rule.
+
+### Added
+- Added operating-hours fixtures, the Brownsville–Los Indios regression, a
+  repository-wide recommendation audit, and CI coverage through `npm test`.
+
 ## 2026-08-16
 
 ### Fixed
