@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-18T19:30:31.112Z",
-  "snapshot_at": "2026-08-18T19:27:12.277Z",
+  "generated_at": "2026-08-18T20:28:02.622Z",
+  "snapshot_at": "2026-08-18T20:21:55.418Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -129,16 +129,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.98,
-      "detected_at": "2026-08-18T18:42:10.768Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
+      "severity": 0.9803921568627451,
+      "detected_at": "2026-08-18T20:28:02.622Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 51 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 51 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 1,
         "best_median": 1,
-        "overall_median": 50,
+        "overall_median": 51,
         "samples": 7
       }
     },
@@ -254,16 +254,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.64,
-      "detected_at": "2026-08-18T19:30:31.112Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 4 AM (median 18 min) — ~64% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 4 AM (mediana 18 min) — ~64% debajo de la base de 30 días de 50 min.",
+      "severity": 0.625,
+      "detected_at": "2026-08-18T20:28:02.622Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 4 AM (median 18 min) — ~63% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 4 AM (mediana 18 min) — ~63% debajo de la base de 30 días de 48 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 4,
         "best_median": 18,
-        "overall_median": 50,
+        "overall_median": 48,
         "samples": 2
       }
     },
@@ -284,7 +284,9 @@
         "overall_median": 70,
         "samples": 6
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "sunday_spike",
       "port_slug": "el-paso-paso-del-norte-pdn",
@@ -301,9 +303,7 @@
         "samples": 7,
         "ratio": 1.5
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "eagle-pass-bridge-i",
