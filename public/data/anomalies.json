@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-18T12:53:35.808Z",
-  "snapshot_at": "2026-08-18T12:42:20.429Z",
+  "generated_at": "2026-08-18T13:45:22.967Z",
+  "snapshot_at": "2026-08-18T13:29:56.097Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -89,6 +89,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-08-18T13:45:22.967Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Tuesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 4,
+        "best_median": 0,
+        "overall_median": 45,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "laredo-bridge-i",
       "port_name": "Laredo - Bridge I",
       "state": "TX",
@@ -143,42 +161,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-08-18T09:37:19.558Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 1 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 1,
-        "best_median": 5,
-        "overall_median": 60,
-        "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8958333333333334,
-      "detected_at": "2026-08-18T07:41:08.041Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 4 AM (median 5 min) — ~90% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 4 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 48 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 4,
-        "best_median": 5,
-        "overall_median": 48,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
@@ -193,24 +175,6 @@
         "best_median": 5,
         "overall_median": 45,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-08-18T07:41:08.041Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Tuesday hour so far is 12 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Mariposa es 12 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 1
       }
     },
     {
@@ -287,6 +251,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.625,
+      "detected_at": "2026-08-18T13:45:22.967Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 4 AM (median 18 min) — ~63% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 4 AM (mediana 18 min) — ~63% debajo de la base de 30 días de 48 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 4,
+        "best_median": 18,
+        "overall_median": 48,
+        "samples": 2
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -304,5 +286,24 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-08-18T09:37:19.558Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 1 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 1,
+        "best_median": 5,
+        "overall_median": 60,
+        "samples": 7
+      }
+    }
+  ]
 }
