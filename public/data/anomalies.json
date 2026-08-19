@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T15:34:56.688Z",
-  "snapshot_at": "2026-08-19T15:01:23.774Z",
+  "generated_at": "2026-08-19T16:35:29.949Z",
+  "snapshot_at": "2026-08-19T16:12:19.504Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -51,6 +51,23 @@
         "overall_median": 100,
         "samples": 6,
         "ratio": 2.4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 1,
+      "detected_at": "2026-08-19T16:35:29.949Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 4 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 4 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 120,
+        "overall_median": 60,
+        "samples": 7,
+        "ratio": 2
       }
     },
     {
@@ -179,20 +196,21 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8461538461538463,
-      "detected_at": "2026-08-19T15:34:56.688Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 4 PM — ~185% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 4 PM — ~185% de la mediana de 30 días. Planea alrededor.",
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-08-19T16:35:29.949Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "peak_hour": 16,
-        "peak_median": 120,
-        "overall_median": 65,
-        "samples": 7,
-        "ratio": 1.8461538461538463
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 2,
+        "best_median": 5,
+        "overall_median": 60,
+        "samples": 7
       }
     },
     {
@@ -218,16 +236,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.7692307692307692,
-      "detected_at": "2026-08-19T15:34:56.688Z",
-      "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 2 AM (median 15 min) — ~77% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 2 AM (mediana 15 min) — ~77% debajo de la base de 30 días de 65 min.",
+      "severity": 0.75,
+      "detected_at": "2026-08-19T16:35:29.949Z",
+      "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 2 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 2 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
         "best_median": 15,
-        "overall_median": 65,
+        "overall_median": 60,
         "samples": 10
       }
     },
@@ -337,24 +355,6 @@
     }
   ],
   "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-08-19T13:47:46.459Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 5,
-        "overall_median": 60,
-        "samples": 7
-      }
-    },
     {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
