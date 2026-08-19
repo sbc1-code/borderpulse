@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T16:35:29.949Z",
-  "snapshot_at": "2026-08-19T16:12:19.504Z",
+  "generated_at": "2026-08-19T17:29:57.146Z",
+  "snapshot_at": "2026-08-19T17:25:05.561Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -254,17 +254,34 @@
       "port_slug": "eagle-pass-bridge-i",
       "port_name": "Eagle Pass - Bridge I",
       "state": "TX",
-      "severity": 0.7333333333333334,
-      "detected_at": "2026-08-19T05:34:04.376Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 2 PM (median 8 min) — ~73% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 2 PM (mediana 8 min) — ~73% debajo de la base de 30 días de 30 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-19T17:29:57.146Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 2 PM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 2 PM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 14,
-        "best_median": 8,
+        "best_median": 10,
         "overall_median": 30,
-        "samples": 4
+        "samples": 5
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.6083333333333334,
+      "detected_at": "2026-08-19T17:29:57.146Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 193 min around 9 PM — ~161% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 193 min cerca de las 9 PM — ~161% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 193,
+        "overall_median": 120,
+        "samples": 8,
+        "ratio": 1.6083333333333334
       }
     },
     {
@@ -283,23 +300,6 @@
         "best_median": 18,
         "overall_median": 45,
         "samples": 8
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.544,
-      "detected_at": "2026-08-19T04:40:29.491Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 193 min around 9 PM — ~154% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 193 min cerca de las 9 PM — ~154% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 193,
-        "overall_median": 125,
-        "samples": 8,
-        "ratio": 1.544
       }
     },
     {
