@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T03:01:04.339Z",
-  "snapshot_at": "2026-08-19T02:31:56.101Z",
+  "generated_at": "2026-08-19T04:40:29.491Z",
+  "snapshot_at": "2026-08-19T04:10:05.347Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -41,16 +41,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.1,
-      "detected_at": "2026-08-18T15:35:01.268Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 10 PM — ~210% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 10 PM — ~210% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.4,
+      "detected_at": "2026-08-19T04:40:29.491Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 240 min around 9 PM — ~240% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 240 min cerca de las 9 PM — ~240% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 210,
+        "peak_hour": 21,
+        "peak_median": 240,
         "overall_median": 100,
-        "samples": 7,
-        "ratio": 2.1
+        "samples": 8,
+        "ratio": 2.4
       }
     },
     {
@@ -95,7 +95,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-18T05:33:00.656Z",
+      "detected_at": "2026-08-19T04:40:29.491Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Tuesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -104,25 +104,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.98,
-      "detected_at": "2026-08-18T21:28:02.926Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 2,
-        "day_label": "Tue",
-        "best_hour": 1,
-        "best_median": 1,
-        "overall_median": 50,
-        "samples": 7
+        "samples": 8
       }
     },
     {
@@ -202,7 +184,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.8333333333333334,
-      "detected_at": "2026-08-18T07:41:08.041Z",
+      "detected_at": "2026-08-19T04:40:29.491Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 12 AM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 12 AM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
       "evidence": {
@@ -211,7 +193,7 @@
         "best_hour": 0,
         "best_median": 5,
         "overall_median": 30,
-        "samples": 9
+        "samples": 11
       }
     },
     {
@@ -287,19 +269,36 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.52,
-      "detected_at": "2026-08-19T01:26:38.563Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 76 min around 5 PM — ~152% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 76 min cerca de las 5 PM — ~152% de la mediana de 30 días. Planea alrededor.",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.544,
+      "detected_at": "2026-08-19T04:40:29.491Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 193 min around 9 PM — ~154% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 193 min cerca de las 9 PM — ~154% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
-        "peak_median": 76,
-        "overall_median": 50,
-        "samples": 7,
-        "ratio": 1.52
+        "peak_hour": 21,
+        "peak_median": 193,
+        "overall_median": 125,
+        "samples": 8,
+        "ratio": 1.544
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.5111111111111111,
+      "detected_at": "2026-08-19T04:40:29.491Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 68 min around 10 PM — ~151% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 68 min cerca de las 10 PM — ~151% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 68,
+        "overall_median": 45,
+        "samples": 6,
+        "ratio": 1.511111111111111
       }
     },
     {
@@ -321,6 +320,41 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.52,
+      "detected_at": "2026-08-19T01:26:38.563Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 76 min around 5 PM — ~152% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 76 min cerca de las 5 PM — ~152% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 17,
+        "peak_median": 76,
+        "overall_median": 50,
+        "samples": 7,
+        "ratio": 1.52
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.98,
+      "detected_at": "2026-08-18T21:28:02.926Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 2,
+        "day_label": "Tue",
+        "best_hour": 1,
+        "best_median": 1,
+        "overall_median": 50,
+        "samples": 7
+      }
+    },
     {
       "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
