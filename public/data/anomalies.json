@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T10:32:42.118Z",
-  "snapshot_at": "2026-08-19T10:26:52.785Z",
+  "generated_at": "2026-08-19T11:28:36.815Z",
+  "snapshot_at": "2026-08-19T11:24:07.279Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -220,7 +220,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.7857142857142857,
-      "detected_at": "2026-08-19T10:32:42.118Z",
+      "detected_at": "2026-08-19T11:28:36.815Z",
       "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 2 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 2 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
       "evidence": {
@@ -229,7 +229,7 @@
         "best_hour": 2,
         "best_median": 15,
         "overall_median": 70,
-        "samples": 9
+        "samples": 10
       }
     },
     {
