@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T07:41:26.454Z",
-  "snapshot_at": "2026-08-19T07:36:49.676Z",
+  "generated_at": "2026-08-19T08:41:32.547Z",
+  "snapshot_at": "2026-08-19T08:15:33.415Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -42,16 +42,16 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-08-19T07:41:26.454Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
+      "detected_at": "2026-08-19T08:41:32.547Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 43 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 43 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 45,
-        "samples": 6
+        "overall_median": 43,
+        "samples": 7
       }
     },
     {
@@ -113,16 +113,34 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9333333333333333,
-      "detected_at": "2026-08-19T07:41:26.454Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 2 AM (median 3 min) — ~93% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 3 min) — ~93% debajo de la base de 30 días de 45 min.",
+      "severity": 0.9777777777777777,
+      "detected_at": "2026-08-19T08:41:32.547Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Wednesday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
-        "best_median": 3,
+        "best_median": 1,
         "overall_median": 45,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.94,
+      "detected_at": "2026-08-19T08:41:32.547Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 3 AM (median 3 min) — ~94% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 3 min) — ~94% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 3,
+        "best_median": 3,
+        "overall_median": 50,
         "samples": 6
       }
     },
@@ -145,38 +163,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.9,
-      "detected_at": "2026-08-19T07:41:26.454Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 1 AM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 1,
-        "best_median": 5,
-        "overall_median": 50,
-        "samples": 5
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8666666666666667,
-      "detected_at": "2026-08-19T06:50:55.795Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
+      "severity": 0.8833333333333333,
+      "detected_at": "2026-08-19T08:41:32.547Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 7 min) — ~88% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 7 min) — ~88% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 1,
-        "best_median": 8,
+        "best_median": 7,
         "overall_median": 60,
-        "samples": 5
+        "samples": 6
       }
     },
     {
