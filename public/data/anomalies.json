@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T01:26:38.563Z",
-  "snapshot_at": "2026-08-19T01:10:26.374Z",
+  "generated_at": "2026-08-19T03:01:04.339Z",
+  "snapshot_at": "2026-08-19T02:31:56.101Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -254,17 +254,17 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.7111111111111111,
-      "detected_at": "2026-08-19T01:26:38.563Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 6 PM (median 13 min) — ~71% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 6 PM (mediana 13 min) — ~71% debajo de la base de 30 días de 45 min.",
+      "severity": 0.6,
+      "detected_at": "2026-08-19T03:01:04.339Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 4 AM (median 18 min) — ~60% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 4 AM (mediana 18 min) — ~60% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 18,
-        "best_median": 13,
+        "best_hour": 4,
+        "best_median": 18,
         "overall_median": 45,
-        "samples": 6
+        "samples": 2
       }
     },
     {
