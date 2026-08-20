@@ -104,13 +104,13 @@ export default function Layout({ children }) {
           </Link>
           <div className="flex shrink-0 items-center gap-1">
             <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-7" aria-label="Switch to English">EN</Button>
-              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-7" aria-label="Cambiar a español">ES</Button>
+              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-9" aria-label="Switch to English">EN</Button>
+              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-9" aria-label="Cambiar a español">ES</Button>
             </div>
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full tap-44" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="rounded-full tap-44" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
@@ -138,9 +138,13 @@ export default function Layout({ children }) {
             <Link to="/" className="flex items-center gap-3">
               <BorderPulseLogo size={40} />
               <div>
-                <h1 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                {/* Not an <h1>: the sidebar is `hidden lg:flex` but stays in
+                    the DOM at every width, so a heading here gave every page a
+                    second h1 (including on mobile). The wrapping <Link>
+                    supplies the accessible name. */}
+                <span className={`block text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Border Pulse
-                </h1>
+                </span>
                 <p className={`text-[11px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                   {language === 'en' ? 'Border wait times' : 'Tiempos de espera'}
                 </p>
@@ -152,10 +156,10 @@ export default function Layout({ children }) {
                 on tall pages. */}
             <div className="mt-3 flex items-center gap-2">
               <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-7" aria-label="Switch to English">EN</Button>
-                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-7" aria-label="Cambiar a español">ES</Button>
+                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-9" aria-label="Switch to English">EN</Button>
+                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-9" aria-label="Cambiar a español">ES</Button>
               </div>
-              <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
+              <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full tap-44" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </Button>
             </div>

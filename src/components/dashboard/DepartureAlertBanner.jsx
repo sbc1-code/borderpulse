@@ -95,7 +95,7 @@ export default function DepartureAlertBanner({ crossings, language, direction = 
           <button
             type="button"
             onClick={handleOpen}
-            className="flex items-center gap-2 min-w-0 text-left text-emerald-800 dark:text-emerald-200 hover:text-emerald-900 dark:hover:text-emerald-100"
+            className="flex items-center gap-2 min-w-0 py-1.5 text-left text-emerald-800 dark:text-emerald-200 hover:text-emerald-900 dark:hover:text-emerald-100"
           >
             <Bell className="w-4 h-4 flex-shrink-0" />
             <span className="text-xs sm:text-sm font-medium truncate">
