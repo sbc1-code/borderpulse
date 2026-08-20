@@ -5,6 +5,22 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-19
 
+### Added
+- **Blueprint Border Line on the dashboard.** The border drawn as an
+  architect's elevation: one line from the Pacific to the Gulf, all 42 ports
+  as ticks placed by true longitude, tick length the current wait, a quiet
+  dashed ghost behind each for the 30-day median. The axis flips with travel
+  direction. Mobile rotates to a vertical geographic bar chart. Inline SVG,
+  no new dependencies, +3.8 KB gzip.
+- **The mobile card wall now collapses** to favorites + nearest + heaviest
+  few behind "Show all 42", because the spine is the orientation layer.
+  `BorderCrossingCard` fetches its own aggregate file, so this is not just
+  scroll length: measured at 390x844, page height 17,888px -> 5,269px and
+  cards rendered 42 -> 5, cutting ~37 requests off the cellular landing path.
+- **Bundle budget in CI** (`scripts/check-bundle-size.mjs`, wired into
+  `npm test`). There was no size check and the entry chunk had already
+  drifted from a documented ~161 KB to 177 KB with nothing to catch it.
+
 ### Fixed
 - **Port identity is pinned; CBP renames can no longer move a URL.** CBP's feed
   intermittently substitutes a different row for the same physical crossing
@@ -26,6 +42,12 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   exactly to 42.
 - **Southbound restored for Ysleta**, which was failing silently on a stale
   `240203` key in `fetch-sb.mjs`. Coordinate coverage 40/44 -> 42/42.
+- **Border Line i18n and tap-target gaps caught in verification.** The SVG
+  title block rendered "42 CROSSINGS · 18 CON DATOS" in Spanish (half
+  translated) and the `<desc>` was English-only; both are localised now.
+  Mobile tick rows measured 23 CSS px at a 375px viewport (iPhone SE/mini),
+  just under the 24x24 AA floor, because the SVG scales down inside a
+  narrower screen — row height raised so it clears at 375px too.
 - **Accessibility: single `<h1>` and WCAG 2.2 tap targets.** The sidebar brand
   was an `<h1>` inside `hidden lg:flex`, so every page had two h1s at every
   width. Controls raised to a 24x24 floor with 44x44 on primary actions, via a

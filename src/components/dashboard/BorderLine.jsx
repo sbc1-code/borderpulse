@@ -29,6 +29,9 @@ const STRINGS = {
     typical: 'typical',
     reporting: 'reporting',
     listLabel: 'All crossings, west to east',
+    crossings: 'crossings',
+    desc: (n, r) =>
+      `${n} border crossings in geographic order from the Pacific to the Gulf. ${r} are currently reporting a wait.`,
     quick: 'Quick',
     moderate: 'Typical',
     heavy: 'Heavy',
@@ -44,6 +47,9 @@ const STRINGS = {
     typical: 'típico',
     reporting: 'con datos',
     listLabel: 'Todos los cruces, de oeste a este',
+    crossings: 'cruces',
+    desc: (n, r) =>
+      `${n} cruces fronterizos en orden geográfico del Pacífico al Golfo. ${r} reportan espera actualmente.`,
     quick: 'Rápido',
     moderate: 'Típico',
     heavy: 'Pesado',
@@ -167,7 +173,7 @@ export default function BorderLine({
     >
       <title id="bp-line-title">{t.title}</title>
       <desc id="bp-line-desc">
-        {`${ticks.length} border crossings in geographic order from the Pacific to the Gulf. ${reportingCount} are currently reporting a wait.`}
+        {t.desc(ticks.length, reportingCount)}
       </desc>
 
       {/* drafting grid */}
@@ -274,7 +280,7 @@ export default function BorderLine({
       {/* title block */}
       <g className="bp-titleblock">
         <text x={12} y={22}>
-          {`${ticks.length} CROSSINGS · ${reportingCount} ${t.reporting.toUpperCase()}`}
+          {`${ticks.length} ${t.crossings.toUpperCase()} · ${reportingCount} ${t.reporting.toUpperCase()}`}
         </text>
         <text x={W - 12} y={22} textAnchor="end">
           {(direction === 'southbound' ? t.southbound : t.northbound).toUpperCase()}
@@ -285,7 +291,10 @@ export default function BorderLine({
 
   // ----------------------------------------------------------------- mobile
   const MW = 360;
-  const ROW = 24;
+  // 26 viewBox units, not 24: the svg scales down to ~341px inside a 375px
+  // viewport (iPhone SE/mini), so 24 units rendered as 23 CSS px and missed
+  // the WCAG 2.2 AA 24x24 floor on the narrowest common phone.
+  const ROW = 26;
   const TOP = 34;
   const MH = TOP + ticks.length * ROW + 18;
   // The label column must actually fit a name. At 96 units it silently clipped
@@ -305,14 +314,14 @@ export default function BorderLine({
     >
       <title id="bp-line-title-m">{t.title}</title>
       <desc id="bp-line-desc-m">
-        {`${ticks.length} border crossings in geographic order from the Pacific to the Gulf. ${reportingCount} are currently reporting a wait.`}
+        {t.desc(ticks.length, reportingCount)}
       </desc>
 
       <line className="bp-axis" x1={SPINE_X} y1={TOP - 10} x2={SPINE_X} y2={MH - 12} />
 
       <g className="bp-titleblock">
         <text x={12} y={18}>
-          {`${ticks.length} CROSSINGS · ${reportingCount} ${t.reporting.toUpperCase()}`}
+          {`${ticks.length} ${t.crossings.toUpperCase()} · ${reportingCount} ${t.reporting.toUpperCase()}`}
         </text>
         <text x={MW - 12} y={18} textAnchor="end">
           {(direction === 'southbound' ? t.southbound : t.northbound).toUpperCase()}

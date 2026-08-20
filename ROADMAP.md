@@ -16,6 +16,9 @@ Ranked roughly by leverage. Pick what fits the available time.
 The GitHub roadmap issue is [#56](https://github.com/sbc1-code/borderpulse/issues/56).
 Work top to bottom; restore product trust before expanding the URL inventory.
 
+- [x] **P0 — pin canonical port identity** — CBP substitutes whole rows for the
+      same crossing, moving its URL. Was failing ~22% of deploys and serving a
+      hard 404 on `/crossing/paso-del-norte/`. [#73](https://github.com/sbc1-code/borderpulse/pull/73).
 - [~] **P0 — restore scheduled data deployment** — implementation shipped
       2026-08-06; keep [#57](https://github.com/sbc1-code/borderpulse/issues/57)
       open until two bot-only cycles publish their exact snapshot commits.
@@ -25,10 +28,10 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [x] **P1 — exclude closed hours from best-time recommendations** — shipped
       2026-08-18 in [#65](https://github.com/sbc1-code/borderpulse/issues/65).
 - [ ] **P1 — make freshness and missing-data states honest** — [#58](https://github.com/sbc1-code/borderpulse/issues/58).
-- [ ] **P1 — reconcile sitemap aliases and Search Console indexing** — [#59](https://github.com/sbc1-code/borderpulse/issues/59).
+- [ ] **P1 — reconcile sitemap aliases and Search Console indexing** — [#59](https://github.com/sbc1-code/borderpulse/issues/59). [#73](https://github.com/sbc1-code/borderpulse/pull/73) removes the root cause (slugs no longer move when CBP renames a port); GSC still needs a reconciliation pass.
 - [ ] **P1 — improve CTR on the proven organic landing pages** — [#64](https://github.com/sbc1-code/borderpulse/issues/64).
 - [ ] **P1 — instrument the core Umami decision funnel** — [#60](https://github.com/sbc1-code/borderpulse/issues/60).
-- [ ] **P2 — simplify first-use and mobile crossing selection** — [#62](https://github.com/sbc1-code/borderpulse/issues/62).
+- [~] **P2 — simplify first-use and mobile crossing selection** — [#62](https://github.com/sbc1-code/borderpulse/issues/62). PRs [#72](https://github.com/sbc1-code/borderpulse/pull/72) (single h1, WCAG 2.2 tap targets) and [#74](https://github.com/sbc1-code/borderpulse/pull/74) (Border Line + mobile card collapse, 17,888px -> 5,269px) cover the accessibility and scroll-length halves. Still open: the first-visit journey itself.
 - [ ] **P2 — clear vulnerable dependencies and add a CI gate** — [#63](https://github.com/sbc1-code/borderpulse/issues/63).
 
 - [x] **Re-bucket the aggregate grid** — shipped 2026-07-27, but NOT as
