@@ -8,6 +8,29 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-08-20 · Staying on React Router 6, with the two advisories accepted by ID
+
+`npm audit` cannot reach zero without React Router 6 -> 7, a semver-major
+migration. Both outstanding advisories were checked against this codebase and
+neither is reachable: the SSR one needs a hydration path this app does not have
+(`createRoot`, and prerender is string templating), and the open-redirect one
+needs a `<Link to>` or `navigate()` target that starts with a backslash, which
+cannot happen because every dynamic target in `src/` has a hardcoded path
+prefix and there are no `useNavigate()` calls at all.
+
+So the migration would buy zero security and risk real routing regressions on
+a live site. Accepted instead, in `scripts/check-audit.mjs`.
+
+Important: the gate excuses them by **GHSA advisory ID, not package name**. If
+it excused `react-router` wholesale it would also swallow a future critical in
+the same package, which is the exact failure the gate exists to catch.
+
+Revisit if either premise breaks — if SSR is added, or a bare `to={value}` /
+`navigate(value)` appears. Then do the v7 migration rather than widening the
+gate.
+
+---
+
 ## 2026-08-19 · Crossing identity is pinned in code, not read from the CBP feed
 
 CBP substitutes whole rows for the same bridge: `240202` "El Paso - Paso Del

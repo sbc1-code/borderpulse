@@ -32,7 +32,7 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [ ] **P1 — improve CTR on the proven organic landing pages** — [#64](https://github.com/sbc1-code/borderpulse/issues/64).
 - [ ] **P1 — instrument the core Umami decision funnel** — [#60](https://github.com/sbc1-code/borderpulse/issues/60).
 - [~] **P2 — simplify first-use and mobile crossing selection** — [#62](https://github.com/sbc1-code/borderpulse/issues/62). PRs [#72](https://github.com/sbc1-code/borderpulse/pull/72) (single h1, WCAG 2.2 tap targets) and [#74](https://github.com/sbc1-code/borderpulse/pull/74) (Border Line + mobile card collapse, 17,888px -> 5,269px) cover the accessibility and scroll-length halves. Still open: the first-visit journey itself.
-- [ ] **P2 — clear vulnerable dependencies and add a CI gate** — [#63](https://github.com/sbc1-code/borderpulse/issues/63).
+- [x] **P2 — clear vulnerable dependencies and add a CI gate** — [#63](https://github.com/sbc1-code/borderpulse/issues/63). All high severities cleared (8 -> 2 advisories); `scripts/check-audit.mjs` gates `npm test` on new high/critical. The 2 remaining moderates are react-router-only, need a v7 major, and were verified unreachable — accepted by advisory ID. See DECISIONS.md 2026-08-20.
 
 - [x] **Re-bucket the aggregate grid** — shipped 2026-07-27, but NOT as
       weekday/weekend. That plan was measured and rejected: within-Mon-Fri
