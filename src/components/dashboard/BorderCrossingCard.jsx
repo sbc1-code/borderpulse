@@ -325,7 +325,7 @@ export default function BorderCrossingCard({
                 aria-label={isFavorite
                   ? (language === 'en' ? 'Remove from favorites' : 'Quitar de favoritos')
                   : (language === 'en' ? 'Add to favorites' : 'Agregar a favoritos')}
-                className="p-1 rounded-md hover:bg-slate-100 transition-colors"
+                className="p-2.5 rounded-md hover:bg-slate-100 transition-colors"
               >
                 <Star
                   className={`w-4 h-4 transition-colors ${
@@ -339,7 +339,7 @@ export default function BorderCrossingCard({
                 <DropdownMenuTrigger asChild>
                   <button
                     aria-label={language === 'en' ? 'More options' : 'Más opciones'}
-                    className="p-1 rounded-md hover:bg-slate-100 transition-colors"
+                    className="p-2.5 rounded-md hover:bg-slate-100 transition-colors"
                   >
                     <MoreHorizontal className="w-4 h-4 text-slate-400" />
                   </button>

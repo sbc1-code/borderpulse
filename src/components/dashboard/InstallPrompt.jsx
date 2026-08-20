@@ -86,7 +86,7 @@ export default function InstallPrompt({ language = 'en' }) {
         <button
           onClick={handleDismiss}
           aria-label="Dismiss"
-          className="absolute top-2 right-2 p-1 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800"
+          className="absolute top-2 right-2 p-2 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800"
         >
           <X className="w-3.5 h-3.5" />
         </button>
