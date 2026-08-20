@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-20T11:29:56.456Z",
-  "snapshot_at": "2026-08-20T12:46:05.762Z",
+  "generated_at": "2026-08-20T13:50:56.227Z",
+  "snapshot_at": "2026-08-20T13:44:42.415Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -179,29 +179,11 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.9166666666666666,
-      "detected_at": "2026-08-20T09:38:19.056Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 60,
-        "samples": 9
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.8888888888888888,
-      "detected_at": "2026-08-20T07:43:34.972Z",
+      "detected_at": "2026-08-20T13:50:56.227Z",
       "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 4 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 4 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -210,7 +192,7 @@
         "best_hour": 4,
         "best_median": 5,
         "overall_median": 45,
-        "samples": 3
+        "samples": 4
       }
     },
     {
@@ -355,6 +337,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.9166666666666666,
+      "detected_at": "2026-08-20T09:38:19.056Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 0,
+        "best_median": 5,
+        "overall_median": 60,
+        "samples": 9
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "eagle-pass-bridge-i",
