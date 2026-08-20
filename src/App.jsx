@@ -7,7 +7,6 @@ import Dashboard from '@/pages/Dashboard';
 // Leaf routes are code-split: no reason to ship Blog/Alerts/Embed/BestTime
 // JS for someone who lands on the dashboard. The dashboard is the hot path,
 // everything else loads on demand.
-const SharedStatus = lazy(() => import('@/pages/SharedStatus'));
 const CrossingDetail = lazy(() => import('@/pages/CrossingDetail'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
@@ -39,7 +38,6 @@ function LayoutRoutes() {
           <Route path="/crossing/:slug" element={<CrossingDetail />} />
           <Route path="/best-time" element={<BestTimeIndex />} />
           <Route path="/best-time/:slug" element={<BestTime />} />
-          <Route path="/status/:id" element={<SharedStatus />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/alerts" element={<Alerts />} />

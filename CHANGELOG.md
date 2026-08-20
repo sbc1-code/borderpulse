@@ -5,6 +5,27 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-20
 
+### Fixed
+- **`/alerts/` no longer 404s on a direct load.** "Alerts" is in the nav on
+  every page and `/alerts` is a real 229-line route, but `prerender.mjs` never
+  emitted it, so GitHub Pages served the noindex 404 page to anyone who did
+  not arrive via client-side routing: a refresh, a shared link, or Googlebot.
+  Pre-existing since the nav link was added in `2dd6ba1`. Now prerendered with
+  `noindex` and kept out of the sitemap, matching the embed-page precedent —
+  it is a local-only tool (Notification API + localStorage) and every visitor
+  sees the same empty state.
+- **Route smoke tests now cover noindex functional routes.**
+  `smoke-routes.mjs` built its manifest purely from `dist/sitemap.xml`, so any
+  route deliberately excluded from the sitemap was invisible to it — which is
+  exactly why `/alerts/` regressed unnoticed. Added `FUNCTIONAL_ROUTES`, which
+  asserts the page is prerendered and then navigates it in both desktop and
+  mobile profiles.
+
+### Removed
+- **Dead `/status/:id` route and `SharedStatus.jsx`.** A 27-line placeholder
+  whose own copy read "coming in a future update". Nothing generated a
+  `/status/` URL anywhere in the codebase. Entry chunk 54.73 -> 54.67 KB gzip.
+
 ### Security
 - **Cleared all high-severity dependency advisories** (#63). `npm audit` goes
   8 -> 2: vite 6.4.2 -> 6.4.3, postcss 8.5.10 -> 8.5.26, plus transitive
