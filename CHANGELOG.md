@@ -3,6 +3,42 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-08-19
+
+### Fixed
+- **Port identity is pinned; CBP renames can no longer move a URL.** CBP's feed
+  intermittently substitutes a different row for the same physical crossing
+  (different `port_number` and `port_name`). Verified mutually exclusive across
+  200 snapshots, so dedupe was never at fault. Because slugs derive from names,
+  this moved URLs: `/crossing/paso-del-norte/` was serving a hard 404 while the
+  sitemap advertised the other spelling, and **9 of the last 40 deploys failed**
+  (`test:routes` correctly caught the non-canonical compare redirect). Also
+  orphaned 30 days of aggregate history on every flip, and silently dropped
+  favorites, which are keyed by `port_number`. Six substitution pairs found:
+  PDN, BOTA, Ysleta, San Ysidro, Naco (51/200, the worst), Otay Mesa. Identity
+  now comes from `src/lib/portIdentity.js`; `BASE_OVERRIDES` covers all 42
+  published crossings so `baseSlug(name)` is a fallback only.
+- **Collapsed two permanently dead cards.** `230103` "Gateway" and `230106`
+  "B&M Bridge" appear in 200/200 snapshots alongside their real twins and have
+  never reported a wait. Both keep working URLs via redirects. Count 44 -> 42.
+- **Region filters no longer hide crossings.** Those same two rows had
+  `state: null`, so they vanished under any region filter. Regions now sum
+  exactly to 42.
+- **Southbound restored for Ysleta**, which was failing silently on a stale
+  `240203` key in `fetch-sb.mjs`. Coordinate coverage 40/44 -> 42/42.
+- **Accessibility: single `<h1>` and WCAG 2.2 tap targets.** The sidebar brand
+  was an `<h1>` inside `hidden lg:flex`, so every page had two h1s at every
+  width. Controls raised to a 24x24 floor with 44x44 on primary actions, via a
+  new `.tap-44` hit-area utility rather than resizing the painted controls
+  (body scrollWidth at 390 has zero slack). Verified at real 360/390/1280
+  viewports with Playwright; the Chrome viewport override that blocked the
+  original audit still does not work.
+
+### Added
+- `src/lib/portIdentity.js` with a fail-closed duplicate-identity assert in
+  `fetch-cbp.mjs`, so a future CBP collision throws instead of silently merging
+  two physical crossings onto one card.
+
 ## 2026-08-18
 
 ### Fixed
