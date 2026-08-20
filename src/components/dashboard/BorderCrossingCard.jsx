@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Clock, MapPin, TrendingUp, TrendingDown, Minus, AlertTriangle,
-  Car, User, Truck, Bell, BellRing, Star, MoreHorizontal,
+  Car, User, Truck, Star, MoreHorizontal,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { getPreviousWait } from '@/components/utils/waitTimeHistory';
 import LaneRow from '@/components/dashboard/LaneRow';
-import { getPrefForCrossing, setPref, permission, requestPermission } from '@/components/utils/notifyService';
 import { isSparseCell } from '@/lib/aggregates';
 import {
   getStatusForDirection,
@@ -129,15 +128,11 @@ export default function BorderCrossingCard({
   slug,
 }) {
   const [showLanes, setShowLanes] = useState(false);
-  const [showNotify, setShowNotify] = useState(false);
-  const [pref, setPrefState] = useState(() => getPrefForCrossing(crossing.port_number, selectedDirection));
-  const [perm, setPerm] = useState(() => (typeof window !== 'undefined' ? permission() : 'default'));
   const [aggregate, setAggregate] = useState(null);
 
   const cardSlug = slug || crossing.slug || null;
 
   useEffect(() => {
-    setPrefState(getPrefForCrossing(crossing.port_number, selectedDirection));
   }, [crossing.port_number, selectedDirection]);
 
   // Fetch the per-crossing historical aggregate to power the "vs. typical" line.
@@ -248,27 +243,6 @@ export default function BorderCrossingCard({
   }, [aggregate, wait, isSouthbound, crossing]);
 
   const lanes = crossing.lanes || {};
-
-  const handleToggleNotify = async () => {
-    if (pref) {
-      setPref(crossing.port_number, null, selectedDirection);
-      setPrefState(null);
-      setShowNotify(false);
-      return;
-    }
-    setShowNotify(true);
-    if (perm !== 'granted') {
-      const res = await requestPermission();
-      setPerm(res === true ? 'granted' : res);
-    }
-  };
-
-  const saveNotify = (kind, threshold) => {
-    const newPref = { active: true, kind, threshold: Number(threshold) };
-    setPref(crossing.port_number, newPref, selectedDirection);
-    setPrefState(newPref);
-    setShowNotify(false);
-  };
 
   return (
     <motion.div
@@ -464,59 +438,6 @@ export default function BorderCrossingCard({
               {advisoryText}
             </div>
           )}
-
-          {/* Primary CTA: Notify Me only */}
-          <div className="mt-2.5">
-            <Button
-              variant={pref ? 'default' : 'outline'}
-              size="sm"
-              onClick={handleToggleNotify}
-              className="w-full gap-1.5 h-8 text-xs"
-            >
-              {pref ? <BellRing className="w-3.5 h-3.5" /> : <Bell className="w-3.5 h-3.5" />}
-              {pref
-                ? (language === 'en' ? `Alert ${pref.kind === 'below' ? '<' : '>'} ${pref.threshold}m` : `Alerta ${pref.kind === 'below' ? '<' : '>'} ${pref.threshold}m`)
-                : (language === 'en' ? 'Notify Me' : 'Notificar')}
-            </Button>
-          </div>
-
-          {/* Notify inline form */}
-          <AnimatePresence>
-            {showNotify && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-2 rounded-md border border-slate-200 bg-slate-50 p-2.5">
-                  <div className="text-[11px] text-slate-600 mb-1.5">
-                    {perm === 'granted'
-                      ? (language === 'en' ? 'Alert me when wait…' : 'Avísame cuando la espera…')
-                      : perm === 'denied'
-                        ? (language === 'en' ? 'Notifications blocked in browser settings' : 'Notificaciones bloqueadas en el navegador')
-                        : (language === 'en' ? 'Allow notifications to enable' : 'Permite notificaciones para activar')}
-                  </div>
-                  {perm === 'granted' && (
-                    <div className="grid grid-cols-2 gap-1.5">
-                      <Button size="sm" variant="outline" className="h-7 text-[11px]" onClick={() => saveNotify('below', 30)}>
-                        {language === 'en' ? '< 30 min' : '< 30 min'}
-                      </Button>
-                      <Button size="sm" variant="outline" className="h-7 text-[11px]" onClick={() => saveNotify('below', 15)}>
-                        {language === 'en' ? '< 15 min' : '< 15 min'}
-                      </Button>
-                      <Button size="sm" variant="outline" className="h-7 text-[11px]" onClick={() => saveNotify('above', 60)}>
-                        {language === 'en' ? '> 60 min' : '> 60 min'}
-                      </Button>
-                      <Button size="sm" variant="outline" className="h-7 text-[11px]" onClick={() => setShowNotify(false)}>
-                        {language === 'en' ? 'Cancel' : 'Cancelar'}
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* Lane details */}
           <AnimatePresence>

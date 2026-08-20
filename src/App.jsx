@@ -4,13 +4,12 @@ import Layout from '@/Layout';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Dashboard from '@/pages/Dashboard';
 
-// Leaf routes are code-split: no reason to ship Blog/Alerts/Embed/BestTime
+// Leaf routes are code-split: no reason to ship Blog/Embed/BestTime
 // JS for someone who lands on the dashboard. The dashboard is the hot path,
 // everything else loads on demand.
 const CrossingDetail = lazy(() => import('@/pages/CrossingDetail'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
-const Alerts = lazy(() => import('@/pages/Alerts'));
 const Embed = lazy(() => import('@/pages/Embed'));
 const BestTime = lazy(() => import('@/pages/BestTime'));
 const BestTimeIndex = lazy(() =>
@@ -40,7 +39,6 @@ function LayoutRoutes() {
           <Route path="/best-time/:slug" element={<BestTime />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/alerts" element={<Alerts />} />
           <Route path="/api" element={<Navigate to="/methodology/" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/methodology" element={<Methodology lang="en" />} />

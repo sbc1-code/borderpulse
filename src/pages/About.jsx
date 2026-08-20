@@ -171,11 +171,6 @@ export default function About() {
               ? 'Geolocation runs in the browser; only the resulting state filter (e.g., "California") is saved to localStorage.'
               : 'La geolocalización corre en el navegador; solo se guarda el filtro de estado resultante (p.ej., "California") en localStorage.'}
           </li>
-          <li>
-            {language === 'en'
-              ? 'Notification thresholds are saved to localStorage in your browser.'
-              : 'Los umbrales de notificación se guardan en localStorage de tu navegador.'}
-          </li>
         </ul>
       </section>
 

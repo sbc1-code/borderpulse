@@ -35,12 +35,10 @@ function pathForIndex(filePath) {
   return `/${path.dirname(relative).split(path.sep).join('/')}/`;
 }
 
-// Routes that must resolve on a direct load but are deliberately noindex and
-// absent from the sitemap, so the canonical loop above cannot cover them.
-// /alerts is linked from the nav on every page; it silently served the 404
-// page for anyone who did not arrive via client-side routing.
-const FUNCTIONAL_ROUTES = ['/alerts/'];
-
+// NOTE: this manifest is built from dist/sitemap.xml alone, so any route
+// deliberately excluded from the sitemap (embed pages, for example) is NOT
+// covered here. That blind spot is how /alerts/ shipped a hard 404 for weeks.
+// If a linked, sitemap-excluded route is ever added, assert it explicitly.
 function loadRouteManifest() {
   const sitemapPath = path.resolve(distDir, 'sitemap.xml');
   if (!fs.existsSync(sitemapPath)) {
@@ -58,16 +56,6 @@ function loadRouteManifest() {
     }
     return { path: canonical.pathname, canonical: canonical.href };
   });
-
-  for (const routePath of FUNCTIONAL_ROUTES) {
-    const filePath = path.resolve(distDir, `.${routePath}`, 'index.html');
-    if (!fs.existsSync(filePath)) {
-      throw new Error(
-        `Functional route has no prerendered page: ${routePath}. ` +
-        `It is linked in the app but would serve the 404 page on a direct load.`,
-      );
-    }
-  }
 
   const canonicalPaths = new Set(canonicals.map((route) => route.path));
   const aliases = [];
@@ -89,7 +77,6 @@ function loadRouteManifest() {
   return {
     canonicals: canonicals.sort((a, b) => a.path.localeCompare(b.path)),
     aliases: aliases.sort((a, b) => a.path.localeCompare(b.path)),
-    functional: [...FUNCTIONAL_ROUTES],
   };
 }
 
@@ -260,37 +247,6 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     }
   }
 
-  for (const routePath of manifest.functional) {
-    activeErrors = [];
-    try {
-      const response = await page.goto(new URL(routePath, baseUrl).href, {
-        waitUntil: 'domcontentloaded',
-        timeout: 15_000,
-      });
-      if (!response || response.status() >= 400) {
-        throw new Error(`HTTP ${response?.status() || 'no response'}`);
-      }
-      await settle(page);
-      // Functional routes are React.lazy chunks, so settle()'s fixed 150ms is
-      // not enough on a cold chunk load. Wait for real content the same way
-      // the /best-time/ canonical check does.
-      await page.waitForFunction(() => {
-        const body = document.body?.innerText || '';
-        return document.querySelector('h1') !== null || body.includes('Something went wrong');
-      }, null, { timeout: 5_000 });
-      const rendered = await inspectRenderedPage(page);
-      if (!rendered.body.trim()) throw new Error('empty body');
-      if (rendered.body.includes('Something went wrong') || rendered.body.includes('Border Pulse encountered an error')) {
-        throw new Error('ErrorBoundary rendered');
-      }
-      if (!rendered.title) throw new Error('missing title');
-      if (!rendered.headings.length) throw new Error('no h1 rendered');
-      if (activeErrors.length) throw new Error(`console: ${activeErrors[0]}`);
-    } catch (error) {
-      failures.push(`${profile.name} ${routePath}: ${error.message}`);
-    }
-  }
-
   for (const route of manifest.aliases) {
     activeErrors = [];
     try {
@@ -352,7 +308,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   }
 
   await context.close();
-  console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias + ${manifest.functional.length} functional routes + dashboard analytics`);
+  console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);
   return failures;
 }
 
@@ -364,7 +320,7 @@ async function main() {
   try {
     const executablePath = findChrome();
     console.log(`[routes] Chrome: ${executablePath}`);
-    console.log(`[routes] manifest: ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias + ${manifest.functional.length} functional routes`);
+    console.log(`[routes] manifest: ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes`);
     browser = await chromium.launch({ executablePath, headless: true, args: ['--no-sandbox'] });
     const profiles = [
       { name: 'desktop', viewport: { width: 1440, height: 900 }, isMobile: false },
