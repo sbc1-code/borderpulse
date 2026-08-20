@@ -19,8 +19,8 @@ const ALIAS_TO_PORT = {
   algodones: ['250201'], // Andrade
   'los algodones': ['250201'],
   'san luis rio colorado': ['260601'], // San Luis
-  'ciudad juarez': ['240221', '240201', '240202', '240203'], // All El Paso ports
-  'cd juarez': ['240221', '240201', '240202', '240203'],
+  'ciudad juarez': ['240221', '240201', '240202', '240104'], // All El Paso ports
+  'cd juarez': ['240221', '240201', '240202', '240104'],
   'nuevo laredo': ['230404', '230401', '230403'], // All Laredo
   'piedras negras': ['230301', '230302'], // Eagle Pass
   'ciudad acuna': ['230201'], // Del Rio
