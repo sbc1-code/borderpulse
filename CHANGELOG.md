@@ -3,6 +3,31 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-08-20
+
+### Security
+- **Cleared all high-severity dependency advisories** (#63). `npm audit` goes
+  8 -> 2: vite 6.4.2 -> 6.4.3, postcss 8.5.10 -> 8.5.26, plus transitive
+  nanoid, js-yaml and @babel/core. No breaking changes; entry chunk and CSS
+  byte-identical.
+- **Added a CI security gate** (`scripts/check-audit.mjs`, wired into
+  `npm test`). Fails on any new high or critical advisory.
+- **Two moderate react-router advisories are knowingly accepted**, not
+  silenced. Both need a semver-major React Router 6 -> 7 migration and neither
+  is reachable here:
+  - `GHSA-337j-9hxr-rhxg` (SSR `deserializeErrors`) — this app has no SSR.
+    `src/main.jsx` uses `createRoot`, not `hydrateRoot`, and `prerender.mjs`
+    is string templating that never executes React.
+  - `GHSA-wrjc-x8rr-h8h6` (open redirect via backslash in `<Link>` /
+    `useNavigate`) — there are zero `useNavigate()` calls, and all 27 dynamic
+    `<Link to={...}>` targets are template literals with a hardcoded path
+    prefix, so a target can never begin with the `\\` sequence the advisory
+    requires.
+
+  The gate accepts these by **advisory ID, not package name**, so a future
+  high or critical in react-router still fails the build. Verified against
+  three synthetic scenarios.
+
 ## 2026-08-19
 
 <<<<<<< HEAD
