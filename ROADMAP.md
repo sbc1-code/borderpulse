@@ -16,6 +16,10 @@ Ranked roughly by leverage. Pick what fits the available time.
 The GitHub roadmap issue is [#56](https://github.com/sbc1-code/borderpulse/issues/56).
 Work top to bottom; restore product trust before expanding the URL inventory.
 
+- [x] **QC: `/alerts/` was a 404 on direct load** — nav link on every page, never
+      prerendered. Fixed, plus `FUNCTIONAL_ROUTES` coverage in smoke-routes so
+      sitemap-excluded routes cannot silently regress again. Dead `/status/:id`
+      route removed.
 - [x] **P0 — pin canonical port identity** — CBP substitutes whole rows for the
       same crossing, moving its URL. Was failing ~22% of deploys and serving a
       hard 404 on `/crossing/paso-del-norte/`. [#73](https://github.com/sbc1-code/borderpulse/pull/73).

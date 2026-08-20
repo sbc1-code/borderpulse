@@ -662,6 +662,29 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
   }
 
+  // /alerts — a real nav destination on every page, so it must resolve on a
+  // direct load, a refresh, or a shared link. It was routed in App.jsx and
+  // linked in Layout.jsx but never prerendered, so GitHub Pages served the
+  // hard 404 page to anyone who did not arrive via client-side routing.
+  //
+  // noindex + absent from the sitemap, matching the embed-page precedent: it
+  // is a local-only tool (Notification API + localStorage) and every visitor
+  // sees the same empty state, so there is nothing worth indexing. Coverage
+  // comes from FUNCTIONAL_ROUTES in scripts/smoke-routes.mjs instead.
+  {
+    const alertsHead = {
+      title: 'Alerts | Border Pulse',
+      desc: 'Manage your Border Pulse wait-time alerts. Notifications fire when a crossing passes the threshold you set. Alerts are stored in your browser.',
+      canonical: `${BASE}/alerts/`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const alertsHtml = applyNoindex(rewriteIndex(indexWithLinks, alertsHead));
+    const outDir = path.resolve(distDir, 'alerts');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), alertsHtml);
+  }
+
   // /best-time index hub — links to every generated best-time page.
   {
     const canonical = `${BASE}/best-time/`;
