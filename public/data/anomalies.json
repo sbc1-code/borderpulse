@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-20T14:39:51.610Z",
-  "snapshot_at": "2026-08-20T17:22:09.384Z",
+  "generated_at": "2026-08-20T18:44:31.163Z",
+  "snapshot_at": "2026-08-20T18:14:41.064Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -320,6 +320,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-08-20T18:44:31.163Z",
+      "summary_en": "Right now Tecate's lightest Thursday hour so far is 10 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 10 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 10,
+        "best_median": 45,
+        "overall_median": 90,
+        "samples": 6
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
@@ -354,24 +372,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-19T18:40:12.420Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Wednesday hour so far is 4 PM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Eagle Pass - Bridge I es 4 PM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 16,
-        "best_median": 10,
-        "overall_median": 30,
-        "samples": 1
-      }
-    }
-  ]
+  "trailing_24h": []
 }
