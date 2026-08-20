@@ -277,7 +277,7 @@ export default function Dashboard() {
             variant={view === 'analytics' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
-            className="gap-1 h-8"
+            className="gap-1 h-9"
             aria-pressed={view === 'analytics'}
           >
             <BarChart3 className="w-3.5 h-3.5" />
@@ -287,13 +287,13 @@ export default function Dashboard() {
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 h-8">
+          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 h-9">
             <Share2 className="w-3.5 h-3.5" />
             <span className="text-xs hidden sm:inline">
               {language === 'en' ? 'Share' : 'Compartir'}
             </span>
           </Button>
-          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 h-8">
+          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 h-9">
             <RefreshCw className={`w-3.5 h-3.5 ${state.isRefreshing ? 'animate-spin' : ''}`} />
             <span className="text-xs hidden sm:inline">
               {language === 'en' ? 'Refresh' : 'Actualizar'}
@@ -311,7 +311,7 @@ export default function Dashboard() {
           variant={direction === 'northbound' ? 'default' : 'ghost'}
           size="sm"
           onClick={() => changeDirection('northbound')}
-          className="flex-1 gap-2 h-9"
+          className="flex-1 gap-2 h-11"
           aria-pressed={direction === 'northbound'}
         >
           <ArrowUp className="w-4 h-4" />
@@ -321,7 +321,7 @@ export default function Dashboard() {
           variant={direction === 'southbound' ? 'default' : 'ghost'}
           size="sm"
           onClick={() => changeDirection('southbound')}
-          className="flex-1 gap-2 h-9"
+          className="flex-1 gap-2 h-11"
           aria-pressed={direction === 'southbound'}
           title={language === 'en' ? 'Estimated southbound delay at major crossings' : 'Demora estimada hacia México en cruces principales'}
         >
@@ -370,7 +370,7 @@ export default function Dashboard() {
                 <Button
                   size="sm"
                   variant="default"
-                  className="h-7 text-xs px-2.5"
+                  className="h-9 text-xs px-2.5"
                   onClick={acceptGeoPrompt}
                   disabled={geoLocating}
                 >
@@ -381,7 +381,7 @@ export default function Dashboard() {
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 text-xs px-2.5"
+                  className="h-9 text-xs px-2.5"
                   onClick={dismissGeoPrompt}
                 >
                   {language === 'en' ? 'Not now' : 'Ahora no'}
@@ -407,7 +407,7 @@ export default function Dashboard() {
                 <button
                   onClick={() => setSearch('')}
                   aria-label="Clear search"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
+                  className="tap-44 absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
                 >
                   <X className="w-3.5 h-3.5 text-slate-400" />
                 </button>
@@ -420,7 +420,7 @@ export default function Dashboard() {
                   variant={region === r.code ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => changeRegion(r.code)}
-                  className="h-8 shrink-0 px-3 text-xs"
+                  className="h-11 shrink-0 px-3 text-xs"
                   aria-pressed={region === r.code}
                 >
                   {r.label[language] || r.label.en}
@@ -468,7 +468,7 @@ export default function Dashboard() {
                     {offlineCrossings.length > 0 && (
                       <button
                         onClick={() => setShowWithoutCurrentWaits((value) => !value)}
-                        className="self-start text-left text-xs text-slate-500 underline decoration-dotted hover:text-slate-900 dark:hover:text-white sm:self-auto sm:text-right"
+                        className="self-start py-1.5 text-left text-xs text-slate-500 underline decoration-dotted hover:text-slate-900 dark:hover:text-white sm:self-auto sm:text-right"
                       >
                         {showWithoutCurrentWaits
                           ? (language === 'en'
