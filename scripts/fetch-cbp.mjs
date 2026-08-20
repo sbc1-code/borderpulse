@@ -8,6 +8,7 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { canonicalPortNumber, pinIdentity, requiresPortCollapse } from '../src/lib/portIdentity.js';
 
 // bwt.cbp.gov serves two endpoints with the same JSON shape:
 //   /api/waittimes        — legacy, frozen on 3/26/2026 (do NOT use)
@@ -193,6 +194,17 @@ const CANONICAL = [
 ];
 
 const canonicalKey = (row) => {
+  // Legacy duplicate port numbers (see portIdentity.js `collapse`) group with
+  // their real twin by port number, because their NAMES differ too much to hit
+  // a shared rule below ("B&M Bridge" vs "Brownsville - B&M"). Applied to both
+  // sides of the pair so they land in the same group.
+  // Substitution pairs are deliberately NOT handled here: both spellings
+  // already match the same rule below, and short-circuiting would orphan the
+  // sibling rows that are meant to merge into the parent.
+  if (requiresPortCollapse(row.port_number)) {
+    return `port:${canonicalPortNumber(row.port_number)}`;
+  }
+
   const blob = `${row.port_name} ${row.crossing_name}`;
   for (const { test, key } of CANONICAL) {
     if (test.test(blob)) return key;
@@ -252,7 +264,9 @@ async function main() {
   if (!Array.isArray(data)) throw new Error('CBP response was not an array');
 
   const rawMexican = data.filter(isMexicanBorder);
-  const mexican = dedupe(rawMexican.map(mapPort));
+  // Identity (port_number / name / state) comes from the pinned table, never
+  // from the feed. CBP substitutes rows; see src/lib/portIdentity.js.
+  const mexican = dedupe(rawMexican.map(mapPort)).map(pinIdentity);
 
   // Fail-safe: never overwrite the last-good snapshot with a near-empty one.
   // A sudden collapse means CBP changed the feed (labels/locale) and the maps
@@ -266,6 +280,21 @@ async function main() {
       `If raw rows look healthy, CBP likely relabeled/localized fields again; ` +
       `update the normalization maps in scripts/fetch-cbp.mjs. Last-good snapshot left intact.`,
     );
+  }
+
+  // Fail closed on a duplicate identity. If CBP ever starts publishing waits on
+  // a port we collapse as legacy, this throws instead of silently merging two
+  // physical crossings into one card.
+  const seenPorts = new Set();
+  for (const c of mexican) {
+    if (seenPorts.has(c.port_number)) {
+      throw new Error(
+        `Refusing to write crossings.json: duplicate port_number ${c.port_number} after ` +
+        `identity pinning. Two rows collapsed onto one canonical port. Review ` +
+        `PINNED_PORTS in src/lib/portIdentity.js. Last-good snapshot left intact.`,
+      );
+    }
+    seenPorts.add(c.port_number);
   }
 
   const payload = {

@@ -5,6 +5,8 @@
 // proximity-ranking ("nearest crossings") and the geolocation prompt — not
 // for navigation, not for southbound estimates.
 
+import { canonicalPortNumber } from './portIdentity.js';
+
 const PORT_COORDS = {
   // California
   '250201': { lat: 32.7270, lng: -114.6650 }, // Andrade
@@ -26,16 +28,15 @@ const PORT_COORDS = {
   '240601': { lat: 31.8285, lng: -107.6362 }, // Columbus
   '240801': { lat: 31.7811, lng: -106.6936 }, // Santa Teresa - Santa Teresa Port of Entry
   // Texas - El Paso area
-  '240207': { lat: 31.7647, lng: -106.4528 }, // Bridge of the Americas (BOTA)
+  '240201': { lat: 31.7647, lng: -106.4528 }, // El Paso - Bridge of the Americas (BOTA)
   '240221': { lat: 31.7541, lng: -106.4877 }, // El Paso (umbrella)
   '240202': { lat: 31.7547, lng: -106.4870 }, // El Paso - Paso Del Norte (PDN)
-  '240203': { lat: 31.6802, lng: -106.3072 }, // El Paso - Ysleta
+  '240104': { lat: 31.6802, lng: -106.3072 }, // El Paso - Ysleta
   '240204': { lat: 31.7641, lng: -106.4480 }, // El Paso - Stanton DCL
   '240301': { lat: 29.5611, lng: -104.3725 }, // Presidio
   '240401': { lat: 31.4172, lng: -106.0719 }, // Marcelino Serna - Tornillo
   'l24501': { lat: 31.2826, lng: -105.8511 }, // Fort Hancock
   // Texas - Eagle Pass / Del Rio / Laredo
-  '230103': { lat: 25.9043, lng: -97.5021 },  // Gateway (Brownsville-area placeholder)
   '230201': { lat: 29.3271, lng: -100.9275 }, // Del Rio
   '230301': { lat: 28.7086, lng: -100.4970 }, // Eagle Pass - Bridge I
   '230302': { lat: 28.6786, lng: -100.4870 }, // Eagle Pass - Bridge II
@@ -91,7 +92,8 @@ export function getCrossingCoords(crossing) {
     ? crossing.lng
     : (typeof crossing.longitude === 'number' ? crossing.longitude : null);
   if (lat != null && lng != null) return { lat, lng };
-  const fallback = PORT_COORDS[crossing.port_number];
+  // Resolve through the canonical port so an alias number still finds coords.
+  const fallback = PORT_COORDS[canonicalPortNumber(crossing.port_number)];
   return fallback || null;
 }
 

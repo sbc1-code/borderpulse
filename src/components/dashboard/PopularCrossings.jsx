@@ -10,7 +10,7 @@ const POPULAR_PORTS = [
   '260402', // Nogales - Mariposa
   '240201', // El Paso - Bridge of the Americas (BOTA)
   '240202', // El Paso - Paso Del Norte (PDN)
-  '240203', // El Paso - Ysleta
+  '240104', // El Paso - Ysleta
   '230401', // Laredo - Bridge I
   '230404', // Laredo - World Trade Bridge
   '230501', // Hidalgo/Pharr - Hidalgo

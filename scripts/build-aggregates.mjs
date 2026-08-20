@@ -27,13 +27,17 @@ async function main() {
   const metaMod = await import(path.resolve(root, 'src/components/utils/crossingMeta.js'));
   // Single source of truth for the confidence floor, shared with the UI.
   const { MIN_CELL_SAMPLES } = await import(path.resolve(root, 'src/lib/aggregates.js'));
+  // Historical snapshots carry whichever port_number CBP was using that day.
+  // Bucket on the canonical port so a substitution does not fork 30 days of
+  // history into two files, one of which then gets wiped as an orphan.
+  const { canonicalPortNumber } = await import(path.resolve(root, 'src/lib/portIdentity.js'));
   const currentDoc = JSON.parse(fs.readFileSync(path.resolve(root, DATA_FILE), 'utf8'));
   const { portToSlug } = slugMod.buildSlugMap(currentDoc.crossings || []);
   const portToMeta = new Map();
   const portToCrossing = new Map();
   for (const c of currentDoc.crossings || []) {
-    portToCrossing.set(String(c.port_number), c);
-    portToMeta.set(String(c.port_number), {
+    portToCrossing.set(canonicalPortNumber(c.port_number), c);
+    portToMeta.set(canonicalPortNumber(c.port_number), {
       name: c.name,
       state: c.state,
       timezone: metaMod.getPortTimezone(c),
@@ -90,10 +94,11 @@ async function main() {
     // actually the Sunday 8 PM return peak.
     for (const c of doc.crossings || []) {
       const w = typeof c.current_wait_time === 'number' ? c.current_wait_time : null;
-      const meta = portToMeta.get(String(c.port_number));
+      const port = canonicalPortNumber(c.port_number);
+      const meta = portToMeta.get(port);
       const tz = meta?.timezone || metaMod.getPortTimezone(c);
       const { day: dayIdx, hour } = localDayHour(ts, tz);
-      addSample(String(c.port_number), dayIdx, hour, w);
+      addSample(port, dayIdx, hour, w);
     }
   }
 

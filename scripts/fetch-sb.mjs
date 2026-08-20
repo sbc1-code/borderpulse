@@ -71,7 +71,7 @@ const ROUTES = [
     free_flow_minutes: 4,
   },
   {
-    port_number: '240203',
+    port_number: '240104',
     name: 'El Paso - Ysleta',
     state: 'TX',
     origin: '31.6645,-106.3255',

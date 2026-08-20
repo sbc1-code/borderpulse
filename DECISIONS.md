@@ -8,6 +8,33 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-08-19 · Crossing identity is pinned in code, not read from the CBP feed
+
+CBP substitutes whole rows for the same bridge: `240202` "El Paso - Paso Del
+Norte (PDN)" becomes `202401` "Paso Del Norte", and back. The rows never
+co-occur (0/200 snapshots), so this is not something dedupe can arbitrate.
+Since slugs come from names, the crossing's URL moved on its own.
+
+`SLUG_ALIASES` was the wrong layer: it aliases *slugs* while the instability is
+in *port numbers*, so every rename needed a new manual entry, and
+`prerender.mjs` skips an alias when it equals the canonical slug, meaning those
+aliases self-cancelled exactly when they were needed.
+
+Identity (`port_number`, `name`, `state`) now comes from `PINNED_PORTS` in
+`src/lib/portIdentity.js`. The feed still supplies all live data. `BASE_OVERRIDES`
+covers every published crossing so a rename cannot move a URL again.
+
+Do not "simplify" this by deriving slugs from names again. That has now cost
+the project three times: the orphaned `presidio` aggregate, the Paso Del Norte
+404, and ~22% of deploys.
+
+Note the port-grouping in `canonicalKey()` applies ONLY to the two legacy
+duplicates. Substitution pairs already match a shared name rule; forcing them
+through port-grouping bypasses those rules and orphans sibling rows (cargo lots,
+Cross Border Express) that are meant to merge into the parent.
+
+---
+
 ## 2026-08-16 · BorderPulse is a standalone product surface
 
 Remove all DIGITO attribution and outbound catalog links from BorderPulse.
