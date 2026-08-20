@@ -104,4 +104,24 @@
       linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
       linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent 38%, rgba(244, 63, 94, 0.08));
   }
+
+  /* Expands the touch target of a small icon-only control to 44x44 without
+     changing its painted size. Apply ONLY to controls with >=44px of clear
+     space around them: two adjacent .tap-44 elements would overlap and steal
+     each other's taps. For adjacent controls, add real padding instead. */
+  .tap-44 {
+    position: relative;
+  }
+
+  .tap-44::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 44px;
+    min-height: 44px;
+    width: 100%;
+    height: 100%;
+  }
 }
