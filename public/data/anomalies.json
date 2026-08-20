@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-20T22:31:14.852Z",
-  "snapshot_at": "2026-08-20T22:26:02.764Z",
+  "generated_at": "2026-08-20T23:28:56.711Z",
+  "snapshot_at": "2026-08-20T23:24:14.983Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -51,6 +51,23 @@
         "overall_median": 100,
         "samples": 6,
         "ratio": 2.4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 1,
+      "detected_at": "2026-08-20T23:28:56.711Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 4 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 4 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 120,
+        "overall_median": 60,
+        "samples": 7,
+        "ratio": 2
       }
     },
     {
@@ -197,37 +214,20 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8461538461538463,
-      "detected_at": "2026-08-20T22:31:14.852Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 120 min around 4 PM — ~185% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 120 min cerca de las 4 PM — ~185% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
-        "peak_median": 120,
-        "overall_median": 65,
-        "samples": 7,
-        "ratio": 1.8461538461538463
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.8461538461538461,
-      "detected_at": "2026-08-20T22:31:14.852Z",
-      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 1 AM (median 10 min) — ~85% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 1 AM (mediana 10 min) — ~85% debajo de la base de 30 días de 65 min.",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-08-20T23:28:56.711Z",
+      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 1 AM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 1 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 1,
         "best_median": 10,
-        "overall_median": 65,
+        "overall_median": 60,
         "samples": 7
       }
     },
