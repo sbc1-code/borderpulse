@@ -15,6 +15,7 @@ import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
+import BorderLine from '@/components/dashboard/BorderLine';
 import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
@@ -22,7 +23,7 @@ import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
 import { buildSlugMap } from '@/lib/slugs';
-import { findNearestCrossing } from '@/lib/geo';
+import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 
 const REGIONS = [
@@ -32,6 +33,22 @@ const REGIONS = [
   { code: 'NM', label: { en: 'New Mexico', es: 'Nuevo México' } },
   { code: 'TX', label: { en: 'Texas', es: 'Texas' } },
 ];
+
+// Phones get the collapsed card list; the border spine is the orientation
+// layer there. Matches Tailwind's `sm` breakpoint.
+function useIsNarrow(breakpoint = 640) {
+  const [narrow, setNarrow] = useState(
+    () => (typeof window !== 'undefined' ? window.innerWidth < breakpoint : false)
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const onChange = (e) => setNarrow(e.matches);
+    setNarrow(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, [breakpoint]);
+  return narrow;
+}
 
 const regionLabelFor = (code, lang) => {
   const r = REGIONS.find((x) => x.code === code);
@@ -64,6 +81,9 @@ export default function Dashboard() {
   const [search, setSearch] = useState('');
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
+  const [focusedPort, setFocusedPort] = useState(null);
+  const [showAllCards, setShowAllCards] = useState(false);
+  const [typicalByPort, setTypicalByPort] = useState(null);
   const [shareOpen, setShareOpen] = useState(false);
   const [showGeoPrompt, setShowGeoPrompt] = useState(false);
   const [geoLocating, setGeoLocating] = useState(false);
@@ -87,6 +107,24 @@ export default function Dashboard() {
   }, []);
 
   const favoritesSet = useMemo(() => new Set(favorites), [favorites]);
+
+  // 30-day medians for the ghost "typical" tick. One 8.6 KB request for all
+  // ranked crossings, deliberately not 42 per-crossing aggregate fetches.
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/data/rankings.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((doc) => {
+        if (cancelled || !doc?.crossings) return;
+        const byPort = {};
+        for (const c of doc.crossings) {
+          if (typeof c.overall_median === 'number') byPort[c.port_number] = c.overall_median;
+        }
+        setTypicalByPort(byPort);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   const load = async () => {
     setState((s) => ({ ...s, isRefreshing: true }));
@@ -147,6 +185,14 @@ export default function Dashboard() {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
+        // Keep a coarse fix so the collapsed mobile list can show "nearest".
+        // Rounded to ~1km, stays in localStorage, never transmitted.
+        try {
+          localStorage.setItem(
+            'borderPulse_geoCoords',
+            JSON.stringify({ lat: Math.round(latitude * 100) / 100, lng: Math.round(longitude * 100) / 100 })
+          );
+        } catch { /* storage may be unavailable */ }
         const nearest = findNearestCrossing(state.crossings, latitude, longitude);
         if (nearest && nearest.state) {
           localStorage.setItem('borderPulse_defaultRegion', nearest.state);
@@ -233,6 +279,48 @@ export default function Dashboard() {
     [sortedCrossings, direction],
   );
   const visibleCrossings = showWithoutCurrentWaits ? sortedCrossings : reportingCrossings;
+
+  // On phones the full card list is ~18,000px of scroll AND one aggregate
+  // fetch per card (BorderCrossingCard fetches its own). The spine above is
+  // the orientation layer, so default to favorites + nearest + the heaviest
+  // few and let the user opt into the rest.
+  const isNarrow = useIsNarrow();
+  const nearestPorts = useMemo(() => {
+    if (!isNarrow) return [];
+    let coords = null;
+    try {
+      const raw = localStorage.getItem('borderPulse_geoCoords');
+      if (raw) coords = JSON.parse(raw);
+    } catch { /* ignore malformed */ }
+    if (!coords || typeof coords.lat !== 'number') return [];
+    const self = { port_number: '__me__', lat: coords.lat, lng: coords.lng };
+    return nearestCrossings(self, sortedCrossings, 3).map((n) => n.crossing.port_number);
+  }, [isNarrow, sortedCrossings]);
+
+  const cardCrossings = useMemo(() => {
+    if (!isNarrow || showAllCards) return visibleCrossings;
+    const keep = new Set(nearestPorts);
+    if (focusedPort) keep.add(focusedPort);
+    const picked = visibleCrossings.filter(
+      (c) => favoritesSet.has(c.port_number) || keep.has(c.port_number)
+    );
+    for (const c of visibleCrossings) {
+      if (picked.length >= 5) break;
+      if (!picked.includes(c)) picked.push(c);
+    }
+    return picked;
+  }, [isNarrow, showAllCards, visibleCrossings, favoritesSet, nearestPorts, focusedPort]);
+
+  const hiddenCardCount = visibleCrossings.length - cardCrossings.length;
+
+  // Tapping a tick pins that crossing's card and scrolls to it.
+  const handleTickSelect = useCallback((portNumber) => {
+    setFocusedPort(portNumber);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(`crossing-${portNumber}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }, []);
 
   if (state.isLoading) {
     return (
@@ -436,6 +524,18 @@ export default function Dashboard() {
             regionLabel={regionLabelFor(region, language)}
           />
 
+          {/* The border drawn to scale. Primary orientation layer: on small
+              screens the card list below collapses behind it. */}
+          <BorderLine
+            crossings={filteredCrossings}
+            direction={direction}
+            language={language}
+            favoritesSet={favoritesSet}
+            typicalByPort={typicalByPort}
+            focusedPort={focusedPort}
+            onSelect={handleTickSelect}
+          />
+
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
             <div className="xl:col-span-9">
@@ -460,8 +560,8 @@ export default function Dashboard() {
                   <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
                     <p className="text-xs text-slate-500">
                       {language === 'en'
-                        ? `Showing ${visibleCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
-                        : `Mostrando ${visibleCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
+                        ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
+                        : `Mostrando ${cardCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
                       {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
                       {search && ` · "${search}"`}
                     </p>
@@ -481,8 +581,8 @@ export default function Dashboard() {
                     )}
                   </div>
                   {(() => {
-                    const favCrossings = visibleCrossings.filter((c) => favoritesSet.has(c.port_number));
-                    const restCrossings = visibleCrossings.filter((c) => !favoritesSet.has(c.port_number));
+                    const favCrossings = cardCrossings.filter((c) => favoritesSet.has(c.port_number));
+                    const restCrossings = cardCrossings.filter((c) => !favoritesSet.has(c.port_number));
                     // Insert the compact "Get Alerted" banner after the first batch of cards
                     // so the first wait card is above the fold while the alert CTA still has prominence.
                     const INTERSTITIAL_AFTER = 6;
@@ -501,16 +601,21 @@ export default function Dashboard() {
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4 mb-4">
                               {favCrossings.map((crossing, idx) => (
-                                <BorderCrossingCard
+                                <div
                                   key={crossing.id || crossing.port_number}
-                                  crossing={crossing}
-                                  language={language}
-                                  index={idx}
-                                  selectedDirection={direction}
-                                  isFavorite={true}
-                                  onToggleFavorite={toggleFavorite}
-                                  slug={portToSlug[crossing.port_number] || crossing.slug}
-                                />
+                                  id={`crossing-${crossing.port_number}`}
+                                  className="scroll-mt-24"
+                                >
+                                  <BorderCrossingCard
+                                    crossing={crossing}
+                                    language={language}
+                                    index={idx}
+                                    selectedDirection={direction}
+                                    isFavorite={true}
+                                    onToggleFavorite={toggleFavorite}
+                                    slug={portToSlug[crossing.port_number] || crossing.slug}
+                                  />
+                                </div>
                               ))}
                             </div>
                           </>
@@ -525,16 +630,21 @@ export default function Dashboard() {
                         )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
                           {restBeforeAlert.map((crossing, idx) => (
-                            <BorderCrossingCard
+                            <div
                               key={crossing.id || crossing.port_number}
-                              crossing={crossing}
-                              language={language}
-                              index={idx}
-                              selectedDirection={direction}
-                              isFavorite={false}
-                              onToggleFavorite={toggleFavorite}
-                              slug={portToSlug[crossing.port_number] || crossing.slug}
-                            />
+                              id={`crossing-${crossing.port_number}`}
+                              className="scroll-mt-24"
+                            >
+                              <BorderCrossingCard
+                                crossing={crossing}
+                                language={language}
+                                index={idx}
+                                selectedDirection={direction}
+                                isFavorite={false}
+                                onToggleFavorite={toggleFavorite}
+                                slug={portToSlug[crossing.port_number] || crossing.slug}
+                              />
+                            </div>
                           ))}
                         </div>
                         {restAfterAlert.length > 0 && (
@@ -550,16 +660,21 @@ export default function Dashboard() {
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
                               {restAfterAlert.map((crossing, idx) => (
-                                <BorderCrossingCard
+                                <div
                                   key={crossing.id || crossing.port_number}
-                                  crossing={crossing}
-                                  language={language}
-                                  index={idx + INTERSTITIAL_AFTER}
-                                  selectedDirection={direction}
-                                  isFavorite={false}
-                                  onToggleFavorite={toggleFavorite}
-                                  slug={portToSlug[crossing.port_number] || crossing.slug}
-                                />
+                                  id={`crossing-${crossing.port_number}`}
+                                  className="scroll-mt-24"
+                                >
+                                  <BorderCrossingCard
+                                    crossing={crossing}
+                                    language={language}
+                                    index={idx + INTERSTITIAL_AFTER}
+                                    selectedDirection={direction}
+                                    isFavorite={false}
+                                    onToggleFavorite={toggleFavorite}
+                                    slug={portToSlug[crossing.port_number] || crossing.slug}
+                                  />
+                                </div>
                               ))}
                             </div>
                           </>
@@ -567,6 +682,16 @@ export default function Dashboard() {
                       </>
                     );
                   })()}
+                  {isNarrow && hiddenCardCount > 0 && (
+                    <button
+                      onClick={() => setShowAllCards(true)}
+                      className="mt-3 w-full rounded-lg border border-slate-200 dark:border-gray-700 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-gray-800"
+                    >
+                      {language === 'en'
+                        ? `Show all ${visibleCrossings.length} crossings`
+                        : `Ver los ${visibleCrossings.length} cruces`}
+                    </button>
+                  )}
                 </>
               )}
             </div>

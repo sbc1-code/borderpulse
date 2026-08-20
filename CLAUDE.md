@@ -34,12 +34,24 @@ If the user just says **"what's new"** or **"catch me up"** or
 ## Quick repo facts
 
 - **Hosted on GitHub Pages** at borderpulse.com.
-  Deploys via `.github/workflows/deploy.yml` on push to `main`.
+  `.github/workflows/deploy.yml` is the SOLE Pages deployer
+  (`concurrency: pages`). It runs on push to `main` AND on
+  `workflow_dispatch`.
 - **Scheduled CBP refresh** runs `.github/workflows/fetch-cbp.yml`
-  every 90 min — those commits use `chore(data): refresh ...` and are
-  intentionally skipped by `deploy.yml` to avoid double-runs.
+  every **15 min**. Those commits use `chore(data): refresh ...` and are
+  skipped by `deploy.yml`'s push trigger, so fetch-cbp explicitly
+  `workflow_dispatch`es deploy.yml with the exact commit SHA — bot pushes
+  do not trigger workflows on their own.
+- **`fetch-depth: 0` is load-bearing** on any workflow that runs
+  `npm run build`. `build-aggregates.mjs` reconstructs its 30-day window
+  with `git log`, so a shallow clone silently produces empty aggregates.
+  This has already caused one three-week silent outage (see CHANGELOG
+  2026-07-27).
 - **Vite + React + Tailwind + shadcn/ui.** Code-split leaf routes
-  via `React.lazy`; main bundle ~161 KB.
+  via `React.lazy`. The eager entry chunk is budgeted in
+  `scripts/check-bundle-size.mjs` and enforced by `npm test` — check
+  there for the current number rather than trusting a figure in prose,
+  which is how it drifted 16 KB unnoticed.
 - **Public JSON feeds** at `/data/crossings.json`, `/data/aggregates/{slug}.json`,
   `/data/timelines/...`, `/data/blog/...`, `/data/stats.json`.
 - **No backend.** No auth, no database, no SMS, no email. Anything that
