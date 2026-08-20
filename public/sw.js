@@ -30,22 +30,6 @@ self.addEventListener('activate', (event) => {
 });
 
 // Handle notification clicks — open or focus the app
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(
-    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
-      // If the app is already open, focus it
-      for (const client of clients) {
-        if (client.url.includes(self.location.origin) && 'focus' in client) {
-          return client.focus();
-        }
-      }
-      // Otherwise open a new window
-      return self.clients.openWindow('/');
-    })
-  );
-});
-
 // Fetch: route requests to the right strategy
 self.addEventListener('fetch', (event) => {
   const { request } = event;

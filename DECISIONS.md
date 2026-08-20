@@ -8,6 +8,26 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-08-20 · No alerts feature until there is somewhere to run it
+
+Removed rather than reworded. The feature was evaluated only while the
+dashboard route was mounted, so it could not notify anyone who was not already
+looking at the site, and browsers throttle background timers anyway. Visiting
+/alerts to check your alerts unmounted the dashboard and stopped evaluation
+entirely.
+
+A client-only "alert" is a contradiction. The honest options were Web Push with
+a server (rules out the zero-backend architecture) or Periodic Background Sync
+(Chromium-only, requires PWA install, no iOS at all — which is most of this
+audience standing at a bridge). Neither is worth it for a feature nobody asked
+for.
+
+If alerts come back, they need a real delivery channel first. Do not reintroduce
+a Notify Me button that only works while the page is open, and do not describe
+anything as an alert unless it can reach someone who has closed the tab.
+
+---
+
 ## 2026-08-20 · Staying on React Router 6, with the two advisories accepted by ID
 
 `npm audit` cannot reach zero without React Router 6 -> 7, a semver-major

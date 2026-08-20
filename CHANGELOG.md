@@ -5,6 +5,29 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-20
 
+### Removed
+- **The alerts / notifications feature, in full.** It could not do the one
+  thing it promised. `notifyService.evaluate()` was only ever called from
+  `Dashboard.load()`, and `Dashboard` clears the refresh interval on unmount,
+  so alerts were evaluated *only* while the dashboard route was mounted in an
+  open tab. Opening the Alerts page to check your alerts stopped the engine.
+  Background tabs also throttle `setInterval`, so the one situation where an
+  alert has value — you are not looking at the site — was exactly the
+  situation where it could not fire. `sw.js` had `notificationclick` but no
+  `push` and no `periodicsync`.
+
+  None of this was disclosed anywhere in the UI. The copy said "Notifications
+  fire when a crossing crosses your threshold" and "Get alerted when to
+  leave", which is a CTA pointing at infrastructure that does not exist — the
+  thing DECISIONS.md already says not to do. Real delivery needs Web Push plus
+  a server, which the zero-backend architecture rules out.
+
+  Removed: `/alerts` route and page, the nav entry on every page,
+  `notifyService.js`, `DepartureAlertBanner.jsx`, the Notify Me CTA and
+  threshold form on every crossing card, the `notificationclick` handler in
+  `sw.js`, and the now-false notification line in the About privacy list.
+  Entry chunk **54.67 -> 50.35 KB gzip**, CSS 15.36 -> 15.13 KB.
+
 ### Fixed
 - **`/alerts/` no longer 404s on a direct load.** "Alerts" is in the nav on
   every page and `/alerts` is a real 229-line route, but `prerender.mjs` never

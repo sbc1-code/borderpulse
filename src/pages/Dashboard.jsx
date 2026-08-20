@@ -8,7 +8,6 @@ import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
 const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
-import DepartureAlertBanner from '@/components/dashboard/DepartureAlertBanner';
 import AboutFooter from '@/components/dashboard/AboutFooter';
 import AdConsentCard from '@/components/ads/AdConsentCard';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
@@ -19,7 +18,6 @@ import BorderLine from '@/components/dashboard/BorderLine';
 import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
 import { dataService } from '@/components/utils/dataService';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
-import { evaluate as evaluateNotify } from '@/components/utils/notifyService';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
 import { buildSlugMap } from '@/lib/slugs';
@@ -143,10 +141,8 @@ export default function Dashboard() {
     try {
       recordSnapshot(data.crossings || [], 'northbound');
       recordSnapshot(data.crossings || [], 'southbound');
-      evaluateNotify(data.crossings || [], language, 'northbound');
-      evaluateNotify(data.crossings || [], language, 'southbound');
     } catch (e) {
-      console.warn('[dashboard] snapshot/notify error', e);
+      console.warn('[dashboard] snapshot error', e);
     }
   };
 
@@ -649,15 +645,6 @@ export default function Dashboard() {
                         </div>
                         {restAfterAlert.length > 0 && (
                           <>
-                            {/* Compact "Get Alerted" interstitial — demoted from full hero (#1). */}
-                            <div className="my-3">
-                              <DepartureAlertBanner
-                                crossings={state.crossings}
-                                language={language}
-                                direction={direction}
-                                compact
-                              />
-                            </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 sm:gap-4">
                               {restAfterAlert.map((crossing, idx) => (
                                 <div
