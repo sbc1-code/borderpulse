@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-21T17:32:22.233Z",
-  "snapshot_at": "2026-08-21T17:06:34.884Z",
+  "generated_at": "2026-08-21T18:41:09.237Z",
+  "snapshot_at": "2026-08-21T18:14:23.827Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -344,16 +344,16 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.5555555555555556,
-      "detected_at": "2026-08-21T17:32:22.233Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 10 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 10 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
+      "detected_at": "2026-08-21T18:41:09.237Z",
+      "summary_en": "Right now Tecate's lightest Friday hour so far is 9 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 9 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 10,
+        "best_hour": 9,
         "best_median": 40,
         "overall_median": 90,
-        "samples": 12
+        "samples": 15
       }
     },
     {
