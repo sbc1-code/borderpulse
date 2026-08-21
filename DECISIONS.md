@@ -8,6 +8,31 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-08-20 · Freshness thresholds come from measured delivery, not the cron
+
+Issue #58 asked for stale/fresh thresholds "derived from the configured
+15-minute refresh cadence". That would have been wrong and would have
+recreated the exact bug it was meant to fix.
+
+fetch-cbp.yml requests */15, but GitHub throttles scheduled runs. Measured
+across 80 consecutive committed snapshots: p50 38, p75 45, p90 55, p95 63,
+max 102 minutes. 68% of gaps exceed 30 minutes during entirely healthy
+operation. A 15-minute-derived threshold would have flagged stale data two
+thirds of the time, which is why the previous time-based banner was deleted
+as noise in the first place.
+
+Thresholds live in src/lib/trustState.js: fresh <= 45, aging 45-90,
+stale > 90. There is a regression test asserting p90 delivery never reads as
+stale. If the cadence or GitHub's throttling changes, re-measure with
+`git log --format=%H -- public/data/crossings.json` before moving them.
+
+Related: the dashboard headline is a MEDIAN, not a mean. Live sample of 33
+reporting ports ran mean 35 against median 15, a 133% overstatement from a
+tail of 90-170 minute ports. Anything labelled "typical" must be a median;
+StatsOverview may keep its mean because it is labelled "Average wait".
+
+---
+
 ## 2026-08-20 · No alerts feature until there is somewhere to run it
 
 Removed rather than reworded. The feature was evaluated only while the
