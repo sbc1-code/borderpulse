@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-21T13:49:10.593Z",
-  "snapshot_at": "2026-08-21T15:03:23.369Z",
+  "generated_at": "2026-08-21T16:38:40.360Z",
+  "snapshot_at": "2026-08-21T16:32:05.784Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -339,6 +339,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-08-21T16:38:40.360Z",
+      "summary_en": "Right now Tecate's lightest Friday hour so far is 10 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 10 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 10,
+        "best_median": 40,
+        "overall_median": 90,
+        "samples": 11
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
@@ -353,24 +371,6 @@
         "overall_median": 50,
         "samples": 6,
         "ratio": 1.52
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-08-21T07:46:33.622Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 10 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 10 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 10,
-        "best_median": 45,
-        "overall_median": 90,
-        "samples": 10
       }
     },
     {
