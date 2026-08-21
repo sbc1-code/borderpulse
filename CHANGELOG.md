@@ -5,6 +5,42 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-20
 
+### Fixed
+- **Trust labels no longer overstate certainty (#58).** New shared model in
+  `src/lib/trustState.js` so a badge, a banner, and a summary chip cannot
+  disagree about the same data.
+  - **Freshness thresholds come from measured delivery, not the configured
+    cron.** `fetch-cbp.yml` requests every 15 min, but GitHub throttles it:
+    across 80 consecutive snapshots the gaps run p50 38, p75 45, p90 55,
+    p95 63, max 102 minutes. A 15-minute-derived threshold would flag stale
+    data ~68% of the time during healthy operation, which is exactly why an
+    earlier time-based banner was removed as noise. Fresh <= 45 min,
+    aging 45-90, stale > 90.
+  - `StaleDataBanner` was offline-only and **ignored the `fetchedAt` prop it
+    was already being passed**. It now reports age, timestamp, and source
+    when a snapshot is genuinely old, and stays silent otherwise.
+  - The card footer said **Live** unconditionally, on any age of data. It now
+    shows Live only when fresh, the age when aging, and "Stale · 3 h ago" when
+    stale, with the pulsing dot dropped outside the fresh state.
+  - **"No wait" -> "No report"** ("Sin tiempo" -> "Sin reporte"). The old label
+    read as zero minutes when it meant CBP published no reading.
+  - **The headline summary is now a median, not a mean.** Measured on a live
+    sample of 33 reporting ports: mean 35 min vs median 15 min, a 133%
+    overstatement driven by a tail of 90-170 minute ports. Labelled
+    "Median wait now" / "Espera mediana ahora". `StatsOverview` keeps its mean
+    and was already labelled "Average wait", which is accurate.
+  - **"Quickest option" -> "Shortest in Texas" / "Shortest border-wide".** The
+    old label implied a crossing you could actually use; border-wide the
+    shortest wait can be 1,500 miles away.
+  - `About` hardcoded "43 crossings" and a `?? 43` fallback. Both now read the
+    canonical count from `stats.json` (live value is 42).
+
+### Added
+- `scripts/test-trust-state.mjs` (9 tests) wired into `npm test`, covering
+  threshold boundaries, unparseable and future timestamps, EN/ES labels, and
+  the median-vs-mean skew. Includes a regression test that p90 delivery must
+  not read as stale.
+
 ### Removed
 - **The alerts / notifications feature, in full.** It could not do the one
   thing it promised. `notifyService.evaluate()` was only ever called from

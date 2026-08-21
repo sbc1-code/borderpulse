@@ -625,6 +625,7 @@ export default function Dashboard() {
                                     isFavorite={true}
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
+                                    snapshotAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
                                   />
                                 </div>
                               ))}
@@ -654,6 +655,7 @@ export default function Dashboard() {
                                 isFavorite={false}
                                 onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
+                                    snapshotAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
                               />
                             </div>
                           ))}
@@ -675,6 +677,7 @@ export default function Dashboard() {
                                     isFavorite={false}
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
+                                    snapshotAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
                                   />
                                 </div>
                               ))}

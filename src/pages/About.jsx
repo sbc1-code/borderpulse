@@ -50,7 +50,7 @@ export default function About() {
     if (!stats) return [];
     return [
       {
-        value: stats.crossings ?? 43,
+        value: stats.crossings,
         label: language === 'en' ? 'Land ports tracked' : 'Puertos rastreados',
       },
       {
@@ -186,7 +186,11 @@ export default function About() {
             <ArrowRight className="w-3.5 h-3.5 ml-auto text-slate-400" />
           </div>
           <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            {language === 'en' ? '43 crossings, hour by hour' : '43 cruces, hora por hora'}
+            {stats?.crossings
+              ? (language === 'en'
+                ? `${stats.crossings} crossings, hour by hour`
+                : `${stats.crossings} cruces, hora por hora`)
+              : (language === 'en' ? 'Hour by hour, every crossing' : 'Hora por hora, cada cruce')}
           </div>
         </Link>
         <Link

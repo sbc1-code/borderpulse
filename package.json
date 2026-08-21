@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "npm run test:hours && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:hours && npm run test:trust && npm run test:audit && npm run test:bundle && npm run test:routes",
     "test:hours": "node --test scripts/test-operating-hours.mjs",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "test:routes": "node scripts/smoke-routes.mjs",
@@ -29,7 +29,8 @@
     "news:fetch": "node scripts/fetch-news.mjs",
     "news:classify": "node scripts/build-curation-queue.mjs",
     "test:bundle": "node scripts/check-bundle-size.mjs",
-    "test:audit": "node scripts/check-audit.mjs"
+    "test:audit": "node scripts/check-audit.mjs",
+    "test:trust": "node --test scripts/test-trust-state.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

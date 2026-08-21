@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { track } from '@/lib/analytics';
+import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -67,7 +68,9 @@ const STATUS_STYLES = {
     meter: 'border-slate-200 bg-slate-50',
     rail: 'bg-slate-200',
     waitText: 'text-slate-900',
-    label: { en: 'No wait', es: 'Sin tiempo' },
+    // Not 'No wait' — that reads as zero minutes. This state means CBP
+    // published no reading for this lane, which is not the same as no delay.
+    label: { en: 'No report', es: 'Sin reporte' },
     dot: 'bg-slate-300',
   },
 };
@@ -127,6 +130,7 @@ export default function BorderCrossingCard({
   isFavorite = false,
   onToggleFavorite,
   slug,
+  snapshotAt = null,
 }) {
   const [showLanes, setShowLanes] = useState(false);
   const [aggregate, setAggregate] = useState(null);
@@ -161,6 +165,9 @@ export default function BorderCrossingCard({
   const wait = getWaitMinutes(crossing, selectedDirection);
   const isHigh = typeof wait === 'number' && wait >= 45;
   const updatedAt = getUpdatedAtForDirection(crossing, selectedDirection);
+  // The footer dot used to say "Live" unconditionally, even on an hours-old
+  // snapshot. Freshness now comes from the shared trust model.
+  const freshness = freshnessOf(snapshotAt ?? updatedAt);
   const isSouthbound = selectedDirection === 'southbound';
   const portStatus = getPortStatus(crossing);
   const portStatusStyle = PORT_STATUS_STYLES[portStatus] || PORT_STATUS_STYLES.unknown;
@@ -492,8 +499,14 @@ export default function BorderCrossingCard({
           {/* Footer: live dot + updated + warning */}
           <div className="mt-auto pt-1.5 flex items-center justify-between text-[10px] text-slate-500 border-t border-slate-100 mt-2">
             <div className="flex items-center gap-1.5">
-              <span className={`w-1.5 h-1.5 rounded-full ${s.dot} animate-pulse`} />
-              <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  freshness.state === FRESHNESS.FRESH ? `${s.dot} animate-pulse` : 'bg-slate-300'
+                }`}
+              />
+              <span className={freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : undefined}>
+                {liveLabel(freshness.state, freshness.age, language)}
+              </span>
             </div>
             <span className="text-slate-400 truncate">{formatUpdatedAt(updatedAt, language)}</span>
           </div>
