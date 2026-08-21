@@ -31,7 +31,7 @@ Work top to bottom; restore product trust before expanding the URL inventory.
       alias routes at desktop and mobile sizes (390 browser navigations).
 - [x] **P1 — exclude closed hours from best-time recommendations** — shipped
       2026-08-18 in [#65](https://github.com/sbc1-code/borderpulse/issues/65).
-- [ ] **P1 — make freshness and missing-data states honest** — [#58](https://github.com/sbc1-code/borderpulse/issues/58).
+- [x] **P1 — make freshness and missing-data states honest** — [#58](https://github.com/sbc1-code/borderpulse/issues/58) shipped 2026-08-20 in #80. Shared trust model in `src/lib/trustState.js`; thresholds measured, not assumed; headline switched from mean to median (35 → 15 min on a live sample).
 - [ ] **P1 — reconcile sitemap aliases and Search Console indexing** — [#59](https://github.com/sbc1-code/borderpulse/issues/59). [#73](https://github.com/sbc1-code/borderpulse/pull/73) removes the root cause (slugs no longer move when CBP renames a port); GSC still needs a reconciliation pass.
 - [ ] **P1 — improve CTR on the proven organic landing pages** — [#64](https://github.com/sbc1-code/borderpulse/issues/64).
 - [ ] **P1 — instrument the core Umami decision funnel** — [#60](https://github.com/sbc1-code/borderpulse/issues/60).
