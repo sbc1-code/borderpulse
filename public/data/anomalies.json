@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-21T11:29:57.232Z",
-  "snapshot_at": "2026-08-21T12:43:03.994Z",
+  "generated_at": "2026-08-21T13:49:10.593Z",
+  "snapshot_at": "2026-08-21T13:32:51.637Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -76,7 +76,7 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-08-21T07:46:33.622Z",
+      "detected_at": "2026-08-21T13:49:10.593Z",
       "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
       "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
       "evidence": {
@@ -85,7 +85,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 40,
-        "samples": 3
+        "samples": 4
       }
     },
     {
