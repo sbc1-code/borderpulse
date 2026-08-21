@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { track } from '@/lib/analytics';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -259,7 +260,7 @@ export default function BorderCrossingCard({
               <div className="flex items-center gap-1.5 mb-0.5">
                 <h3 className="text-sm font-semibold text-slate-900 truncate" title={crossing.name}>
                   {cardSlug ? (
-                    <Link to={`/crossing/${cardSlug}/`} className="hover:underline">
+                    <Link to={`/crossing/${cardSlug}/`} className="hover:underline" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                       {crossing.name || crossing.port_name}
                     </Link>
                   ) : (
@@ -321,7 +322,7 @@ export default function BorderCrossingCard({
                 <DropdownMenuContent align="end" className="w-44">
                   {cardSlug ? (
                     <DropdownMenuItem asChild>
-                      <Link to={`/crossing/${cardSlug}/`} className="cursor-pointer">
+                      <Link to={`/crossing/${cardSlug}/`} className="cursor-pointer" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                         {language === 'en' ? 'View trends' : 'Ver tendencias'}
                       </Link>
                     </DropdownMenuItem>
@@ -332,7 +333,7 @@ export default function BorderCrossingCard({
                   )}
                   {cardSlug && (
                     <DropdownMenuItem asChild>
-                      <Link to={`/best-time/${cardSlug}/`} className="cursor-pointer">
+                      <Link to={`/best-time/${cardSlug}/`} className="cursor-pointer" onClick={() => track('best-time-open', { slug: cardSlug, source: 'card' })}>
                         {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
                       </Link>
                     </DropdownMenuItem>

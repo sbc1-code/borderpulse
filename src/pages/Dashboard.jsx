@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,7 @@ import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
 import { buildSlugMap } from '@/lib/slugs';
+import { track } from '@/lib/analytics';
 import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 
@@ -100,11 +101,22 @@ export default function Dashboard() {
         ? prev.filter((p) => p !== portNumber)
         : [...prev, portNumber];
       localStorage.setItem('borderPulse_favorites', JSON.stringify(next));
+      // Analytics deliberately does NOT live in here. A state updater must be
+      // safe to call more than once (StrictMode, concurrent re-render), and a
+      // double-invoked updater would double-count the event.
       return next;
     });
   }, []);
 
+  const handleToggleFavorite = useCallback((portNumber) => {
+    const adding = !favoritesSetRef.current.has(portNumber);
+    toggleFavorite(portNumber);
+    track('favorite-toggle', { action: adding ? 'add' : 'remove' });
+  }, [toggleFavorite]);
+
   const favoritesSet = useMemo(() => new Set(favorites), [favorites]);
+  const favoritesSetRef = useRef(favoritesSet);
+  useEffect(() => { favoritesSetRef.current = favoritesSet; }, [favoritesSet]);
 
   // 30-day medians for the ghost "typical" tick. One 8.6 KB request for all
   // ranked crossings, deliberately not 42 per-crossing aggregate fetches.
@@ -228,10 +240,12 @@ export default function Dashboard() {
   const changeDirection = (dir) => {
     setDirection(dir);
     localStorage.setItem('borderPulse_direction', dir);
+    track('direction-toggle', { to: dir });
   };
   const changeRegion = (r) => {
     setRegion(r);
     localStorage.setItem('borderPulse_region', r);
+    track('region-filter', { region: r });
   };
 
   // Map port_number → slug for /crossing/{slug} links and /data/aggregates/{slug}.json fetches.
@@ -312,6 +326,7 @@ export default function Dashboard() {
   // Tapping a tick pins that crossing's card and scrolls to it.
   const handleTickSelect = useCallback((portNumber) => {
     setFocusedPort(portNumber);
+    track('borderline-select', { port: portNumber });
     requestAnimationFrame(() => {
       const el = document.getElementById(`crossing-${portNumber}`);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -608,7 +623,7 @@ export default function Dashboard() {
                                     index={idx}
                                     selectedDirection={direction}
                                     isFavorite={true}
-                                    onToggleFavorite={toggleFavorite}
+                                    onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                   />
                                 </div>
@@ -637,7 +652,7 @@ export default function Dashboard() {
                                 index={idx}
                                 selectedDirection={direction}
                                 isFavorite={false}
-                                onToggleFavorite={toggleFavorite}
+                                onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
                               />
                             </div>
@@ -658,7 +673,7 @@ export default function Dashboard() {
                                     index={idx + INTERSTITIAL_AFTER}
                                     selectedDirection={direction}
                                     isFavorite={false}
-                                    onToggleFavorite={toggleFavorite}
+                                    onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                   />
                                 </div>
@@ -671,7 +686,7 @@ export default function Dashboard() {
                   })()}
                   {isNarrow && hiddenCardCount > 0 && (
                     <button
-                      onClick={() => setShowAllCards(true)}
+                      onClick={() => { setShowAllCards(true); track('show-all-crossings'); }}
                       className="mt-3 w-full rounded-lg border border-slate-200 dark:border-gray-700 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-gray-800"
                     >
                       {language === 'en'

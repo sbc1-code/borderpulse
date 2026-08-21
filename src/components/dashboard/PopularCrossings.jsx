@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { track } from '@/lib/analytics';
 
 const POPULAR_PORTS = [
   '250401', // San Ysidro
@@ -37,6 +38,7 @@ export default function PopularCrossings({ crossings, language = 'en' }) {
           <li key={c.port_number} className="text-xs">
             <Link
               to={`/crossing/${c.slug}/`}
+              onClick={() => track('crossing-open', { slug: c.slug, source: 'popular' })}
               className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:underline"
             >
               {language === 'en' ? `${c.name} wait times` : `${c.name} tiempos de espera`}
