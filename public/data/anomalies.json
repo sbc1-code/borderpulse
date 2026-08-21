@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-21T09:40:29.929Z",
-  "snapshot_at": "2026-08-21T08:57:39.825Z",
+  "generated_at": "2026-08-21T10:34:06.851Z",
+  "snapshot_at": "2026-08-21T10:12:11.669Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,6 +143,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.9333333333333333,
+      "detected_at": "2026-08-21T10:34:06.851Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 3 AM (median 3 min) — ~93% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 3 min) — ~93% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 3,
+        "best_median": 3,
+        "overall_median": 45,
+        "samples": 9
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
@@ -157,24 +175,6 @@
         "overall_median": 30,
         "samples": 6,
         "ratio": 1.9333333333333333
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.9111111111111111,
-      "detected_at": "2026-08-21T09:40:29.929Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 3 AM (median 4 min) — ~91% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 4 min) — ~91% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 3,
-        "best_median": 4,
-        "overall_median": 45,
-        "samples": 8
       }
     },
     {
@@ -269,6 +269,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.75,
+      "detected_at": "2026-08-21T10:34:06.851Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 2 AM (median 10 min) — ~75% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 2 AM (mediana 10 min) — ~75% debajo de la base de 30 días de 40 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 2,
+        "best_median": 10,
+        "overall_median": 40,
+        "samples": 11
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -343,34 +361,16 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.5,
-      "detected_at": "2026-08-21T07:46:33.622Z",
-      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 7 PM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 7 PM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-08-21T10:34:06.851Z",
+      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 2 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 2 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 19,
+        "best_hour": 2,
         "best_median": 30,
         "overall_median": 60,
-        "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5,
-      "detected_at": "2026-08-21T09:40:29.929Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 1 AM (median 20 min) — ~50% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 1 AM (mediana 20 min) — ~50% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 1,
-        "best_median": 20,
-        "overall_median": 40,
-        "samples": 11
+        "samples": 10
       }
     },
     {
