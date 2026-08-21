@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Activity, AlertTriangle, Clock, MapPin, TrendingDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { summarize } from '@/lib/trustState';
 import { getStatusForWait, getWaitMinutes } from '@/components/utils/crossingDirection';
 
 function formatWait(wait) {
@@ -77,7 +78,8 @@ export default function CommuterSnapshot({
       return {
         total,
         reportingCount: 0,
-        avg: null,
+        median: null,
+        mean: null,
         fastest: null,
         slowest: null,
         counts: { good: 0, moderate: 0, heavy: 0 },
@@ -86,7 +88,12 @@ export default function CommuterSnapshot({
     }
 
     const sorted = [...reporting].sort((a, b) => a.wait - b.wait);
-    const avg = Math.round(reporting.reduce((sum, row) => sum + row.wait, 0) / reporting.length);
+    // MEDIAN, not mean. Border waits are heavily right-skewed: a measured live
+    // sample of 33 reporting ports ran mean 35 against median 15, a 133%
+    // overstatement, because a tail of 90-170 minute ports drags the average.
+    // The headline is presented as what a typical crossing looks like, so it
+    // has to be a median. See src/lib/trustState.js.
+    const { median, mean } = summarize(reporting.map((row) => row.wait));
     const counts = reporting.reduce((acc, row) => {
       acc[getStatusForWait(row.wait)] += 1;
       return acc;
@@ -95,16 +102,18 @@ export default function CommuterSnapshot({
     return {
       total,
       reportingCount: reporting.length,
-      avg,
+      median,
+      mean,
       fastest: sorted[0],
       slowest: sorted[sorted.length - 1],
       counts,
-      overallTier: getStatusForWait(avg),
+      overallTier: getStatusForWait(median),
     };
   }, [crossings, selectedDirection]);
 
   const tier = TIER_META[stats.overallTier] || TIER_META.unknown;
-  const scopeLabel = regionLabel && !['All', 'Todos'].includes(regionLabel)
+  const hasRegion = Boolean(regionLabel) && !['All', 'Todos'].includes(regionLabel);
+  const scopeLabel = hasRegion
     ? regionLabel
     : (language === 'en' ? 'all crossings' : 'todos los cruces');
   const directionLabel = selectedDirection === 'southbound'
@@ -132,10 +141,10 @@ export default function CommuterSnapshot({
           <div className="mt-2.5 flex items-end justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-wide text-slate-400">
-                {language === 'en' ? 'Right now' : 'Ahora'}
+                {language === 'en' ? 'Median wait now' : 'Espera mediana ahora'}
               </p>
               <p className="mt-0.5 text-3xl font-bold leading-none tabular-nums sm:text-4xl">
-                {formatWait(stats.avg)}
+                {formatWait(stats.median)}
               </p>
             </div>
             <div className="shrink-0 text-right text-[11px] leading-tight text-slate-400">
@@ -164,7 +173,14 @@ export default function CommuterSnapshot({
           />
           <SnapshotMetric
             icon={TrendingDown}
-            label={language === 'en' ? 'Quickest option' : 'Opción más rápida'}
+            // Was "Quickest option", which implies a crossing you could actually
+            // use. Border-wide, the shortest wait can be 1,500 miles away, so
+            // the label states its scope instead of recommending anything.
+            label={
+              hasRegion
+                ? (language === 'en' ? `Shortest in ${scopeLabel}` : `Menor en ${scopeLabel}`)
+                : (language === 'en' ? 'Shortest border-wide' : 'Menor en la frontera')
+            }
             value={formatWait(stats.fastest?.wait)}
             detail={stats.fastest?.crossing?.name || (language === 'en' ? 'No current report' : 'Sin reporte actual')}
             tone="emerald"
