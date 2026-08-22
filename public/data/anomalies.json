@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-22T12:46:17.687Z",
-  "snapshot_at": "2026-08-22T13:18:39.060Z",
+  "generated_at": "2026-08-22T14:25:21.831Z",
+  "snapshot_at": "2026-08-22T14:19:30.377Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -164,16 +164,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-08-22T07:34:56.433Z",
-      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 3 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 3 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
+      "severity": 0.8837209302325582,
+      "detected_at": "2026-08-22T14:25:21.831Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 3 AM (median 5 min) — ~88% below the 30-day baseline of 43 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 3 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 43 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 5,
-        "overall_median": 45,
+        "overall_median": 43,
         "samples": 3
       }
     },
