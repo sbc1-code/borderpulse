@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-22T18:35:31.993Z",
-  "snapshot_at": "2026-08-22T18:59:01.012Z",
+  "generated_at": "2026-08-22T20:27:07.770Z",
+  "snapshot_at": "2026-08-22T20:20:44.891Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -267,6 +267,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.5789473684210527,
+      "detected_at": "2026-08-22T20:27:07.770Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 60 min around 10 PM — ~158% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 60 min cerca de las 10 PM — ~158% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 60,
+        "overall_median": 38,
+        "samples": 6,
+        "ratio": 1.5789473684210527
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -334,23 +351,6 @@
         "best_median": 30,
         "overall_median": 60,
         "samples": 20
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5,
-      "detected_at": "2026-08-19T09:37:42.259Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 60 min around 10 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 60 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 60,
-        "overall_median": 40,
-        "samples": 6,
-        "ratio": 1.5
       }
     },
     {
