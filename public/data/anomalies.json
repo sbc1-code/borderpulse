@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-23T12:47:28.909Z",
-  "snapshot_at": "2026-08-23T12:37:04.946Z",
+  "generated_at": "2026-08-23T13:34:39.421Z",
+  "snapshot_at": "2026-08-23T13:19:50.266Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -198,17 +198,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.62,
-      "detected_at": "2026-08-23T12:47:28.909Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 5 AM (median 19 min) — ~62% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 5 AM (mediana 19 min) — ~62% debajo de la base de 30 días de 50 min.",
+      "severity": 0.64,
+      "detected_at": "2026-08-23T13:34:39.421Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 6 AM (median 18 min) — ~64% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 6 AM (mediana 18 min) — ~64% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 19,
+        "best_hour": 6,
+        "best_median": 18,
         "overall_median": 50,
-        "samples": 8
+        "samples": 17
       }
     },
     {
@@ -227,24 +227,6 @@
         "best_median": 45,
         "overall_median": 100,
         "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5217391304347826,
-      "detected_at": "2026-08-23T12:47:28.909Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 5 AM (median 55 min) — ~52% below the 30-day baseline of 115 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 5 AM (mediana 55 min) — ~52% debajo de la base de 30 días de 115 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 55,
-        "overall_median": 115,
-        "samples": 16
       }
     },
     {
@@ -283,6 +265,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5217391304347826,
+      "detected_at": "2026-08-23T12:47:28.909Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 5 AM (median 55 min) — ~52% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 5 AM (mediana 55 min) — ~52% debajo de la base de 30 días de 115 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 55,
+        "overall_median": 115,
+        "samples": 16
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-hidalgo",
