@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-23T16:30:12.409Z",
-  "snapshot_at": "2026-08-23T20:20:27.434Z",
+  "generated_at": "2026-08-23T21:25:23.909Z",
+  "snapshot_at": "2026-08-23T21:19:58.962Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -103,23 +103,6 @@
         "best_median": 0,
         "overall_median": 5,
         "samples": 5
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.9333333333333333,
-      "detected_at": "2026-08-18T22:27:25.706Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 58 min around 4 PM — ~193% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 58 min cerca de las 4 PM — ~193% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
-        "peak_median": 58,
-        "overall_median": 30,
-        "samples": 6,
-        "ratio": 1.9333333333333333
       }
     },
     {
