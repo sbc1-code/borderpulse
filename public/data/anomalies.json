@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-23T11:24:09.617Z",
-  "snapshot_at": "2026-08-23T10:59:19.825Z",
+  "generated_at": "2026-08-23T12:47:28.909Z",
+  "snapshot_at": "2026-08-23T12:37:04.946Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -111,7 +111,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-08-23T07:36:22.193Z",
+      "detected_at": "2026-08-23T12:47:28.909Z",
       "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 4 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 4 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -120,7 +120,7 @@
         "best_hour": 4,
         "best_median": 15,
         "overall_median": 60,
-        "samples": 6
+        "samples": 8
       }
     },
     {
@@ -177,20 +177,38 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-08-23T06:47:52.560Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 6 AM (median 20 min) — ~60% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 6 AM (mediana 20 min) — ~60% debajo de la base de 30 días de 50 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-23T12:47:28.909Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 6,
+        "best_hour": 5,
         "best_median": 20,
+        "overall_median": 60,
+        "samples": 8
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.62,
+      "detected_at": "2026-08-23T12:47:28.909Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 5 AM (median 19 min) — ~62% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 5 AM (mediana 19 min) — ~62% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 19,
         "overall_median": 50,
-        "samples": 13
+        "samples": 8
       }
     },
     {
@@ -209,6 +227,24 @@
         "best_median": 45,
         "overall_median": 100,
         "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.5217391304347826,
+      "detected_at": "2026-08-23T12:47:28.909Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 5 AM (median 55 min) — ~52% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 5 AM (mediana 55 min) — ~52% debajo de la base de 30 días de 115 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 55,
+        "overall_median": 115,
+        "samples": 16
       }
     },
     {
