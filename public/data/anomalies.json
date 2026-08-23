@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-23T09:31:25.498Z",
-  "snapshot_at": "2026-08-23T09:00:08.586Z",
+  "generated_at": "2026-08-23T10:27:50.380Z",
+  "snapshot_at": "2026-08-23T10:00:08.399Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -107,24 +107,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-08-23T09:31:25.498Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 4 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -195,6 +177,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-08-23T10:27:50.380Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 4 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 4,
+        "best_median": 15,
+        "overall_median": 45,
+        "samples": 10
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -216,17 +216,17 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.52,
-      "detected_at": "2026-08-23T09:31:25.498Z",
-      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 2 AM (median 48 min) — ~52% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 2 AM (mediana 48 min) — ~52% debajo de la base de 30 días de 100 min.",
+      "severity": 0.55,
+      "detected_at": "2026-08-23T10:27:50.380Z",
+      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 2 AM (median 45 min) — ~55% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 2 AM (mediana 45 min) — ~55% debajo de la base de 30 días de 100 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 2,
-        "best_median": 48,
+        "best_median": 45,
         "overall_median": 100,
-        "samples": 6
+        "samples": 7
       }
     },
     {
