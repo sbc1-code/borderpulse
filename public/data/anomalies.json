@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-23T08:34:31.461Z",
-  "snapshot_at": "2026-08-23T08:30:13.704Z",
+  "generated_at": "2026-08-23T09:31:25.498Z",
+  "snapshot_at": "2026-08-23T09:00:08.586Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -110,15 +110,15 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9111111111111111,
-      "detected_at": "2026-08-23T08:34:31.461Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 5 AM (median 4 min) — ~91% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 5 AM (mediana 4 min) — ~91% debajo de la base de 30 días de 45 min.",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-08-23T09:31:25.498Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 4 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 4,
+        "best_hour": 4,
+        "best_median": 5,
         "overall_median": 45,
         "samples": 8
       }
@@ -209,6 +209,24 @@
         "best_median": 20,
         "overall_median": 50,
         "samples": 13
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.52,
+      "detected_at": "2026-08-23T09:31:25.498Z",
+      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 2 AM (median 48 min) — ~52% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 2 AM (mediana 48 min) — ~52% debajo de la base de 30 días de 100 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 2,
+        "best_median": 48,
+        "overall_median": 100,
+        "samples": 6
       }
     },
     {
@@ -316,24 +334,6 @@
         "best_median": 10,
         "overall_median": 60,
         "samples": 20
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.9,
-      "detected_at": "2026-08-22T09:30:25.812Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 1 AM (median 10 min) — ~90% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 1 AM (mediana 10 min) — ~90% debajo de la base de 30 días de 100 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 1,
-        "best_median": 10,
-        "overall_median": 100,
-        "samples": 8
       }
     }
   ]
