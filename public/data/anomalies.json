@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-24T12:57:20.561Z",
-  "snapshot_at": "2026-08-24T14:24:52.865Z",
+  "generated_at": "2026-08-24T15:42:52.785Z",
+  "snapshot_at": "2026-08-24T15:08:56.602Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -333,42 +333,6 @@
         "overall_median": 30,
         "samples": 6,
         "ratio": 1.6666666666666667
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.72,
-      "detected_at": "2026-08-23T15:26:18.693Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 7 AM (median 14 min) — ~72% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 14 min) — ~72% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 7,
-        "best_median": 14,
-        "overall_median": 50,
-        "samples": 17
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-08-23T15:26:18.693Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 7 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 7 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 7,
-        "best_median": 10,
-        "overall_median": 30,
-        "samples": 7
       }
     }
   ]
