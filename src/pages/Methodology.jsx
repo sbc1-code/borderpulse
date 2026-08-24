@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 
-const LAST_REVIEWED = '2026-05-16';
+const LAST_REVIEWED = '2026-08-23';
 
 const COPY = {
   en: {
@@ -43,18 +43,16 @@ const COPY = {
       },
       {
         icon: MapIcon,
-        title: 'Southbound is estimated, not measured.',
+        title: 'Southbound estimates are paused.',
         body: (
           <>
             <p>
-              CBP does not publish southbound wait times. Where Border Pulse shows a southbound
-              number, it is derived from Google Maps drive-time deltas on the approach road versus a
-              free-flow baseline for that segment. The number estimates queue delay, not the official
-              inspection time, and only at crossings where the approach road has reliable map coverage.
+              CBP does not publish southbound wait times. Border Pulse previously estimated them from
+              Google Maps drive-time deltas, but that paid feed is disabled and the live product now
+              presents official northbound CBP data only.
             </p>
             <p>
-              Southbound numbers are labeled as estimates everywhere they appear and should be treated
-              as directional, not exact.
+              Retained historical southbound files are not presented as current conditions.
             </p>
           </>
         ),
@@ -220,19 +218,16 @@ const COPY = {
       },
       {
         icon: MapIcon,
-        title: 'El sentido hacia México es estimado, no medido.',
+        title: 'Las estimaciones hacia México están pausadas.',
         body: (
           <>
             <p>
-              CBP no publica tiempos de espera hacia México. Donde Border Pulse muestra un número
-              hacia el sur, se deriva de la diferencia de tiempos de manejo en Google Maps en el tramo
-              de aproximación versus una línea base sin tráfico para ese tramo. El número estima la
-              demora de la fila, no el tiempo oficial de inspección, y solo donde el tramo de
-              aproximación tiene cobertura confiable en el mapa.
+              CBP no publica tiempos de espera hacia México. Border Pulse antes los estimaba con
+              diferencias de tiempos de manejo de Google Maps, pero ese feed de pago está desactivado
+              y el producto en vivo ahora presenta solo datos oficiales de CBP hacia EE.UU.
             </p>
             <p>
-              Los números hacia México están etiquetados como estimaciones donde aparecen y deben
-              tomarse como referencia, no como un valor exacto.
+              Los archivos históricos retenidos no se presentan como condiciones actuales.
             </p>
           </>
         ),
@@ -379,8 +374,8 @@ export default function Methodology({ lang = 'en' }) {
       ? 'Metodología | Border Pulse'
       : 'Methodology | Border Pulse';
     const description = lang === 'es'
-      ? 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.'
-      : 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.';
+      ? 'Cómo Border Pulse convierte datos oficiales de CBP en los números que ves: fuentes, cadencia programada, mediana sobre promedio y ventana rotativa de 30 días.'
+      : 'How Border Pulse turns official CBP data into the numbers you see: sources, scheduled refreshes, median over mean, and a 30-day rolling window.';
     const canonical = lang === 'es'
       ? 'https://borderpulse.com/metodologia/'
       : 'https://borderpulse.com/methodology/';

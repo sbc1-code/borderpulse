@@ -82,12 +82,12 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           </div>
           <div>
             <div className="font-medium text-slate-900 dark:text-white">
-              {language === 'en' ? 'How are southbound delays estimated?' : '¿Cómo se estiman las demoras hacia México?'}
+              {language === 'en' ? 'What about southbound delays?' : '¿Qué pasa con las demoras hacia México?'}
             </div>
             <p>
               {language === 'en'
-                ? 'CBP does not publish southbound wait times. Border Pulse estimates delay at major crossings using live routing conditions and crossing-specific baseline travel times.'
-                : 'CBP no publica tiempos hacia México. Border Pulse estima la demora en cruces principales usando condiciones de ruta en tiempo real y tiempos base por cruce.'}
+                ? 'CBP does not publish southbound wait times. Border Pulse has paused its paid estimates and currently shows official northbound data only.'
+                : 'CBP no publica tiempos hacia México. Border Pulse pausó sus estimaciones de pago y actualmente muestra solo datos oficiales hacia EE.UU.'}
             </p>
           </div>
           <div>

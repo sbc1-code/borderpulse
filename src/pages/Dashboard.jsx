@@ -350,8 +350,8 @@ export default function Dashboard() {
         </motion.h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
           {language === 'en'
-            ? 'Official wait times to the U.S. · Estimated delays to Mexico · Live CBP data'
-            : 'Tiempos oficiales hacia EE.UU. · Demoras estimadas hacia México · Datos en vivo de CBP'}
+            ? 'Official wait times to the U.S. · Historical patterns · Live CBP data'
+            : 'Tiempos oficiales hacia EE.UU. · Patrones históricos · Datos en vivo de CBP'}
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}

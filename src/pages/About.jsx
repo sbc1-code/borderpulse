@@ -133,8 +133,8 @@ export default function About() {
           </p>
           <p>
             {language === 'en'
-              ? 'Southbound estimates (where shown) are derived from Google Maps drive-time deltas on the approach segment vs. a free-flow baseline. They are estimates, not official. We label them clearly.'
-              : 'Las estimaciones hacia México (cuando se muestran) se derivan de tiempos de manejo de Google Maps en el tramo de aproximación vs. una línea base sin tráfico. Son estimaciones, no oficiales. Las etiquetamos claramente.'}
+              ? 'Southbound estimates are paused. The live product currently presents official northbound CBP data only.'
+              : 'Las estimaciones hacia México están pausadas. El producto en vivo actualmente presenta solo datos oficiales de CBP hacia EE.UU.'}
           </p>
           <p>
             {language === 'en'

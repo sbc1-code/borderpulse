@@ -445,8 +445,8 @@ export default function CrossingDetail() {
         </p>
         <p className="text-xs text-slate-500 mt-2">
           {language === 'en'
-            ? `Northbound wait times at ${crossing.name} are pulled from U.S. Customs and Border Protection on a regular schedule. Southbound estimates (where available) are derived from Google Maps drive times on the approach segment.`
-            : `Los tiempos de espera hacia EE.UU. en ${crossing.name} se obtienen de U.S. Customs and Border Protection con regularidad. Las estimaciones hacia México (cuando están disponibles) se derivan de tiempos de manejo de Google Maps en el tramo de aproximación.`}
+            ? `Northbound wait times at ${crossing.name} are pulled from U.S. Customs and Border Protection on a regular schedule. Southbound estimates are currently paused.`
+            : `Los tiempos de espera hacia EE.UU. en ${crossing.name} se obtienen de U.S. Customs and Border Protection con regularidad. Las estimaciones hacia México están pausadas.`}
         </p>
       </header>
 
