@@ -10,11 +10,10 @@ const SIZES = [
   { id: 'wide', w: '100%', h: 200, labelEn: 'Responsive', labelEs: 'Adaptable' },
 ];
 
-function buildSnippet(slug, theme, lang, direction, size) {
+function buildSnippet(slug, theme, lang, size) {
   const params = new URLSearchParams();
   if (theme === 'dark') params.set('theme', 'dark');
   if (lang === 'es') params.set('lang', 'es');
-  if (direction === 'southbound') params.set('direction', 'southbound');
   const qs = params.toString();
   const src = `https://borderpulse.com/embed/${slug}${qs ? `?${qs}` : ''}`;
   const widthAttr = size.w === '100%' ? 'width="100%"' : `width="${size.w}"`;
@@ -25,29 +24,27 @@ function buildSnippet(slug, theme, lang, direction, size) {
 export default function EmbedSnippetModal({ open, onOpenChange, slug, language = 'en' }) {
   const [theme, setTheme] = useState('light');
   const [lang, setLang] = useState(language);
-  const [direction, setDirection] = useState('northbound');
   const [sizeId, setSizeId] = useState('sm');
   const [copied, setCopied] = useState(false);
 
   const size = SIZES.find((s) => s.id === sizeId) || SIZES[0];
   const snippet = useMemo(
-    () => buildSnippet(slug, theme, lang, direction, size),
-    [slug, theme, lang, direction, size],
+    () => buildSnippet(slug, theme, lang, size),
+    [slug, theme, lang, size],
   );
 
   const previewSrc = useMemo(() => {
     const params = new URLSearchParams();
     if (theme === 'dark') params.set('theme', 'dark');
     if (lang === 'es') params.set('lang', 'es');
-    if (direction === 'southbound') params.set('direction', 'southbound');
     const qs = params.toString();
     return `/embed/${slug}${qs ? `?${qs}` : ''}`;
-  }, [slug, theme, lang, direction]);
+  }, [slug, theme, lang]);
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(snippet);
-      track('embed-copy', { slug, theme, lang, direction, size: sizeId });
+      track('embed-copy', { slug, theme, lang, direction: 'northbound', size: sizeId });
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch (e) {
@@ -75,7 +72,7 @@ export default function EmbedSnippetModal({ open, onOpenChange, slug, language =
               : 'Pon este iframe en tu sitio para mostrar el tiempo de espera en vivo. Gratis, sin API key.'}
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             <div>
               <label className={labelClass}>{language === 'en' ? 'Theme' : 'Tema'}</label>
               <select className={selectClass} value={theme} onChange={(e) => setTheme(e.target.value)}>
@@ -88,13 +85,6 @@ export default function EmbedSnippetModal({ open, onOpenChange, slug, language =
               <select className={selectClass} value={lang} onChange={(e) => setLang(e.target.value)}>
                 <option value="en">EN</option>
                 <option value="es">ES</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>{language === 'en' ? 'Direction' : 'Dirección'}</label>
-              <select className={selectClass} value={direction} onChange={(e) => setDirection(e.target.value)}>
-                <option value="northbound">{language === 'en' ? 'To USA' : 'Hacia EE.UU.'}</option>
-                <option value="southbound">{language === 'en' ? 'To Mexico' : 'Hacia México'}</option>
               </select>
             </div>
             <div>

@@ -25,7 +25,7 @@ export default function Embed() {
   const [params] = useSearchParams();
   const theme = params.get('theme') === 'dark' ? 'dark' : 'light';
   const lang = params.get('lang') === 'es' ? 'es' : 'en';
-  const direction = params.get('direction') === 'southbound' ? 'southbound' : 'northbound';
+  const direction = 'northbound';
   const compact = params.get('compact') === 'true';
 
   const [crossings, setCrossings] = useState([]);

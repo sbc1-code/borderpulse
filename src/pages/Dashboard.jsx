@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RefreshCw, ArrowUp, ArrowDown, Wifi, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
+import { RefreshCw, Wifi, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
@@ -61,14 +61,11 @@ export default function Dashboard() {
     isLoading: true,
     isRefreshing: false,
     source: null,
-    southboundSource: null,
-    southboundFetchedAt: null,
-    southboundNote: null,
     fetchedAt: null,
   });
 
   const language = usePersistentLanguage();
-  const [direction, setDirection] = useState(() => localStorage.getItem('borderPulse_direction') || 'northbound');
+  const direction = 'northbound';
   const [region, setRegion] = useState(() => {
     // Stored region preference takes precedence; otherwise check the geolocation default.
     const stored = localStorage.getItem('borderPulse_region');
@@ -145,14 +142,10 @@ export default function Dashboard() {
       isLoading: false,
       isRefreshing: false,
       source: data.source,
-      southboundSource: data.southbound_source,
-      southboundFetchedAt: data.southbound_timestamp,
-      southboundNote: data.southbound_note,
       fetchedAt: data.timestamp,
     });
     try {
       recordSnapshot(data.crossings || [], 'northbound');
-      recordSnapshot(data.crossings || [], 'southbound');
     } catch (e) {
       console.warn('[dashboard] snapshot error', e);
     }
@@ -237,11 +230,6 @@ export default function Dashboard() {
     });
   }, [language]);
 
-  const changeDirection = (dir) => {
-    setDirection(dir);
-    localStorage.setItem('borderPulse_direction', dir);
-    track('direction-toggle', { to: dir });
-  };
   const changeRegion = (r) => {
     setRegion(r);
     localStorage.setItem('borderPulse_region', r);
@@ -403,39 +391,6 @@ export default function Dashboard() {
 
       {/* Offline / stale data warning */}
       <StaleDataBanner fetchedAt={state.fetchedAt} language={language} />
-
-      {/* Direction toggle */}
-      <div className="mx-auto mb-3 flex w-full max-w-[calc(100vw-1.5rem)] rounded-lg bg-slate-100 p-1 dark:bg-gray-800 sm:max-w-md">
-        <Button
-          variant={direction === 'northbound' ? 'default' : 'ghost'}
-          size="sm"
-          onClick={() => changeDirection('northbound')}
-          className="flex-1 gap-2 h-11"
-          aria-pressed={direction === 'northbound'}
-        >
-          <ArrowUp className="w-4 h-4" />
-          {language === 'en' ? 'To US' : 'Hacia EE.UU.'}
-        </Button>
-        <Button
-          variant={direction === 'southbound' ? 'default' : 'ghost'}
-          size="sm"
-          onClick={() => changeDirection('southbound')}
-          className="flex-1 gap-2 h-11"
-          aria-pressed={direction === 'southbound'}
-          title={language === 'en' ? 'Estimated southbound delay at major crossings' : 'Demora estimada hacia México en cruces principales'}
-        >
-          <ArrowDown className="w-4 h-4" />
-          {language === 'en' ? 'To MX' : 'Hacia MX'}
-        </Button>
-      </div>
-
-      {direction === 'southbound' && (
-        <div className="mx-auto mb-4 w-full max-w-[calc(100vw-1.5rem)] rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900 sm:max-w-3xl">
-          {language === 'en'
-            ? 'To MX uses Border Pulse estimates at major crossings. Official port status, hours, and advisories are shown when available.'
-            : 'Hacia MX usa estimaciones de Border Pulse en cruces principales. El estado oficial del puerto, horarios y avisos se muestran cuando están disponibles.'}
-        </div>
-      )}
 
       {view === 'analytics' ? (
         <Suspense
@@ -625,7 +580,7 @@ export default function Dashboard() {
                                     isFavorite={true}
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
-                                    snapshotAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
+                                    snapshotAt={state.fetchedAt}
                                   />
                                 </div>
                               ))}
@@ -655,7 +610,7 @@ export default function Dashboard() {
                                 isFavorite={false}
                                 onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
-                                    snapshotAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
+                                snapshotAt={state.fetchedAt}
                               />
                             </div>
                           ))}
@@ -677,7 +632,7 @@ export default function Dashboard() {
                                     isFavorite={false}
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
-                                    snapshotAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
+                                    snapshotAt={state.fetchedAt}
                                   />
                                 </div>
                               ))}
@@ -722,7 +677,7 @@ export default function Dashboard() {
 
           <AboutFooter
             language={language}
-            fetchedAt={direction === 'southbound' ? state.southboundFetchedAt : state.fetchedAt}
+            fetchedAt={state.fetchedAt}
             count={state.crossings.length}
             direction={direction}
           />

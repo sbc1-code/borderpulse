@@ -263,6 +263,11 @@ async function readExistingPayload() {
 }
 
 async function main() {
+  if (process.env.ALLOW_PAID_SOUTHBOUND_FETCH !== 'yes') {
+    console.warn('Paid southbound fetch is disabled. Set ALLOW_PAID_SOUTHBOUND_FETCH=yes only for an intentional billable run.');
+    return;
+  }
+
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   const fetchedAt = new Date().toISOString();
   const existing = await readExistingPayload();
