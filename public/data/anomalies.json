@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-24T03:07:08.465Z",
-  "snapshot_at": "2026-08-24T02:37:30.030Z",
+  "generated_at": "2026-08-24T04:49:40.097Z",
+  "snapshot_at": "2026-08-24T03:38:22.571Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -8,14 +8,14 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 8,
-      "detected_at": "2026-08-24T03:07:08.465Z",
+      "detected_at": "2026-08-24T04:49:40.097Z",
       "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 45 min around 8 PM — ~900% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 45 min cerca de las 8 PM — ~900% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 20,
         "peak_median": 45,
         "overall_median": 5,
-        "samples": 14,
+        "samples": 15,
         "ratio": 9
       }
     },
@@ -110,7 +110,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-08-23T05:32:56.864Z",
+      "detected_at": "2026-08-24T04:49:40.097Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -119,7 +119,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 5
+        "samples": 6
       }
     },
     {
@@ -163,16 +163,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.6782608695652175,
-      "detected_at": "2026-08-23T08:34:31.461Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 193 min around 9 PM — ~168% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 193 min cerca de las 9 PM — ~168% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.6949152542372881,
+      "detected_at": "2026-08-24T04:49:40.097Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 200 min around 9 PM — ~169% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 200 min cerca de las 9 PM — ~169% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
-        "peak_median": 193,
-        "overall_median": 115,
-        "samples": 8,
-        "ratio": 1.6782608695652175
+        "peak_median": 200,
+        "overall_median": 118,
+        "samples": 9,
+        "ratio": 1.694915254237288
       }
     },
     {
@@ -234,16 +234,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.6000000000000001,
-      "detected_at": "2026-08-23T23:24:53.169Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 80 min around 4 PM — ~160% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 80 min cerca de las 4 PM — ~160% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.6200000000000001,
+      "detected_at": "2026-08-24T04:49:40.097Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 81 min around 8 PM — ~162% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 81 min cerca de las 8 PM — ~162% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 16,
-        "peak_median": 80,
+        "peak_hour": 20,
+        "peak_median": 81,
         "overall_median": 50,
-        "samples": 8,
-        "ratio": 1.6
+        "samples": 9,
+        "ratio": 1.62
       }
     },
     {
@@ -262,6 +262,23 @@
         "best_median": 45,
         "overall_median": 100,
         "samples": 7
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.5111111111111111,
+      "detected_at": "2026-08-24T04:49:40.097Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 68 min around 10 PM — ~151% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 68 min cerca de las 10 PM — ~151% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 68,
+        "overall_median": 45,
+        "samples": 6,
+        "ratio": 1.511111111111111
       }
     },
     {
@@ -288,15 +305,33 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 0.5,
-      "detected_at": "2026-08-19T06:50:55.795Z",
+      "detected_at": "2026-08-24T04:49:40.097Z",
       "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 60 min around 10 PM — ~150% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 60 min cerca de las 10 PM — ~150% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 60,
         "overall_median": 40,
-        "samples": 9,
+        "samples": 10,
         "ratio": 1.5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-08-24T04:49:40.097Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 11 PM (median 15 min) — ~50% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 11 PM (mediana 15 min) — ~50% debajo de la base de 30 días de 30 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 23,
+        "best_median": 15,
+        "overall_median": 30,
+        "samples": 7
       }
     }
   ],
@@ -352,24 +387,6 @@
         "best_median": 15,
         "overall_median": 45,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-08-23T04:41:08.797Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 12 AM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 12 AM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 30,
-        "samples": 9
       }
     }
   ]
