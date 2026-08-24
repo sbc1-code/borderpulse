@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-24T15:42:52.785Z",
-  "snapshot_at": "2026-08-24T19:11:28.966Z",
+  "generated_at": "2026-08-24T20:34:25.528Z",
+  "snapshot_at": "2026-08-24T20:03:44.937Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -88,23 +88,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-08-24T07:05:25.027Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 60 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 60 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 60,
-        "overall_median": 30,
-        "samples": 8,
-        "ratio": 2
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
@@ -174,6 +157,23 @@
         "best_median": 5,
         "overall_median": 30,
         "samples": 6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.8181818181818181,
+      "detected_at": "2026-08-24T20:34:25.528Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 60 min around 10 PM — ~182% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 60 min cerca de las 10 PM — ~182% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 60,
+        "overall_median": 33,
+        "samples": 8,
+        "ratio": 1.8181818181818181
       }
     },
     {
