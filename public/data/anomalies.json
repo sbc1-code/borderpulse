@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-24T22:30:07.762Z",
-  "snapshot_at": "2026-08-24T23:16:53.701Z",
+  "generated_at": "2026-08-25T01:26:39.952Z",
+  "snapshot_at": "2026-08-25T00:00:26.362Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,6 +143,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8888888888888888,
+      "detected_at": "2026-08-25T01:26:39.952Z",
+      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 4 PM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 4 PM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 16,
+        "best_median": 5,
+        "overall_median": 45,
+        "samples": 7
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -157,24 +175,6 @@
         "best_median": 5,
         "overall_median": 25,
         "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.7777777777777778,
-      "detected_at": "2026-08-24T07:05:25.027Z",
-      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 12 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 12 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 0,
-        "best_median": 10,
-        "overall_median": 45,
-        "samples": 1
       }
     },
     {
