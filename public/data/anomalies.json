@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-26T08:49:26.958Z",
-  "snapshot_at": "2026-08-26T08:23:11.016Z",
+  "generated_at": "2026-08-26T09:47:20.394Z",
+  "snapshot_at": "2026-08-26T09:09:43.393Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -93,7 +93,7 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-08-26T08:49:26.958Z",
+      "detected_at": "2026-08-26T09:47:20.394Z",
       "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
       "evidence": {
@@ -102,7 +102,7 @@
         "best_hour": 1,
         "best_median": 0,
         "overall_median": 30,
-        "samples": 10
+        "samples": 11
       }
     },
     {
@@ -182,7 +182,7 @@
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
       "severity": 0.98,
-      "detected_at": "2026-08-26T08:49:26.958Z",
+      "detected_at": "2026-08-26T09:47:20.394Z",
       "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 3 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -191,7 +191,7 @@
         "best_hour": 3,
         "best_median": 1,
         "overall_median": 50,
-        "samples": 10
+        "samples": 11
       }
     },
     {
@@ -199,17 +199,17 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8833333333333333,
-      "detected_at": "2026-08-26T08:49:26.958Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 7 min) — ~88% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 7 min) — ~88% debajo de la base de 30 días de 60 min.",
+      "severity": 0.8666666666666667,
+      "detected_at": "2026-08-26T09:47:20.394Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
-        "best_hour": 2,
-        "best_median": 7,
+        "best_hour": 1,
+        "best_median": 8,
         "overall_median": 60,
-        "samples": 8
+        "samples": 12
       }
     },
     {
@@ -272,7 +272,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-08-26T08:49:26.958Z",
+      "detected_at": "2026-08-26T09:47:20.394Z",
       "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 1 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 1 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -281,7 +281,7 @@
         "best_hour": 1,
         "best_median": 15,
         "overall_median": 60,
-        "samples": 8
+        "samples": 9
       }
     },
     {
