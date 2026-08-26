@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-26T09:47:20.394Z",
-  "snapshot_at": "2026-08-26T09:09:43.393Z",
+  "generated_at": "2026-08-26T10:38:43.289Z",
+  "snapshot_at": "2026-08-26T10:29:56.651Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -88,24 +88,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-08-26T09:47:20.394Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 1,
-        "best_median": 0,
-        "overall_median": 30,
-        "samples": 11
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
@@ -182,7 +164,7 @@
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
       "severity": 0.98,
-      "detected_at": "2026-08-26T09:47:20.394Z",
+      "detected_at": "2026-08-26T10:38:43.289Z",
       "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 3 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
       "evidence": {
@@ -191,7 +173,25 @@
         "best_hour": 3,
         "best_median": 1,
         "overall_median": 50,
-        "samples": 11
+        "samples": 13
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.9,
+      "detected_at": "2026-08-26T10:38:43.289Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Wednesday hour so far is 12 AM (median 3 min) — ~90% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Nogales - Deconcini es 12 AM (mediana 3 min) — ~90% debajo de la base de 30 días de 30 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 0,
+        "best_median": 3,
+        "overall_median": 30,
+        "samples": 8
       }
     },
     {
@@ -200,7 +200,7 @@
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "severity": 0.8666666666666667,
-      "detected_at": "2026-08-26T09:47:20.394Z",
+      "detected_at": "2026-08-26T10:38:43.289Z",
       "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 1 AM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -209,7 +209,7 @@
         "best_hour": 1,
         "best_median": 8,
         "overall_median": 60,
-        "samples": 12
+        "samples": 13
       }
     },
     {
@@ -236,16 +236,16 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.8,
-      "detected_at": "2026-08-26T07:50:31.312Z",
-      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 11 PM (median 20 min) — ~80% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 11 PM (mediana 20 min) — ~80% debajo de la base de 30 días de 100 min.",
+      "detected_at": "2026-08-26T10:38:43.289Z",
+      "summary_en": "Right now Otay Mesa's lightest Wednesday hour so far is 12 AM (median 20 min) — ~80% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Otay Mesa es 12 AM (mediana 20 min) — ~80% debajo de la base de 30 días de 100 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
-        "best_hour": 23,
+        "best_hour": 0,
         "best_median": 20,
         "overall_median": 100,
-        "samples": 6
+        "samples": 13
       }
     },
     {
@@ -272,7 +272,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-08-26T09:47:20.394Z",
+      "detected_at": "2026-08-26T10:38:43.289Z",
       "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 1 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 1 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -281,7 +281,7 @@
         "best_hour": 1,
         "best_median": 15,
         "overall_median": 60,
-        "samples": 9
+        "samples": 10
       }
     },
     {
