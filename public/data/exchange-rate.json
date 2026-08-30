@@ -1,10 +1,10 @@
 {
   "base_currency": "USD",
   "target_currency": "MXN",
-  "rate": 17.0115,
+  "rate": 17.0169,
   "previous_rate": 17.0115,
-  "change_percentage": 0.0001,
+  "change_percentage": 0.032,
   "source": "open.er-api.com",
-  "last_updated": "2026-08-29T23:30:15.871Z",
-  "fetched_at": "2026-08-29T23:30:15.871Z"
+  "last_updated": "2026-08-30T01:34:05.494Z",
+  "fetched_at": "2026-08-30T01:34:05.494Z"
 }
