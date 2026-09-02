@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-02T17:45:23.435Z",
-  "snapshot_at": "2026-09-02T19:57:18.028Z",
+  "generated_at": "2026-09-02T23:08:47.637Z",
+  "snapshot_at": "2026-09-02T22:22:44.938Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -407,23 +407,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "laredo-colombia-solidarity",
-      "port_name": "Laredo - Colombia Solidarity",
-      "state": "TX",
-      "severity": 14,
-      "detected_at": "2026-09-01T20:48:28.247Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 45 min around 7 PM — ~1500% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 45 min cerca de las 7 PM — ~1500% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 45,
-        "overall_median": 3,
-        "samples": 8,
-        "ratio": 15
-      }
-    }
-  ]
+  "trailing_24h": []
 }
