@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T20:45:12.099Z",
-  "snapshot_at": "2026-09-03T19:59:49.858Z",
+  "generated_at": "2026-09-03T23:06:26.873Z",
+  "snapshot_at": "2026-09-03T22:31:38.097Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -196,24 +196,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.925,
-      "detected_at": "2026-09-03T17:41:06.533Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 3 AM (median 3 min) — ~93% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 3 min) — ~93% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 3,
-        "best_median": 3,
-        "overall_median": 40,
-        "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -228,6 +210,24 @@
         "best_median": 5,
         "overall_median": 60,
         "samples": 11
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.9142857142857143,
+      "detected_at": "2026-09-03T23:06:26.873Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 3 AM (median 3 min) — ~91% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 3 min) — ~91% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 3,
+        "best_median": 3,
+        "overall_median": 35,
+        "samples": 7
       }
     },
     {
