@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-07T19:42:56.711Z",
-  "snapshot_at": "2026-09-07T20:58:14.225Z",
+  "generated_at": "2026-09-08T01:01:13.165Z",
+  "snapshot_at": "2026-09-07T23:18:50.036Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -112,16 +112,16 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.875,
-      "detected_at": "2026-09-07T19:42:56.711Z",
-      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 4 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 4 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
+      "detected_at": "2026-09-08T01:01:13.165Z",
+      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 5 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 5 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 16,
+        "best_hour": 17,
         "best_median": 5,
         "overall_median": 40,
-        "samples": 7
+        "samples": 12
       }
     },
     {
