@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-12T16:06:08.079Z",
-  "snapshot_at": "2026-09-12T16:02:26.665Z",
+  "generated_at": "2026-09-12T19:03:22.614Z",
+  "snapshot_at": "2026-09-12T18:21:03.747Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -251,16 +251,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8518518518518519,
-      "detected_at": "2026-09-12T16:06:08.079Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 8 min) — ~85% below the 30-day baseline of 54 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 8 min) — ~85% debajo de la base de 30 días de 54 min.",
+      "severity": 0.8545454545454545,
+      "detected_at": "2026-09-12T19:03:22.614Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 8 min) — ~85% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 8 min) — ~85% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 8,
-        "overall_median": 54,
+        "overall_median": 55,
         "samples": 14
       }
     },
@@ -371,42 +371,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.9,
-      "detected_at": "2026-09-11T17:38:08.728Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 2 AM (median 3 min) — ~90% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 2 AM (mediana 3 min) — ~90% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 2,
-        "best_median": 3,
-        "overall_median": 30,
-        "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-09-11T17:38:08.728Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 15,
-        "samples": 4
-      }
-    }
-  ]
+  "trailing_24h": []
 }
