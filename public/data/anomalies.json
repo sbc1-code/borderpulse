@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-12T19:03:22.614Z",
-  "snapshot_at": "2026-09-13T00:20:17.879Z",
+  "generated_at": "2026-09-13T05:47:05.023Z",
+  "snapshot_at": "2026-09-13T05:05:09.794Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -162,34 +162,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-09-12T16:06:08.079Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-09-13T05:47:05.023Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
+        "day_of_week": 0,
+        "day_label": "Sun",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 7
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-09-12T16:06:08.079Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 4,
-        "best_median": 0,
-        "overall_median": 35,
-        "samples": 8
+        "samples": 3
       }
     },
     {
@@ -336,6 +318,44 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-09-13T05:47:05.023Z",
+      "summary_en": "Right now Tecate's lightest Saturday hour so far is 12 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Tecate es 12 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 0,
+        "best_median": 40,
+        "overall_median": 90,
+        "samples": 5
+      }
+    }
+  ],
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-09-12T16:06:08.079Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 0,
+        "overall_median": 35,
+        "samples": 8
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -351,25 +371,6 @@
         "overall_median": 20,
         "samples": 9
       }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-09-12T16:06:08.079Z",
-      "summary_en": "Right now Tecate's lightest Saturday hour so far is 12 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Tecate es 12 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 0,
-        "best_median": 40,
-        "overall_median": 90,
-        "samples": 4
-      }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
