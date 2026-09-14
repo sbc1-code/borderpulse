@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-14T20:48:13.129Z",
-  "snapshot_at": "2026-09-14T19:11:35.169Z",
+  "generated_at": "2026-09-14T23:45:01.125Z",
+  "snapshot_at": "2026-09-14T22:29:59.143Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -194,6 +194,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.8444444444444446,
+      "detected_at": "2026-09-14T23:45:01.125Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 83 min around 10 PM — ~184% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 83 min cerca de las 10 PM — ~184% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 83,
+        "overall_median": 45,
+        "samples": 7,
+        "ratio": 1.8444444444444446
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -243,23 +260,6 @@
         "best_median": 5,
         "overall_median": 20,
         "samples": 7
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.7291666666666667,
-      "detected_at": "2026-09-14T20:48:13.129Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 83 min around 10 PM — ~173% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 83 min cerca de las 10 PM — ~173% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 83,
-        "overall_median": 48,
-        "samples": 7,
-        "ratio": 1.7291666666666667
       }
     },
     {
