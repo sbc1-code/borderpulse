@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-13T23:58:10.714Z",
-  "snapshot_at": "2026-09-13T23:33:11.139Z",
+  "generated_at": "2026-09-14T20:48:13.129Z",
+  "snapshot_at": "2026-09-14T19:11:35.169Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,23 +72,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1.4,
-      "detected_at": "2026-09-13T15:53:45.338Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 60 min around 10 PM — ~240% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 60 min cerca de las 10 PM — ~240% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 60,
-        "overall_median": 25,
-        "samples": 6,
-        "ratio": 2.4
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
@@ -109,16 +92,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 1.25,
-      "detected_at": "2026-09-13T23:58:10.714Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 10 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 10 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.0930232558139537,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 10 PM — ~209% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 10 PM — ~209% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 90,
-        "overall_median": 40,
+        "overall_median": 43,
         "samples": 2,
-        "ratio": 2.25
+        "ratio": 2.0930232558139537
       }
     },
     {
@@ -139,17 +122,34 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 60 min around 10 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 60 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 60,
+        "overall_median": 30,
+        "samples": 6,
+        "ratio": 2
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-09-13T11:24:02.121Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Sunday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Monday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
+        "day_of_week": 1,
+        "day_label": "Mon",
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 25,
@@ -162,33 +162,34 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-09-13T05:47:05.023Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
+        "day_of_week": 1,
+        "day_label": "Mon",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 3
+        "samples": 5
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.8444444444444446,
-      "detected_at": "2026-09-09T13:35:22.353Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 83 min around 10 PM — ~184% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 83 min cerca de las 10 PM — ~184% de la mediana de 30 días. Planea alrededor.",
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8837209302325582,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 4 PM (median 5 min) — ~88% below the 30-day baseline of 43 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 4 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 43 min.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 83,
-        "overall_median": 45,
-        "samples": 7,
-        "ratio": 1.8444444444444446
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 16,
+        "best_median": 5,
+        "overall_median": 43,
+        "samples": 7
       }
     },
     {
@@ -210,20 +211,55 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.7714285714285715,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Monday hour so far is 2 AM (median 8 min) — ~77% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 8 min) — ~77% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 2,
+        "best_median": 8,
+        "overall_median": 35,
+        "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Monday hour so far is 12 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Brownsville - Gateway es 12 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 0,
+        "best_median": 5,
+        "overall_median": 20,
+        "samples": 7
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.7555555555555555,
-      "detected_at": "2026-09-13T15:53:45.338Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 7 AM (median 11 min) — ~76% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 7 AM (mediana 11 min) — ~76% debajo de la base de 30 días de 45 min.",
+      "severity": 0.7291666666666667,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 83 min around 10 PM — ~173% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 83 min cerca de las 10 PM — ~173% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 7,
-        "best_median": 11,
-        "overall_median": 45,
-        "samples": 13
+        "peak_hour": 22,
+        "peak_median": 83,
+        "overall_median": 48,
+        "samples": 7,
+        "ratio": 1.7291666666666667
       }
     },
     {
@@ -231,16 +267,34 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-09-13T11:24:02.121Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 3 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 3 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 4 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 4 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 3,
-        "best_median": 15,
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 4,
+        "best_median": 20,
         "overall_median": 60,
+        "samples": 11
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.6545454545454545,
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Monday hour so far is 12 AM (median 19 min) — ~65% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 19 min) — ~65% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 0,
+        "best_median": 19,
+        "overall_median": 55,
         "samples": 6
       }
     },
@@ -249,110 +303,19 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.7,
-      "detected_at": "2026-09-13T11:24:02.121Z",
-      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 3 AM (median 30 min) — ~70% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 3 AM (mediana 30 min) — ~70% debajo de la base de 30 días de 100 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 3,
-        "best_median": 30,
-        "overall_median": 100,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.625,
-      "detected_at": "2026-09-13T23:58:10.714Z",
-      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 15 min) — ~63% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 15 min) — ~63% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 15,
-        "overall_median": 40,
-        "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
       "severity": 0.6,
-      "detected_at": "2026-09-13T15:53:45.338Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 6 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 6 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-09-14T20:48:13.129Z",
+      "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 9 PM (median 40 min) — ~60% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 9 PM (mediana 40 min) — ~60% debajo de la base de 30 días de 100 min.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 6,
-        "best_median": 10,
-        "overall_median": 25,
-        "samples": 13
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.5818181818181818,
-      "detected_at": "2026-09-13T11:24:02.121Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 6 AM (median 23 min) — ~58% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 6 AM (mediana 23 min) — ~58% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 6,
-        "best_median": 23,
-        "overall_median": 55,
-        "samples": 12
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.5454545454545454,
-      "detected_at": "2026-09-13T11:24:02.121Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 4 AM (median 50 min) — ~55% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 4 AM (mediana 50 min) — ~55% debajo de la base de 30 días de 110 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 50,
-        "overall_median": 110,
-        "samples": 13
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 21,
+        "best_median": 40,
+        "overall_median": 100,
+        "samples": 9
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-09-13T05:47:05.023Z",
-      "summary_en": "Right now Tecate's lightest Saturday hour so far is 12 AM (median 40 min) — ~56% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Tecate es 12 AM (mediana 40 min) — ~56% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 0,
-        "best_median": 40,
-        "overall_median": 90,
-        "samples": 5
-      }
-    }
-  ]
+  "trailing_24h": []
 }
