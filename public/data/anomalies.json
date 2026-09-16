@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-15T21:59:34.365Z",
-  "snapshot_at": "2026-09-15T21:57:04.308Z",
+  "generated_at": "2026-09-16T00:10:37.487Z",
+  "snapshot_at": "2026-09-15T23:57:54.104Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -38,40 +38,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.6666666666666665,
-      "detected_at": "2026-09-08T23:16:05.358Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 40 min around 5 PM — ~267% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 40 min cerca de las 5 PM — ~267% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 40,
-        "overall_median": 15,
-        "samples": 6,
-        "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1.5,
-      "detected_at": "2026-09-13T23:58:10.714Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 50 min around 5 PM — ~250% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 50 min cerca de las 5 PM — ~250% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 50,
-        "overall_median": 20,
-        "samples": 6,
-        "ratio": 2.5
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
@@ -85,6 +51,23 @@
         "overall_median": 25,
         "samples": 6,
         "ratio": 2.4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1.3333333333333335,
+      "detected_at": "2026-09-16T00:10:37.487Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 35 min around 6 PM — ~233% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 35 min cerca de las 6 PM — ~233% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 35,
+        "overall_median": 15,
+        "samples": 9,
+        "ratio": 2.3333333333333335
       }
     },
     {
@@ -189,6 +172,23 @@
         "best_median": 0,
         "overall_median": 0,
         "samples": 6
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-09-16T00:10:37.487Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 4 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 4 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 40,
+        "overall_median": 20,
+        "samples": 10,
+        "ratio": 2
       }
     },
     {
