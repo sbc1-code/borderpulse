@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-17T07:23:53.852Z",
-  "snapshot_at": "2026-09-17T06:39:36.413Z",
+  "generated_at": "2026-09-17T13:13:15.752Z",
+  "snapshot_at": "2026-09-17T12:05:30.002Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -110,15 +110,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-09-17T07:23:53.852Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 28 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 28 min.",
+      "detected_at": "2026-09-17T13:13:15.752Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 1,
         "best_median": 0,
-        "overall_median": 28,
+        "overall_median": 30,
         "samples": 7
       }
     },
@@ -247,23 +247,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.8928571428571428,
-      "detected_at": "2026-09-17T07:23:53.852Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 53 min around 10 PM — ~189% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 53 min cerca de las 10 PM — ~189% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 53,
-        "overall_median": 28,
-        "samples": 6,
-        "ratio": 1.8928571428571428
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -315,6 +298,23 @@
         "best_median": 10,
         "overall_median": 50,
         "samples": 8
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.7666666666666666,
+      "detected_at": "2026-09-17T13:13:15.752Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 53 min around 10 PM — ~177% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 53 min cerca de las 10 PM — ~177% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 53,
+        "overall_median": 30,
+        "samples": 6,
+        "ratio": 1.7666666666666666
       }
     },
     {
