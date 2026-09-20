@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-20T18:07:16.639Z",
-  "snapshot_at": "2026-09-20T17:50:29.686Z",
+  "generated_at": "2026-09-20T21:18:20.321Z",
+  "snapshot_at": "2026-09-20T20:06:55.465Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -55,36 +55,53 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 1.1428571428571428,
-      "detected_at": "2026-09-20T18:07:16.639Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 225 min around 5 PM — ~214% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 225 min cerca de las 5 PM — ~214% de la mediana de 30 días. Planea alrededor.",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 1.12,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 53 min around 10 PM — ~212% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 53 min cerca de las 10 PM — ~212% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
-        "peak_median": 225,
-        "overall_median": 105,
-        "samples": 8,
-        "ratio": 2.142857142857143
+        "peak_hour": 22,
+        "peak_median": 53,
+        "overall_median": 25,
+        "samples": 6,
+        "ratio": 2.12
       }
     },
     {
       "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-09-16T19:54:15.481Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 200 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 200 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.1111111111111112,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 95 min around 5 PM — ~211% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 95 min cerca de las 5 PM — ~211% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 200,
-        "overall_median": 100,
-        "samples": 5,
-        "ratio": 2
+        "peak_hour": 17,
+        "peak_median": 95,
+        "overall_median": 45,
+        "samples": 8,
+        "ratio": 2.111111111111111
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 1.0454545454545454,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 225 min around 5 PM — ~205% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 225 min cerca de las 5 PM — ~205% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 17,
+        "peak_median": 225,
+        "overall_median": 110,
+        "samples": 8,
+        "ratio": 2.0454545454545454
       }
     },
     {
@@ -147,32 +164,15 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-09-16T00:10:37.487Z",
+      "detected_at": "2026-09-20T21:18:20.321Z",
       "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 4 PM — ~200% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 4 PM — ~200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 16,
         "peak_median": 40,
         "overall_median": 20,
-        "samples": 10,
+        "samples": 11,
         "ratio": 2
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8999999999999999,
-      "detected_at": "2026-09-20T18:07:16.639Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 95 min around 5 PM — ~190% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 95 min cerca de las 5 PM — ~190% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 95,
-        "overall_median": 50,
-        "samples": 8,
-        "ratio": 1.9
       }
     },
     {
@@ -198,51 +198,17 @@
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-09-20T18:07:16.639Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 5 AM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 5 AM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
+      "severity": 0.8,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 5 AM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 5 AM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 5,
         "best_median": 5,
-        "overall_median": 30,
+        "overall_median": 25,
         "samples": 8
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8,
-      "detected_at": "2026-09-20T00:50:27.861Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 10 PM — ~180% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 10 PM — ~180% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 90,
-        "overall_median": 50,
-        "samples": 1,
-        "ratio": 1.8
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.7666666666666666,
-      "detected_at": "2026-09-17T13:13:15.752Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 53 min around 10 PM — ~177% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 53 min cerca de las 10 PM — ~177% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 53,
-        "overall_median": 30,
-        "samples": 6,
-        "ratio": 1.7666666666666666
       }
     },
     {
@@ -268,16 +234,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.7,
-      "detected_at": "2026-09-20T18:07:16.639Z",
-      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 15 min) — ~70% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 15 min) — ~70% debajo de la base de 30 días de 50 min.",
+      "severity": 0.7272727272727273,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 4 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 4 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 4,
         "best_median": 15,
-        "overall_median": 50,
+        "overall_median": 55,
         "samples": 1
       }
     },
@@ -286,17 +252,34 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.7,
-      "detected_at": "2026-09-20T18:07:16.639Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 3 AM (median 15 min) — ~70% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 3 AM (mediana 15 min) — ~70% debajo de la base de 30 días de 50 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 3 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 3 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 3,
         "best_median": 15,
-        "overall_median": 50,
+        "overall_median": 45,
         "samples": 9
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.6363636363636365,
+      "detected_at": "2026-09-20T21:18:20.321Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 90 min around 10 PM — ~164% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 90 min cerca de las 10 PM — ~164% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 90,
+        "overall_median": 55,
+        "samples": 1,
+        "ratio": 1.6363636363636365
       }
     },
     {
@@ -314,24 +297,6 @@
         "best_hour": 5,
         "best_median": 20,
         "overall_median": 50,
-        "samples": 9
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.55,
-      "detected_at": "2026-09-20T18:07:16.639Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 4 AM (median 45 min) — ~55% below the 30-day baseline of 100 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 4 AM (mediana 45 min) — ~55% debajo de la base de 30 días de 100 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 45,
-        "overall_median": 100,
         "samples": 9
       }
     },
@@ -371,5 +336,24 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.55,
+      "detected_at": "2026-09-20T18:07:16.639Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 4 AM (median 45 min) — ~55% below the 30-day baseline of 100 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 4 AM (mediana 45 min) — ~55% debajo de la base de 30 días de 100 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 4,
+        "best_median": 45,
+        "overall_median": 100,
+        "samples": 9
+      }
+    }
+  ]
 }
