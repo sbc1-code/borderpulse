@@ -33,7 +33,7 @@
     "news:classify": "node scripts/build-curation-queue.mjs",
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
-    "test:trust": "node --test scripts/test-trust-state.mjs",
+    "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-product-truth.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
     "test:history": "node --test scripts/test-snapshot-history.mjs"
   },

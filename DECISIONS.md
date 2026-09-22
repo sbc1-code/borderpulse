@@ -29,6 +29,21 @@ history when a checkout is shallow or a different host performs the build.
 
 ---
 
+## 2026-09-22 · Keep the free dashboard free; test a narrow Plus beta
+
+The proposed paid wedge is account-synced northbound crossing rules with
+server-side email delivery, personal history, and a secondary ad-free surface.
+The raw CBP dashboard, methodology, bilingual content, and core planning pages
+stay free. The first price hypothesis is $5/month for a private beta; it is not
+approved for live Stripe setup.
+
+This sells continuity and delivery rather than hiding public data. It also
+matches the existing decision that a client-only alert is not an alert. The
+minimum contract lives in `docs/PAID-BETA-CONTRACT.md`; do not add auth,
+checkout, or email secrets until the owner decisions and test-mode gates pass.
+
+---
+
 ## 2026-08-20 · Freshness thresholds come from measured delivery, not the cron
 
 Issue #58 asked for stale/fresh thresholds "derived from the configured

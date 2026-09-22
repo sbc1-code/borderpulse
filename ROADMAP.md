@@ -14,7 +14,10 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 - [x] Add an agent-readable operator guide, active task queue, and status command.
 - [~] Restore a green release baseline on the current remote `main`.
 - [ ] Migrate the verified free app to a Vercel preview.
-- [ ] Add the paid beta only after product, data, privacy, billing, and QA gates.
+- [x] Draft the paid-beta product, data, and entitlement contract before adding
+      auth or checkout UI. Final offer approval and all launch gates remain open.
+- [ ] Implement the paid beta only after product, data, privacy, billing, and
+      QA gates.
 
 Ranked roughly by leverage. Pick what fits the available time.
 
@@ -102,9 +105,9 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [ ] **Embed analytics** — track which sites embed the widget. Needs
       a server (Cloudflare worker or similar). GitHub Pages doesn't
       expose access logs.
-- [ ] **Auth tier (sync, SMS alerts, history)** — only justified if
-      consumer paid tier becomes a real direction. See README/strategy
-      notes.
+- [ ] **Auth tier (sync, email alerts, history)** — justified only for the
+      proposed paid beta after the contract and launch gates pass. No SMS or
+      southbound feature is implied.
 - [ ] **Programmatic SEO `/best-time/:slug/:day`** — 7-day variants
       per crossing (≈300 EN + 300 ES = 600 pages). Hold until core
       `/best-time/:slug` ranks; then expand only for the high-traffic

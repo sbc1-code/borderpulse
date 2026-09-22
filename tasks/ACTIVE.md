@@ -15,8 +15,9 @@ green and the deployed artifact is verified.
       committing an explicit, tested snapshot-history artifact.
 - [ ] Produce a successful preview deployment on Vercel from the verified
       artifact; no production cutover yet.
-- [ ] Define the paid-beta data model and entitlement contract before adding
-      auth or checkout UI.
+- [x] Define the proposed paid-beta data model and entitlement contract before
+      adding auth or checkout UI; see `docs/PAID-BETA-CONTRACT.md`. Final offer,
+      price, legal, and billing approvals remain open.
 - [ ] Implement test-mode auth, Stripe entitlements, and email alerts behind
       explicit launch gates.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
@@ -44,3 +45,6 @@ green and the deployed artifact is verified.
 - `public/data/snapshot-history.json` contains 295 compact snapshots covering
   the current 30-day window; aggregate tests prove the build reads the artifact
   and not Git history.
+- `docs/PAID-BETA-CONTRACT.md` defines the proposed BorderPulse Plus boundary,
+  minimal tables, server invariants, and owner approval gates. No auth, Stripe,
+  email provider, or customer data has been added.
