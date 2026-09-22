@@ -9,17 +9,23 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 ## Next up
 
-### Commercial rebuild control plane — 2026-09-22
+### Free product and PMF validation — 2026-09-22
 
 - [x] Add an agent-readable operator guide, active task queue, and status command.
-- [~] Restore a green release baseline on the current remote `main`.
-- [ ] Migrate the verified free app to a Vercel preview.
-- [x] Draft the paid-beta product, data, and entitlement contract before adding
-      auth or checkout UI. Final offer approval and all launch gates remain open.
-- [ ] Implement the paid beta only after product, data, privacy, billing, and
-      QA gates.
+- [ ] Restore the free public data publication path and verify live freshness.
+- [ ] Run the bounded discovery round in `docs/PMF-TEST.md`.
+- [ ] Choose one repeated paid job and price, or explicitly keep BorderPulse
+      free until stronger evidence exists.
+- [x] Preserve the paid-beta product, data, entitlement, and operator work in
+      PR #87 as a reversible later option.
 
 Ranked roughly by leverage. Pick what fits the available time.
+
+### Later: paid BorderPulse Plus
+
+The saved-crossing, alert, account, Stripe, Supabase, and Vercel work in PR #87
+can resume after the PMF gate passes. Its current feature boundary and price are
+provisional; do not treat the implementation as a product decision.
 
 ### Active execution queue — 2026-08-06 audit
 

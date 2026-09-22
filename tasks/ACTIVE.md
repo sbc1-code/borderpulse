@@ -1,11 +1,11 @@
 # Active BorderPulse execution
 
-## Current stage: build the test-mode paid workflow
+## Current stage: validate free-product demand before paid infrastructure
 
-The public site is still served from GitHub Pages. The free release baseline is
-green and the paid workflow now has a test-only account/API foundation plus a
-server-side alert evaluator. Do not start live billing or a production Vercel
-cutover until provider, privacy, financial, and QA gates are verified.
+The public site is still served from GitHub Pages. The free product remains the
+near-term priority. The paid workflow is preserved in PR #87 as a later option,
+not a launch commitment. Do not create providers, invite beta users, or make a
+pricing promise until the PMF test in `docs/PMF-TEST.md` produces evidence.
 
 ## Next tasks
 
@@ -18,23 +18,21 @@ cutover until provider, privacy, financial, and QA gates are verified.
 - [x] Define the proposed paid-beta data model and entitlement contract before
       adding auth or checkout UI; see `docs/PAID-BETA-CONTRACT.md`. Final offer,
       price, legal, and billing approvals remain open.
-- [x] Implement test-mode auth, Stripe entitlements, and email-alert mechanics behind
-      explicit launch gates.
-- [x] Make Stripe entitlement state monotonic across retries and out-of-order
-      webhook delivery; add weekday selection to the alert rule UI and keep
-      checkout hidden until billing configuration is present.
-- [x] Add authenticated alert-rule editing and pause/resume controls with
-      opt-in and ownership checks.
-- [x] Add local HTTP contract checks proving paid routes fail closed without
-      provider configuration; keep live migration/provider QA open.
 - [ ] Restore public data publication: CBP fetch runs are succeeding, but the
       GitHub Pages deploy gate on `origin/main` is failing its dependency audit.
       Do not call the data pipeline live until `borderpulse.com/data/crossings.json`
       reads a current snapshot again.
-- [ ] Run product, privacy, support, financial, marketing, accessibility, and
-      production QA gates; request approval before live billing or cutover.
-- [ ] Resolve the owner choices in `docs/OWNER-APPROVAL.md`; only then create
-      test provider resources and record their literal readback.
+- [ ] Run a small discovery round and record repeated jobs, opt-ins, beta
+      commitments, and price reactions in `docs/PMF-TEST.md`.
+- [ ] Decide whether one paid job has enough evidence to justify resuming PR
+      #87, reshaping it, or leaving BorderPulse free for now.
+
+## Parked until demand evidence
+
+- Paid auth, Supabase, Stripe, Resend, billing operations, production Vercel
+  cutover, and the existing Plus contract remain preserved but paused.
+- The paid branch is not proof of product-market fit, customer demand, or a
+  final price.
 
 ## Evidence required for the current stage
 

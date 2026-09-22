@@ -1,13 +1,15 @@
 # BorderPulse launch gates
 
-This is the operator checklist for the proposed BorderPulse Plus beta. A
-green code check does not authorize a production cutover, a live charge, or a
-customer message.
+This is the parked operator checklist for a possible BorderPulse Plus beta. A
+green code check does not establish demand or authorize a production cutover,
+a live charge, or a customer message.
 
 ## Product
 
 - [x] Free public product remains anonymous and useful: official northbound CBP
       data, crossing pages, comparisons, best-time views, bilingual guidance.
+- [ ] PMF discovery confirms one recurring paid job, a plausible price range,
+      and enough concrete opt-ins before the paid workflow resumes.
 - [x] Plus boundary is written in `PAID-BETA-CONTRACT.md`: saved northbound
       crossings, bounded alert rules, opt-in email, and delivery history.
 - [ ] Owner approves the final name, promise, founding price, participants,
