@@ -1,4 +1,4 @@
-import { serverConfig, missingConfig } from '../_lib/config.js';
+import { PAID_WORKFLOW_CONFIG_NAMES, serverConfig, missingConfig } from '../_lib/config.js';
 import { isPlusEntitled } from '../_lib/entitlements.js';
 import { HttpError, json, methodGuard, sendError } from '../_lib/http.js';
 import { createStripeClient } from '../_lib/stripe.js';
@@ -8,9 +8,7 @@ export default async function handler(req, res) {
   try {
     methodGuard(req, ['POST']);
     const config = serverConfig();
-    const missing = missingConfig(config, [
-      'supabaseUrl', 'supabaseAnonKey', 'stripeSecretKey', 'stripePriceId', 'appUrl',
-    ]);
+    const missing = missingConfig(config, PAID_WORKFLOW_CONFIG_NAMES);
     if (missing.length) throw new HttpError(503, 'Billing service is not configured');
     const { client, user } = await requireUser(req, config);
     const { data: entitlement, error: entitlementError } = await client

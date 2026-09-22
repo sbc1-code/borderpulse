@@ -1,4 +1,4 @@
-import { serverConfig, missingConfig } from '../_lib/config.js';
+import { isPaidWorkflowReady, serverConfig, missingConfig } from '../_lib/config.js';
 import { HttpError, json, methodGuard, sendError } from '../_lib/http.js';
 import { isPlusEntitled } from '../_lib/entitlements.js';
 import { requireUser } from '../_lib/supabase.js';
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     if (error) throw new Error(error.message);
     json(res, 200, {
       entitled: isPlusEntitled(data),
-      billing_ready: Boolean(config.stripeSecretKey && config.stripePriceId && config.appUrl),
+      paid_workflow_ready: isPaidWorkflowReady(config),
       has_billing_record: Boolean(data?.stripe_customer_id),
       entitlement: data ? {
         plan_key: data.plan_key,

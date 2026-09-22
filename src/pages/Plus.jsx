@@ -280,7 +280,7 @@ export default function Plus() {
   const crossingByPort = useMemo(() => new Map(crossings.map((crossing) => [String(crossing.port_number), crossing])), [crossings]);
   const crossingLabel = (saved) => saved.display_name || crossingByPort.get(String(saved.port_number))?.name || saved.port_number;
   const entitled = Boolean(entitlement?.entitled);
-  const billingReady = Boolean(entitlement?.billing_ready);
+  const billingReady = Boolean(entitlement?.paid_workflow_ready);
   const timezone = typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC' : 'UTC';
   const dayOptions = isSpanish
     ? [[1, 'Lun'], [2, 'Mar'], [3, 'Mié'], [4, 'Jue'], [5, 'Vie'], [6, 'Sáb'], [0, 'Dom']]

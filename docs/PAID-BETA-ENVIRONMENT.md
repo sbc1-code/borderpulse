@@ -23,6 +23,11 @@ They must never be prefixed with `VITE_` and must never reach the browser.
 The preview must use test-mode Stripe values. Live keys and live Price IDs are
 blocked until the owner approves the commercial and production gates.
 
+The Plus page keeps checkout hidden until all listed paid-workflow values are
+present, including the webhook, cron, and email values. This prevents a user
+from subscribing to a partially connected product. The browser receives only
+the boolean readiness result, never the values themselves.
+
 The alert evaluator is hosted as a Vercel function and invoked by the existing
 GitHub Actions control plane every 15 minutes. Store the evaluator URL as the
 repository secret `BORDERPULSE_ALERT_EVALUATOR_URL` and the same `CRON_SECRET`

@@ -20,3 +20,24 @@ export function serverConfig(env = process.env) {
 export function missingConfig(config, names) {
   return names.filter((name) => !config[name]);
 }
+
+// Checkout must remain hidden until the whole paid workflow can honor what it
+// sells: account state, signed billing webhooks, scheduled evaluation, and
+// transactional email. This is intentionally server-side and never exposes
+// the underlying values to the browser.
+export const PAID_WORKFLOW_CONFIG_NAMES = [
+  'supabaseUrl',
+  'supabaseAnonKey',
+  'supabaseServiceRoleKey',
+  'stripeSecretKey',
+  'stripeWebhookSecret',
+  'stripePriceId',
+  'appUrl',
+  'cronSecret',
+  'resendApiKey',
+  'alertFromEmail',
+];
+
+export function isPaidWorkflowReady(config) {
+  return missingConfig(config, PAID_WORKFLOW_CONFIG_NAMES).length === 0;
+}

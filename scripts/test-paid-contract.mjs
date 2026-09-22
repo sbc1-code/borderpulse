@@ -13,6 +13,7 @@ import {
   validateSavedCrossingInput,
 } from '../api/_lib/validation.js';
 import { evaluateAlertRule, isWithinAlertWindow, observedMinutes } from '../api/_lib/alerts.js';
+import { isPaidWorkflowReady, serverConfig } from '../api/_lib/config.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const migration = fs.readFileSync(
@@ -162,9 +163,28 @@ test('Stripe subscription state is applied through the ordered database function
 
 test('the Plus screen exposes weekday scheduling and does not offer checkout before billing is configured', () => {
   const plusScreen = fs.readFileSync(path.join(root, 'src/pages/Plus.jsx'), 'utf8');
-  assert.match(entitlementRoute, /billing_ready:/);
+  assert.match(entitlementRoute, /paid_workflow_ready:/);
   assert.match(plusScreen, /days_of_week/);
   assert.match(plusScreen, /billingUnavailable/);
   assert.match(plusScreen, /billingReady && <Button/);
   assert.doesNotMatch(plusScreen, /days_of_week: \[0, 1, 2, 3, 4, 5, 6\]/);
+});
+
+test('paid workflow readiness requires every server-side dependency', () => {
+  const readyEnv = {
+    SUPABASE_URL: 'https://example.supabase.co',
+    SUPABASE_ANON_KEY: 'anon',
+    SUPABASE_SERVICE_ROLE_KEY: 'service',
+    STRIPE_SECRET_KEY: 'sk_test',
+    STRIPE_WEBHOOK_SECRET: 'whsec_test',
+    STRIPE_PRICE_ID: 'price_test',
+    PUBLIC_APP_URL: 'https://preview.example.com',
+    CRON_SECRET: 'cron',
+    RESEND_API_KEY: 're_test',
+    ALERT_FROM_EMAIL: 'Border Pulse <alerts@example.com>',
+  };
+  const ready = serverConfig(readyEnv);
+  assert.equal(isPaidWorkflowReady(ready), true);
+  assert.equal(isPaidWorkflowReady(serverConfig({ ...readyEnv, RESEND_API_KEY: '' })), false);
+  assert.equal(isPaidWorkflowReady(serverConfig({ ...readyEnv, STRIPE_WEBHOOK_SECRET: '' })), false);
 });
