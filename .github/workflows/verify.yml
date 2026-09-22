@@ -1,0 +1,31 @@
+name: Verify BorderPulse
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'agent/**'
+      - 'fix/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Build the release artifact
+        run: npm run build
+      - name: Run release and route checks
+        run: npm test
