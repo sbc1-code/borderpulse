@@ -49,6 +49,9 @@ belong underneath as evidence.
 - `docs/LAUNCH-GATES.md` is the current cross-functional checklist. Keep its
   unchecked provider, legal, support, marketing, and authenticated-QA gates
   open even when the code verifier is green.
+- `docs/OWNER-APPROVAL.md` is the plain-language decision sheet. Use it when
+  the owner wants to unlock test-provider setup without authorizing production,
+  live charges, or marketing.
 
 ## What “done” means
 

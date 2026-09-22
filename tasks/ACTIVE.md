@@ -25,6 +25,8 @@ cutover until provider, privacy, financial, and QA gates are verified.
       checkout hidden until billing configuration is present.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
       production QA gates; request approval before live billing or cutover.
+- [ ] Resolve the owner choices in `docs/OWNER-APPROVAL.md`; only then create
+      test provider resources and record their literal readback.
 
 ## Evidence required for the current stage
 
