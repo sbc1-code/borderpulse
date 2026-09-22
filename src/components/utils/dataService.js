@@ -1,10 +1,12 @@
 /**
- * dataService - reads static JSON snapshots published by the GitHub Action
- * fetch workflow (scripts/fetch-cbp.mjs). No auth, no entity API, no LLM.
+ * dataService - prefers the cached official-data function on Vercel, then
+ * falls back to the static JSON snapshot used by GitHub Pages. No auth, no
+ * entity API, no LLM.
  */
 import { buildSlugMap } from '@/lib/slugs';
 
 const DATA_PATH = '/data/crossings.json';
+const LIVE_DATA_PATH = '/api/public/crossings';
 const FX_PATH = '/data/exchange-rate.json';
 const SB_PATH = '/data/crossings-sb.json';
 
@@ -55,16 +57,30 @@ class DataService {
     }
   }
 
-  async fetchJson(path) {
-    const res = await fetch(`${path}?t=${Date.now()}`, { cache: 'no-store' });
+  async fetchJson(path, { cacheBust = true } = {}) {
+    const url = cacheBust ? `${path}?t=${Date.now()}` : path;
+    const res = await fetch(url, { cache: cacheBust ? 'no-store' : 'default' });
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
     return res.json();
+  }
+
+  async fetchCrossingsDoc() {
+    try {
+      // Vercel caches this response at the CDN for five minutes. Do not append
+      // a timestamp here: a cache-busting query would turn every visitor into
+      // an upstream CBP request and defeat the reliability/cost design.
+      return await this.fetchJson(LIVE_DATA_PATH, { cacheBust: false });
+    } catch {
+      // GitHub Pages has no Function route, and the static snapshot remains a
+      // deliberate last-good fallback if Vercel or CBP is unavailable.
+      return this.fetchJson(DATA_PATH);
+    }
   }
 
   async getBorderData() {
     try {
       const [crossingsDoc, fxDoc, sbDoc] = await Promise.all([
-        this.fetchJson(DATA_PATH),
+        this.fetchCrossingsDoc(),
         this.fetchJson(FX_PATH).catch(() => null),
         this.fetchJson(SB_PATH).catch(() => null),
       ]);

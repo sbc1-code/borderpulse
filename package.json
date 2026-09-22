@@ -7,7 +7,7 @@
       "dev": "vite",
     "operator:status": "node scripts/operator-status.mjs",
     "operator:verify": "npm run build && npm test",
-    "test": "npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:history && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:cbp-public && npm run test:history && npm run test:audit && npm run test:bundle && npm run test:routes",
     "test:hours": "node --test scripts/test-operating-hours.mjs",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "test:routes": "node scripts/smoke-routes.mjs",
@@ -36,6 +36,7 @@
     "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-product-truth.mjs",
     "test:paid-contract": "node --test scripts/test-paid-contract.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
+    "test:cbp-public": "node --test scripts/test-cbp-public.mjs",
     "test:history": "node --test scripts/test-snapshot-history.mjs && npm run test:paid-contract"
   },
   "dependencies": {
