@@ -18,7 +18,7 @@ personalization around the free data:
 - one to three northbound crossing watch rules;
 - lane selection, wait threshold, weekday selection, and a local time window;
 - email notifications that can reach a user after the tab is closed;
-- personal alert and crossing history;
+- personal alert-delivery history and account-synced saved-crossing history;
 - an ad-free product surface as a secondary benefit.
 
 The beta does not promise southbound wait times, exact arrival predictions,
@@ -125,6 +125,7 @@ The paid layer should begin with these server routes and no general API:
   user;
 - `GET /api/me/entitlement` returns the server-derived paid state;
 - CRUD routes for saved crossings and alert rules;
+- a read-only alert-delivery history route;
 - one protected scheduled evaluator that writes delivery records and sends
   email through the selected transactional provider.
 
@@ -141,7 +142,7 @@ free experience must still render and clearly keep paid actions unavailable.
 - [ ] Supabase project, backups, export, RLS, and deletion test are verified.
 - [ ] Test-mode Checkout, webhook replay, entitlement changes, cancellation,
       failed payment, refund, and dispute behavior pass.
-- [ ] Email delivery, bounce, unsubscribe, and suppression behavior pass.
+- [ ] Email delivery, provider failure, opt-out, and suppression behavior pass.
 - [ ] Preview has no production credentials or live Price IDs.
 - [ ] The free dashboard remains anonymous and passes the existing route,
       accessibility, freshness, and browser checks.

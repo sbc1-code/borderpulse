@@ -34,15 +34,16 @@ belong underneath as evidence.
 ## Current operating rules
 
 - Free BorderPulse remains the public northbound border-intelligence product.
-- The proposed paid wedge is saved crossings plus email alerts and personal
-  history. It is not live until the product, data, privacy, billing, and QA
-  gates pass.
+- The proposed paid wedge is saved crossings plus email alerts and alert
+  delivery history. It is not live until the product, data, privacy, billing,
+  and QA gates pass.
 - The planned v1 stack is Vercel, Supabase, Stripe, one transactional email
   provider, and the existing data pipeline. Do not add Firebase, SMS, or paid
   southbound maps unless the product decision changes.
-- The repository now contains a test-only Supabase migration and Vercel API
-  foundation. Treat them as implementation work, not proof that accounts,
-  billing, or paid access exist.
+- The repository now contains a test-only Supabase migration, Vercel API
+  foundation, and a protected server-side alert evaluator. Treat them as
+  implementation work, not proof that accounts, billing, email, or paid access
+  exist.
 - Production deployment and live billing are separate approvals. A green local
   test is not proof of either one.
 

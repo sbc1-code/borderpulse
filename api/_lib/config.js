@@ -1,4 +1,5 @@
 export function serverConfig(env = process.env) {
+  const alertMaxAgeMinutes = Number(env.ALERT_MAX_AGE_MINUTES || 45);
   return {
     supabaseUrl: env.SUPABASE_URL || '',
     supabaseAnonKey: env.SUPABASE_ANON_KEY || '',
@@ -7,6 +8,12 @@ export function serverConfig(env = process.env) {
     stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET || '',
     stripePriceId: env.STRIPE_PRICE_ID || '',
     appUrl: env.PUBLIC_APP_URL || '',
+    cronSecret: env.CRON_SECRET || '',
+    resendApiKey: env.RESEND_API_KEY || '',
+    alertFromEmail: env.ALERT_FROM_EMAIL || '',
+    alertMaxAgeMinutes: Number.isFinite(alertMaxAgeMinutes) && alertMaxAgeMinutes > 0
+      ? alertMaxAgeMinutes
+      : 45,
   };
 }
 

@@ -1,11 +1,11 @@
 # Active BorderPulse execution
 
-## Current stage: restore release truth
+## Current stage: build the test-mode paid workflow
 
-The public site is still served from GitHub Pages. The current remote deploy
-builds, but its test gate fails on four high-severity dependency advisories.
-Do not start live billing or a production Vercel cutover until this baseline is
-green and the deployed artifact is verified.
+The public site is still served from GitHub Pages. The free release baseline is
+green and the paid workflow now has a test-only account/API foundation plus a
+server-side alert evaluator. Do not start live billing or a production Vercel
+cutover until provider, privacy, financial, and QA gates are verified.
 
 ## Next tasks
 
@@ -13,12 +13,12 @@ green and the deployed artifact is verified.
       release checks on the current remote `main`.
 - [x] Remove the build's dependence on Git history for 30-day aggregates by
       committing an explicit, tested snapshot-history artifact.
-- [ ] Produce a successful preview deployment on Vercel from the verified
+- [x] Produce a successful preview deployment on Vercel from the verified
       artifact; no production cutover yet.
 - [x] Define the proposed paid-beta data model and entitlement contract before
       adding auth or checkout UI; see `docs/PAID-BETA-CONTRACT.md`. Final offer,
       price, legal, and billing approvals remain open.
-- [ ] Implement test-mode auth, Stripe entitlements, and email alerts behind
+- [x] Implement test-mode auth, Stripe entitlements, and email-alert mechanics behind
       explicit launch gates.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
       production QA gates; request approval before live billing or cutover.
@@ -46,9 +46,13 @@ green and the deployed artifact is verified.
   the current 30-day window; aggregate tests prove the build reads the artifact
   and not Git history.
 - `docs/PAID-BETA-CONTRACT.md` defines the proposed BorderPulse Plus boundary,
-  minimal tables, server invariants, and owner approval gates. No auth, Stripe,
-  email provider, or customer data has been added.
+  minimal tables, server invariants, and owner approval gates. Provider
+  credentials, customer data, and billing state remain absent.
 - The `api/` foundation contains fail-closed Vercel handlers for profile
   opt-in, entitlement readback, saved crossings, alert rules, Checkout,
   Customer Portal, and signed Stripe subscription webhooks. They require test
   configuration and have not been connected to a provider.
+- The Plus UI includes saved-crossing/rule management and alert-delivery
+  history. The evaluator is a protected Vercel function invoked by an optional
+  15-minute GitHub Actions schedule; it skips safely until
+  `BORDERPULSE_ALERT_EVALUATOR_URL` and `BORDERPULSE_CRON_SECRET` exist.

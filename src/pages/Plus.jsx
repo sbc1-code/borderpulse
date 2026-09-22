@@ -69,6 +69,7 @@ export default function Plus() {
   const [entitlement, setEntitlement] = useState(null);
   const [savedCrossings, setSavedCrossings] = useState([]);
   const [alertRules, setAlertRules] = useState([]);
+  const [alertDeliveries, setAlertDeliveries] = useState([]);
   const [crossings, setCrossings] = useState([]);
   const [crossingForm, setCrossingForm] = useState({ port_number: '', lane_type: 'standard' });
   const [alertForm, setAlertForm] = useState({
@@ -103,6 +104,8 @@ export default function Plus() {
     lane: 'Tipo de carril',
     savedTitle: 'Mis cruces',
     alertTitle: 'Mis alertas',
+    activityTitle: 'Actividad de alertas',
+    noActivity: 'Todavía no hay actividad de alertas.',
     alertIntro: 'Recibe un correo cuando el tiempo esté en o por debajo de tu límite.',
     threshold: 'Límite en minutos',
     from: 'Desde',
@@ -140,6 +143,8 @@ export default function Plus() {
     lane: 'Lane type',
     savedTitle: 'My crossings',
     alertTitle: 'My alerts',
+    activityTitle: 'Alert activity',
+    noActivity: 'There is no alert activity yet.',
     alertIntro: 'Get an email when the wait is at or below your limit.',
     threshold: 'Limit in minutes',
     from: 'From',
@@ -192,12 +197,14 @@ export default function Plus() {
       setProfile(profileResult.profile);
       setEntitlement(entitlementResult);
       if (entitlementResult.entitled) {
-        const [crossingResult, alertResult] = await Promise.all([
+        const [crossingResult, alertResult, deliveryResult] = await Promise.all([
           apiFetch('/api/me/saved-crossings', { supabase }),
           apiFetch('/api/me/alert-rules', { supabase }),
+          apiFetch('/api/me/alert-deliveries', { supabase }),
         ]);
         setSavedCrossings(crossingResult.saved_crossings || []);
         setAlertRules(alertResult.alert_rules || []);
+        setAlertDeliveries(deliveryResult.alert_deliveries || []);
         setAlertForm((current) => ({ ...current, saved_crossing_id: current.saved_crossing_id || crossingResult.saved_crossings?.[0]?.id || '' }));
       }
     } catch (loadError) {
@@ -341,6 +348,10 @@ export default function Plus() {
                   <Button type="submit" disabled={busy || !alertForm.saved_crossing_id || !profile?.email_opt_in}>{copy.addAlert}</Button>
                 </form>
                 <div className="mt-4 space-y-2">{alertRules.length ? alertRules.map((rule) => <div key={rule.id} className="flex items-center justify-between gap-3 rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-gray-800"><span>{crossingLabel(savedCrossings.find((saved) => saved.id === rule.saved_crossing_id) || { port_number: rule.saved_crossing_id })} ≤ {rule.threshold_minutes} min</span><Button variant="ghost" size="sm" onClick={() => handleAction(() => apiFetch(`/api/me/alert-rules?id=${encodeURIComponent(rule.id)}`, { supabase, method: 'DELETE' }))} disabled={busy} aria-label={`${copy.remove} alert`}><Trash2 className="h-4 w-4" /></Button></div>) : <p className="text-sm text-slate-500">{copy.noAlerts}</p>}</div>
+              </Panel>
+
+              <Panel title={copy.activityTitle} icon={Mail}>
+                <div className="space-y-2">{alertDeliveries.length ? alertDeliveries.map((delivery) => <div key={delivery.id} className="flex flex-col gap-1 rounded-lg bg-slate-50 px-3 py-2 text-xs dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between"><span className="font-medium text-slate-700 dark:text-slate-200">{delivery.status === 'sent' ? (isSpanish ? 'Enviado' : 'Sent') : delivery.status === 'failed' ? (isSpanish ? 'Falló' : 'Failed') : delivery.status === 'suppressed' ? (isSpanish ? 'Suprimido' : 'Suppressed') : (isSpanish ? 'En cola' : 'Queued')}</span><span className="text-slate-500 dark:text-slate-400">{new Date(delivery.evaluated_at || delivery.created_at).toLocaleString(isSpanish ? 'es-MX' : 'en-US')}{delivery.suppression_reason ? ` · ${delivery.suppression_reason}` : ''}</span></div>) : <p className="text-sm text-slate-500">{copy.noActivity}</p>}</div>
               </Panel>
             </>
           )}

@@ -12,10 +12,15 @@ import {
   validateProfileInput,
   validateSavedCrossingInput,
 } from '../api/_lib/validation.js';
+import { evaluateAlertRule, isWithinAlertWindow, observedMinutes } from '../api/_lib/alerts.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const migration = fs.readFileSync(
   path.join(root, 'supabase/migrations/202609220001_paid_beta.sql'),
+  'utf8',
+);
+const idempotencyMigration = fs.readFileSync(
+  path.join(root, 'supabase/migrations/202609220002_alert_delivery_idempotency.sql'),
   'utf8',
 );
 
@@ -42,6 +47,7 @@ test('paid beta migration is fail-closed and owner-scoped', () => {
   assert.match(migration, /create trigger profiles_email_sync/);
   assert.match(migration, /No authenticated or anonymous policies are created for stripe_events/);
   assert.doesNotMatch(migration, /create policy stripe_events/);
+  assert.match(idempotencyMigration, /unique \(rule_id, source_snapshot_at\)/);
 });
 
 test('entitlement policy fails closed and only projects the allowlisted price', () => {
@@ -96,10 +102,30 @@ test('saved crossing and alert rule inputs are bounded', () => {
     saved_crossing_id: 'crossing_test', threshold_minutes: 20, days_of_week: [1, 1],
     window_start: '06:00', window_end: '09:30', timezone: 'UTC',
   }), /days_of_week is invalid/);
+  assert.throws(() => validateAlertRuleInput({
+    saved_crossing_id: 'crossing_test', threshold_minutes: 20, days_of_week: [1],
+    window_start: '06:00', window_end: '09:30', timezone: 'Not/A_Timezone',
+  }), /timezone is invalid/);
   const profile = validateProfileInput({ language: 'es', timezone: 'America/Mexico_City', email_opt_in: true });
   assert.equal(profile.language, 'es');
   assert.equal(profile.timezone, 'America/Mexico_City');
   assert.equal(profile.email_opt_in, true);
   assert.match(profile.email_opt_in_at, /^20\d\d-/);
   assert.throws(() => validateProfileInput({ email_opt_in: 'yes' }), /email_opt_in is invalid/);
+});
+
+test('alert evaluator is lane-aware, schedule-aware, and fail-closed on stale data', () => {
+  const crossing = {
+    current_wait_time: 20,
+    lanes: { passenger_standard: { delay_minutes: 20 }, passenger_sentri: { delay_minutes: 5 } },
+  };
+  assert.equal(observedMinutes(crossing, 'sentri'), 5);
+  assert.equal(observedMinutes(crossing, 'ready'), null);
+  const now = new Date('2026-09-22T16:00:00.000Z');
+  const rule = {
+    lane_type: 'sentri', threshold_minutes: 10, days_of_week: [2], window_start: '08:00', window_end: '12:00', timezone: 'America/Los_Angeles',
+  };
+  assert.equal(isWithinAlertWindow({ now, timeZone: rule.timezone, daysOfWeek: rule.days_of_week, windowStart: rule.window_start, windowEnd: rule.window_end }), true);
+  assert.equal(evaluateAlertRule({ rule, crossing, snapshotAt: '2026-09-22T15:50:00.000Z', now, maxAgeMinutes: 45 }).shouldSend, true);
+  assert.equal(evaluateAlertRule({ rule, crossing, snapshotAt: '2026-09-22T14:00:00.000Z', now, maxAgeMinutes: 45 }).reason, 'snapshot_stale');
 });

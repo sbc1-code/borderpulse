@@ -32,6 +32,16 @@ function validTime(value) {
   return typeof value === 'string' && /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(value);
 }
 
+function validTimeZone(value) {
+  if (typeof value !== 'string' || value.trim().length === 0 || value.length > 80) return false;
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: value }).format();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function validateAlertRuleInput(body) {
   const crossingId = requiredString(body?.saved_crossing_id, 'saved_crossing_id', 64);
   const threshold = body?.threshold_minutes;
@@ -43,6 +53,7 @@ export function validateAlertRuleInput(body) {
     throw new HttpError(400, 'alert window is invalid');
   }
   const timezone = requiredString(body?.timezone, 'timezone', 80);
+  if (!validTimeZone(timezone)) throw new HttpError(400, 'timezone is invalid');
   return {
     saved_crossing_id: crossingId,
     threshold_minutes: threshold,
@@ -62,6 +73,7 @@ export function validateProfileInput(body) {
   }
   if (body && Object.hasOwn(body, 'timezone')) {
     result.timezone = requiredString(body.timezone, 'timezone', 80);
+    if (!validTimeZone(result.timezone)) throw new HttpError(400, 'timezone is invalid');
   }
   if (body && Object.hasOwn(body, 'email_opt_in')) {
     if (typeof body.email_opt_in !== 'boolean') throw new HttpError(400, 'email_opt_in is invalid');
