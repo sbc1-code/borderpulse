@@ -23,7 +23,8 @@ pricing promise until the PMF test in `docs/PMF-TEST.md` produces evidence.
       Do not call the data pipeline live until `borderpulse.com/data/crossings.json`
       reads a current snapshot again.
 - [ ] Run a small discovery round and record repeated jobs, opt-ins, beta
-      commitments, and price reactions in `docs/PMF-TEST.md`.
+      commitments, price reactions, and actual operating-cost inputs in
+      `docs/PMF-TEST.md`.
 - [ ] Decide whether one paid job has enough evidence to justify resuming PR
       #87, reshaping it, or leaving BorderPulse free for now.
 

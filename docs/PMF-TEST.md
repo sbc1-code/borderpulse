@@ -48,6 +48,33 @@ ask about their last crossing decision. For each person, record:
 Ask for behavior and commitment, not compliments. “That sounds useful” is
 interest; an opt-in, scheduled pilot, or payment is stronger evidence.
 
+## Cost and maintenance model
+
+Operating cost and customer value answer different questions. Use the real
+provider readbacks when they exist, but do not turn an infrastructure estimate
+into a price promise.
+
+Track these separately:
+
+- fixed monthly costs: hosting, domain, monitoring, and any paid workspace;
+- usage costs: database reads/writes, email sends, bandwidth, scheduled jobs,
+  and payment processing;
+- owner maintenance: feed failures, dependency updates, provider changes,
+  support, privacy requests, and billing reconciliation;
+- safety reserve: refunds, failed sends, unexpected traffic, and tax/accounting
+  overhead.
+
+A simple floor is:
+
+`monthly price floor = (fixed costs / expected paying users) + variable cost per user + maintenance reserve`
+
+That is a break-even floor, not the right price. The right price still depends
+on the value of the avoided delay, avoided uncertainty, or better trip decision.
+At present the BorderPulse Vercel project has no environment variables and no
+custom domain, and no paid provider has been connected, so the actual monthly
+BorderPulse cost is not yet established. Record invoices and usage before
+resuming the paid build.
+
 ## Promotion gate
 
 Resume paid implementation only if the evidence supports it. A practical
