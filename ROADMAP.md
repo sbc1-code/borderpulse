@@ -9,6 +9,13 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 ## Next up
 
+### Commercial rebuild control plane — 2026-09-22
+
+- [x] Add an agent-readable operator guide, active task queue, and status command.
+- [~] Restore a green release baseline on the current remote `main`.
+- [ ] Migrate the verified free app to a Vercel preview.
+- [ ] Add the paid beta only after product, data, privacy, billing, and QA gates.
+
 Ranked roughly by leverage. Pick what fits the available time.
 
 ### Active execution queue — 2026-08-06 audit

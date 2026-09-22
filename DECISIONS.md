@@ -8,6 +8,17 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-09-22 · Use a small operator control plane for agentic maintenance
+
+Codex and Claude Code read `AGENTS.md`, `BORDERPULSE_OPERATOR.md`, and
+`tasks/ACTIVE.md` before acting. `npm run operator:status` gives a safe plain
+English state check, while `npm run operator:verify` is the release-check
+entry point. This keeps the product manageable without adding a dashboard or
+another service, and keeps production, billing, and customer communication
+behind explicit approval gates.
+
+---
+
 ## 2026-08-20 · Freshness thresholds come from measured delivery, not the cron
 
 Issue #58 asked for stale/fresh thresholds "derived from the configured

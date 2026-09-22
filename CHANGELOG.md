@@ -3,6 +3,22 @@
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
+## 2026-09-22
+
+### Added
+- **Agent-friendly operator control plane.** Added `BORDERPULSE_OPERATOR.md`,
+  `AGENTS.md`, `tasks/ACTIVE.md`, and `npm run operator:status` so Codex and
+  Claude Code can resume work from an explicit queue and report plain-language
+  evidence. `npm run operator:verify` remains the release-check entry point.
+
+### Fixed
+- Reconciled the local checkout to the current remote `main` before continuing
+  the commercial rebuild. The latest remote deploy still builds but its test
+  gate is blocked by four high-severity dependency advisories; the security
+  gate is intentionally not being weakened.
+- The browser smoke suite now chooses an available local preview port, so an
+  abandoned development server cannot create a false release failure.
+
 ## 2026-08-20
 
 ### Fixed
