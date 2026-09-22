@@ -34,8 +34,9 @@
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
     "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-product-truth.mjs",
+    "test:paid-contract": "node --test scripts/test-paid-contract.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
-    "test:history": "node --test scripts/test-snapshot-history.mjs"
+    "test:history": "node --test scripts/test-snapshot-history.mjs && npm run test:paid-contract"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
