@@ -58,6 +58,8 @@ async function main() {
     { loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/best-time/`, changefreq: 'daily', priority: '0.7', lastmod: today },
     { loc: `${BASE}/plus/`, changefreq: 'monthly', priority: '0.3', lastmod: today },
+    { loc: `${BASE}/privacy/`, changefreq: 'yearly', priority: '0.2', lastmod: today },
+    { loc: `${BASE}/privacidad/`, changefreq: 'yearly', priority: '0.2', lastmod: today },
     { loc: `${BASE}/methodology/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
     { loc: `${BASE}/metodologia/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
   ];

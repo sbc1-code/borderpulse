@@ -126,6 +126,8 @@ The paid layer should begin with these server routes and no general API:
 - `GET /api/me/entitlement` returns the server-derived paid state;
 - CRUD routes for saved crossings and alert rules;
 - a read-only alert-delivery history route;
+- a confirmed account-deletion route that blocks deletion until an active
+  subscription is canceled;
 - one protected scheduled evaluator that writes delivery records and sends
   email through the selected transactional provider.
 

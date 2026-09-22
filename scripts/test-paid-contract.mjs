@@ -23,6 +23,7 @@ const idempotencyMigration = fs.readFileSync(
   path.join(root, 'supabase/migrations/202609220002_alert_delivery_idempotency.sql'),
   'utf8',
 );
+const accountRoute = fs.readFileSync(path.join(root, 'api/me/account.js'), 'utf8');
 
 test('paid beta migration is fail-closed and owner-scoped', () => {
   for (const table of [
@@ -128,4 +129,11 @@ test('alert evaluator is lane-aware, schedule-aware, and fail-closed on stale da
   assert.equal(isWithinAlertWindow({ now, timeZone: rule.timezone, daysOfWeek: rule.days_of_week, windowStart: rule.window_start, windowEnd: rule.window_end }), true);
   assert.equal(evaluateAlertRule({ rule, crossing, snapshotAt: '2026-09-22T15:50:00.000Z', now, maxAgeMinutes: 45 }).shouldSend, true);
   assert.equal(evaluateAlertRule({ rule, crossing, snapshotAt: '2026-09-22T14:00:00.000Z', now, maxAgeMinutes: 45 }).reason, 'snapshot_stale');
+});
+
+test('account deletion is explicit and protects active billing', () => {
+  assert.match(accountRoute, /body\.confirm !== 'DELETE'/);
+  assert.match(accountRoute, /supabaseServiceRoleKey/);
+  assert.match(accountRoute, /Cancel your subscription in the billing portal/);
+  assert.match(accountRoute, /admin\.auth\.admin\.deleteUser\(user\.id\)/);
 });

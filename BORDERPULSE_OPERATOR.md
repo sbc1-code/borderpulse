@@ -46,6 +46,9 @@ belong underneath as evidence.
   exist.
 - Production deployment and live billing are separate approvals. A green local
   test is not proof of either one.
+- `docs/LAUNCH-GATES.md` is the current cross-functional checklist. Keep its
+  unchecked provider, legal, support, marketing, and authenticated-QA gates
+  open even when the code verifier is green.
 
 ## What “done” means
 

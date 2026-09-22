@@ -94,6 +94,9 @@ export default function Plus() {
     sent: 'Revisa tu correo. El enlace abre tu cuenta de Border Pulse.',
     signedIn: 'Cuenta conectada',
     signOut: 'Salir',
+    deleteAccount: 'Eliminar cuenta',
+    deleteConfirm: '¿Eliminar tu cuenta y tus datos guardados? Esta acción no se puede deshacer.',
+    deleted: 'Tu cuenta fue eliminada.',
     loading: 'Cargando cuenta…',
     checkout: 'Unirme a la beta privada',
     portal: 'Administrar suscripción',
@@ -133,6 +136,9 @@ export default function Plus() {
     sent: 'Check your email. The link will open your Border Pulse account.',
     signedIn: 'Account connected',
     signOut: 'Sign out',
+    deleteAccount: 'Delete account',
+    deleteConfirm: 'Delete your account and saved data? This cannot be undone.',
+    deleted: 'Your account was deleted.',
     loading: 'Loading account…',
     checkout: 'Join the private beta',
     portal: 'Manage subscription',
@@ -233,6 +239,23 @@ export default function Plus() {
     setBusy(false);
   }
 
+  async function handleDeleteAccount() {
+    if (typeof window !== 'undefined' && !window.confirm(copy.deleteConfirm)) return;
+    setBusy(true); setError(''); setMessage('');
+    try {
+      await apiFetch('/api/me/account', { supabase, method: 'DELETE', body: JSON.stringify({ confirm: 'DELETE' }) });
+      await supabase.auth.signOut();
+      setSession(null);
+      setProfile(null);
+      setEntitlement(null);
+      setMessage(copy.deleted);
+    } catch (deleteError) {
+      setError(formatError(deleteError));
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function handleAction(action) {
     setBusy(true); setError(''); setMessage('');
     try {
@@ -299,7 +322,7 @@ export default function Plus() {
           <Panel title={copy.signedIn} icon={UserRound}>
             <div className="flex flex-col gap-3 text-sm text-slate-700 dark:text-slate-300 sm:flex-row sm:items-center sm:justify-between">
               <span>{profile?.email || session.user?.email}</span>
-              <Button variant="outline" size="sm" onClick={handleSignOut} disabled={busy}>{copy.signOut}</Button>
+              <div className="flex flex-wrap gap-2"><Button variant="outline" size="sm" onClick={handleSignOut} disabled={busy}>{copy.signOut}</Button><Button variant="destructive" size="sm" onClick={handleDeleteAccount} disabled={busy}>{copy.deleteAccount}</Button></div>
             </div>
             <label className="mt-4 flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
               <input type="checkbox" className="mt-0.5" checked={Boolean(profile?.email_opt_in)} onChange={(event) => updateEmailOptIn(event.target.checked)} disabled={busy || !profile} />

@@ -678,6 +678,27 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), plusHtml);
   }
 
+  // /privacy + /privacidad — the current data-handling draft. Keep both
+  // language URLs visible before the paid beta is connected so the launch
+  // review has a concrete surface to inspect.
+  {
+    const privacyHead = {
+      title: 'Privacy and data | Border Pulse',
+      desc: 'Draft notice describing how Border Pulse handles public preferences and proposed Plus beta account data.',
+      canonical: `${BASE}/privacy/`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const privacyHtml = rewriteIndex(indexWithLinks, privacyHead);
+    const privacyDir = path.resolve(distDir, 'privacy');
+    fs.mkdirSync(privacyDir, { recursive: true });
+    fs.writeFileSync(path.resolve(privacyDir, 'index.html'), privacyHtml);
+    const spanishHead = { ...privacyHead, title: 'Privacidad y datos | Border Pulse', canonical: `${BASE}/privacidad/` };
+    const spanishDir = path.resolve(distDir, 'privacidad');
+    fs.mkdirSync(spanishDir, { recursive: true });
+    fs.writeFileSync(path.resolve(spanishDir, 'index.html'), rewriteIndex(indexWithLinks, spanishHead));
+  }
+
   // /best-time index hub — links to every generated best-time page.
   {
     const canonical = `${BASE}/best-time/`;

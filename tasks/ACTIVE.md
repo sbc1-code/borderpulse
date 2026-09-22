@@ -56,3 +56,7 @@ cutover until provider, privacy, financial, and QA gates are verified.
   history. The evaluator is a protected Vercel function invoked by an optional
   15-minute GitHub Actions schedule; it skips safely until
   `BORDERPULSE_ALERT_EVALUATOR_URL` and `BORDERPULSE_CRON_SECRET` exist.
+- `docs/LAUNCH-GATES.md` now records the remaining provider, legal/privacy,
+  support, financial, marketing, and authenticated-QA gates. `/privacy/` and
+  `/privacidad/` are draft surfaces, and account deletion is implemented but
+  not provider-tested.
