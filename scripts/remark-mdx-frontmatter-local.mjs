@@ -20,9 +20,9 @@ export default function remarkMdxFrontmatterLocal() {
             declaration: {
               type: 'VariableDeclaration',
               kind: 'const',
-              declarations: [{
-                type: 'VariableDeclarator',
-                id: { type: 'Identifier', name: 'frontmatter' },
+                declarations: [{
+                  type: 'VariableDeclarator',
+                  id: { type: 'Identifier', name: 'frontmatter' },
                 init: value,
               }],
             },

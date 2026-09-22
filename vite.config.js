@@ -12,7 +12,7 @@ export default defineConfig({
       ...mdx({
         remarkPlugins: [
           remarkFrontmatter,
-          [remarkMdxFrontmatter, { name: 'frontmatter' }],
+          remarkMdxFrontmatter,
         ],
         providerImportSource: '@mdx-js/react',
       }),

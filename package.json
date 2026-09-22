@@ -2,9 +2,9 @@
   "name": "borderpulse",
   "private": true,
   "version": "0.1.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
+    "type": "module",
+    "scripts": {
+      "dev": "vite",
     "operator:status": "node scripts/operator-status.mjs",
     "operator:verify": "npm run build && npm test",
     "test": "npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:history && npm run test:audit && npm run test:bundle && npm run test:routes",
