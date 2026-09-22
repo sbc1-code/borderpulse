@@ -6,6 +6,8 @@ The public site is still served from GitHub Pages. The free product remains the
 near-term priority. The paid workflow is preserved in PR #87 as a later option,
 not a launch commitment. Do not create providers, invite beta users, or make a
 pricing promise until the PMF test in `docs/PMF-TEST.md` produces evidence.
+The current business recommendation and testable offer hypotheses are in
+`docs/BUSINESS-VIABILITY.md`.
 
 ## Next tasks
 
