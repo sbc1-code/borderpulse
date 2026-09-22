@@ -9,6 +9,7 @@ import {
 } from '../api/_lib/entitlements.js';
 import {
   validateAlertRuleInput,
+  validateAlertRulePatchInput,
   validateProfileInput,
   validateSavedCrossingInput,
 } from '../api/_lib/validation.js';
@@ -129,6 +130,11 @@ test('saved crossing and alert rule inputs are bounded', () => {
   assert.equal(profile.email_opt_in, true);
   assert.match(profile.email_opt_in_at, /^20\d\d-/);
   assert.throws(() => validateProfileInput({ email_opt_in: 'yes' }), /email_opt_in is invalid/);
+  assert.deepEqual(validateAlertRulePatchInput({ threshold_minutes: 15, days_of_week: [1, 3], enabled: false }), {
+    threshold_minutes: 15, days_of_week: [1, 3], enabled: false,
+  });
+  assert.throws(() => validateAlertRulePatchInput({ enabled: 'false' }), /enabled is invalid/);
+  assert.throws(() => validateAlertRulePatchInput({}), /No alert rule fields provided/);
 });
 
 test('alert evaluator is lane-aware, schedule-aware, and fail-closed on stale data', () => {
@@ -168,6 +174,16 @@ test('the Plus screen exposes weekday scheduling and does not offer checkout bef
   assert.match(plusScreen, /billingUnavailable/);
   assert.match(plusScreen, /billingReady && <Button/);
   assert.doesNotMatch(plusScreen, /days_of_week: \[0, 1, 2, 3, 4, 5, 6\]/);
+});
+
+test('alert rules support authenticated editing and pause/resume controls', () => {
+  const alertRoute = fs.readFileSync(path.join(root, 'api/me/alert-rules.js'), 'utf8');
+  const plusScreen = fs.readFileSync(path.join(root, 'src/pages/Plus.jsx'), 'utf8');
+  assert.match(alertRoute, /methodGuard\(req, \['GET', 'POST', 'PATCH', 'DELETE'\]\)/);
+  assert.match(alertRoute, /validateAlertRulePatchInput/);
+  assert.match(alertRoute, /Email opt-in is required before enabling an alert/);
+  assert.match(plusScreen, /body: JSON\.stringify\(\{ enabled: !rule\.enabled \}\)/);
+  assert.match(plusScreen, /editingRuleId/);
 });
 
 test('paid workflow readiness requires every server-side dependency', () => {

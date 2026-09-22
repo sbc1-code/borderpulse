@@ -23,6 +23,8 @@ cutover until provider, privacy, financial, and QA gates are verified.
 - [x] Make Stripe entitlement state monotonic across retries and out-of-order
       webhook delivery; add weekday selection to the alert rule UI and keep
       checkout hidden until billing configuration is present.
+- [x] Add authenticated alert-rule editing and pause/resume controls with
+      opt-in and ownership checks.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
       production QA gates; request approval before live billing or cutover.
 - [ ] Resolve the owner choices in `docs/OWNER-APPROVAL.md`; only then create

@@ -69,6 +69,7 @@ export default function Plus() {
   const [entitlement, setEntitlement] = useState(null);
   const [savedCrossings, setSavedCrossings] = useState([]);
   const [alertRules, setAlertRules] = useState([]);
+  const [editingRuleId, setEditingRuleId] = useState(null);
   const [alertDeliveries, setAlertDeliveries] = useState([]);
   const [crossings, setCrossings] = useState([]);
   const [crossingForm, setCrossingForm] = useState({ port_number: '', lane_type: 'standard' });
@@ -116,6 +117,12 @@ export default function Plus() {
     from: 'Desde',
     until: 'Hasta',
     addAlert: 'Crear alerta',
+    updateAlert: 'Actualizar alerta',
+    edit: 'Editar',
+    cancel: 'Cancelar',
+    pause: 'Pausar',
+    resume: 'Reanudar',
+    paused: 'Pausada',
     optIn: 'Acepto recibir alertas de Border Pulse por correo.',
     remove: 'Eliminar',
     noSaved: 'Todavía no tienes cruces guardados.',
@@ -160,6 +167,12 @@ export default function Plus() {
     from: 'From',
     until: 'Until',
     addAlert: 'Create alert',
+    updateAlert: 'Update alert',
+    edit: 'Edit',
+    cancel: 'Cancel',
+    pause: 'Pause',
+    resume: 'Resume',
+    paused: 'Paused',
     optIn: 'I agree to receive Border Pulse alerts by email.',
     remove: 'Remove',
     noSaved: 'You have no saved crossings yet.',
@@ -369,7 +382,7 @@ export default function Plus() {
 
               <Panel title={copy.alertTitle} icon={Bell}>
                 <p className="mb-4 text-sm text-slate-600 dark:text-slate-300">{copy.alertIntro}</p>
-                <form onSubmit={(event) => { event.preventDefault(); handleAction(() => apiFetch('/api/me/alert-rules', { supabase, method: 'POST', body: JSON.stringify({ ...alertForm, threshold_minutes: Number(alertForm.threshold_minutes), timezone }) })); }} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:items-end">
+                <form onSubmit={(event) => { event.preventDefault(); handleAction(async () => { const method = editingRuleId ? 'PATCH' : 'POST'; const path = editingRuleId ? `/api/me/alert-rules?id=${encodeURIComponent(editingRuleId)}` : '/api/me/alert-rules'; const result = await apiFetch(path, { supabase, method, body: JSON.stringify({ ...alertForm, threshold_minutes: Number(alertForm.threshold_minutes), timezone }) }); setEditingRuleId(null); return result; }); }} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:items-end">
                   <SelectField label={copy.crossing} value={alertForm.saved_crossing_id} onChange={(event) => setAlertForm({ ...alertForm, saved_crossing_id: event.target.value })} required>
                     <option value="">—</option>{savedCrossings.map((saved) => <option key={saved.id} value={saved.id}>{crossingLabel(saved)}</option>)}
                   </SelectField>
@@ -396,9 +409,10 @@ export default function Plus() {
                       ))}
                     </div>
                   </fieldset>
-                  <Button type="submit" disabled={busy || !alertForm.saved_crossing_id || !profile?.email_opt_in || !alertForm.days_of_week.length}>{copy.addAlert}</Button>
+                  <Button type="submit" disabled={busy || !alertForm.saved_crossing_id || !profile?.email_opt_in || !alertForm.days_of_week.length}>{editingRuleId ? copy.updateAlert : copy.addAlert}</Button>
+                  {editingRuleId && <Button type="button" variant="ghost" onClick={() => { setEditingRuleId(null); setAlertForm((current) => ({ ...current, saved_crossing_id: savedCrossings[0]?.id || '', threshold_minutes: 30, days_of_week: [1, 2, 3, 4, 5], window_start: '06:00', window_end: '22:00' })); }} disabled={busy}>{copy.cancel}</Button>}
                 </form>
-                <div className="mt-4 space-y-2">{alertRules.length ? alertRules.map((rule) => <div key={rule.id} className="flex items-center justify-between gap-3 rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-gray-800"><span>{crossingLabel(savedCrossings.find((saved) => saved.id === rule.saved_crossing_id) || { port_number: rule.saved_crossing_id })} ≤ {rule.threshold_minutes} min</span><Button variant="ghost" size="sm" onClick={() => handleAction(() => apiFetch(`/api/me/alert-rules?id=${encodeURIComponent(rule.id)}`, { supabase, method: 'DELETE' }))} disabled={busy} aria-label={`${copy.remove} alert`}><Trash2 className="h-4 w-4" /></Button></div>) : <p className="text-sm text-slate-500">{copy.noAlerts}</p>}</div>
+                <div className="mt-4 space-y-2">{alertRules.length ? alertRules.map((rule) => <div key={rule.id} className="flex flex-col gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between"><span>{crossingLabel(savedCrossings.find((saved) => saved.id === rule.saved_crossing_id) || { port_number: rule.saved_crossing_id })} ≤ {rule.threshold_minutes} min {!rule.enabled && <span className="text-xs text-slate-500">· {copy.paused}</span>}</span><div className="flex flex-wrap gap-1"><Button variant="outline" size="sm" onClick={() => { setEditingRuleId(rule.id); setAlertForm({ saved_crossing_id: rule.saved_crossing_id, threshold_minutes: rule.threshold_minutes, days_of_week: rule.days_of_week, window_start: rule.window_start.slice(0, 5), window_end: rule.window_end.slice(0, 5) }); }} disabled={busy}>{copy.edit}</Button><Button variant="outline" size="sm" onClick={() => handleAction(() => apiFetch(`/api/me/alert-rules?id=${encodeURIComponent(rule.id)}`, { supabase, method: 'PATCH', body: JSON.stringify({ enabled: !rule.enabled }) }))} disabled={busy}>{rule.enabled ? copy.pause : copy.resume}</Button><Button variant="ghost" size="sm" onClick={() => handleAction(() => apiFetch(`/api/me/alert-rules?id=${encodeURIComponent(rule.id)}`, { supabase, method: 'DELETE' }))} disabled={busy} aria-label={`${copy.remove} alert`}><Trash2 className="h-4 w-4" /></Button></div></div>) : <p className="text-sm text-slate-500">{copy.noAlerts}</p>}</div>
               </Panel>
 
               <Panel title={copy.activityTitle} icon={Mail}>

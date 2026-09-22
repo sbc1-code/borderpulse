@@ -17,6 +17,8 @@ personalization around the free data:
 - account-synced saved crossings across devices;
 - one to three northbound crossing watch rules;
 - lane selection, wait threshold, weekday selection, and a local time window;
+- editable and pausable alert rules so a user can change or temporarily stop a
+  watch without deleting it;
 - email notifications that can reach a user after the tab is closed;
 - personal alert-delivery history and account-synced saved-crossing history;
 - an ad-free product surface as a secondary benefit.
@@ -125,7 +127,8 @@ The paid layer should begin with these server routes and no general API:
 - `POST /api/billing/portal` creates a Customer Portal session for an entitled
   user;
 - `GET /api/me/entitlement` returns the server-derived paid state;
-- CRUD routes for saved crossings and alert rules;
+- CRUD routes for saved crossings and alert rules, including authenticated
+  alert-rule edits and pause/resume;
 - a read-only alert-delivery history route;
 - a confirmed account-deletion route that blocks deletion until an active
   subscription is canceled;

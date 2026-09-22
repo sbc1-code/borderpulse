@@ -65,6 +65,41 @@ export function validateAlertRuleInput(body) {
   };
 }
 
+export function validateAlertRulePatchInput(body) {
+  const result = {};
+  if (Object.hasOwn(body || {}, 'saved_crossing_id')) {
+    result.saved_crossing_id = requiredString(body.saved_crossing_id, 'saved_crossing_id', 64);
+  }
+  if (Object.hasOwn(body || {}, 'threshold_minutes')) {
+    if (!Number.isInteger(body.threshold_minutes) || body.threshold_minutes < 0 || body.threshold_minutes > 600) {
+      throw new HttpError(400, 'threshold_minutes is invalid');
+    }
+    result.threshold_minutes = body.threshold_minutes;
+  }
+  if (Object.hasOwn(body || {}, 'days_of_week')) {
+    if (!validDays(body.days_of_week)) throw new HttpError(400, 'days_of_week is invalid');
+    result.days_of_week = body.days_of_week;
+  }
+  if (Object.hasOwn(body || {}, 'window_start')) {
+    if (!validTime(body.window_start)) throw new HttpError(400, 'window_start is invalid');
+    result.window_start = body.window_start;
+  }
+  if (Object.hasOwn(body || {}, 'window_end')) {
+    if (!validTime(body.window_end)) throw new HttpError(400, 'window_end is invalid');
+    result.window_end = body.window_end;
+  }
+  if (Object.hasOwn(body || {}, 'timezone')) {
+    result.timezone = requiredString(body.timezone, 'timezone', 80);
+    if (!validTimeZone(result.timezone)) throw new HttpError(400, 'timezone is invalid');
+  }
+  if (Object.hasOwn(body || {}, 'enabled')) {
+    if (typeof body.enabled !== 'boolean') throw new HttpError(400, 'enabled is invalid');
+    result.enabled = body.enabled;
+  }
+  if (!Object.keys(result).length) throw new HttpError(400, 'No alert rule fields provided');
+  return result;
+}
+
 export function validateProfileInput(body) {
   const result = {};
   if (body && Object.hasOwn(body, 'language')) {
