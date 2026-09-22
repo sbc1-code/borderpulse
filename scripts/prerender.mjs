@@ -662,6 +662,22 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
   }
 
+  // /plus — public shell for the proposed paid beta. The page stays usable
+  // without provider configuration and never claims that billing is active.
+  {
+    const plusHead = {
+      title: 'Border Pulse Plus | Saved crossings and email alerts',
+      desc: 'Proposed private beta for saved northbound crossings, email alerts, and personal history. Public Border Pulse data remains free.',
+      canonical: `${BASE}/plus/`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const plusHtml = rewriteIndex(indexWithLinks, plusHead);
+    const outDir = path.resolve(distDir, 'plus');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), plusHtml);
+  }
+
   // /best-time index hub — links to every generated best-time page.
   {
     const canonical = `${BASE}/best-time/`;
@@ -782,7 +798,7 @@ async function main() {
   }
 
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + plus shell + crawlable nav on homepage`,
   );
 }
 

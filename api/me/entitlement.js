@@ -12,11 +12,19 @@ export default async function handler(req, res) {
     const { client, user } = await requireUser(req, config);
     const { data, error } = await client
       .from('entitlements')
-      .select('plan_key,status,current_period_end')
+      .select('plan_key,status,current_period_end,stripe_customer_id')
       .eq('user_id', user.id)
       .maybeSingle();
     if (error) throw new Error(error.message);
-    json(res, 200, { entitled: isPlusEntitled(data), entitlement: data || null });
+    json(res, 200, {
+      entitled: isPlusEntitled(data),
+      has_billing_record: Boolean(data?.stripe_customer_id),
+      entitlement: data ? {
+        plan_key: data.plan_key,
+        status: data.status,
+        current_period_end: data.current_period_end,
+      } : null,
+    });
   } catch (error) {
     sendError(res, error);
   }
