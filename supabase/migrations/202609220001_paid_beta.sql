@@ -55,6 +55,7 @@ create table if not exists public.alert_rules (
   updated_at timestamptz not null default now(),
   foreign key (saved_crossing_id, user_id)
     references public.saved_crossings(id, user_id) on delete cascade,
+  unique (user_id, saved_crossing_id),
   check (days_of_week <@ array[0, 1, 2, 3, 4, 5, 6]::smallint[]),
   check (cardinality(days_of_week) between 1 and 7)
 );
@@ -101,6 +102,22 @@ create index if not exists stripe_events_status_idx on public.stripe_events(proc
 drop trigger if exists profiles_updated_at on public.profiles;
 create trigger profiles_updated_at before update on public.profiles
 for each row execute function public.set_updated_at();
+
+create or replace function public.sync_profile_email()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  select email into new.email from auth.users where id = new.id;
+  return new;
+end;
+$$;
+
+drop trigger if exists profiles_email_sync on public.profiles;
+create trigger profiles_email_sync before insert or update on public.profiles
+for each row execute function public.sync_profile_email();
 
 drop trigger if exists saved_crossings_updated_at on public.saved_crossings;
 create trigger saved_crossings_updated_at before update on public.saved_crossings

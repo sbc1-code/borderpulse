@@ -7,6 +7,11 @@ import {
   isPlusEntitled,
   projectSubscriptionEntitlement,
 } from '../api/_lib/entitlements.js';
+import {
+  validateAlertRuleInput,
+  validateProfileInput,
+  validateSavedCrossingInput,
+} from '../api/_lib/validation.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const migration = fs.readFileSync(
@@ -33,6 +38,8 @@ test('paid beta migration is fail-closed and owner-scoped', () => {
   assert.match(migration, /create policy entitlements_owner_select/);
   assert.match(migration, /foreign key \(saved_crossing_id, user_id\)/);
   assert.match(migration, /unique \(id, user_id\)/);
+  assert.match(migration, /unique \(user_id, saved_crossing_id\)/);
+  assert.match(migration, /create trigger profiles_email_sync/);
   assert.match(migration, /No authenticated or anonymous policies are created for stripe_events/);
   assert.doesNotMatch(migration, /create policy stripe_events/);
 });
@@ -67,4 +74,32 @@ test('entitlement policy fails closed and only projects the allowlisted price', 
       source_event_id: 'evt_test',
     },
   );
+});
+
+test('saved crossing and alert rule inputs are bounded', () => {
+  assert.deepEqual(validateSavedCrossingInput({
+    port_number: '250401', display_name: 'San Ysidro', lane_type: 'standard', direction: 'southbound',
+  }), {
+    port_number: '250401', display_name: 'San Ysidro', direction: 'northbound', lane_type: 'standard',
+  });
+  assert.throws(() => validateSavedCrossingInput({
+    port_number: '250401', display_name: 'San Ysidro', lane_type: 'unknown',
+  }), /lane_type is invalid/);
+  assert.deepEqual(validateAlertRuleInput({
+    saved_crossing_id: 'crossing_test', threshold_minutes: 20, days_of_week: [1, 2, 3, 4, 5],
+    window_start: '06:00', window_end: '09:30', timezone: 'America/Los_Angeles',
+  }), {
+    saved_crossing_id: 'crossing_test', threshold_minutes: 20, days_of_week: [1, 2, 3, 4, 5],
+    window_start: '06:00', window_end: '09:30', timezone: 'America/Los_Angeles', enabled: true,
+  });
+  assert.throws(() => validateAlertRuleInput({
+    saved_crossing_id: 'crossing_test', threshold_minutes: 20, days_of_week: [1, 1],
+    window_start: '06:00', window_end: '09:30', timezone: 'UTC',
+  }), /days_of_week is invalid/);
+  const profile = validateProfileInput({ language: 'es', timezone: 'America/Mexico_City', email_opt_in: true });
+  assert.equal(profile.language, 'es');
+  assert.equal(profile.timezone, 'America/Mexico_City');
+  assert.equal(profile.email_opt_in, true);
+  assert.match(profile.email_opt_in_at, /^20\d\d-/);
+  assert.throws(() => validateProfileInput({ email_opt_in: 'yes' }), /email_opt_in is invalid/);
 });

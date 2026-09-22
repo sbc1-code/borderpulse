@@ -33,6 +33,18 @@ export async function readRawBody(req) {
   return Buffer.concat(chunks);
 }
 
+export function requestBody(req) {
+  if (req.body && typeof req.body === 'object' && !Buffer.isBuffer(req.body)) return req.body;
+  if (typeof req.body === 'string') {
+    try {
+      return JSON.parse(req.body);
+    } catch {
+      throw new HttpError(400, 'Invalid JSON body');
+    }
+  }
+  throw new HttpError(400, 'JSON body required');
+}
+
 export function sendError(res, error) {
   const status = Number.isInteger(error?.status) ? error.status : 500;
   if (status >= 500) console.error(error);

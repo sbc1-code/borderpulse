@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { isPlusEntitled } from './entitlements.js';
 import { HttpError, getBearerToken } from './http.js';
 
 function clientOptions(headers = {}) {
@@ -33,4 +34,18 @@ export async function requireUser(req, config) {
   const { data, error } = await client.auth.getUser(token);
   if (error || !data?.user) throw new HttpError(401, 'Sign in required');
   return { client, user: data.user };
+}
+
+export async function requirePlusUser(req, config) {
+  const authenticated = await requireUser(req, config);
+  const { data: entitlement, error } = await authenticated.client
+    .from('entitlements')
+    .select('plan_key,status,current_period_end')
+    .eq('user_id', authenticated.user.id)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  if (!isPlusEntitled(entitlement)) {
+    throw new HttpError(403, 'BorderPulse Plus is required');
+  }
+  return { ...authenticated, entitlement };
 }
