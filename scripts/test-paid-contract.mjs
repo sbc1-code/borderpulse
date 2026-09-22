@@ -15,6 +15,12 @@ import {
 } from '../api/_lib/validation.js';
 import { evaluateAlertRule, isWithinAlertWindow, observedMinutes } from '../api/_lib/alerts.js';
 import { isPaidWorkflowReady, serverConfig } from '../api/_lib/config.js';
+import checkoutHandler from '../api/billing/checkout.js';
+import portalHandler from '../api/billing/portal.js';
+import alertRulesHandler from '../api/me/alert-rules.js';
+import accountHandler from '../api/me/account.js';
+import cronHandler from '../api/cron/evaluate-alerts.js';
+import webhookHandler from '../api/stripe/webhook.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const migration = fs.readFileSync(
@@ -32,6 +38,41 @@ const orderingMigration = fs.readFileSync(
 const accountRoute = fs.readFileSync(path.join(root, 'api/me/account.js'), 'utf8');
 const entitlementRoute = fs.readFileSync(path.join(root, 'api/me/entitlement.js'), 'utf8');
 const webhookRoute = fs.readFileSync(path.join(root, 'api/stripe/webhook.js'), 'utf8');
+
+function invoke(handler, req) {
+  return new Promise((resolve, reject) => {
+    const response = {
+      statusCode: 200,
+      headers: {},
+      status(code) { this.statusCode = code; return this; },
+      setHeader(name, value) { this.headers[name] = value; },
+      end(body) {
+        let payload = null;
+        try { payload = body ? JSON.parse(body) : null; } catch { payload = body; }
+        resolve({ status: this.statusCode, payload });
+      },
+    };
+    Promise.resolve(handler(req, response)).catch(reject);
+  });
+}
+
+async function withoutPaidEnvironment(callback) {
+  const keys = [
+    'SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_ROLE_KEY',
+    'STRIPE_SECRET_KEY', 'STRIPE_WEBHOOK_SECRET', 'STRIPE_PRICE_ID',
+    'PUBLIC_APP_URL', 'CRON_SECRET', 'RESEND_API_KEY', 'ALERT_FROM_EMAIL',
+  ];
+  const previous = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
+  for (const key of keys) delete process.env[key];
+  try {
+    return await callback();
+  } finally {
+    for (const key of keys) {
+      if (previous[key] === undefined) delete process.env[key];
+      else process.env[key] = previous[key];
+    }
+  }
+}
 
 test('paid beta migration is fail-closed and owner-scoped', () => {
   for (const table of [
@@ -203,4 +244,34 @@ test('paid workflow readiness requires every server-side dependency', () => {
   assert.equal(isPaidWorkflowReady(ready), true);
   assert.equal(isPaidWorkflowReady(serverConfig({ ...readyEnv, RESEND_API_KEY: '' })), false);
   assert.equal(isPaidWorkflowReady(serverConfig({ ...readyEnv, STRIPE_WEBHOOK_SECRET: '' })), false);
+});
+
+test('Vercel handlers fail closed before touching providers when configuration is absent', async () => {
+  await withoutPaidEnvironment(async () => {
+    const cases = [
+      [checkoutHandler, { method: 'POST', headers: {} }],
+      [portalHandler, { method: 'POST', headers: {} }],
+      [alertRulesHandler, { method: 'GET', headers: {} }],
+      [accountHandler, { method: 'DELETE', headers: {} }],
+      [cronHandler, { method: 'GET', headers: {} }],
+      [webhookHandler, { method: 'POST', headers: {} }],
+    ];
+    for (const [handler, request] of cases) {
+      const result = await invoke(handler, request);
+      assert.equal(result.status, 503);
+      assert.equal(result.payload.error, 'Internal server error');
+    }
+  });
+});
+
+test('the protected evaluator rejects a bad cron credential before provider access', async () => {
+  await withoutPaidEnvironment(async () => {
+    process.env.CRON_SECRET = 'cron_test_secret';
+    const result = await invoke(cronHandler, {
+      method: 'GET',
+      headers: { authorization: 'Bearer wrong_secret' },
+    });
+    assert.equal(result.status, 401);
+    assert.equal(result.payload.error, 'Unauthorized');
+  });
 });

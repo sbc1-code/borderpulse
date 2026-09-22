@@ -25,6 +25,8 @@ cutover until provider, privacy, financial, and QA gates are verified.
       checkout hidden until billing configuration is present.
 - [x] Add authenticated alert-rule editing and pause/resume controls with
       opt-in and ownership checks.
+- [x] Add local HTTP contract checks proving paid routes fail closed without
+      provider configuration; keep live migration/provider QA open.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
       production QA gates; request approval before live billing or cutover.
 - [ ] Resolve the owner choices in `docs/OWNER-APPROVAL.md`; only then create

@@ -22,6 +22,9 @@ customer message.
       functions; preview remains behind Vercel Authentication.
 - [x] Server-side entitlement checks fail closed; RLS migration and delivery
       idempotency migration are written.
+- [x] Vercel handlers have local HTTP contract coverage for absent-provider
+      configuration and invalid cron credentials; a live database migration
+      test still requires the dedicated Supabase project.
 - [x] Account deletion requires explicit confirmation and blocks while billing
       is active or processing.
 - [ ] Dedicated Supabase project is created, migration applied, backups and
