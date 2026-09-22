@@ -46,9 +46,10 @@ async function checkLiveSite() {
 
 const branch = git(['branch', '--show-current']) || '(detached)';
 const head = git(['rev-parse', '--short', 'HEAD']) || '(unknown)';
-const remote = git(['rev-parse', '--short', 'origin/main']) || '(not fetched)';
+const upstream = git(['rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{upstream}']) || 'origin/main';
+const remote = git(['rev-parse', '--short', upstream]) || '(not fetched)';
 const clean = git(['status', '--short']) === '';
-const relation = git(['rev-list', '--left-right', '--count', 'HEAD...origin/main']) || '(unknown)';
+const relation = git(['rev-list', '--left-right', '--count', `HEAD...${upstream}`]) || '(unknown)';
 const live = await checkLiveSite();
 
 console.log('BorderPulse operator status');
@@ -56,7 +57,7 @@ console.log('===========================');
 console.log(`Active task: ${readActiveTask('tasks/ACTIVE.md')}`);
 console.log(`Branch:      ${branch}`);
 console.log(`Local code:  ${head}`);
-console.log(`Remote main: ${remote}`);
+console.log(`Remote ref:  ${upstream} (${remote})`);
 console.log(`Sync:        ${relation} (left=local-only, right=remote-only)`);
 console.log(`Worktree:    ${clean ? 'clean' : 'has uncommitted changes'}`);
 console.log(`Live site:   ${live.state}`);
