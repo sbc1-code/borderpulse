@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-22T14:30:35.079Z",
-  "snapshot_at": "2026-09-22T12:36:11.078Z",
+  "generated_at": "2026-09-22T18:38:00.279Z",
+  "snapshot_at": "2026-09-22T17:17:14.245Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -322,16 +322,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-09-22T14:30:35.079Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 12 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 12 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-09-22T18:38:00.279Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 12 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 12 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 0,
         "best_median": 10,
-        "overall_median": 25,
+        "overall_median": 30,
         "samples": 8
       }
     },
