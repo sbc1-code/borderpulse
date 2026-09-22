@@ -23,7 +23,13 @@ const idempotencyMigration = fs.readFileSync(
   path.join(root, 'supabase/migrations/202609220002_alert_delivery_idempotency.sql'),
   'utf8',
 );
+const orderingMigration = fs.readFileSync(
+  path.join(root, 'supabase/migrations/202609220003_stripe_event_ordering.sql'),
+  'utf8',
+);
 const accountRoute = fs.readFileSync(path.join(root, 'api/me/account.js'), 'utf8');
+const entitlementRoute = fs.readFileSync(path.join(root, 'api/me/entitlement.js'), 'utf8');
+const webhookRoute = fs.readFileSync(path.join(root, 'api/stripe/webhook.js'), 'utf8');
 
 test('paid beta migration is fail-closed and owner-scoped', () => {
   for (const table of [
@@ -49,6 +55,10 @@ test('paid beta migration is fail-closed and owner-scoped', () => {
   assert.match(migration, /No authenticated or anonymous policies are created for stripe_events/);
   assert.doesNotMatch(migration, /create policy stripe_events/);
   assert.match(idempotencyMigration, /unique \(rule_id, source_snapshot_at\)/);
+  assert.match(orderingMigration, /source_event_created bigint/);
+  assert.match(orderingMigration, /apply_stripe_entitlement/);
+  assert.match(orderingMigration, /excluded\.source_event_created >= public\.entitlements\.source_event_created/);
+  assert.match(orderingMigration, /grant execute .* to service_role/);
 });
 
 test('entitlement policy fails closed and only projects the allowlisted price', () => {
@@ -79,7 +89,12 @@ test('entitlement policy fails closed and only projects the allowlisted price', 
       status: 'active',
       current_period_end: '2026-09-23T00:00:00.000Z',
       source_event_id: 'evt_test',
+      source_event_created: null,
     },
+  );
+  assert.deepEqual(
+    projectSubscriptionEntitlement(base, { priceId: 'price_test', eventId: 'evt_test', eventCreated: 1790035200 }).source_event_created,
+    1790035200,
   );
 });
 
@@ -136,4 +151,20 @@ test('account deletion is explicit and protects active billing', () => {
   assert.match(accountRoute, /supabaseServiceRoleKey/);
   assert.match(accountRoute, /Cancel your subscription in the billing portal/);
   assert.match(accountRoute, /admin\.auth\.admin\.deleteUser\(user\.id\)/);
+});
+
+test('Stripe subscription state is applied through the ordered database function', () => {
+  assert.match(webhookRoute, /eventCreated: event\.created/);
+  assert.match(webhookRoute, /apply_stripe_entitlement/);
+  assert.match(webhookRoute, /p_source_event_created: entitlement\.source_event_created/);
+  assert.doesNotMatch(webhookRoute, /entitlements['\"]\.upsert/);
+});
+
+test('the Plus screen exposes weekday scheduling and does not offer checkout before billing is configured', () => {
+  const plusScreen = fs.readFileSync(path.join(root, 'src/pages/Plus.jsx'), 'utf8');
+  assert.match(entitlementRoute, /billing_ready:/);
+  assert.match(plusScreen, /days_of_week/);
+  assert.match(plusScreen, /billingUnavailable/);
+  assert.match(plusScreen, /billingReady && <Button/);
+  assert.doesNotMatch(plusScreen, /days_of_week: \[0, 1, 2, 3, 4, 5, 6\]/);
 });

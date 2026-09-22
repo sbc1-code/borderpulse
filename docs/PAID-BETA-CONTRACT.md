@@ -98,7 +98,8 @@ RLS cannot perform the operation; that key never reaches the browser.
 1. Stripe webhooks, not a checkout redirect, activate or revoke an
    entitlement.
 2. Webhooks are signature-verified, idempotent, and safe to retry or receive
-   out of order.
+   out of order. Entitlement writes carry the Stripe event creation time and
+   an older event cannot overwrite newer billing state.
 3. Unknown, failed, refunded, disputed, or expired billing states fail closed
    for paid features while the free dashboard remains available.
 4. Alert evaluation requires a valid northbound CBP snapshot inside the paid
@@ -130,6 +131,10 @@ The paid layer should begin with these server routes and no general API:
   subscription is canceled;
 - one protected scheduled evaluator that writes delivery records and sends
   email through the selected transactional provider.
+
+The ordered entitlement write is implemented by the test-only migration
+`202609220003_stripe_event_ordering.sql`; it must be applied after the base
+paid-beta migrations before Stripe webhooks are enabled.
 
 The free dashboard continues to read the static CBP artifacts and does not
 depend on account infrastructure. If Supabase, Stripe, or email is down, the

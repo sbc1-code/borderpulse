@@ -52,9 +52,19 @@ export default async function handler(req, res) {
       const entitlement = projectSubscriptionEntitlement(event.data.object, {
         priceId: config.stripePriceId,
         eventId: event.id,
+        eventCreated: event.created,
       });
       if (entitlement) {
-        const { error } = await admin.from('entitlements').upsert(entitlement, { onConflict: 'user_id' });
+        const { error } = await admin.rpc('apply_stripe_entitlement', {
+          p_user_id: entitlement.user_id,
+          p_stripe_customer_id: entitlement.stripe_customer_id,
+          p_stripe_subscription_id: entitlement.stripe_subscription_id,
+          p_plan_key: entitlement.plan_key,
+          p_status: entitlement.status,
+          p_current_period_end: entitlement.current_period_end,
+          p_source_event_id: entitlement.source_event_id,
+          p_source_event_created: entitlement.source_event_created,
+        });
         if (error) throw new Error(error.message);
       }
     }

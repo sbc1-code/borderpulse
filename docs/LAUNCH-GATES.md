@@ -32,7 +32,7 @@ customer message.
 ## Billing and finance
 
 - [x] Checkout, portal, signed webhook, idempotency, and allowlisted Price-ID
-      mechanics exist in code.
+      mechanics exist in code; entitlement writes reject older Stripe events.
 - [ ] Owner confirms the correct Stripe account, legal identity, statement
       descriptor, support route, refund policy, tax treatment, and price.
 - [ ] A separate BorderPulse Plus test Product and recurring Price exist. The

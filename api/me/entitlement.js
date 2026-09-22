@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     if (error) throw new Error(error.message);
     json(res, 200, {
       entitled: isPlusEntitled(data),
+      billing_ready: Boolean(config.stripeSecretKey && config.stripePriceId && config.appUrl),
       has_billing_record: Boolean(data?.stripe_customer_id),
       entitlement: data ? {
         plan_key: data.plan_key,

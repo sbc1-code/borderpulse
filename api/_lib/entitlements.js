@@ -12,7 +12,7 @@ function subscriptionUserId(subscription) {
   return subscription?.metadata?.user_id || null;
 }
 
-export function projectSubscriptionEntitlement(subscription, { priceId, eventId } = {}) {
+export function projectSubscriptionEntitlement(subscription, { priceId, eventId, eventCreated } = {}) {
   const userId = subscriptionUserId(subscription);
   const item = subscription?.items?.data?.find((entry) => entry?.price?.id === priceId);
   if (!userId || !priceId || !item) return null;
@@ -28,6 +28,7 @@ export function projectSubscriptionEntitlement(subscription, { priceId, eventId 
       ? new Date(periodEnd * 1000).toISOString()
       : null,
     source_event_id: eventId || null,
+    source_event_created: Number.isInteger(eventCreated) && eventCreated > 0 ? eventCreated : null,
   };
 }
 

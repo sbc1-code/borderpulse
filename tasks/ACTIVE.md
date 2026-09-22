@@ -20,6 +20,9 @@ cutover until provider, privacy, financial, and QA gates are verified.
       price, legal, and billing approvals remain open.
 - [x] Implement test-mode auth, Stripe entitlements, and email-alert mechanics behind
       explicit launch gates.
+- [x] Make Stripe entitlement state monotonic across retries and out-of-order
+      webhook delivery; add weekday selection to the alert rule UI and keep
+      checkout hidden until billing configuration is present.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
       production QA gates; request approval before live billing or cutover.
 

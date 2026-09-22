@@ -73,7 +73,7 @@ export default function Plus() {
   const [crossings, setCrossings] = useState([]);
   const [crossingForm, setCrossingForm] = useState({ port_number: '', lane_type: 'standard' });
   const [alertForm, setAlertForm] = useState({
-    saved_crossing_id: '', threshold_minutes: 30, window_start: '06:00', window_end: '22:00',
+    saved_crossing_id: '', threshold_minutes: 30, days_of_week: [1, 2, 3, 4, 5], window_start: '06:00', window_end: '22:00',
   });
 
   const isSpanish = language === 'es';
@@ -99,6 +99,7 @@ export default function Plus() {
     deleted: 'Tu cuenta fue eliminada.',
     loading: 'Cargando cuenta…',
     checkout: 'Unirme a la beta privada',
+    billingUnavailable: 'La beta de pago todavía no está conectada. Esta página no iniciará ningún cobro todavía.',
     portal: 'Administrar suscripción',
     active: 'Plus está activo',
     pending: 'Tu suscripción está procesándose.',
@@ -111,6 +112,7 @@ export default function Plus() {
     noActivity: 'Todavía no hay actividad de alertas.',
     alertIntro: 'Recibe un correo cuando el tiempo esté en o por debajo de tu límite.',
     threshold: 'Límite en minutos',
+    days: 'Días de la semana',
     from: 'Desde',
     until: 'Hasta',
     addAlert: 'Crear alerta',
@@ -141,6 +143,7 @@ export default function Plus() {
     deleted: 'Your account was deleted.',
     loading: 'Loading account…',
     checkout: 'Join the private beta',
+    billingUnavailable: 'The paid beta is not connected yet. This page will not start a charge yet.',
     portal: 'Manage subscription',
     active: 'Plus is active',
     pending: 'Your subscription is processing.',
@@ -153,6 +156,7 @@ export default function Plus() {
     noActivity: 'There is no alert activity yet.',
     alertIntro: 'Get an email when the wait is at or below your limit.',
     threshold: 'Limit in minutes',
+    days: 'Days of the week',
     from: 'From',
     until: 'Until',
     addAlert: 'Create alert',
@@ -276,7 +280,11 @@ export default function Plus() {
   const crossingByPort = useMemo(() => new Map(crossings.map((crossing) => [String(crossing.port_number), crossing])), [crossings]);
   const crossingLabel = (saved) => saved.display_name || crossingByPort.get(String(saved.port_number))?.name || saved.port_number;
   const entitled = Boolean(entitlement?.entitled);
+  const billingReady = Boolean(entitlement?.billing_ready);
   const timezone = typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC' : 'UTC';
+  const dayOptions = isSpanish
+    ? [[1, 'Lun'], [2, 'Mar'], [3, 'Mié'], [4, 'Jue'], [5, 'Vie'], [6, 'Sáb'], [0, 'Dom']]
+    : [[1, 'Mon'], [2, 'Tue'], [3, 'Wed'], [4, 'Thu'], [5, 'Fri'], [6, 'Sat'], [0, 'Sun']];
 
   return (
     <div className="mx-auto max-w-[1000px] p-4 sm:p-6">
@@ -332,10 +340,10 @@ export default function Plus() {
 
           {!entitled && (
             <Panel title={copy.title} icon={PlusIcon}>
-              <p className="text-sm text-slate-600 dark:text-slate-300">{entitlement ? copy.pending : copy.notReady}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">{billingReady ? (entitlement ? copy.pending : copy.notReady) : copy.billingUnavailable}</p>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Button onClick={() => handleAction(() => apiFetch('/api/billing/checkout', { supabase, method: 'POST' }))} disabled={busy}>{copy.checkout}</Button>
-                {entitlement?.has_billing_record && <Button variant="outline" onClick={() => handleAction(() => apiFetch('/api/billing/portal', { supabase, method: 'POST' }))} disabled={busy}>{copy.portal}</Button>}
+                {billingReady && <Button onClick={() => handleAction(() => apiFetch('/api/billing/checkout', { supabase, method: 'POST' }))} disabled={busy}>{copy.checkout}</Button>}
+                {billingReady && entitlement?.has_billing_record && <Button variant="outline" onClick={() => handleAction(() => apiFetch('/api/billing/portal', { supabase, method: 'POST' }))} disabled={busy}>{copy.portal}</Button>}
               </div>
             </Panel>
           )}
@@ -361,14 +369,34 @@ export default function Plus() {
 
               <Panel title={copy.alertTitle} icon={Bell}>
                 <p className="mb-4 text-sm text-slate-600 dark:text-slate-300">{copy.alertIntro}</p>
-                <form onSubmit={(event) => { event.preventDefault(); handleAction(() => apiFetch('/api/me/alert-rules', { supabase, method: 'POST', body: JSON.stringify({ ...alertForm, threshold_minutes: Number(alertForm.threshold_minutes), days_of_week: [0, 1, 2, 3, 4, 5, 6], timezone }) })); }} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:items-end">
+                <form onSubmit={(event) => { event.preventDefault(); handleAction(() => apiFetch('/api/me/alert-rules', { supabase, method: 'POST', body: JSON.stringify({ ...alertForm, threshold_minutes: Number(alertForm.threshold_minutes), timezone }) })); }} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:items-end">
                   <SelectField label={copy.crossing} value={alertForm.saved_crossing_id} onChange={(event) => setAlertForm({ ...alertForm, saved_crossing_id: event.target.value })} required>
                     <option value="">—</option>{savedCrossings.map((saved) => <option key={saved.id} value={saved.id}>{crossingLabel(saved)}</option>)}
                   </SelectField>
                   <Field label={copy.threshold} type="number" min="0" max="600" value={alertForm.threshold_minutes} onChange={(event) => setAlertForm({ ...alertForm, threshold_minutes: event.target.value })} required />
                   <Field label={copy.from} type="time" value={alertForm.window_start} onChange={(event) => setAlertForm({ ...alertForm, window_start: event.target.value })} required />
                   <Field label={copy.until} type="time" value={alertForm.window_end} onChange={(event) => setAlertForm({ ...alertForm, window_end: event.target.value })} required />
-                  <Button type="submit" disabled={busy || !alertForm.saved_crossing_id || !profile?.email_opt_in}>{copy.addAlert}</Button>
+                  <fieldset className="sm:col-span-2 lg:col-span-5">
+                    <legend className="text-xs font-medium text-slate-700 dark:text-slate-300">{copy.days}</legend>
+                    <div className="mt-1 flex flex-wrap gap-2">
+                      {dayOptions.map(([day, label]) => (
+                        <label key={day} className="flex min-h-9 items-center gap-1.5 rounded-md border border-slate-300 bg-white px-2.5 text-xs text-slate-700 dark:border-gray-600 dark:bg-gray-800 dark:text-slate-200">
+                          <input
+                            type="checkbox"
+                            checked={alertForm.days_of_week.includes(day)}
+                            onChange={() => setAlertForm((current) => ({
+                              ...current,
+                              days_of_week: current.days_of_week.includes(day)
+                                ? current.days_of_week.filter((value) => value !== day)
+                                : [...current.days_of_week, day].sort((a, b) => a - b),
+                            }))}
+                          />
+                          {label}
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                  <Button type="submit" disabled={busy || !alertForm.saved_crossing_id || !profile?.email_opt_in || !alertForm.days_of_week.length}>{copy.addAlert}</Button>
                 </form>
                 <div className="mt-4 space-y-2">{alertRules.length ? alertRules.map((rule) => <div key={rule.id} className="flex items-center justify-between gap-3 rounded-lg bg-slate-50 px-3 py-2 text-sm dark:bg-gray-800"><span>{crossingLabel(savedCrossings.find((saved) => saved.id === rule.saved_crossing_id) || { port_number: rule.saved_crossing_id })} ≤ {rule.threshold_minutes} min</span><Button variant="ghost" size="sm" onClick={() => handleAction(() => apiFetch(`/api/me/alert-rules?id=${encodeURIComponent(rule.id)}`, { supabase, method: 'DELETE' }))} disabled={busy} aria-label={`${copy.remove} alert`}><Trash2 className="h-4 w-4" /></Button></div>) : <p className="text-sm text-slate-500">{copy.noAlerts}</p>}</div>
               </Panel>
