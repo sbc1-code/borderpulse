@@ -72,8 +72,9 @@ pricing promise until the PMF test in `docs/PMF-TEST.md` produces evidence.
   support, financial, marketing, and authenticated-QA gates. `/privacy/` and
   `/privacidad/` are draft surfaces, and account deletion is implemented but
   not provider-tested.
-- The CBP fetch workflow is currently healthy: GitHub Actions run 2227
+- The CBP fetch workflow is currently healthy: GitHub Actions run 2229
   completed successfully on 2026-09-22. Public publication is not healthy:
-  Pages run 1147 failed in `npm test`, and the public JSON still reports a
+  Pages run 1149 failed in `npm test`, and the public JSON still reports a
   2026-09-04 snapshot. The last successful Pages deploy was run 1020 on
-  2026-09-04.
+  2026-09-04. The isolated repair is pushed as `fix/restore-public-data` at
+  `fe0e0fe5`; it passes build, zero high advisories, and 396 browser checks.
