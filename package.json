@@ -7,7 +7,7 @@
     "dev": "vite",
     "operator:status": "node scripts/operator-status.mjs",
     "operator:verify": "npm run build && npm test",
-    "test": "npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:history && npm run test:audit && npm run test:bundle && npm run test:routes",
     "test:hours": "node --test scripts/test-operating-hours.mjs",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "test:routes": "node scripts/smoke-routes.mjs",
@@ -18,6 +18,7 @@
     "fetch:cbp": "node scripts/fetch-cbp.mjs",
     "fetch:fx": "node scripts/fetch-fx.mjs",
     "fetch:sb": "node scripts/fetch-sb.mjs",
+    "history:build": "node scripts/build-snapshot-history.mjs --include-current",
     "aggregates": "node scripts/build-aggregates.mjs",
     "rankings": "node scripts/build-rankings.mjs",
     "blog:index": "node scripts/build-blog-index.mjs",
@@ -33,7 +34,8 @@
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
     "test:trust": "node --test scripts/test-trust-state.mjs",
-    "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs"
+    "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
+    "test:history": "node --test scripts/test-snapshot-history.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

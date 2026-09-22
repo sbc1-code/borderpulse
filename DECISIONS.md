@@ -19,6 +19,16 @@ behind explicit approval gates.
 
 ---
 
+## 2026-09-22 · Materialize snapshot history before site builds
+
+The data-ingestion workflow may use full Git history to create
+`public/data/snapshot-history.json`, but `build-aggregates.mjs` consumes that
+explicit artifact and never calls `git log` or `git show`. This keeps Vercel,
+Pages, previews, and future agents from silently losing the 30-day product
+history when a checkout is shallow or a different host performs the build.
+
+---
+
 ## 2026-08-20 · Freshness thresholds come from measured delivery, not the cron
 
 Issue #58 asked for stale/fresh thresholds "derived from the configured

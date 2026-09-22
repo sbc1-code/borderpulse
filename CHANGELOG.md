@@ -18,6 +18,9 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   gate is intentionally not being weakened.
 - The browser smoke suite now chooses an available local preview port, so an
   abandoned development server cannot create a false release failure.
+- **30-day aggregates now use an explicit snapshot-history artifact.** The data
+  ingestion job materializes compact wait observations; deploy and anomaly
+  workflows no longer need Git history to build the free app.
 
 ## 2026-08-20
 

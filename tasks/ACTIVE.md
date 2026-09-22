@@ -11,8 +11,8 @@ green and the deployed artifact is verified.
 
 - [x] Repair the dependency security gate without weakening it; run the full
       release checks on the current remote `main`.
-- [ ] Remove the build's dependence on Git history for 30-day aggregates, or
-      replace it with an explicit, tested snapshot artifact.
+- [x] Remove the build's dependence on Git history for 30-day aggregates by
+      committing an explicit, tested snapshot-history artifact.
 - [ ] Produce a successful preview deployment on Vercel from the verified
       artifact; no production cutover yet.
 - [ ] Define the paid-beta data model and entitlement contract before adding
@@ -40,3 +40,7 @@ green and the deployed artifact is verified.
   frontmatter dependency with a small YAML-only local plugin plus a regression
   test. The two React Router moderates remain accepted by advisory ID.
 - No production deployment, Stripe change, or customer communication occurred.
+
+- `public/data/snapshot-history.json` contains 295 compact snapshots covering
+  the current 30-day window; aggregate tests prove the build reads the artifact
+  and not Git history.
