@@ -215,10 +215,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     const title = language === 'en'
-      ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
+      ? 'Border Pulse | Current US-Mexico Border Wait Times'
       : 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real';
     const description = language === 'en'
-      ? 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
+      ? 'Current wait times at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
       : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
     updatePageMeta({
       title,

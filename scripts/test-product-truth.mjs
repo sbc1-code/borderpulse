@@ -10,6 +10,8 @@ const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 test('public trust copy does not claim live southbound estimates', () => {
   const homepage = read('index.html');
   const footer = read('src/components/dashboard/AboutFooter.jsx');
+  const seo = read('src/lib/seo.js');
+  const dashboard = read('src/pages/Dashboard.jsx');
 
   assert.match(homepage, /paid southbound estimates are paused/i);
   assert.match(homepage, /official northbound data only/i);
@@ -17,4 +19,7 @@ test('public trust copy does not claim live southbound estimates', () => {
   assert.match(footer, /official northbound CBP data only/i);
   assert.doesNotMatch(homepage, /estimates delay at major crossings using live routing/i);
   assert.doesNotMatch(footer, /Southbound delays are estimated by Border Pulse/i);
+  for (const source of [homepage, seo, dashboard]) {
+    assert.doesNotMatch(source, /Real-Time US-Mexico/i);
+  }
 });

@@ -43,7 +43,7 @@ function renderCrossingHead(crossing, slug, aggregate) {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
   const title = `${crossing.name} Border Wait Time Today: Live CBP Data (2026) | Border Pulse`;
-  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
+  const desc = `Current ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
@@ -354,7 +354,7 @@ function renderBestTimeHead(crossing, slug, aggregate) {
 
 function renderEmbedHead(crossing, slug) {
   const title = `${crossing.name} wait time | Border Pulse`;
-  const desc = `Live wait time at ${crossing.name}, refreshed regularly.`;
+  const desc = `Current wait time at ${crossing.name}, refreshed regularly.`;
   // Canonical points to the full crossing page so search engines consolidate
   // any accidental indexing on the canonical URL.
   const canonical = `${BASE}/crossing/${slug}/`;
@@ -734,7 +734,7 @@ async function main() {
     if (!cA || !cB) continue;
     const pair = `${aSlug}-vs-${bSlug}`;
     const title = `${cA.name} vs ${cB.name}: Which Crossing Is Faster? (2026 Data) | Border Pulse`;
-    const desc = `Live wait times, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. Pick the faster crossing right now.`;
+    const desc = `Current wait times, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. Pick the faster crossing right now.`;
     const canonical = `${BASE}/compare/${pair}/`;
     const ogImage = `${BASE}/og-card.png`;
     const breadcrumb = {
@@ -760,7 +760,7 @@ async function main() {
   for (const c of crossings.filter(hasPedestrianLane)) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
-    const title = `Walk or Drive Across ${c.name}? Live Wait Comparison (2026) | Border Pulse`;
+    const title = `Walk or Drive Across ${c.name}? Current Wait Comparison (2026) | Border Pulse`;
     const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
     const canonical = `${BASE}/walk-or-drive/${slug}/`;
     const ogImage = `${BASE}/og/${slug}.png`;

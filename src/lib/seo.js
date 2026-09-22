@@ -42,10 +42,10 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
  */
 export function resetPageMeta() {
   document.documentElement.lang = 'en';
-  document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
-  setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
-  setMeta('og:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times', 'property');
-  setMeta('og:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
+  document.title = 'Border Pulse | Current US-Mexico Border Crossing Wait Times';
+  setMeta('description', 'Current wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
+  setMeta('og:title', 'Border Pulse | Current US-Mexico Border Crossing Wait Times', 'property');
+  setMeta('og:description', 'Current wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
   setMeta('og:image', 'https://borderpulse.com/og-card.png', 'property');
   setMeta('og:url', 'https://borderpulse.com/', 'property');
   const link = document.querySelector('link[rel="canonical"]');

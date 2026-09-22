@@ -1,6 +1,6 @@
 # Border Pulse
 
-Real-time US-Mexico border wait times. Static site on GitHub Pages at [borderpulse.com](https://borderpulse.com).
+Current US-Mexico border wait times. Static site on GitHub Pages at [borderpulse.com](https://borderpulse.com).
 
 ## Stack
 - Vite + React 18 + Tailwind + shadcn/ui
