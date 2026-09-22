@@ -27,6 +27,10 @@ cutover until provider, privacy, financial, and QA gates are verified.
       opt-in and ownership checks.
 - [x] Add local HTTP contract checks proving paid routes fail closed without
       provider configuration; keep live migration/provider QA open.
+- [ ] Restore public data publication: CBP fetch runs are succeeding, but the
+      GitHub Pages deploy gate on `origin/main` is failing its dependency audit.
+      Do not call the data pipeline live until `borderpulse.com/data/crossings.json`
+      reads a current snapshot again.
 - [ ] Run product, privacy, support, financial, marketing, accessibility, and
       production QA gates; request approval before live billing or cutover.
 - [ ] Resolve the owner choices in `docs/OWNER-APPROVAL.md`; only then create
@@ -69,3 +73,8 @@ cutover until provider, privacy, financial, and QA gates are verified.
   support, financial, marketing, and authenticated-QA gates. `/privacy/` and
   `/privacidad/` are draft surfaces, and account deletion is implemented but
   not provider-tested.
+- The CBP fetch workflow is currently healthy: GitHub Actions run 2227
+  completed successfully on 2026-09-22. Public publication is not healthy:
+  Pages run 1147 failed in `npm test`, and the public JSON still reports a
+  2026-09-04 snapshot. The last successful Pages deploy was run 1020 on
+  2026-09-04.

@@ -6,6 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const { freshnessOf } = await import('../src/lib/trustState.js');
 
 function git(args) {
   try {
@@ -44,6 +45,21 @@ async function checkLiveSite() {
   }
 }
 
+async function checkLiveData() {
+  try {
+    const response = await fetch('https://borderpulse.com/data/crossings.json', {
+      headers: { 'user-agent': 'borderpulse-operator-status/1.0' },
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!response.ok) return { state: `HTTP ${response.status}`, age: null, count: null };
+    const snapshot = await response.json();
+    const { state, age } = freshnessOf(snapshot?.fetched_at);
+    return { state, age, count: snapshot?.count ?? snapshot?.crossings?.length ?? null };
+  } catch (error) {
+    return { state: `unreachable (${error.message})`, age: null, count: null };
+  }
+}
+
 const branch = git(['branch', '--show-current']) || '(detached)';
 const head = git(['rev-parse', '--short', 'HEAD']) || '(unknown)';
 const upstream = git(['rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{upstream}']) || 'origin/main';
@@ -51,6 +67,7 @@ const remote = git(['rev-parse', '--short', upstream]) || '(not fetched)';
 const clean = git(['status', '--short']) === '';
 const relation = git(['rev-list', '--left-right', '--count', `HEAD...${upstream}`]) || '(unknown)';
 const live = await checkLiveSite();
+const data = await checkLiveData();
 
 console.log('BorderPulse operator status');
 console.log('===========================');
@@ -63,6 +80,8 @@ console.log(`Worktree:    ${clean ? 'clean' : 'has uncommitted changes'}`);
 console.log(`Live site:   ${live.state}`);
 console.log(`Live server: ${live.server}`);
 console.log(`Live update: ${live.updated}`);
+console.log(`Live data:   ${data.state}${data.age == null ? '' : ` (${data.age} min old)`}`);
+console.log(`Data count:  ${data.count ?? '(unknown)'}`);
 console.log('');
 
 if (!clean) console.log('Next safe move: inspect the worktree before starting another task.');

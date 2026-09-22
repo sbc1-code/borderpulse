@@ -18,6 +18,9 @@ customer message.
 ## Technical and deployment
 
 - [x] Release baseline and explicit snapshot-history artifact are tested.
+- [ ] Public data publication is current: the scheduled CBP fetch succeeds,
+      the Pages/Vercel publication succeeds, and the live
+      `/data/crossings.json` snapshot is fresh.
 - [x] Vercel preview builds successfully and exposes the protected API
       functions; preview remains behind Vercel Authentication.
 - [x] Server-side entitlement checks fail closed; RLS migration and delivery
