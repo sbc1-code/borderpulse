@@ -25,7 +25,12 @@ commercial evidence required before resuming paid infrastructure.
 - [ ] Restore public data publication: CBP fetch runs are succeeding, but the
       GitHub Pages deploy gate on `origin/main` is failing its dependency audit.
       Do not call the data pipeline live until `borderpulse.com/data/crossings.json`
-      reads a current snapshot again.
+      reads a current snapshot again. Repair PR [#88](https://github.com/sbc1-code/borderpulse/pull/88)
+      is open and mergeable; its exact `fe0e0fe5` commit passed the local
+      release checks. PR #88 has no GitHub check because the base `main`
+      branch does not yet contain `.github/workflows/verify.yml`. A merge
+      remains a separate publication decision and must be verified by the
+      actual Pages run and live JSON readback.
 - [ ] Run a small discovery round and record repeated jobs, opt-ins, beta
       commitments, price reactions, and actual operating-cost inputs in
       `docs/PMF-TEST.md`.
