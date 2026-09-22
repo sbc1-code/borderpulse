@@ -76,7 +76,7 @@ create table if not exists public.entitlements (
   stripe_customer_id text unique,
   stripe_subscription_id text unique,
   plan_key text not null default 'plus_monthly' check (plan_key = 'plus_monthly'),
-  status text not null check (status in ('active', 'past_due', 'canceled', 'unpaid', 'incomplete', 'incomplete_expired', 'trialing')),
+  status text not null check (status in ('active', 'past_due', 'canceled', 'unpaid', 'incomplete', 'incomplete_expired', 'trialing', 'paused')),
   current_period_end timestamptz,
   source_event_id text,
   updated_at timestamptz not null default now()

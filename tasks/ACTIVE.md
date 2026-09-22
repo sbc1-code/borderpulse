@@ -48,3 +48,6 @@ green and the deployed artifact is verified.
 - `docs/PAID-BETA-CONTRACT.md` defines the proposed BorderPulse Plus boundary,
   minimal tables, server invariants, and owner approval gates. No auth, Stripe,
   email provider, or customer data has been added.
+- The `api/` foundation contains fail-closed Vercel handlers for entitlement
+  readback, Checkout, Customer Portal, and signed Stripe subscription webhooks.
+  They require test configuration and have not been connected to a provider.

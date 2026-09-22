@@ -40,6 +40,9 @@ belong underneath as evidence.
 - The planned v1 stack is Vercel, Supabase, Stripe, one transactional email
   provider, and the existing data pipeline. Do not add Firebase, SMS, or paid
   southbound maps unless the product decision changes.
+- The repository now contains a test-only Supabase migration and Vercel API
+  foundation. Treat them as implementation work, not proof that accounts,
+  billing, or paid access exist.
 - Production deployment and live billing are separate approvals. A green local
   test is not proof of either one.
 
