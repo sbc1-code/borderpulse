@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "npm run test:hours && npm run test:trust && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:audit && npm run test:bundle && npm run test:routes",
     "test:hours": "node --test scripts/test-operating-hours.mjs",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "test:routes": "node scripts/smoke-routes.mjs",
@@ -30,7 +30,8 @@
     "news:classify": "node scripts/build-curation-queue.mjs",
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
-    "test:trust": "node --test scripts/test-trust-state.mjs"
+    "test:trust": "node --test scripts/test-trust-state.mjs",
+    "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
@@ -101,7 +102,6 @@
     "playwright-core": "^1.62.1",
     "postcss": "^8.5.3",
     "remark-frontmatter": "^5.0.0",
-    "remark-mdx-frontmatter": "^5.2.0",
     "rss-parser": "^3.13.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.2",
