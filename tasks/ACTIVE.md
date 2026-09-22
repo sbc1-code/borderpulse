@@ -8,6 +8,8 @@ not a launch commitment. Do not create providers, invite beta users, or make a
 pricing promise until the PMF test in `docs/PMF-TEST.md` produces evidence.
 The current business recommendation and testable offer hypotheses are in
 `docs/BUSINESS-VIABILITY.md`.
+Use `docs/MEASUREMENT-PLAN.md` for the exact reliability, product-use, and
+commercial evidence required before resuming paid infrastructure.
 
 ## Next tasks
 
