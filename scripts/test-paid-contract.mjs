@@ -63,10 +63,13 @@ async function withoutPaidEnvironment(callback) {
     'PUBLIC_APP_URL', 'CRON_SECRET', 'RESEND_API_KEY', 'ALERT_FROM_EMAIL',
   ];
   const previous = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
+  const previousConsoleError = console.error;
   for (const key of keys) delete process.env[key];
+  console.error = () => {};
   try {
     return await callback();
   } finally {
+    console.error = previousConsoleError;
     for (const key of keys) {
       if (previous[key] === undefined) delete process.env[key];
       else process.env[key] = previous[key];
