@@ -1,15 +1,18 @@
 # Active BorderPulse execution
 
-## Current stage: validate free-product demand before paid infrastructure
+## Current stage: free-product reliability and workflow discovery
 
-The public site is still served from GitHub Pages. The free product remains the
-near-term priority. The paid workflow is preserved in PR #87 as a later option,
-not a launch commitment. Do not create providers, invite beta users, or make a
-pricing promise until the PMF test in `docs/PMF-TEST.md` produces evidence.
-The current business recommendation and testable offer hypotheses are in
-`docs/BUSINESS-VIABILITY.md`.
-Use `docs/MEASUREMENT-PLAN.md` for the exact reliability, product-use, and
-commercial evidence required before resuming paid infrastructure.
+The public site remains on GitHub Pages, whose current CBP JSON is a fallback.
+The free product remains the near-term priority. The protected Vercel preview
+has a tested five-minute CDN-cached official-data function, but has no
+`borderpulse.com` domain or production cutover. The paid workflow is preserved
+in PR #87 as a later option, not a launch commitment.
+
+Do not create providers, invite beta users, promise a price, or publish a paid
+offer. `docs/BUSINESS-VIABILITY.md` records why generic widgets, public-data
+APIs, and basic alerts are not differentiated enough. Use
+`docs/SAN-YSIDRO-WORKFLOW-DISCOVERY.md` for the authorized future discovery
+cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
 
 ## Next tasks
 
@@ -22,20 +25,22 @@ commercial evidence required before resuming paid infrastructure.
 - [x] Define the proposed paid-beta data model and entitlement contract before
       adding auth or checkout UI; see `docs/PAID-BETA-CONTRACT.md`. Final offer,
       price, legal, and billing approvals remain open.
-- [ ] Restore public data publication: CBP fetch runs are succeeding, but the
-      GitHub Pages deploy gate on `origin/main` is failing its dependency audit.
-      Do not call the data pipeline live until `borderpulse.com/data/crossings.json`
-      reads a current snapshot again. Repair PR [#88](https://github.com/sbc1-code/borderpulse/pull/88)
-      is open and mergeable at `f2ed087f`; its exact head passed two GitHub
-      release checks plus the local release checks. The PR also adds the
-      verification workflow to `main` and makes it run on future `fix/**`
-      branches. A merge remains a separate publication decision and must be
-      verified by the actual Pages run and live JSON readback.
-- [ ] Run a small discovery round and record repeated jobs, opt-ins, beta
-      commitments, price reactions, and actual operating-cost inputs in
-      `docs/PMF-TEST.md`.
-- [ ] Decide whether one paid job has enough evidence to justify resuming PR
-      #87, reshaping it, or leaving BorderPulse free for now.
+- [x] Restore public data publication. PR [#88](https://github.com/sbc1-code/borderpulse/pull/88)
+      merged at `5c0798ab`; Pages run `35791687491` passed and live JSON read
+      back 42 official crossings at `2026-09-22T23:06:59Z`.
+- [x] Produce and verify the protected Vercel preview data path. Commit
+      `7e24c67a` adds `api/public/crossings`; preview
+      `dpl_GULTHFLZxvbDa4sjuwhN22DuARWa` lists it as a deployed 10-second Node
+      function. It has not yet had an authorized browser/runtime check.
+- [ ] Obtain authorized Umami and Vercel-preview access, then read the actual
+      decision funnel and test the live function/CDN response before any domain
+      cutover decision.
+- [ ] After separate authorization, conduct the five-account San Ysidro-Tijuana
+      workflow discovery cohort. Do not send outreach yet; use
+      `docs/SAN-YSIDRO-WORKFLOW-DISCOVERY.md`.
+- [ ] Decide only from evidence: offer one manual pilot after three independent
+      repetitions of the same differentiated workflow plus a written payment
+      commitment, or keep the product free and stop commercial feature work.
 
 ## Parked until demand evidence
 
@@ -52,7 +57,25 @@ commercial evidence required before resuming paid infrastructure.
 - Preview route smoke tests pass and the free public experience remains intact.
 - No production deployment or live Stripe charge occurs during baseline work.
 
-## Verified in this session
+## Current verified state, 2026-09-22
+
+- The public Pages fallback is current at the recorded live readback above, but
+  successful GitHub scheduled fetches that day were separated by 2h48 to 5h27.
+  Do not make a 15-minute freshness promise from the Action schedule.
+- `agent/operator-control-plane` commit `7e24c67a` passed the full
+  `npm run operator:verify` suite with 402 desktop/mobile browser navigations,
+  its focused public-function tests, a direct official CBP writer fetch, local
+  Vercel build, and two remote release checks. Commit `536e7e7f` revised the
+  commercial hypothesis after the competitive check; its two remote release
+  checks also passed.
+- The Vercel preview is protected by existing Vercel Authentication. Anonymous
+  access redirects to SSO, so its remote function response and CDN headers are
+  not yet verified. No protection setting was changed.
+- No Vercel production deployment, custom-domain change, provider setup,
+  database, customer data, billing action, customer invite, or marketing
+  publication occurred.
+
+## Historical baseline evidence
 
 - Remote baseline reconciled to `12808875` before changes.
 - `npm ci` installed 437 packages from the updated lockfile.
