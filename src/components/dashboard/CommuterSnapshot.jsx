@@ -21,7 +21,7 @@ const TIER_META = {
     bar: 'bg-amber-500',
   },
   heavy: {
-    label: { en: 'Heavy right now', es: 'Pesado ahora' },
+    label: { en: 'Heavy reported wait', es: 'Espera reportada alta' },
     chip: 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-200 dark:border-rose-900',
     bar: 'bg-rose-500',
   },
@@ -88,7 +88,7 @@ export default function CommuterSnapshot({
     }
 
     const sorted = [...reporting].sort((a, b) => a.wait - b.wait);
-    // MEDIAN, not mean. Border waits are heavily right-skewed: a measured live
+    // MEDIAN, not mean. Border waits are heavily right-skewed: a measured
     // sample of 33 reporting ports ran mean 35 against median 15, a 133%
     // overstatement, because a tail of 90-170 minute ports drags the average.
     // The headline is presented as what a typical crossing looks like, so it
@@ -141,7 +141,7 @@ export default function CommuterSnapshot({
           <div className="mt-2.5 flex items-end justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-wide text-slate-400">
-                {language === 'en' ? 'Median wait now' : 'Espera mediana ahora'}
+                {language === 'en' ? 'Median reported wait' : 'Espera mediana reportada'}
               </p>
               <p className="mt-0.5 text-3xl font-bold leading-none tabular-nums sm:text-4xl">
                 {formatWait(stats.median)}

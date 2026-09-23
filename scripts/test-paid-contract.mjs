@@ -229,7 +229,7 @@ test('Stripe subscription state is applied through the ordered database function
   assert.doesNotMatch(webhookRoute, /entitlements['\"]\.upsert/);
 });
 
-test('the Plus screen exposes weekday scheduling and does not offer checkout before billing is configured', () => {
+test('the preserved Plus prototype is schedule-aware and does not offer checkout before billing is configured', () => {
   const plusScreen = fs.readFileSync(path.join(root, 'src/pages/Plus.jsx'), 'utf8');
   assert.match(entitlementRoute, /paid_workflow_ready:/);
   assert.match(plusScreen, /days_of_week/);

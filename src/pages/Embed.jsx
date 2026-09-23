@@ -7,6 +7,7 @@ import { nowInTz } from '@/components/utils/crossingMeta';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import { isSparseCell } from '@/lib/aggregates';
 import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
+import { useFreshnessClock } from '@/lib/useFreshnessClock';
 
 const FLAG = { CA: '🇺🇸', AZ: '🇺🇸', NM: '🇺🇸', TX: '🇺🇸' };
 
@@ -32,6 +33,7 @@ export default function Embed() {
   const [crossings, setCrossings] = useState([]);
   const [aggregate, setAggregate] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const freshnessNow = useFreshnessClock();
 
   useEffect(() => {
     let cancelled = false;
@@ -93,7 +95,7 @@ export default function Embed() {
   const updatedAt = crossing
     ? (isSouthbound ? crossing.southbound_updated_at : crossing.updated_at)
     : null;
-  const freshness = freshnessOf(updatedAt);
+  const freshness = freshnessOf(updatedAt, freshnessNow);
   const currentLabel = liveLabel(freshness.state, freshness.age, lang);
   const hasFreshOfficialReading = !isSouthbound && freshness.state === FRESHNESS.FRESH;
   const snapshotLabel = hasFreshOfficialReading

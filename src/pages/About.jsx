@@ -63,7 +63,7 @@ export default function About() {
       {
         value: 'CBP',
         label: language === 'en' ? 'Source of record' : 'Fuente original',
-        sub: language === 'en' ? 'Live upstream feed' : 'Feed en vivo',
+        sub: language === 'en' ? 'Official upstream feed' : 'Feed oficial',
       },
       {
         value: stats.blog_posts ?? 12,

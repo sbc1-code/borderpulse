@@ -32,6 +32,12 @@ cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
       `7e24c67a` adds `api/public/crossings`; preview
       `dpl_GULTHFLZxvbDa4sjuwhN22DuARWa` lists it as a deployed 10-second Node
       function. It has not yet had an authorized browser/runtime check.
+- [x] Complete a product-truth audit of the free app. “Live” now depends on a
+      fresh source snapshot across the dashboard, comparison, detail, embed,
+      share, and walk-or-drive flows; generated route heads no longer promise
+      live/current readings; and `/plus/` is a non-offering research notice
+      removed from public navigation and the sitemap. The preserved prototype
+      and provider code remain fail-closed for a later evidence gate.
 - [ ] Obtain authorized Umami and Vercel-preview access, then read the actual
       decision funnel and test the live function/CDN response before any domain
       cutover decision.

@@ -68,8 +68,8 @@ export default function EmbedSnippetModal({ open, onOpenChange, slug, language =
         <div className="space-y-4">
           <p className="text-xs text-slate-500 dark:text-slate-400">
             {language === 'en'
-              ? 'Drop this iframe on your site to show live wait time. Free, no API key.'
-              : 'Pon este iframe en tu sitio para mostrar el tiempo de espera en vivo. Gratis, sin API key.'}
+              ? 'Drop this iframe on your site to show the latest official CBP wait report. Free, no API key.'
+              : 'Pon este iframe en tu sitio para mostrar el último reporte oficial de espera de CBP. Gratis, sin API key.'}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">

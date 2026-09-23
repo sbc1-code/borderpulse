@@ -56,7 +56,10 @@ function SelectField({ label, children, ...props }) {
   );
 }
 
-export default function Plus() {
+// This prototype remains in the repository so it can be evaluated after the
+// documented demand gate. It is deliberately not rendered by the public
+// route: no account, email delivery, checkout, or customer promise is active.
+function PlusPrototype() {
   const language = usePersistentLanguage();
   const configured = hasSupabaseBrowserConfig();
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
@@ -424,6 +427,49 @@ export default function Plus() {
       )}
 
       <p className="mt-5 flex items-center gap-1 text-xs text-slate-500"><ExternalLink className="h-3 w-3" /> {copy.noPaywall}</p>
+    </div>
+  );
+}
+
+export default function Plus() {
+  const language = usePersistentLanguage();
+  const isSpanish = language === 'es';
+
+  useEffect(() => {
+    const title = isSpanish
+      ? 'Border Pulse | Investigación de producto de pago'
+      : 'Border Pulse | Paid product research';
+    const description = isSpanish
+      ? 'Border Pulse mantiene los reportes públicos de CBP gratuitos mientras investiga qué flujo de trabajo podría justificar un producto de pago.'
+      : 'Border Pulse keeps public CBP reports free while it researches which workflow, if any, could justify a paid product.';
+    updatePageMeta({ title, description, ogTitle: title, ogDescription: description, ogUrl: 'https://borderpulse.com/plus/', canonical: 'https://borderpulse.com/plus/' });
+    return () => resetPageMeta();
+  }, [isSpanish]);
+
+  return (
+    <div className="mx-auto max-w-[760px] p-4 sm:p-6">
+      <Link to="/" className="text-sm text-emerald-700 hover:underline dark:text-emerald-400">
+        ← {isSpanish ? 'Volver al panel gratuito' : 'Back to the free dashboard'}
+      </Link>
+      <section className="mt-5 rounded-xl border border-slate-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900/50 sm:p-7">
+        <Lock className="h-6 w-6 text-emerald-700 dark:text-emerald-400" aria-hidden="true" />
+        <h1 className="mt-3 text-2xl font-bold text-slate-950 dark:text-white">
+          {isSpanish ? 'El producto de pago está en investigación' : 'The paid product is in research'}
+        </h1>
+        <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+          {isSpanish
+            ? 'Los reportes oficiales de espera de CBP siguen siendo gratuitos. Border Pulse no está aceptando registros, creando cuentas, enviando alertas ni cobrando mientras prueba si existe un flujo de trabajo específico que valga la pena pagar.'
+            : 'Official CBP wait reports remain free. Border Pulse is not accepting sign-ups, creating accounts, sending alerts, or taking payment while it tests whether a specific workflow is worth paying for.'}
+        </p>
+        <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+          {isSpanish
+            ? 'La siguiente puerta es evidencia, no software: cinco entrevistas con usuarios de un corredor, tres repeticiones del mismo problema y un compromiso escrito para un piloto manual.'
+            : 'The next gate is evidence, not software: five interviews in one corridor, three repetitions of the same problem, and a written commitment for a manual pilot.'}
+        </p>
+        <Link to="/methodology/" className="mt-5 inline-flex text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+          {isSpanish ? 'Ver metodología y fuentes' : 'See methodology and sources'} →
+        </Link>
+      </section>
     </div>
   );
 }
