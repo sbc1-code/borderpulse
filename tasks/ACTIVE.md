@@ -74,6 +74,13 @@ cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
 - No Vercel production deployment, custom-domain change, provider setup,
   database, customer data, billing action, customer invite, or marketing
   publication occurred.
+- Commit `e129c473` reconciles the old $5/provider-setup handoff with the
+  evidence-based commercial decision: a business pilot remains manual, and the
+  preserved consumer-alert stack stays parked until its separate user-demand
+  gate passes. It also makes the embed reserve “Live” for fresh official data
+  and makes the parked evaluator read the current official feed rather than
+  the slow static fallback. Full operator verification (402 browser
+  navigations), local Vercel packaging, and two remote release checks passed.
 
 ## Historical baseline evidence
 
