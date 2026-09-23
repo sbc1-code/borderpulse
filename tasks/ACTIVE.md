@@ -109,6 +109,16 @@ until the evidence gate is genuinely met.
   `/plus/` requests both return the existing SSO 302. No production target,
   custom domain, environment variable, provider, billing, or account state
   changed.
+- Commit `a6f1a7c0` aligned the public product copy and agent-facing planning
+  with the evidence-led commercial rule. It is deployed as protected Vercel
+  preview `dpl_5LZJj5KhdHhqaYm6hWroG1J451YC` at
+  `https://borderpulse-2cd1m258r-sbc1-codes-projects.vercel.app`. Vercel
+  inspection reports target `preview`, status Ready, the current
+  official-data function, and the preserved fail-closed billing/alert
+  functions; `vercel env ls` reports no environment variables. Anonymous
+  `/` and `/api/public/crossings` requests receive the existing Vercel SSO
+  302, so the protected runtime still needs authorized browser readback. No
+  production target, domain, provider, billing, or user state changed.
 
 ## Historical baseline evidence
 
