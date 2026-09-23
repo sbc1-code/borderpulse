@@ -1,4 +1,4 @@
-# BorderPulse PMF test
+# BorderPulse commercial-discovery test
 
 BorderPulse has a useful free product and a technically credible paid-beta
 branch. That is not evidence that a subscription is wanted. Keep the paid
@@ -7,16 +7,19 @@ promote the paid workflow until this test produces stronger demand evidence.
 
 ## Decision to answer
 
-Who has a recurring border-crossing problem, which outcome matters enough to
-pay for, and what price feels reasonable for that outcome?
+Which buyer has a repeated border-crossing job that free alternatives do not
+solve, which outcome matters enough to pay for, and what support burden would
+make a paid offer fair?
 
-The test should compare jobs, not merely feature names:
+The test should compare jobs, not merely feature names. The first path is a
+business workflow; consumer alerts are a later, separate path:
 
-- **Timely alerts:** “Tell me when my usual crossing is unusually bad.”
-- **Planning history:** “Help me choose a crossing and time from trustworthy
+- **Business workflow:** “Give my customer, driver, or staff member a useful
+  next step when a named corridor condition changes.”
+- **Consumer timely alert:** “Tell me when my usual crossing is unusually
+  bad.”
+- **Consumer planning:** “Help me choose a crossing and time from trustworthy
   recent patterns.”
-- **Trip decision support:** “Help me leave at the right time for an arrival
-  target.”
 
 Do not assume that saved crossings, email, SMS, southbound coverage, or a
 generic “Plus” tier is the winning job.
@@ -33,20 +36,32 @@ generic “Plus” tier is the winning job.
    alert/early-access interest. Treat page views as usage evidence, not payment
    evidence.
 
-## Small discovery round
+## First discovery round: one business segment, one corridor
 
-Over roughly two weeks, reach 10 real or highly relevant border travelers and
-ask about their last crossing decision. For each person, record:
+Use the five-account San Ysidro cohort in
+`SAN-YSIDRO-WORKFLOW-DISCOVERY.md`. Do not pitch BorderPulse or quote a price.
+Ask each business about a recent operational or customer-facing crossing
+decision. Record:
 
-- crossing pair, direction, frequency, and consequence of a bad wait;
-- what they use today and what is missing;
-- which of the three jobs above they would use repeatedly;
-- whether they would try it, join a beta, pay once for a pilot, or pay monthly;
-- the price reaction to a concrete outcome, tested around a modest range such
-  as $5–$10/month rather than presented as a final price.
+- corridor, affected customer/staff action, frequency, and consequence of a
+  bad wait;
+- what they use today, including free data/widgets, and what remains manual;
+- the exact downstream job and an existing instruction or escalation they use;
+- whether a narrowly scoped pilot would reduce a real support or operational
+  burden; and
+- a written commitment only after the same workflow independently repeats.
 
 Ask for behavior and commitment, not compliments. “That sounds useful” is
-interest; an opt-in, scheduled pilot, or payment is stronger evidence.
+interest; a written pilot scope or payment commitment is stronger evidence. Do
+not test price ranges until a buyer has named the outcome and support burden.
+
+## Separate consumer-alert path
+
+Only use this path if user evidence, rather than the business cohort, points to
+one recurring consumer job. Over roughly two weeks, interview 10 qualified
+frequent travelers. Require five explicit opt-ins for the same job, three
+private-beta commitments, and one payment commitment before choosing any price
+or reopening the preserved alert/account implementation.
 
 ## Cost and maintenance model
 
@@ -77,21 +92,25 @@ resuming the paid build.
 
 ## Promotion gate
 
-Resume paid implementation only if the evidence supports it. A practical
-minimum is:
+Offer one manual business pilot only if all of the following are true:
 
-- 10 qualified conversations;
-- 5 explicit opt-ins for the same paid job;
-- 3 people willing to use a private beta;
-- at least 1 paid pilot or equivalent concrete payment commitment.
+- five qualified conversations in one segment/corridor;
+- three independent accounts identify the same downstream job beyond displaying
+  public data; and
+- one accepts a written, time-bounded paid-pilot scope.
 
-If the evidence points to a different job, rewrite the paid contract before
-writing more billing or account code. If there is no repeated pain, keep
-BorderPulse free and useful rather than manufacturing a subscription.
+If consumer evidence wins instead, meet the consumer gate above and rewrite the
+paid contract before writing more billing or account code. If there is no
+repeated pain, keep BorderPulse free and useful rather than manufacturing a
+subscription.
 
 ## Later
 
-If the gate passes, resume the preserved sequence: choose the paid job and
+If the business gate passes, fulfill one manual pilot first. Do not connect a
+provider or reuse the consumer-alert stack unless several business pilots
+repeat the same support pattern and a business-specific contract is approved.
+
+If the consumer gate passes, rewrite the paid contract, choose the paid job and
 price, create isolated test providers, run authenticated end-to-end QA, then
 make a separate production decision. The existing paid branch is an option,
 not a commitment to its current feature boundary or price.

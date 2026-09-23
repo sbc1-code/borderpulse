@@ -13,8 +13,8 @@ code shipped, or a payment integration as proof of product-market fit.
    comparison, sharing, or embedding?
 3. Is the first paid buyer a recurring traveler or a business serving border
    travelers?
-4. Should we run a business widget pilot, resume consumer alerts, or keep the
-   product free?
+4. Should we test a manual business workflow pilot, resume consumer alerts, or
+   keep the product free?
 
 ## North-star metric
 
@@ -42,8 +42,8 @@ add a target only after two clean weeks of readback.
 
 | Health area | Metric | Why it matters | Current evidence |
 | --- | --- | --- | --- |
-| Trust | Public snapshot age and fresh/stale state | A stale data product cannot earn repeat use or sell a widget. | Live JSON is stale as of 2026-09-22. |
-| Reliability | Successful scheduled fetch-to-publication cycles | Separates source collection from customer-visible delivery. | Fetch succeeds; Pages publication fails. |
+| Trust | Public snapshot age and fresh/stale state | A stale data product cannot earn repeat use or support a workflow. | Re-read with `npm run operator:status` before each review. |
+| Reliability | Successful scheduled fetch-to-publication cycles | Separates source collection from customer-visible delivery. | Pages fallback is recovered, but observed schedule gaps remain; the Vercel data function is verified only in its protected preview. |
 | Acquisition | Visitors and landing-page/channel mix | Shows whether the free distribution surface reaches relevant people. | Requires Umami dashboard readback. |
 | Activation | QDA divided by dashboard-page views | Indicates whether visitors find a crossing decision useful. | Events exist; no readback yet. |
 | Engagement | QDA mix by crossing, region, language, and action | Identifies the repeated job worth improving. | Events partly capture region/crossing; no readback yet. |
@@ -87,12 +87,13 @@ commercial decision:
   live;
 - a written recovery path exists for source, build, and deployment failure.
 
-The repair branch `fix/restore-public-data` is the current candidate to clear
-this gate. It has no authority to publish by itself.
+The Pages repair has been promoted. The remaining reliability question is
+observed schedule cadence and authorized browser readback of the protected
+Vercel candidate, not whether the static artifact exists.
 
 ## Commercial gates
 
-### Business widget/data pilot
+### Business workflow pilot
 
 Proceed from discovery to one manual pilot only when all are true:
 

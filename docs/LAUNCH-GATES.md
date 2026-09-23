@@ -10,10 +10,15 @@ a live charge, or a customer message.
       data, crossing pages, comparisons, best-time views, bilingual guidance.
 - [ ] PMF discovery confirms one recurring paid job, a plausible price range,
       and enough concrete opt-ins before the paid workflow resumes.
-- [x] Plus boundary is written in `PAID-BETA-CONTRACT.md`: saved northbound
-      crossings, bounded alert rules, opt-in email, and delivery history.
-- [ ] Owner approves the final name, promise, founding price, participants,
-      and public/private beta boundary.
+- [x] A parked consumer-alert technical option is documented in
+      `PAID-BETA-CONTRACT.md`; it is not the selected paid offer.
+- [ ] Business discovery identifies one repeated downstream workflow and one
+      written paid-pilot commitment before any business-specific paid contract
+      is written.
+- [ ] Consumer discovery independently passes its stricter gate before the
+      parked consumer-alert option is reopened.
+- [ ] Owner approves the selected offer's final name, promise, price,
+      participants, and public/private boundary after the relevant evidence.
 - [ ] Personal history definition is accepted as saved-crossing history plus
       alert-delivery history for the first beta.
 

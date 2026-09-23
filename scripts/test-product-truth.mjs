@@ -23,3 +23,11 @@ test('public trust copy does not claim live southbound estimates', () => {
     assert.doesNotMatch(source, /Real-Time US-Mexico/i);
   }
 });
+
+test('embed cards reserve the Live label for fresh official data', () => {
+  const embed = read('src/pages/Embed.jsx');
+  assert.match(embed, /freshnessOf\(updatedAt\)/);
+  assert.match(embed, /liveLabel\(freshness\.state, freshness\.age, lang\)/);
+  assert.match(embed, /freshness\.state === FRESHNESS\.FRESH/);
+  assert.doesNotMatch(embed, /\{lang === 'es' \? 'En vivo' : 'Live'\} · \{formatRelative\(updatedAt, lang\)\}/);
+});

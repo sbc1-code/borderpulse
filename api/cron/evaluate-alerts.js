@@ -3,18 +3,34 @@ import { evaluateAlertRule, buildAlertEmail, sendResendEmail } from '../_lib/ale
 import { isPlusEntitled } from '../_lib/entitlements.js';
 import { HttpError, json, methodGuard, sendError } from '../_lib/http.js';
 import { createAdminClient } from '../_lib/supabase.js';
+import { CBP_URL, createCbpPayload } from '../../scripts/fetch-cbp.mjs';
 
 function requireCron(req, secret) {
   if (!secret) throw new HttpError(503, 'Alert evaluator is not configured');
   if (req.headers?.authorization !== `Bearer ${secret}`) throw new HttpError(401, 'Unauthorized');
 }
 
-async function loadSnapshot(appUrl) {
-  const response = await fetch(`${appUrl.replace(/\/$/, '')}/data/crossings.json?alert_t=${Date.now()}`, { cache: 'no-store' });
-  if (!response.ok) throw new HttpError(503, 'CBP snapshot is unavailable');
-  const payload = await response.json();
-  if (!payload?.fetched_at || !Array.isArray(payload.crossings)) throw new HttpError(503, 'CBP snapshot is invalid');
-  return payload;
+async function loadSnapshot() {
+  // The Pages JSON is a deliberately slow static fallback. A future alert
+  // evaluator must not mistake that build-time artifact for a current source
+  // of truth, especially when Vercel preview authentication would also block
+  // one function from fetching another by its public URL. Fetch and normalize
+  // the same official CBP feed used by the public Vercel data function.
+  let response;
+  try {
+    response = await fetch(CBP_URL, {
+      headers: { 'User-Agent': 'borderpulse.com/1.0 (alert-evaluator)' },
+      signal: AbortSignal.timeout(8_000),
+    });
+  } catch {
+    throw new HttpError(503, 'Official CBP data is temporarily unavailable');
+  }
+  if (!response.ok) throw new HttpError(503, 'Official CBP data is temporarily unavailable');
+  try {
+    return createCbpPayload(await response.json());
+  } catch {
+    throw new HttpError(503, 'Official CBP data is temporarily unavailable');
+  }
 }
 
 function truncate(value, max = 240) {
@@ -83,7 +99,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const snapshot = await loadSnapshot(config.appUrl);
+    const snapshot = await loadSnapshot();
     const snapshotAt = snapshot.fetched_at;
     const portByNumber = new Map((snapshot.crossings || []).map((crossing) => [String(crossing.port_number), crossing]));
     const ruleIds = rules.map((rule) => rule.id);

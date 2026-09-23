@@ -38,6 +38,9 @@ const orderingMigration = fs.readFileSync(
 const accountRoute = fs.readFileSync(path.join(root, 'api/me/account.js'), 'utf8');
 const entitlementRoute = fs.readFileSync(path.join(root, 'api/me/entitlement.js'), 'utf8');
 const webhookRoute = fs.readFileSync(path.join(root, 'api/stripe/webhook.js'), 'utf8');
+const cronRoute = fs.readFileSync(path.join(root, 'api/cron/evaluate-alerts.js'), 'utf8');
+const ownerApproval = fs.readFileSync(path.join(root, 'docs/OWNER-APPROVAL.md'), 'utf8');
+const paidContract = fs.readFileSync(path.join(root, 'docs/PAID-BETA-CONTRACT.md'), 'utf8');
 
 function invoke(handler, req) {
   return new Promise((resolve, reject) => {
@@ -195,6 +198,21 @@ test('alert evaluator is lane-aware, schedule-aware, and fail-closed on stale da
   assert.equal(isWithinAlertWindow({ now, timeZone: rule.timezone, daysOfWeek: rule.days_of_week, windowStart: rule.window_start, windowEnd: rule.window_end }), true);
   assert.equal(evaluateAlertRule({ rule, crossing, snapshotAt: '2026-09-22T15:50:00.000Z', now, maxAgeMinutes: 45 }).shouldSend, true);
   assert.equal(evaluateAlertRule({ rule, crossing, snapshotAt: '2026-09-22T14:00:00.000Z', now, maxAgeMinutes: 45 }).reason, 'snapshot_stale');
+});
+
+test('a future alert evaluator reads the official feed, never the static fallback', () => {
+  assert.match(cronRoute, /import \{ CBP_URL, createCbpPayload \} from '\.\.\/\.\.\/scripts\/fetch-cbp\.mjs';/);
+  assert.match(cronRoute, /fetch\(CBP_URL/);
+  assert.match(cronRoute, /createCbpPayload\(await response\.json\(\)\)/);
+  assert.doesNotMatch(cronRoute, /\/data\/crossings\.json/);
+});
+
+test('commercial documents park the consumer stack until evidence exists', () => {
+  assert.match(ownerApproval, /Status: \*\*parked/);
+  assert.match(ownerApproval, /does \*\*not\*\* activate the preserved consumer-alert\s+stack/);
+  assert.doesNotMatch(ownerApproval, /Copy-paste approval/);
+  assert.match(paidContract, /No price, plan name, or billing model is set/);
+  assert.match(paidContract, /Do not create a Stripe Product\/Price/);
 });
 
 test('account deletion is explicit and protects active billing', () => {

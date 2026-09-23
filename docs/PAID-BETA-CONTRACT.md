@@ -1,7 +1,9 @@
 # BorderPulse paid beta contract
 
-Status: proposed implementation contract. It is not live, does not create a
-Stripe product, and does not authorize production billing.
+Status: **parked technical contract, not the current product plan.** It is not
+live, does not create a Stripe product, and does not authorize provider setup,
+customer outreach, or production billing. Reopen and revise it only through
+the evidence gate in `OWNER-APPROVAL.md`.
 
 ## Product boundary
 
@@ -11,8 +13,9 @@ The public BorderPulse dashboard remains free and useful:
 - crossing pages, comparisons, best-time views, and bilingual guidance;
 - source, freshness, methodology, and limitations.
 
-The proposed paid beta is **BorderPulse Plus**. Its value is continuity and
-personalization around the free data:
+If consumer-alert discovery later validates this specific job, the proposed
+paid beta could be **BorderPulse Plus**. Its possible value would be continuity
+and personalization around the free data:
 
 - account-synced saved crossings across devices;
 - one to three northbound crossing watch rules;
@@ -27,16 +30,18 @@ The beta does not promise southbound wait times, exact arrival predictions,
 guaranteed savings, SMS, precise location history, immigration or travel
 document data, or access to otherwise public CBP numbers.
 
-## Pricing hypothesis
+## Pricing and offer status
 
-The first test is one simple founding price: **$5 per month**, cancel anytime.
-This is a hypothesis for a private beta, not a final approved price. Do not
-create a live Stripe Price until the owner confirms the price, account,
-support route, refund policy, tax handling, and legal identity.
+No price, plan name, or billing model is set. The prior $5/month suggestion is
+superseded because no repeated consumer-alert job or payment commitment has
+been established. The current business-first discovery path may instead lead
+to a manually fulfilled, corridor-specific pilot that this contract does not
+describe.
 
-Do not add annual plans, coupons, trials, or a business/API plan in the first
-implementation. They create billing and support states before the core paid
-workflow is proven.
+Do not create a Stripe Product/Price, annual plan, coupon, trial, or business
+API plan from this document. If consumer evidence later wins, choose the
+single paid job and a price only after the owner confirms the account, support
+route, refund policy, tax handling, legal identity, and actual operating cost.
 
 ## Minimal data contract
 
@@ -143,9 +148,11 @@ The free dashboard continues to read the static CBP artifacts and does not
 depend on account infrastructure. If Supabase, Stripe, or email is down, the
 free experience must still render and clearly keep paid actions unavailable.
 
-## Go/no-go gates before implementation leaves test mode
+## Go/no-go gates before this option leaves its parked state
 
-- [ ] Owner approves the Plus promise and founding price.
+- [ ] Discovery establishes a repeated consumer-alert job and payment
+      commitment, or this contract is rewritten for the chosen paid job.
+- [ ] Owner approves the exact promise and price only after that evidence.
 - [ ] Correct BorderPulse Stripe account and legal/support identity confirmed.
 - [ ] Refund, cancellation, tax, privacy, retention, and deletion language
       reviewed for the jurisdictions served.
