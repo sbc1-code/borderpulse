@@ -13,6 +13,9 @@ offer. `docs/BUSINESS-VIABILITY.md` records why generic widgets, public-data
 APIs, and basic alerts are not differentiated enough. Use
 `docs/SAN-YSIDRO-WORKFLOW-DISCOVERY.md` for the authorized future discovery
 cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
+`docs/VALIDATION-OPERATIONS.md` is the owner-operable weekly review, discovery
+ledger, cost record, and decision-state tool. It avoids a new CRM or paid stack
+until the evidence gate is genuinely met.
 
 ## Next tasks
 

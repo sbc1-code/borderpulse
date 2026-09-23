@@ -54,6 +54,8 @@ decision. Record:
 Ask for behavior and commitment, not compliments. “That sounds useful” is
 interest; a written pilot scope or payment commitment is stronger evidence. Do
 not test price ranges until a buyer has named the outcome and support burden.
+Record the de-identified evidence and resulting decision in
+`VALIDATION-OPERATIONS.md`; do not create a customer database for discovery.
 
 ## Separate consumer-alert path
 
