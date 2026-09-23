@@ -71,9 +71,12 @@ cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
 - The Vercel preview is protected by existing Vercel Authentication. Anonymous
   access redirects to SSO, so its remote function response and CDN headers are
   not yet verified. No protection setting was changed.
-- No Vercel production deployment, custom-domain change, provider setup,
-  database, customer data, billing action, customer invite, or marketing
-  publication occurred.
+- Vercel does contain a production-target placeholder,
+  `dpl_AqCbysDcDBDu3v2ApW1moxa3qY5A`, but inspection shows no application build
+  output and only a Vercel alias. Its root and data route are SSO-protected;
+  it is not a public BorderPulse site or a `borderpulse.com` cutover. No custom
+  domain, provider setup, database, customer data, billing action, customer
+  invite, or marketing publication occurred.
 - Commit `e129c473` reconciles the old $5/provider-setup handoff with the
   evidence-based commercial decision: a business pilot remains manual, and the
   preserved consumer-alert stack stays parked until its separate user-demand
@@ -81,6 +84,12 @@ cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
   and makes the parked evaluator read the current official feed rather than
   the slow static fallback. Full operator verification (402 browser
   navigations), local Vercel packaging, and two remote release checks passed.
+- Commit `f5984923` is deployed as protected preview
+  `dpl_6KVBdwUq3TjSTwfgg9xJMpaTfer7` at
+  `https://borderpulse-5f8s3hndn-sbc1-codes-projects.vercel.app`. Vercel lists
+  the updated alert evaluator as a 412.86 KB Node function. Anonymous root and
+  `/api/public/crossings` requests both return the existing SSO 302; no
+  protection or production target was changed.
 
 ## Historical baseline evidence
 
