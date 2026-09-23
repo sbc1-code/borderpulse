@@ -91,11 +91,21 @@ cohort and `docs/MEASUREMENT-PLAN.md` for the evidence gates.
   the slow static fallback. Full operator verification (402 browser
   navigations), local Vercel packaging, and two remote release checks passed.
 - Commit `f5984923` is deployed as protected preview
-  `dpl_6KVBdwUq3TjSTwfgg9xJMpaTfer7` at
-  `https://borderpulse-5f8s3hndn-sbc1-codes-projects.vercel.app`. Vercel lists
-  the updated alert evaluator as a 412.86 KB Node function. Anonymous root and
-  `/api/public/crossings` requests both return the existing SSO 302; no
-  protection or production target was changed.
+      `dpl_6KVBdwUq3TjSTwfgg9xJMpaTfer7` at
+      `https://borderpulse-5f8s3hndn-sbc1-codes-projects.vercel.app`. Vercel lists
+      the updated alert evaluator as a 412.86 KB Node function. Anonymous root and
+      `/api/public/crossings` requests both return the existing SSO 302; no
+      protection or production target was changed.
+- Commit `63b48935` completed the product-truth audit. Its full browser suite
+  passed before final prerender-only hardening; the final source then passed
+  product-truth and paid-contract tests, a Vite/prerender build, and both
+  remote `release-checks` jobs. It is deployed as protected preview
+  `dpl_6vDmMo5J9cRrKCb77VVMRB73mRkL` at
+  `https://borderpulse-mg45qt7hk-sbc1-codes-projects.vercel.app`. Vercel lists
+  the current official-data function and evaluator, while anonymous `/` and
+  `/plus/` requests both return the existing SSO 302. No production target,
+  custom domain, environment variable, provider, billing, or account state
+  changed.
 
 ## Historical baseline evidence
 
