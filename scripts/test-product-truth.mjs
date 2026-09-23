@@ -82,3 +82,15 @@ test('static route heads do not promise a live or current wait reading', () => {
   assert.doesNotMatch(prerender, /Border Wait Time Today: Live CBP Data/);
   assert.doesNotMatch(prerender, /Pick the faster crossing right now/);
 });
+
+test('methodology explains the same-origin data route and static fallback', () => {
+  const about = read('src/pages/About.jsx');
+  const methodology = read('src/pages/Methodology.jsx');
+
+  assert.match(about, /Where the host provides an official-data route/);
+  assert.match(about, /otherwise it uses the scheduled snapshot/);
+  assert.doesNotMatch(about, /the same file the dashboard reads/);
+  assert.match(methodology, /same-origin, normalized official-data route/);
+  assert.match(methodology, /dashboard uses that published static snapshot/);
+  assert.match(methodology, /ruta de datos oficiales normalizada y del mismo/);
+});

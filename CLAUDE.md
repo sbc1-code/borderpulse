@@ -53,9 +53,11 @@ If the user just says **"what's new"** or **"catch me up"** or
   which is how it drifted 16 KB unnoticed.
 - **Public JSON feeds** at `/data/crossings.json`, `/data/aggregates/{slug}.json`,
   `/data/timelines/...`, `/data/blog/...`, `/data/stats.json`.
-- **No backend.** No auth, no database, no SMS, no email. Anything that
-  needs persistence lives in browser localStorage. Anything that needs
-  cron lives in GitHub Actions.
+- **No live customer backend.** The public Pages fallback has no auth,
+  database, SMS, or email. A protected Vercel preview packages an
+  official-data function plus fail-closed future paid handlers, but no
+  provider or customer configuration exists. Browser-local persistence stays
+  in localStorage; scheduled static publication stays in GitHub Actions.
 
 ## Constraints to respect
 

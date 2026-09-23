@@ -34,24 +34,35 @@ belong underneath as evidence.
 ## Current operating rules
 
 - Free BorderPulse remains the public northbound border-intelligence product.
-- The proposed paid wedge is saved crossings plus email alerts and alert
-  delivery history. It is not live until the product, data, privacy, billing,
-  and QA gates pass.
-- The planned v1 stack is Vercel, Supabase, Stripe, one transactional email
-  provider, and the existing data pipeline. Do not add Firebase, SMS, or paid
-  southbound maps unless the product decision changes.
-- The repository now contains a test-only Supabase migration, Vercel API
-  foundation, and a protected server-side alert evaluator. Treat them as
+  It must report source freshness honestly before traffic or revenue is
+  interpreted.
+- No paid wedge has been selected. Generic wait-time widgets, public CBP data,
+  and basic consumer alerts are already well served. The first commercial
+  hypothesis is one manually fulfilled, corridor-specific business workflow
+  only after five qualified conversations identify the same downstream job and
+  one buyer makes a written paid commitment.
+- A consumer product based on saved crossings and email alerts remains a
+  separate, preserved technical option. It cannot resume merely because the
+  code exists: it needs the stricter consumer demand gate in `docs/PMF-TEST.md`
+  and a revised product contract for the job actually chosen.
+- Vercel is the next deployment and compute candidate because the repository
+  already has a protected preview and official-data function. Keep the static
+  Pages fallback until an authorized preview readback supports a domain
+  decision. Do not add Firebase, SMS, or paid southbound maps.
+- The repository contains test-only Supabase migrations, Vercel API handlers,
+  and a protected server-side alert evaluator. Treat them as preserved
   implementation work, not proof that accounts, billing, email, or paid access
-  exist.
+  exist. Supabase, Stripe, and transactional email are justified only if a
+  proven paid workflow requires them.
 - Production deployment and live billing are separate approvals. A green local
   test is not proof of either one.
-- `docs/LAUNCH-GATES.md` is the current cross-functional checklist. Keep its
-  unchecked provider, legal, support, marketing, and authenticated-QA gates
-  open even when the code verifier is green.
-- `docs/OWNER-APPROVAL.md` is the plain-language decision sheet. Use it when
-  the owner wants to unlock test-provider setup without authorizing production,
-  live charges, or marketing.
+- `docs/VALIDATION-OPERATIONS.md` is the weekly evidence, discovery, and
+  cost record. `docs/LAUNCH-GATES.md` applies only after that evidence selects
+  a real offer. Keep all provider, legal, support, marketing, and
+  authenticated-QA gates open even when code verification is green.
+- `docs/OWNER-APPROVAL.md` is the plain-language reactivation gate. Use it
+  only after product evidence warrants test-provider setup; it does not
+  authorize production, live charges, or marketing.
 
 ## What “done” means
 

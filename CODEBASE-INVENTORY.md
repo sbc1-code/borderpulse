@@ -1,10 +1,26 @@
-# BorderPulse Codebase Inventory
+# BorderPulse Codebase Inventory (historical snapshot)
 
-> **Purpose:** Single source of truth for what already exists in this codebase. Feed this to other AI sessions so they stop recommending features that are already built.
+> **Purpose:** Historical code inventory retained for archaeology. It is **not**
+> current operating state. Start with `AGENTS.md`, `BORDERPULSE_OPERATOR.md`,
+> `tasks/ACTIVE.md`, `ROADMAP.md`, and `DECISIONS.md`; this file predates the
+> Vercel preview, the product-truth audit, removed client-only alerts, and the
+> evidence-led commercial decision.
 >
 > **Last verified:** 2026-05-16
 > **Repo:** https://github.com/sbc1-code/borderpulse · Live at borderpulse.com
-> **Stack:** Vite + React 18 + Tailwind + shadcn/ui · No backend · GitHub Pages
+> **Snapshot stack:** Vite + React 18 + Tailwind + shadcn/ui · GitHub Pages
+
+## Current starting point — 2026-09-22
+
+- The public product is a free, bilingual northbound CBP decision tool with
+  explicit source freshness. GitHub Pages is the public static fallback.
+- A protected Vercel preview contains a five-minute CDN-cached official-data
+  function and fail-closed future handlers. It has no custom domain, customer
+  accounts, provider configuration, or public runtime readback.
+- `/alerts` and `/status/:id` are no longer public routes. `/plus/` is a
+  no-offer research notice, not a billing surface.
+- Generic widgets, public data, and consumer alerts are not the selected paid
+  product. See `docs/VALIDATION-OPERATIONS.md` for the actual evidence gate.
 
 ---
 

@@ -128,8 +128,8 @@ export default function About() {
         <div className="space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
           <p>
             {language === 'en'
-              ? 'Northbound passenger wait times come directly from U.S. Customs and Border Protection (CBP). A scheduled job pulls the feed and writes a snapshot to /data/crossings.json — the same file the dashboard reads. Snapshots roll up into per-crossing aggregates with a 30-day lookback that power "vs. typical" comparisons and the lightest-hour predictions on every /best-time page.'
-              : 'Los tiempos de espera hacia EE.UU. vienen directamente de U.S. Customs and Border Protection (CBP). Un trabajo programado jala el feed y escribe un snapshot en /data/crossings.json — el mismo archivo que lee el panel. Los snapshots se agregan en datos por cruce con un retroceso de 30 días que alimentan las comparaciones "vs. lo normal" y las predicciones de hora más ligera en cada página /best-time.'}
+              ? 'Northbound passenger wait times come directly from U.S. Customs and Border Protection (CBP). Where the host provides an official-data route, the dashboard reads that normalized response; otherwise it uses the scheduled snapshot at /data/crossings.json. Snapshots roll up into per-crossing aggregates with a 30-day lookback that power "vs. typical" comparisons and the lightest-hour guidance on every /best-time page.'
+              : 'Los tiempos de espera hacia EE.UU. vienen directamente de U.S. Customs and Border Protection (CBP). Cuando el host ofrece una ruta de datos oficiales, el panel lee esa respuesta normalizada; de lo contrario usa el snapshot programado en /data/crossings.json. Los snapshots se agregan en datos por cruce con un retroceso de 30 días que alimentan las comparaciones "vs. lo normal" y la guía de hora más ligera en cada página /best-time.'}
           </p>
           <p>
             {language === 'en'

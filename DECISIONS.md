@@ -19,6 +19,26 @@ behind explicit approval gates.
 
 ---
 
+## 2026-09-22 · Evidence-led business workflow supersedes the narrow Plus plan
+
+The earlier same-day $5/month BorderPulse Plus hypothesis is parked. Current
+market evidence shows that generic widgets, public CBP-derived data, and
+consumer alerts are commodity features, so neither the name, price, nor
+account/alert boundary is a selected product.
+
+Keep the public tool free and reliable. The only commercial test now is a
+manual, corridor-specific decision surface for a business whose own customer
+or staff workflow changes when a border condition changes. Consider one paid
+pilot only after five qualified conversations yield three independent examples
+of the same job and one written paid commitment. Consumer alerts are a separate
+later test and must independently clear `docs/PMF-TEST.md` before the preserved
+Supabase/Stripe/Vercel code can be reopened.
+
+This protects the existing free product, avoids a new Firebase/Google Cloud
+stack, and prevents implementation work from being mistaken for demand.
+
+---
+
 ## 2026-09-22 · Materialize snapshot history before site builds
 
 The data-ingestion workflow may use full Git history to create

@@ -10,6 +10,23 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   `AGENTS.md`, `tasks/ACTIVE.md`, and `npm run operator:status` so Codex and
   Claude Code can resume work from an explicit queue and report plain-language
   evidence. `npm run operator:verify` remains the release-check entry point.
+- **Evidence-led commercial operating record.** Added the viability brief,
+  PMF test, San Ysidro-Tijuana discovery packet, measurement plan, launch
+  gates, and `docs/VALIDATION-OPERATIONS.md`. The current product stays free;
+  a paid business must first prove a repeated buyer-owned workflow and a
+  written commitment. The saved-crossing/alert code is preserved as a separate
+  consumer option, not a live offer or price decision.
+
+### Changed
+- **Product trust and paid-state correction.** Freshness now governs every
+  "Live" claim in dashboard, detail, compare, embed, share, and
+  walk-or-drive surfaces. Generated route metadata avoids real-time claims.
+  `/plus/` is a no-offer research notice and was removed from navigation and
+  the sitemap; no account, alert, billing, or signup action is exposed.
+- **Vercel is a protected reliability candidate, not a production launch.**
+  The official-data function and preserved fail-closed functions build in a
+  protected preview. No custom domain, environment variable, paid provider,
+  or public production cutover has been configured.
 
 ### Fixed
 - Reconciled the local checkout to the current remote `main` before continuing

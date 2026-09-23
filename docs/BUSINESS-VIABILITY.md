@@ -38,6 +38,12 @@ offer. Current competitors already make the commodity available:
   and Apple Watch/Lock Screen features. [Bordify's App Store listing](https://apps.apple.com/us/app/bordify-border-wait-times/id1006266261)
   describes alerts, historical analysis, community reports, cameras, and
   southbound coverage, with 1.9K ratings shown when checked.
+- [Bordergarita's San Diego-Tijuana page](https://bordergarita.com/en/mexico/tijuana-border-crossing)
+  also markets CBP-derived wait reports with a five-minute refresh claim, while
+  [Border Station Parking](https://www.borderparking.com/) already gives its
+  customers public passenger/pedestrian wait links alongside on-site parking
+  and shuttle service. A business cannot be assumed to need another wait-time
+  surface just because it serves the corridor.
 
 This does not prove there is no business. It does mean BorderPulse cannot
 honestly sell a bilingual live widget, public source data, or basic alerts as a
@@ -95,6 +101,12 @@ or shuttle page that answers when to leave and how to arrive; or an internal
 dispatch note that maps a port condition to an existing escalation. It should
 never imply exclusive ownership of CBP data, predictive accuracy, or an
 automated decision that is not actually delivered.
+
+The live public pages reinforce the boundary: Border Station Parking already
+combines nearby parking, shuttle service, and official wait links; SDTJ Passport
+already publishes cross-border schedules and contact routes. The only
+test-worthy question is whether a buyer needs its *own instruction or
+escalation* tied to a changing condition, not whether it can embed a wait time.
 
 ## Recommended offer to test
 
