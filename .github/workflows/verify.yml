@@ -27,5 +27,5 @@ jobs:
         run: npm ci
       - name: Build the release artifact
         run: npm run build
-      - name: Run release and route checks
+      - name: Run release, paid-contract, and route checks
         run: npm test

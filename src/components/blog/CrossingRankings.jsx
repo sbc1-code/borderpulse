@@ -4,8 +4,8 @@ import { useLang } from '@/lib/LangContext';
 
 const STRINGS = {
   en: {
-    loading: 'Loading the live ranking...',
-    error: 'Ranking data is not available right now.',
+    loading: 'Loading the latest ranking...',
+    error: 'Ranking data is not available at the moment.',
     rank: '#',
     crossing: 'Crossing',
     typical: 'Typical wait',
@@ -17,7 +17,7 @@ const STRINGS = {
     note: 'Ranked busiest to fastest. Crossings without enough recent CBP history are left out.',
   },
   es: {
-    loading: 'Cargando la clasificación en vivo...',
+    loading: 'Cargando la clasificación más reciente...',
     error: 'La clasificación no está disponible en este momento.',
     rank: '#',
     crossing: 'Cruce',

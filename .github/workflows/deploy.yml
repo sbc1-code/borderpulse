@@ -32,7 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          # The build consumes public/data/snapshot-history.json. Keeping this
+          # shallow proves deploys do not silently depend on Git history.
+          fetch-depth: 1
           ref: ${{ inputs.commit_sha || github.sha }}
       - uses: actions/setup-node@v6
         with:

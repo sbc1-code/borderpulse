@@ -6,6 +6,7 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { track } from '@/lib/analytics';
 import { pickLightestHour } from '@/lib/recommendations';
+import { freshnessOf, liveLabel } from '@/lib/trustState';
 
 function formatHourCompact(h) {
   if (h == null) return '';
@@ -21,15 +22,15 @@ function lightestTodayFor(crossing, aggregate) {
   return pickLightestHour(crossing, aggregate.by_hour, today);
 }
 
-function buildStatusText(crossings, language, direction, portToSlug, aggregates) {
-  const now = new Date();
-  const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+function buildStatusText(crossings, language, direction, portToSlug, aggregates, snapshotAt) {
   const directionLabel = direction === 'southbound'
     ? (language === 'en' ? 'To Mexico' : 'Hacia México')
     : (language === 'en' ? 'To USA' : 'Hacia EE.UU.');
+  const freshness = freshnessOf(snapshotAt);
+  const reportLabel = liveLabel(freshness.state, freshness.age, language);
   const header = language === 'en'
-    ? `🚦 Border Wait Times ${directionLabel} (${time}):`
-    : `🚦 Tiempos de Espera ${directionLabel} (${time}):`;
+    ? `🚦 CBP Wait Report ${directionLabel} (${reportLabel}):`
+    : `🚦 Reporte de Espera de CBP ${directionLabel} (${reportLabel}):`;
   const isNorthbound = direction !== 'southbound';
   const lines = crossings
     .filter((c) => getWaitMinutes(c, direction) != null)
@@ -51,12 +52,12 @@ function buildStatusText(crossings, language, direction, portToSlug, aggregates)
       return `${c.name} ${wait}min${annotation}`;
     });
   const footer = language === 'en'
-    ? '📲 Real-time updates: borderpulse.com'
-    : '📲 Actualizaciones en vivo: borderpulse.com';
+    ? '📲 Source and latest report: borderpulse.com'
+    : '📲 Fuente y último reporte: borderpulse.com';
   return [header, '', ...lines, '', footer].join('\n');
 }
 
-export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound', portToSlug }) {
+export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound', portToSlug, snapshotAt }) {
   const [copied, setCopied] = useState(false);
   const [aggregates, setAggregates] = useState({});
 
@@ -95,8 +96,8 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
   }, [open, direction, crossings, portToSlug, aggregates]);
 
   const text = useMemo(
-    () => buildStatusText(crossings || [], language, direction, portToSlug, aggregates),
-    [crossings, language, direction, portToSlug, aggregates],
+    () => buildStatusText(crossings || [], language, direction, portToSlug, aggregates, snapshotAt),
+    [crossings, language, direction, portToSlug, aggregates, snapshotAt],
   );
 
   const copy = async () => {

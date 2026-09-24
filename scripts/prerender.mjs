@@ -20,8 +20,8 @@ function faqItems(crossing, aggregate) {
   const hours = crossing.hours || 'check official CBP hours';
   const items = [
     {
-      q: `What are the current wait times at ${name}?`,
-      a: `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule.`,
+      q: `What is the latest reported wait time at ${name}?`,
+      a: `Border Pulse pulls the latest reported wait time for ${name} from U.S. Customs and Border Protection on a regular schedule.`,
     },
     {
       q: `What hours is ${name} open?`,
@@ -40,10 +40,10 @@ function faqItems(crossing, aggregate) {
 }
 
 function renderCrossingHead(crossing, slug, aggregate) {
-  // Title pattern matches what wins these SERPs: keyword-first, "today"/live
-  // freshness signal, current year. Brand goes last where truncation is cheap.
-  const title = `${crossing.name} Border Wait Time Today: Live CBP Data (2026) | Border Pulse`;
-  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
+  // The static head must not promise a live reading. The app itself labels a
+  // snapshot Live only while it is fresh.
+  const title = `${crossing.name} Border Wait Reports and Best Times | Border Pulse`;
+  const desc = `Latest published CBP wait report for ${crossing.name}, plus 30-day hour-by-hour patterns, port hours, and the best time to cross.`;
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
@@ -354,7 +354,7 @@ function renderBestTimeHead(crossing, slug, aggregate) {
 
 function renderEmbedHead(crossing, slug) {
   const title = `${crossing.name} wait time | Border Pulse`;
-  const desc = `Live wait time at ${crossing.name}, refreshed regularly.`;
+  const desc = `Latest published CBP wait report for ${crossing.name}.`;
   // Canonical points to the full crossing page so search engines consolidate
   // any accidental indexing on the canonical URL.
   const canonical = `${BASE}/crossing/${slug}/`;
@@ -662,6 +662,42 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
   }
 
+  // /plus — public research notice. The preserved paid prototype is not
+  // exposed as an offer until the documented evidence gate has been met.
+  {
+    const plusHead = {
+      title: 'Border Pulse | Paid product research',
+      desc: 'Border Pulse keeps public CBP reports free while it researches which workflow, if any, could justify a paid product.',
+      canonical: `${BASE}/plus/`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const plusHtml = rewriteIndex(indexWithLinks, plusHead);
+    const outDir = path.resolve(distDir, 'plus');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), plusHtml);
+  }
+
+  // /privacy + /privacidad — the current data-handling draft for public
+  // preferences and any future account-based workflow.
+  {
+    const privacyHead = {
+      title: 'Privacy and data | Border Pulse',
+      desc: 'Draft notice describing how Border Pulse handles public preferences and potential future account data.',
+      canonical: `${BASE}/privacy/`,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+    };
+    const privacyHtml = rewriteIndex(indexWithLinks, privacyHead);
+    const privacyDir = path.resolve(distDir, 'privacy');
+    fs.mkdirSync(privacyDir, { recursive: true });
+    fs.writeFileSync(path.resolve(privacyDir, 'index.html'), privacyHtml);
+    const spanishHead = { ...privacyHead, title: 'Privacidad y datos | Border Pulse', canonical: `${BASE}/privacidad/` };
+    const spanishDir = path.resolve(distDir, 'privacidad');
+    fs.mkdirSync(spanishDir, { recursive: true });
+    fs.writeFileSync(path.resolve(spanishDir, 'index.html'), rewriteIndex(indexWithLinks, spanishHead));
+  }
+
   // /best-time index hub — links to every generated best-time page.
   {
     const canonical = `${BASE}/best-time/`;
@@ -734,7 +770,7 @@ async function main() {
     if (!cA || !cB) continue;
     const pair = `${aSlug}-vs-${bSlug}`;
     const title = `${cA.name} vs ${cB.name}: Which Crossing Is Faster? (2026 Data) | Border Pulse`;
-    const desc = `Live wait times, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. Pick the faster crossing right now.`;
+    const desc = `Compare official CBP wait reports, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side.`;
     const canonical = `${BASE}/compare/${pair}/`;
     const ogImage = `${BASE}/og-card.png`;
     const breadcrumb = {
@@ -760,8 +796,8 @@ async function main() {
   for (const c of crossings.filter(hasPedestrianLane)) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
-    const title = `Walk or Drive Across ${c.name}? Live Wait Comparison (2026) | Border Pulse`;
-    const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
+    const title = `Walk or Drive Across ${c.name}? CBP Wait-Report Comparison | Border Pulse`;
+    const desc = `Compare official CBP pedestrian and vehicle wait reports at ${c.name}. See whether walking may save enough time to be worth parking.`;
     const canonical = `${BASE}/walk-or-drive/${slug}/`;
     const ogImage = `${BASE}/og/${slug}.png`;
     const breadcrumb = {
@@ -782,7 +818,7 @@ async function main() {
   }
 
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + plus shell + crawlable nav on homepage`,
   );
 }
 

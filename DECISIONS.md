@@ -8,6 +8,62 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-09-22 · Use a small operator control plane for agentic maintenance
+
+Codex and Claude Code read `AGENTS.md`, `BORDERPULSE_OPERATOR.md`, and
+`tasks/ACTIVE.md` before acting. `npm run operator:status` gives a safe plain
+English state check, while `npm run operator:verify` is the release-check
+entry point. This keeps the product manageable without adding a dashboard or
+another service, and keeps production, billing, and customer communication
+behind explicit approval gates.
+
+---
+
+## 2026-09-22 · Evidence-led business workflow supersedes the narrow Plus plan
+
+The earlier same-day $5/month BorderPulse Plus hypothesis is parked. Current
+market evidence shows that generic widgets, public CBP-derived data, and
+consumer alerts are commodity features, so neither the name, price, nor
+account/alert boundary is a selected product.
+
+Keep the public tool free and reliable. The only commercial test now is a
+manual, corridor-specific decision surface for a business whose own customer
+or staff workflow changes when a border condition changes. Consider one paid
+pilot only after five qualified conversations yield three independent examples
+of the same job and one written paid commitment. Consumer alerts are a separate
+later test and must independently clear `docs/PMF-TEST.md` before the preserved
+Supabase/Stripe/Vercel code can be reopened.
+
+This protects the existing free product, avoids a new Firebase/Google Cloud
+stack, and prevents implementation work from being mistaken for demand.
+
+---
+
+## 2026-09-22 · Materialize snapshot history before site builds
+
+The data-ingestion workflow may use full Git history to create
+`public/data/snapshot-history.json`, but `build-aggregates.mjs` consumes that
+explicit artifact and never calls `git log` or `git show`. This keeps Vercel,
+Pages, previews, and future agents from silently losing the 30-day product
+history when a checkout is shallow or a different host performs the build.
+
+---
+
+## 2026-09-22 · Keep the free dashboard free; test a narrow Plus beta
+
+The proposed paid wedge is account-synced northbound crossing rules with
+server-side email delivery, personal history, and a secondary ad-free surface.
+The raw CBP dashboard, methodology, bilingual content, and core planning pages
+stay free. The first price hypothesis is $5/month for a private beta; it is not
+approved for live Stripe setup.
+
+This sells continuity and delivery rather than hiding public data. It also
+matches the existing decision that a client-only alert is not an alert. The
+minimum contract lives in `docs/PAID-BETA-CONTRACT.md`; do not add auth,
+checkout, or email secrets until the owner decisions and test-mode gates pass.
+
+---
+
 ## 2026-08-20 · Freshness thresholds come from measured delivery, not the cron
 
 Issue #58 asked for stale/fresh thresholds "derived from the configured

@@ -6,6 +6,8 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import { isSparseCell } from '@/lib/aggregates';
+import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
+import { useFreshnessClock } from '@/lib/useFreshnessClock';
 
 const FLAG = { CA: '🇺🇸', AZ: '🇺🇸', NM: '🇺🇸', TX: '🇺🇸' };
 
@@ -31,6 +33,7 @@ export default function Embed() {
   const [crossings, setCrossings] = useState([]);
   const [aggregate, setAggregate] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const freshnessNow = useFreshnessClock();
 
   useEffect(() => {
     let cancelled = false;
@@ -92,6 +95,12 @@ export default function Embed() {
   const updatedAt = crossing
     ? (isSouthbound ? crossing.southbound_updated_at : crossing.updated_at)
     : null;
+  const freshness = freshnessOf(updatedAt, freshnessNow);
+  const currentLabel = liveLabel(freshness.state, freshness.age, lang);
+  const hasFreshOfficialReading = !isSouthbound && freshness.state === FRESHNESS.FRESH;
+  const snapshotLabel = hasFreshOfficialReading
+    ? `${currentLabel} · ${formatRelative(updatedAt, lang)}`
+    : currentLabel;
 
   const isDark = theme === 'dark';
   const bg = isDark ? 'bg-gray-900' : 'bg-white';
@@ -194,8 +203,11 @@ export default function Embed() {
           <div className="flex items-center gap-1 min-w-0">
             {wait != null ? (
               <>
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block flex-shrink-0" aria-hidden="true" />
-                <span className="truncate">{lang === 'es' ? 'En vivo' : 'Live'} · {formatRelative(updatedAt, lang)}</span>
+                <span
+                  className={`w-1.5 h-1.5 rounded-full inline-block flex-shrink-0 ${hasFreshOfficialReading ? 'bg-rose-500' : 'bg-amber-500'}`}
+                  aria-hidden="true"
+                />
+                <span className="truncate">{snapshotLabel}</span>
               </>
             ) : (
               <span className="truncate">

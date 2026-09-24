@@ -8,12 +8,13 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { canonicalPortNumber, pinIdentity, requiresPortCollapse } from '../src/lib/portIdentity.js';
 
 // bwt.cbp.gov serves two endpoints with the same JSON shape:
 //   /api/waittimes        — legacy, frozen on 3/26/2026 (do NOT use)
 //   /api/bwtpublicmod     — current, used by the CBP Angular app
-const CBP_URL = 'https://bwt.cbp.gov/api/bwtpublicmod';
+export const CBP_URL = 'https://bwt.cbp.gov/api/bwtpublicmod';
 const OUT_PATH = path.join(process.cwd(), 'public', 'data', 'crossings.json');
 
 // Minimum healthy crossing count. CBP's Mexican-border feed yields ~43 distinct
@@ -256,11 +257,17 @@ const dedupe = (rows) => {
   return keep;
 };
 
-async function main() {
-  console.log(`Fetching ${CBP_URL}...`);
-  const res = await fetch(CBP_URL, { headers: { 'User-Agent': 'borderpulse.com/1.0 (static-fetch)' } });
-  if (!res.ok) throw new Error(`CBP fetch failed: HTTP ${res.status}`);
-  const data = await res.json();
+/**
+ * Convert the official CBP response into BorderPulse's stable public contract.
+ *
+ * This is deliberately shared by the scheduled static writer and the Vercel
+ * live-data function. A locale or port-identity change must therefore be fixed
+ * once, rather than allowing the two delivery paths to silently disagree.
+ */
+export function createCbpPayload(data, {
+  fetchedAt = new Date().toISOString(),
+  minimumCrossings = MIN_CROSSINGS,
+} = {}) {
   if (!Array.isArray(data)) throw new Error('CBP response was not an array');
 
   const rawMexican = data.filter(isMexicanBorder);
@@ -268,46 +275,54 @@ async function main() {
   // from the feed. CBP substitutes rows; see src/lib/portIdentity.js.
   const mexican = dedupe(rawMexican.map(mapPort)).map(pinIdentity);
 
-  // Fail-safe: never overwrite the last-good snapshot with a near-empty one.
-  // A sudden collapse means CBP changed the feed (labels/locale) and the maps
-  // above need updating, so surface it loudly (non-zero exit fails the Action and
-  // opens a tracking issue) instead of silently publishing an empty map.
-  if (mexican.length < MIN_CROSSINGS) {
+  // Fail-safe: never serve a near-empty result if CBP changes its localized
+  // shape. The caller retains its last CDN/static response instead of replacing
+  // all crossings with a broken payload.
+  if (mexican.length < minimumCrossings) {
     throw new Error(
-      `Refusing to write crossings.json: ${mexican.length} Mexican-border crossings ` +
-      `after dedupe (expected >= ${MIN_CROSSINGS}). ` +
-      `Raw Mexican rows from CBP: ${rawMexican.length}; total feed rows: ${data.length}. ` +
-      `If raw rows look healthy, CBP likely relabeled/localized fields again; ` +
-      `update the normalization maps in scripts/fetch-cbp.mjs. Last-good snapshot left intact.`,
+      `Refusing CBP payload: ${mexican.length} Mexican-border crossings ` +
+      `(expected >= ${minimumCrossings}). Raw Mexican rows: ${rawMexican.length}; ` +
+      `total feed rows: ${data.length}.`,
     );
   }
 
   // Fail closed on a duplicate identity. If CBP ever starts publishing waits on
-  // a port we collapse as legacy, this throws instead of silently merging two
-  // physical crossings into one card.
+  // a port we collapse as legacy, surface the mismatch instead of silently
+  // merging two physical crossings into one card.
   const seenPorts = new Set();
-  for (const c of mexican) {
-    if (seenPorts.has(c.port_number)) {
+  for (const crossing of mexican) {
+    if (seenPorts.has(crossing.port_number)) {
       throw new Error(
-        `Refusing to write crossings.json: duplicate port_number ${c.port_number} after ` +
-        `identity pinning. Two rows collapsed onto one canonical port. Review ` +
-        `PINNED_PORTS in src/lib/portIdentity.js. Last-good snapshot left intact.`,
+        `Refusing CBP payload: duplicate port_number ${crossing.port_number} ` +
+        'after identity pinning. Review PINNED_PORTS before serving this payload.',
       );
     }
-    seenPorts.add(c.port_number);
+    seenPorts.add(crossing.port_number);
   }
 
-  const payload = {
+  return {
     source: 'U.S. Customs and Border Protection',
     source_url: CBP_URL,
-    fetched_at: new Date().toISOString(),
+    fetched_at: fetchedAt,
     count: mexican.length,
     crossings: mexican,
   };
+}
+
+async function main() {
+  console.log(`Fetching ${CBP_URL}...`);
+  const res = await fetch(CBP_URL, { headers: { 'User-Agent': 'borderpulse.com/1.0 (static-fetch)' } });
+  if (!res.ok) throw new Error(`CBP fetch failed: HTTP ${res.status}`);
+  const data = await res.json();
+  const payload = createCbpPayload(data);
 
   await fs.mkdir(path.dirname(OUT_PATH), { recursive: true });
   await fs.writeFile(OUT_PATH, JSON.stringify(payload, null, 2));
-  console.log(`Wrote ${mexican.length} Mexican-border crossings → ${OUT_PATH}`);
+  console.log(`Wrote ${payload.count} Mexican-border crossings → ${OUT_PATH}`);
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+// The Vercel public-data function imports createCbpPayload. Keep the writer
+// side effect strictly limited to direct `node scripts/fetch-cbp.mjs` runs.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((err) => { console.error(err); process.exit(1); });
+}

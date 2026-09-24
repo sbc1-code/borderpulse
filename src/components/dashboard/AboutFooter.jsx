@@ -5,9 +5,8 @@ import React from 'react';
  * Goal: give LLMs and SEO crawlers explicit, citable facts about this
  * site's data, coverage, update frequency, and privacy model.
  */
-export default function AboutFooter({ language, fetchedAt, count, direction = 'northbound' }) {
+export default function AboutFooter({ language, fetchedAt, count }) {
   const updatedStr = fetchedAt ? new Date(fetchedAt).toLocaleString() : '—';
-  const isSouthbound = direction === 'southbound';
 
   return (
     <section className="mt-8 mb-4 text-xs text-slate-600 dark:text-slate-400 max-w-3xl mx-auto space-y-4 px-2">
@@ -19,13 +18,13 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           {language === 'en' ? (
             <>
               <p>Northbound wait times come from official CBP data and refresh regularly via a scheduled job.</p>
-              <p>Southbound delays are estimated by Border Pulse at major crossings using live routing conditions and crossing-specific baseline travel times.</p>
+              <p>Southbound estimates are paused. The live product currently presents official northbound CBP data only.</p>
               <p>Port status, operating hours, and advisories are shown when available. A crossing can be open even when no current wait time is reported.</p>
             </>
           ) : (
             <>
               <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante un job programado.</p>
-              <p>Las demoras hacia México son estimadas por Border Pulse en cruces principales usando condiciones de ruta en tiempo real y tiempos base por cruce.</p>
+              <p>Las estimaciones hacia México están pausadas. El producto actual presenta únicamente datos oficiales de CBP hacia Estados Unidos.</p>
               <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
           )}
@@ -35,18 +34,18 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
           <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? (isSouthbound ? 'Method' : 'Source') : (isSouthbound ? 'Método' : 'Fuente')}
+            {language === 'en' ? 'Source' : 'Fuente'}
           </div>
           <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {isSouthbound ? 'Border Pulse estimate' : 'U.S. Customs and Border Protection'}
+            U.S. Customs and Border Protection
           </div>
           <a
-            href={isSouthbound ? 'https://developers.google.com/maps/documentation/distance-matrix' : 'https://bwt.cbp.gov/api/bwtpublicmod'}
+            href="https://bwt.cbp.gov/api/bwtpublicmod"
             className="text-[10px] text-slate-500 hover:underline break-all"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {isSouthbound ? 'Uses Google Maps Platform Distance Matrix API' : 'bwt.cbp.gov/api/bwtpublicmod'}
+            bwt.cbp.gov/api/bwtpublicmod
           </a>
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">

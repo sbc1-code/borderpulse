@@ -191,6 +191,10 @@ export default function Layout({ children }) {
               {language === 'en' ? 'About' : 'Acerca de'}
             </Link>
             <span>·</span>
+            <Link to={language === 'es' ? '/privacidad/' : '/privacy/'} className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'es' ? 'Privacidad' : 'Privacy'}
+            </Link>
+            <span>·</span>
             <Link
               to={language === 'es' ? '/metodologia/' : '/methodology/'}
               className="hover:text-slate-900 dark:hover:text-white transition-colors"

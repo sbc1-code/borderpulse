@@ -24,6 +24,8 @@ import { buildSlugMap } from '@/lib/slugs';
 import { track } from '@/lib/analytics';
 import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
+import { useFreshnessClock } from '@/lib/useFreshnessClock';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -66,6 +68,10 @@ export default function Dashboard() {
 
   const language = usePersistentLanguage();
   const direction = 'northbound';
+  const freshnessNow = useFreshnessClock();
+  const dataFreshness = freshnessOf(state.fetchedAt, freshnessNow);
+  const hasFreshData = dataFreshness.state === FRESHNESS.FRESH;
+  const dataStatusLabel = liveLabel(dataFreshness.state, dataFreshness.age, language);
   const [region, setRegion] = useState(() => {
     // Stored region preference takes precedence; otherwise check the geolocation default.
     const stored = localStorage.getItem('borderPulse_region');
@@ -214,12 +220,13 @@ export default function Dashboard() {
   }, [state.crossings]);
 
   useEffect(() => {
+    const current = dataFreshness.state === FRESHNESS.FRESH;
     const title = language === 'en'
-      ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
-      : 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real';
+      ? `Border Pulse | ${current ? 'Current' : 'Latest'} US-Mexico Border Wait Reports`
+      : `Border Pulse | ${current ? 'Reportes actuales' : 'Últimos reportes'} de espera fronteriza EE.UU.-México`;
     const description = language === 'en'
-      ? 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
-      : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
+      ? `${current ? 'Current' : 'Latest'} official CBP wait reports at US-Mexico border crossings, with 30-day planning patterns. Bilingual EN/ES.`
+      : `${current ? 'Reportes actuales' : 'Últimos reportes'} oficiales de espera de CBP en cruces fronterizos EE.UU.-México, con patrones de planificación de 30 días. Bilingüe EN/ES.`;
     updatePageMeta({
       title,
       description,
@@ -228,7 +235,7 @@ export default function Dashboard() {
       ogUrl: 'https://borderpulse.com/',
       canonical: 'https://borderpulse.com/',
     });
-  }, [language]);
+  }, [language, dataFreshness.state]);
 
   const changeRegion = (r) => {
     setRegion(r);
@@ -350,15 +357,15 @@ export default function Dashboard() {
         </motion.h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
           {language === 'en'
-            ? 'Official wait times to the U.S. · Historical patterns · Live CBP data'
-            : 'Tiempos oficiales hacia EE.UU. · Patrones históricos · Datos en vivo de CBP'}
+            ? `Official wait reports to the U.S. · Historical patterns · ${hasFreshData ? 'Live CBP data' : `CBP report ${dataStatusLabel}`}`
+            : `Reportes oficiales hacia EE.UU. · Patrones históricos · ${hasFreshData ? 'Datos de CBP en vivo' : `Reporte de CBP ${dataStatusLabel}`}`}
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}
         <div className="flex items-center gap-2 flex-wrap mt-3">
           <div className="flex items-center gap-1 text-[11px] text-slate-500 mr-auto">
-            <Wifi className="w-3 h-3 text-emerald-500" />
-            <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
+            <Wifi className={`w-3 h-3 ${hasFreshData ? 'text-emerald-500' : 'text-amber-500'}`} />
+            <span>{dataStatusLabel}</span>
           </div>
           <Button
             variant={view === 'analytics' ? 'default' : 'outline'}
@@ -370,7 +377,7 @@ export default function Dashboard() {
             <BarChart3 className="w-3.5 h-3.5" />
             <span className="text-xs">
               {view === 'analytics'
-                ? (language === 'en' ? 'Live' : 'En vivo')
+                ? (language === 'en' ? 'Wait reports' : 'Reportes de espera')
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
@@ -581,6 +588,7 @@ export default function Dashboard() {
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                     snapshotAt={state.fetchedAt}
+                                    freshnessNow={freshnessNow}
                                   />
                                 </div>
                               ))}
@@ -611,6 +619,7 @@ export default function Dashboard() {
                                 onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
                                 snapshotAt={state.fetchedAt}
+                                freshnessNow={freshnessNow}
                               />
                             </div>
                           ))}
@@ -633,6 +642,7 @@ export default function Dashboard() {
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                     snapshotAt={state.fetchedAt}
+                                    freshnessNow={freshnessNow}
                                   />
                                 </div>
                               ))}
@@ -691,6 +701,7 @@ export default function Dashboard() {
         language={language}
         direction={direction}
         portToSlug={portToSlug}
+        snapshotAt={state.fetchedAt}
       />
     </div>
   );

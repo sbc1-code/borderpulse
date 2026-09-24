@@ -65,8 +65,10 @@ const COPY = {
             <p>
               A scheduled GitHub Action fetches the CBP feed and writes a new{' '}
               <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/crossings.json</code>.
-              GitHub's free cron can be delayed, so the site describes the cadence as regular
-              rather than exact. We do not interpolate or smooth between refreshes.
+              A host can also provide a same-origin, normalized official-data route; when it is
+              unavailable, the dashboard uses that published static snapshot. GitHub's free cron
+              can be delayed, so the site describes the cadence as regular rather than exact. We
+              do not interpolate or smooth between refreshes.
             </p>
             <p>
               The same scheduled job rolls up snapshots into per-port aggregates and refreshes the
@@ -241,8 +243,10 @@ const COPY = {
               Un GitHub Action programado jala el feed de CBP y escribe un
               nuevo{' '}
               <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/crossings.json</code>.
-              El cron gratuito de GitHub puede retrasarse, así que el sitio describe la cadencia
-              como regular y no exacta. No interpolamos ni suavizamos entre refrescos.
+              Un host también puede ofrecer una ruta de datos oficiales normalizada y del mismo
+              origen; cuando no está disponible, el panel usa ese snapshot estático publicado. El
+              cron gratuito de GitHub puede retrasarse, así que el sitio describe la cadencia como
+              regular y no exacta. No interpolamos ni suavizamos entre refrescos.
             </p>
             <p>
               El mismo trabajo programado agrupa los snapshots en agregados por puerto y refresca los

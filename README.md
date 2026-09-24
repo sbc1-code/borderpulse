@@ -1,12 +1,13 @@
 # Border Pulse
 
-Real-time US-Mexico border wait times. Static site on GitHub Pages at [borderpulse.com](https://borderpulse.com).
+Current US-Mexico border wait times. Static site on GitHub Pages at [borderpulse.com](https://borderpulse.com).
 
 ## Stack
 - Vite + React 18 + Tailwind + shadcn/ui
 - Data: U.S. Customs and Border Protection official feed (`bwt.cbp.gov/api/bwtpublicmod`)
 - Exchange rate: `exchangerate.host` / `open.er-api.com`
-- Hosting: GitHub Pages (static), no backend
+- Hosting: GitHub Pages static fallback; protected Vercel preview for the
+  candidate official-data function. No live customer backend.
 - Monetization: Adsterra Native Banner (live on `borderpulse.com`)
 
 ## Data pipeline
@@ -14,7 +15,10 @@ Real-time US-Mexico border wait times. Static site on GitHub Pages at [borderpul
 
 Paid southbound Google Maps estimates are paused and are not part of the production workflow. The retained `scripts/fetch-sb.mjs` utility is historical/manual only; production serves the official northbound CBP feed.
 
-The client (`src/components/utils/dataService.js`) reads those static JSON files. No API, no auth, no rate limits.
+The client (`src/components/utils/dataService.js`) first attempts a same-origin
+official-data route when the host provides one, then falls back to the static
+snapshot. The public Pages site has no account, billing, or customer API; the
+protected Vercel functions are not a public paid service.
 
 ## Local dev
 ```bash

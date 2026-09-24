@@ -9,6 +9,8 @@ import { nowInTz } from '@/components/utils/crossingMeta';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { isSparseCell } from '@/lib/aggregates';
+import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
+import { useFreshnessClock } from '@/lib/useFreshnessClock';
 
 // /compare/<slugA>-vs-<slugB> — side-by-side live wait + 30-day pattern.
 // The pair is parsed from the single :pair param so we don't have to add a
@@ -48,11 +50,16 @@ function todayLightest(byHour, timezone) {
   return todays[0] || null;
 }
 
-function CrossingPanel({ crossing, slug, aggregate, language }) {
+function CrossingPanel({ crossing, slug, aggregate, language, freshness }) {
   const wait = getWaitMinutes(crossing, 'northbound');
   const overallMedian = aggregate?.overall_median;
   const lightest = todayLightest(aggregate?.by_hour, aggregate?.timezone);
   const sampleCount = aggregate?.sample_count;
+  const isFresh = freshness.state === FRESHNESS.FRESH;
+  const reportLabel = liveLabel(freshness.state, freshness.age, language);
+  const waitLabel = isFresh
+    ? (language === 'en' ? 'Live wait' : 'Espera en vivo')
+    : (language === 'en' ? `Latest CBP wait · ${reportLabel}` : `Última espera de CBP · ${reportLabel}`);
 
   return (
     <Card className="h-full">
@@ -67,7 +74,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
         <div className="space-y-3">
           <div>
             <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">
-              {language === 'en' ? 'Live wait' : 'Espera en vivo'}
+              {waitLabel}
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tabular-nums">
               {wait == null ? '—' : `${wait} min`}
@@ -120,14 +127,15 @@ export default function Compare() {
   const language = usePersistentLanguage();
 
   const parsed = useMemo(() => parsePair(pair), [pair]);
-  const [state, setState] = useState({ crossings: [], isLoading: true });
+  const [state, setState] = useState({ crossings: [], fetchedAt: null, isLoading: true });
   const [aggA, setAggA] = useState(null);
   const [aggB, setAggB] = useState(null);
+  const freshnessNow = useFreshnessClock();
 
   useEffect(() => {
     (async () => {
       const data = await dataService.getBorderData();
-      setState({ crossings: data.crossings || [], isLoading: false });
+      setState({ crossings: data.crossings || [], fetchedAt: data.timestamp, isLoading: false });
     })();
   }, []);
 
@@ -170,8 +178,8 @@ export default function Compare() {
       ? `${crossingA.name} vs ${crossingB.name}: which is faster | Border Pulse`
       : `${crossingA.name} vs ${crossingB.name}: cuál es más rápida | Border Pulse`;
     const desc = language === 'en'
-      ? `Live wait times, today's lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side. Pick the faster crossing right now.`
-      : `Tiempos en vivo, hora más ligera de hoy y patrones de 30 días en ${crossingA.name} y ${crossingB.name} lado a lado. Elige la garita más rápida ahora.`;
+      ? `Compare official CBP wait reports, today's lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side.`
+      : `Compara reportes oficiales de espera de CBP, la hora más ligera de hoy y patrones de 30 días en ${crossingA.name} y ${crossingB.name} lado a lado.`;
     const url = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -189,28 +197,34 @@ export default function Compare() {
 
   const waitA = getWaitMinutes(crossingA, 'northbound');
   const waitB = getWaitMinutes(crossingB, 'northbound');
+  const dataFreshness = freshnessOf(state.fetchedAt, freshnessNow);
+  const hasFreshData = dataFreshness.state === FRESHNESS.FRESH;
+  const dataStatusLabel = liveLabel(dataFreshness.state, dataFreshness.age, language);
+  const currentLead = hasFreshData
+    ? (language === 'en' ? 'Right now' : 'Ahora mismo')
+    : (language === 'en' ? `In the latest CBP report (${dataStatusLabel})` : `En el último reporte de CBP (${dataStatusLabel})`);
 
   let liveSummary = null;
   if (waitA != null && waitB != null) {
     if (waitA === waitB) {
       liveSummary = language === 'en'
-        ? `Right now both ports report ${waitA} minutes. Either is fine.`
-        : `Ahora mismo las dos garitas reportan ${waitA} minutos. Cualquiera está bien.`;
+        ? `${currentLead}, both ports report ${waitA} minutes. Either is fine.`
+        : `${currentLead}, las dos garitas reportan ${waitA} minutos. Cualquiera está bien.`;
     } else {
       const faster = waitA < waitB ? crossingA : crossingB;
       const delta = Math.abs(waitA - waitB);
       liveSummary = language === 'en'
-        ? `Right now, ${faster.name} is ${delta} minutes faster (${Math.min(waitA, waitB)} min vs ${Math.max(waitA, waitB)} min northbound).`
-        : `Ahora mismo, ${faster.name} está ${delta} minutos más rápida (${Math.min(waitA, waitB)} min vs ${Math.max(waitA, waitB)} min hacia EE.UU.).`;
+        ? `${currentLead}, ${faster.name} is ${delta} minutes faster (${Math.min(waitA, waitB)} min vs ${Math.max(waitA, waitB)} min northbound).`
+        : `${currentLead}, ${faster.name} está ${delta} minutos más rápida (${Math.min(waitA, waitB)} min vs ${Math.max(waitA, waitB)} min hacia EE.UU.).`;
     }
   } else if (waitA != null && waitB == null) {
     liveSummary = language === 'en'
-      ? `${crossingB.name} has no current wait time published. ${crossingA.name} is reporting ${waitA} min.`
-      : `${crossingB.name} no tiene tiempo actual publicado. ${crossingA.name} reporta ${waitA} min.`;
+      ? `${crossingB.name} has no wait report in this CBP snapshot. ${crossingA.name} reports ${waitA} min.`
+      : `${crossingB.name} no tiene reporte de espera en esta captura de CBP. ${crossingA.name} reporta ${waitA} min.`;
   } else if (waitB != null && waitA == null) {
     liveSummary = language === 'en'
-      ? `${crossingA.name} has no current wait time published. ${crossingB.name} is reporting ${waitB} min.`
-      : `${crossingA.name} no tiene tiempo actual publicado. ${crossingB.name} reporta ${waitB} min.`;
+      ? `${crossingA.name} has no wait report in this CBP snapshot. ${crossingB.name} reports ${waitB} min.`
+      : `${crossingA.name} no tiene reporte de espera en esta captura de CBP. ${crossingB.name} reporta ${waitB} min.`;
   }
 
   // Aggregate-based comparisons (only show when both have data)
@@ -251,23 +265,23 @@ export default function Compare() {
         <p className="text-xs sm:text-sm text-slate-500 mt-1 inline-flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5" />
           {language === 'en'
-            ? 'Live wait times and 30-day patterns side by side. Northbound only.'
-            : 'Tiempos en vivo y patrones de 30 días lado a lado. Solo hacia EE.UU.'}
+            ? `${hasFreshData ? 'Live waits' : `Latest CBP report (${dataStatusLabel})`} and 30-day patterns side by side. Northbound only.`
+            : `${hasFreshData ? 'Esperas en vivo' : `Último reporte de CBP (${dataStatusLabel})`} y patrones de 30 días lado a lado. Solo hacia EE.UU.`}
         </p>
       </header>
 
       {liveSummary && (
         <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40 px-4 py-3">
           <div className="text-[10px] uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-semibold mb-0.5">
-            {language === 'en' ? 'Right now' : 'Ahora mismo'}
+            {hasFreshData ? (language === 'en' ? 'Right now' : 'Ahora mismo') : (language === 'en' ? 'Latest CBP report' : 'Último reporte de CBP')}
           </div>
           <p className="text-sm text-slate-900 dark:text-white">{liveSummary}</p>
         </div>
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
-        <CrossingPanel crossing={crossingA} slug={aSlug} aggregate={aggA} language={language} />
-        <CrossingPanel crossing={crossingB} slug={bSlug} aggregate={aggB} language={language} />
+        <CrossingPanel crossing={crossingA} slug={aSlug} aggregate={aggA} language={language} freshness={dataFreshness} />
+        <CrossingPanel crossing={crossingB} slug={bSlug} aggregate={aggB} language={language} freshness={dataFreshness} />
       </div>
 
       {typicalSummary && (
@@ -286,8 +300,12 @@ export default function Compare() {
         <ul className="text-sm text-slate-700 dark:text-slate-300 space-y-1.5 list-disc pl-5">
           <li>
             {language === 'en'
-              ? 'Live wait reflects the most recent CBP report. Refreshes when the page loads.'
-              : 'La espera en vivo refleja el reporte más reciente de CBP. Se actualiza al cargar la página.'}
+              ? (hasFreshData
+                ? 'Live wait reflects the most recent CBP report. Refreshes when the page loads.'
+                : `This is the latest CBP report (${dataStatusLabel}), not a live reading.`)
+              : (hasFreshData
+                ? 'La espera en vivo refleja el reporte más reciente de CBP. Se actualiza al cargar la página.'
+                : `Este es el último reporte de CBP (${dataStatusLabel}), no una lectura en vivo.`)}
           </li>
           <li>
             {language === 'en'

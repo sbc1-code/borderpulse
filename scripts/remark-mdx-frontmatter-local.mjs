@@ -1,10 +1,13 @@
 import matter from 'gray-matter';
 
-// BorderPulse only uses YAML frontmatter. The upstream plugin also brings in
-// the unmaintained TOML parser, so keep the small export contract locally.
+// The upstream remark-mdx-frontmatter plugin pulls in `toml`, which currently
+// has high-severity advisories and no fixed release. BorderPulse only uses YAML
+// frontmatter, so keep the same exported `frontmatter` contract locally and
+// remove the unnecessary TOML parser from the build graph.
 export default function remarkMdxFrontmatterLocal() {
   return (tree, file) => {
     const parsed = matter(String(file));
+    const value = toEstree(parsed.data || {});
     const exportNode = {
       type: 'mdxjsEsm',
       value: '',
@@ -17,10 +20,10 @@ export default function remarkMdxFrontmatterLocal() {
             declaration: {
               type: 'VariableDeclaration',
               kind: 'const',
-              declarations: [{
-                type: 'VariableDeclarator',
-                id: { type: 'Identifier', name: 'frontmatter' },
-                init: toEstree(parsed.data || {}),
+                declarations: [{
+                  type: 'VariableDeclarator',
+                  id: { type: 'Identifier', name: 'frontmatter' },
+                init: value,
               }],
             },
             specifiers: [],
@@ -39,7 +42,9 @@ function toEstree(value) {
   if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
     return { type: 'Literal', value };
   }
-  if (Array.isArray(value)) return { type: 'ArrayExpression', elements: value.map(toEstree) };
+  if (Array.isArray(value)) {
+    return { type: 'ArrayExpression', elements: value.map(toEstree) };
+  }
   if (typeof value === 'object') {
     return {
       type: 'ObjectExpression',

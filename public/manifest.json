@@ -1,7 +1,7 @@
 {
   "name": "Border Pulse",
   "short_name": "Border Pulse",
-  "description": "Real-time US-Mexico border wait times. Official CBP data.",
+  "description": "Official US-Mexico border wait reports from CBP, refreshed regularly.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -1,0 +1,23 @@
+name: Evaluate BorderPulse Plus alerts
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate alerts when the production route is configured
+        env:
+          ALERT_URL: ${{ secrets.BORDERPULSE_ALERT_EVALUATOR_URL }}
+          CRON_SECRET: ${{ secrets.BORDERPULSE_CRON_SECRET }}
+        run: |
+          if [ -z "$ALERT_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "Alert evaluator secrets are not configured; skipping safely."
+            exit 0
+          fi
+          curl --fail-with-body --silent --show-error \
+            --request GET "$ALERT_URL" \
+            --header "Authorization: Bearer $CRON_SECRET"

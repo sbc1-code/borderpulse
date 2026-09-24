@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import net from 'node:net';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -7,7 +8,7 @@ import { chromium } from 'playwright-core';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
 const configuredBase = process.env.ROUTE_SMOKE_BASE_URL;
-const baseUrl = new URL(configuredBase || 'http://127.0.0.1:4173');
+let baseUrl = new URL(configuredBase || 'http://127.0.0.1:0');
 const productionOrigin = 'https://borderpulse.com';
 
 function decodeXml(value) {
@@ -124,16 +125,30 @@ async function waitForPreview(child) {
 
 async function startPreview() {
   if (configuredBase) return null;
+  const port = Number(process.env.ROUTE_SMOKE_PORT) || await findFreePort();
+  baseUrl = new URL(`http://127.0.0.1:${port}`);
   const viteBin = path.resolve(root, 'node_modules/vite/bin/vite.js');
   const child = spawn(
     process.execPath,
-    [viteBin, 'preview', '--host', baseUrl.hostname, '--port', baseUrl.port, '--strictPort'],
+    [viteBin, 'preview', '--host', baseUrl.hostname, '--port', String(port), '--strictPort'],
     { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] },
   );
   child.stdout.on('data', (chunk) => process.stdout.write(`[preview] ${chunk}`));
   child.stderr.on('data', (chunk) => process.stderr.write(`[preview] ${chunk}`));
   await waitForPreview(child);
   return child;
+}
+
+function findFreePort() {
+  return new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.once('error', reject);
+    server.listen(0, '127.0.0.1', () => {
+      const address = server.address();
+      const port = typeof address === 'object' && address ? address.port : null;
+      server.close((error) => error ? reject(error) : resolve(port));
+    });
+  });
 }
 
 function schemaTypes(schemas) {

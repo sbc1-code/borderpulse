@@ -9,7 +9,37 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 ## Next up
 
+### Free product and PMF validation — 2026-09-22
+
+- [x] Add an agent-readable operator guide, active task queue, and status command.
+- [x] Restore the free public data publication path and verify a live JSON
+      readback. The Pages path remains a fallback, not a promised 15-minute
+      service.
+- [ ] Obtain authorized Umami and Vercel-preview readback. Measure the real
+      decision funnel and verify the preview's runtime/CDN response before a
+      domain cutover decision.
+- [ ] After explicit outreach authorization, run the five-account San
+      Ysidro-Tijuana discovery cohort in
+      `docs/SAN-YSIDRO-WORKFLOW-DISCOVERY.md`.
+- [ ] Decide from evidence: offer one manual pilot after three independent
+      repetitions of the same buyer-owned job plus a written paid commitment,
+      or explicitly keep BorderPulse free and stop commercial feature work.
+- [x] Preserve the paid-beta product, data, entitlement, and operator work in
+      PR #87 as a reversible later option.
+
 Ranked roughly by leverage. Pick what fits the available time.
+
+### Later: only after a paid job is proven
+
+The first possible paid work is one manual, buyer-owned corridor decision page
+or briefing with explicit source, freshness, fallback, support, and success
+boundaries. It needs no generic SaaS, login, subscription, public API, or
+automated alert stack.
+
+The saved-crossing, alert, account, Stripe, Supabase, and Vercel work in PR #87
+is a separate consumer-product option. It can resume only if the stricter
+consumer gate passes; its name, feature boundary, price, and providers are all
+provisional. Do not treat the implementation as a product decision.
 
 ### Active execution queue — 2026-08-06 audit
 
@@ -95,9 +125,9 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [ ] **Embed analytics** — track which sites embed the widget. Needs
       a server (Cloudflare worker or similar). GitHub Pages doesn't
       expose access logs.
-- [ ] **Auth tier (sync, SMS alerts, history)** — only justified if
-      consumer paid tier becomes a real direction. See README/strategy
-      notes.
+- [ ] **Account/alert tier (sync, email alerts, history)** — justified only if
+      the separate consumer gate selects that job and its contract and launch
+      gates pass. No SMS or southbound feature is implied.
 - [ ] **Programmatic SEO `/best-time/:slug/:day`** — 7-day variants
       per crossing (≈300 EN + 300 ES = 600 pages). Hold until core
       `/best-time/:slug` ranks; then expand only for the high-traffic
@@ -129,7 +159,7 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 Snapshot of features live on borderpulse.com today.
 
 ### Pages
-- `/` — Dashboard with 44 wait cards, vs-typical comparison, geo prompt,
+- `/` — Dashboard with the current published crossing inventory, vs-typical comparison, geo prompt,
   region filters, search, direction toggle, right-rail stats + USD/MXN
 - `/crossing/:slug` — Per-crossing detail with hourly chart (7-day
   selector), lightest-hour callout, recent advisories timeline,
@@ -141,12 +171,9 @@ Snapshot of features live on borderpulse.com today.
 - `/compare/:pair` — 15 hand-picked same-region crossing comparisons
 - `/walk-or-drive/:slug` — 30 pedestrian-vs-vehicle decision pages
 - `/blog` + `/blog/:slug` — 36 bilingual posts, 18 EN / 18 ES
-- `/alerts` — Notification subscriptions management (toggle / delete
-  per row)
 - `/about` — Stats, methodology, "what runs in your browser"
 - `/embed/:slug` — Iframe-friendly widget with theme/lang/direction
   URL params (intentionally `noindex`)
-- `/status/:id` — Stub (existing, not actively used)
 
 ### Public data feeds
 - `/data/crossings.json` — Live wait times, refreshed by scheduled cron
@@ -160,7 +187,7 @@ Snapshot of features live on borderpulse.com today.
 - GitHub Pages deploy via `.github/workflows/deploy.yml`
 - Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; changed,
   validated snapshots explicitly dispatch the sole deployer with their SHA
-- Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild
+- Sitemap and RSS regenerated each prebuild
 - Desktop/mobile browser smoke gate covers every sitemap URL and generated alias
 - Code-split leaf routes (main bundle ~161 KB)
 - Robots.txt allows AI crawlers, disallows `/embed/`

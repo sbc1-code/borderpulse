@@ -30,8 +30,8 @@ export default function PopularCrossings({ crossings, language = 'en' }) {
       </h2>
       <p className="text-xs text-slate-500 mb-3">
         {language === 'en'
-          ? 'Live wait times, historical patterns, and best times to cross at each port.'
-          : 'Tiempos de espera en vivo, patrones históricos y mejores horas para cruzar en cada puerto.'}
+          ? 'Official wait reports, historical patterns, and best times to cross at each port.'
+          : 'Reportes oficiales de espera, patrones históricos y mejores horas para cruzar en cada puerto.'}
       </p>
       <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-1.5">
         {items.map((c) => (

@@ -131,6 +131,7 @@ export default function BorderCrossingCard({
   onToggleFavorite,
   slug,
   snapshotAt = null,
+  freshnessNow = Date.now(),
 }) {
   const [showLanes, setShowLanes] = useState(false);
   const [aggregate, setAggregate] = useState(null);
@@ -167,7 +168,7 @@ export default function BorderCrossingCard({
   const updatedAt = getUpdatedAtForDirection(crossing, selectedDirection);
   // The footer dot used to say "Live" unconditionally, even on an hours-old
   // snapshot. Freshness now comes from the shared trust model.
-  const freshness = freshnessOf(snapshotAt ?? updatedAt);
+  const freshness = freshnessOf(snapshotAt ?? updatedAt, freshnessNow);
   const isSouthbound = selectedDirection === 'southbound';
   const portStatus = getPortStatus(crossing);
   const portStatusStyle = PORT_STATUS_STYLES[portStatus] || PORT_STATUS_STYLES.unknown;

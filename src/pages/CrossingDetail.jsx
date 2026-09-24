@@ -17,6 +17,7 @@ import { usePersistentLanguage } from '@/lib/useLanguage';
 import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
+import { useFreshnessClock } from '@/lib/useFreshnessClock';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -79,8 +80,8 @@ function faqItems(crossing, aggregate, lang) {
   out.push({
     q: lang === 'en' ? `What are the current wait times at ${name}?` : `¿Cuáles son los tiempos de espera actuales en ${name}?`,
     a: lang === 'en'
-      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the card above for the live number.`
-      : `Border Pulse toma el tiempo de espera más reciente de ${name} de U.S. Customs and Border Protection con regularidad. Consulta la tarjeta arriba para ver el número en vivo.`,
+      ? `Border Pulse pulls the latest reported wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the card above for its freshness and timestamp.`
+      : `Border Pulse toma el tiempo de espera reportado más reciente de ${name} de U.S. Customs and Border Protection con regularidad. Consulta la tarjeta arriba para ver su antigüedad y hora de actualización.`,
   });
 
   out.push({
@@ -214,6 +215,7 @@ export default function CrossingDetail() {
   const [embedOpen, setEmbedOpen] = useState(false);
   const [anomalies, setAnomalies] = useState(null);
   const language = usePersistentLanguage();
+  const freshnessNow = useFreshnessClock();
 
   // Initial guess is browser-local; once the crossing loads, todayIdx below
   // switches to the port's timezone and the reset effect re-syncs selectedDay.
@@ -354,8 +356,8 @@ export default function CrossingDetail() {
       ? `${crossing.name} Wait Times | Border Pulse`
       : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
     const desc = language === 'en'
-      ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
-      : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
+      ? `Latest official CBP wait reports for ${crossing.name}${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
+      : `Últimos reportes oficiales de espera de CBP para ${crossing.name}${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
     const url = `https://borderpulse.com/crossing/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -458,6 +460,8 @@ export default function CrossingDetail() {
           selectedDirection="northbound"
           isFavorite={false}
           onToggleFavorite={() => {}}
+          snapshotAt={state.fetchedAt}
+          freshnessNow={freshnessNow}
         />
       </div>
 
@@ -512,7 +516,7 @@ export default function CrossingDetail() {
         return (
           <section className="mb-6">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-              {language === 'en' ? 'Lanes right now' : 'Carriles ahora mismo'}
+              {language === 'en' ? 'Reported lane status' : 'Estado reportado de carriles'}
             </h2>
             <p className="text-xs text-slate-500 mb-3">
               {language === 'en'

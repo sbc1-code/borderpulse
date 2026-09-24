@@ -212,8 +212,8 @@ export function BestTimeIndex() {
           </li>
           <li>
             {language === 'en'
-              ? 'Click any crossing to see its full hour-by-hour heatmap and the live wait right now.'
-              : 'Haz clic en cualquier cruce para ver el heatmap completo hora por hora y la espera en vivo.'}
+              ? 'Click any crossing to see its full hour-by-hour heatmap and latest wait report.'
+              : 'Haz clic en cualquier cruce para ver el heatmap completo hora por hora y el último reporte de espera.'}
           </li>
         </ul>
       </div>
@@ -418,8 +418,8 @@ export default function BestTime() {
         ) : (
           <p className="text-sm text-emerald-800 dark:text-emerald-200">
             {language === 'en'
-              ? `Not enough sampled data for ${DAY_LABELS.en[today]} yet. Try the live wait times instead.`
-              : `Aún no hay suficientes datos muestreados para ${DAY_LABELS.es[today]}. Consulta los tiempos en vivo.`}
+              ? `Not enough sampled data for ${DAY_LABELS.en[today]} yet. Check the latest wait report instead.`
+              : `Aún no hay suficientes datos muestreados para ${DAY_LABELS.es[today]}. Consulta el último reporte de espera.`}
           </p>
         )}
       </section>
@@ -501,7 +501,7 @@ export default function BestTime() {
         </div>
       </section>
 
-      {/* See current wait CTA */}
+      {/* See latest wait report CTA */}
       <section className="mb-6">
         <Link
           to={`/crossing/${canonicalSlug}/`}
@@ -509,8 +509,8 @@ export default function BestTime() {
         >
           <Clock className="w-4 h-4 text-emerald-600" />
           {language === 'en'
-            ? `See current wait time at ${crossing.name}`
-            : `Ver tiempo de espera actual en ${crossing.name}`}
+            ? `See latest wait report at ${crossing.name}`
+            : `Ver último reporte de espera en ${crossing.name}`}
           <ArrowRight className="w-4 h-4 ml-1" />
         </Link>
       </section>
