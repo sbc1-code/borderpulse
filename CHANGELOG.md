@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2026-09-27
+
+### Fixed
+- Restored the existing Adsterra native banner placement to Active in the
+  publisher dashboard, with adult ads disabled. Updated the script host to
+  match the current placement code. The August 29-September 27 report showed
+  zero impressions and zero revenue before reactivation; future earnings
+  require fresh measurement.
+
+### Added
+- AdSense ownership meta tag and the account-provided Google ads.txt entry for
+  site verification. These identify the publisher without loading Google ad
+  scripts. AdSense approval and ad serving remain pending; the existing
+  Adsterra integration remains the current ad implementation.
+
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
