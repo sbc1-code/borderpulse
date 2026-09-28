@@ -5,6 +5,8 @@
 ### Fixed
 - Mobile refresh and share buttons retain accessible names when their visible
   text is hidden, with 44-pixel minimum tap targets.
+- Fixed the search-clear control falling outside its input on mobile and
+  localized its accessible label in Spanish.
 - Connected a separate Google Cloud Scheduler trigger for quarter-hour CBP
   refreshes; see `docs/REFRESH-OPERATIONS.md` for verification and token renewal.
 - Dashboard background refreshes now update displayed cards and refresh on
