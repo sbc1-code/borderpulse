@@ -3,6 +3,8 @@
 ## 2026-09-27
 
 ### Fixed
+- Mobile refresh and share buttons retain accessible names when their visible
+  text is hidden, with 44-pixel minimum tap targets.
 - Connected a separate Google Cloud Scheduler trigger for quarter-hour CBP
   refreshes; see `docs/REFRESH-OPERATIONS.md` for verification and token renewal.
 - Dashboard background refreshes now update displayed cards and refresh on

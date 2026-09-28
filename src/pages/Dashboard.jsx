@@ -392,13 +392,13 @@ export default function Dashboard() {
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 h-9">
+          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 min-h-11 min-w-11" aria-label={language === 'en' ? 'Share' : 'Compartir'}>
             <Share2 className="w-3.5 h-3.5" />
             <span className="text-xs hidden sm:inline">
               {language === 'en' ? 'Share' : 'Compartir'}
             </span>
           </Button>
-          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 h-9">
+          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 min-h-11 min-w-11" aria-label={language === 'en' ? 'Refresh' : 'Actualizar'}>
             <RefreshCw className={`w-3.5 h-3.5 ${state.isRefreshing ? 'animate-spin' : ''}`} />
             <span className="text-xs hidden sm:inline">
               {language === 'en' ? 'Refresh' : 'Actualizar'}
