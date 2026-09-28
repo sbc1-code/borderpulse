@@ -28,6 +28,10 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   operating cost before claiming an acquisition-to-revenue loop works.
 - Improve one end-to-end journey from search query to crossing comparison or
   best-time decision. Avoid thin pages made only to capture more keywords.
+- Sebastian reports that Stripe is connected for BorderPulse. Verify the
+  account, mode, product/Price, webhook and checkout state in Stripe before
+  describing any paid offering or accepting a charge. The free, ad-supported
+  crossing experience remains the current offer.
 
 ### Next: test one adjacent crossing job
 
@@ -47,8 +51,8 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 - Connect proven crossing jobs into a coherent bilingual trip experience.
 - Explore business workflow products or sponsorships only with a real buyer,
   a differentiated outcome, a permissible data path and a written commitment.
-  Consumer accounts, alerts, payments and a database remain optional tools,
-  not prerequisites for the platform vision.
+  Stripe integration work can support a validated offer later; accounts,
+  alerts and a database depend on the job being solved.
 - Southbound timing needs a reliable, authorized source and an honest
   confidence model before it returns to the live product.
 
