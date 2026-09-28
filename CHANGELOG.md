@@ -3,6 +3,12 @@
 ## 2026-09-27
 
 ### Fixed
+- Connected a separate Google Cloud Scheduler trigger for quarter-hour CBP
+  refreshes; see `docs/REFRESH-OPERATIONS.md` for verification and token renewal.
+- Dashboard background refreshes now update displayed cards and refresh on
+  tab return. Failed requests preserve the last good snapshot and timestamp.
+- Ad controls have larger tap targets and bilingual dismissal labels;
+  removed unsupported guarantees about third-party ad content.
 - Restored the existing Adsterra native banner placement to Active in the
   publisher dashboard, with adult ads disabled. Updated the script host to
   match the current placement code. The August 29-September 27 report showed

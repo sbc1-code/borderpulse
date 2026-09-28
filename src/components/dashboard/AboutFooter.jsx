@@ -19,13 +19,13 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           {language === 'en' ? (
             <>
               <p>Northbound wait times come from official CBP data and refresh regularly via a scheduled job.</p>
-              <p>Southbound delays are estimated by Border Pulse at major crossings using live routing conditions and crossing-specific baseline travel times.</p>
+              <p>Southbound estimates are paused. This dashboard shows official northbound data only. Each lane's CBP reporting time may be older than the site's fetch time.</p>
               <p>Port status, operating hours, and advisories are shown when available. A crossing can be open even when no current wait time is reported.</p>
             </>
           ) : (
             <>
               <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante un job programado.</p>
-              <p>Las demoras hacia México son estimadas por Border Pulse en cruces principales usando condiciones de ruta en tiempo real y tiempos base por cruce.</p>
+              <p>Las estimaciones hacia México están pausadas. Este panel muestra únicamente datos oficiales hacia Estados Unidos. La hora del reporte de CBP de cada carril puede ser anterior a la consulta del sitio.</p>
               <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
           )}
