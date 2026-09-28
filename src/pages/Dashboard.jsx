@@ -392,13 +392,13 @@ export default function Dashboard() {
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 h-9">
+          <Button variant="outline" size="sm" onClick={() => setShareOpen(true)} className="gap-1 min-h-11 min-w-11" aria-label={language === 'en' ? 'Share' : 'Compartir'}>
             <Share2 className="w-3.5 h-3.5" />
             <span className="text-xs hidden sm:inline">
               {language === 'en' ? 'Share' : 'Compartir'}
             </span>
           </Button>
-          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 h-9">
+          <Button variant="outline" size="sm" onClick={load} disabled={state.isRefreshing} className="gap-1 min-h-11 min-w-11" aria-label={language === 'en' ? 'Refresh' : 'Actualizar'}>
             <RefreshCw className={`w-3.5 h-3.5 ${state.isRefreshing ? 'animate-spin' : ''}`} />
             <span className="text-xs hidden sm:inline">
               {language === 'en' ? 'Refresh' : 'Actualizar'}
@@ -473,13 +473,13 @@ export default function Dashboard() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
-                className="w-full h-10 pl-9 pr-9 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+                className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
               />
               {search && (
                 <button
                   onClick={() => setSearch('')}
-                  aria-label="Clear search"
-                  className="tap-44 absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
+                  aria-label={language === 'en' ? 'Clear search' : 'Borrar búsqueda'}
+                  className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
                 >
                   <X className="w-3.5 h-3.5 text-slate-400" />
                 </button>
