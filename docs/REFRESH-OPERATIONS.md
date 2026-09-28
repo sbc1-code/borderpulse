@@ -1,5 +1,28 @@
 # Public data refresh
 
+## Verified closeout — 2026-09-27 Pacific
+
+- PR #89 restored the Adsterra placement code and added AdSense ownership
+  verification. AdSense ownership and ads.txt are verified; review was
+  requested and remains pending approval. Adult ads are disabled in Adsterra;
+  the existing opt-in placement remains active.
+- PR #90 (`cd5ffb65`) deployed successfully in Pages run `36363887817`.
+  Both release checks passed. This repaired dashboard background updates,
+  retained last-good data on failure, and made fetch freshness visible.
+- Cloud Scheduler's automatic 17:52 Pacific execution succeeded. Its GitHub
+  fetch run `36363785834` succeeded, and the public JSON readback confirmed
+  `fetched_at: 2026-09-28T00:52:28.201Z`, with 42 crossings.
+- PR #91 (`c816b7a8`) deployed successfully in Pages run `36364313380`.
+  Both release checks passed; mobile search placement and EN/ES control
+  labels were checked at 390px, and the final controls were read back live.
+- Expected incremental recurring cost is $0 within the current free
+  allowance. Google Maps remains disabled. Ad revenue and long-term cadence
+  still require measurement; one successful scheduled delivery is not an
+  uptime guarantee.
+- Next operational requirement: renew the restricted scheduler token before
+  **December 26, 2026**, and update its Authorization header. Check AdSense's
+  review result before enabling Google ad serving.
+
 ## Configuration (2026-09-27)
 
 - Google Cloud project: `borderpulse-493414`.
