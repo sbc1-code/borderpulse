@@ -106,8 +106,8 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             </div>
             <p>
               {language === 'en'
-                ? 'The site works without an account. Page-view analytics are handled by Umami (anonymous, cookieless). Preferences are saved to localStorage. Ads are opt-in and disabled by default.'
-                : 'El sitio funciona sin cuenta. La analítica de vistas la maneja Umami (anónima, sin cookies). Las preferencias se guardan en localStorage. Los anuncios son opcionales y están desactivados por defecto.'}
+                ? 'The site works without an account. Page-view analytics are handled by Umami (anonymous, cookieless). Preferences are saved to localStorage. Adsterra ads help support BorderPulse.'
+                : 'El sitio funciona sin cuenta. La analítica de vistas la maneja Umami (anónima, sin cookies). Las preferencias se guardan en localStorage. Los anuncios de Adsterra ayudan a mantener BorderPulse.'}
             </p>
           </div>
         </div>

@@ -662,6 +662,38 @@ async function main() {
     fs.writeFileSync(path.resolve(outDir, 'index.html'), aboutHtml);
   }
 
+  // Privacy notices are bilingual, crawlable, and linked from the ad unit.
+  {
+    const enCanonical = `${BASE}/privacy/`;
+    const esCanonical = `${BASE}/privacidad/`;
+    const hreflangs = [
+      { lang: 'en', href: enCanonical },
+      { lang: 'es', href: esCanonical },
+      { lang: 'x-default', href: enCanonical },
+    ];
+    const enHead = {
+      lang: 'en',
+      title: 'Privacy and advertising | Border Pulse',
+      desc: 'How Border Pulse uses browser preferences, analytics, and Adsterra advertising.',
+      canonical: enCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [],
+      hreflangs,
+    };
+    const esHead = {
+      ...enHead,
+      lang: 'es',
+      title: 'Privacidad y publicidad | Border Pulse',
+      desc: 'Cómo Border Pulse usa preferencias del navegador, analítica y publicidad de Adsterra.',
+      canonical: esCanonical,
+    };
+    for (const [route, head] of [['privacy', enHead], ['privacidad', esHead]]) {
+      const outDir = path.resolve(distDir, route);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+    }
+  }
+
   // /best-time index hub — links to every generated best-time page.
   {
     const canonical = `${BASE}/best-time/`;

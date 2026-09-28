@@ -19,6 +19,7 @@ const About = lazy(() => import('@/pages/About'));
 const Methodology = lazy(() => import('@/pages/Methodology'));
 const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
+const Privacy = lazy(() => import('@/pages/Privacy'));
 
 function RouteFallback() {
   return (
@@ -45,6 +46,8 @@ function LayoutRoutes() {
           <Route path="/metodologia" element={<Methodology lang="es" />} />
           <Route path="/compare/:pair" element={<Compare />} />
           <Route path="/walk-or-drive/:slug" element={<WalkOrDrive />} />
+          <Route path="/privacy" element={<Privacy lang="en" />} />
+          <Route path="/privacidad" element={<Privacy lang="es" />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

@@ -53,10 +53,17 @@ async function main() {
     { lang: 'es', href: `${BASE}/metodologia/` },
     { lang: 'x-default', href: `${BASE}/methodology/` },
   ];
+  const privacyAlternates = [
+    { lang: 'en', href: `${BASE}/privacy/` },
+    { lang: 'es', href: `${BASE}/privacidad/` },
+    { lang: 'x-default', href: `${BASE}/privacy/` },
+  ];
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
     { loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/best-time/`, changefreq: 'daily', priority: '0.7', lastmod: today },
+    { loc: `${BASE}/privacy/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },
+    { loc: `${BASE}/privacidad/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },
     { loc: `${BASE}/methodology/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
     { loc: `${BASE}/metodologia/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
   ];

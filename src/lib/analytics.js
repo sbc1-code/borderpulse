@@ -19,10 +19,9 @@
 //   favorite-toggle     repeat-use signal (commuters vs one-off visitors)
 //   show-all-crossings  whether the mobile collapse hides too much
 //
-// Distribution + monetization:
+// Distribution:
 //   embed-copy          distribution / backlink funnel
 //   share-status        viral / WhatsApp distribution
-//   ad-consent          monetization-readiness signal (opt-in ad take rate)
 //
 // No free-text is ever sent: slugs and enum values only, never a raw search
 // query, so an accidental paste cannot land in analytics.

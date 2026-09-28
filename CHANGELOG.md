@@ -2,6 +2,11 @@
 
 ## 2026-09-27
 
+### Changed
+- Dashboard ads load automatically from Adsterra to support the platform.
+  Added linked English and Spanish privacy notices that describe the provider's
+  possible technical data and cookie use. Local source change; deploy pending.
+
 ### Fixed
 - Mobile refresh and share buttons retain accessible names when their visible
   text is hidden, with 44-pixel minimum tap targets.

@@ -17,6 +17,7 @@ export default function AdsterraBanner({
   containerId = DEFAULT_CONTAINER,
   scriptSrc = DEFAULT_SCRIPT,
   label = 'Advertisement',
+  language = 'en',
 }) {
   const hostRef = useRef(null);
   const injectedRef = useRef(false);
@@ -39,6 +40,12 @@ export default function AdsterraBanner({
   return (
     <div className="w-full flex flex-col items-center my-6">
       <span className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">{label}</span>
+      <p className="mb-2 text-center text-[11px] text-slate-500">
+        {language === 'en' ? 'Ads help support BorderPulse. Served by Adsterra.' : 'Los anuncios ayudan a mantener BorderPulse. Publicados por Adsterra.'}{' '}
+        <a href={language === 'en' ? '/privacy/#advertising' : '/privacidad/#advertising'} className="underline underline-offset-2">
+          {language === 'en' ? 'Privacy details' : 'Detalles de privacidad'}
+        </a>
+      </p>
       <div ref={hostRef} className="w-full flex justify-center">
         <div id={containerId} />
       </div>
