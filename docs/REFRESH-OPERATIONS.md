@@ -1,5 +1,34 @@
 # Public data refresh
 
+## Ads and sharing closeout — 2026-09-27 Pacific
+
+- Sebastian confirmed the public platform is supported by automatically served
+  ads. This supersedes the earlier opt-in placement decision below.
+- [PR #94](https://github.com/sbc1-code/borderpulse/pull/94), merge
+  `da03e980383fa7504c574dd2796de17aba976a27`, removed the ad opt-in and
+  published English/Spanish privacy and advertising disclosures.
+  [Pages run 36370712116](https://github.com/sbc1-code/borderpulse/actions/runs/36370712116)
+  passed; the dashboard and both privacy routes returned HTTP 200.
+- [PR #95](https://github.com/sbc1-code/borderpulse/pull/95), merge
+  `91843791d53ea4bf2c73496ff4a75032dd23db0a`, added bilingual native-share,
+  WhatsApp, and copy-link controls on crossing pages, descriptive wait-time
+  headings, and a link to historical planning. Shared messages use the
+  canonical crossing URL without a cached wait-time claim.
+  [Pages run 36374113003](https://github.com/sbc1-code/borderpulse/actions/runs/36374113003)
+  passed. Live San Ysidro readback confirmed HTTP 200, the new heading and
+  WhatsApp URL, and no horizontal overflow at 375px.
+- Verification: production build, full test suite (404 desktop/mobile
+  navigations), EN/ES copy and share fallback, desktop native-share payload
+  and event, and historical planning navigation passed. No new dependency
+  or service was added. Existing unrelated local edits were preserved.
+- Measurement is instrumented through `crossing-share` with crossing slug
+  and method. Real analytics ingestion, traffic lift, and ad revenue have
+  not been established by these checks. Next: measure search clicks,
+  crossing-page visits, shares, and ad revenue over the first 30 days;
+  continue observing refresh cadence and check AdSense review status.
+  No external promotion or outreach was sent in this session.
+- Retain the December 26 Scheduler-token renewal requirement below.
+
 ## Verified closeout — 2026-09-27 Pacific
 
 - PR #89 restored the Adsterra placement code and added AdSense ownership
