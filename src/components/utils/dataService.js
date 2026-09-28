@@ -2,7 +2,7 @@
  * dataService - reads static JSON snapshots published by the GitHub Action
  * fetch workflow (scripts/fetch-cbp.mjs). No auth, no entity API, no LLM.
  */
-import { buildSlugMap } from '@/lib/slugs';
+import { buildSlugMap } from '../../lib/slugs.js';
 
 const DATA_PATH = '/data/crossings.json';
 const FX_PATH = '/data/exchange-rate.json';
@@ -40,7 +40,7 @@ function mergeSouthbound(crossingsDoc, sbDoc) {
   });
 }
 
-class DataService {
+export class DataService {
   constructor() {
     this.listeners = new Set();
     this.cache = null;
@@ -85,14 +85,18 @@ class DataService {
       return payload;
     } catch (err) {
       console.warn('[dataService] fetch failed', err);
-      const fallback = { success: false, crossings: [], exchange_rate: null, timestamp: new Date().toISOString(), source: 'fallback', fromFallback: true };
+      // Preserve the last successful snapshot and its real timestamp. A failed
+      // connection must not erase usable data or make it appear freshly fetched.
+      const fallback = this.cache
+        ? { ...this.cache, success: false, fromFallback: true }
+        : this.getFallbackData();
       this.notify(fallback);
       return fallback;
     }
   }
 
   async refreshBorderData() { return this.getBorderData(); }
-  getFallbackData() { return { success: false, crossings: [], exchange_rate: null, timestamp: new Date().toISOString(), source: 'fallback', fromFallback: true }; }
+  getFallbackData() { return { success: false, crossings: [], exchange_rate: null, timestamp: null, source: 'fallback', fromFallback: true }; }
 
   startAutoRefresh(intervalMs = 15 * 60 * 1000) {
     if (this.refreshTimer) return;

@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { RefreshCw, Wifi, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
+import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
@@ -135,26 +135,39 @@ export default function Dashboard() {
 
   const load = async () => {
     setState((s) => ({ ...s, isRefreshing: true }));
-    const data = await dataService.getBorderData();
-    setState({
-      crossings: data.crossings || [],
-      exchangeRate: data.exchange_rate,
-      isLoading: false,
-      isRefreshing: false,
-      source: data.source,
-      fetchedAt: data.timestamp,
-    });
-    try {
-      recordSnapshot(data.crossings || [], 'northbound');
-    } catch (e) {
-      console.warn('[dashboard] snapshot error', e);
-    }
+    await dataService.getBorderData();
   };
 
   useEffect(() => {
+    const applyData = (data) => {
+      setState({
+        crossings: data.crossings || [],
+        exchangeRate: data.exchange_rate,
+        isLoading: false,
+        isRefreshing: false,
+        source: data.source,
+        fetchedAt: data.timestamp,
+      });
+      if (data.success) {
+        try {
+          recordSnapshot(data.crossings || [], 'northbound');
+        } catch (e) {
+          console.warn('[dashboard] snapshot error', e);
+        }
+      }
+    };
+    dataService.addListener(applyData);
     load();
-    dataService.startAutoRefresh(15 * 60 * 1000);
-    return () => dataService.stopAutoRefresh();
+    dataService.startAutoRefresh(5 * 60 * 1000);
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') load();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      dataService.removeListener(applyData);
+      dataService.stopAutoRefresh();
+      document.removeEventListener('visibilitychange', onVisible);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -350,15 +363,20 @@ export default function Dashboard() {
         </motion.h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
           {language === 'en'
-            ? 'Official wait times to the U.S. · Historical patterns · Live CBP data'
-            : 'Tiempos oficiales hacia EE.UU. · Patrones históricos · Datos en vivo de CBP'}
+            ? 'Official CBP wait times to the U.S. · Historical patterns'
+            : 'Tiempos oficiales de CBP hacia EE.UU. · Patrones históricos'}
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}
         <div className="flex items-center gap-2 flex-wrap mt-3">
           <div className="flex items-center gap-1 text-[11px] text-slate-500 mr-auto">
-            <Wifi className="w-3 h-3 text-emerald-500" />
-            <span>{language === 'en' ? 'Live' : 'En vivo'}</span>
+            <RefreshCw className="w-3 h-3" />
+            <span>
+              {language === 'en' ? 'Data fetched: ' : 'Datos consultados: '}
+              {state.fetchedAt
+                ? new Date(state.fetchedAt).toLocaleString(language === 'en' ? 'en-US' : 'es-MX', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
+                : (language === 'en' ? 'unavailable' : 'no disponibles')}
+            </span>
           </div>
           <Button
             variant={view === 'analytics' ? 'default' : 'outline'}

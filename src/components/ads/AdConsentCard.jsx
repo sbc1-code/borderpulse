@@ -56,7 +56,7 @@ export default function AdConsentCard({ language = 'en' }) {
         <div className="flex justify-center mt-1">
           <button
             onClick={dismiss}
-            className="text-[10px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 underline decoration-dotted"
+            className="min-h-11 px-3 text-xs text-slate-600 dark:text-slate-300 underline decoration-dotted"
           >
             {language === 'en' ? 'Hide ads this session' : 'Ocultar anuncios esta sesión'}
           </button>
@@ -71,7 +71,7 @@ export default function AdConsentCard({ language = 'en' }) {
       <div className="relative rounded-lg border border-slate-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/40 px-4 py-3">
         <button
           onClick={dismiss}
-          aria-label="Dismiss"
+          aria-label={language === 'en' ? 'Dismiss ad invitation' : 'Cerrar invitación de anuncios'}
           className="absolute top-2 right-2 p-2 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800"
         >
           <X className="w-3.5 h-3.5" />
@@ -84,14 +84,14 @@ export default function AdConsentCard({ language = 'en' }) {
             </p>
             <p className="text-xs text-slate-500 mt-0.5">
               {language === 'en'
-                ? 'Enable a single ad to help cover data and hosting costs. Safe for work, clearly labeled.'
-                : 'Habilita un anuncio para cubrir costos de datos y hosting. Seguro, claramente marcado.'}
+                ? 'Show third-party ads to support this free service. You can hide them at any time.'
+                : 'Muestra anuncios de terceros para apoyar este servicio gratuito. Puedes ocultarlos cuando quieras.'}
             </p>
           </div>
           <Button
             size="sm"
             onClick={enable}
-            className="flex-shrink-0 text-xs h-8 px-4"
+            className="flex-shrink-0 text-xs min-h-11 px-4"
           >
             {language === 'en' ? 'Enable' : 'Habilitar'}
           </Button>
