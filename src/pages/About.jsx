@@ -163,8 +163,8 @@ export default function About() {
           </li>
           <li>
             {language === 'en'
-              ? 'Ads are opt-in and disabled by default.'
-              : 'Los anuncios son opcionales y están desactivados por defecto.'}
+              ? <>Third-party ads from Adsterra help support BorderPulse. <Link to="/privacy/#advertising" className="underline">Privacy details</Link>.</>
+              : <>Los anuncios de Adsterra ayudan a mantener BorderPulse. <Link to="/privacidad/#advertising" className="underline">Detalles de privacidad</Link>.</>}
           </li>
           <li>
             {language === 'en'
