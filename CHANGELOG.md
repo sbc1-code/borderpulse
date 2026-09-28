@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-09-27
+
+### Added
+- AdSense ownership meta tag and the account-provided Google ads.txt entry for
+  site verification. These identify the publisher without loading Google ad
+  scripts. AdSense approval and ad serving remain pending; the existing
+  Adsterra integration remains the current ad implementation.
+
 Append-only log of shipped work. Date entries roughly group what landed in
 a single session. Pull from `git log` if you ever need raw commit detail.
 
