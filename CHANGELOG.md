@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-09-27 — Crossing discovery and sharing
+
+### Added
+- Bilingual sharing panel on crossing detail pages: native share, WhatsApp, and copy-link actions, with accessible feedback and a link to historical crossing planning. Shares use the canonical crossing URL without a cached wait-time claim. The existing Umami wrapper records `crossing-share` with slug and method.
+
+### Changed
+- Crossing headings now explicitly identify wait times in English and Spanish.
+- Verified production build and 375px English/Spanish copy, share fallback, WhatsApp URL, and overflow checks. Release-check results belong to the pull request.
+
 ## 2026-09-27
 
 ### Changed

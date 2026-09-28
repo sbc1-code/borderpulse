@@ -22,6 +22,7 @@
 // Distribution:
 //   embed-copy          distribution / backlink funnel
 //   share-status        viral / WhatsApp distribution
+//   crossing-share      crossing-page distribution; method=native|copy|whatsapp
 //
 // No free-text is ever sent: slugs and enum values only, never a raw search
 // query, so an accidental paste cannot land in analytics.
