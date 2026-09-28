@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
+import CrossingShare from '@/components/dashboard/CrossingShare';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { getHoursSummary, nowInPortTz } from '@/components/utils/crossingMeta';
@@ -431,7 +432,7 @@ export default function CrossingDetail() {
 
       <header className="mb-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-          {crossing.name}
+          {language === 'en' ? `${crossing.name} wait times` : `Tiempos de espera en ${crossing.name}`}
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-3 flex-wrap">
           <span className="inline-flex items-center gap-1">
@@ -460,6 +461,8 @@ export default function CrossingDetail() {
           onToggleFavorite={() => {}}
         />
       </div>
+
+      <CrossingShare key={canonicalSlug} name={crossing.name} slug={canonicalSlug} language={language} />
 
       {activeAnomaly && (
         <section
