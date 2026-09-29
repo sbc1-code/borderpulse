@@ -7,6 +7,61 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 
 ---
 
+## Product direction — 2026-09-28
+
+BorderPulse is an independently branded product built by DIGITO. Its own domain,
+codebase, operating record and product decisions stay here; DIGITO may describe
+the product as proof of its work without folding the crossing experience into
+the trades-focused DIGITO site.
+
+The long-term opportunity is practical, bilingual cross-border decision support
+for people who cross for work, family and everyday life. Wait times are the
+first useful job, not the whole platform. This direction comes from Sebastian's
+cross-border experience; it is a product hypothesis, not a claim of demand.
+
+### Now: earn trust in the free entry point
+
+- Keep official northbound CBP data, source timestamps, honest stale states and
+  the static fallback reliable. Keep the free experience supported by ads.
+- Measure whether people complete a crossing decision and return. Review
+  organic landing pages, search clicks, sharing, and actual ad revenue against
+  operating cost before claiming an acquisition-to-revenue loop works.
+- Improve one end-to-end journey from search query to crossing comparison or
+  best-time decision. Avoid thin pages made only to capture more keywords.
+- Sebastian reports that Stripe is connected for BorderPulse. Verify the
+  account, mode, product/Price, webhook and checkout state in Stripe before
+  describing any paid offering or accepting a charge. The free, ad-supported
+  crossing experience remains the current offer.
+
+### Next: test one adjacent crossing job
+
+- Interview or observe repeat crossers to find a specific unresolved decision.
+  Candidates include departure timing, pedestrian-versus-driving choice,
+  port-hour changes and official advisories. The existing trip-planner idea is
+  a candidate, not a committed release.
+- Prototype one corridor and one job with clear data sources, freshness and
+  failure states. Measure use of the decision, not just page views. Only expand
+  to more ports after that pilot helps people.
+- Any document or program information should link to current official sources
+  and state its last review date. Do not imply individualized legal or
+  immigration advice.
+
+### Later: a broader platform if use supports it
+
+- Connect proven crossing jobs into a coherent bilingual trip experience.
+- Explore business workflow products or sponsorships only with a real buyer,
+  a differentiated outcome, a permissible data path and a written commitment.
+  Stripe integration work can support a validated offer later; accounts,
+  alerts and a database depend on the job being solved.
+- Southbound timing needs a reliable, authorized source and an honest
+  confidence model before it returns to the live product.
+
+This direction does not override the current reliability and demand gates
+below. The next product decision is still evidence about actual use and one
+adjacent job, not a paid-stack build.
+
+---
+
 ## Next up
 
 Ranked roughly by leverage. Pick what fits the available time.
