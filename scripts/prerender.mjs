@@ -765,8 +765,8 @@ async function main() {
     const cB = slugToCrossing[bSlug];
     if (!cA || !cB) continue;
     const pair = `${aSlug}-vs-${bSlug}`;
-    const title = `${cA.name} vs ${cB.name}: Which Crossing Is Faster? (2026 Data) | Border Pulse`;
-    const desc = `Live wait times, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. Pick the faster crossing right now.`;
+    const title = `${cA.name} vs ${cB.name}: Reported Northbound Waits | Border Pulse`;
+    const desc = `CBP-reported northbound standard-passenger waits, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. These figures do not include total trip time.`;
     const canonical = `${BASE}/compare/${pair}/`;
     const ogImage = `${BASE}/og-card.png`;
     const breadcrumb = {

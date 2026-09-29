@@ -18,6 +18,7 @@
 //   borderline-select   whether the border visualization is actually used
 //   favorite-toggle     repeat-use signal (commuters vs one-off visitors)
 //   show-all-crossings  whether the mobile collapse hides too much
+//   compare-open        San Ysidro decision-panel click; slug and source only
 //
 // Distribution:
 //   embed-copy          distribution / backlink funnel

@@ -10,9 +10,33 @@ import {
   liveLabel,
   summarize,
 } from '../src/lib/trustState.js';
+import { standardPassengerWait } from '../src/lib/standardPassengerWait.js';
+import { track } from '../src/lib/analytics.js';
 
 const NOW = Date.parse('2026-08-21T12:00:00.000Z');
 const minutesAgo = (m) => new Date(NOW - m * 60_000).toISOString();
+
+test('decision comparison uses only an available standard-passenger report', () => {
+  const crossing = {
+    current_wait_time: 40,
+    lanes: { passenger_standard: { status: 'delay', delay_minutes: 0 }, passenger_ready: { delay_minutes: 5 } },
+  };
+  assert.equal(standardPassengerWait(crossing), 0);
+  assert.equal(standardPassengerWait({ ...crossing, lanes: { passenger_ready: { delay_minutes: 5 } } }), null);
+  assert.equal(standardPassengerWait({ ...crossing, lanes: { passenger_standard: { status: 'Update Pending', delay_minutes: 40 } } }), null);
+  assert.equal(standardPassengerWait({ ...crossing, port_status: 'Closed' }), null);
+});
+
+test('comparison click event sends only the intended slug and source', () => {
+  const events = [];
+  globalThis.window = { umami: { track: (...args) => events.push(args) } };
+  try {
+    track('compare-open', { slug: 'san-ysidro', source: 'decision-panel' });
+    assert.deepEqual(events, [['compare-open', { slug: 'san-ysidro', source: 'decision-panel' }]]);
+  } finally {
+    delete globalThis.window;
+  }
+});
 
 test('freshness boundaries are inclusive on the fresh side', () => {
   // Exactly at the threshold must still count as fresh, so a card does not
