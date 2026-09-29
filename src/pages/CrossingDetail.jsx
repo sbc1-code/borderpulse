@@ -7,6 +7,7 @@ import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
+import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
 import { getHoursSummary, nowInPortTz } from '@/components/utils/crossingMeta';
@@ -407,6 +408,15 @@ export default function CrossingDetail() {
       vsTypical,
     };
   });
+  const isSanYsidro = canonicalSlug === 'san-ysidro';
+  const lowerCompareEntries = isSanYsidro
+    ? compareEntries.filter(({ crossing: c }) => portToSlug[c.port_number] !== 'otay-mesa')
+    : compareEntries;
+  const lowerComparePairs = comparePairsFor(canonicalSlug)
+    .filter(({ otherSlug }) => !isSanYsidro || otherSlug !== 'otay-mesa');
+  const otayMesa = isSanYsidro
+    ? state.crossings.find((c) => portToSlug[c.port_number] === 'otay-mesa')
+    : null;
 
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
@@ -457,10 +467,20 @@ export default function CrossingDetail() {
           language={language}
           index={0}
           selectedDirection="northbound"
+          snapshotAt={isSanYsidro ? state.fetchedAt : null}
           isFavorite={false}
           onToggleFavorite={() => {}}
         />
       </div>
+
+      {isSanYsidro && (
+        <SanYsidroDecision
+          sanYsidro={crossing}
+          otayMesa={otayMesa}
+          fetchedAt={state.fetchedAt}
+          language={language}
+        />
+      )}
 
       <CrossingShare key={canonicalSlug} name={crossing.name} slug={canonicalSlug} language={language} />
 
@@ -756,7 +776,7 @@ export default function CrossingDetail() {
         </div>
       </section>
 
-      {compareEntries.length > 0 && (
+      {lowerCompareEntries.length > 0 && (
         <section className="mb-6">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
             {language === 'en' ? 'Compare with nearby crossings' : 'Compara con cruces cercanos'}
@@ -767,7 +787,7 @@ export default function CrossingDetail() {
               : 'Más cercanos en línea recta. Tiempos de espera hacia EE.UU.'}
           </p>
           <div className="space-y-2">
-            {compareEntries.map((entry) => {
+            {lowerCompareEntries.map((entry) => {
               const s = portToSlug[entry.crossing.port_number];
               if (!s) return null;
               return (
@@ -780,12 +800,12 @@ export default function CrossingDetail() {
               );
             })}
           </div>
-          {comparePairsFor(canonicalSlug).length > 0 && (
+          {lowerComparePairs.length > 0 && (
             <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
               <span className="text-slate-500">
                 {language === 'en' ? 'Side-by-side comparisons:' : 'Comparaciones lado a lado:'}
               </span>
-              {comparePairsFor(canonicalSlug).map(({ otherSlug, path }) => {
+              {lowerComparePairs.map(({ otherSlug, path }) => {
                 const other = state.crossings.find((c) => portToSlug[c.port_number] === otherSlug);
                 if (!other) return null;
                 return (
@@ -801,7 +821,7 @@ export default function CrossingDetail() {
               })}
             </div>
           )}
-          {hasPedestrianLane(crossing) && (
+          {hasPedestrianLane(crossing) && !isSanYsidro && (
             <div className="mt-2 text-xs">
               <Link
                 to={`/walk-or-drive/${canonicalSlug}/`}

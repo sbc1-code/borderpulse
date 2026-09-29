@@ -4,7 +4,8 @@ import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
-import { getWaitMinutes } from '@/components/utils/crossingDirection';
+import { standardPassengerWait } from '@/lib/standardPassengerWait';
+import { FRESHNESS, freshnessOf, formatAge } from '@/lib/trustState';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
@@ -49,7 +50,7 @@ function todayLightest(byHour, timezone) {
 }
 
 function CrossingPanel({ crossing, slug, aggregate, language }) {
-  const wait = getWaitMinutes(crossing, 'northbound');
+  const wait = standardPassengerWait(crossing);
   const overallMedian = aggregate?.overall_median;
   const lightest = todayLightest(aggregate?.by_hour, aggregate?.timezone);
   const sampleCount = aggregate?.sample_count;
@@ -67,7 +68,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
         <div className="space-y-3">
           <div>
             <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">
-              {language === 'en' ? 'Live wait' : 'Espera en vivo'}
+              {language === 'en' ? 'Reported standard-passenger wait' : 'Espera reportada, auto estándar'}
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tabular-nums">
               {wait == null ? '—' : `${wait} min`}
@@ -120,14 +121,14 @@ export default function Compare() {
   const language = usePersistentLanguage();
 
   const parsed = useMemo(() => parsePair(pair), [pair]);
-  const [state, setState] = useState({ crossings: [], isLoading: true });
+  const [state, setState] = useState({ crossings: [], isLoading: true, fetchedAt: null });
   const [aggA, setAggA] = useState(null);
   const [aggB, setAggB] = useState(null);
 
   useEffect(() => {
     (async () => {
       const data = await dataService.getBorderData();
-      setState({ crossings: data.crossings || [], isLoading: false });
+      setState({ crossings: data.crossings || [], isLoading: false, fetchedAt: data.timestamp });
     })();
   }, []);
 
@@ -167,11 +168,11 @@ export default function Compare() {
   useEffect(() => {
     if (!crossingA || !crossingB) return;
     const title = language === 'en'
-      ? `${crossingA.name} vs ${crossingB.name}: which is faster | Border Pulse`
-      : `${crossingA.name} vs ${crossingB.name}: cuál es más rápida | Border Pulse`;
+      ? `${crossingA.name} vs ${crossingB.name}: reported waits | Border Pulse`
+      : `${crossingA.name} vs ${crossingB.name}: esperas reportadas | Border Pulse`;
     const desc = language === 'en'
-      ? `Live wait times, today's lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side. Pick the faster crossing right now.`
-      : `Tiempos en vivo, hora más ligera de hoy y patrones de 30 días en ${crossingA.name} y ${crossingB.name} lado a lado. Elige la garita más rápida ahora.`;
+      ? `CBP-reported northbound standard-passenger waits, today's lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side.`
+      : `Esperas reportadas por CBP para autos en carril estándar hacia EE. UU., hora más ligera de hoy y patrones de 30 días en ${crossingA.name} y ${crossingB.name}.`;
     const url = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -187,30 +188,36 @@ export default function Compare() {
     return <Navigate to="/" replace />;
   }
 
-  const waitA = getWaitMinutes(crossingA, 'northbound');
-  const waitB = getWaitMinutes(crossingB, 'northbound');
+  const waitA = standardPassengerWait(crossingA);
+  const waitB = standardPassengerWait(crossingB);
+  const freshness = freshnessOf(state.fetchedAt);
+  const snapshotTime = state.fetchedAt && freshness.state !== FRESHNESS.UNKNOWN
+    ? new Date(state.fetchedAt).toLocaleString(language === 'es' ? 'es-MX' : 'en-US', {
+      timeZone: 'America/Los_Angeles', dateStyle: 'medium', timeStyle: 'short',
+    })
+    : null;
 
   let liveSummary = null;
   if (waitA != null && waitB != null) {
     if (waitA === waitB) {
       liveSummary = language === 'en'
-        ? `Right now both ports report ${waitA} minutes. Either is fine.`
-        : `Ahora mismo las dos garitas reportan ${waitA} minutos. Cualquiera está bien.`;
+        ? `Both ports report a ${waitA}-minute northbound standard-passenger wait. This does not compare total trip time.`
+        : `Ambas garitas reportan ${waitA} minutos de espera hacia EE. UU. para autos en carril estándar. Esto no compara el tiempo total del viaje.`;
     } else {
-      const faster = waitA < waitB ? crossingA : crossingB;
+      const shorter = waitA < waitB ? crossingA : crossingB;
       const delta = Math.abs(waitA - waitB);
       liveSummary = language === 'en'
-        ? `Right now, ${faster.name} is ${delta} minutes faster (${Math.min(waitA, waitB)} min vs ${Math.max(waitA, waitB)} min northbound).`
-        : `Ahora mismo, ${faster.name} está ${delta} minutos más rápida (${Math.min(waitA, waitB)} min vs ${Math.max(waitA, waitB)} min hacia EE.UU.).`;
+        ? `${shorter.name} reports a northbound standard-passenger wait ${delta} minutes shorter (${Math.min(waitA, waitB)} vs ${Math.max(waitA, waitB)} min). This does not compare total trip time.`
+        : `${shorter.name} reporta una espera hacia EE. UU. para autos en carril estándar ${delta} minutos menor (${Math.min(waitA, waitB)} vs ${Math.max(waitA, waitB)} min). Esto no compara el tiempo total del viaje.`;
     }
   } else if (waitA != null && waitB == null) {
     liveSummary = language === 'en'
-      ? `${crossingB.name} has no current wait time published. ${crossingA.name} is reporting ${waitA} min.`
-      : `${crossingB.name} no tiene tiempo actual publicado. ${crossingA.name} reporta ${waitA} min.`;
+      ? `${crossingB.name} has no reported standard-passenger wait. ${crossingA.name} reports ${waitA} min.`
+      : `${crossingB.name} no tiene espera reportada para autos en carril estándar. ${crossingA.name} reporta ${waitA} min.`;
   } else if (waitB != null && waitA == null) {
     liveSummary = language === 'en'
-      ? `${crossingA.name} has no current wait time published. ${crossingB.name} is reporting ${waitB} min.`
-      : `${crossingA.name} no tiene tiempo actual publicado. ${crossingB.name} reporta ${waitB} min.`;
+      ? `${crossingA.name} has no reported standard-passenger wait. ${crossingB.name} reports ${waitB} min.`
+      : `${crossingA.name} no tiene espera reportada para autos en carril estándar. ${crossingB.name} reporta ${waitB} min.`;
   }
 
   // Aggregate-based comparisons (only show when both have data)
@@ -220,8 +227,8 @@ export default function Compare() {
     const mB = aggB.overall_median;
     if (mA === mB) {
       typicalSummary = language === 'en'
-        ? `Over the last 30 days both have run a ${mA}-minute overall median. The day and hour matter more than the port choice.`
-        : `En los últimos 30 días las dos han corrido con mediana general de ${mA} minutos. El día y la hora importan más que la garita.`;
+        ? `Over the last 30 days both have a ${mA}-minute overall median for reported waits.`
+        : `En los últimos 30 días, ambas tienen una mediana general de ${mA} minutos de espera reportada.`;
     } else {
       const fasterTypical = mA < mB ? crossingA : crossingB;
       const delta = Math.abs(mA - mB);
@@ -251,17 +258,22 @@ export default function Compare() {
         <p className="text-xs sm:text-sm text-slate-500 mt-1 inline-flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5" />
           {language === 'en'
-            ? 'Live wait times and 30-day patterns side by side. Northbound only.'
-            : 'Tiempos en vivo y patrones de 30 días lado a lado. Solo hacia EE.UU.'}
+            ? 'Reported northbound waits and 30-day patterns side by side.'
+            : 'Esperas reportadas hacia EE. UU. y patrones de 30 días lado a lado.'}
         </p>
       </header>
 
       {liveSummary && (
         <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40 px-4 py-3">
           <div className="text-[10px] uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-semibold mb-0.5">
-            {language === 'en' ? 'Right now' : 'Ahora mismo'}
+            {language === 'en' ? 'Reported standard-passenger waits' : 'Esperas reportadas, auto estándar'}
           </div>
           <p className="text-sm text-slate-900 dark:text-white">{liveSummary}</p>
+          <p className={`mt-2 text-xs ${freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : 'text-slate-600 dark:text-slate-300'}`}>
+            {snapshotTime
+              ? `${language === 'en' ? 'Data snapshot' : 'Consulta de datos'}: ${snapshotTime} PT · ${formatAge(freshness.age, language)}${freshness.state === FRESHNESS.STALE ? (language === 'en' ? ' · stale data' : ' · datos desactualizados') : ''}`
+              : (language === 'en' ? 'Data time unknown' : 'Hora de los datos desconocida')}
+          </p>
         </div>
       )}
 
@@ -286,8 +298,8 @@ export default function Compare() {
         <ul className="text-sm text-slate-700 dark:text-slate-300 space-y-1.5 list-disc pl-5">
           <li>
             {language === 'en'
-              ? 'Live wait reflects the most recent CBP report. Refreshes when the page loads.'
-              : 'La espera en vivo refleja el reporte más reciente de CBP. Se actualiza al cargar la página.'}
+              ? 'Reported waits come from the most recent CBP snapshot. Ports may report at different times. The snapshot refreshes when the page loads.'
+              : 'Las esperas reportadas provienen de la consulta más reciente de CBP. Cada garita puede reportar a distinta hora. La consulta se actualiza al cargar la página.'}
           </li>
           <li>
             {language === 'en'
@@ -296,8 +308,8 @@ export default function Compare() {
           </li>
           <li>
             {language === 'en'
-              ? '30-day median is the typical wait across all hours and days. Lower is generally better, but the hour you cross matters more than the port choice.'
-              : 'La mediana de 30 días es la espera típica considerando todas las horas y días. Más bajo es mejor en general, pero la hora a la que cruzas importa más que la garita.'}
+              ? '30-day median summarizes reported waits across hours and days. Neither figure includes total trip time.'
+              : 'La mediana de 30 días resume las esperas reportadas de todas las horas y días. Ninguna cifra incluye el tiempo total del viaje.'}
           </li>
         </ul>
       </section>

@@ -28,6 +28,14 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   operating cost before claiming an acquisition-to-revenue loop works.
 - Improve one end-to-end journey from search query to crossing comparison or
   best-time decision. Avoid thin pages made only to capture more keywords.
+- [~] Pilot the San Ysidro-to-Otay Mesa standard-passenger comparison. After
+  release, review 30 days of `compare-open` clicks and San Ysidro page visits;
+  use Search Console traffic as a guardrail, not causal proof. If Umami reports
+  remain inaccessible, verify event emission and defer use claims.
+- Follow up on the separately observed Sunday-pattern callout: its "Today vs.
+  the 30-day pattern" heading can appear on another day. Align the heading and
+  displayed day with the pattern's actual scope before calling it a today
+  comparison.
 - Sebastian reports that Stripe is connected for BorderPulse. Verify the
   account, mode, product/Price, webhook and checkout state in Stripe before
   describing any paid offering or accepting a charge. The free, ad-supported
