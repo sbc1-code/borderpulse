@@ -55,7 +55,7 @@ jobs:
           case "$PUBLISH_TARGET" in preview|production) ;; *) echo 'Invalid publication target'; exit 1;; esac
       - run: npm ci
       - name: Install pinned deployment CLI
-        run: npm install --global vercel@50.1.6
+        run: npm install --global vercel@61.1.0
       - name: Validate collector output and record provenance
         run: npm run publish:validate -- --write-manifest
       - name: Pull matching environment settings

@@ -120,7 +120,7 @@ Pages deployer. Both hosts build the same Vite app; only Vercel enables
    it snapshots latest `main` at job start to avoid queued pushes publishing
    older data. Its concurrency group serializes deployments.
 3. Dispatch `publish-vercel.yml`. It uses Node 24 and the existing Vercel CLI
-   version 50.1.6, validates inputs, pulls preview settings, runs `vercel build`
+   version 61.1.0, validates inputs, pulls preview settings, runs `vercel build`
    in Actions, runs `npm test`, rechecks freshness, and uploads with
    `vercel deploy --prebuilt`. It performs no remote Vercel build.
 4. Read the deployed `/data/publication.json` and compare it with the Actions
