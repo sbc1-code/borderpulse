@@ -91,7 +91,7 @@ export default function StatsOverview({
               <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wide leading-tight truncate">
+              <p className={`truncate text-xs uppercase leading-tight tracking-wide ${theme === 'dark' ? 'text-slate-200' : 'text-slate-700'}`}>
                 {stat.label}
               </p>
               <p className={`text-sm font-bold ${
@@ -127,7 +127,7 @@ export default function StatsOverview({
                   <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wide truncate leading-tight">
+                  <p className={`text-xs uppercase tracking-wide leading-tight ${theme === 'dark' ? 'text-slate-200' : 'text-slate-700'}`}>
                     {stat.label}
                   </p>
                   <p className={`text-sm font-bold ${
@@ -164,7 +164,7 @@ export default function StatsOverview({
                 <stat.icon className={`w-4 h-4 ${stat.color}`} />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate leading-tight">
+                <p className={`text-xs uppercase tracking-wider leading-tight ${theme === 'dark' ? 'text-slate-200' : 'text-slate-700'}`}>
                   {stat.label}
                 </p>
                 <p className={`text-lg sm:text-xl font-bold ${
@@ -172,7 +172,7 @@ export default function StatsOverview({
                 } leading-tight mt-0.5 tabular-nums`}>
                   {stat.value}
                 </p>
-                <p className="text-[10px] text-slate-400 dark:text-slate-500 truncate leading-tight mt-0.5">
+                <p className={`mt-0.5 text-xs leading-tight ${theme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>
                   {stat.hint}
                 </p>
               </div>

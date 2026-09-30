@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Database, Megaphone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 
 export default function Privacy({ lang = 'en' }) {
@@ -18,13 +17,11 @@ export default function Privacy({ lang = 'en' }) {
   }, [es]);
 
   return (
-    <main className="mx-auto max-w-[900px] p-4 sm:p-6">
+    <div className="mx-auto max-w-[900px] p-4 sm:p-6">
       <div className="mb-5">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="-ml-2 gap-1">
-            <ArrowLeft className="h-3.5 w-3.5" />
-            {es ? 'Todos los cruces' : 'All crossings'}
-          </Button>
+        <Link to="/" className="-ml-2 inline-flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium hover:bg-slate-100 dark:hover:bg-gray-800">
+          <ArrowLeft className="h-3.5 w-3.5" />
+          {es ? 'Todos los cruces' : 'All crossings'}
         </Link>
       </div>
       <header className="mb-6">
@@ -73,6 +70,6 @@ export default function Privacy({ lang = 'en' }) {
       <p className="mt-6 text-xs text-slate-500 dark:text-slate-400">
         {es ? 'No es asesoría legal. Borrador actualizado: 27 de septiembre de 2026.' : 'Not legal advice. Draft updated: September 27, 2026.'}
       </p>
-    </main>
+    </div>
   );
 }

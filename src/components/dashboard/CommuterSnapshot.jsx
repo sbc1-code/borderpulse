@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Activity, AlertTriangle, Clock, MapPin, TrendingDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { summarize } from '@/lib/trustState';
 import { getStatusForWait, getWaitMinutes } from '@/components/utils/crossingDirection';
 
@@ -42,17 +42,17 @@ function SnapshotMetric({ icon: Icon, label, value, detail, tone = 'slate' }) {
 
   return (
     <div className="min-w-0 border-l border-slate-200 pl-2.5 first:border-l-0 first:pl-0 dark:border-slate-800 sm:pl-3">
-      <div className="flex items-center gap-1 text-[10px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400 sm:gap-1.5 sm:text-[11px]">
+      <div className="flex items-start gap-1 text-xs font-medium uppercase leading-tight tracking-wide text-slate-600 dark:text-slate-300 sm:gap-1.5">
         <span className={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-md border sm:h-5 sm:w-5 ${toneClass}`}>
           <Icon className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
         </span>
-        <span className="truncate">{label}</span>
+        <span>{label}</span>
       </div>
       <div className="mt-0.5 truncate text-base font-bold leading-tight text-slate-950 tabular-nums dark:text-white sm:mt-1 sm:text-lg">
         {value}
       </div>
       {detail && (
-        <div className="mt-0.5 truncate text-[10px] text-slate-500 dark:text-slate-400 sm:text-[11px]" title={detail}>
+        <div className="mt-0.5 line-clamp-2 text-xs text-slate-600 dark:text-slate-300" title={detail}>
           {detail}
         </div>
       )}
@@ -66,6 +66,7 @@ export default function CommuterSnapshot({
   language = 'en',
   regionLabel,
 }) {
+  const reduceMotion = useReducedMotion();
   const stats = useMemo(() => {
     const rows = (crossings || []).map((crossing) => ({
       crossing,
@@ -127,27 +128,28 @@ export default function CommuterSnapshot({
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 8 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={reduceMotion ? { duration: 0 } : undefined}
       className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950"
       aria-label={language === 'en' ? 'Commuter snapshot' : 'Resumen para commuters'}
     >
       <div className="grid gap-0 lg:grid-cols-[1.1fr,2fr]">
         <div className="border-b border-slate-200 bg-slate-950 p-3 text-white sm:p-4 lg:border-b-0 lg:border-r lg:border-slate-800">
-          <div className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-semibold ${tier.chip}`}>
+          <div className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-semibold ${tier.chip}`}>
             <span className={`h-1.5 w-1.5 rounded-full ${tier.bar}`} />
             {tier.label[language] || tier.label.en}
           </div>
           <div className="mt-2.5 flex items-end justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-[11px] uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-slate-300">
                 {language === 'en' ? 'Median wait now' : 'Espera mediana ahora'}
               </p>
               <p className="mt-0.5 text-3xl font-bold leading-none tabular-nums sm:text-4xl">
                 {formatWait(stats.median)}
               </p>
             </div>
-            <div className="shrink-0 text-right text-[11px] leading-tight text-slate-400">
+            <div className="shrink-0 text-right text-xs leading-tight text-slate-300">
               <p className="truncate">{scopeLabel}</p>
               <p>{directionLabel}</p>
             </div>
@@ -157,7 +159,7 @@ export default function CommuterSnapshot({
             <div className="bg-amber-500" style={{ width: `${moderatePct}%` }} />
             <div className="bg-rose-500" style={{ width: `${heavyPct}%` }} />
           </div>
-          <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400">
+          <div className="mt-2 flex items-center justify-between text-xs text-slate-300">
             <span>{stats.reportingCount}/{stats.total} {language === 'en' ? 'reporting' : 'reportando'}</span>
             <span>{stats.counts.good} / {stats.counts.moderate} / {stats.counts.heavy}</span>
           </div>
@@ -196,7 +198,7 @@ export default function CommuterSnapshot({
           />
         </div>
       </div>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-200 bg-slate-50 px-4 py-2 text-[11px] text-slate-500 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-400">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-200 bg-slate-50 px-4 py-2 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300">
         <span className="inline-flex items-center gap-1">
           <Activity className="h-3 w-3 text-emerald-500" />
           {language === 'en' ? 'Quick under 15m' : 'Rápido bajo 15m'}

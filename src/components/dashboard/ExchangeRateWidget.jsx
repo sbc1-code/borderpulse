@@ -46,14 +46,14 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
             <div className={`text-xl font-bold tabular-nums ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
               ${exchangeRate?.rate?.toFixed(4) || '---'}
             </div>
-            <div className="flex items-center justify-between mt-1 text-[10px] text-slate-500">
+            <div className={`mt-1 flex items-center justify-between text-xs ${theme === 'dark' ? 'text-slate-200' : 'text-slate-700'}`}>
               <span>
                 {exchangeRate?.previous_rate
                   ? `${language === 'en' ? 'Prev' : 'Ant'} $${exchangeRate.previous_rate.toFixed(4)}`
                   : (language === 'en' ? 'Current rate' : 'Tipo actual')}
               </span>
               {exchangeRate?.last_updated && (
-                <span className="text-slate-400">
+                <span>
                   {new Date(exchangeRate.last_updated).toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',

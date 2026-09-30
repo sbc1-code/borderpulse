@@ -361,7 +361,7 @@ export default function Dashboard() {
         >
           {language === 'en' ? 'Border Crossing Intelligence' : 'Inteligencia de Cruces Fronterizos'}
         </motion.h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+        <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">
           {language === 'en'
             ? 'Official CBP wait times to the U.S. · Historical patterns'
             : 'Tiempos oficiales de CBP hacia EE.UU. · Patrones históricos'}
@@ -369,7 +369,7 @@ export default function Dashboard() {
 
         {/* Controls row — wraps cleanly on mobile */}
         <div className="flex items-center gap-2 flex-wrap mt-3">
-          <div className="flex items-center gap-1 text-[11px] text-slate-500 mr-auto">
+          <div className="mr-auto flex items-center gap-1 text-xs text-slate-600 dark:text-slate-300">
             <RefreshCw className="w-3 h-3" />
             <span>
               {language === 'en' ? 'Data fetched: ' : 'Datos consultados: '}
@@ -382,7 +382,7 @@ export default function Dashboard() {
             variant={view === 'analytics' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
-            className="gap-1 h-9"
+            className="gap-1 min-h-11"
             aria-pressed={view === 'analytics'}
           >
             <BarChart3 className="w-3.5 h-3.5" />
@@ -442,7 +442,7 @@ export default function Dashboard() {
                 <Button
                   size="sm"
                   variant="default"
-                  className="h-9 text-xs px-2.5"
+                  className="min-h-11 px-3 text-sm"
                   onClick={acceptGeoPrompt}
                   disabled={geoLocating}
                 >
@@ -453,7 +453,7 @@ export default function Dashboard() {
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-9 text-xs px-2.5"
+                  className="min-h-11 px-3 text-sm text-slate-900 hover:bg-blue-100 dark:text-slate-900 dark:hover:bg-blue-100"
                   onClick={dismissGeoPrompt}
                 >
                   {language === 'en' ? 'Not now' : 'Ahora no'}
@@ -485,7 +485,7 @@ export default function Dashboard() {
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-1.5 flex-wrap justify-center sm:justify-end">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:flex-wrap sm:justify-end" role="group" aria-label={language === 'en' ? 'Filter by region' : 'Filtrar por región'} tabIndex={0}>
               {REGIONS.map((r) => (
                 <Button
                   key={r.code}
@@ -542,7 +542,7 @@ export default function Dashboard() {
               ) : (
                 <>
                   <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-600 dark:text-slate-300">
                       {language === 'en'
                         ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
                         : `Mostrando ${cardCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
@@ -552,7 +552,7 @@ export default function Dashboard() {
                     {offlineCrossings.length > 0 && (
                       <button
                         onClick={() => setShowWithoutCurrentWaits((value) => !value)}
-                        className="self-start py-1.5 text-left text-xs text-slate-500 underline decoration-dotted hover:text-slate-900 dark:hover:text-white sm:self-auto sm:text-right"
+                        className="self-start min-h-11 py-2 text-left text-xs text-slate-600 underline decoration-dotted hover:text-slate-900 dark:text-slate-300 dark:hover:text-white sm:self-auto sm:text-right"
                       >
                         {showWithoutCurrentWaits
                           ? (language === 'en'
@@ -578,7 +578,7 @@ export default function Dashboard() {
                           <>
                             <div className="flex items-center gap-2 mb-2 mt-1">
                               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                              <span className="text-xs font-medium text-slate-600">
+                              <span className="text-xs font-medium text-slate-700 dark:text-slate-200">
                                 {language === 'en' ? 'Favorites' : 'Favoritos'}
                               </span>
                               <div className="flex-1 h-px bg-slate-200" />
@@ -607,7 +607,7 @@ export default function Dashboard() {
                         )}
                         {favCrossings.length > 0 && restCrossings.length > 0 && (
                           <div className="flex items-center gap-2 mb-2">
-                            <span className="text-xs font-medium text-slate-600">
+                            <span className="text-xs font-medium text-slate-700 dark:text-slate-200">
                               {language === 'en' ? 'All crossings' : 'Todos los cruces'}
                             </span>
                             <div className="flex-1 h-px bg-slate-200" />

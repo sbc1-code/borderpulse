@@ -12,7 +12,7 @@ export default function LaneRow({ icon: Icon, label, data, language }) {
       </div>
       <div className="flex items-center gap-2 font-medium text-slate-900 tabular-nums whitespace-nowrap">
         <span>{data.delay_minutes == null ? '—' : `${data.delay_minutes}m`}</span>
-        <span className="text-slate-400 font-normal">
+        <span className="text-slate-700 font-normal">
           · {data.lanes_open} {language === 'en' ? 'open' : 'abiertas'}
         </span>
       </div>
