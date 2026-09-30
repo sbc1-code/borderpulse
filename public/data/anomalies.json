@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-30T13:27:36.527Z",
-  "snapshot_at": "2026-09-30T13:22:25.966Z",
+  "generated_at": "2026-09-30T18:57:05.410Z",
+  "snapshot_at": "2026-09-30T18:52:36.515Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -55,6 +55,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 2.6,
+      "detected_at": "2026-09-30T18:57:05.410Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 180 min around 10 PM — ~360% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 180 min cerca de las 10 PM — ~360% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 180,
+        "overall_median": 50,
+        "samples": 15,
+        "ratio": 3.6
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -68,23 +85,6 @@
         "overall_median": 60,
         "samples": 8,
         "ratio": 3.5
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 2.272727272727273,
-      "detected_at": "2026-09-30T13:27:36.527Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 180 min around 10 PM — ~327% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 180 min cerca de las 10 PM — ~327% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 180,
-        "overall_median": 55,
-        "samples": 15,
-        "ratio": 3.272727272727273
       }
     },
     {
@@ -318,38 +318,56 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.76,
-      "detected_at": "2026-09-30T13:27:36.527Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 10 PM — ~176% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 10 PM — ~176% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 220,
-        "overall_median": 125,
-        "samples": 15,
-        "ratio": 1.76
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.7272727272727273,
-      "detected_at": "2026-09-30T13:27:36.527Z",
-      "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 12 AM (median 15 min) — ~73% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 12 AM (mediana 15 min) — ~73% debajo de la base de 30 días de 55 min.",
+      "severity": 0.7,
+      "detected_at": "2026-09-30T18:57:05.410Z",
+      "summary_en": "Right now Calexico - West's lightest Wednesday hour so far is 12 AM (median 15 min) — ~70% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - West es 12 AM (mediana 15 min) — ~70% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 0,
         "best_median": 15,
-        "overall_median": 55,
+        "overall_median": 50,
         "samples": 8
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.6923076923076923,
+      "detected_at": "2026-09-30T18:57:05.410Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 10 PM — ~169% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 10 PM — ~169% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 220,
+        "overall_median": 130,
+        "samples": 15,
+        "ratio": 1.6923076923076923
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.6692307692307693,
+      "detected_at": "2026-09-30T18:57:05.410Z",
+      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 9 PM (median 43 min) — ~67% below the 30-day baseline of 130 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 9 PM (mediana 43 min) — ~67% debajo de la base de 30 días de 130 min.",
+      "evidence": {
+        "day_of_week": 3,
+        "day_label": "Wed",
+        "best_hour": 21,
+        "best_median": 43,
+        "overall_median": 130,
+        "samples": 4
       }
     },
     {
@@ -368,24 +386,6 @@
         "best_median": 5,
         "overall_median": 15,
         "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.656,
-      "detected_at": "2026-09-30T13:27:36.527Z",
-      "summary_en": "Right now San Ysidro's lightest Wednesday hour so far is 9 PM (median 43 min) — ~66% below the 30-day baseline of 125 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en San Ysidro es 9 PM (mediana 43 min) — ~66% debajo de la base de 30 días de 125 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 21,
-        "best_median": 43,
-        "overall_median": 125,
-        "samples": 4
       }
     },
     {
