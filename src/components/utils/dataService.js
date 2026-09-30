@@ -63,7 +63,7 @@ export class DataService {
   }
 
   async fetchCrossingsDoc() {
-    if (import.meta.env.VITE_PUBLIC_CBP_API === 'true') {
+    if (import.meta.env?.VITE_PUBLIC_CBP_API === 'true') {
       try {
         // No cache-busting query: Vercel's five-minute CDN cache is deliberate.
         const res = await fetch(LIVE_DATA_PATH);
