@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Unreleased — comparison pilot learning loop
+
+- The crossing comparison page now offers a canonical WhatsApp share link and a copy-link action. Shared links open current data rather than carrying a potentially stale wait claim.
+- A three-choice, anonymous usefulness prompt records whether the comparison helped someone choose a crossing. Umami records only the canonical pair and a fixed answer value; it does not record a person's route, name, or free text.
+- This is a low-cost way to learn from the San Ysidro–Otay Mesa pilot within the existing stack. It does not establish a paid team use case or add accounts, storage, or a new service.
+
 ## 2026-09-27 — Crossing discovery and sharing
 
 ### Added

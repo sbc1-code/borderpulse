@@ -19,11 +19,13 @@
 //   favorite-toggle     repeat-use signal (commuters vs one-off visitors)
 //   show-all-crossings  whether the mobile collapse hides too much
 //   compare-open        San Ysidro decision-panel click; slug and source only
+//   compare-feedback    stated usefulness of a pair; answer=yes|no|still-deciding
 //
 // Distribution:
 //   embed-copy          distribution / backlink funnel
 //   share-status        viral / WhatsApp distribution
 //   crossing-share      crossing-page distribution; method=native|copy|whatsapp
+//   compare-share       comparison-page distribution; method=copy|whatsapp
 //
 // No free-text is ever sent: slugs and enum values only, never a raw search
 // query, so an accidental paste cannot land in analytics.
