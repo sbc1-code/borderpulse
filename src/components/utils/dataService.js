@@ -1,10 +1,11 @@
 /**
- * dataService - reads static JSON snapshots published by the GitHub Action
- * fetch workflow (scripts/fetch-cbp.mjs). No auth, no entity API, no LLM.
+ * dataService - reads the cached official-data endpoint on Vercel, with the
+ * GitHub Action's static JSON snapshot as a fallback. Pages uses static data.
  */
 import { buildSlugMap } from '../../lib/slugs.js';
 
 const DATA_PATH = '/data/crossings.json';
+const LIVE_DATA_PATH = '/api/public/crossings';
 const FX_PATH = '/data/exchange-rate.json';
 const SB_PATH = '/data/crossings-sb.json';
 
@@ -61,13 +62,29 @@ export class DataService {
     return res.json();
   }
 
+  async fetchCrossingsDoc() {
+    if (import.meta.env.VITE_PUBLIC_CBP_API === 'true') {
+      try {
+        // No cache-busting query: Vercel's five-minute CDN cache is deliberate.
+        const res = await fetch(LIVE_DATA_PATH);
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${LIVE_DATA_PATH}`);
+        return { doc: await res.json(), fromFallback: false };
+      } catch (error) {
+        console.warn('[dataService] live CBP endpoint failed; using published snapshot', error);
+        return { doc: await this.fetchJson(DATA_PATH), fromFallback: true };
+      }
+    }
+    return { doc: await this.fetchJson(DATA_PATH), fromFallback: false };
+  }
+
   async getBorderData() {
     try {
-      const [crossingsDoc, fxDoc, sbDoc] = await Promise.all([
-        this.fetchJson(DATA_PATH),
+      const [crossingsResult, fxDoc, sbDoc] = await Promise.all([
+        this.fetchCrossingsDoc(),
         this.fetchJson(FX_PATH).catch(() => null),
         this.fetchJson(SB_PATH).catch(() => null),
       ]);
+      const { doc: crossingsDoc, fromFallback } = crossingsResult;
       const crossings = mergeSouthbound(crossingsDoc, sbDoc);
       const payload = {
         success: true,
@@ -78,7 +95,7 @@ export class DataService {
         southbound_source: sbDoc?.source || null,
         southbound_timestamp: sbDoc?.fetched_at || null,
         southbound_note: sbDoc?.note || null,
-        fromFallback: false,
+        fromFallback,
       };
       this.cache = payload;
       this.notify(payload);

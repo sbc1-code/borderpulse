@@ -21,6 +21,10 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] Review the cost-controlled Vercel preview from the current public app:
+  verify automatic ads, live CBP endpoint, static fallback, 30-day history,
+  and measured usage before any domain move. The public site stays on Pages
+  until Sebastian approves a production cutover.
 - Keep official northbound CBP data, source timestamps, honest stale states and
   the static fallback reliable. Keep the free experience supported by ads.
 - Measure whether people complete a crossing decision and return. Review
