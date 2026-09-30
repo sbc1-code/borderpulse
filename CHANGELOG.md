@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## Unreleased — combined free-product release checks
+
+- Combined comparison sharing with guide-to-waits and favorites without coupling the release to Vercel. A storage write failure now leaves the favorite unchanged and shows an EN/ES error instead of a false saved confirmation.
+- Added desktop/mobile EN/ES interaction coverage for favorite persistence, storage failure, copy failure, canonical/UTM sharing, feedback and guide-to-waits events. CI checks out full history while the Pages build still derives aggregates from Git.
+- Local build, existing full release suite (406 route navigations), and the new targeted interaction checks passed. Production release still requires approval.
+
+## Unreleased — comparison pilot learning loop
+
+- The crossing comparison page now offers a canonical WhatsApp share link and a copy-link action. Shared links open current data rather than carrying a potentially stale wait claim.
+- A three-choice, anonymous usefulness prompt records whether the comparison helped someone choose a crossing. Umami records only the canonical pair and a fixed answer value; it does not record a person's route, name, or free text.
+- This is a low-cost way to learn from the San Ysidro–Otay Mesa pilot within the existing stack. It does not establish a paid team use case or add accounts, storage, or a new service.
+
+## Unreleased — guide-to-waits and return visits
+
+- Crossing detail pages now save favorites to the same browser-local list used by the dashboard. The star control previously appeared there but did nothing. A saved crossing rises to the top of the dashboard; no account or notification is implied.
+- Blog guides now offer a direct route to current northbound waits and WhatsApp/copy sharing. Shared links carry only a channel-level UTM tag, with no person-level referral identifier. Umami records `blog-to-waits` and `blog-share` using the guide slug and fixed method values.
+- Adsterra remains in its existing dashboard placement while ad creative quality and actual revenue are reviewed. No extra ad unit or recurring service was added.
+
 ## 2026-09-27 — Crossing discovery and sharing
 
 ### Added
