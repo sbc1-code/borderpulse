@@ -21,7 +21,7 @@ const OUT_PATH = path.join(process.cwd(), 'public', 'data', 'crossings.json');
 // crossings after dedupe. If we ever fall below this, something upstream broke
 // (e.g. CBP relabeled/localized fields): refuse to overwrite the last-good
 // snapshot rather than silently publishing an empty map. See DECISIONS.md.
-const MIN_CROSSINGS = 35;
+export const MIN_CROSSINGS = 35;
 
 // --- CBP localization normalization -----------------------------------------
 // In May 2026 CBP's bwtpublicmod feed began returning Spanish-localized values

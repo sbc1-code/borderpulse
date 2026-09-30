@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "npm run test:refresh && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:refresh && npm run test:publish && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test:publish": "node --test scripts/test-publish-data.mjs scripts/test-public-crossings.mjs",
+    "publish:validate": "node scripts/validate-publish-data.mjs",
     "test:hours": "node --test scripts/test-operating-hours.mjs",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",
     "test:routes": "node scripts/smoke-routes.mjs",

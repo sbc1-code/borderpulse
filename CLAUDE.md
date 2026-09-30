@@ -42,11 +42,11 @@ If the user just says **"what's new"** or **"catch me up"** or
   skipped by `deploy.yml`'s push trigger, so fetch-cbp explicitly
   `workflow_dispatch`es deploy.yml with the exact commit SHA — bot pushes
   do not trigger workflows on their own.
-- **`fetch-depth: 0` is load-bearing** on any workflow that runs
-  `npm run build`. `build-aggregates.mjs` reconstructs its 30-day window
-  with `git log`, so a shallow clone silently produces empty aggregates.
-  This has already caused one three-week silent outage (see CHANGELOG
-  2026-07-27).
+- **`fetch-depth: 0` is load-bearing for the collector**, which materializes
+  `public/data/snapshot-history.json`. Site builds read that explicit artifact
+  and can use shallow clones. Never regenerate history from a shallow clone.
+  The daily Vercel publisher is independent of the 15-minute data writer;
+  see `docs/REFRESH-OPERATIONS.md` for activation and rollback gates.
 - **Vite + React + Tailwind + shadcn/ui.** Code-split leaf routes
   via `React.lazy`. The eager entry chunk is budgeted in
   `scripts/check-bundle-size.mjs` and enforced by `npm test` — check
@@ -54,7 +54,8 @@ If the user just says **"what's new"** or **"catch me up"** or
   which is how it drifted 16 KB unnoticed.
 - **Public JSON feeds** at `/data/crossings.json`, `/data/aggregates/{slug}.json`,
   `/data/timelines/...`, `/data/blog/...`, `/data/stats.json`.
-- **No backend.** No auth, no database, no SMS, no email. Anything that
+- **Vercel previews add one cached official-CBP function.** No auth, database,
+  SMS or email. Anything that
   needs persistence lives in browser localStorage. Anything that needs
   cron lives in GitHub Actions.
 

@@ -45,3 +45,4 @@ drafts/curation/latest-feed.json
 .playwright-mcp/
 .vercel
 .env*.local
+/public/data/publication.json

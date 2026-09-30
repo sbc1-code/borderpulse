@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Unreleased — controlled daily Vercel publication
+
+- Added a disabled-by-default daily/application-change GitHub publisher that builds Vercel output locally, runs release checks and uploads prebuilt artifacts. Data-only commits do not trigger it. Preview is the default; production needs an explicit target change after approval.
+- Added publication provenance and gates for collector freshness, identity/count consistency, rolling history coverage and matching latest observations, and USD/MXN data. Failed validation never uploads a replacement deployment.
+- Hardened the Vercel client fallback: malformed responses cannot invent a fresh timestamp, older static data cannot replace newer browser data, and requests time out. Added upstream, malformed-data, recovery and publish-gate tests.
+- Documented activation, measured usage baseline, cutover and the exact captured Pages DNS rollback. No new credential, production deployment, DNS change or paid service is implied by this entry.
+
 ## Unreleased — combined free-product release checks
 
 - Combined comparison sharing with guide-to-waits and favorites without coupling the release to Vercel. A storage write failure now leaves the favorite unchanged and shows an EN/ES error instead of a false saved confirmation.

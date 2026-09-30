@@ -1,0 +1,118 @@
+name: Publish bundled data to Vercel
+run-name: Vercel ${{ vars.VERCEL_PUBLISH_TARGET || 'preview' }} - ${{ github.event_name }}
+
+on:
+  schedule:
+    - cron: '17 8 * * *'
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'public/data/**'
+      - 'public/og/**'
+      - 'public/sitemap.xml'
+      - 'public/rss.xml'
+      - 'docs/**'
+      - '**.md'
+      - 'drafts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+# Independent of the 15-minute writer and the sole Pages deployer.
+concurrency:
+  group: vercel-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Remains off until the credential and preview publication are approved.
+    if: vars.VERCEL_PUBLISH_ENABLED == 'true' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VERCEL_ORG_ID: team_nUpE7oimh9LSdodnuGLxZhgr
+      VERCEL_PROJECT_ID: prj_ftFsRRgb2QcOKUmhG3If4rWRWI8e
+      PUBLISH_TARGET: ${{ vars.VERCEL_PUBLISH_TARGET || 'preview' }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      # Resolve current main once at job start, then build/deploy that exact SHA.
+      # A queued code push must not roll a newer deployment back to old data.
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Check publication authorization
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo 'Missing approved VERCEL_TOKEN'; exit 1; }
+          case "$PUBLISH_TARGET" in preview|production) ;; *) echo 'Invalid publication target'; exit 1;; esac
+      - run: npm ci
+      - name: Install pinned deployment CLI
+        run: npm install --global vercel@50.1.6
+      - name: Validate collector output and record provenance
+        run: npm run publish:validate -- --write-manifest
+      - name: Pull matching environment settings
+        run: vercel pull --yes --environment="$PUBLISH_TARGET" --token="$VERCEL_TOKEN"
+      - name: Build locally for the selected target
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$PUBLISH_TARGET" = production ]; then
+            vercel build --prod --token="$VERCEL_TOKEN"
+          else
+            vercel build --token="$VERCEL_TOKEN"
+          fi
+      - name: Run release checks against the built artifact
+        run: npm test
+      - name: Recheck data freshness before uploading
+        run: npm run publish:validate
+      - name: Deploy the verified prebuilt output
+        id: deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(deploy --prebuilt --token="$VERCEL_TOKEN")
+          if [ "$PUBLISH_TARGET" = production ]; then args+=(--prod); fi
+          deployment_url=$(vercel "${args[@]}")
+          echo "url=$deployment_url" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Vercel $PUBLISH_TARGET publication"
+            echo "Deployment: $deployment_url"
+            echo "Source commit: $(git rev-parse HEAD)"
+            echo '```json'
+            cat public/data/publication.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain publication evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vercel-publication-${{ github.run_id }}
+          path: public/data/publication.json
+          retention-days: 14
+      - name: Report failure or recovery
+        if: always()
+        uses: actions/github-script@v9
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          script: |
+            const title = '[ops] Vercel daily publication failing';
+            const {data: issues} = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', creator: 'github-actions[bot]', per_page: 100,
+            });
+            const existing = issues.find(issue => issue.title === title);
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            if (process.env.JOB_STATUS === 'failure' && !existing) {
+              await github.rest.issues.create({owner: context.repo.owner, repo: context.repo.repo, title,
+                body: `Publication failed: ${runUrl}. The workflow does not delete or disable the previous deployment. Inspect the failed step before retrying; do not relax the data gates.`});
+            } else if (process.env.JOB_STATUS === 'success' && existing) {
+              await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body: `Recovered: ${runUrl}`});
+              await github.rest.issues.update({owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, state: 'closed'});
+            }
