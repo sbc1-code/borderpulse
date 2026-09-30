@@ -8,7 +8,7 @@ import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
-import { dataService } from '@/components/utils/dataService';
+import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { getHoursSummary, nowInPortTz } from '@/components/utils/crossingMeta';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
@@ -248,15 +248,14 @@ export default function CrossingDetail() {
   const [selectedDay, setSelectedDay] = useState(() => new Date().getDay());
 
   useEffect(() => {
-    (async () => {
-      const data = await dataService.getBorderData();
+    return subscribeToBorderData(data => {
       setState({
         crossings: data.crossings || [],
         isLoading: false,
         source: data.source,
         fetchedAt: data.timestamp,
       });
-    })();
+    });
   }, []);
 
   // Fetch anomaly feed once; silently skip if it 404s (cron hasn't written

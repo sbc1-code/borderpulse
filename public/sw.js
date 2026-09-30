@@ -1,4 +1,4 @@
-const CACHE_NAME = 'borderpulse-v3';
+const CACHE_NAME = 'borderpulse-v4';
 
 // App shell files to pre-cache on install
 const APP_SHELL = [
@@ -37,6 +37,10 @@ self.addEventListener('fetch', (event) => {
 
   // Only handle same-origin requests
   if (url.origin !== location.origin) return;
+
+  // The live endpoint already has a shared Vercel CDN cache. Do not add an
+  // unbounded offline cache here: dataService owns the timestamped fallback.
+  if (url.pathname === '/api/public/crossings') return;
 
   // Data files: network-first with 3s timeout, fall back to cache
   if (url.pathname.startsWith('/data/') && url.pathname.endsWith('.json')) {

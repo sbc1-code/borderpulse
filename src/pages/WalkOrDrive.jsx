@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Car, User, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { dataService } from '@/components/utils/dataService';
+import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
@@ -57,10 +57,9 @@ export default function WalkOrDrive() {
   const [state, setState] = useState({ crossings: [], isLoading: true });
 
   useEffect(() => {
-    (async () => {
-      const data = await dataService.getBorderData();
+    return subscribeToBorderData(data => {
       setState({ crossings: data.crossings || [], isLoading: false });
-    })();
+    });
   }, []);
 
   const { crossing, canonicalSlug } = useMemo(() => {

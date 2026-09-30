@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2026-09-30 — Vercel cutover and live-wait refresh
+
+- Approved production publication and IONOS apex/www website DNS cutover
+  completed; both domains have trusted HTTPS, and www redirects to the apex.
+  The site runs on Vercel, code/data collection and prebuilt daily publication
+  on GitHub Actions, and the domain/DNS on IONOS. Exact receipts and rollback
+  records are in issue #101. Two scheduled publication observations and actual
+  first-week cost validation remain pending, without a second automation.
+- Fixed current-waits views freezing after their initial load. Comparison,
+  crossing, best-time, walk-or-drive and embed pages now receive background
+  refreshes and refresh on tab return/reconnection. Comparison has a bilingual
+  manual refresh control. Concurrent refresh requests are deduplicated.
+- Current waits render independently of optional FX/southbound requests.
+  Removed the service worker's extra offline cache for the live API so the
+  shared Vercel CDN and timestamped client/static fallback remain authoritative.
+  Added regressions for slow optional feeds, concurrent requests, timer/tab/
+  reconnection updates, cleanup and stale service-worker response handling.
+
 ## Unreleased — controlled daily Vercel publication
 
 - Added a disabled-by-default daily/application-change GitHub publisher that builds Vercel output locally, runs release checks and uploads prebuilt artifacts. Data-only commits do not trigger it. Preview is the default; production needs an explicit target change after approval.

@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, Clock, Copy, MessageCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Clock, Copy, MessageCircle, RefreshCw } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { dataService } from '@/components/utils/dataService';
+import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { standardPassengerWait } from '@/lib/standardPassengerWait';
 import { FRESHNESS, freshnessOf, formatAge } from '@/lib/trustState';
@@ -122,7 +124,7 @@ export default function Compare() {
   const language = usePersistentLanguage();
 
   const parsed = useMemo(() => parsePair(pair), [pair]);
-  const [state, setState] = useState({ crossings: [], isLoading: true, fetchedAt: null });
+  const [state, setState] = useState({ crossings: [], isLoading: true, isRefreshing: false, fetchedAt: null });
   const [aggA, setAggA] = useState(null);
   const [aggB, setAggB] = useState(null);
   const [feedback, setFeedback] = useState(null);
@@ -134,11 +136,15 @@ export default function Compare() {
   }, [pair]);
 
   useEffect(() => {
-    (async () => {
-      const data = await dataService.getBorderData();
-      setState({ crossings: data.crossings || [], isLoading: false, fetchedAt: data.timestamp });
-    })();
+    return subscribeToBorderData(data => {
+      setState({ crossings: data.crossings || [], isLoading: false, isRefreshing: false, fetchedAt: data.timestamp });
+    });
   }, []);
+
+  const refresh = () => {
+    setState(previous => ({ ...previous, isRefreshing: true }));
+    dataService.getBorderData();
+  };
 
   const { aSlug, bSlug, crossingA, crossingB } = useMemo(() => {
     if (!parsed || !state.crossings.length) {
@@ -275,7 +281,8 @@ export default function Compare() {
         </Link>
       </div>
 
-      <header className="mb-4">
+      <header className="mb-4 flex items-start justify-between gap-3">
+        <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
           {language === 'en'
             ? `${crossingA.name} vs ${crossingB.name}`
@@ -287,6 +294,11 @@ export default function Compare() {
             ? 'Reported northbound waits and 30-day patterns side by side.'
             : 'Esperas reportadas hacia EE. UU. y patrones de 30 días lado a lado.'}
         </p>
+        </div>
+        <Button variant="outline" onClick={refresh} disabled={state.isRefreshing} className="min-h-11 shrink-0">
+          <RefreshCw className={`mr-2 h-4 w-4 ${state.isRefreshing ? 'animate-spin' : ''}`} />
+          {language === 'en' ? 'Refresh waits' : 'Actualizar esperas'}
+        </Button>
       </header>
 
       {liveSummary && (
@@ -386,8 +398,8 @@ export default function Compare() {
         <ul className="text-sm text-slate-700 dark:text-slate-300 space-y-1.5 list-disc pl-5">
           <li>
             {language === 'en'
-              ? 'Reported waits come from the most recent CBP snapshot. Ports may report at different times. The snapshot refreshes when the page loads.'
-              : 'Las esperas reportadas provienen de la consulta más reciente de CBP. Cada garita puede reportar a distinta hora. La consulta se actualiza al cargar la página.'}
+              ? 'Reported waits come from the most recent CBP snapshot. Ports may report at different times. The page checks for updates while open and when you return to the tab; Refresh waits checks again.'
+              : 'Las esperas reportadas provienen de la consulta más reciente de CBP. Cada garita puede reportar a distinta hora. La página consulta actualizaciones mientras está abierta y al volver a la pestaña; Actualizar esperas consulta de nuevo.'}
           </li>
           <li>
             {language === 'en'
