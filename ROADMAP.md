@@ -32,6 +32,9 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   release, review 30 days of `compare-open` clicks and San Ysidro page visits;
   use Search Console traffic as a guardrail, not causal proof. If Umami reports
   remain inaccessible, verify event emission and defer use claims.
+  Comparison sharing and a fixed-choice usefulness prompt are prepared for the
+  next release. Read `compare-share` and `compare-feedback` alongside visits;
+  a feedback click is stated usefulness, not evidence of a completed crossing.
 - Follow up on the separately observed Sunday-pattern callout: its "Today vs.
   the 30-day pattern" heading can appear on another day. Align the heading and
   displayed day with the pattern's actual scope before calling it a today

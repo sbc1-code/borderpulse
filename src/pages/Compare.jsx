@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Clock, Copy, MessageCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { dataService } from '@/components/utils/dataService';
 import { buildSlugMap } from '@/lib/slugs';
@@ -10,6 +10,7 @@ import { nowInTz } from '@/components/utils/crossingMeta';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { isSparseCell } from '@/lib/aggregates';
+import { track } from '@/lib/analytics';
 
 // /compare/<slugA>-vs-<slugB> — side-by-side live wait + 30-day pattern.
 // The pair is parsed from the single :pair param so we don't have to add a
@@ -124,6 +125,13 @@ export default function Compare() {
   const [state, setState] = useState({ crossings: [], isLoading: true, fetchedAt: null });
   const [aggA, setAggA] = useState(null);
   const [aggB, setAggB] = useState(null);
+  const [feedback, setFeedback] = useState(null);
+  const [copyState, setCopyState] = useState('idle');
+
+  useEffect(() => {
+    setFeedback(null);
+    setCopyState('idle');
+  }, [pair]);
 
   useEffect(() => {
     (async () => {
@@ -191,6 +199,24 @@ export default function Compare() {
   const waitA = standardPassengerWait(crossingA);
   const waitB = standardPassengerWait(crossingB);
   const freshness = freshnessOf(state.fetchedAt);
+  const compareUrl = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}/`;
+  const shareText = language === 'en'
+    ? `Compare ${crossingA.name} and ${crossingB.name} northbound waits on Border Pulse. Check the data time before you travel.`
+    : `Compara las esperas hacia EE. UU. en ${crossingA.name} y ${crossingB.name} en Border Pulse. Revisa la hora de los datos antes de salir.`;
+  const recordFeedback = (answer) => {
+    if (feedback) return;
+    setFeedback(answer);
+    track('compare-feedback', { pair: `${aSlug}-vs-${bSlug}`, answer });
+  };
+  const copyCompareLink = async () => {
+    try {
+      await navigator.clipboard.writeText(compareUrl);
+      setCopyState('copied');
+      track('compare-share', { pair: `${aSlug}-vs-${bSlug}`, method: 'copy' });
+    } catch {
+      setCopyState('failed');
+    }
+  };
   const snapshotTime = state.fetchedAt && freshness.state !== FRESHNESS.UNKNOWN
     ? new Date(state.fetchedAt).toLocaleString(language === 'es' ? 'es-MX' : 'en-US', {
       timeZone: 'America/Los_Angeles', dateStyle: 'medium', timeStyle: 'short',
@@ -290,6 +316,68 @@ export default function Compare() {
           <p className="text-sm text-slate-700 dark:text-slate-200">{typicalSummary}</p>
         </div>
       )}
+
+      <section className="mb-6 rounded-lg border border-slate-200 bg-white px-4 py-4 dark:border-gray-700 dark:bg-gray-900" aria-labelledby="compare-pilot-title">
+        <h2 id="compare-pilot-title" className="text-base font-semibold text-slate-900 dark:text-white">
+          {language === 'en' ? 'Share this comparison' : 'Comparte esta comparación'}
+        </h2>
+        <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">
+          {language === 'en'
+            ? 'The link opens the latest available data. It does not preserve the waits shown right now.'
+            : 'El enlace abre los datos más recientes disponibles. No guarda las esperas que ves ahora.'}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(`${shareText}\n${compareUrl}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('compare-share', { pair: `${aSlug}-vs-${bSlug}`, method: 'whatsapp' })}
+            className="inline-flex min-h-11 items-center gap-2 rounded-md border border-emerald-600 px-3 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
+          >
+            <MessageCircle className="h-4 w-4" aria-hidden="true" /> WhatsApp
+          </a>
+          <button
+            type="button"
+            onClick={copyCompareLink}
+            className="inline-flex min-h-11 items-center gap-2 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50 dark:border-gray-600 dark:text-slate-200 dark:hover:bg-gray-800"
+          >
+            {copyState === 'copied' ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
+            {copyState === 'copied'
+              ? (language === 'en' ? 'Link copied' : 'Enlace copiado')
+              : (language === 'en' ? 'Copy link' : 'Copiar enlace')}
+          </button>
+        </div>
+        {copyState === 'failed' && (
+          <p className="mt-2 text-xs text-amber-700 dark:text-amber-400" role="status">
+            {language === 'en' ? 'Copy failed. You can share this page from your browser.' : 'No se pudo copiar. Puedes compartir esta página desde tu navegador.'}
+          </p>
+        )}
+        <div className="mt-4 border-t border-slate-200 pt-4 dark:border-gray-700">
+          <p className="text-sm font-medium text-slate-900 dark:text-white">
+            {language === 'en' ? 'Did this help you choose a crossing?' : '¿Te ayudó a elegir una garita?'}
+          </p>
+          {feedback ? (
+            <p className="mt-2 text-sm text-emerald-800 dark:text-emerald-300" role="status">
+              {language === 'en' ? 'Thanks for helping us improve Border Pulse.' : 'Gracias por ayudarnos a mejorar Border Pulse.'}
+            </p>
+          ) : (
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button type="button" onClick={() => recordFeedback('yes')} className="min-h-11 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 hover:bg-slate-50 dark:border-gray-600 dark:text-slate-200 dark:hover:bg-gray-800">
+                {language === 'en' ? 'Yes' : 'Sí'}
+              </button>
+              <button type="button" onClick={() => recordFeedback('no')} className="min-h-11 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 hover:bg-slate-50 dark:border-gray-600 dark:text-slate-200 dark:hover:bg-gray-800">
+                No
+              </button>
+              <button type="button" onClick={() => recordFeedback('still-deciding')} className="min-h-11 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 hover:bg-slate-50 dark:border-gray-600 dark:text-slate-200 dark:hover:bg-gray-800">
+                {language === 'en' ? 'Still deciding' : 'Aún decido'}
+              </button>
+            </div>
+          )}
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+            {language === 'en' ? 'Anonymous answer; no account needed.' : 'Respuesta anónima; no necesitas cuenta.'}
+          </p>
+        </div>
+      </section>
 
       <section className="mb-6">
         <h2 className="text-base font-semibold text-slate-900 dark:text-white mb-2">

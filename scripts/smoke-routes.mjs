@@ -3,6 +3,7 @@ import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
+import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -307,6 +308,11 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     failures.push(`${profile.name} dashboard analytics: ${error.message}`);
   }
 
+  try {
+    await checkGrowthInteractions(page, context, baseUrl);
+  } catch (error) {
+    failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
+  }
   await context.close();
   console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);
   return failures;
@@ -314,6 +320,10 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
 
 async function main() {
   const manifest = loadRouteManifest();
+  if (process.argv.includes('--growth-only')) {
+    manifest.canonicals = [];
+    manifest.aliases = [];
+  }
   const crossings = JSON.parse(fs.readFileSync(path.resolve(root, 'public/data/crossings.json'), 'utf8')).crossings || [];
   const preview = await startPreview();
   let browser;
