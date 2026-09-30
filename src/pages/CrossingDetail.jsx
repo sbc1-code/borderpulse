@@ -59,7 +59,7 @@ const TIER_BG = {
   sparse: 'rgb(241 245 249)',  // slate-100
   good: 'rgb(16 185 129)',     // emerald-500
   typical: 'rgb(245 158 11)',  // amber-500
-  heavy: 'rgb(244 63 94)',     // rose-500
+  heavy: 'rgb(190 18 60)',     // rose-700: white chart labels remain legible
 };
 
 function formatDistance(km, lang) {
@@ -638,15 +638,15 @@ export default function CrossingDetail() {
                   aria-selected={isActive}
                   onClick={() => setSelectedDay(dIdx)}
                   className={[
-                    'h-7 px-2.5 rounded-full text-xs font-medium border transition-colors',
+                    'min-h-11 min-w-11 px-2.5 rounded-full text-xs font-medium border transition-colors',
                     isActive
-                      ? 'bg-emerald-600 text-white border-emerald-600'
+                      ? 'bg-emerald-700 text-white border-emerald-700'
                       : 'bg-white dark:bg-gray-900 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800',
                   ].join(' ')}
                 >
                   {DAY_LABELS[language][dIdx]}
                   {isToday && (
-                    <span className="ml-1 text-[10px] opacity-80">
+                    <span className="ml-1 text-xs">
                       {language === 'en' ? '·today' : '·hoy'}
                     </span>
                   )}
@@ -672,7 +672,7 @@ export default function CrossingDetail() {
                   // skim — every cell looked alarming regardless of value.
                   const tier = tierFor(val);
                   const bg = TIER_BG[tier];
-                  const textColor = sparse ? 'text-slate-400' : 'text-white';
+                  const textColor = sparse ? 'text-slate-600' : tier === 'heavy' ? 'text-white' : 'text-slate-950';
 
                   // Ring layering: current hour (sky) wins; otherwise best (emerald).
                   const ringClass = isCurrent
@@ -699,17 +699,18 @@ export default function CrossingDetail() {
                         className={`w-full h-10 rounded flex items-center justify-center ${ringClass}`}
                         style={{ background: bg }}
                         title={title}
+                        role="img"
                         aria-label={title}
                       >
-                        <span className={`text-[10px] sm:text-xs font-semibold tabular-nums ${textColor}`}>
+                        <span className={`text-xs font-semibold tabular-nums ${textColor}`}>
                           {sparse ? '' : `${val}m`}
                         </span>
                       </div>
                       <span
-                        className={`text-[9px] tabular-nums ${
+                        className={`text-xs tabular-nums ${
                           isCurrent
                             ? 'text-sky-700 dark:text-sky-400 font-semibold'
-                            : 'text-slate-500'
+                            : 'text-slate-600 dark:text-slate-300'
                         }`}
                       >
                         {formatHourCompact(h)}
@@ -719,7 +720,7 @@ export default function CrossingDetail() {
                 })}
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-3 text-[11px] text-slate-500">
+              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="inline-block w-3 h-3 rounded" style={{ background: TIER_BG.good }} />
                   {language === 'en' ? 'Quick (under 30m)' : 'Rápido (menos de 30m)'}
@@ -769,7 +770,7 @@ export default function CrossingDetail() {
                       {e.source_name}
                     </span>
                     {e.published_at && (
-                      <span className="text-[11px] text-slate-500 tabular-nums">
+                      <span className="text-xs tabular-nums text-slate-600 dark:text-slate-300">
                         {new Date(e.published_at).toLocaleDateString(
                           language === 'es' ? 'es-MX' : 'en-US',
                           { year: 'numeric', month: 'short', day: 'numeric' },

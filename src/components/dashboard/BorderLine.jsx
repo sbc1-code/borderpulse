@@ -167,7 +167,7 @@ export default function BorderLine({
     <svg
       viewBox={`0 0 ${W} ${H}`}
       className="bp-line-svg w-full"
-      role="img"
+      role="group"
       aria-labelledby="bp-line-title bp-line-desc"
       preserveAspectRatio="xMidYMid meet"
     >
@@ -308,7 +308,7 @@ export default function BorderLine({
     <svg
       viewBox={`0 0 ${MW} ${MH}`}
       className="bp-line-svg w-full"
-      role="img"
+      role="group"
       aria-labelledby="bp-line-title-m bp-line-desc-m"
       preserveAspectRatio="xMidYMid meet"
     >

@@ -34,7 +34,7 @@ function PanelCard({ icon: Icon, title, wait, sub, lang, recommendedLabel }) {
         <div className="flex items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-2">
             <Icon className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h3>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h2>
           </div>
           {recommendedLabel && (
             <span className="inline-flex items-center rounded-full bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 dark:text-emerald-300">
@@ -45,7 +45,7 @@ function PanelCard({ icon: Icon, title, wait, sub, lang, recommendedLabel }) {
         <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tabular-nums">
           {wait == null ? '—' : `${wait} min`}
         </div>
-        <p className="text-[11px] text-slate-500 mt-1">{sub}</p>
+        <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">{sub}</p>
       </CardContent>
     </Card>
   );

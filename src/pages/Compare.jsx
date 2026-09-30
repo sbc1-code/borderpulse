@@ -63,12 +63,12 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
           <h2 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white">
             {crossing.name}
           </h2>
-          <span className="text-[11px] text-slate-500">{crossing.state}</span>
+          <span className="text-xs text-slate-600 dark:text-slate-300">{crossing.state}</span>
         </div>
 
         <div className="space-y-3">
           <div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">
+            <div className="mb-0.5 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-300">
               {language === 'en' ? 'Reported standard-passenger wait' : 'Espera reportada, auto estándar'}
             </div>
             <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tabular-nums">
@@ -78,7 +78,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
 
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">
+              <div className="mb-0.5 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-300">
                 {language === 'en' ? 'Today’s lightest' : 'Hoy más ligero'}
               </div>
               <div className="text-sm font-medium text-slate-900 dark:text-white">
@@ -88,7 +88,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
               </div>
             </div>
             <div>
-              <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-0.5">
+              <div className="mb-0.5 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-300">
                 {language === 'en' ? '30-day median' : 'Mediana 30 días'}
               </div>
               <div className="text-sm font-medium text-slate-900 dark:text-white">
@@ -98,7 +98,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
           </div>
 
           {sampleCount != null && (
-            <div className="text-[11px] text-slate-500">
+            <div className="text-xs text-slate-600 dark:text-slate-300">
               {language === 'en'
                 ? `Based on ${sampleCount} samples`
                 : `Con base en ${sampleCount} muestras`}
@@ -107,7 +107,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
 
           <Link
             to={`/crossing/${slug}/`}
-            className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 dark:text-emerald-400 hover:underline"
+            className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
           >
             {language === 'en' ? 'Open full page' : 'Abrir página completa'} <ArrowRight className="w-3.5 h-3.5" />
           </Link>

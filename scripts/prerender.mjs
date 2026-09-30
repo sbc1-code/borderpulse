@@ -446,7 +446,7 @@ function renderBlogPostBody(post, author) {
   const authorName = author?.name || post.author || '';
   const byline = authorName ? `<p>${esc(authorName)} · ${esc(post.date)}</p>` : '';
   return `
-<article lang="${lang}" aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+<article lang="${lang}" aria-hidden="true" inert style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
   <header>
     <h1>${esc(post.title)}</h1>
     <p>${esc(post.description || '')}</p>

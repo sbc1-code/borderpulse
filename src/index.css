@@ -85,6 +85,24 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  :is(a, button, input, select, textarea, [role="button"]):focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: 2px;
+  }
+
+  .dark :is(a, button, input, select, textarea, [role="button"]):focus-visible {
+    outline-color: #34d399;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer utilities {
@@ -116,7 +134,7 @@
     --bp-line-soft: rgba(30, 58, 95, 0.28);
     --bp-grid: rgba(30, 58, 95, 0.10);
     --bp-ink: #1e3a5f;
-    --bp-ink-dim: rgba(30, 58, 95, 0.62);
+    --bp-ink-dim: rgba(30, 58, 95, 0.84);
     --bp-good: #059669;
     --bp-moderate: #d97706;
     --bp-heavy: #e11d48;
@@ -146,7 +164,7 @@
   }
 
   .bp-line-sub {
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     line-height: 1.4;
     color: var(--bp-ink-dim);
     margin-top: 0.125rem;
@@ -156,7 +174,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--bp-ink-dim);

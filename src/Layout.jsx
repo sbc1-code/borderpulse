@@ -90,7 +90,7 @@ export default function Layout({ children }) {
       {/* Mobile header */}
       <header className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
-          <Link to="/" className="flex min-w-0 items-center gap-2">
+          <Link to="/" aria-label="Border Pulse home" className="flex min-h-11 min-w-11 items-center gap-2 rounded-md">
             <BorderPulseLogo size={32} />
             <span className={`hidden truncate text-base font-bold sm:inline sm:text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Border Pulse
@@ -98,36 +98,37 @@ export default function Layout({ children }) {
           </Link>
           <div className="flex shrink-0 items-center gap-1">
             <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-9" aria-label="Switch to English">EN</Button>
-              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-9" aria-label="Cambiar a español">ES</Button>
+              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Switch to English" aria-pressed={language === 'en'}>EN</Button>
+              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
             </div>
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full tap-44" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="rounded-full tap-44" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
         </div>
         {mobileOpen && (
-          <div className={`border-t ${isDark ? 'border-gray-800 bg-gray-900' : 'border-slate-200 bg-white'} px-4 py-2 space-y-1`}>
+          <nav id="mobile-navigation" aria-label={language === 'en' ? 'Main navigation' : 'Navegación principal'} className={`border-t ${isDark ? 'border-gray-800 bg-gray-900' : 'border-slate-200 bg-white'} px-4 py-2 space-y-1`}>
             {nav.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg ${item.current ? isDark ? 'bg-emerald-900/30 text-emerald-300' : 'bg-emerald-50 text-emerald-800' : isDark ? 'text-slate-300 hover:bg-gray-800' : 'text-slate-700 hover:bg-slate-100'}`}
+                aria-current={item.current ? 'page' : undefined}
+                className={`flex min-h-11 items-center gap-3 px-3 py-2 rounded-lg ${item.current ? isDark ? 'bg-emerald-900/30 text-emerald-300' : 'bg-emerald-50 text-emerald-800' : isDark ? 'text-slate-300 hover:bg-gray-800' : 'text-slate-700 hover:bg-slate-100'}`}
               >
                 <item.icon className="w-5 h-5" />
                 {item.name}
               </Link>
             ))}
-          </div>
+          </nav>
         )}
       </header>
 
       <div className="lg:flex min-h-screen">
-        <aside className={`hidden lg:flex w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex-col`}>
+        <aside aria-label={language === 'en' ? 'Site navigation' : 'Navegación del sitio'} className={`hidden lg:flex w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex-col`}>
           <div className={`p-5 border-b ${isDark ? 'border-gray-800' : 'border-slate-200'}`}>
             <Link to="/" className="flex items-center gap-3">
               <BorderPulseLogo size={40} />
@@ -150,20 +151,21 @@ export default function Layout({ children }) {
                 on tall pages. */}
             <div className="mt-3 flex items-center gap-2">
               <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="text-xs px-2 h-9" aria-label="Switch to English">EN</Button>
-                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="text-xs px-2 h-9" aria-label="Cambiar a español">ES</Button>
+                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Switch to English" aria-pressed={language === 'en'}>EN</Button>
+                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
               </div>
-              <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full tap-44" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
+              <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </Button>
             </div>
           </div>
-          <nav className="flex-1 p-3 space-y-1">
+          <nav aria-label={language === 'en' ? 'Main navigation' : 'Navegación principal'} className="flex-1 p-3 space-y-1">
             {nav.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium ${item.current
+                aria-current={item.current ? 'page' : undefined}
+                className={`flex min-h-11 items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium ${item.current
                   ? isDark ? 'bg-emerald-900/30 text-emerald-300' : 'bg-emerald-50 text-emerald-800'
                   : isDark ? 'text-slate-300 hover:bg-gray-800/60' : 'text-slate-700 hover:bg-slate-100'}`}
               >
@@ -178,7 +180,7 @@ export default function Layout({ children }) {
 
       {/* Footer (all viewports) */}
       <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>
-        <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+        <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
           <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
             <span>
               {language === 'en' ? 'Data: U.S. Customs and Border Protection' : 'Datos: Aduanas y Protección Fronteriza EE.UU.'}

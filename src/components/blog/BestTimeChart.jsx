@@ -93,20 +93,21 @@ export default function BestTimeChart({ slug, title }) {
   }
 
   return (
-    <figure className="not-prose my-6">
+    <figure className="not-prose my-6 w-full min-w-0 max-w-[calc(100vw-2rem)]">
       {title && (
         <figcaption className="text-xs uppercase tracking-wide text-slate-500 mb-2">
           {title}
         </figcaption>
       )}
-      <div className="overflow-x-auto rounded border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-3">
-        <table className="text-[10px] tabular-nums">
+      <div className="w-full min-w-0 max-w-full overflow-x-auto rounded border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-3" role="region" aria-label={title || t.caption} tabIndex={0} style={{ contain: 'paint' }}>
+        <table className="text-xs tabular-nums">
+          <caption className="sr-only">{t.caption}</caption>
           <thead>
             <tr>
-              <th className="w-10"></th>
+              <th scope="col" className="w-10 text-slate-700 dark:text-slate-200">{lang === 'es' ? 'Día' : 'Day'}</th>
               {Array.from({ length: 24 }, (_, h) => (
-                <th key={h} className="px-0.5 py-1 text-slate-500 font-normal text-center">
-                  {h % 2 === 0 ? formatHourCompact(h) : ''}
+                <th key={h} scope="col" className="px-0.5 py-1 text-slate-700 dark:text-slate-200 font-medium text-center">
+                  {formatHourCompact(h)}
                 </th>
               ))}
             </tr>
@@ -114,15 +115,17 @@ export default function BestTimeChart({ slug, title }) {
           <tbody>
             {days.map((day, di) => (
               <tr key={day}>
-                <th className="pr-2 py-0.5 text-right text-slate-500 font-normal">{day}</th>
+                <th scope="row" className="pr-2 py-0.5 text-right text-slate-700 dark:text-slate-200 font-medium">{day}</th>
                 {Array.from({ length: 24 }, (_, h) => {
                   const v = grid[`${di}-${h}`];
                   return (
                     <td key={h} className="px-0.5 py-0.5">
+                      <span className="sr-only">{v == null ? `${day} ${formatHour12(h)}: ${t.legendNoData}` : t.cell(day, formatHour12(h), v)}</span>
                       <div
                         className="w-5 h-5 rounded-sm"
                         style={{ background: colorFor(v) }}
                         title={v == null ? '—' : t.cell(days[di], formatHour12(h), v)}
+                        aria-hidden="true"
                       />
                     </td>
                   );

@@ -28,6 +28,10 @@ export default function Embed() {
   const direction = 'northbound';
   const compact = params.get('compact') === 'true';
 
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   const [crossings, setCrossings] = useState([]);
   const [aggregate, setAggregate] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -102,20 +106,20 @@ export default function Embed() {
 
   if (!loaded) {
     return (
-      <div className={`min-h-screen w-full flex items-center justify-center ${bg} ${text}`}>
+      <main className={`min-h-screen w-full flex items-center justify-center ${bg} ${text}`}>
         <div className={`text-xs ${subtext}`}>{lang === 'es' ? 'Cargando…' : 'Loading…'}</div>
-      </div>
+      </main>
     );
   }
 
   if (!crossing) {
     return (
-      <div className={`min-h-screen w-full flex flex-col items-center justify-center ${bg} ${text} p-3`}>
-        <div className="text-sm font-medium">{lang === 'es' ? 'Cruce no encontrado' : 'Crossing not found'}</div>
+      <main className={`min-h-screen w-full flex flex-col items-center justify-center ${bg} ${text} p-3`}>
+        <h1 className="text-sm font-medium">{lang === 'es' ? 'Cruce no encontrado' : 'Crossing not found'}</h1>
         <a href="https://borderpulse.com" target="_blank" rel="noopener" className={`mt-1 text-[11px] underline ${subtext}`}>
           borderpulse.com
         </a>
-      </div>
+      </main>
     );
   }
 
@@ -147,9 +151,9 @@ export default function Embed() {
 
   const deltaColor = deltaText
     ? (deltaText.tone === 'high'
-        ? (isDark ? 'text-rose-400' : 'text-rose-600')
+        ? (isDark ? 'text-rose-400' : 'text-rose-700')
         : deltaText.tone === 'low'
-          ? (isDark ? 'text-emerald-400' : 'text-emerald-600')
+          ? (isDark ? 'text-emerald-400' : 'text-emerald-700')
           : subtext)
     : '';
 
@@ -157,14 +161,14 @@ export default function Embed() {
   const waitSize = compact ? 'text-3xl' : 'text-4xl';
 
   return (
-    <div
+    <main
       className={`min-h-screen w-full ${bg} ${text} flex flex-col font-sans`}
       style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' }}
     >
       <div className={`flex-1 ${padding} flex flex-col gap-1.5 min-w-0`}>
         <div className="flex items-center justify-between gap-2 min-w-0">
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className="text-[13px] font-semibold truncate">{crossing.name}</span>
+            <h1 className="truncate text-[13px] font-semibold">{crossing.name}</h1>
             <span className="text-xs flex-shrink-0" aria-hidden="true">{FLAG[crossing.state] || ''}</span>
           </div>
           <span className={`text-[10px] uppercase tracking-wide ${subtext} flex-shrink-0`}>
@@ -220,6 +224,6 @@ export default function Embed() {
         </div>
         <span className={`text-[10px] ${subtext} flex-shrink-0`}>borderpulse.com →</span>
       </a>
-    </div>
+    </main>
   );
 }

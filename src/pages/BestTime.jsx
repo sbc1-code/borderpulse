@@ -42,8 +42,9 @@ function HourBar({ entry, max, lang, isCurrentHour, isLightestHour }) {
     : median < 30
       ? 'bg-emerald-500'
       : median < 60
-        ? 'bg-amber-500'
-        : 'bg-rose-500';
+      ? 'bg-amber-500'
+        : 'bg-rose-700';
+  const valueColor = median < 60 ? 'text-slate-950' : 'text-white';
   const ringClass = isLightestHour
     ? 'ring-2 ring-emerald-500'
     : isCurrentHour
@@ -58,7 +59,7 @@ function HourBar({ entry, max, lang, isCurrentHour, isLightestHour }) {
       <div className={`flex-1 h-5 rounded-md bg-slate-100 dark:bg-gray-800 overflow-hidden ${ringClass}`}>
         <div className={`h-full ${filledColor} flex items-center justify-end pr-1.5`} style={{ width: `${widthPct}%` }}>
           {!sparse && (
-            <span className="text-[10px] font-bold text-white tabular-nums">
+            <span className={`text-xs font-bold tabular-nums ${valueColor}`}>
               {median}
             </span>
           )}
@@ -218,8 +219,8 @@ export function BestTimeIndex() {
         </ul>
       </div>
 
-      <div className="rounded-lg border border-slate-200 dark:border-gray-700 overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="rounded-lg border border-slate-200 dark:border-gray-700 overflow-x-auto" role="region" aria-label={language === 'en' ? 'Best time by crossing' : 'Mejor hora por cruce'} tabIndex={0}>
+        <table className="w-full min-w-[540px] text-sm">
           <thead className="bg-slate-50 dark:bg-gray-900 text-slate-600 dark:text-slate-300 text-[11px] uppercase tracking-wide">
             <tr>
               <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Crossing' : 'Cruce'}</th>
@@ -227,7 +228,7 @@ export function BestTimeIndex() {
               <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Lightest hour today' : 'Hora más ligera hoy'}</th>
               <th className="text-right px-3 py-2 font-medium">{language === 'en' ? 'Median (min)' : 'Mediana (min)'}</th>
               <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">{language === 'en' ? 'Day avg' : 'Prom. día'}</th>
-              <th className="px-3 py-2 font-medium" aria-label="link"></th>
+              <th className="px-3 py-2 font-medium">{language === 'en' ? 'Details' : 'Detalles'}</th>
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-gray-900/40 divide-y divide-slate-200 dark:divide-gray-800">
@@ -482,7 +483,7 @@ export default function BestTime() {
                   <td className="px-3 py-2 text-slate-900 dark:text-slate-100">
                     {DAY_LABELS[language][row.day]}
                     {row.day === today && (
-                      <span className="ml-1.5 text-[10px] text-emerald-600 dark:text-emerald-400">·{language === 'en' ? 'today' : 'hoy'}</span>
+                      <span className="ml-1.5 text-xs text-emerald-800 dark:text-emerald-300">·{language === 'en' ? 'today' : 'hoy'}</span>
                     )}
                   </td>
                   <td className="px-3 py-2 text-slate-900 dark:text-slate-100">
