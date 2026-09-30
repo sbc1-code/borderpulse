@@ -16,6 +16,7 @@
     "fetch:cbp": "node scripts/fetch-cbp.mjs",
     "fetch:fx": "node scripts/fetch-fx.mjs",
     "fetch:sb": "node scripts/fetch-sb.mjs",
+    "history:build": "node scripts/build-snapshot-history.mjs",
     "aggregates": "node scripts/build-aggregates.mjs",
     "rankings": "node scripts/build-rankings.mjs",
     "blog:index": "node scripts/build-blog-index.mjs",
