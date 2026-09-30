@@ -191,10 +191,24 @@ Captured rollback DNS (recheck at approval):
 | @ | A | 185.199.111.153 | 3600 |
 | www | CNAME | sbc1-code.github.io | 3600 |
 
-Vercel currently reports no `borderpulse.com` domain in this team. Do not guess
-the new records from generic examples. Obtain the exact recommendation for
-this project before changing DNS. Review any AAAA/CAA or ownership-verification
-records as part of that same packet; do not remove unrelated records.
+Read-only Vercel domain-configuration API lookup for project
+`prj_ftFsRRgb2QcOKUmhG3If4rWRWI8e` returned these rank-1 targets on September 29:
+
+| Host | Type | Proposed value | TTL |
+| --- | --- | --- | --- |
+| @ | A | 216.150.1.1 | 3600 |
+| @ | A | 216.150.16.1 | 3600 |
+| www | CNAME | 84c88a1a10d2756f.vercel-dns-016.com | 3600 |
+
+Replace the four Pages apex A records with the two recommended Vercel A records
+and replace the `www` CNAME only after approval. Vercel has no attached
+`borderpulse.com` domain yet; the read-only recommendation does not attach it.
+Public DNS showed no apex AAAA or CAA records. The `www` IPv6 answers currently
+come from its Pages CNAME, not a separate `www` AAAA record. Re-read all records
+and Vercel recommendations at cutover, including any ownership TXT challenge.
+Set `www` to redirect to `https://borderpulse.com` in the project domain setup.
+Leave IONOS nameservers and unrelated records intact. Allow the current
+3600-second TTL when evaluating propagation and rollback.
 
 After approval: build for production (`vercel pull --environment=production`,
 `vercel build --prod`), run checks, upload `vercel deploy --prebuilt --prod`,
