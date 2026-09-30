@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, MessageCircle } from 'lucide-react';
 import { MDXProvider } from '@mdx-js/react';
 import { Button } from '@/components/ui/button';
 import { getPost, getAuthor, pillarLabel, listPosts } from '@/lib/blog-runtime';
 import { mdxComponents } from '@/components/blog/MdxComponents';
 import { LangContext } from '@/lib/LangContext';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
+import { track } from '@/lib/analytics';
 
 const STRINGS = {
   en: {
@@ -17,6 +18,12 @@ const STRINGS = {
     and: 'and',
     beforeTravel: 'before you travel.',
     alsoIn: 'Also available in',
+    crossingSoon: 'Crossing soon?',
+    nextStep: 'Check the latest official northbound wait report, then send this guide to someone who needs it.',
+    currentWaits: 'Current wait times',
+    copyLink: 'Copy guide link',
+    copied: 'Guide link copied.',
+    copyFailed: 'Copy failed. You can share this page from your browser.',
   },
   es: {
     allPosts: 'Todos los posts',
@@ -26,6 +33,12 @@ const STRINGS = {
     and: 'y',
     beforeTravel: 'antes de viajar.',
     alsoIn: 'Disponible en',
+    crossingSoon: '¿Cruzarás pronto?',
+    nextStep: 'Consulta el reporte oficial más reciente hacia EE. UU. y comparte esta guía con quien la necesite.',
+    currentWaits: 'Tiempos de espera actuales',
+    copyLink: 'Copiar enlace de la guía',
+    copied: 'Enlace de la guía copiado.',
+    copyFailed: 'No se pudo copiar. Puedes compartir esta página desde tu navegador.',
   },
 };
 
@@ -49,6 +62,9 @@ function findTwin(post, allPosts) {
 export default function BlogPost() {
   const { slug } = useParams();
   const post = getPost(slug);
+  const [copyStatus, setCopyStatus] = useState('');
+
+  useEffect(() => setCopyStatus(''), [slug]);
 
   useEffect(() => {
     if (!post) return;
@@ -73,6 +89,21 @@ export default function BlogPost() {
   const allPosts = [...listPosts({ lang: 'en' }), ...listPosts({ lang: 'es' })];
   const twin = findTwin(post, allPosts);
   const twinLangLabel = twin?.frontmatter.lang === 'es' ? 'Español' : 'English';
+  const guideUrl = `https://borderpulse.com/blog/${slug}/`;
+  const whatsappUrl = `${guideUrl}?utm_source=whatsapp&utm_medium=share&utm_campaign=guide`;
+  const copyUrl = `${guideUrl}?utm_source=copy&utm_medium=share&utm_campaign=guide`;
+  const shareText = lang === 'es'
+    ? `Lee esta guía de Border Pulse: ${fm.title}`
+    : `Read this Border Pulse guide: ${fm.title}`;
+  const copyGuideLink = async () => {
+    try {
+      await navigator.clipboard.writeText(copyUrl);
+      setCopyStatus(t.copied);
+      track('blog-share', { slug, method: 'copy' });
+    } catch {
+      setCopyStatus(t.copyFailed);
+    }
+  };
 
   return (
     <article className="p-3 sm:p-4 lg:p-6 max-w-[760px] mx-auto" lang={lang}>
@@ -117,6 +148,22 @@ export default function BlogPost() {
           </MDXProvider>
         </LangContext.Provider>
       </div>
+      <section className="mt-8 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4 dark:border-emerald-900 dark:bg-emerald-950/20 sm:p-5" aria-label={t.crossingSoon}>
+        <h2 className="text-base font-semibold text-slate-900 dark:text-white">{t.crossingSoon}</h2>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t.nextStep}</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link to="/" onClick={() => track('blog-to-waits', { slug })} className="inline-flex min-h-11 items-center gap-2 rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-800">
+            {t.currentWaits}<ArrowRight aria-hidden="true" className="h-4 w-4" />
+          </Link>
+          <a href={`https://wa.me/?text=${encodeURIComponent(`${shareText}\n${whatsappUrl}`)}`} target="_blank" rel="noopener noreferrer" onClick={() => track('blog-share', { slug, method: 'whatsapp' })} className="inline-flex min-h-11 items-center gap-2 rounded-md border border-emerald-700 px-3 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-100 dark:text-emerald-300 dark:hover:bg-emerald-950/40">
+            <MessageCircle aria-hidden="true" className="h-4 w-4" />WhatsApp
+          </a>
+          <button type="button" onClick={copyGuideLink} className="inline-flex min-h-11 items-center gap-2 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50 dark:border-gray-600 dark:text-slate-200 dark:hover:bg-gray-800">
+            <Copy aria-hidden="true" className="h-4 w-4" />{t.copyLink}
+          </button>
+        </div>
+        {copyStatus && <p className="mt-2 text-xs text-slate-600 dark:text-slate-300" role="status">{copyStatus}</p>}
+      </section>
       <footer className="mt-10 border-t border-slate-200 dark:border-gray-800 pt-4 text-xs text-slate-500">
         {t.footer}{' '}
         <a

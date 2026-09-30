@@ -19,6 +19,7 @@ import { usePersistentLanguage } from '@/lib/useLanguage';
 import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
+import { track } from '@/lib/analytics';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -216,6 +217,28 @@ export default function CrossingDetail() {
   const [embedOpen, setEmbedOpen] = useState(false);
   const [anomalies, setAnomalies] = useState(null);
   const language = usePersistentLanguage();
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('borderPulse_favorites') || '[]');
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleFavorite = (portNumber) => {
+    const adding = !favorites.includes(portNumber);
+    const next = adding
+      ? [...favorites, portNumber]
+      : favorites.filter((number) => number !== portNumber);
+    setFavorites(next);
+    try {
+      localStorage.setItem('borderPulse_favorites', JSON.stringify(next));
+    } catch {
+      // The current page still responds if storage is unavailable.
+    }
+    track('favorite-toggle', { action: adding ? 'add' : 'remove', source: 'crossing-detail' });
+  };
 
   // Initial guess is browser-local; once the crossing loads, todayIdx below
   // switches to the port's timezone and the reset effect re-syncs selectedDay.
@@ -468,9 +491,16 @@ export default function CrossingDetail() {
           index={0}
           selectedDirection="northbound"
           snapshotAt={isSanYsidro ? state.fetchedAt : null}
-          isFavorite={false}
-          onToggleFavorite={() => {}}
+          isFavorite={favorites.includes(crossing.port_number)}
+          onToggleFavorite={toggleFavorite}
         />
+        {favorites.includes(crossing.port_number) && (
+          <p className="mt-2 text-xs text-emerald-700 dark:text-emerald-300" role="status">
+            {language === 'en'
+              ? 'Saved on this device. This crossing appears first on the dashboard.'
+              : 'Guardado en este dispositivo. Este cruce aparece primero en el panel principal.'}
+          </p>
+        )}
       </div>
 
       {isSanYsidro && (

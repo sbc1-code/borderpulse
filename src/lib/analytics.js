@@ -24,6 +24,8 @@
 //   embed-copy          distribution / backlink funnel
 //   share-status        viral / WhatsApp distribution
 //   crossing-share      crossing-page distribution; method=native|copy|whatsapp
+//   blog-share          guide distribution; slug and method=copy|whatsapp
+//   blog-to-waits       guide reader opening the current waits dashboard
 //
 // No free-text is ever sent: slugs and enum values only, never a raw search
 // query, so an accidental paste cannot land in analytics.

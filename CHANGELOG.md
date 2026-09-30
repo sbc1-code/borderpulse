@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Unreleased — guide-to-waits and return visits
+
+- Crossing detail pages now save favorites to the same browser-local list used by the dashboard. The star control previously appeared there but did nothing. A saved crossing rises to the top of the dashboard; no account or notification is implied.
+- Blog guides now offer a direct route to current northbound waits and WhatsApp/copy sharing. Shared links carry only a channel-level UTM tag, with no person-level referral identifier. Umami records `blog-to-waits` and `blog-share` using the guide slug and fixed method values.
+- Adsterra remains in its existing dashboard placement while ad creative quality and actual revenue are reviewed. No extra ad unit or recurring service was added.
+
 ## 2026-09-27 — Crossing discovery and sharing
 
 ### Added
