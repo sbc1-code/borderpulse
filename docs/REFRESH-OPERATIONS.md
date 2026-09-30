@@ -107,7 +107,10 @@ Pages deployer. Both hosts build the same Vite app; only Vercel enables
 
 ### Activate preview only after credential approval
 
-1. Review the workflow and passing release checks. Store an approved Vercel
+1. Merge the reviewed hosting changes after the independent product release.
+   Wait for one successful collector run on `main` so its current crossings
+   and materialized history match; validate those inputs before activation.
+   Review the workflow and passing release checks. Store an approved Vercel
    access token as the repository Actions secret `VERCEL_TOKEN`, scoped to
    the existing team with the narrowest deployment permissions the account
    supports. Document expiry privately and rotate before expiry. Never paste
@@ -130,6 +133,30 @@ Pages deployer. Both hosts build the same Vite app; only Vercel enables
 
 No new service or credential is needed to test a local prebuilt preview with
 the existing CLI login. The unattended Actions credential is a separate gate.
+
+### Verified candidate preview
+
+The authenticated [candidate preview](https://borderpulse-1aclctmdc-sbc1-codes-projects.vercel.app)
+is ready at deployment `dpl_4dt2z2rNsmkrEsTw3VJv1WX8WTLx`; it has no production
+alias. Its log confirms prebuilt artifacts, with no remote application build.
+The artifact manifest records runtime source `ba320b18` and 403 historical
+snapshots. Deployment metadata records `b65c6f89`, which adds only documentation
+and the audit-report validation fix after the local build.
+
+Authenticated browser readback confirmed 42 live crossings fetched at
+`2026-09-30T05:02:02.700Z`, newer than the bundled `04:22:28.572Z` snapshot;
+the dashboard displayed the same live timestamp. Comparison history, canonical
+sharing controls, USD/MXN and automatic Adsterra creatives loaded. The unknown
+route rendered the prepared 404 page; the packaged route configuration returns
+status 404. Local verification passed 406 route navigations, EN/ES desktop and
+mobile growth interactions, 18 publication/function tests and four refresh
+tests. GitHub release checks passed for both #106 and hosting head `b65c6f89`.
+
+The immediate post-deployment usage readback remained $0.27 for BorderPulse and
+$2.46 of the team's $20 credit. The page warns of up to one hour of reporting
+delay; this unchanged rounded reading does not prove zero deployment cost.
+Daily automation, two scheduled observations and production cost validation
+remain pending. No production release or DNS change has occurred.
 
 ### Data and failure contract
 
