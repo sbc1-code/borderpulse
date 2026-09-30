@@ -14,7 +14,14 @@ Real-time US-Mexico border wait times. Static site on GitHub Pages at [borderpul
 
 Paid southbound Google Maps estimates are paused and are not part of the production workflow. The retained `scripts/fetch-sb.mjs` utility is historical/manual only; production serves the official northbound CBP feed.
 
-The client (`src/components/utils/dataService.js`) reads those static JSON files. No API, no auth, no rate limits.
+On Pages, the client reads those static JSON files. Vercel previews use the
+five-minute CDN-cached `/api/public/crossings` endpoint with the static snapshot
+as fallback; both preserve actual timestamps. No account is required.
+
+The collector also materializes rolling 30-day history. The prepared Vercel
+publisher builds bundled data daily at 08:17 UTC and when app code changes,
+not for every data commit. It is disabled until credential approval and starts
+in preview. See [refresh operations](docs/REFRESH-OPERATIONS.md).
 
 ## Local dev
 ```bash

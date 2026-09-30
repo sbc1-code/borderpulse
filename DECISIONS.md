@@ -8,6 +8,33 @@ Format: date · one-line decision · short why.
 
 ---
 
+## 2026-09-29 · Publish Vercel bundles daily from GitHub Actions
+
+The 15-minute collector and Pages rollback remain intact. Vercel current waits
+use the cached CBP function; bundled history, FX and generated routes publish
+daily plus application changes. Build in GitHub Actions and upload prebuilt
+output, keeping automatic Vercel Git builds disconnected. Publication rejects
+stale or inconsistent collector data; a failed gate leaves the previous site
+available. Preview is the default and activation requires an approved scoped
+credential. Production/domain changes remain a separate decision. Target $0
+additional monthly spend; do not pause the shared Vercel team and DIGITO.
+
+---
+
+## 2026-09-29 · Evaluate Vercel with a public-app preview
+
+Keep the existing GitHub Pages site and automatic ads while testing Vercel.
+Vercel builds use the same Vite app plus a five-minute CDN-cached CBP endpoint;
+the client retains the last successful reading and falls back to the published
+static snapshot with its original timestamp when the endpoint fails. A compact
+30-day snapshot artifact makes historical aggregates independent of build-host
+Git history. Do not connect every data commit to a Vercel build: the scheduled
+writer runs too often for that to be a cost-controlled default. A production
+domain move needs a production-equivalent preview, usage review, and owner
+approval first.
+
+---
+
 ## 2026-08-20 · Freshness thresholds come from measured delivery, not the cron
 
 Issue #58 asked for stale/fresh thresholds "derived from the configured

@@ -72,7 +72,11 @@ try {
   process.exit(1);
 }
 
-const counts = report.metadata?.vulnerabilities ?? {};
+if (report.error || !report.metadata?.vulnerabilities || !report.vulnerabilities) {
+  console.error('[audit] registry audit did not return a complete report; refusing to treat unavailable data as zero advisories');
+  process.exit(1);
+}
+const counts = report.metadata.vulnerabilities;
 const vulns = Object.values(report.vulnerabilities ?? {});
 const blocking = vulns.filter(
   (v) => THRESHOLD.includes(v.severity) && !isFullyAccepted(v)

@@ -1,17 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 const DATA_FILE = 'public/data/crossings.json';
+const HISTORY_FILE = 'public/data/snapshot-history.json';
 const LOOKBACK_DAYS = 30;
-
-function sh(cmd) {
-  return execSync(cmd, { cwd: root, encoding: 'utf8', maxBuffer: 50 * 1024 * 1024 }).trim();
-}
 
 function median(arr) {
   if (!arr.length) return null;
@@ -53,15 +49,17 @@ async function main() {
     return tzCache.get(key);
   }
 
-  let log;
-  try {
-    log = sh(`git log --since="${since}" --pretty=format:%H --date=iso -- ${DATA_FILE}`);
-  } catch (e) {
-    console.warn('[aggregates] git log failed, skipping', e.message);
-    return;
+  const historyPath = path.resolve(root, HISTORY_FILE);
+  if (!fs.existsSync(historyPath)) {
+    throw new Error(`Missing ${HISTORY_FILE}. Run npm run history:build in the data-ingestion environment.`);
   }
-  const shas = log.split('\n').map((x) => x.trim()).filter(Boolean);
-  console.log(`[aggregates] ${shas.length} snapshots over last ${LOOKBACK_DAYS} days`);
+  const history = JSON.parse(fs.readFileSync(historyPath, 'utf8'));
+  const snapshots = (history.snapshots || []).filter((snapshot) => {
+    const ts = new Date(snapshot.fetched_at);
+    return !Number.isNaN(ts.getTime()) && ts >= new Date(since);
+  });
+  if (!snapshots.length) throw new Error(`No snapshots in ${HISTORY_FILE} for the last ${LOOKBACK_DAYS} days`);
+  console.log(`[aggregates] ${snapshots.length} explicit snapshots over last ${LOOKBACK_DAYS} days`);
 
   // portNumber -> day (0-6) -> hour (0-23) -> [waits]
   const buckets = new Map();
@@ -76,16 +74,7 @@ async function main() {
     byHour.get(hour).push(wait);
   }
 
-  for (const sha of shas) {
-    let raw;
-    try {
-      raw = sh(`git show ${sha}:${DATA_FILE}`);
-    } catch {
-      continue;
-    }
-    let doc;
-    try { doc = JSON.parse(raw); } catch { continue; }
-
+  for (const doc of snapshots) {
     const ts = doc.fetched_at ? new Date(doc.fetched_at) : null;
     if (!ts || Number.isNaN(ts.getTime())) continue;
     // Bucket by PORT-LOCAL day/hour. The original UTC bucketing shifted
