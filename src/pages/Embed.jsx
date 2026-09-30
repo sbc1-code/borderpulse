@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { dataService } from '@/components/utils/dataService';
+import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { crossingForSlug, buildSlugMap } from '@/lib/slugs';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
@@ -37,18 +37,10 @@ export default function Embed() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
-    dataService.getBorderData()
-      .then((doc) => {
-        if (!cancelled) {
-          setCrossings(doc?.crossings || []);
-          setLoaded(true);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setLoaded(true);
-      });
-    return () => { cancelled = true; };
+    return subscribeToBorderData(doc => {
+      setCrossings(doc.crossings || []);
+      setLoaded(true);
+    });
   }, []);
 
   const crossing = useMemo(

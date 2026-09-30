@@ -21,10 +21,17 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
-- [~] Review the cost-controlled Vercel preview from the current public app:
-  verify automatic ads, live CBP endpoint, static fallback, 30-day history,
-  and measured usage before any domain move. The public site stays on Pages
-  until Sebastian approves a production cutover.
+- [x] Approved Vercel production cutover: PR #109 merged, Actions publication
+  succeeded, and IONOS apex/www DNS plus trusted HTTPS were verified. See
+  issue #101 for publication evidence and exact rollback records.
+- [ ] Observe two scheduled Vercel production publications and first-week
+  usage/cost. The manual cutover publish does not count toward the two runs.
+  No publication-monitoring automation exists; the October pilot readout is
+  separate. Preserve Pages rollback and the 15-minute collector meanwhile.
+- [x] Current-waits views refresh while open and on tab return/reconnection,
+  including comparison, crossing, best-time, walk-or-drive and embed routes.
+  Slow optional feeds no longer delay waits, and the service worker does not
+  silently substitute an old response for the live API.
 - Keep official northbound CBP data, source timestamps, honest stale states and
   the static fallback reliable. Keep the free experience supported by ads.
 - Measure whether people complete a crossing decision and return. Review
@@ -227,7 +234,10 @@ Snapshot of features live on borderpulse.com today.
 - `/data/stats.json` — Public aggregate stats (drives `/about`)
 
 ### Infra
-- GitHub Pages deploy via `.github/workflows/deploy.yml`
+- Vercel production via `.github/workflows/publish-vercel.yml`; daily prebuilt
+  Actions publication plus application changes. IONOS owns domain/DNS.
+- GitHub Pages deploy via `.github/workflows/deploy.yml` retained for rollback;
+  recent jobs are pending/canceled, so verify a successful build before rollback.
 - Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; changed,
   validated snapshots explicitly dispatch the sole deployer with their SHA
 - Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild

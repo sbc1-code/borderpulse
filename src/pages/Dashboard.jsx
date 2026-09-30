@@ -17,6 +17,7 @@ import PopularCrossings from '@/components/dashboard/PopularCrossings';
 import BorderLine from '@/components/dashboard/BorderLine';
 import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
 import { dataService } from '@/components/utils/dataService';
+import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
@@ -156,18 +157,7 @@ export default function Dashboard() {
         }
       }
     };
-    dataService.addListener(applyData);
-    load();
-    dataService.startAutoRefresh(5 * 60 * 1000);
-    const onVisible = () => {
-      if (document.visibilityState === 'visible') load();
-    };
-    document.addEventListener('visibilitychange', onVisible);
-    return () => {
-      dataService.removeListener(applyData);
-      dataService.stopAutoRefresh();
-      document.removeEventListener('visibilitychange', onVisible);
-    };
+    return subscribeToBorderData(applyData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -57,6 +57,7 @@ export class DataService {
     this.listeners = new Set();
     this.cache = null;
     this.refreshTimer = null;
+    this.inFlight = null;
   }
 
   addListener(fn) { this.listeners.add(fn); }
@@ -88,13 +89,22 @@ export class DataService {
     return { doc: validateSnapshot(await this.fetchJson(DATA_PATH)), fromFallback: false };
   }
 
-  async getBorderData() {
+  getBorderData() {
+    if (!this.inFlight) {
+      this.inFlight = this.loadBorderData().finally(() => { this.inFlight = null; });
+    }
+    return this.inFlight;
+  }
+
+  async loadBorderData() {
     try {
-      const [crossingsResult, fxDoc, sbDoc] = await Promise.all([
-        this.fetchCrossingsDoc(),
+      let auxiliaryData = null;
+      const auxiliary = Promise.all([
         this.fetchJson(FX_PATH).catch(() => null),
         this.fetchJson(SB_PATH).catch(() => null),
-      ]);
+      ]).then(data => { auxiliaryData = data; return data; });
+      const crossingsResult = await this.fetchCrossingsDoc();
+      const [fxDoc, sbDoc] = auxiliaryData || [this.cache?.exchange_rate, null];
       const { doc: crossingsDoc, fromFallback } = crossingsResult;
       if (this.cache && Date.parse(crossingsDoc.fetched_at) < Date.parse(this.cache.timestamp)) {
         const retained = { ...this.cache, success: false, fromFallback: true };
@@ -115,6 +125,23 @@ export class DataService {
       };
       this.cache = payload;
       this.notify(payload);
+      // Current waits do not depend on the optional feeds. Enrich the same
+      // reading later, without overwriting a newer refresh or its timestamp.
+      if (!auxiliaryData) {
+        auxiliary.then(([fx, sb]) => {
+          if (this.cache !== payload || (!fx && !sb)) return;
+          const enriched = {
+            ...payload,
+            crossings: mergeSouthbound(crossingsDoc, sb),
+            exchange_rate: fx || payload.exchange_rate,
+            southbound_source: sb?.source || null,
+            southbound_timestamp: sb?.fetched_at || null,
+            southbound_note: sb?.note || null,
+          };
+          this.cache = enriched;
+          this.notify(enriched);
+        }).catch(error => console.warn('[dataService] optional feed failed', error));
+      }
       return payload;
     } catch (err) {
       console.warn('[dataService] fetch failed', err);

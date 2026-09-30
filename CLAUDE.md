@@ -33,7 +33,13 @@ If the user just says **"what's new"** or **"catch me up"** or
 
 ## Quick repo facts
 
-- **Hosted on GitHub Pages** at borderpulse.com.
+- **Hosted on Vercel** at borderpulse.com; IONOS remains registrar/DNS.
+  The apex and www cutover is verified in issue #101. Actions builds and
+  uploads prebuilt output daily at 08:17 UTC and on application changes;
+  data-only commits do not deploy to Vercel. Current waits use its cached CBP
+  endpoint. Two scheduled production observations and first-week cost review
+  remain pending; no separate monitoring automation was created.
+  **GitHub Pages is preserved for rollback.**
   `.github/workflows/deploy.yml` is the SOLE Pages deployer
   (`concurrency: pages`). It runs on push to `main` AND on
   `workflow_dispatch`.
@@ -54,10 +60,13 @@ If the user just says **"what's new"** or **"catch me up"** or
   which is how it drifted 16 KB unnoticed.
 - **Public JSON feeds** at `/data/crossings.json`, `/data/aggregates/{slug}.json`,
   `/data/timelines/...`, `/data/blog/...`, `/data/stats.json`.
-- **Vercel previews add one cached official-CBP function.** No auth, database,
+- **Vercel production adds one cached official-CBP function.** No auth, database,
   SMS or email. Anything that
   needs persistence lives in browser localStorage. Anything that needs
   cron lives in GitHub Actions.
+- Current-waits pages share `subscribeToBorderData`: refresh while open and
+  on tab return/reconnection. The service worker leaves the live endpoint
+  to the CDN; timestamped static/browser fallback belongs to `dataService`.
 
 ## Constraints to respect
 

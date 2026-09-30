@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Clock, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { dataService } from '@/components/utils/dataService';
+import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings } from '@/lib/geo';
@@ -76,11 +76,10 @@ export function BestTimeIndex() {
   const [aggregates, setAggregates] = useState({}); // port_number -> aggregate
 
   useEffect(() => {
-    let cancelled = false;
-    dataService.getBorderData()
-      .then((doc) => { if (!cancelled) { setCrossings(doc?.crossings || []); setLoaded(true); } })
-      .catch(() => { if (!cancelled) setLoaded(true); });
-    return () => { cancelled = true; };
+    return subscribeToBorderData(doc => {
+      setCrossings(doc.crossings || []);
+      setLoaded(true);
+    });
   }, []);
 
   const portToSlug = useMemo(() => {
@@ -279,16 +278,10 @@ export default function BestTime() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
-    dataService.getBorderData()
-      .then((doc) => {
-        if (!cancelled) {
-          setCrossings(doc?.crossings || []);
-          setLoaded(true);
-        }
-      })
-      .catch(() => { if (!cancelled) setLoaded(true); });
-    return () => { cancelled = true; };
+    return subscribeToBorderData(doc => {
+      setCrossings(doc.crossings || []);
+      setLoaded(true);
+    });
   }, []);
 
   const { crossing, portToSlug, canonicalSlug } = useMemo(() => {
