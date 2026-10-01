@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-01T08:35:23.779Z",
-  "snapshot_at": "2026-10-01T08:22:26.592Z",
+  "generated_at": "2026-10-01T16:10:25.930Z",
+  "snapshot_at": "2026-10-01T16:07:37.692Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 9.5,
-      "detected_at": "2026-09-30T22:55:47.779Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~1050% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~1050% de la mediana de 30 días. Planea alrededor.",
+      "severity": 6,
+      "detected_at": "2026-10-01T16:10:25.930Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~700% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~700% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 105,
-        "overall_median": 10,
+        "overall_median": 15,
         "samples": 11,
-        "ratio": 10.5
+        "ratio": 7
       }
     },
     {
@@ -92,16 +92,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 2.1578947368421053,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~316% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~316% de la mediana de 30 días. Planea alrededor.",
+      "severity": 2.4285714285714284,
+      "detected_at": "2026-10-01T16:10:25.930Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~343% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~343% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 120,
-        "overall_median": 38,
+        "overall_median": 35,
         "samples": 8,
-        "ratio": 3.1578947368421053
+        "ratio": 3.4285714285714284
       }
     },
     {
@@ -161,16 +161,16 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
+      "detected_at": "2026-10-01T16:10:25.930Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 4,
+        "best_hour": 3,
         "best_median": 0,
         "overall_median": 10,
-        "samples": 1
+        "samples": 2
       }
     },
     {
@@ -215,16 +215,16 @@
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
       "severity": 0.975,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 3 AM (median 1 min) — ~98% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 40 min.",
+      "detected_at": "2026-10-01T16:10:25.930Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 12 AM (median 1 min) — ~98% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 12 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
-        "best_hour": 3,
+        "best_hour": 0,
         "best_median": 1,
         "overall_median": 40,
-        "samples": 4
+        "samples": 6
       }
     },
     {
@@ -247,24 +247,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.868421052631579,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 4 AM (median 5 min) — ~87% below the 30-day baseline of 38 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 4 AM (mediana 5 min) — ~87% debajo de la base de 30 días de 38 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 5,
-        "overall_median": 38,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -279,6 +261,42 @@
         "best_median": 7,
         "overall_median": 50,
         "samples": 10
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8571428571428572,
+      "detected_at": "2026-10-01T16:10:25.930Z",
+      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 3 AM (median 5 min) — ~86% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 3 AM (mediana 5 min) — ~86% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 3,
+        "best_median": 5,
+        "overall_median": 35,
+        "samples": 4
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.7692307692307692,
+      "detected_at": "2026-10-01T16:10:25.930Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 30 min) — ~77% below the 30-day baseline of 130 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 30 min) — ~77% debajo de la base de 30 días de 130 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 0,
+        "best_median": 30,
+        "overall_median": 130,
+        "samples": 6
       }
     },
     {
@@ -304,7 +322,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-10-01T08:35:23.779Z",
+      "detected_at": "2026-10-01T16:10:25.930Z",
       "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 12 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 12 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -313,61 +331,7 @@
         "best_hour": 0,
         "best_median": 15,
         "overall_median": 45,
-        "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.6538461538461539,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 45 min) — ~65% below the 30-day baseline of 130 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 45 min) — ~65% debajo de la base de 30 días de 130 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 0,
-        "best_median": 45,
-        "overall_median": 130,
-        "samples": 8
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.625,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Thursday hour so far is 8 AM (median 15 min) — ~63% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Eagle Pass - Bridge I es 8 AM (mediana 15 min) — ~63% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 8,
-        "best_median": 15,
-        "overall_median": 40,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 4 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 4 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 45,
-        "overall_median": 90,
-        "samples": 5
+        "samples": 12
       }
     },
     {
@@ -406,6 +370,42 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.625,
+      "detected_at": "2026-10-01T08:35:23.779Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Thursday hour so far is 8 AM (median 15 min) — ~63% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Eagle Pass - Bridge I es 8 AM (mediana 15 min) — ~63% debajo de la base de 30 días de 40 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 8,
+        "best_median": 15,
+        "overall_median": 40,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5,
+      "detected_at": "2026-10-01T08:35:23.779Z",
+      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 4 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 4 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 4,
+        "best_median": 45,
+        "overall_median": 90,
+        "samples": 5
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
