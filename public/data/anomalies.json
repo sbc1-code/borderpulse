@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-02T15:34:18.382Z",
-  "snapshot_at": "2026-10-02T15:22:26.641Z",
+  "generated_at": "2026-10-02T20:30:49.805Z",
+  "snapshot_at": "2026-10-02T20:22:26.506Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 6,
-      "detected_at": "2026-10-01T16:10:25.930Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~700% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~700% de la mediana de 30 días. Planea alrededor.",
+      "severity": 4.25,
+      "detected_at": "2026-10-02T20:30:49.805Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~525% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~525% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 105,
-        "overall_median": 15,
+        "overall_median": 20,
         "samples": 11,
-        "ratio": 7
+        "ratio": 5.25
       }
     },
     {
@@ -123,23 +123,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1.6666666666666665,
-      "detected_at": "2026-09-30T00:10:35.593Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 10 PM — ~267% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 10 PM — ~267% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 40,
-        "overall_median": 15,
-        "samples": 13,
-        "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -161,15 +144,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-02T15:34:18.382Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
+      "detected_at": "2026-10-02T20:30:49.805Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 15,
+        "overall_median": 20,
         "samples": 13
       }
     },
@@ -197,16 +180,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-02T15:34:18.382Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 4 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 4 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-10-02T20:30:49.805Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 12 PM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 12 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 16,
+        "best_hour": 12,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 5
+        "samples": 7
       }
     },
     {
@@ -215,16 +198,33 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-02T15:34:18.382Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
+      "detected_at": "2026-10-02T20:30:49.805Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 0,
-        "overall_median": 15,
+        "overall_median": 20,
         "samples": 13
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-10-02T20:30:49.805Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 10 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 40,
+        "overall_median": 20,
+        "samples": 13,
+        "ratio": 2
       }
     },
     {
@@ -350,6 +350,24 @@
         "best_median": 30,
         "overall_median": 90,
         "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-10-02T20:30:49.805Z",
+      "summary_en": "Right now Tecate's lightest Friday hour so far is 10 AM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 10 AM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 10,
+        "best_median": 20,
+        "overall_median": 60,
+        "samples": 7
       }
     },
     {
