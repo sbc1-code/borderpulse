@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-03T20:48:21.406Z",
-  "snapshot_at": "2026-10-03T20:37:25.814Z",
+  "generated_at": "2026-10-04T05:06:33.299Z",
+  "snapshot_at": "2026-10-04T04:52:29.595Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -33,23 +33,6 @@
         "peak_median": 180,
         "overall_median": 45,
         "samples": 15,
-        "ratio": 4
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 3,
-      "detected_at": "2026-09-30T06:26:45.699Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 60 min around 10 PM — ~400% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 60 min cerca de las 10 PM — ~400% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 60,
-        "overall_median": 15,
-        "samples": 13,
         "ratio": 4
       }
     },
@@ -100,6 +83,23 @@
         "peak_hour": 19,
         "peak_median": 45,
         "overall_median": 15,
+        "samples": 13,
+        "ratio": 3
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 2,
+      "detected_at": "2026-10-04T05:06:33.299Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 60 min around 10 PM — ~300% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 60 min cerca de las 10 PM — ~300% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 60,
+        "overall_median": 20,
         "samples": 13,
         "ratio": 3
       }
@@ -197,16 +197,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-03T06:13:14.099Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-10-04T05:06:33.299Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 11 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 11 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 0,
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 11,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 2
+        "samples": 5
       }
     },
     {
@@ -250,16 +250,16 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.92,
-      "detected_at": "2026-10-03T12:20:48.469Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 3 AM (median 2 min) — ~92% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 2 min) — ~92% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-10-04T05:06:33.299Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 3 AM (median 2 min) — ~92% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 2 min) — ~92% debajo de la base de 30 días de 25 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
+        "day_of_week": 0,
+        "day_label": "Sun",
         "best_hour": 3,
         "best_median": 2,
         "overall_median": 25,
-        "samples": 14
+        "samples": 3
       }
     },
     {
@@ -321,35 +321,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.7560975609756098,
-      "detected_at": "2026-10-03T20:48:21.406Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~76% below the 30-day baseline of 41 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 10 min) — ~76% debajo de la base de 30 días de 41 min.",
+      "severity": 0.7777777777777778,
+      "detected_at": "2026-10-04T05:06:33.299Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 3 AM (median 10 min) — ~78% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 10 min) — ~78% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 10,
-        "overall_median": 41,
+        "overall_median": 45,
         "samples": 6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-10-03T17:05:53.668Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 10 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 10 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 22,
-        "best_median": 5,
-        "overall_median": 20,
-        "samples": 4
       }
     },
     {
@@ -357,16 +339,16 @@
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-10-03T06:13:14.099Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Saturday hour so far is 12 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Pharr es 12 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
+      "severity": 0.75,
+      "detected_at": "2026-10-04T05:06:33.299Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 4 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 4 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 0,
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 4,
         "best_median": 5,
-        "overall_median": 15,
+        "overall_median": 20,
         "samples": 1
       }
     },
@@ -386,6 +368,24 @@
         "best_median": 20,
         "overall_median": 55,
         "samples": 15
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-10-04T05:06:33.299Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 10 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 10 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 10,
+        "best_median": 10,
+        "overall_median": 20,
+        "samples": 7
       }
     }
   ],
