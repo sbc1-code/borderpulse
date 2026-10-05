@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-05T00:34:35.188Z",
-  "snapshot_at": "2026-10-05T00:22:31.869Z",
+  "generated_at": "2026-10-05T06:40:31.970Z",
+  "snapshot_at": "2026-10-05T06:37:36.576Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 6,
-      "detected_at": "2026-10-04T21:04:09.694Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~700% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~700% de la mediana de 30 días. Planea alrededor.",
+      "severity": 7,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 5 PM — ~800% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 5 PM — ~800% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 105,
+        "peak_hour": 17,
+        "peak_median": 120,
         "overall_median": 15,
-        "samples": 11,
-        "ratio": 7
+        "samples": 9,
+        "ratio": 8
       }
     },
     {
@@ -24,16 +24,16 @@
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
-      "severity": 3.5,
-      "detected_at": "2026-10-05T00:34:35.188Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 90 min around 4 PM — ~450% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 90 min cerca de las 4 PM — ~450% de la mediana de 30 días. Planea alrededor.",
+      "severity": 5,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 120 min around 5 PM — ~600% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 120 min cerca de las 5 PM — ~600% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 16,
-        "peak_median": 90,
+        "peak_hour": 17,
+        "peak_median": 120,
         "overall_median": 20,
-        "samples": 7,
-        "ratio": 4.5
+        "samples": 9,
+        "ratio": 6
       }
     },
     {
@@ -41,16 +41,16 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 3,
-      "detected_at": "2026-09-30T22:55:47.779Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 180 min around 10 PM — ~400% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 180 min cerca de las 10 PM — ~400% de la mediana de 30 días. Planea alrededor.",
+      "severity": 2.3333333333333335,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 150 min around 10 PM — ~333% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 150 min cerca de las 10 PM — ~333% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
-        "peak_median": 180,
+        "peak_median": 150,
         "overall_median": 45,
-        "samples": 15,
-        "ratio": 4
+        "samples": 9,
+        "ratio": 3.3333333333333335
       }
     },
     {
@@ -59,14 +59,14 @@
       "port_name": "Tecate",
       "state": "CA",
       "severity": 2,
-      "detected_at": "2026-10-05T00:34:35.188Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 8 PM — ~300% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 8 PM — ~300% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 6 PM — ~300% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 6 PM — ~300% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 20,
+        "peak_hour": 18,
         "peak_median": 180,
         "overall_median": 60,
-        "samples": 13,
+        "samples": 9,
         "ratio": 3
       }
     },
@@ -76,14 +76,14 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 2,
-      "detected_at": "2026-10-02T08:11:10.612Z",
+      "detected_at": "2026-10-05T06:40:31.970Z",
       "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~300% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~300% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 120,
         "overall_median": 40,
-        "samples": 8,
+        "samples": 11,
         "ratio": 3
       }
     },
@@ -93,14 +93,14 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 2,
-      "detected_at": "2026-10-05T00:34:35.188Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 90 min around 6 PM — ~300% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 90 min cerca de las 6 PM — ~300% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 90 min around 7 PM — ~300% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 90 min cerca de las 7 PM — ~300% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 18,
+        "peak_hour": 19,
         "peak_median": 90,
         "overall_median": 30,
-        "samples": 7,
+        "samples": 9,
         "ratio": 3
       }
     },
@@ -110,14 +110,14 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 2,
-      "detected_at": "2026-10-04T05:06:33.299Z",
+      "detected_at": "2026-10-05T06:40:31.970Z",
       "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 60 min around 10 PM — ~300% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 60 min cerca de las 10 PM — ~300% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 60,
         "overall_median": 20,
-        "samples": 13,
+        "samples": 8,
         "ratio": 3
       }
     },
@@ -126,33 +126,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.6666666666666665,
-      "detected_at": "2026-10-01T08:35:23.779Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 240 min around 10 PM — ~267% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 240 min cerca de las 10 PM — ~267% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.4444444444444446,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 220 min around 9 PM — ~244% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 220 min cerca de las 9 PM — ~244% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 240,
-        "overall_median": 90,
-        "samples": 15,
-        "ratio": 2.6666666666666665
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-10-04T21:04:09.694Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
+        "peak_hour": 21,
         "peak_median": 220,
-        "overall_median": 110,
-        "samples": 15,
-        "ratio": 2
+        "overall_median": 90,
+        "samples": 9,
+        "ratio": 2.4444444444444446
       }
     },
     {
@@ -197,16 +180,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-04T05:06:33.299Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 11 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 11 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 11,
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 0,
         "best_median": 0,
         "overall_median": 0,
-        "samples": 5
+        "samples": 8
       }
     },
     {
@@ -215,33 +198,51 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-04T12:01:46.493Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Monday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Brownsville - Gateway es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
       "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 0,
         "best_median": 0,
         "overall_median": 20,
-        "samples": 8
+        "samples": 6
       }
     },
     {
       "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-10-03T17:05:53.668Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 40 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 40 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.9130434782608696,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 9 PM — ~191% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 9 PM — ~191% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 22,
-        "peak_median": 40,
+        "peak_hour": 21,
+        "peak_median": 220,
+        "overall_median": 115,
+        "samples": 9,
+        "ratio": 1.9130434782608696
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.85,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Monday hour so far is 3 PM (median 3 min) — ~85% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Pharr es 3 PM (mediana 3 min) — ~85% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 15,
+        "best_median": 3,
         "overall_median": 20,
-        "samples": 13,
-        "ratio": 2
+        "samples": 7
       }
     },
     {
@@ -267,53 +268,17 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.8181818181818181,
-      "detected_at": "2026-10-04T21:04:09.694Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 2 AM (median 20 min) — ~82% below the 30-day baseline of 110 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 2 AM (mediana 20 min) — ~82% debajo de la base de 30 días de 110 min.",
+      "severity": 0.8260869565217391,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 2 AM (median 20 min) — ~83% below the 30-day baseline of 115 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 2 AM (mediana 20 min) — ~83% debajo de la base de 30 días de 115 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 2,
         "best_median": 20,
-        "overall_median": 110,
+        "overall_median": 115,
         "samples": 10
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-10-04T05:06:33.299Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 4 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 4 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 5,
-        "overall_median": 20,
-        "samples": 1
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.6727272727272727,
-      "detected_at": "2026-10-04T12:01:46.493Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 4 AM (median 18 min) — ~67% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 4 AM (mediana 18 min) — ~67% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 18,
-        "overall_median": 55,
-        "samples": 15
       }
     },
     {
@@ -335,19 +300,54 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Monday hour so far is 12 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Hidalgo es 12 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 0,
+        "best_median": 10,
+        "overall_median": 30,
+        "samples": 15
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.6499999999999999,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 33 min around 10 PM — ~165% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 33 min cerca de las 10 PM — ~165% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 33,
+        "overall_median": 20,
+        "samples": 8,
+        "ratio": 1.65
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
       "severity": 0.6444444444444444,
-      "detected_at": "2026-10-05T00:34:35.188Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 74 min around 5 PM — ~164% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 74 min cerca de las 5 PM — ~164% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 74 min around 9 PM — ~164% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 74 min cerca de las 9 PM — ~164% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
+        "peak_hour": 21,
         "peak_median": 74,
         "overall_median": 45,
-        "samples": 7,
+        "samples": 8,
         "ratio": 1.6444444444444444
       }
     },
@@ -371,6 +371,26 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-10-05T06:40:31.970Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Monday hour so far is 2 AM (median 25 min) — ~55% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 25 min) — ~55% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 2,
+        "best_median": 25,
+        "overall_median": 55,
+        "samples": 13
+      }
+    }
+  ],
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -385,26 +405,6 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 6
-      }
-    }
-  ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.92,
-      "detected_at": "2026-10-04T05:06:33.299Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 3 AM (median 2 min) — ~92% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 2 min) — ~92% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 3,
-        "best_median": 2,
-        "overall_median": 25,
-        "samples": 3
       }
     }
   ]
