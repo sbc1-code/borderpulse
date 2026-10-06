@@ -131,10 +131,10 @@ export default function CommuterSnapshot({
       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduceMotion ? { duration: 0 } : undefined}
-      className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950"
+      className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-950"
       aria-label={language === 'en' ? 'Commuter snapshot' : 'Resumen para commuters'}
     >
-      <div className="grid gap-0 lg:grid-cols-[1.1fr,2fr]">
+      <div className="grid gap-0 lg:grid-cols-[1.1fr_2fr]">
         <div className="border-b border-slate-200 bg-slate-950 p-3 text-white sm:p-4 lg:border-b-0 lg:border-r lg:border-slate-800">
           <div className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-semibold ${tier.chip}`}>
             <span className={`h-1.5 w-1.5 rounded-full ${tier.bar}`} />

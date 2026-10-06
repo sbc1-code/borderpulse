@@ -421,14 +421,14 @@ export default function Dashboard() {
           {showGeoPrompt && (
             <div className="mx-auto mb-3 flex w-full max-w-[calc(100vw-1.5rem)] flex-col gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 sm:max-w-3xl sm:flex-row sm:items-center sm:justify-between sm:gap-3">
               <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 min-w-0">
-                <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
                 <span className="truncate">
                   {language === 'en'
                     ? '📍 Show crossings near you?'
                     : '📍 ¿Mostrar cruces cerca de ti?'}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 flex-shrink-0">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <Button
                   size="sm"
                   variant="default"
@@ -463,7 +463,7 @@ export default function Dashboard() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
-                className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+                className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
               />
               {search && (
                 <button

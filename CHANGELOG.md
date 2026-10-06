@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2026-10-06 — Publication security and generated-writer reliability
+
+- Generated-data writers now resolve current main after queueing, generate in an
+  isolated worktree and regenerate/validate on bounded push races rather than
+  rebasing stale JSON. Manual anomaly drafts use the final successful worktree;
+  unrelated caller edits remain intact. Added 14 local-remote integration tests.
+- Migrated Tailwind to 4.3.3 with its dedicated PostCSS integration, CSS theme
+  and utility migration; updated source-map-js to its compatible patched 1.2.2.
+  The audit, data, bundle and route gates remain unchanged.
+- Owner approved Safari 16.4+, Chrome 111+ and Firefox 128+ as the support floor.
+  Older browsers may be affected. No Radix or unrelated dependency PRs are part
+  of this repair. Production recovery is verified separately by publication
+  provenance and public data freshness; a merged code change alone is not proof.
+
 ## 2026-09-30 — Vercel cutover and live-wait refresh
 
 - Approved production publication and IONOS apex/www website DNS cutover

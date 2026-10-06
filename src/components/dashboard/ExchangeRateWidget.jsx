@@ -75,9 +75,9 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
     >
       <Card className={`${
         theme === 'dark'
-          ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700'
-          : 'bg-gradient-to-br from-white/90 to-blue-50/50 border-slate-200'
-      } backdrop-blur-sm transition-all duration-300 hover:shadow-xl`}>
+          ? 'bg-linear-to-br from-gray-800/50 to-gray-900/50 border-gray-700'
+          : 'bg-linear-to-br from-white/90 to-blue-50/50 border-slate-200'
+      } backdrop-blur-xs transition-all duration-300 hover:shadow-xl`}>
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-lg">
             <div className="flex items-center gap-1">
