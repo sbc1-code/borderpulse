@@ -53,7 +53,7 @@ function HourBar({ entry, max, lang, isCurrentHour, isLightestHour }) {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="w-12 text-[11px] text-slate-500 dark:text-slate-400 tabular-nums flex-shrink-0">
+      <div className="w-12 text-[11px] text-slate-500 dark:text-slate-400 tabular-nums shrink-0">
         {entry ? formatHour12(entry.hour, lang) : ''}
       </div>
       <div className={`flex-1 h-5 rounded-md bg-slate-100 dark:bg-gray-800 overflow-hidden ${ringClass}`}>

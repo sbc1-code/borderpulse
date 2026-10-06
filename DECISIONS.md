@@ -329,3 +329,14 @@ is the implementation record.
 ---
 
 *Append a new section the next time a non-obvious decision lands.*
+
+
+## 2026-10-06 · Accept Tailwind 4 browser floor to clear publication blockers
+
+The owner approved the tested Tailwind 4 migration and production release with
+Safari 16.4+, Chrome 111+ and Firefox 128+ as the support floor. The current
+braces advisory has no supported patched release on the reviewed Tailwind 3
+dependency paths. Remove those paths through the supported integration and
+patch source-map-js to 1.2.2; keep the existing security/data/bundle gates rather
+than widening exceptions or forcing unrelated major upgrades. Older-browser
+support is not claimed.

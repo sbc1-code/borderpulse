@@ -412,7 +412,7 @@ export default function Methodology({ lang = 'en' }) {
         {t.sections.map(({ icon: Icon, title, body }) => (
           <section key={title}>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white mb-2 flex items-start gap-2">
-              <Icon className="w-4 h-4 mt-1 text-emerald-600 flex-shrink-0" />
+              <Icon className="w-4 h-4 mt-1 text-emerald-600 shrink-0" />
               <span>{title}</span>
             </h2>
             <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed space-y-3 pl-6">

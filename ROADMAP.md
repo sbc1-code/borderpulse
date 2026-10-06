@@ -24,10 +24,17 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 - [x] Approved Vercel production cutover: PR #109 merged, Actions publication
   succeeded, and IONOS apex/www DNS plus trusted HTTPS were verified. See
   issue #101 for publication evidence and exact rollback records.
-- [ ] Observe two scheduled Vercel production publications and first-week
-  usage/cost. The manual cutover publish does not count toward the two runs.
-  No publication-monitoring automation exists; the October pilot readout is
-  separate. Preserve Pages rollback and the 15-minute collector meanwhile.
+- [x] Historical cutover verification: October 1 and October 2 scheduled
+  Vercel production publications succeeded. These do not establish continued
+  daily health; October 3-6 publication was blocked by dependency audit findings.
+- [x] Implement the October 6 publication dependency repair and bounded
+  generated-writer race recovery. Keep all existing release gates and the Pages
+  rollback; production recovery requires a successful publication receipt.
+- [ ] Verify fresh public history/FX after the repair and observe two subsequent
+  scheduled publications. Keep first-week usage/cost review pending separately;
+  no second monitoring automation or manual run counts as a scheduled success.
+- [ ] Triage the eight remaining moderate audit package entries without absorbing
+  unrelated dependency majors or adding broad advisory exceptions.
 - [x] Current-waits views refresh while open and on tab return/reconnection,
   including comparison, crossing, best-time, walk-or-drive and embed routes.
   Slow optional feeds no longer delay waits, and the service worker does not

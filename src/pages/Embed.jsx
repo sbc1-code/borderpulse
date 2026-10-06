@@ -161,9 +161,9 @@ export default function Embed() {
         <div className="flex items-center justify-between gap-2 min-w-0">
           <div className="flex items-center gap-1.5 min-w-0">
             <h1 className="truncate text-[13px] font-semibold">{crossing.name}</h1>
-            <span className="text-xs flex-shrink-0" aria-hidden="true">{FLAG[crossing.state] || ''}</span>
+            <span className="text-xs shrink-0" aria-hidden="true">{FLAG[crossing.state] || ''}</span>
           </div>
-          <span className={`text-[10px] uppercase tracking-wide ${subtext} flex-shrink-0`}>
+          <span className={`text-[10px] uppercase tracking-wide ${subtext} shrink-0`}>
             {directionLabel}
           </span>
         </div>
@@ -179,7 +179,7 @@ export default function Embed() {
               {lang === 'es' ? 'Sin tiempo reportado' : 'No current wait reported'}
             </span>
           )}
-          <span className={`text-[10px] ml-auto ${subtext} flex-shrink-0`}>{sourceLabel}</span>
+          <span className={`text-[10px] ml-auto ${subtext} shrink-0`}>{sourceLabel}</span>
         </div>
 
         {!compact && deltaText && (
@@ -190,7 +190,7 @@ export default function Embed() {
           <div className="flex items-center gap-1 min-w-0">
             {wait != null ? (
               <>
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block flex-shrink-0" aria-hidden="true" />
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block shrink-0" aria-hidden="true" />
                 <span className="truncate">{lang === 'es' ? 'En vivo' : 'Live'} · {formatRelative(updatedAt, lang)}</span>
               </>
             ) : (
@@ -214,7 +214,7 @@ export default function Embed() {
             {lang === 'es' ? 'Datos por Border Pulse' : 'Powered by Border Pulse'}
           </span>
         </div>
-        <span className={`text-[10px] ${subtext} flex-shrink-0`}>borderpulse.com →</span>
+        <span className={`text-[10px] ${subtext} shrink-0`}>borderpulse.com →</span>
       </a>
     </main>
   );

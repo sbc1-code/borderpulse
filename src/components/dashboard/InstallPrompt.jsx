@@ -91,7 +91,7 @@ export default function InstallPrompt({ language = 'en' }) {
           <X className="w-3.5 h-3.5" />
         </button>
         <div className="flex items-center gap-3 pr-6">
-          <Smartphone className="w-5 h-5 text-slate-400 flex-shrink-0" />
+          <Smartphone className="w-5 h-5 text-slate-400 shrink-0" />
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-slate-900 dark:text-white">
               {language === 'en'
@@ -107,7 +107,7 @@ export default function InstallPrompt({ language = 'en' }) {
           <Button
             size="sm"
             onClick={handleInstall}
-            className="flex-shrink-0 text-xs h-8 px-4"
+            className="shrink-0 text-xs h-8 px-4"
           >
             {language === 'en' ? 'Install' : 'Instalar'}
           </Button>

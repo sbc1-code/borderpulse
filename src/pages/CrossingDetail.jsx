@@ -185,7 +185,7 @@ function CompareRow({ entry, language, slug }) {
             )}
           </div>
         </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <div className="text-right">
             <div className="text-base font-semibold text-slate-900 dark:text-white tabular-nums">
               {currentWait == null ? '—' : currentWait}
@@ -528,7 +528,7 @@ export default function CrossingDetail() {
           aria-live="polite"
         >
           <div className="flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 mt-0.5 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
+            <AlertTriangle className="w-4 h-4 mt-0.5 text-emerald-700 dark:text-emerald-400 shrink-0" />
             <div className="min-w-0">
               <h2 className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
                 {language === 'es' ? 'Hoy vs. el patrón de 30 días' : 'Today vs. the 30-day pattern'}

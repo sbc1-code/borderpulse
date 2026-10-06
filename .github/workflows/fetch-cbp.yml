@@ -24,46 +24,15 @@ jobs:
       # artifact. Site builds consume the artifact and can use shallow clones.
       - uses: actions/checkout@v7
         with:
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
           cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Fetch CBP border wait times
-        run: node scripts/fetch-cbp.mjs
-      - name: Fetch USD/MXN exchange rate
-        run: node scripts/fetch-fx.mjs
-      - name: Materialize rolling snapshot history
-        run: npm run history:build -- --include-current
-      - name: Validate static site
-        run: npm run build
-      - name: Commit validated data snapshot
+      - name: Generate, validate and publish current data
         id: snapshot
-        run: |
-          git config user.name  "borderpulse-bot"
-          git config user.email "borderpulse-bot@users.noreply.github.com"
-          git add public/data/crossings.json public/data/exchange-rate.json public/data/snapshot-history.json
-          if git diff --cached --quiet; then
-            echo "No data changes."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m "chore(data): refresh CBP + FX snapshot"
-            for attempt in 1 2 3; do
-              if git push origin HEAD:main; then
-                break
-              fi
-              if [ "$attempt" -eq 3 ]; then
-                echo "Unable to push validated snapshot after $attempt attempts."
-                exit 1
-              fi
-              git fetch origin main
-              git rebase origin/main
-            done
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          fi
+        run: node scripts/write-data-snapshot.mjs cbp
       - name: Dispatch exact snapshot to the sole Pages deployer
         if: steps.snapshot.outputs.changed == 'true'
         uses: actions/github-script@v9

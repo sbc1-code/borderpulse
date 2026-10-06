@@ -1,6 +1,418 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  /* Preserve v3's affordances while the framework upgrade is reviewed. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: default;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+  }
+
+  dialog {
+    margin: auto;
+  }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility bp-shell {
+  background-color: #f6f8f7;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.08),
+      transparent 34%,
+      rgba(14, 165, 233, 0.07)
+    );
+  background-size:
+    32px 32px,
+    32px 32px,
+    100% 100%;
+}
+
+@utility bp-shell-dark {
+  background-color: #020617;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.08),
+      transparent 38%,
+      rgba(244, 63, 94, 0.08)
+    );
+}
+
+@utility bp-line {
+  /* ---- Blueprint Border Line ------------------------------------------
+     Drafting surface for BorderLine.jsx. Tokens are defined for light here
+     and overridden under .dark below, because dark mode is a class on <html>
+     (src/Layout.jsx) and there is no theme context to read from a prop. */
+  --bp-field: #f4f7f9;
+  --bp-line-strong: #1e3a5f;
+  --bp-line-soft: rgba(30, 58, 95, 0.28);
+  --bp-grid: rgba(30, 58, 95, 0.1);
+  --bp-ink: #1e3a5f;
+  --bp-ink-dim: rgba(30, 58, 95, 0.84);
+  --bp-good: #059669;
+  --bp-moderate: #d97706;
+  --bp-heavy: #e11d48;
+  background-color: var(--bp-field);
+  border-color: rgba(30, 58, 95, 0.16);
+
+  .dark & {
+    --bp-field: #020617;
+    --bp-line-strong: #67e8f9;
+    --bp-line-soft: rgba(103, 232, 249, 0.3);
+    --bp-grid: rgba(103, 232, 249, 0.09);
+    --bp-ink: #a5f3fc;
+    --bp-ink-dim: rgba(165, 243, 252, 0.6);
+    --bp-good: #34d399;
+    --bp-moderate: #fbbf24;
+    --bp-heavy: #fb7185;
+    border-color: rgba(103, 232, 249, 0.2);
+  }
+}
+
+@utility dark {
+  & .bp-line {
+    --bp-field: #020617;
+    --bp-line-strong: #67e8f9;
+    --bp-line-soft: rgba(103, 232, 249, 0.3);
+    --bp-grid: rgba(103, 232, 249, 0.09);
+    --bp-ink: #a5f3fc;
+    --bp-ink-dim: rgba(165, 243, 252, 0.6);
+    --bp-good: #34d399;
+    --bp-moderate: #fbbf24;
+    --bp-heavy: #fb7185;
+    border-color: rgba(103, 232, 249, 0.2);
+  }
+}
+
+@utility bp-line-h {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink);
+}
+
+@utility bp-line-sub {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--bp-ink-dim);
+  margin-top: 0.125rem;
+}
+
+@utility bp-line-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bp-ink-dim);
+  white-space: nowrap;
+}
+
+@utility bp-sw {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  margin-left: 0.4rem;
+}
+
+@utility bp-sw-good {
+  background: var(--bp-good);
+}
+
+@utility bp-sw-mod {
+  background: var(--bp-moderate);
+}
+
+@utility bp-sw-heavy {
+  background: var(--bp-heavy);
+}
+
+@utility bp-line-svg {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@utility bp-grid {
+  & line {
+    stroke: var(--bp-grid);
+    stroke-width: 1;
+  }
+}
+
+@utility bp-axis {
+  stroke: var(--bp-line-strong);
+  stroke-width: 1.25;
+}
+
+@utility bp-ghost {
+  /* The "typical" reference. Deliberately quiet: it is context for the live
+     tick, not a competing series. */
+  stroke: var(--bp-line-soft);
+  stroke-width: 1;
+  stroke-dasharray: 1.5 3.5;
+  opacity: 0.5;
+  .bp-tick.is-focus & {
+    opacity: 1;
+  }
+}
+
+@utility bp-tick {
+  &.is-focus .bp-ghost {
+    opacity: 1;
+  }
+  cursor: pointer;
+  outline: none;
+  &.is-focus .bp-stem {
+    stroke-width: 4.5;
+  }
+  &:focus-visible .bp-node {
+    stroke: var(--bp-ink);
+    stroke-width: 2;
+  }
+  &.is-focus .bp-row-name {
+    fill: var(--bp-ink);
+  }
+  &.is-focus .bp-row-val {
+    fill: var(--bp-ink);
+  }
+}
+
+@utility is-focus {
+  &.bp-tick .bp-ghost {
+    opacity: 1;
+  }
+  &.bp-tick .bp-stem {
+    stroke-width: 4.5;
+  }
+  &.bp-tick .bp-row-name {
+    fill: var(--bp-ink);
+  }
+  & .bp-tick .bp-row-val {
+    fill: var(--bp-ink);
+  }
+}
+
+@utility bp-stem {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-width 120ms ease;
+  .bp-tick.is-focus & {
+    stroke-width: 4.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+@utility bp-stem-none {
+  stroke: var(--bp-line-soft);
+  stroke-width: 1.25;
+  stroke-dasharray: 1 3;
+}
+
+@utility bp-node {
+  fill: var(--bp-line-strong);
+  .bp-tick:focus-visible & {
+    stroke: var(--bp-ink);
+    stroke-width: 2;
+  }
+}
+
+@utility bp-fav {
+  fill: var(--bp-moderate);
+}
+
+@utility bp-callout {
+  & line {
+    stroke: var(--bp-line-soft);
+    stroke-width: 1;
+  }
+}
+
+@utility bp-callout-name {
+  fill: var(--bp-ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+@utility bp-callout-val {
+  fill: var(--bp-ink-dim);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+@utility bp-anchor {
+  & line {
+    stroke: var(--bp-line-soft);
+    stroke-width: 1;
+  }
+  & text {
+    fill: var(--bp-ink-dim);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+  }
+}
+
+@utility bp-titleblock {
+  & text {
+    fill: var(--bp-ink-dim);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+  }
+}
+
+@utility bp-row-name {
+  fill: var(--bp-ink-dim);
+  font-size: 8.5px;
+  letter-spacing: 0;
+  .bp-tick.is-focus & {
+    fill: var(--bp-ink);
+  }
+}
+
+@utility bp-row-val {
+  fill: var(--bp-ink);
+  font-size: 11px;
+  font-weight: 700;
+
+  .bp-tick.is-focus & {
+    fill: var(--bp-ink);
+  }
+}
+
+@utility bp-row-focus {
+  fill: var(--bp-line-soft);
+  opacity: 0.16;
+}
+
+@utility tap-44 {
+  /* Expands the touch target of a small icon-only control to 44x44 without
+     changing its painted size. Apply ONLY to controls with >=44px of clear
+     space around them: two adjacent .tap-44 elements would overlap and steal
+     each other's taps. For adjacent controls, add real padding instead. */
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 44px;
+    min-height: 44px;
+    width: 100%;
+    height: 100%;
+  }
+}
 
 @layer base {
   :root {
@@ -102,201 +514,5 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-  }
-}
-
-@layer utilities {
-  .bp-shell {
-    background-color: #f6f8f7;
-    background-image:
-      linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-      linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent 34%, rgba(14, 165, 233, 0.07));
-    background-size: 32px 32px, 32px 32px, 100% 100%;
-  }
-
-  .bp-shell-dark {
-    background-color: #020617;
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent 38%, rgba(244, 63, 94, 0.08));
-  }
-
-
-  /* ---- Blueprint Border Line ------------------------------------------
-     Drafting surface for BorderLine.jsx. Tokens are defined for light here
-     and overridden under .dark below, because dark mode is a class on <html>
-     (src/Layout.jsx) and there is no theme context to read from a prop. */
-  .bp-line {
-    --bp-field: #f4f7f9;
-    --bp-line-strong: #1e3a5f;
-    --bp-line-soft: rgba(30, 58, 95, 0.28);
-    --bp-grid: rgba(30, 58, 95, 0.10);
-    --bp-ink: #1e3a5f;
-    --bp-ink-dim: rgba(30, 58, 95, 0.84);
-    --bp-good: #059669;
-    --bp-moderate: #d97706;
-    --bp-heavy: #e11d48;
-    background-color: var(--bp-field);
-    border-color: rgba(30, 58, 95, 0.16);
-  }
-
-  .dark .bp-line {
-    --bp-field: #020617;
-    --bp-line-strong: #67e8f9;
-    --bp-line-soft: rgba(103, 232, 249, 0.30);
-    --bp-grid: rgba(103, 232, 249, 0.09);
-    --bp-ink: #a5f3fc;
-    --bp-ink-dim: rgba(165, 243, 252, 0.60);
-    --bp-good: #34d399;
-    --bp-moderate: #fbbf24;
-    --bp-heavy: #fb7185;
-    border-color: rgba(103, 232, 249, 0.20);
-  }
-
-  .bp-line-h {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bp-ink);
-  }
-
-  .bp-line-sub {
-    font-size: 0.75rem;
-    line-height: 1.4;
-    color: var(--bp-ink-dim);
-    margin-top: 0.125rem;
-  }
-
-  .bp-line-legend {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.6875rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--bp-ink-dim);
-    white-space: nowrap;
-  }
-
-  .bp-sw {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 1px;
-    margin-left: 0.4rem;
-  }
-  .bp-sw-good { background: var(--bp-good); }
-  .bp-sw-mod { background: var(--bp-moderate); }
-  .bp-sw-heavy { background: var(--bp-heavy); }
-
-  .bp-line-svg {
-    display: block;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
-
-  .bp-grid line {
-    stroke: var(--bp-grid);
-    stroke-width: 1;
-  }
-
-  .bp-axis {
-    stroke: var(--bp-line-strong);
-    stroke-width: 1.25;
-  }
-
-  /* The "typical" reference. Deliberately quiet: it is context for the live
-     tick, not a competing series. */
-  .bp-ghost {
-    stroke: var(--bp-line-soft);
-    stroke-width: 1;
-    stroke-dasharray: 1.5 3.5;
-    opacity: 0.5;
-  }
-  .bp-tick.is-focus .bp-ghost { opacity: 1; }
-
-  .bp-stem {
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    transition: stroke-width 120ms ease;
-  }
-
-  .bp-stem-none {
-    stroke: var(--bp-line-soft);
-    stroke-width: 1.25;
-    stroke-dasharray: 1 3;
-  }
-
-  .bp-node { fill: var(--bp-line-strong); }
-  .bp-fav { fill: var(--bp-moderate); }
-
-  .bp-tick { cursor: pointer; outline: none; }
-  .bp-tick.is-focus .bp-stem { stroke-width: 4.5; }
-  .bp-tick:focus-visible .bp-node { stroke: var(--bp-ink); stroke-width: 2; }
-
-  .bp-callout line { stroke: var(--bp-line-soft); stroke-width: 1; }
-  .bp-callout-name {
-    fill: var(--bp-ink);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-  }
-  .bp-callout-val {
-    fill: var(--bp-ink-dim);
-    font-size: 10px;
-    letter-spacing: 0.04em;
-  }
-
-  .bp-anchor line { stroke: var(--bp-line-soft); stroke-width: 1; }
-  .bp-anchor text {
-    fill: var(--bp-ink-dim);
-    font-size: 9.5px;
-    letter-spacing: 0.12em;
-  }
-
-  .bp-titleblock text {
-    fill: var(--bp-ink-dim);
-    font-size: 9.5px;
-    letter-spacing: 0.1em;
-  }
-
-  .bp-row-name {
-    fill: var(--bp-ink-dim);
-    font-size: 8.5px;
-    letter-spacing: 0;
-  }
-  .bp-row-val {
-    fill: var(--bp-ink);
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .bp-row-focus { fill: var(--bp-line-soft); opacity: 0.16; }
-  .bp-tick.is-focus .bp-row-name,
-  .bp-tick.is-focus .bp-row-val { fill: var(--bp-ink); }
-
-  @media (prefers-reduced-motion: reduce) {
-    .bp-stem { transition: none; }
-  }
-
-  /* Expands the touch target of a small icon-only control to 44x44 without
-     changing its painted size. Apply ONLY to controls with >=44px of clear
-     space around them: two adjacent .tap-44 elements would overlap and steal
-     each other's taps. For adjacent controls, add real padding instead. */
-  .tap-44 {
-    position: relative;
-  }
-
-  .tap-44::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 44px;
-    min-height: 44px;
-    width: 100%;
-    height: 100%;
   }
 }

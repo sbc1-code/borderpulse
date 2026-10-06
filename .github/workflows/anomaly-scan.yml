@@ -28,6 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: main
           fetch-depth: 0
 
       - uses: actions/setup-node@v6
@@ -35,38 +36,12 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Regenerate aggregates from committed snapshots
-        run: node scripts/build-aggregates.mjs
-
-      - name: Detect anomalies
-        run: node scripts/detect-anomalies.mjs
-
-      - name: Commit anomalies.json (always)
-        run: |
-          git config user.name "borderpulse-bot"
-          git config user.email "207095575+sbc1-code@users.noreply.github.com"
-          git add public/data/anomalies.json
-          if git diff --cached --quiet; then
-            echo "anomalies.json unchanged. Nothing to commit."
-            exit 0
-          fi
-          git commit -m "chore(data): refresh anomalies"
-          for attempt in 1 2 3; do
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            if [ "$attempt" -eq 3 ]; then
-              echo "Unable to push anomaly snapshot after $attempt attempts."
-              exit 1
-            fi
-            git fetch origin main
-            git rebase origin/main
-          done
+      - name: Regenerate and publish anomalies on current main
+        id: snapshot
+        run: node scripts/write-data-snapshot.mjs anomaly
 
       - name: Check for anomalies (drafter)
+        working-directory: ${{ steps.snapshot.outputs.worktree }}
         if: github.event_name == 'workflow_dispatch'
         id: check
         run: |
@@ -75,10 +50,12 @@ jobs:
           echo "Detected $COUNT anomalies."
 
       - name: Draft posts from anomalies (template-based, no API cost)
+        working-directory: ${{ steps.snapshot.outputs.worktree }}
         if: github.event_name == 'workflow_dispatch' && steps.check.outputs.anomaly_count != '0'
         run: node scripts/draft-from-anomaly.mjs
 
       - name: Commit drafts and open PR
+        working-directory: ${{ steps.snapshot.outputs.worktree }}
         if: github.event_name == 'workflow_dispatch' && steps.check.outputs.anomaly_count != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -92,7 +69,7 @@ jobs:
             echo "No draft files changed. Nothing to commit."
             exit 0
           fi
-          git commit -m "Mode A: drafts for $DATE"
+          git -c user.name="borderpulse-bot" -c user.email="207095575+sbc1-code@users.noreply.github.com" commit -m "Mode A: drafts for $DATE"
           git push --set-upstream origin "$BRANCH"
           gh pr create \
             --title "Mode A drafts $DATE" \
