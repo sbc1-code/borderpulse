@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-06T16:35:38.883Z",
-  "snapshot_at": "2026-10-06T16:22:39.137Z",
+  "generated_at": "2026-10-06T21:29:29.395Z",
+  "snapshot_at": "2026-10-06T21:22:40.968Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,16 +143,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 1.0370370370370372,
-      "detected_at": "2026-10-06T16:35:38.883Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 9 PM — ~204% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 9 PM — ~204% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.0952380952380953,
+      "detected_at": "2026-10-06T21:29:29.395Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 9 PM — ~210% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 9 PM — ~210% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
         "peak_median": 220,
-        "overall_median": 108,
+        "overall_median": 105,
         "samples": 9,
-        "ratio": 2.037037037037037
+        "ratio": 2.0952380952380953
       }
     },
     {
@@ -250,16 +250,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9791666666666666,
-      "detected_at": "2026-10-06T09:54:53.172Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 12 AM (median 1 min) — ~98% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 12 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 48 min.",
+      "severity": 0.98,
+      "detected_at": "2026-10-06T21:29:29.395Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Tuesday hour so far is 12 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Paso Del Norte (PDN) es 12 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 0,
         "best_median": 1,
-        "overall_median": 48,
+        "overall_median": 50,
         "samples": 15
       }
     },
@@ -335,23 +335,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5416666666666667,
-      "detected_at": "2026-10-05T22:23:44.720Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 74 min around 9 PM — ~154% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 74 min cerca de las 9 PM — ~154% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 74,
-        "overall_median": 48,
-        "samples": 8,
-        "ratio": 1.5416666666666667
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
@@ -389,6 +372,23 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5416666666666667,
+      "detected_at": "2026-10-05T22:23:44.720Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 74 min around 9 PM — ~154% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 74 min cerca de las 9 PM — ~154% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 74,
+        "overall_median": 48,
+        "samples": 8,
+        "ratio": 1.5416666666666667
+      }
+    },
     {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
