@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-06T21:29:29.395Z",
-  "snapshot_at": "2026-10-06T21:22:40.968Z",
+  "generated_at": "2026-10-07T01:17:04.821Z",
+  "snapshot_at": "2026-10-07T01:07:37.546Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 5,
-      "detected_at": "2026-10-05T22:23:44.720Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 5 PM — ~600% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 5 PM — ~600% de la mediana de 30 días. Planea alrededor.",
+      "severity": 3.8,
+      "detected_at": "2026-10-07T01:17:04.821Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 5 PM — ~480% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 5 PM — ~480% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 17,
         "peak_median": 120,
-        "overall_median": 20,
+        "overall_median": 25,
         "samples": 9,
-        "ratio": 6
+        "ratio": 4.8
       }
     },
     {
@@ -34,23 +34,6 @@
         "overall_median": 25,
         "samples": 9,
         "ratio": 4.8
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 2,
-      "detected_at": "2026-10-05T06:40:31.970Z",
-      "summary_en": "Heads up: Tecate's Sunday peak hits 180 min around 6 PM — ~300% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Tecate alcanza 180 min cerca de las 6 PM — ~300% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 180,
-        "overall_median": 60,
-        "samples": 9,
-        "ratio": 3
       }
     },
     {
@@ -106,6 +89,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "tecate",
+      "port_name": "Tecate",
+      "state": "CA",
+      "severity": 1.5,
+      "detected_at": "2026-10-07T01:17:04.821Z",
+      "summary_en": "Heads up: Tecate's Sunday peak hits 150 min around 7 PM — ~250% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Tecate alcanza 150 min cerca de las 7 PM — ~250% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 150,
+        "overall_median": 60,
+        "samples": 8,
+        "ratio": 2.5
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -143,16 +143,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 1.0952380952380953,
-      "detected_at": "2026-10-06T21:29:29.395Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 9 PM — ~210% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 9 PM — ~210% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.2000000000000002,
+      "detected_at": "2026-10-07T01:17:04.821Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 220 min around 9 PM — ~220% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 220 min cerca de las 9 PM — ~220% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
         "peak_median": 220,
-        "overall_median": 105,
+        "overall_median": 100,
         "samples": 9,
-        "ratio": 2.0952380952380953
+        "ratio": 2.2
       }
     },
     {
@@ -161,15 +161,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-06T16:35:38.883Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-10-07T01:17:04.821Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 3,
         "best_median": 0,
-        "overall_median": 20,
+        "overall_median": 25,
         "samples": 9
       }
     },
@@ -287,16 +287,16 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.875,
-      "detected_at": "2026-10-06T09:54:53.172Z",
-      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 6 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 6 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
+      "detected_at": "2026-10-07T01:17:04.821Z",
+      "summary_en": "Right now Calexico - East's lightest Tuesday hour so far is 5 PM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Calexico - East es 5 PM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 18,
+        "best_hour": 17,
         "best_median": 5,
         "overall_median": 40,
-        "samples": 6
+        "samples": 8
       }
     },
     {
@@ -353,6 +353,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-10-07T01:17:04.821Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 75 min around 7 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 75 min cerca de las 7 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 75,
+        "overall_median": 50,
+        "samples": 8,
+        "ratio": 1.5
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -371,41 +388,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5416666666666667,
-      "detected_at": "2026-10-05T22:23:44.720Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 74 min around 9 PM — ~154% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 74 min cerca de las 9 PM — ~154% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 74,
-        "overall_median": 48,
-        "samples": 8,
-        "ratio": 1.5416666666666667
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-10-05T22:23:44.720Z",
-      "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 10 AM (median 45 min) — ~50% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 10 AM (mediana 45 min) — ~50% debajo de la base de 30 días de 90 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 10,
-        "best_median": 45,
-        "overall_median": 90,
-        "samples": 9
-      }
-    }
-  ]
+  "trailing_24h": []
 }
