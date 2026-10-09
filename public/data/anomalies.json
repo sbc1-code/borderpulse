@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-09T15:57:41.741Z",
-  "snapshot_at": "2026-10-09T15:52:26.478Z",
+  "generated_at": "2026-10-09T20:46:00.220Z",
+  "snapshot_at": "2026-10-09T20:37:31.255Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,6 +72,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 2.142857142857143,
+      "detected_at": "2026-10-09T20:46:00.220Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 220 min around 9 PM — ~314% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 220 min cerca de las 9 PM — ~314% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 220,
+        "overall_median": 70,
+        "samples": 9,
+        "ratio": 3.142857142857143
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
@@ -102,23 +119,6 @@
         "overall_median": 20,
         "samples": 8,
         "ratio": 3
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.9333333333333331,
-      "detected_at": "2026-10-08T08:36:37.894Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 220 min around 9 PM — ~293% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 220 min cerca de las 9 PM — ~293% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 220,
-        "overall_median": 75,
-        "samples": 9,
-        "ratio": 2.933333333333333
       }
     },
     {
@@ -392,16 +392,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.5333333333333333,
-      "detected_at": "2026-10-09T08:42:09.153Z",
-      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 12 AM (median 35 min) — ~53% below the 30-day baseline of 75 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 12 AM (mediana 35 min) — ~53% debajo de la base de 30 días de 75 min.",
+      "severity": 0.5,
+      "detected_at": "2026-10-09T20:46:00.220Z",
+      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 12 AM (median 35 min) — ~50% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 12 AM (mediana 35 min) — ~50% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 0,
         "best_median": 35,
-        "overall_median": 75,
+        "overall_median": 70,
         "samples": 14
       }
     },
