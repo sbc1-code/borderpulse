@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-09T20:46:00.220Z",
-  "snapshot_at": "2026-10-09T20:37:31.255Z",
+  "generated_at": "2026-10-10T00:36:23.918Z",
+  "snapshot_at": "2026-10-10T00:22:24.532Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -38,23 +38,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 2.4285714285714284,
-      "detected_at": "2026-10-09T01:51:27.672Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~343% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~343% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 120,
-        "overall_median": 35,
-        "samples": 11,
-        "ratio": 3.4285714285714284
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
@@ -68,6 +51,23 @@
         "overall_median": 45,
         "samples": 9,
         "ratio": 3.3333333333333335
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 2.1578947368421053,
+      "detected_at": "2026-10-10T00:36:23.918Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~316% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~316% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 120,
+        "overall_median": 38,
+        "samples": 11,
+        "ratio": 3.1578947368421053
       }
     },
     {
@@ -232,16 +232,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9791666666666666,
-      "detected_at": "2026-10-09T08:42:09.153Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Friday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 48 min.",
+      "severity": 0.98,
+      "detected_at": "2026-10-10T00:36:23.918Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Friday hour so far is 1 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Paso Del Norte (PDN) es 1 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 1,
         "best_median": 1,
-        "overall_median": 48,
+        "overall_median": 50,
         "samples": 9
       }
     },
@@ -304,16 +304,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.8571428571428572,
-      "detected_at": "2026-10-09T08:42:09.153Z",
-      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 12 AM (median 5 min) — ~86% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 12 AM (mediana 5 min) — ~86% debajo de la base de 30 días de 35 min.",
+      "severity": 0.868421052631579,
+      "detected_at": "2026-10-10T00:36:23.918Z",
+      "summary_en": "Right now Calexico - East's lightest Friday hour so far is 12 AM (median 5 min) — ~87% below the 30-day baseline of 38 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - East es 12 AM (mediana 5 min) — ~87% debajo de la base de 30 días de 38 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 0,
         "best_median": 5,
-        "overall_median": 35,
+        "overall_median": 38,
         "samples": 10
       }
     },
@@ -371,23 +371,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5625,
-      "detected_at": "2026-10-09T01:51:27.672Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 75 min around 7 PM — ~156% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 75 min cerca de las 7 PM — ~156% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 75,
-        "overall_median": 48,
-        "samples": 8,
-        "ratio": 1.5625
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
@@ -406,6 +389,25 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-10-10T00:36:23.918Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 75 min around 7 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 75 min cerca de las 7 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 75,
+        "overall_median": 50,
+        "samples": 8,
+        "ratio": 1.5
+      }
+    }
+  ],
+  "trailing_24h": [
+    {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
@@ -423,6 +425,5 @@
         "samples": 3
       }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
