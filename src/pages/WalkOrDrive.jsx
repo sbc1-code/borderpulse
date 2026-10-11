@@ -6,6 +6,8 @@ import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { availableLaneWait } from '@/lib/crossingAvailability';
+import { getPortStatus } from '@/components/utils/crossingMeta';
 
 // Time it typically takes to park, walk the bridge, and reach a rideshare /
 // transit / family pickup on the U.S. side. This isn't a guess — it's the
@@ -19,13 +21,6 @@ const FOOT_OVERHEAD_MIN = 20;
 // recommending a switch. Below this gap, parking inconvenience usually
 // dominates the wait-time savings.
 const RECOMMEND_GAP_MIN = 15;
-
-function laneWaitFromCrossing(crossing, key) {
-  const lane = crossing?.lanes?.[key];
-  if (!lane) return null;
-  if (typeof lane.delay_minutes !== 'number') return null;
-  return lane.delay_minutes;
-}
 
 function PanelCard({ icon: Icon, title, wait, sub, lang, recommendedLabel }) {
   return (
@@ -70,11 +65,11 @@ export default function WalkOrDrive() {
     return { crossing: c, canonicalSlug: c ? portToSlug[c.port_number] : null };
   }, [state.crossings, slug]);
 
-  const veh = laneWaitFromCrossing(crossing, 'passenger_standard');
-  const vehReady = laneWaitFromCrossing(crossing, 'passenger_ready');
-  const vehSentri = laneWaitFromCrossing(crossing, 'passenger_sentri');
-  const ped = laneWaitFromCrossing(crossing, 'pedestrian_standard');
-  const pedReady = laneWaitFromCrossing(crossing, 'pedestrian_ready');
+  const veh = availableLaneWait(crossing, 'passenger_standard');
+  const vehReady = availableLaneWait(crossing, 'passenger_ready');
+  const vehSentri = availableLaneWait(crossing, 'passenger_sentri');
+  const ped = availableLaneWait(crossing, 'pedestrian_standard');
+  const pedReady = availableLaneWait(crossing, 'pedestrian_ready');
 
   // Best foot wait considering Ready Lane availability for pedestrians.
   const bestFootWait = useMemo(() => {
@@ -129,10 +124,9 @@ export default function WalkOrDrive() {
   }
   if (!crossing) return <Navigate to="/" replace />;
 
-  // No pedestrian data at this crossing — gracefully redirect users to the
-  // crossing detail page. Don't pretend we have an answer when CBP doesn't
-  // publish ped data here.
-  if (ped == null && pedReady == null) {
+  // A closure takes precedence over old lane reports retained by CBP.
+  const closed = getPortStatus(crossing) === 'closed';
+  if (closed || (ped == null && pedReady == null)) {
     return (
       <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
         <div className="mb-3">
@@ -142,13 +136,24 @@ export default function WalkOrDrive() {
           </Link>
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
-          {language === 'en' ? `${crossing.name}: pedestrian data not published` : `${crossing.name}: sin datos peatonales publicados`}
+          {closed
+            ? (language === 'en' ? `${crossing.name}: closed now` : `${crossing.name}: cerrado ahora`)
+            : (language === 'en' ? `${crossing.name}: no current pedestrian wait reported` : `${crossing.name}: sin espera peatonal actual reportada`)}
         </h1>
         <p className="text-sm text-slate-700 dark:text-slate-300 mb-4">
-          {language === 'en'
-            ? `CBP doesn't publish a pedestrian wait time for ${crossing.name}, so the walk-vs-drive question can't be answered from data. Some ports don't have pedestrian lanes; others have them but don't report. Check the live page for what is published.`
-            : `CBP no publica tiempo de espera peatonal para ${crossing.name}, así que la pregunta caminar-vs-manejar no se puede responder con datos. Algunos puertos no tienen carriles peatonales; otros sí pero no reportan. Revisa la página en vivo para ver lo que sí se publica.`}
+          {closed
+            ? (language === 'en'
+              ? 'CBP marks this crossing closed. Previous lane reports are not current travel options. Check the crossing status before leaving.'
+              : 'CBP marca este cruce como cerrado. Los reportes anteriores de carriles no son opciones actuales para cruzar. Verifica el estado del cruce antes de salir.')
+            : (language === 'en'
+              ? `CBP has no current pedestrian wait report for ${crossing.name}, so a walk-vs-drive recommendation is unavailable. A missing report does not mean zero wait or prove that there is no pedestrian lane.`
+              : `CBP no tiene un reporte actual de espera peatonal para ${crossing.name}, así que no hay recomendación entre caminar o manejar. La falta de un reporte no significa espera cero ni demuestra que no haya carril peatonal.`)}
         </p>
+        {closed && crossing.hours && (
+          <p className="mb-4 text-sm text-slate-700 dark:text-slate-300">
+            {language === 'en' ? 'Posted CBP hours: ' : 'Horario publicado por CBP: '}{crossing.hours}
+          </p>
+        )}
         <Link to={`/crossing/${canonicalSlug}/`} className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400 hover:underline">
           {language === 'en' ? `Open ${crossing.name} live page` : `Abrir página en vivo de ${crossing.name}`} <ArrowRight className="w-4 h-4" />
         </Link>
