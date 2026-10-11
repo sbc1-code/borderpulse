@@ -340,3 +340,11 @@ dependency paths. Remove those paths through the supported integration and
 patch source-map-js to 1.2.2; keep the existing security/data/bundle gates rather
 than widening exceptions or forcing unrelated major upgrades. Older-browser
 support is not claimed.
+
+
+## 2026-10-11 · Keep fixed route advice separate from rolling charts
+
+Rolling CBP charts do not support permanent hour-specific route rules. The
+San Ysidro/Otay Mesa guides now send current decisions to the timestamped
+comparison, with lane eligibility and extra driving time considered; original
+publication dates remain visible alongside dated corrections.

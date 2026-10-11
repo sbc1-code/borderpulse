@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-11 — Safer crossing guidance
+
+- Walk-or-drive pages now treat an official port closure as overriding retained
+  lane numbers, explain closure separately from missing reports in EN/ES, and
+  preserve genuine zero-minute waits. PR #123 passed 414 desktop/mobile route
+  navigations and was verified on Vercel production at commit 89955af1.
+- Corrected the paired San Ysidro/Otay Mesa guides: removed fixed April figures,
+  unsupported truck-delay explanations and blanket route rules; linked the
+  current comparison and identified rolling charts as historical context.
+  Original publication/byline remain; revision metadata records October 11.
+- Added EN/ES regression coverage for closure, Back navigation, reopening,
+  pending lane reports, comparison-guide links, translation and date metadata.
+
 ## 2026-10-06 — Publication security and generated-writer reliability
 
 - Generated-data writers now resolve current main after queueing, generate in an
