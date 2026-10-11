@@ -13,8 +13,8 @@ export async function checkComparisonGuide(page, context, baseUrl) {
     const url = new URL(`/blog/${version.slug}/`, baseUrl).href;
     await page.goto(url);
     await page.getByRole('heading', { level: 1, name: version.title, exact: true }).waitFor();
-    await page.getByText(version.notice, { exact: true }).waitFor();
     const article = page.locator('#root article');
+    await article.getByText(version.notice, { exact: true }).waitFor();
     const content = await article.innerText();
     assert.equal(await article.getAttribute('lang'), version.lang);
     assert.ok(!/Default to Otay|Default a Otay|almost always Otay|casi siempre Otay|trucker rush|traileros congestionan/.test(content), 'dated route rules must not return');
@@ -30,13 +30,12 @@ export async function checkComparisonGuide(page, context, baseUrl) {
     assert.ok(byline.includes(version.lang === 'en' ? 'April 24, 2026' : '24 de abril de 2026'), 'original publication date stays visible');
     assert.ok(byline.includes(version.lang === 'en' ? 'Updated October 11, 2026' : 'Actualizado 11 de octubre de 2026'), 'revision date stays visible');
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'guide must fit viewport');
-    await page.getByRole('link', { name: version.cta, exact: true }).click();
+    await article.getByRole('link', { name: version.cta, exact: true }).click();
     await page.waitForURL(value => value.pathname === '/compare/san-ysidro-vs-otay-mesa/');
     await page.goBack();
     await page.getByRole('heading', { level: 1, name: version.title, exact: true }).waitFor();
-    await page.getByRole('link', { name: version.twinLabel, exact: true }).click();
+    await article.getByRole('link', { name: version.twinLabel, exact: true }).click();
     await page.waitForURL(value => value.pathname === `/blog/${version.twin}/`);
   }
   console.log('[comparison-guide] PASS: EN/ES correction, current comparison CTA, Back, translation, original publication and revision metadata');
 }
-
