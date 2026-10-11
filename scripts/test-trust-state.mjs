@@ -10,6 +10,7 @@ import {
   liveLabel,
   summarize,
 } from '../src/lib/trustState.js';
+import { availableLaneWait } from '../src/lib/crossingAvailability.js';
 import { standardPassengerWait } from '../src/lib/standardPassengerWait.js';
 import { track } from '../src/lib/analytics.js';
 
@@ -121,4 +122,30 @@ test('a zero wait is a real reading and must survive summarization', () => {
   assert.equal(s.count, 3);
   assert.equal(s.min, 0);
   assert.equal(s.median, 0);
+});
+
+
+test('walk-or-drive ignores retained lane numbers at a closed crossing', () => {
+  const crossing = { port_status: ' Closed ', lanes: {
+    passenger_standard: { status: 'delay', delay_minutes: 15, lanes_open: 1 },
+    pedestrian_standard: { status: 'no delay', delay_minutes: 0, lanes_open: 1 },
+    pedestrian_ready: { status: 'no delay', delay_minutes: 0, lanes_open: 1 },
+  } };
+  for (const key of Object.keys(crossing.lanes)) assert.equal(availableLaneWait(crossing, key), null);
+  crossing.port_status = 'Open';
+  assert.equal(availableLaneWait(crossing, 'passenger_standard'), 15);
+  assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), 0, 'a reported zero is real');
+});
+
+test('walk-or-drive requires a usable lane report rather than an old numeric value', () => {
+  const wait = (lane) => availableLaneWait({ port_status: 'Open', lanes: { pedestrian_standard: lane } }, 'pedestrian_standard');
+  for (const status of ['Update Pending', 'Lanes Closed', 'N/A', '', 'unexpected']) {
+    assert.equal(wait({ status, delay_minutes: 5, lanes_open: 1 }), null);
+  }
+  for (const delay_minutes of [null, undefined, -1, NaN, Infinity, '0']) {
+    assert.equal(wait({ status: 'delay', delay_minutes, lanes_open: 1 }), null);
+  }
+  assert.equal(wait({ status: 'delay', delay_minutes: 5, lanes_open: 0 }), null);
+  assert.equal(wait(null), null);
+  assert.equal(wait({ status: ' No Delay ', delay_minutes: 0, lanes_open: 1 }), 0);
 });
