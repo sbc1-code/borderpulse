@@ -349,3 +349,10 @@ contains main San Ysidro (250401), PedWest (250407) and Cross Border Express
 (250409) together with different hours, status and reports. Main San Ysidro
 uses only its own row, even when reports are pending. A missing main row
 fails closed instead of substituting another facility's status or lane waits.
+
+## 2026-10-11 · Keep fixed route advice separate from rolling charts
+
+Rolling CBP charts do not support permanent hour-specific route rules. The
+San Ysidro/Otay Mesa guides now send current decisions to the timestamped
+comparison, with lane eligibility and extra driving time considered; original
+publication dates remain visible alongside dated corrections.

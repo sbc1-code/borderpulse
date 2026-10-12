@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
+import { checkComparisonGuide } from './check-comparison-guide.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -312,6 +313,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   try {
     await checkGrowthInteractions(page, context, baseUrl);
     await checkWalkDriveAvailability(page, context, baseUrl);
+    await checkComparisonGuide(page, context, baseUrl);
   } catch (error) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
   }
