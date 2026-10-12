@@ -6,6 +6,7 @@ import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
+import { checkReportTimes } from './check-report-times.mjs';
 import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
 import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
 
@@ -319,6 +320,13 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await checkComparisonGuide(page, context, baseUrl);
   } catch (error) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
+  }
+  activeErrors = [];
+  try {
+    await checkReportTimes(page, context, baseUrl);
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} report times: ${error.stack || error.message}`);
   }
   activeErrors = [];
   try {
