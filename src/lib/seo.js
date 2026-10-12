@@ -2,6 +2,18 @@
  * seo.js — lightweight helpers to set <meta> tags from SPA routes.
  * No extra deps; manipulates head directly.
  */
+import { pageHreflangs } from './hreflang.js';
+
+function setHreflangs(hreflangs) {
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((link) => link.remove());
+  for (const { lang, href } of hreflangs) {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', lang);
+    link.setAttribute('href', href);
+    document.head.appendChild(link);
+  }
+}
 
 function setMeta(name, content, attr = 'name') {
   if (!content) return;
@@ -16,9 +28,10 @@ function setMeta(name, content, attr = 'name') {
 
 /**
  * Update page-level SEO tags. Call from useEffect in each page component.
- * Pass null/undefined for any field to skip it.
+ * Pass null/undefined for a field to skip it. A canonical update also replaces
+ * language alternates; explicit hreflangs (including []) override the defaults.
  */
-export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical, lang }) {
+export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical, lang, hreflangs }) {
   if (lang) document.documentElement.lang = lang;
   if (title) document.title = title;
   if (description) setMeta('description', description);
@@ -34,6 +47,7 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
       document.head.appendChild(link);
     }
     link.setAttribute('href', canonical);
+    setHreflangs(hreflangs ?? pageHreflangs(canonical, lang || 'en'));
   }
 }
 
@@ -41,6 +55,7 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
  * Reset meta tags to defaults (call on unmount or route change).
  */
 export function resetPageMeta() {
+  setHreflangs(pageHreflangs('https://borderpulse.com/'));
   document.documentElement.lang = 'en';
   document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
   setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');

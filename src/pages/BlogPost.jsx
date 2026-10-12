@@ -8,6 +8,7 @@ import { mdxComponents } from '@/components/blog/MdxComponents';
 import { LangContext } from '@/lib/LangContext';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { track } from '@/lib/analytics';
+import { blogHreflangs } from '@/lib/hreflang';
 
 const STRINGS = {
   en: {
@@ -74,7 +75,10 @@ export default function BlogPost() {
     const url = `https://borderpulse.com/blog/${slug}/`;
     const imagePath = fm.ogImage || fm.hero;
     const ogImg = imagePath ? `https://borderpulse.com${imagePath}` : undefined;
-    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url, lang: fm.lang || 'en' });
+    const publishedPosts = [...listPosts({ lang: 'en' }), ...listPosts({ lang: 'es' })]
+      .map((p) => ({ ...p.frontmatter, slug: p.slug }));
+    const hreflangs = blogHreflangs({ ...fm, slug }, publishedPosts);
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url, lang: fm.lang || 'en', hreflangs });
     return () => resetPageMeta();
   }, [post, slug]);
 

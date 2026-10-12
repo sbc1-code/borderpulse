@@ -9,6 +9,7 @@ import { checkComparisonGuide } from './check-comparison-guide.mjs';
 import { checkReportTimes } from './check-report-times.mjs';
 import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
 import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
+import { checkBuiltHreflangs, checkHreflangNavigation } from './check-hreflang.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -339,6 +340,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   activeErrors = [];
   try {
     await checkFaqNavigation(page, baseUrl);
+    await checkHreflangNavigation(page, baseUrl);
     if (activeErrors.length) throw new Error(activeErrors.join(' | '));
   } catch (error) {
     failures.push(`${profile.name} FAQ scope navigation: ${error.stack || error.message}`);
@@ -350,6 +352,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
 
 async function main() {
   checkBuiltFaqScope(distDir);
+  checkBuiltHreflangs(distDir);
   const manifest = loadRouteManifest();
   if (process.argv.includes('--growth-only')) {
     manifest.canonicals = [];

@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import { mdxBodyToHtml } from './lib/mdx-to-html.mjs';
 import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
+import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -135,19 +136,7 @@ function renderBlogPostHead(post, author, allPosts) {
   const datePublished = `${post.date}T12:00:00Z`;
   const dateModified = `${post.updated || post.date}T12:00:00Z`;
 
-  // Build hreflang pairs if this post has a translation twin.
-  const hreflangs = [];
-  if (post.translationKey && allPosts) {
-    const en = allPosts.find(
-      (p) => p.translationKey === post.translationKey && p.lang === 'en',
-    );
-    const es = allPosts.find(
-      (p) => p.translationKey === post.translationKey && p.lang === 'es',
-    );
-    if (en) hreflangs.push({ lang: 'en', href: `${BASE}/blog/${en.slug}/` });
-    if (es) hreflangs.push({ lang: 'es', href: `${BASE}/blog/${es.slug}/` });
-    if (en) hreflangs.push({ lang: 'x-default', href: `${BASE}/blog/${en.slug}/` });
-  }
+  const hreflangs = blogHreflangs(post, allPosts || []);
 
   const blogPosting = {
     '@context': 'https://schema.org',
@@ -290,15 +279,12 @@ function rewriteIndex(indexHtml, head) {
     }
   }
 
-  // Replace any existing hreflang tags with post-specific ones (the shell has
-  // homepage-default hreflangs from index.html that we must override per page).
-  if (head.hreflangs && head.hreflangs.length) {
-    html = html.replace(/\s*<link\s+rel=["']alternate["']\s+hreflang=[^>]*>/gi, '');
-    const hreflangTags = head.hreflangs
-      .map((h) => `  <link rel="alternate" hreflang="${esc(h.lang)}" href="${esc(h.href)}" />`)
-      .join('\n');
-    html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
-  }
+  // Always replace shell alternates, including routes without translated URLs.
+  html = html.replace(/\s*<link\b(?=[^>]*\brel=["']alternate["'])(?=[^>]*\bhreflang=)[^>]*>/gi, '');
+  const hreflangTags = (head.hreflangs ?? pageHreflangs(head.canonical, head.lang || 'en'))
+    .map((h) => `  <link rel="alternate" hreflang="${esc(h.lang)}" href="${esc(h.href)}" />`)
+    .join('\n');
+  html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
 
   // Escape any literal "</script" inside the JSON body so a value like
   // "</script><script>alert(1)</script>" can't break out of the
