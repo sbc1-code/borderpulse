@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-12 — Shared FAQ metadata scope
+
+- Removed the homepage FAQPage node from the shared HTML shell. Its southbound
+  live-routing answer was stale and the same four questions leaked into
+  unrelated prerendered routes. Visible homepage answers and crossing-specific
+  FAQ generation remain unchanged.
+- Added release checks for every generated HTML JSON-LD block, absence of the
+  removed questions/claim, representative metadata and bilingual canonicals,
+  and client navigation through crossing and EN/ES blog routes with Back.
+  Existing ad-slot and comparison-guide checks remain in the smoke gate.
+- This is a metadata correctness correction, with no claimed search-result
+  benefit. Other prerender/runtime schema lifecycle issues remain separate.
+
 ## 2026-10-12 — Bounded ad-slot diagnostics
 
 - Added best-effort Umami diagnostics for the existing dashboard native slot:

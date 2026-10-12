@@ -366,3 +366,13 @@ but none proves that a creative loaded or that a billable impression occurred.
 Missing Umami or browser observers undercount; there is no queue, retry or new
 ad request. Use the publisher's reports for actual network totals and revenue.
 The change retains the existing placement, provider and disclosure.
+
+
+## 2026-10-12 · Remove the stale FAQ from the shared HTML shell
+
+The homepage FAQPage was copied to unrelated routes and described paused
+southbound estimates as active. Remove that single node rather than add runtime
+schema management. Keep visible homepage answers, route-specific FAQ generation,
+other structured data, canonical/hreflang behavior and JSON script escaping.
+This scoped correctness fix does not promise search or rich-result improvements;
+other prerender/runtime schema lifecycle issues need separate review.

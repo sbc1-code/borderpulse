@@ -7,6 +7,7 @@ import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
 import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
+import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -223,6 +224,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
       }
       if (!rendered.title || !rendered.description) throw new Error('missing title or description');
       const schemas = rendered.schemas.map((value) => JSON.parse(value));
+      assertNoGlobalFaq(schemas, route.path);
       if (route.path === '/best-time/') {
         const types = schemaTypes(schemas);
         const itemList = schemas.find((schema) => schema?.['@type'] === 'ItemList');
@@ -318,12 +320,20 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   } catch (error) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
   }
+  activeErrors = [];
+  try {
+    await checkFaqNavigation(page, baseUrl);
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} FAQ scope navigation: ${error.stack || error.message}`);
+  }
   await context.close();
   console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);
   return failures;
 }
 
 async function main() {
+  checkBuiltFaqScope(distDir);
   const manifest = loadRouteManifest();
   if (process.argv.includes('--growth-only')) {
     manifest.canonicals = [];
