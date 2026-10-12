@@ -6,6 +6,7 @@ import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
+import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -336,6 +337,8 @@ async function main() {
     console.log(`[routes] Chrome: ${executablePath}`);
     console.log(`[routes] manifest: ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes`);
     browser = await chromium.launch({ executablePath, headless: true, args: ['--no-sandbox'] });
+    await checkAdSlotDiagnostics(browser, baseUrl);
+    if (process.argv.includes('--ads-only')) return;
     const profiles = [
       { name: 'desktop', viewport: { width: 1440, height: 900 }, isMobile: false },
       { name: 'mobile', viewport: { width: 390, height: 844 }, isMobile: true },

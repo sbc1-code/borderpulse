@@ -29,6 +29,12 @@
 //   blog-share          guide distribution; slug and method=copy|whatsapp
 //   blog-to-waits       guide reader opening the current waits dashboard
 //
+// Diagnostics (not audited ad-network statistics):
+//   ad-slot-diagnostic  slot=dashboard-native; state=script-ready|script-error|
+//                       container-populated|slot-visible. At most once per
+//                       state per mounted slot, including effect replays.
+//                       DOM/geometry only, not impressions or revenue.
+//
 // No free-text is ever sent: slugs and enum values only, never a raw search
 // query, so an accidental paste cannot land in analytics.
 export function track(event, data) {
