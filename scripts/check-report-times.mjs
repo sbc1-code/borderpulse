@@ -175,8 +175,9 @@ export async function checkReportTimes(page, context, baseUrl) {
       }, { timeout: 5_000 }).then(response => response.finished()),
       action(),
     ]);
-    // Let response parsing, subscription notifications and React commit finish.
-    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    // Give response parsing and subscriptions a bounded event-loop turn.
+    // Parallel headless profiles may pause animation frames in a background tab.
+    await page.waitForTimeout(50);
   };
   const setStandard = (wait, raw, status = wait === 0 ? 'no delay' : 'delay') => {
     if (mode === 'normal') snapshot.fetched_at = new Date().toISOString();
