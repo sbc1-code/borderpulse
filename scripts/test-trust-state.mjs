@@ -7,7 +7,8 @@ import {
   ageMinutes,
   freshnessOf,
   formatAge,
-  liveLabel,
+  fetchLabel,
+  reportTimeLabel,
   summarize,
 } from '../src/lib/trustState.js';
 import { availableLaneWait } from '../src/lib/crossingAvailability.js';
@@ -65,19 +66,35 @@ test('missing or unparseable timestamps are unknown, never zero', () => {
     assert.equal(freshnessOf(bad, NOW).state, FRESHNESS.UNKNOWN);
   }
   // An unknown age must not render as "Live".
-  assert.notEqual(liveLabel(FRESHNESS.UNKNOWN, null, 'en'), 'Live');
+  assert.notEqual(fetchLabel(FRESHNESS.UNKNOWN, null, 'en'), 'Live');
 });
 
 test('future timestamps clamp to zero rather than going negative', () => {
   assert.equal(ageMinutes(new Date(NOW + 60_000).toISOString(), NOW), 0);
 });
 
-test('only fresh data is allowed to call itself Live, in both languages', () => {
-  assert.equal(liveLabel(FRESHNESS.FRESH, 3, 'en'), 'Live');
-  assert.equal(liveLabel(FRESHNESS.FRESH, 3, 'es'), 'En vivo');
-  for (const state of [FRESHNESS.AGING, FRESHNESS.STALE, FRESHNESS.UNKNOWN]) {
-    assert.doesNotMatch(liveLabel(state, 120, 'en'), /^Live$/);
-    assert.doesNotMatch(liveLabel(state, 120, 'es'), /^En vivo$/);
+test('retrieval labels never claim the lane report itself is live', () => {
+  assert.equal(fetchLabel(FRESHNESS.FRESH, 3, 'en'), 'Fetched 3 min ago');
+  assert.equal(fetchLabel(FRESHNESS.FRESH, 3, 'es'), 'Consulta: hace 3 min');
+  assert.equal(fetchLabel(FRESHNESS.STALE, 120, 'en'), 'Stale snapshot · Fetched 2 h ago');
+  assert.equal(fetchLabel(FRESHNESS.UNKNOWN, null, 'es'), 'Hora de consulta desconocida');
+  for (const state of Object.values(FRESHNESS)) {
+    assert.doesNotMatch(fetchLabel(state, 120, 'en'), /Live/);
+    assert.doesNotMatch(fetchLabel(state, 120, 'es'), /En vivo/);
+  }
+});
+
+test('official report times preserve raw midnight, locale and DST text without inferred dates or ages', () => {
+  for (const raw of ['At 11:00 pm MST', 'At Midnight PDT', 'At 1:00 am PST', 'At 1:00 am PDT', 'A las 11:00 pm MST']) {
+    assert.equal(reportTimeLabel(raw, 'en'), `CBP reported: ${raw}`);
+    assert.equal(reportTimeLabel(raw, 'es'), `Reporte CBP: ${raw}`);
+  }
+});
+
+test('missing report times stay unknown rather than borrowing a fresh fetch or feed export time', () => {
+  for (const missing of [null, undefined, '', '  ', 0, {}]) {
+    assert.equal(reportTimeLabel(missing, 'en'), 'CBP report time unavailable');
+    assert.equal(reportTimeLabel(missing, 'es'), 'Hora del reporte CBP no disponible');
   }
 });
 

@@ -21,6 +21,10 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [x] Separate CBP lane report times from snapshot retrieval on dashboard and
+  crossing detail cards. Preserve raw report text and unknown dates; release
+  verification belongs to the scoped pull request.
+
 - [x] Approved Vercel production cutover: PR #109 merged, Actions publication
   succeeded, and IONOS apex/www DNS plus trusted HTTPS were verified. See
   issue #101 for publication evidence and exact rollback records.

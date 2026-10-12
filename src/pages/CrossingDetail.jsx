@@ -492,7 +492,7 @@ export default function CrossingDetail() {
           language={language}
           index={0}
           selectedDirection="northbound"
-          snapshotAt={isSanYsidro ? state.fetchedAt : null}
+          snapshotAt={state.fetchedAt}
           isFavorite={favorites.includes(crossing.port_number)}
           onToggleFavorite={toggleFavorite}
         />
@@ -554,7 +554,7 @@ export default function CrossingDetail() {
       )}
 
       {(() => {
-        // "Lanes right now" — always-on per-lane breakout for this port.
+        // "Latest lane reports" — always-on per-lane breakout for this port.
         // Filters to lanes CBP currently reports with a real delay value;
         // hides "Update Pending" stubs and null lanes that don't apply here.
         const L = crossing.lanes || {};
@@ -573,12 +573,12 @@ export default function CrossingDetail() {
         return (
           <section className="mb-6">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-              {language === 'en' ? 'Lanes right now' : 'Carriles ahora mismo'}
+              {language === 'en' ? 'Latest lane reports' : 'Últimos reportes por carril'}
             </h2>
             <p className="text-xs text-slate-500 mb-3">
               {language === 'en'
-                ? `Per-lane delay and number of lanes open at ${crossing.name}, straight from CBP. Northbound only.`
-                : `Demora por carril y número de carriles abiertos en ${crossing.name}, directo de CBP. Solo hacia EE.UU.`}
+                ? `Per-lane delay and number of lanes open at ${crossing.name}, as reported by CBP. Report times may differ from the data fetch time. Northbound only.`
+                : `Demora por carril y número de carriles abiertos en ${crossing.name}, según CBP. La hora del reporte puede diferir de la hora de consulta. Solo hacia EE.UU.`}
             </p>
             <div className="rounded-md border border-slate-200 bg-slate-50 p-2.5 divide-y divide-slate-200">
               {rows.map((r) => (
