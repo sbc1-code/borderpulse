@@ -185,10 +185,14 @@ export async function checkReportTimes(page, context, baseUrl) {
     crossing.lanes.passenger_standard = lane(wait, raw, status);
   };
 
+  // Playwright Core has no default action timeout. Bound fixture failures so
+  // a missing selector reports a failure instead of hanging the release gate.
+  page.setDefaultTimeout(10_000);
   await context.route(feedMatcher, feedHandler);
   page.on('response', recordResponse);
   try {
     for (const language of ['en', 'es']) {
+      console.log(`[report-times] ${language}: dashboard and lane drawer`);
       mode = 'normal';
       snapshot.fetched_at = new Date().toISOString();
       crossing.port_status = 'Open';
@@ -239,6 +243,7 @@ export async function checkReportTimes(page, context, baseUrl) {
       await search(language);
       await assertPrimary(card(), language, 37, 'At 11:00 pm MST');
 
+      console.log(`[report-times] ${language}: refresh and source-time states`);
       setStandard(41, 'At 12:15 am MDT');
       snapshot.fetched_at = new Date().toISOString();
       await waitForFeed(() => page.getByRole('button', { name: language === 'en' ? 'Refresh' : 'Actualizar', exact: true }).click());
@@ -281,6 +286,7 @@ export async function checkReportTimes(page, context, baseUrl) {
 
       // A new document resets the in-memory cache, allowing an intentionally
       // older static snapshot. Live-API builds first receive a synthetic 503.
+      console.log(`[report-times] ${language}: stale fallback and recovery`);
       mode = 'static-fallback';
       snapshot.fetched_at = new Date(Date.now() - 3 * 60 * 60_000).toISOString();
       crossing.updated_at = new Date().toISOString();
@@ -334,6 +340,7 @@ export async function checkReportTimes(page, context, baseUrl) {
     } finally {
       page.off('response', recordResponse);
       await context.unroute(feedMatcher, feedHandler);
+      page.setDefaultTimeout(0);
     }
   }
   console.log('[report-times] PASS: EN/ES raw lane clocks, missing/zero/pending/closed waits, drawer/detail/Back, refresh/tab return, stale fallback/recovery, dark contrast and viewport fit');
