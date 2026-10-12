@@ -21,6 +21,12 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] Correct route hreflangs in generated HTML and SPA navigation while
+  preserving actual EN/ES pairs. Publication requires independent review and
+  complete release checks; exact production verification belongs to the PR.
+- [ ] Investigate dynamic walk-or-drive sitemap inventory separately from the
+  language-alternate correction; do not expand routes in that scoped change.
+
 - [x] Separate CBP lane report times from snapshot retrieval on dashboard and
   crossing detail cards. Preserve raw report text and unknown dates; release
   verification belongs to the scoped pull request.

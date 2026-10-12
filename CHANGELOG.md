@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## Unreleased — route-specific language alternates
+
+- Generated crossing, best-time, comparison and other single-URL pages replace
+  inherited homepage hreflangs with their own canonical URL. Existing published
+  EN/ES blog, methodology and privacy pairs remain reciprocal; browser language
+  preferences do not create translated URLs.
+- SPA metadata updates replace stale language alternates and restore homepage
+  alternates on reset, preserving canonical URLs and non-language alternate links.
+- Added all-generated-page and desktop/mobile navigation checks, including
+  language switching, translated article entry and Back. Providers remain blocked
+  or mocked in browser tests. Sitemap inventory is a separate follow-up; release
+  and production verification evidence belongs to the scoped pull request.
+
 ## 2026-10-12 — CBP report times and fetch labels
 
 - Dashboard and crossing cards distinguish snapshot retrieval from the official
