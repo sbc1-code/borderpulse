@@ -356,3 +356,13 @@ Rolling CBP charts do not support permanent hour-specific route rules. The
 San Ysidro/Otay Mesa guides now send current decisions to the timestamped
 comparison, with lane eligibility and extra driving time considered; original
 publication dates remain visible alongside dated corrections.
+
+## 2026-10-12 · Keep ad-slot diagnostics bounded and distinct from network reports
+
+The existing Umami wrapper receives only `ad-slot-diagnostic` with fixed slot
+and state enums, once per state per mounted dashboard slot. Script completion,
+DOM content and foreground container geometry can help locate loading failures,
+but none proves that a creative loaded or that a billable impression occurred.
+Missing Umami or browser observers undercount; there is no queue, retry or new
+ad request. Use the publisher's reports for actual network totals and revenue.
+The change retains the existing placement, provider and disclosure.

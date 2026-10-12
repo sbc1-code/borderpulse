@@ -252,3 +252,6 @@ Snapshot of features live on borderpulse.com today.
 - Code-split leaf routes (main bundle ~161 KB)
 - Robots.txt allows AI crawlers, disallows `/embed/`
 - Anonymous page-view analytics via Umami
+- Bounded dashboard ad-slot diagnostics through existing Umami: script/DOM/
+  container visibility stages only, not billed impressions or revenue. Actual
+  ad-network totals still require publisher reports.

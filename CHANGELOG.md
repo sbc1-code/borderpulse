@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-10-12 — Bounded ad-slot diagnostics
+
+- Added best-effort Umami diagnostics for the existing dashboard native slot:
+  script ready/error, container populated and at least 50% container geometry
+  visible in a foreground tab. Each state is attempted once per mounted slot,
+  including effect replays. No new provider, ad request, identifier or storage.
+- These are browser diagnostics, not audited impressions, creative viewability,
+  fill rate or earnings. Current ad placement and EN/ES disclosure remain intact.
+- Added mocked unit and desktop/mobile EN/ES browser coverage. Browser tests
+  intercept all external traffic and use inert content instead of live ads.
+
 ## 2026-10-12 — San Ysidro source identity
 
 - Main San Ysidro now uses only CBP port 250401. PedWest and Cross Border
