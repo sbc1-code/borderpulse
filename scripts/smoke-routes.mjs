@@ -338,12 +338,18 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     clearTimeout(reportDeadline);
   }
   activeErrors = [];
+  const metadataDeadline = setTimeout(() => {
+    console.error(`[metadata-navigation] ${profile.name}: exceeded 60-second fixture deadline`);
+    page.close().catch(() => {});
+  }, 60_000);
   try {
     await checkFaqNavigation(page, baseUrl);
     await checkHreflangNavigation(page, baseUrl);
     if (activeErrors.length) throw new Error(activeErrors.join(' | '));
   } catch (error) {
-    failures.push(`${profile.name} FAQ scope navigation: ${error.stack || error.message}`);
+    failures.push(`${profile.name} metadata navigation: ${error.stack || error.message}`);
+  } finally {
+    clearTimeout(metadataDeadline);
   }
   await context.close();
   console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);

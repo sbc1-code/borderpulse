@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Unreleased — bounded language metadata navigation checks
+
+- Bound language metadata predicate waits and the combined metadata fixture,
+  with route diagnostics. A failed predicate now fails the release gate instead
+  of waiting for the workflow timeout.
+- Shared-URL crossing language switching verifies both rendered Spanish copy
+  and the selected language control, then checks the exact canonical/alternates.
+  Existing cleanup can reset document language on a background data update;
+  that separate lifecycle issue is outside this metadata-alternate correction.
+
 ## Unreleased — route-specific language alternates
 
 - Generated crossing, best-time, comparison and other single-URL pages replace
