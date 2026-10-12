@@ -322,11 +322,19 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
   }
   activeErrors = [];
+  // Bound the entire fixture, including browser protocol promises that are
+  // outside locator timeouts. A stuck fixture must fail the release gate.
+  const reportDeadline = setTimeout(() => {
+    console.error(`[report-times] ${profile.name}: exceeded 60-second fixture deadline`);
+    page.close().catch(() => {});
+  }, 60_000);
   try {
     await checkReportTimes(page, context, baseUrl);
     if (activeErrors.length) throw new Error(activeErrors.join(' | '));
   } catch (error) {
     failures.push(`${profile.name} report times: ${error.stack || error.message}`);
+  } finally {
+    clearTimeout(reportDeadline);
   }
   activeErrors = [];
   try {
