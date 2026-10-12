@@ -376,3 +376,12 @@ schema management. Keep visible homepage answers, route-specific FAQ generation,
 other structured data, canonical/hreflang behavior and JSON script escaping.
 This scoped correctness fix does not promise search or rich-result improvements;
 other prerender/runtime schema lifecycle issues need separate review.
+
+
+## 2026-10-12 · Retrieval time cannot establish a lane report's age
+
+A fresh CBP fetch can contain older clock-only lane reports. Show the supplied
+lane update_time separately from fetched_at, and describe snapshot freshness
+as retrieval freshness rather than Live. Do not infer a report date, midnight
+rollover or DST occurrence from the feed export date. Existing snapshot stale
+thresholds and fallback timestamps remain unchanged.

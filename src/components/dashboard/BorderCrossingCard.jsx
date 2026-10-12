@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { track } from '@/lib/analytics';
-import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
+import { FRESHNESS, freshnessOf, fetchLabel, reportTimeLabel } from '@/lib/trustState';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -21,7 +21,6 @@ import LaneRow from '@/components/dashboard/LaneRow';
 import { isSparseCell } from '@/lib/aggregates';
 import {
   getStatusForDirection,
-  getUpdatedAtForDirection,
   getWaitMinutes,
 } from '@/components/utils/crossingDirection';
 import {
@@ -96,20 +95,6 @@ function formatHour12(h, lang) {
   return `${h % 12 || 12} ${suffix}`;
 }
 
-function formatUpdatedAt(value, language) {
-  if (!value) return '';
-  if (typeof value === 'string' && /T.*Z$/.test(value)) {
-    const d = new Date(value);
-    if (!Number.isNaN(d.getTime())) {
-      return d.toLocaleTimeString(language === 'en' ? 'en-US' : 'es-MX', {
-        hour: 'numeric',
-        minute: '2-digit',
-      });
-    }
-  }
-  return String(value);
-}
-
 function advisoryLabel(type, language) {
   const labels = {
     closure: { en: 'Closure', es: 'Cierre' },
@@ -165,10 +150,9 @@ export default function BorderCrossingCard({
   const s = STATUS_STYLES[status] || STATUS_STYLES.unknown;
   const wait = getWaitMinutes(crossing, selectedDirection);
   const isHigh = typeof wait === 'number' && wait >= 45;
-  const updatedAt = getUpdatedAtForDirection(crossing, selectedDirection);
-  // The footer dot used to say "Live" unconditionally, even on an hours-old
-  // snapshot. Freshness now comes from the shared trust model.
-  const freshness = freshnessOf(snapshotAt ?? updatedAt);
+  // Retrieval freshness must not be confused with a lane's report time.
+  // A timezone-less feed export timestamp is not a fallback fetch timestamp.
+  const freshness = freshnessOf(snapshotAt);
   const isSouthbound = selectedDirection === 'southbound';
   const portStatus = getPortStatus(crossing);
   const portStatusStyle = PORT_STATUS_STYLES[portStatus] || PORT_STATUS_STYLES.unknown;
@@ -179,7 +163,7 @@ export default function BorderCrossingCard({
     ? (language === 'en'
       ? (isSouthbound ? 'Estimate not available yet' : 'No current wait time reported')
       : (isSouthbound ? 'La estimación todavía no está disponible' : 'No hay tiempo actual reportado'))
-    : (isSouthbound ? (language === 'en' ? 'Estimated delay' : 'Demora estimada') : (language === 'en' ? 'Official wait time' : 'Tiempo oficial'));
+    : (isSouthbound ? (language === 'en' ? 'Estimated delay' : 'Demora estimada') : (language === 'en' ? 'Latest reported wait' : 'Última espera reportada'));
   const hoursLabel = getHoursSummary(crossing, language);
   const advisoryText = summarizeNotice(getOperationalNotice(crossing));
   const hasAdvisory = hasOperationalAdvisory(crossing);
@@ -259,7 +243,7 @@ export default function BorderCrossingCard({
       animate={{ opacity: 1, y: 0 }}
       transition={reduceMotion ? { duration: 0 } : { delay: Math.min(index * 0.02, 0.3) }}
     >
-      <Card className="h-full flex flex-col overflow-hidden rounded-lg border-slate-200/90 bg-white shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-700 dark:bg-slate-950">
+      <Card data-testid="border-crossing-card" data-port-number={crossing.port_number} className="h-full flex flex-col overflow-hidden rounded-lg border-slate-200/90 bg-white shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-700 dark:bg-slate-950">
         <div className={`h-1.5 ${s.bar}`} />
         <CardContent className="p-3 flex-1 flex flex-col">
           {/* Header */}
@@ -366,7 +350,7 @@ export default function BorderCrossingCard({
                   {waitMetaLabel}
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
-                  <span className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>
+                  <span data-testid="primary-wait" className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>
                     {wait == null ? '—' : wait}
                   </span>
                   <span className="text-sm font-medium text-slate-700">
@@ -390,6 +374,11 @@ export default function BorderCrossingCard({
                 )}
               </div>
             </div>
+            {!isSouthbound && wait != null && (
+              <p className="mt-2 text-xs text-slate-600 break-words" data-testid="cbp-report-time">
+                {reportTimeLabel(lanes.passenger_standard?.update_time, language)}
+              </p>
+            )}
             <div className={`mt-2.5 h-2 overflow-hidden rounded-full ${s.rail}`}>
               <div
                 className={`h-full rounded-full ${s.bar}`}
@@ -498,7 +487,7 @@ export default function BorderCrossingCard({
             )}
           </AnimatePresence>
 
-          {/* Footer: live dot + updated + warning */}
+          {/* Footer: snapshot retrieval freshness, separate from official lane reports. */}
           <div className="mt-auto mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-t border-slate-200 pt-2 text-xs text-slate-600 dark:border-slate-700 dark:text-slate-300">
             <div className="flex items-center gap-1.5">
               <span
@@ -506,11 +495,10 @@ export default function BorderCrossingCard({
                   freshness.state === FRESHNESS.FRESH ? `${s.dot} motion-safe:animate-pulse` : 'bg-slate-400'
                 }`}
               />
-              <span className={freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : undefined}>
-                {liveLabel(freshness.state, freshness.age, language)}
+              <span data-testid="snapshot-freshness" className={freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : undefined}>
+                {fetchLabel(freshness.state, freshness.age, language)}
               </span>
             </div>
-            <span className="text-slate-600 dark:text-slate-300 tabular-nums">{formatUpdatedAt(updatedAt, language)}</span>
           </div>
           {isHigh && (
             <div className="mt-2 flex items-center gap-1.5 rounded-md bg-rose-50 px-2 py-1 text-xs text-rose-800">

@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-12 — CBP report times and fetch labels
+
+- Dashboard and crossing cards distinguish snapshot retrieval from the official
+  standard-lane report time. Lane details expose each report's original clock
+  and timezone text, with an explicit missing-time label for numeric reports.
+- Replaced fetch-derived Live labels and the detail page's Lanes right now
+  heading. All crossing detail cards use the actual snapshot retrieval time.
+  Missing report dates are not inferred from export timestamps or clock text;
+  collection, identity, wait availability and historical calculations stay intact.
+- Added EN/ES regression coverage for raw report text, missing times, retrieval
+  labels, stale fallback and lane state/navigation behavior. Release evidence
+  belongs to the pull request.
+
 ## 2026-10-12 — Shared FAQ metadata scope
 
 - Removed the homepage FAQPage node from the shared HTML shell. Its southbound
