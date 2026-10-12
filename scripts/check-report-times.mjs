@@ -172,9 +172,11 @@ export async function checkReportTimes(page, context, baseUrl) {
       page.waitForResponse(response => {
         const url = new URL(response.url());
         return feedMatcher(url) && (mode === 'normal' || url.pathname === '/data/crossings.json');
-      }, { timeout: 5_000 }).then(response => response.finished()),
+      }, { timeout: 5_000 }),
       action(),
     ]);
+    // Do not await Response.finished(): a rejected 503 body may never emit
+    // requestfinished. The UI assertions below wait for the applied payload.
     // Give response parsing and subscriptions a bounded event-loop turn.
     // Parallel headless profiles may pause animation frames in a background tab.
     await page.waitForTimeout(50);
