@@ -341,6 +341,14 @@ patch source-map-js to 1.2.2; keep the existing security/data/bundle gates rathe
 than widening exceptions or forcing unrelated major upgrades. Older-browser
 support is not claimed.
 
+## 2026-10-11 · San Ysidro siblings cannot replace its main port
+
+This supersedes the San Ysidro/PedWest substitution and CBX-merge assumptions
+in the August 19 identity decision. The official raw feed now demonstrably
+contains main San Ysidro (250401), PedWest (250407) and Cross Border Express
+(250409) together with different hours, status and reports. Main San Ysidro
+uses only its own row, even when reports are pending. A missing main row
+fails closed instead of substituting another facility's status or lane waits.
 
 ## 2026-10-11 · Keep fixed route advice separate from rolling charts
 

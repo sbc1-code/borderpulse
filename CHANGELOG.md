@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-10-12 — San Ysidro source identity
+
+- Main San Ysidro now uses only CBP port 250401. PedWest and Cross Border
+  Express can no longer override its hours, closure status or lane waits when
+  the main crossing is awaiting reports. Missing main-row data fails closed.
+- Added a captured official-source regression fixture, source-order/rename
+  tests and public endpoint failure-cache checks.
+
 ## 2026-10-11 — Safer crossing guidance
 
 - Walk-or-drive pages now treat an official port closure as overriding retained

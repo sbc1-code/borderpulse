@@ -22,7 +22,9 @@
 //
 // Substitution rates measured over 200 snapshots:
 //   240202 PDN 188 / 202401 12      240201 BOTA 188 / 240207 12
-//   240104 Ysleta 199 / 240203 1    250401 San Ysidro 198 / 250407 2
+//   240104 Ysleta 199 / 240203 1
+//   San Ysidro/PedWest was previously treated as a substitution. The raw CBP
+//   feed observed 2026-10-11 contains both, so that mapping is revoked below.
 //   260301 Naco 149 / 260305 51     250601 Otay Mesa 196 / 250609 4
 //
 // The last two entries are a different failure: 230103 "Gateway" and 230106
@@ -37,7 +39,9 @@ export const PINNED_PORTS = {
   '240202': { name: 'El Paso - Paso Del Norte (PDN)', state: 'TX', aliases: ['202401'] },
   '240201': { name: 'El Paso - Bridge of the Americas (BOTA)', state: 'TX', aliases: ['240207'] },
   '240104': { name: 'El Paso - Ysleta', state: 'TX', aliases: ['240203'] },
-  '250401': { name: 'San Ysidro', state: 'CA', aliases: ['250407'] },
+  // PedWest (250407) co-occurs with the main crossing and has its own hours.
+  // It is not an identity alias. See the explicit San Ysidro collector guard.
+  '250401': { name: 'San Ysidro', state: 'CA', aliases: [] },
   '260301': { name: 'Naco', state: 'AZ', aliases: ['260305'] },
   '250601': { name: 'Otay Mesa', state: 'CA', aliases: ['250609'] },
 
@@ -46,8 +50,8 @@ export const PINNED_PORTS = {
   // the substitution pairs above already group correctly via the name rules in
   // scripts/fetch-cbp.mjs (both spellings match the same regex), so they need
   // identity pinning only. Forcing port-grouping on them would bypass those
-  // name rules and orphan sibling rows (cargo lots, Cross Border Express)
-  // that are supposed to merge into their parent crossing.
+  // name rules and orphan sibling rows (such as cargo lots) that are
+  // supposed to merge into their parent crossing. San Ysidro is guarded separately.
   '535501': { name: 'Brownsville - B&M', state: 'TX', aliases: ['230106'], collapse: true },
   '535504': { name: 'Brownsville - Gateway', state: 'TX', aliases: ['230103'], collapse: true },
 };

@@ -195,6 +195,8 @@ const CANONICAL = [
 ];
 
 const canonicalKey = (row) => {
+  // These are distinct facilities in one source family, even if CBP renames one.
+  if (['250401', '250407', '250409'].includes(String(row.port_number))) return 'san-ysidro';
   // Legacy duplicate port numbers (see portIdentity.js `collapse`) group with
   // their real twin by port number, because their NAMES differ too much to hit
   // a shared rule below ("B&M Bridge" vs "Brownsville - B&M"). Applied to both
@@ -238,7 +240,19 @@ const dedupe = (rows) => {
     groups.set(k, arr);
   }
   const keep = [];
-  for (const [, arr] of groups) {
+  for (const [key, arr] of groups) {
+    if (key === 'san-ysidro') {
+      // CBP publishes the main crossing, PedWest and Cross Border Express
+      // together. A named sibling can outscore the main row while reports
+      // are pending, but its hours, closure and lane waits are not those of
+      // the main crossing. Never promote or merge sibling facility data.
+      const main = arr.find(row => String(row.port_number) === '250401');
+      if (!main) {
+        throw new Error('Refusing to substitute a San Ysidro sibling: main port 250401 is missing');
+      }
+      keep.push({ ...main, lanes: { ...main.lanes } });
+      continue;
+    }
     arr.sort((a, b) => rowScore(b) - rowScore(a));
     const winner = { ...arr[0], lanes: { ...arr[0].lanes } };
     // Merge lane data from siblings if winner has gaps.
