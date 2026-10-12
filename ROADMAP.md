@@ -39,6 +39,10 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   including comparison, crossing, best-time, walk-or-drive and embed routes.
   Slow optional feeds no longer delay waits, and the service worker does not
   silently substitute an old response for the live API.
+- [x] Remove the stale shared homepage FAQ schema, preserving visible homepage
+  answers and crossing-specific FAQ generation. Bounded release checks cover
+  generated metadata and client navigation; release evidence belongs in the PR.
+  Broader prerender/runtime schema lifecycle work is outside this correction.
 - Keep official northbound CBP data, source timestamps, honest stale states and
   the static fallback reliable. Keep the free experience supported by ads.
 - Measure whether people complete a crossing decision and return. Review
