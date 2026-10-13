@@ -59,8 +59,16 @@ test('SPA metadata replaces stale/duplicate hreflangs and preserves other altern
     assert.deepEqual(actual(), pageHreflangs(canonical));
     updatePageMeta({ canonical: base + '/blog/example/', hreflangs: [] });
     assert.deepEqual(actual(), []);
+    document.documentElement.lang = 'es';
     resetPageMeta();
+    assert.equal(document.documentElement.lang, 'es', 'metadata cleanup must preserve the language selected by its owner');
     assert.deepEqual(actual(), pageHreflangs(base + '/'));
     assert.ok(nodes.includes(rss));
+    for (const lang of ['en', 'es']) {
+      updatePageMeta({ canonical: `${base}/blog/content-${lang}/`, lang });
+      assert.equal(document.documentElement.lang, lang, 'explicit content language must still take ownership');
+      resetPageMeta();
+      assert.equal(document.documentElement.lang, lang, 'cleanup must not overwrite the content owner');
+    }
   } finally { globalThis.document = previous; }
 });

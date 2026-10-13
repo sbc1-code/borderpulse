@@ -21,11 +21,17 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
-- [~] Correct route hreflangs in generated HTML and SPA navigation while
-  preserving actual EN/ES pairs. Publication requires independent review and
-  complete release checks; exact production verification belongs to the PR.
-- [ ] Investigate dynamic walk-or-drive sitemap inventory separately from the
-  language-alternate correction; do not expand routes in that scoped change.
+- [x] Correct route hreflangs and bound metadata-navigation checks (PR129/130).
+  Production was verified on October 12 at `2b40cb2b`, including reciprocal
+  pairs and exact served assets. Those releases are complete; preserve them.
+- [x] Preserve document language through metadata cleanup, data/aggregate
+  updates and navigation. Content-specific EN/ES routes keep their own language;
+  implementation checks and exact publication evidence belong to the scoped PR.
+- [ ] Prioritize stable pedestrian-capability curation for walk-or-drive route
+  inventory. Sitemap and prerender currently share a predicate based on lane
+  objects in each snapshot, so the inventory fluctuates as reports change.
+  Keep this separate from document-language ownership; do not invent capability
+  or expand routes without source evidence.
 
 - [x] Separate CBP lane report times from snapshot retrieval on dashboard and
   crossing detail cards. Preserve raw report text and unknown dates; release

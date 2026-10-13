@@ -33,7 +33,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const pageOwnsLanguage =
       /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
-      /^\/(methodology|metodologia)\/?$/.test(location.pathname);
+      /^\/(methodology|metodologia|privacy|privacidad)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
   }, [language, location.pathname]);

@@ -53,10 +53,11 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
 
 /**
  * Reset meta tags to defaults (call on unmount or route change).
+ * Document language belongs to Layout or the content-specific page. Metadata
+ * effects also clean up during data updates, so they must not reset language.
  */
 export function resetPageMeta() {
   setHreflangs(pageHreflangs('https://borderpulse.com/'));
-  document.documentElement.lang = 'en';
   document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
   setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
   setMeta('og:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times', 'property');
