@@ -1,6 +1,18 @@
 # CHANGELOG
 
-## Unreleased — bounded language metadata navigation checks
+## 2026-10-13 — Document language ownership
+
+- Metadata cleanup preserves the document language during crossing data and
+  aggregate updates. Shared pages retain the browser's EN/ES preference;
+  translated article, methodology and privacy routes declare their own content
+  language. Privacy text, canonicals and language alternates are unchanged.
+- Added a regression that fails on the previous English reset, plus local-only
+  desktop/mobile checks for delayed aggregates, feed refresh, switching,
+  Back/Forward and content-specific routes with contradictory preferences.
+  External providers and service workers stay blocked in browser checks.
+- Full release checks and exact publication evidence belong to the scoped PR.
+
+## 2026-10-12 — Bounded language metadata navigation checks (PR130)
 
 - Bound language metadata predicate waits and the combined metadata fixture,
   with route diagnostics. A failed predicate now fails the release gate instead
@@ -10,7 +22,7 @@
   Existing cleanup can reset document language on a background data update;
   that separate lifecycle issue is outside this metadata-alternate correction.
 
-## Unreleased — route-specific language alternates
+## 2026-10-12 — Route-specific language alternates (PR129)
 
 - Generated crossing, best-time, comparison and other single-URL pages replace
   inherited homepage hreflangs with their own canonical URL. Existing published

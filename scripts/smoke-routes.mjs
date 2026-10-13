@@ -10,6 +10,7 @@ import { checkReportTimes } from './check-report-times.mjs';
 import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
 import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
 import { checkBuiltHreflangs, checkHreflangNavigation } from './check-hreflang.mjs';
+import { checkDocumentLanguage } from './check-document-language.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -336,6 +337,19 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     failures.push(`${profile.name} report times: ${error.stack || error.message}`);
   } finally {
     clearTimeout(reportDeadline);
+  }
+  activeErrors = [];
+  const languageDeadline = setTimeout(() => {
+    console.error(`[document-language] ${profile.name}: exceeded 60-second fixture deadline`);
+    page.close().catch(() => {});
+  }, 60_000);
+  try {
+    await checkDocumentLanguage(page, context, baseUrl);
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} document language: ${error.stack || error.message}`);
+  } finally {
+    clearTimeout(languageDeadline);
   }
   activeErrors = [];
   const metadataDeadline = setTimeout(() => {

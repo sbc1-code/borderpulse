@@ -12,7 +12,7 @@ export default function Privacy({ lang = 'en' }) {
     const description = es
       ? 'Aviso sobre preferencias del navegador, analítica y anuncios de Adsterra en Border Pulse.'
       : 'Notice about browser preferences, analytics, and Adsterra advertising on Border Pulse.';
-    updatePageMeta({ title, description, ogTitle: title, ogDescription: description, ogUrl: canonical, canonical });
+    updatePageMeta({ title, description, ogTitle: title, ogDescription: description, ogUrl: canonical, canonical, lang: es ? 'es' : 'en' });
     return () => resetPageMeta();
   }, [es]);
 
