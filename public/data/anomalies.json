@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-12T17:34:52.290Z",
-  "snapshot_at": "2026-10-12T17:22:39.882Z",
+  "generated_at": "2026-10-13T00:22:28.631Z",
+  "snapshot_at": "2026-10-13T00:07:36.494Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -217,7 +217,7 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.85,
-      "detected_at": "2026-10-12T07:06:18.190Z",
+      "detected_at": "2026-10-13T00:22:28.631Z",
       "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Monday hour so far is 6 PM (median 3 min) — ~85% below the 30-day baseline of 20 min.",
       "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Pharr es 6 PM (mediana 3 min) — ~85% debajo de la base de 30 días de 20 min.",
       "evidence": {
@@ -226,7 +226,7 @@
         "best_hour": 18,
         "best_median": 3,
         "overall_median": 20,
-        "samples": 16
+        "samples": 20
       }
     },
     {
@@ -268,16 +268,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.7454545454545455,
-      "detected_at": "2026-10-12T17:34:52.290Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Monday hour so far is 2 AM (median 14 min) — ~75% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 14 min) — ~75% debajo de la base de 30 días de 55 min.",
+      "severity": 0.7586206896551724,
+      "detected_at": "2026-10-13T00:22:28.631Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Monday hour so far is 2 AM (median 14 min) — ~76% below the 30-day baseline of 58 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 14 min) — ~76% debajo de la base de 30 días de 58 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 2,
         "best_median": 14,
-        "overall_median": 55,
+        "overall_median": 58,
         "samples": 13
       }
     },
@@ -297,42 +297,6 @@
         "best_median": 25,
         "overall_median": 75,
         "samples": 14
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-10-12T07:06:18.190Z",
-      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 11 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 11 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 11,
-        "best_median": 15,
-        "overall_median": 45,
-        "samples": 9
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-10-12T07:06:18.190Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 11 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 11 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 11,
-        "best_median": 5,
-        "overall_median": 15,
-        "samples": 9
       }
     },
     {
@@ -372,6 +336,62 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-10-12T17:34:52.290Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Monday hour so far is 2 AM (median 25 min) — ~50% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 25 min) — ~50% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 2,
+        "best_median": 25,
+        "overall_median": 50,
+        "samples": 9
+      }
+    }
+  ],
+  "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-10-12T07:06:18.190Z",
+      "summary_en": "Right now Calexico - West's lightest Monday hour so far is 11 AM (median 15 min) — ~67% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - West es 11 AM (mediana 15 min) — ~67% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 11,
+        "best_median": 15,
+        "overall_median": 45,
+        "samples": 9
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-10-12T07:06:18.190Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Monday hour so far is 11 AM (median 5 min) — ~67% below the 30-day baseline of 15 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Nogales - Deconcini es 11 AM (mediana 5 min) — ~67% debajo de la base de 30 días de 15 min.",
+      "evidence": {
+        "day_of_week": 1,
+        "day_label": "Mon",
+        "best_hour": 11,
+        "best_median": 5,
+        "overall_median": 15,
+        "samples": 9
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -405,25 +425,6 @@
         "overall_median": 30,
         "samples": 9
       }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-10-12T17:34:52.290Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Monday hour so far is 2 AM (median 25 min) — ~50% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 25 min) — ~50% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 2,
-        "best_median": 25,
-        "overall_median": 50,
-        "samples": 9
-      }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
