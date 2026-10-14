@@ -30,6 +30,7 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await page.reload();
       const chooser = page.getByLabel(lang === 'es' ? 'Tu zona de cruce' : 'Your crossing area');
       await chooser.selectOption('el-paso-juarez');
+      await page.waitForURL(url => url.searchParams.get('area') === 'el-paso-juarez');
       const panel = page.getByRole('region', { name: lang === 'es' ? 'Comparación local' : 'Local comparison', exact: true });
       await panel.waitFor();
       await panel.getByText(/Santa Teresa/).first().waitFor();
@@ -55,7 +56,10 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await chooser.selectOption('san-diego-tijuana');
       await panel.getByRole('heading', { name: 'San Diego–Tijuana', exact: true }).waitFor();
       await page.reload();
-      assert.equal(await chooser.inputValue(), 'el-paso-juarez', 'blocked write must not claim persistence');
+      assert.equal(await chooser.inputValue(), 'san-diego-tijuana', 'the URL remains usable when browser storage is blocked');
+      assert.equal(await page.evaluate(() => localStorage.getItem('borderPulse_corridor')), 'el-paso-juarez', 'blocked storage does not claim a saved preference');
+      await chooser.selectOption('el-paso-juarez');
+      await panel.getByRole('heading', { name: 'El Paso–Juárez', exact: true }).waitFor();
       const cameraLink = panel.getByRole('link', { name: lang === 'es' ? 'Ver cámaras' : 'View cameras', exact: true }).first();
       await cameraLink.click();
       await page.waitForURL(url => url.hash === '#cameras');
@@ -76,6 +80,7 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await page.getByRole('button', { name: 'California', exact: true }).click();
       assert.equal(await chooser.inputValue(), '');
       assert.equal(await page.getByRole('region', { name: lang === 'es' ? 'Comparación local' : 'Local comparison', exact: true }).count(), 0);
+      assert.equal(new URL(page.url()).searchParams.has('area'), false);
     }
   } finally {
     await page.unroute(dataPattern, feed);

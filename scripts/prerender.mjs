@@ -6,6 +6,9 @@ import { mdxBodyToHtml } from './lib/mdx-to-html.mjs';
 import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
+import { snapshotHtml, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
+import { crossingSearchTitle } from '../src/lib/crossingNames.js';
+import { camerasFor } from '../src/lib/cameras.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -43,7 +46,7 @@ function faqItems(crossing, aggregate) {
 function renderCrossingHead(crossing, slug, aggregate) {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
-  const title = `${crossing.name} Border Wait Time Today: Live CBP Data (2026) | Border Pulse`;
+  const title = crossingSearchTitle(crossing, 'en', camerasFor(crossing.port_number).length > 0);
   const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
@@ -489,7 +492,7 @@ async function main() {
   const authors = readAuthors();
 
   const indexWithLinks = injectCrawlableLinks(originalIndex, crossings, portToSlug, posts);
-  fs.writeFileSync(indexPath, indexWithLinks);
+  fs.writeFileSync(indexPath, injectSnapshot(indexWithLinks, snapshotHtml(crossings, portToSlug, doc.fetched_at)));
 
   const aggregatesDir = path.resolve(root, 'public/data/aggregates');
   let crossingCount = 0;
@@ -504,7 +507,7 @@ async function main() {
       } catch {}
     }
     const head = renderCrossingHead(c, slug, aggregate);
-    const html = rewriteIndex(indexWithLinks, head);
+    const html = injectSnapshot(rewriteIndex(indexWithLinks, head), snapshotHtml([c], portToSlug, doc.fetched_at, true));
     const outDir = path.resolve(distDir, 'crossing', slug);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);

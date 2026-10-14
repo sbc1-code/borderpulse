@@ -21,6 +21,14 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] QC the October 13 locality-first flow, shareable area URLs and familiar
+  crossing names. Deliver useful visible homepage/crossing snapshots without
+  JavaScript, preserving timestamps and canonical identity. Validation and
+  preview evidence belong to PR #132; not published yet.
+- [ ] Reconnect an existing authorized Search Console data path to measure
+  query/page impressions, clicks, CTR and area-to-crossing actions after release.
+  GSC Wizard reported an ended trial during QC; no subscription was started.
+
 - [~] October 13 competitor feature batch: nine remembered local corridor
   filters, comparisons of the selected eligible lane and click-loaded public
   camera views at five Juárez–El Paso bridges. Prepared on the feature branch;

@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2026-10-13 — UX and crawlable-report QC (prepared)
+
+- Captured the live competitor and BorderPulse homepage in the cloud browser.
+  The observed first-screen gap is local decisions versus border-wide charts.
+  Moved the summary/chart behind an accessible disclosure, added quick local
+  choices, and made corridor selection a shareable `?area=` URL with Back
+  navigation and canonical homepage identity preserved.
+- Added familiar El Paso–Juárez crossing names and accent-insensitive aliases
+  for local search, headings and search titles without changing port identity.
+- Homepage and all 42 canonical crossing pages now deliver visible report HTML
+  before JavaScript. The original retrieval timestamp, raw lane clocks, missing
+  reports and closure state stay explicit. Other routes do not inherit this
+  homepage snapshot; no new page inventory or guessed rich-result schema.
+- Added snapshot/no-JavaScript assertions and expanded local-area browser
+  checks. No ranking, Core Web Vitals or acquisition improvement is claimed;
+  current Search Console reads were unavailable because the connected provider
+  reported an ended trial. Exact release evidence belongs to the pull request.
+
 ## 2026-10-13 — Local comparison and camera feature batch (prepared)
 
 - Added nine named crossing corridors, remembered in browser storage and

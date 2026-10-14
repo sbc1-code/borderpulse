@@ -1,5 +1,15 @@
 # DECISIONS
 
+## 2026-10-13 · Local decisions lead; published reports remain useful without JS
+
+Use familiar names as display/search aliases, preserving canonical CBP identity.
+Keep the border-wide chart available behind a disclosure and make local area
+selection shareable without creating duplicate indexable URLs. Deliver visible,
+timestamped HTML inside the React root on the homepage and crossing pages;
+createRoot replaces it with the refreshing app. Do not hide different report
+content for crawlers, imply a published snapshot is live, or expand thin SEO
+routes while current query/ranking evidence is unavailable.
+
 ## 2026-10-13 · Local comparisons use eligible lanes; cameras load on request
 
 The owner requested competitor-inspired crossing features. Compare named

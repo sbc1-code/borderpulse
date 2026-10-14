@@ -8,6 +8,8 @@ import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
 import CrossingCameras from '@/components/dashboard/CrossingCameras';
+import { camerasFor } from '@/lib/cameras';
+import { crossingDisplayName, crossingSearchTitle } from '@/lib/crossingNames';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
@@ -385,9 +387,7 @@ export default function CrossingDetail() {
   useEffect(() => {
     if (!crossing) return;
     const hasHistoricalPattern = Array.isArray(aggregate?.by_hour) && aggregate.by_hour.length > 0;
-    const title = language === 'en'
-      ? `${crossing.name} Wait Times | Border Pulse`
-      : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
+    const title = crossingSearchTitle(crossing, language, camerasFor(crossing.port_number).length > 0);
     const desc = language === 'en'
       ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
       : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
@@ -475,7 +475,7 @@ export default function CrossingDetail() {
 
       <header className="mb-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-          {language === 'en' ? `${crossing.name} wait times` : `Tiempos de espera en ${crossing.name}`}
+          {language === 'en' ? `${crossingDisplayName(crossing, language)} wait times` : `Tiempos de espera en ${crossingDisplayName(crossing, language)}`}
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-3 flex-wrap">
           <span className="inline-flex items-center gap-1">

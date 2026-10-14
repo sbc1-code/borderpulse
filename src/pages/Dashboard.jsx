@@ -1,4 +1,5 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,6 +19,7 @@ import BorderLine from '@/components/dashboard/BorderLine';
 import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
 import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
+import { crossingSearchTerms } from '@/lib/crossingNames';
 import { dataService } from '@/components/utils/dataService';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
@@ -68,8 +70,11 @@ export default function Dashboard() {
   });
 
   const language = usePersistentLanguage();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const didSyncArea = useRef(false);
   const direction = 'northbound';
   const [region, setRegion] = useState(() => {
+    if (corridorFor(searchParams.get('area'))) return 'ALL';
     // Stored region preference takes precedence; otherwise check the geolocation default.
     const stored = localStorage.getItem('borderPulse_region');
     if (stored) return stored;
@@ -79,9 +84,20 @@ export default function Dashboard() {
   });
   const [search, setSearch] = useState('');
   const [corridor, setCorridor] = useState(() => {
+    if (searchParams.has('area')) return corridorFor(searchParams.get('area'))?.id || '';
     try { return corridorFor(localStorage.getItem('borderPulse_corridor'))?.id || ''; }
     catch { return ''; }
   });
+  useEffect(() => {
+    if (!didSyncArea.current) {
+      didSyncArea.current = true;
+      if (!searchParams.has('area')) return;
+    }
+    const id = corridorFor(searchParams.get('area'))?.id || '';
+    setCorridor(id);
+    setSearch('');
+    if (id) setRegion('ALL');
+  }, [searchParams]);
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -247,6 +263,9 @@ export default function Dashboard() {
       localStorage.removeItem('borderPulse_corridor');
     } catch { /* Filters still work when browser storage is unavailable. */ }
     track('region-filter', { region: r });
+    const next = new URLSearchParams(searchParams);
+    next.delete('area');
+    setSearchParams(next);
   };
 
   const changeCorridor = (id) => {
@@ -259,6 +278,9 @@ export default function Dashboard() {
       localStorage.setItem('borderPulse_region', 'ALL');
     } catch { /* A blocked write must not prevent local comparison. */ }
     track('corridor-filter', { corridor: id || 'all' });
+    const next = new URLSearchParams(searchParams);
+    id ? next.set('area', id) : next.delete('area');
+    setSearchParams(next);
   };
 
   // Map port_number → slug for /crossing/{slug} links and /data/aggregates/{slug}.json fetches.
@@ -269,14 +291,12 @@ export default function Dashboard() {
 
   // Filter by region + search; then sort heaviest first, keep null waits last.
   const filteredCrossings = useMemo(() => {
-    const q = search.trim().toLowerCase();
+    const q = search.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     return state.crossings.filter((c) => {
       if (corridor && !corridorFor(corridor)?.ports.includes(String(c.port_number))) return false;
       if (region !== 'ALL' && c.state !== region) return false;
       if (!q) return true;
-      const haystack = [c.name, c.port_name, c.crossing_name, c.state]
-        .filter(Boolean).join(' ').toLowerCase();
-      return haystack.includes(q);
+      return crossingSearchTerms(c).includes(q);
     });
   }, [state.crossings, region, search, corridor]);
 
@@ -372,7 +392,7 @@ export default function Dashboard() {
           animate={{ opacity: 1, x: 0 }}
           className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
         >
-          {language === 'en' ? 'Border Crossing Intelligence' : 'Inteligencia de Cruces Fronterizos'}
+          {language === 'en' ? 'US–Mexico border wait times' : 'Tiempos de espera en la frontera México–EE. UU.'}
         </motion.h1>
         <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">
           {language === 'en'
@@ -521,8 +541,14 @@ export default function Dashboard() {
               {CORRIDORS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </div>
+          {!corridor && <nav aria-label={language === 'es' ? 'Comparar cruces cercanos' : 'Compare nearby crossings'} className="mx-auto mb-4 flex max-w-3xl flex-wrap gap-2">
+            <p className="w-full text-xs text-slate-600 dark:text-slate-400">{language === 'es' ? 'Elige tu zona para comparar el mismo carril en cruces cercanos.' : 'Choose your area to compare the same lane at nearby crossings.'}</p>
+            {CORRIDORS.slice(0, 3).map(c => <Link key={c.id} to={`/?area=${c.id}`} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; e.preventDefault(); changeCorridor(c.id); }} className="inline-flex min-h-11 items-center rounded-lg border border-emerald-200 bg-white px-3 text-sm font-medium text-emerald-800 dark:border-emerald-800 dark:bg-gray-900 dark:text-emerald-300">{c.name}</Link>)}
+          </nav>}
           <LocalCrossingComparison crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
 
+          <details className="mb-4 rounded-lg border border-slate-200 bg-white/70 p-3 dark:border-gray-700 dark:bg-gray-900/70">
+            <summary className="min-h-11 cursor-pointer text-sm font-medium text-slate-700 dark:text-slate-300">{language === 'es' ? 'Ver resumen y mapa de esperas' : 'Show wait summary and border chart'}</summary>
           <CommuterSnapshot
             crossings={filteredCrossings}
             selectedDirection={direction}
@@ -541,6 +567,7 @@ export default function Dashboard() {
             focusedPort={focusedPort}
             onSelect={handleTickSelect}
           />
+          </details>
 
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
