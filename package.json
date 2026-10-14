@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "test": "npm run test:ads && npm run test:writer && npm run test:refresh && npm run test:publish && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:metadata && npm run test:audit && npm run test:bundle && npm run test:routes",
-    "test:metadata": "node --test scripts/test-faq-scope.mjs scripts/test-hreflang.mjs",
+    "test:metadata": "node --test scripts/test-faq-scope.mjs scripts/test-hreflang.mjs scripts/test-crossing-snapshot.mjs",
     "test:ads": "node --test scripts/test-ad-slot-diagnostics.mjs",
     "test:publish": "node --test scripts/test-publish-data.mjs scripts/test-public-crossings.mjs",
     "publish:validate": "node scripts/validate-publish-data.mjs",
@@ -35,7 +35,7 @@
     "news:classify": "node scripts/build-curation-queue.mjs",
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
-    "test:trust": "node --test scripts/test-trust-state.mjs",
+    "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-local-comparison.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
     "test:writer": "node --test scripts/test-generated-writer.mjs",
     "test:refresh": "node --test scripts/test-data-refresh.mjs"

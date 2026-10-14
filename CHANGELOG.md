@@ -1,5 +1,75 @@
 # CHANGELOG
 
+## 2026-10-13 — Camera coverage beyond El Paso (prepared)
+
+- Added a camera-area selector for all nine corridors. The camera area follows
+  an explicit dashboard area change, while its own picker does not change the
+  wait-time filter. Changing areas/crossings and collapsing remove the player.
+- Added San Ysidro and Otay Mesa Caltrans U.S. road approach viewers, explicitly
+  distinguished from Mexico-to-U.S. inspection queues in visible copy, search
+  titles and no-JavaScript snapshots. Added four officially published Eagle
+  Pass Bridge II player views, without inferring their lane/orientation.
+- Added external official camera-source paths for Nogales, Laredo and Pharr.
+  Pharr's source belongs only to port 230502, not nearby Anzalduas. Calexico,
+  Brownsville and Progreso show an explicit unverified-coverage state.
+- Caltrans uses its published still images with manual refresh, original-image
+  timestamp guidance and error fallback. Both San Diego sources showed the
+  provider's Temporarily Unavailable placeholder during the browser check.
+- Generalized source/disclosure/privacy copy for YouTube, Caltrans and
+  IPCamLive; retained source/fallback links. No paid camera license, video relay,
+  new dependency or production release. Provider playback is not established
+  by mocked tests; exact verification evidence belongs to PR #132.
+
+## 2026-10-13 — Homepage camera access (prepared)
+
+- Added a visible Camera feeds section beside the local-area controls. Visitors
+  can select one of five verified El Paso–Juárez bridges and open the existing
+  camera player directly on the homepage, without finding a detail-page link.
+- Opening the section makes no player request. Selecting a view loads one
+  player; changing bridges or collapsing the section removes it. Coverage is
+  labeled explicitly, and English/Spanish copy and provider fallbacks are shared
+  with the crossing-detail component.
+- Added desktop/mobile EN/ES release checks for discovery, bridge switching,
+  deferred loading, cleanup and viewport fit. Direct inspection found both Paso
+  del Norte players rendered but buffering in the cloud browser; live playback
+  and source uptime remain unverified. Final release evidence belongs to PR #132.
+
+## 2026-10-13 — UX and crawlable-report QC (prepared)
+
+- Captured the live competitor and BorderPulse homepage in the cloud browser.
+  The observed first-screen gap is local decisions versus border-wide charts.
+  Moved the summary/chart behind an accessible disclosure, added quick local
+  choices, and made corridor selection a shareable `?area=` URL with Back
+  navigation and canonical homepage identity preserved.
+- Added familiar El Paso–Juárez crossing names and accent-insensitive aliases
+  for local search, headings and search titles without changing port identity.
+- Homepage and all 42 canonical crossing pages now deliver visible report HTML
+  before JavaScript. The original retrieval timestamp, raw lane clocks, missing
+  reports and closure state stay explicit. Other routes do not inherit this
+  homepage snapshot; no new page inventory or guessed rich-result schema.
+- Added snapshot/no-JavaScript assertions and expanded local-area browser
+  checks. No ranking, Core Web Vitals or acquisition improvement is claimed;
+  current Search Console reads were unavailable because the connected provider
+  reported an ended trial. Exact release evidence belongs to the pull request.
+
+## 2026-10-13 — Local comparison and camera feature batch (prepared)
+
+- Added nine named crossing corridors, remembered in browser storage and
+  compatible with existing state/search filters. El Paso–Juárez includes
+  Santa Teresa in New Mexico without treating the entire state as local.
+- Added northbound comparisons for standard passenger, Ready Lane, SENTRI
+  and pedestrian lanes. Missing reports, closed ports/lanes and unverifiable
+  operating hours are excluded. Ties, fewer than two available reports and
+  stale/unknown/future snapshot times suppress a shortest-wait claim. Report
+  clocks remain separate from retrieval time; extra driving is not estimated.
+- Added ten click-loaded camera views at five Juárez–El Paso bridges from
+  the official Fideicomiso directory, with view switching, closing, source and
+  playback fallback links, EN/ES provider disclosure and privacy copy.
+- Added comparison eligibility tests and desktop/mobile EN/ES interactions
+  to the existing release gate. No new npm dependency, account, database,
+  subscription, email service or production workflow change. Publication and
+  validation evidence belongs to the scoped pull request.
+
 ## 2026-10-13 — Document language ownership
 
 - Metadata cleanup preserves the document language during crossing data and

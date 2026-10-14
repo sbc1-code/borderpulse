@@ -39,6 +39,11 @@ export default function Privacy({ lang = 'en' }) {
       </header>
 
       <div className="space-y-4">
+        <section className="rounded-xl border border-slate-200 bg-white/80 p-4 dark:border-gray-700 dark:bg-gray-900/50">
+          <h2 className="font-semibold text-slate-900 dark:text-white">{es ? 'Cámaras públicas' : 'Public cameras'}</h2>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{es ? 'El panel y algunas páginas de cruces ofrecen cámaras públicas y enlaces a fuentes oficiales. Seleccionar una vista carga un reproductor de YouTube o IPCamLive, o una imagen de Caltrans; tu navegador se conecta directamente con ese servicio. Algunos enlaces abren la página del proveedor. Sus solicitudes, el acceso y la disponibilidad de las cámaras dependen del proveedor.' : 'The dashboard and some crossing pages offer public cameras and links to official sources. Selecting a view loads a YouTube or IPCamLive player, or a Caltrans image; your browser connects directly to that service. Some links open the provider’s website. Its requests, access and camera availability depend on the provider.'}</p>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm text-emerald-700 underline dark:text-emerald-400">{es ? 'Aviso de privacidad de Google' : 'Google Privacy Policy'}</a>
+        </section>
         <section className="rounded-xl border border-slate-200 bg-white/80 p-4 dark:border-gray-700 dark:bg-gray-900/50 sm:p-5">
           <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
             <Database className="h-4 w-4 text-emerald-600" />
@@ -68,7 +73,7 @@ export default function Privacy({ lang = 'en' }) {
       </div>
 
       <p className="mt-6 text-xs text-slate-500 dark:text-slate-400">
-        {es ? 'No es asesoría legal. Borrador actualizado: 27 de septiembre de 2026.' : 'Not legal advice. Draft updated: September 27, 2026.'}
+        {es ? 'No es asesoría legal. Borrador actualizado: 13 de octubre de 2026.' : 'Not legal advice. Draft updated: October 13, 2026.'}
       </p>
     </div>
   );

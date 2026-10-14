@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Copy, Share2, Check } from 'lucide-react';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { track } from '@/lib/analytics';
 import { pickLightestHour } from '@/lib/recommendations';
+import { corridorFor } from '@/lib/corridors';
 
 function formatHourCompact(h) {
   if (h == null) return '';
@@ -21,15 +22,18 @@ function lightestTodayFor(crossing, aggregate) {
   return pickLightestHour(crossing, aggregate.by_hour, today);
 }
 
-function buildStatusText(crossings, language, direction, portToSlug, aggregates) {
-  const now = new Date();
-  const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+function buildStatusText(crossings, language, direction, portToSlug, aggregates, corridorId, fetchedAt) {
+  const corridor = corridorFor(corridorId);
+  if (corridor) return `${corridor.name}\n${language === 'es' ? 'Compara los reportes de CBP por carril antes de salir.' : 'Compare CBP lane reports before leaving.'}\nhttps://borderpulse.com/?area=${corridor.id}`;
+  const time = fetchedAt && Number.isFinite(Date.parse(fetchedAt))
+    ? new Date(fetchedAt).toLocaleString(language === 'es' ? 'es-MX' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
+    : (language === 'es' ? 'hora de consulta desconocida' : 'retrieval time unknown');
   const directionLabel = direction === 'southbound'
     ? (language === 'en' ? 'To Mexico' : 'Hacia México')
     : (language === 'en' ? 'To USA' : 'Hacia EE.UU.');
   const header = language === 'en'
-    ? `🚦 Border Wait Times ${directionLabel} (${time}):`
-    : `🚦 Tiempos de Espera ${directionLabel} (${time}):`;
+    ? `🚦 Reported Border Waits ${directionLabel} (data fetched ${time}):`
+    : `🚦 Esperas Reportadas ${directionLabel} (datos consultados ${time}):`;
   const isNorthbound = direction !== 'southbound';
   const lines = crossings
     .filter((c) => getWaitMinutes(c, direction) != null)
@@ -56,8 +60,9 @@ function buildStatusText(crossings, language, direction, portToSlug, aggregates)
   return [header, '', ...lines, '', footer].join('\n');
 }
 
-export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound', portToSlug }) {
+export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound', portToSlug, corridorId, fetchedAt }) {
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
   const [aggregates, setAggregates] = useState({});
 
   // Lazy-fetch aggregates for the top 17 NB crossings on open. Browser
@@ -65,7 +70,7 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
   // fetch, so this is fast in practice. SB shares skip this since
   // aggregates are NB-only.
   useEffect(() => {
-    if (!open || direction === 'southbound' || !portToSlug) return;
+    if (!open || corridorFor(corridorId) || direction === 'southbound' || !portToSlug) return;
     const slugs = (crossings || [])
       .filter((c) => getWaitMinutes(c, direction) != null)
       .slice(0, 17)
@@ -92,11 +97,11 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
       });
     });
     return () => { cancelled = true; };
-  }, [open, direction, crossings, portToSlug, aggregates]);
+  }, [open, direction, crossings, portToSlug, aggregates, corridorId]);
 
   const text = useMemo(
-    () => buildStatusText(crossings || [], language, direction, portToSlug, aggregates),
-    [crossings, language, direction, portToSlug, aggregates],
+    () => buildStatusText(crossings || [], language, direction, portToSlug, aggregates, corridorId, fetchedAt),
+    [crossings, language, direction, portToSlug, aggregates, corridorId, fetchedAt],
   );
 
   const copy = async () => {
@@ -104,16 +109,19 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
       await navigator.clipboard.writeText(text);
       track('share-status', { direction, method: 'copy' });
       setCopied(true);
+      setCopyError(false);
       setTimeout(() => setCopied(false), 1800);
     } catch (e) {
-      console.warn(e);
+      setCopied(false);
+      setCopyError(true);
     }
   };
 
   const nativeShare = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Border Pulse', text, url: 'https://borderpulse.com' });
+        const area = corridorFor(corridorId);
+        await navigator.share({ title: 'Border Pulse', text, url: area ? `https://borderpulse.com/?area=${area.id}` : 'https://borderpulse.com/' });
         track('share-status', { direction, method: 'native' });
       } catch {}
     } else {
@@ -126,25 +134,29 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <DialogTitle>
-            {language === 'en' ? 'Share current status' : 'Compartir estado actual'}
+            {corridorFor(corridorId)
+              ? (language === 'en' ? 'Share this crossing area' : 'Compartir esta zona de cruce')
+              : (language === 'en' ? 'Share reported waits' : 'Compartir esperas reportadas')}
           </DialogTitle>
+          <DialogDescription>{language === 'en' ? 'Check lane eligibility and report times before leaving.' : 'Verifica los requisitos del carril y las horas de reporte antes de salir.'}</DialogDescription>
         </DialogHeader>
         <div className="space-y-3">
           <div className="rounded-md border border-slate-200 bg-slate-50 p-3 text-xs font-mono whitespace-pre-wrap text-slate-800 max-h-64 overflow-auto">
             {text}
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <Button onClick={copy} variant="outline" className="gap-2">
+            <Button onClick={copy} variant="outline" className="gap-2 min-h-11">
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {copied
                 ? (language === 'en' ? 'Copied' : 'Copiado')
                 : (language === 'en' ? 'Copy for WhatsApp' : 'Copiar para WhatsApp')}
             </Button>
-            <Button onClick={nativeShare} className="gap-2">
+            <Button onClick={nativeShare} className="gap-2 min-h-11">
               <Share2 className="w-4 h-4" />
               {language === 'en' ? 'Share' : 'Compartir'}
             </Button>
           </div>
+          {copyError && <p role="status" className="text-xs text-amber-700 dark:text-amber-300">{language === 'en' ? 'Copy failed. You can share the page URL from your browser.' : 'No se pudo copiar. Puedes compartir la URL desde tu navegador.'}</p>}
           <p className="text-[11px] text-slate-500 text-center">
             {language === 'en'
               ? 'Paste into WhatsApp, iMessage, or anywhere else.'

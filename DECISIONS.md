@@ -1,5 +1,41 @@
 # DECISIONS
 
+## 2026-10-13 · Camera coverage cannot substitute nearby roads for inspection queues
+
+Use an explicit camera-area picker and distinguish embedded crossing views,
+Caltrans U.S. road approach views, and external official source pages. Areas
+with no verified source show that state instead of defaulting to El Paso.
+Keep canonical port identity: the Pharr source is not Anzalduas. Camera source
+review establishes provenance, not current playback or lane-specific conditions.
+
+## 2026-10-13 · Camera access belongs on the homepage
+
+The owner could not find feeds from the preview homepage. Give cameras their
+own visible entry beside local-area selection, with explicit El Paso–Juárez
+coverage and an inline bridge/view picker. Reuse the existing player and
+disclosures; selecting a view remains the only action that loads the provider,
+and bridge changes/collapse remove playback.
+
+## 2026-10-13 · Local decisions lead; published reports remain useful without JS
+
+Use familiar names as display/search aliases, preserving canonical CBP identity.
+Keep the border-wide chart available behind a disclosure and make local area
+selection shareable without creating duplicate indexable URLs. Deliver visible,
+timestamped HTML inside the React root on the homepage and crossing pages;
+createRoot replaces it with the refreshing app. Do not hide different report
+content for crawlers, imply a published snapshot is live, or expand thin SEO
+routes while current query/ranking evidence is unavailable.
+
+## 2026-10-13 · Local comparisons use eligible lanes; cameras load on request
+
+The owner requested competitor-inspired crossing features. Compare named
+corridors and the same northbound lane type without estimating total trip time.
+Suppress comparative winners on stale/unknown retrievals or unavailable hours;
+camera views are orientation, not proof of lane-specific conditions. Load the
+public YouTube player only after a user selects a camera; use official-source
+and provider fallback links. Real alerts/community reports remain separate
+backend work and do not override the ban on non-delivering notification CTAs.
+
 Short log of *why* something is the way it is. Append-only. Future-you (or
 the AI you're collaborating with) reads this when "wait, why did we…"
 comes up.

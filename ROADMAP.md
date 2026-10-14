@@ -21,6 +21,30 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] QC the October 13 locality-first flow, shareable area URLs and familiar
+  crossing names, with a visible inline camera entry on the homepage. Deliver
+  useful visible homepage/crossing snapshots without
+  JavaScript, preserving timestamps and canonical identity. Validation and
+  preview evidence belong to PR #132; not published yet.
+- [ ] Reconnect an existing authorized Search Console data path to measure
+  query/page impressions, clicks, CTR and area-to-crossing actions after release.
+  GSC Wizard reported an ended trial during QC; no subscription was started.
+
+- [~] October 13 competitor feature batch: nine remembered local corridor
+  filters, comparisons of the selected eligible lane and click-loaded public
+  camera views across El Paso–Juárez, San Diego–Tijuana and Eagle Pass, with
+  external official source paths for Nogales, Laredo and Pharr. Prepared on the feature branch;
+  production publication is not implied. Keep raw CBP report times visible and
+  exclude closed/unverifiable hours, missing reports and stale winner claims.
+- [ ] Verify permissible camera sources for Calexico–Mexicali, Brownsville and
+  Progreso, and real playback of the prepared viewers. Public source directories
+  and road approaches do not establish inspection-queue or live-stream coverage.
+- [ ] Real email threshold alerts and community crossing reports: implement
+  only with a working delivery channel and shared storage. See
+  `docs/CROSSING-FEATURES.md` for the concrete follow-up contract, source receipts,
+  operating costs and validation requirements. No signup/report form until the
+  service actually accepts and delivers it.
+
 - [x] Correct route hreflangs and bound metadata-navigation checks (PR129/130).
   Production was verified on October 12 at `2b40cb2b`, including reciprocal
   pairs and exact served assets. Those releases are complete; preserve them.

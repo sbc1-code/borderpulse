@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, useLocation, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck, AlertTriangle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,9 @@ import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
+import CrossingCameras from '@/components/dashboard/CrossingCameras';
+import { cameraSourceFor } from '@/lib/cameras';
+import { crossingDisplayName, crossingSearchTitle } from '@/lib/crossingNames';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
@@ -278,6 +281,13 @@ export default function CrossingDetail() {
   }, [state.crossings, slug]);
 
   const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
+  const { hash } = useLocation();
+  const loadedPort = crossing?.port_number;
+  useEffect(() => {
+    if (hash !== '#cameras' || !loadedPort) return;
+    const frame = requestAnimationFrame(() => document.getElementById('cameras')?.scrollIntoView());
+    return () => cancelAnimationFrame(frame);
+  }, [hash, loadedPort]);
 
   // Aggregate buckets are port-local; evaluate "today"/"now" in the port's
   // timezone once the crossing is known.
@@ -377,9 +387,7 @@ export default function CrossingDetail() {
   useEffect(() => {
     if (!crossing) return;
     const hasHistoricalPattern = Array.isArray(aggregate?.by_hour) && aggregate.by_hour.length > 0;
-    const title = language === 'en'
-      ? `${crossing.name} Wait Times | Border Pulse`
-      : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
+    const title = crossingSearchTitle(crossing, language, cameraSourceFor(crossing.port_number)?.kind);
     const desc = language === 'en'
       ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
       : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
@@ -467,7 +475,7 @@ export default function CrossingDetail() {
 
       <header className="mb-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-          {language === 'en' ? `${crossing.name} wait times` : `Tiempos de espera en ${crossing.name}`}
+          {language === 'en' ? `${crossingDisplayName(crossing, language)} wait times` : `Tiempos de espera en ${crossingDisplayName(crossing, language)}`}
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-3 flex-wrap">
           <span className="inline-flex items-center gap-1">
@@ -521,6 +529,10 @@ export default function CrossingDetail() {
       )}
 
       <CrossingShare key={canonicalSlug} name={crossing.name} slug={canonicalSlug} language={language} />
+
+      <div id="cameras" className="scroll-mt-20">
+        <CrossingCameras key={canonicalSlug} crossing={crossing} language={language} />
+      </div>
 
       {activeAnomaly && (
         <section
