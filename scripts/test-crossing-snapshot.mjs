@@ -31,6 +31,16 @@ test('single-crossing snapshot has local name and an official camera path', () =
   assert.match(html, /puentesfronterizos.gob.mx\/camaras-en-vivo.php/);
   assert.doesNotMatch(html, /Choose a crossing area/);
 });
+test('San Diego camera metadata and snapshots identify U.S. roads rather than the Mexico queue', () => {
+  const port = { ...crossing, port_number: '250401', name: 'San Ysidro' };
+  const html = snapshotHtml([port], { '250401': 'san-ysidro' }, stamp, true);
+  assert.match(html, /cwwp2.dot.ca.gov/);
+  assert.match(html, /U.S. road approaches, not the inspection queue/);
+  assert.doesNotMatch(html, /Fideicomiso|puentesfronterizos/);
+  assert.match(crossingSearchTitle(port, 'en', 'approach'), /road cameras/);
+  assert.match(crossingSearchTitle(port, 'es', 'approach'), /cámaras viales/);
+  assert.match(crossingSearchTitle(port, 'en', 'external'), /camera sources/);
+});
 test('feed values are escaped and cannot inject active HTML', () => {
   const html = snapshotHtml([{ ...crossing, name: '<script>bad</script>', port_number: 'unknown', hours: '<img src=x>' }], { unknown: 'safe' }, stamp, true);
   assert.doesNotMatch(html, /<script>|<img/);

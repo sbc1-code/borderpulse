@@ -18,7 +18,7 @@ export async function checkNoJsReports(browser, baseUrl) {
     await report.getByRole('link', { name: 'Santa Fe · Paso del Norte', exact: true }).click();
     await page.getByRole('heading', { name: 'Santa Fe · Paso del Norte border wait times', exact: true }).waitFor();
     assert.equal(await report.locator('tbody tr').count(), 1);
-    assert.ok(await report.getByRole('link', { name: 'View public bridge cameras in the official Fideicomiso directory', exact: true }).isVisible());
+    assert.ok(await report.getByRole('link', { name: 'View official camera sources: Fideicomiso de Puentes Fronterizos de Chihuahua', exact: true }).isVisible());
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'no-JS crossing must fit mobile viewport');
   } finally { await context.close(); }
   console.log('[nojs-reports] PASS: mobile homepage → crossing → official camera path, visible reports, original timestamps and viewport fit without app JavaScript');

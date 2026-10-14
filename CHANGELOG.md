@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2026-10-13 — Camera coverage beyond El Paso (prepared)
+
+- Added a camera-area selector for all nine corridors. The camera area follows
+  an explicit dashboard area change, while its own picker does not change the
+  wait-time filter. Changing areas/crossings and collapsing remove the player.
+- Added San Ysidro and Otay Mesa Caltrans U.S. road approach viewers, explicitly
+  distinguished from Mexico-to-U.S. inspection queues in visible copy, search
+  titles and no-JavaScript snapshots. Added four officially published Eagle
+  Pass Bridge II player views, without inferring their lane/orientation.
+- Added external official camera-source paths for Nogales, Laredo and Pharr.
+  Pharr's source belongs only to port 230502, not nearby Anzalduas. Calexico,
+  Brownsville and Progreso show an explicit unverified-coverage state.
+- Generalized source/disclosure/privacy copy for YouTube, Caltrans and
+  IPCamLive; retained source/fallback links. No paid camera license, video relay,
+  new dependency or production release. Provider playback is not established
+  by mocked tests; exact verification evidence belongs to PR #132.
+
 ## 2026-10-13 — Homepage camera access (prepared)
 
 - Added a visible Camera feeds section beside the local-area controls. Visitors

@@ -547,7 +547,7 @@ export default function Dashboard() {
             <p className="w-full text-xs text-slate-600 dark:text-slate-400">{language === 'es' ? 'Elige tu zona para comparar el mismo carril en cruces cercanos.' : 'Choose your area to compare the same lane at nearby crossings.'}</p>
             {CORRIDORS.slice(0, 3).map(c => <Link key={c.id} to={`/?area=${c.id}`} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; e.preventDefault(); changeCorridor(c.id); }} className="inline-flex min-h-11 items-center rounded-lg border border-emerald-200 bg-white px-3 text-sm font-medium text-emerald-800 dark:border-emerald-800 dark:bg-gray-900 dark:text-emerald-300">{c.name}</Link>)}
           </nav>}
-          <DashboardCameras crossings={state.crossings} language={language} />
+          <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <LocalCrossingComparison crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
 
           <details className="mb-4 rounded-lg border border-slate-200 bg-white/70 p-3 dark:border-gray-700 dark:bg-gray-900/70">

@@ -46,6 +46,38 @@ camera maintenance during review, so its streams are not advertised as working.
 Playback itself could not be established by text retrieval; browser tests mock
 or block providers and test the controls, not third-party stream uptime.
 
+## Expanded camera coverage — October 13
+
+The homepage camera-area picker includes all nine corridors. Six have reviewed
+source paths: 16 embedded views at eight crossings in three corridors, plus
+official external-source links at five crossings in three additional corridors.
+Calexico–Mexicali, Brownsville and Progreso have no source verified in this batch
+and show that explicitly. A reviewed source is not a stream-uptime guarantee.
+
+| Area | Canonical ports | Type and source receipt |
+| --- | --- | --- |
+| San Diego–Tijuana | 250401 San Ysidro; 250601 Otay Mesa | Caltrans U.S. road approaches; not the northbound inspection queue in Mexico. Official list: https://cwwp2.dot.ca.gov/vm/streamlist.htm |
+| Eagle Pass | 230302 Bridge II | Four iframe players published at https://www.eaglepasstx.gov/335/International-Bridge-2-Cameras ; alias IDs: 67231a475ead1, 639ba5d96b3f6, 639ba81bb4b49, 68f3f8b846277. Views are numbered because lane/orientation is unconfirmed. |
+| Nogales | 260401 DeConcini; 260402 Mariposa | External municipal directory: https://heroicanogales.gob.mx/webcams-garitas ; municipal source publication: https://heroicanogales.gob.mx/acciones/fortalecen-acceso-ciudadano-a-camaras-de-garita-mariposa |
+| Laredo | 230401 Bridge I; 230402 Bridge II | External municipal directory: https://www.cityoflaredo.com/services/bridge-cameras . Indexed official listing was retrieved; page fetch returned 403 during review, so no embed/playback is claimed. |
+| McAllen–Reynosa | 230502 Pharr | External official bridge site: https://bridge.pharr-tx.gov/ advertises its Live Bridge Camera link. The viewer fetch timed out during review; no embed/playback is claimed. This source must not be assigned to Anzalduas (230503). |
+
+Caltrans viewer pages inspected in the browser:
+- San Ysidro: https://cwwp2.dot.ca.gov/vm/loc/d11/c214sb5viadesanysidro.htm
+- Otay Mesa: https://cwwp2.dot.ca.gov/vm/loc/d11/c100i905siemprevivat.htm
+
+Caltrans publishes these viewers through its official live-camera list and
+describes its own information as generally public domain in
+https://dot.ca.gov/conditions-of-use . Keep attribution and provider links.
+BorderTraffic's public page requires licensing for commercial use of its
+content; its free personal-use views are not copied or embedded here. No
+license was purchased and no provider was contacted.
+
+Area/crossing selection alone creates no provider iframe. Selecting one of the
+reviewed embedded views loads that provider's page; source-only options are
+ordinary outbound links. Existing detail cards, titles and visible static
+snapshots use the correct source and distinguish road approaches from queues.
+
 ## Next: real email threshold alerts
 
 The existing product has no database or email delivery provider. Do not collect

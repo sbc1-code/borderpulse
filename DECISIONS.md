@@ -1,5 +1,13 @@
 # DECISIONS
 
+## 2026-10-13 · Camera coverage cannot substitute nearby roads for inspection queues
+
+Use an explicit camera-area picker and distinguish embedded crossing views,
+Caltrans U.S. road approach views, and external official source pages. Areas
+with no verified source show that state instead of defaulting to El Paso.
+Keep canonical port identity: the Pharr source is not Anzalduas. Camera source
+review establishes provenance, not current playback or lane-specific conditions.
+
 ## 2026-10-13 · Camera access belongs on the homepage
 
 The owner could not find feeds from the preview homepage. Give cameras their

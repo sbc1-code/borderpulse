@@ -32,9 +32,13 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 - [~] October 13 competitor feature batch: nine remembered local corridor
   filters, comparisons of the selected eligible lane and click-loaded public
-  camera views at five Juárez–El Paso bridges. Prepared on the feature branch;
+  camera views across El Paso–Juárez, San Diego–Tijuana and Eagle Pass, with
+  external official source paths for Nogales, Laredo and Pharr. Prepared on the feature branch;
   production publication is not implied. Keep raw CBP report times visible and
   exclude closed/unverifiable hours, missing reports and stale winner claims.
+- [ ] Verify permissible camera sources for Calexico–Mexicali, Brownsville and
+  Progreso, and real playback of the prepared viewers. Public source directories
+  and road approaches do not establish inspection-queue or live-stream coverage.
 - [ ] Real email threshold alerts and community crossing reports: implement
   only with a working delivery channel and shared storage. See
   `docs/CROSSING-FEATURES.md` for the concrete follow-up contract, source receipts,

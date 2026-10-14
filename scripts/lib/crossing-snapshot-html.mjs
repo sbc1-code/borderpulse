@@ -1,7 +1,7 @@
 import { availableLaneWait } from '../../src/lib/crossingAvailability.js';
 import { crossingDisplayName } from '../../src/lib/crossingNames.js';
 import { CORRIDORS } from '../../src/lib/corridors.js';
-import { camerasFor, CAMERA_SOURCE } from '../../src/lib/cameras.js';
+import { cameraSourceFor } from '../../src/lib/cameras.js';
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -21,8 +21,9 @@ export function snapshotHtml(crossings, portToSlug, fetchedAt, single = false) {
     const value = closed ? 'Closed in this snapshot' : wait == null ? 'No standard-lane report' : `${wait} min`;
     return `<tr><th scope="row" style="text-align:left;padding:12px"><a href="/crossing/${esc(slug)}/">${esc(crossingDisplayName(c))}</a></th><td style="padding:12px">${esc(value)}</td><td style="padding:12px">${esc(lane?.update_time || 'CBP report time unavailable')}</td><td style="padding:12px">${esc(c.hours || 'Official hours unavailable')}</td></tr>`;
   }).join('');
-  const cameraLink = single && camerasFor(crossings[0]?.port_number).length
-    ? `<p><a href="${CAMERA_SOURCE}">View public bridge cameras in the official Fideicomiso directory</a>. Stream availability is controlled by the provider.</p>` : '';
+  const cameraSource = single && cameraSourceFor(crossings[0]?.port_number);
+  const cameraLink = cameraSource
+    ? `<p><a href="${esc(cameraSource.sourceUrl)}">View official camera sources: ${esc(cameraSource.owner)}</a>. ${cameraSource.kind === 'approach' ? 'These are U.S. road approaches, not the inspection queue from Mexico into the U.S.' : 'Camera access and availability are controlled by the provider.'}</p>` : '';
   return `<main data-prerender="crossing-snapshot" style="max-width:1100px;margin:0 auto;padding:24px;color:#0f172a;background:#fff;font-family:system-ui,sans-serif">
     <h1>${esc(heading)}</h1>
     <p>Official CBP northbound reports, crossing hours, local comparisons and historical planning. English and Spanish are available in the interactive app.</p>

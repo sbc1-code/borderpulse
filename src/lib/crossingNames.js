@@ -19,7 +19,9 @@ export function crossingSearchTerms(crossing) {
 
 export function crossingSearchTitle(crossing, language = 'en', hasCameras = false) {
   const name = crossingDisplayName(crossing, language);
+  const enCamera = hasCameras === 'approach' ? ' & road cameras' : hasCameras === 'external' ? ' & camera sources' : hasCameras ? ' & cameras' : '';
+  const esCamera = hasCameras === 'approach' ? ' y cámaras viales' : hasCameras === 'external' ? ' y fuentes de cámaras' : hasCameras ? ' y cámaras' : '';
   return language === 'es'
-    ? `${name}: esperas CBP${hasCameras ? ' y cámaras' : ''} | Border Pulse`
-    : `${name}: CBP wait times${hasCameras ? ' & cameras' : ''} | Border Pulse`;
+    ? `${name}: esperas CBP${esCamera} | Border Pulse`
+    : `${name}: CBP wait times${enCamera} | Border Pulse`;
 }

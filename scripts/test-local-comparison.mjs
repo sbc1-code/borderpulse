@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { CORRIDORS, localComparison, isOperatingNow } from '../src/lib/corridors.js';
-import { camerasFor } from '../src/lib/cameras.js';
+import { camerasFor, cameraSourceFor } from '../src/lib/cameras.js';
 
 const now = Date.parse('2026-10-13T18:00:00Z');
 const fresh = new Date(now - 5 * 60_000).toISOString();
@@ -80,4 +80,21 @@ test('camera registry has only reviewed ports and valid public player URLs', () 
       assert.equal(new URL(view.embedUrl).searchParams.has('autoplay'), false);
     }
   }
+});
+test('expanded camera sources preserve geography, type and official provenance', () => {
+  for (const port of ['250401', '250601']) {
+    assert.equal(cameraSourceFor(port).kind, 'approach');
+    assert.equal(cameraSourceFor(port).owner, 'Caltrans');
+    assert.equal(new URL(camerasFor(port)[0].embedUrl).hostname, 'cwwp2.dot.ca.gov');
+  }
+  assert.equal(camerasFor('230302').length, 4);
+  assert.ok(camerasFor('230302').every(view => new URL(view.embedUrl).hostname === 'g1.ipcamlive.com'));
+  for (const port of ['260401', '260402', '230401', '230402', '230502']) {
+    const view = camerasFor(port)[0];
+    assert.equal(view.kind, 'external');
+    assert.equal(view.embedUrl, undefined);
+    assert.equal(view.watchUrl, cameraSourceFor(port).sourceUrl);
+  }
+  assert.equal(cameraSourceFor('230503'), null, 'Pharr cameras cannot stand in for Anzalduas');
+  assert.equal(cameraSourceFor('250302'), null, 'missing Calexico coverage cannot be invented');
 });
