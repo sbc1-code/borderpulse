@@ -8,13 +8,14 @@ export async function checkLocalCrossings(page, context, baseUrl) {
     if (!['240202', '240201', '240104', '240204', '240801', '240401'].includes(crossing.port_number)) continue;
     crossing.hours = '24 hrs/day';
     crossing.port_status = 'Open';
+    crossing.current_wait_time = crossing.port_number === '240801' ? 0 : 30;
     crossing.lanes = {
       passenger_standard: { status: 'Delay', lanes_open: 1, delay_minutes: crossing.port_number === '240801' ? 0 : 30, update_time: '12:00 PM MDT' },
       passenger_sentri: { status: 'No Delay', lanes_open: 1, delay_minutes: 0, update_time: '12:00 PM MDT' },
     };
   }
-  const dataPattern = '**/data/crossings.json';
-  const apiPattern = '**/api/public/crossings';
+  const dataPattern = '**/data/crossings.json*';
+  const apiPattern = '**/api/public/crossings*';
   const feed = route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(fixture) });
   await page.route(dataPattern, feed);
   await page.route(apiPattern, feed);
