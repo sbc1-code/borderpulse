@@ -4,6 +4,7 @@ import fs from 'node:fs';
 // This fixture tests retained CBP lane values without hitting CBP or ad networks.
 export async function checkWalkDriveAvailability(page, context, baseUrl) {
   const snapshot = JSON.parse(fs.readFileSync(new URL('../public/data/crossings.json', import.meta.url)));
+  snapshot.fetched_at = new Date().toISOString();
   const crossing = snapshot.crossings.find(row => row.port_number === '250201');
   assert.ok(crossing, 'Andrade fixture must exist');
   crossing.hours = '6 am-10 pm';
