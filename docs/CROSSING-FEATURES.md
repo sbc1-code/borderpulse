@@ -16,6 +16,12 @@ another view replaces the iframe; closing removes it. There is no video relay,
 recording, paid routing call, new SDK or new secret. Availability is controlled
 by the source and is not inferred from iframe load success.
 
+The homepage also has a visible Camera feeds section with explicit El Paso–Juárez
+coverage. Opening it exposes the bridge/view controls without creating a player.
+Selecting a view loads the same component used on crossing pages. Changing the
+bridge or collapsing the section removes the player. This path addresses the
+owner's difficulty finding the feeds in the preview.
+
 ## Camera source receipts
 
 Official directory: https://www.puentesfronterizos.gob.mx/camaras-en-vivo.php

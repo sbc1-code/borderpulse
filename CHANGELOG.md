@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2026-10-13 — Homepage camera access (prepared)
+
+- Added a visible Camera feeds section beside the local-area controls. Visitors
+  can select one of five verified El Paso–Juárez bridges and open the existing
+  camera player directly on the homepage, without finding a detail-page link.
+- Opening the section makes no player request. Selecting a view loads one
+  player; changing bridges or collapsing the section removes it. Coverage is
+  labeled explicitly, and English/Spanish copy and provider fallbacks are shared
+  with the crossing-detail component.
+- Added desktop/mobile EN/ES release checks for discovery, bridge switching,
+  deferred loading, cleanup and viewport fit. Direct inspection found both Paso
+  del Norte players rendered but buffering in the cloud browser; live playback
+  and source uptime remain unverified. Final release evidence belongs to PR #132.
+
 ## 2026-10-13 — UX and crawlable-report QC (prepared)
 
 - Captured the live competitor and BorderPulse homepage in the cloud browser.

@@ -1,5 +1,13 @@
 # DECISIONS
 
+## 2026-10-13 · Camera access belongs on the homepage
+
+The owner could not find feeds from the preview homepage. Give cameras their
+own visible entry beside local-area selection, with explicit El Paso–Juárez
+coverage and an inline bridge/view picker. Reuse the existing player and
+disclosures; selecting a view remains the only action that loads the provider,
+and bridge changes/collapse remove playback.
+
 ## 2026-10-13 · Local decisions lead; published reports remain useful without JS
 
 Use familiar names as display/search aliases, preserving canonical CBP identity.

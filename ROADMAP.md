@@ -22,7 +22,8 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 ### Now: earn trust in the free entry point
 
 - [~] QC the October 13 locality-first flow, shareable area URLs and familiar
-  crossing names. Deliver useful visible homepage/crossing snapshots without
+  crossing names, with a visible inline camera entry on the homepage. Deliver
+  useful visible homepage/crossing snapshots without
   JavaScript, preserving timestamps and canonical identity. Validation and
   preview evidence belong to PR #132; not published yet.
 - [ ] Reconnect an existing authorized Search Console data path to measure
