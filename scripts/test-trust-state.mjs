@@ -166,3 +166,17 @@ test('walk-or-drive requires a usable lane report rather than an old numeric val
   assert.equal(wait(null), null);
   assert.equal(wait({ status: ' No Delay ', delay_minutes: 0, lanes_open: 1 }), 0);
 });
+
+// Walk/drive uses the same measured thresholds without treating clock skew as fresh.
+test('walk-drive retrieval gate handles fresh, aging, stale and inconsistent clocks', async () => {
+  const { walkDriveFreshness } = await import('../src/lib/walkDriveFreshness.js');
+  for (const minutes of [0, 45, 46, 90]) {
+    assert.equal(walkDriveFreshness(minutesAgo(minutes), NOW).usable, true);
+  }
+  for (const stamp of [minutesAgo(91), null, undefined, '', 'invalid', 0, {}, minutesAgo(-1)]) {
+    assert.equal(walkDriveFreshness(stamp, NOW).usable, false);
+  }
+  const stamp = minutesAgo(90);
+  assert.equal(walkDriveFreshness(stamp, NOW + 60_000).state, FRESHNESS.STALE);
+  assert.equal(walkDriveFreshness(stamp, NOW + 60_000).usable, false);
+});

@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2026-10-14 — Walk-or-drive retrieval freshness (prepared)
+
+- Preserve the actual snapshot retrieval time and suppress walk/drive/tie advice
+  and recommendation badges for stale, missing, invalid or future timestamps.
+  Re-evaluate age while the page stays open, using the existing 45/90-minute
+  thresholds; failed refreshes retain the original timestamp.
+- Show retrieval age separately from raw CBP lane report clocks, including
+  unavailable-clock labels. Replace unconditional live/current decision wording
+  in the comparison and its metadata with reported-wait wording.
+- Add EN/ES desktop/mobile regression coverage for zero waits, expiry without a
+  new feed, offline refresh, recovery, future timestamps and report clocks.
+  Retain closure, pending-report and Back-navigation checks. No feed, threshold,
+  route-inventory, camera or ad changes; publication awaits independent review.
+
 ## 2026-10-13 — Camera coverage beyond El Paso (prepared)
 
 - Added a camera-area selector for all nine corridors. The camera area follows

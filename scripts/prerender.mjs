@@ -781,8 +781,8 @@ async function main() {
   for (const c of crossings.filter(hasPedestrianLane)) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
-    const title = `Walk or Drive Across ${c.name}? Live Wait Comparison (2026) | Border Pulse`;
-    const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
+    const title = `Walk or Drive Across ${c.name}? CBP Wait Comparison | Border Pulse`;
+    const desc = `Compare reported pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
     const canonical = `${BASE}/walk-or-drive/${slug}/`;
     const ogImage = `${BASE}/og/${slug}.png`;
     const breadcrumb = {

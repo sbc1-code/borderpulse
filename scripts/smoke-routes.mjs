@@ -6,6 +6,7 @@ import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkLocalCrossings } from './check-local-crossings.mjs';
 import { checkNoJsReports } from './check-nojs-reports.mjs';
+import { checkWalkDriveFreshness } from './check-walk-drive-freshness.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
 import { checkReportTimes } from './check-report-times.mjs';
@@ -322,6 +323,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await checkGrowthInteractions(page, context, baseUrl);
     await checkLocalCrossings(page, context, baseUrl);
     await checkWalkDriveAvailability(page, context, baseUrl);
+    await checkWalkDriveFreshness(context, baseUrl);
     await checkComparisonGuide(page, context, baseUrl);
   } catch (error) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
