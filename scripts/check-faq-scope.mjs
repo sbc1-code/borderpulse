@@ -105,7 +105,7 @@ export function checkBuiltFaqScope(distDir = path.join(root, 'dist')) {
     { route: '/metodologia/', title: 'Metodología |', lang: 'es', types: ['BreadcrumbList'], hreflangs: twins('/methodology/', '/metodologia/') },
     { route: '/privacy/', title: 'Privacy and advertising |', hreflangs: twins('/privacy/', '/privacidad/') },
     { route: '/privacidad/', title: 'Privacidad y publicidad |', lang: 'es', hreflangs: twins('/privacy/', '/privacidad/') },
-    { route: '/crossing/san-ysidro/', title: 'San Ysidro Border Wait Time', types: ['Place', 'FAQPage', 'BreadcrumbList'] },
+    { route: '/crossing/san-ysidro/', title: 'San Ysidro: CBP wait times', types: ['Place', 'FAQPage', 'BreadcrumbList'] },
     { route: '/blog/', title: 'Border Pulse Blog |', types: ['Blog', 'BreadcrumbList'] },
     { route: enArticle, title: 'San Ysidro vs Otay Mesa:', types: ['BlogPosting', 'BreadcrumbList'], hreflangs: twins(enArticle, esArticle) },
     { route: esArticle, title: 'San Ysidro vs Otay Mesa:', lang: 'es', types: ['BlogPosting', 'BreadcrumbList'], hreflangs: twins(enArticle, esArticle) },

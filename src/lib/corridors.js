@@ -44,7 +44,16 @@ export function localComparison(crossings, corridorId, laneKey, fetchedAt, now =
   const rows = corridor.ports.map(port => {
     const crossing = crossings.find(c => String(c.port_number) === port);
     if (!crossing) return null;
-    return { crossing, wait: isOperatingNow(crossing, now) ? availableLaneWait(crossing, laneKey) : null };
+    const open = isOperatingNow(crossing, now);
+    const wait = open ? availableLaneWait(crossing, laneKey) : null;
+    let reason = null;
+    if (wait == null) {
+      if ((crossing.port_status || '').trim().toLowerCase() === 'closed') reason = 'port_closed';
+      else if (!open) reason = parseOperatingHours(crossing.hours).kind === 'unknown' ? 'hours_unknown' : 'outside_hours';
+      else if (crossing.lanes?.[laneKey]?.lanes_open === 0) reason = 'lane_closed';
+      else reason = 'no_report';
+    }
+    return { crossing, wait, reason };
   }).filter(Boolean);
   const eligible = rows.filter(r => r.wait != null).sort((a, b) => a.wait - b.wait);
   const freshness = freshnessOf(fetchedAt, now).state;

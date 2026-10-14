@@ -31,6 +31,13 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       const chooser = page.getByLabel(lang === 'es' ? 'Tu zona de cruce' : 'Your crossing area');
       await chooser.selectOption('el-paso-juarez');
       await page.waitForURL(url => url.searchParams.get('area') === 'el-paso-juarez');
+      await page.getByRole('button', { name: lang === 'es' ? 'Compartir' : 'Share', exact: true }).click();
+      const dialog = page.getByRole('dialog');
+      await dialog.getByRole('button', { name: lang === 'es' ? 'Copiar para WhatsApp' : 'Copy for WhatsApp', exact: true }).click();
+      const shareText = await page.evaluate(() => window.copiedLink);
+      assert.ok(shareText.includes('https://borderpulse.com/?area=el-paso-juarez'));
+      assert.ok(!/\d+\s*min/.test(shareText), 'local sharing must not carry a cached wait claim');
+      await page.keyboard.press('Escape');
       const panel = page.getByRole('region', { name: lang === 'es' ? 'Comparación local' : 'Local comparison', exact: true });
       await panel.waitFor();
       await panel.getByText(/Santa Teresa/).first().waitFor();
@@ -45,7 +52,7 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await panel.getByText(lang === 'es' ? 'Solo compara SENTRI si cumples los requisitos de ese carril.' : 'Compare SENTRI only if you meet that lane’s requirements.', { exact: true }).waitFor();
       assert.ok(!(await panel.locator('[data-testid="local-comparison-summary"]').innerText()).includes('0 min'), 'ties cannot claim a shortest option');
       await lane.selectOption('pedestrian_standard');
-      assert.equal(await panel.getByText(lang === 'es' ? 'No comparable' : 'Not comparable', { exact: true }).count(), 6);
+      assert.equal(await panel.getByText(lang === 'es' ? 'Sin reporte: Peatones' : 'No pedestrian report', { exact: true }).count(), 6);
       await page.evaluate(() => {
         const original = Storage.prototype.setItem;
         Storage.prototype.setItem = function(key, value) {

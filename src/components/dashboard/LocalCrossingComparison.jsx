@@ -15,6 +15,14 @@ export default function LocalCrossingComparison({ crossings, corridorId, portToS
   const corridor = corridorFor(corridorId);
   if (!corridor) return null;
   const es = language === 'es';
+  const laneLabel = LOCAL_LANES.find(l => l.key === lane);
+  const unavailable = {
+    port_closed: es ? 'Cruce cerrado' : 'Crossing closed',
+    outside_hours: es ? 'Fuera del horario' : 'Outside posted hours',
+    hours_unknown: es ? 'Horario sin confirmar' : 'Hours unconfirmed',
+    lane_closed: es ? 'Carril cerrado' : 'Lane closed',
+    no_report: es ? `Sin reporte: ${laneLabel.es}` : `No ${laneLabel.en.toLowerCase()} report`,
+  };
   const { rows, shortest } = localComparison(crossings, corridorId, lane, fetchedAt, now);
   const freshness = freshnessOf(fetchedAt, now);
   return (
@@ -35,9 +43,9 @@ export default function LocalCrossingComparison({ crossings, corridorId, portToS
       </p>
       <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">{es ? 'Hacia EE. UU. · mismo tipo de carril. Considera el trayecto adicional, tu destino y los requisitos. Estas cifras no comparan el tiempo total del viaje.' : 'Northbound · same lane type. Consider extra driving, your destination and eligibility. These figures do not compare total trip time.'}</p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {rows.map(({ crossing, wait }) => <div key={crossing.port_number} className="min-w-0 rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-gray-700 dark:bg-gray-800">
+        {rows.map(({ crossing, wait, reason }) => <div key={crossing.port_number} className="min-w-0 rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-gray-700 dark:bg-gray-800">
           <Link to={`/crossing/${portToSlug[crossing.port_number]}/`} className="inline-flex min-h-11 items-center text-sm font-medium text-slate-900 underline dark:text-white">{crossingDisplayName(crossing, language)}</Link>
-          <p className="text-xl font-semibold tabular-nums text-slate-900 dark:text-white">{wait == null ? (es ? 'No comparable' : 'Not comparable') : `${wait} min`}</p>
+          <p className="text-xl font-semibold tabular-nums text-slate-900 dark:text-white">{wait == null ? unavailable[reason] : `${wait} min`}</p>
           <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">{crossing.hours || (es ? 'Horario no disponible' : 'Hours unavailable')}</p>
           <p className="mt-1 break-words text-xs text-slate-600 dark:text-slate-400">{reportTimeLabel(crossing.lanes?.[lane]?.update_time, language)}</p>
           {camerasFor(crossing.port_number).length > 0 && <Link to={`/crossing/${portToSlug[crossing.port_number]}/#cameras`} className="inline-flex min-h-11 items-center text-xs text-emerald-700 underline dark:text-emerald-400">{es ? 'Ver cámaras' : 'View cameras'}</Link>}

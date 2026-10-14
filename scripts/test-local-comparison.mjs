@@ -34,6 +34,13 @@ test('closed ports, zero open lanes, unknown status and missing/pending reports 
     assert.equal(result.shortest, null);
   }
 });
+
+test('unavailable lane explanations distinguish closures, hours and missing reports', () => {
+  assert.equal(compare([make('240202', 0, { port_status: 'Closed' })]).rows[0].reason, 'port_closed');
+  assert.equal(compare([make('240202', 0, { hours: 'Unknown' })]).rows[0].reason, 'hours_unknown');
+  assert.equal(compare([make('240202', 0, { lanes: { passenger_standard: { status: 'Delay', lanes_open: 0, delay_minutes: 0 } } })]).rows[0].reason, 'lane_closed');
+  assert.equal(compare([make('240202', 0, { lanes: {} })]).rows[0].reason, 'no_report');
+});
 test('negative and malformed waits are unavailable, not fastest', () => {
   for (const wait of [-1, '0', NaN, Infinity]) assert.equal(compare([make('240202', 30), make('240201', wait)]).shortest, null);
 });

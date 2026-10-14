@@ -52,6 +52,7 @@ test('local naming helps search without changing official identity or canonical 
 test('built homepage and every crossing page contain their own useful visible snapshot', () => {
   if (!fs.existsSync('dist/index.html')) return;
   assert.match(fs.readFileSync('dist/index.html', 'utf8'), /data-prerender="crossing-snapshot"/);
+  assert.match(fs.readFileSync('dist/index.html', 'utf8'), /aria-label="All border crossings" aria-hidden="true" inert/);
   const doc = JSON.parse(fs.readFileSync('public/data/crossings.json', 'utf8'));
   for (const dir of fs.readdirSync('dist/crossing')) {
     const html = fs.readFileSync(`dist/crossing/${dir}/index.html`, 'utf8');

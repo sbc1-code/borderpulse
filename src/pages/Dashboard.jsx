@@ -96,7 +96,7 @@ export default function Dashboard() {
     const id = corridorFor(searchParams.get('area'))?.id || '';
     setCorridor(id);
     setSearch('');
-    if (id) setRegion('ALL');
+    if (id) { setRegion('ALL'); setShowGeoPrompt(false); }
   }, [searchParams]);
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
@@ -270,6 +270,7 @@ export default function Dashboard() {
 
   const changeCorridor = (id) => {
     setCorridor(id);
+    setShowGeoPrompt(false);
     setRegion('ALL');
     setSearch('');
     setFocusedPort(null);
@@ -758,6 +759,8 @@ export default function Dashboard() {
         language={language}
         direction={direction}
         portToSlug={portToSlug}
+        corridorId={corridor}
+        fetchedAt={state.fetchedAt}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkLocalCrossings } from './check-local-crossings.mjs';
+import { checkNoJsReports } from './check-nojs-reports.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
 import { checkReportTimes } from './check-report-times.mjs';
@@ -388,6 +389,7 @@ async function main() {
     console.log(`[routes] Chrome: ${executablePath}`);
     console.log(`[routes] manifest: ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes`);
     browser = await chromium.launch({ executablePath, headless: true, args: ['--no-sandbox'] });
+    await checkNoJsReports(browser, baseUrl);
     await checkAdSlotDiagnostics(browser, baseUrl);
     if (process.argv.includes('--ads-only')) return;
     const profiles = [

@@ -403,7 +403,7 @@ function injectCrawlableLinks(html, crossings, portToSlug, posts) {
     .join('\n');
 
   const block = `
-<nav aria-label="All border crossings" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+<nav aria-label="All border crossings" aria-hidden="true" inert style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
   <h2>All U.S. border crossings</h2>
   <ul>
 ${crossingLinks}
