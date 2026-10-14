@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-14T12:44:15.561Z",
-  "snapshot_at": "2026-10-14T12:37:30.712Z",
+  "generated_at": "2026-10-14T17:51:47.285Z",
+  "snapshot_at": "2026-10-14T17:37:27.840Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -217,15 +217,15 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-14T12:44:15.561Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-10-14T17:51:47.285Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
         "best_median": 0,
-        "overall_median": 25,
+        "overall_median": 30,
         "samples": 12
       }
     },
@@ -288,16 +288,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8909090909090909,
-      "detected_at": "2026-10-14T12:44:15.561Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 6 min) — ~89% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 55 min.",
+      "severity": 0.8947368421052632,
+      "detected_at": "2026-10-14T17:51:47.285Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Wednesday hour so far is 2 AM (median 6 min) — ~89% below the 30-day baseline of 57 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 57 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 2,
         "best_median": 6,
-        "overall_median": 55,
+        "overall_median": 57,
         "samples": 14
       }
     },
@@ -334,23 +334,6 @@
         "best_median": 5,
         "overall_median": 30,
         "samples": 5
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.8,
-      "detected_at": "2026-10-12T00:19:49.301Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 45 min around 5 PM — ~180% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 45 min cerca de las 5 PM — ~180% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 45,
-        "overall_median": 25,
-        "samples": 10,
-        "ratio": 1.8
       }
     },
     {
@@ -421,6 +404,23 @@
         "best_median": 30,
         "overall_median": 60,
         "samples": 10
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-10-14T17:51:47.285Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 45 min around 5 PM — ~150% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 45 min cerca de las 5 PM — ~150% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 17,
+        "peak_median": 45,
+        "overall_median": 30,
+        "samples": 10,
+        "ratio": 1.5
       }
     }
   ],
