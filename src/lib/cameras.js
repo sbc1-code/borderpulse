@@ -37,7 +37,7 @@ export function camerasFor(port) {
   const source = cameraSourceFor(key);
   if (!source) return [];
   if (source.kind === 'external') return [{ id: key, en: 'Open official camera source', es: 'Abrir fuente oficial de cámaras', watchUrl: source.sourceUrl, kind: 'external' }];
-  if (CALTRANS_VIEWS[key]) return CALTRANS_VIEWS[key].map(([id, en, es, slug]) => ({ id, en, es, kind: 'approach', embedUrl: `https://cwwp2.dot.ca.gov/vm/loc/d11/${slug}.htm`, watchUrl: `https://cwwp2.dot.ca.gov/vm/loc/d11/${slug}.htm` }));
+  if (CALTRANS_VIEWS[key]) return CALTRANS_VIEWS[key].map(([id, en, es, slug]) => ({ id, en, es, kind: 'approach', imageUrl: `https://cwwp2.dot.ca.gov/data/d11/cctv/image/${slug}/${slug}.jpg`, embedUrl: `https://cwwp2.dot.ca.gov/vm/loc/d11/${slug}.htm`, watchUrl: `https://cwwp2.dot.ca.gov/vm/loc/d11/${slug}.htm` }));
   if (key === '230302') return ['67231a475ead1', '639ba5d96b3f6', '639ba81bb4b49', '68f3f8b846277'].map((id, i) => ({ id, en: `Bridge II view ${i + 1}`, es: `Vista ${i + 1} del Puente II`, kind: 'crossing', embedUrl: `https://g1.ipcamlive.com/player/player.php?alias=${id}`, watchUrl: `https://g1.ipcamlive.com/player/player.php?alias=${id}` }));
   return (CAMERA_VIEWS[key] || []).map(([id, en, es]) => ({ id, en, es, kind: 'crossing', embedUrl: `https://www.youtube-nocookie.com/embed/${id}?rel=0`, watchUrl: `https://www.youtube.com/watch?v=${id}` }));
 }

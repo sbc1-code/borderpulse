@@ -12,6 +12,9 @@
 - Added external official camera-source paths for Nogales, Laredo and Pharr.
   Pharr's source belongs only to port 230502, not nearby Anzalduas. Calexico,
   Brownsville and Progreso show an explicit unverified-coverage state.
+- Caltrans uses its published still images with manual refresh, original-image
+  timestamp guidance and error fallback. Both San Diego sources showed the
+  provider's Temporarily Unavailable placeholder during the browser check.
 - Generalized source/disclosure/privacy copy for YouTube, Caltrans and
   IPCamLive; retained source/fallback links. No paid camera license, video relay,
   new dependency or production release. Provider playback is not established

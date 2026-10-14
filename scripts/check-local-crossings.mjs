@@ -19,6 +19,9 @@ export async function checkLocalCrossings(page, context, baseUrl) {
   const feed = route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(fixture) });
   await page.route(dataPattern, feed);
   await page.route(apiPattern, feed);
+  const cameraImagePattern = 'https://cwwp2.dot.ca.gov/data/d11/cctv/image/**';
+  const cameraImage = route => route.fulfill({ contentType: 'image/png', body: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYGAAAAAEAAH2FzhVAAAAAElFTkSuQmCC', 'base64') });
+  await page.route(cameraImagePattern, cameraImage);
   try {
     for (const lang of ['en', 'es']) {
       await page.goto(new URL('/', baseUrl).href);
@@ -55,7 +58,19 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await bridgeChooser.getByRole('button', { name: 'San Ysidro', exact: true }).click();
       await cameraHub.getByText(lang === 'es' ? /no muestran la fila de inspección/ : /do not show the inspection queue/).waitFor();
       await cameraHub.getByRole('button', { name: lang === 'es' ? 'I-5 · Via de San Ysidro (lado EE. UU.)' : 'I-5 · Via de San Ysidro (U.S. road)', exact: true }).click();
-      assert.equal(new URL(await inlineCamera.getAttribute('src')).hostname, 'cwwp2.dot.ca.gov');
+      const cameraSnapshot = cameraHub.getByRole('img');
+      await cameraSnapshot.waitFor();
+      const originalImageUrl = await cameraSnapshot.getAttribute('src');
+      assert.equal(new URL(originalImageUrl).hostname, 'cwwp2.dot.ca.gov');
+      assert.equal(await cameraHub.locator('iframe').count(), 0, 'Caltrans snapshots do not load a video player');
+      await cameraHub.getByRole('button', { name: lang === 'es' ? 'Actualizar imagen' : 'Refresh image', exact: true }).click();
+      assert.notEqual(await cameraSnapshot.getAttribute('src'), originalImageUrl, 'manual refresh requests a new image without claiming a new capture time');
+      await page.route(cameraImagePattern, route => route.abort('blockedbyclient'));
+      await cameraHub.getByRole('button', { name: lang === 'es' ? 'Actualizar imagen' : 'Refresh image', exact: true }).click();
+      await cameraHub.getByText(lang === 'es' ? /Imagen no disponible/ : /Camera image unavailable/).waitFor();
+      assert.equal(await cameraHub.getByRole('link', { name: lang === 'es' ? 'Abrir visor de video en Caltrans' : 'Open the Caltrans video viewer', exact: true }).getAttribute('href'), 'https://cwwp2.dot.ca.gov/vm/loc/d11/c214sb5viadesanysidro.htm');
+      await page.unroute(cameraImagePattern);
+      await page.route(cameraImagePattern, cameraImage);
       assert.equal(new URL(page.url()).searchParams.get('area'), 'el-paso-juarez', 'camera selection must not silently change the wait-time area');
       await cameraArea.selectOption('eagle-pass');
       assert.equal(await cameraHub.locator('iframe').count(), 0);
@@ -132,6 +147,7 @@ export async function checkLocalCrossings(page, context, baseUrl) {
   } finally {
     await page.unroute(dataPattern, feed);
     await page.unroute(apiPattern, feed);
+    await page.unroute(cameraImagePattern);
     await page.evaluate(() => localStorage.removeItem('borderPulse_corridor'));
   }
   console.log('[local-crossings] PASS: EN/ES corridor persistence, lane eligibility, storage failure, camera navigation, deferred player, view switching and close');

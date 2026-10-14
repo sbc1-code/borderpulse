@@ -49,7 +49,8 @@ or block providers and test the controls, not third-party stream uptime.
 ## Expanded camera coverage — October 13
 
 The homepage camera-area picker includes all nine corridors. Six have reviewed
-source paths: 16 embedded views at eight crossings in three corridors, plus
+source paths: 14 video-player views and two camera snapshots at eight crossings
+in three corridors, plus
 official external-source links at five crossings in three additional corridors.
 Calexico–Mexicali, Brownsville and Progreso have no source verified in this batch
 and show that explicitly. A reviewed source is not a stream-uptime guarantee.
@@ -65,6 +66,16 @@ and show that explicitly. A reviewed source is not a stream-uptime guarantee.
 Caltrans viewer pages inspected in the browser:
 - San Ysidro: https://cwwp2.dot.ca.gov/vm/loc/d11/c214sb5viadesanysidro.htm
 - Otay Mesa: https://cwwp2.dot.ca.gov/vm/loc/d11/c100i905siemprevivat.htm
+
+The viewer's video poster fields publish the snapshot URLs used in the app:
+- https://cwwp2.dot.ca.gov/data/d11/cctv/image/c214sb5viadesanysidro/c214sb5viadesanysidro.jpg
+- https://cwwp2.dot.ca.gov/data/d11/cctv/image/c100i905siemprevivat/c100i905siemprevivat.jpg
+
+These images load after view selection and refresh only on explicit request;
+request time is not displayed as capture time. Failed loads expose a visible
+error and an official video-viewer link. The provider's own Temporarily
+Unavailable placeholder remains visible when returned as an image. Both sources
+showed that placeholder during this review; playback/uptime is not claimed.
 
 Caltrans publishes these viewers through its official live-camera list and
 describes its own information as generally public domain in

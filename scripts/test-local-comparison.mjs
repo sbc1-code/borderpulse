@@ -86,6 +86,8 @@ test('expanded camera sources preserve geography, type and official provenance',
     assert.equal(cameraSourceFor(port).kind, 'approach');
     assert.equal(cameraSourceFor(port).owner, 'Caltrans');
     assert.equal(new URL(camerasFor(port)[0].embedUrl).hostname, 'cwwp2.dot.ca.gov');
+    assert.equal(new URL(camerasFor(port)[0].imageUrl).hostname, 'cwwp2.dot.ca.gov');
+    assert.match(camerasFor(port)[0].imageUrl, /\.jpg$/);
   }
   assert.equal(camerasFor('230302').length, 4);
   assert.ok(camerasFor('230302').every(view => new URL(view.embedUrl).hostname === 'g1.ipcamlive.com'));
