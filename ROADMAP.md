@@ -21,6 +21,17 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] October 13 competitor feature batch: nine remembered local corridor
+  filters, comparisons of the selected eligible lane and click-loaded public
+  camera views at five Juárez–El Paso bridges. Prepared on the feature branch;
+  production publication is not implied. Keep raw CBP report times visible and
+  exclude closed/unverifiable hours, missing reports and stale winner claims.
+- [ ] Real email threshold alerts and community crossing reports: implement
+  only with a working delivery channel and shared storage. See
+  `docs/CROSSING-FEATURES.md` for the concrete follow-up contract, source receipts,
+  operating costs and validation requirements. No signup/report form until the
+  service actually accepts and delivers it.
+
 - [x] Correct route hreflangs and bound metadata-navigation checks (PR129/130).
   Production was verified on October 12 at `2b40cb2b`, including reciprocal
   pairs and exact served assets. Those releases are complete; preserve them.

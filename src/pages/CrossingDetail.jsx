@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, useLocation, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck, AlertTriangle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
+import CrossingCameras from '@/components/dashboard/CrossingCameras';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
@@ -278,6 +279,13 @@ export default function CrossingDetail() {
   }, [state.crossings, slug]);
 
   const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
+  const { hash } = useLocation();
+  const loadedPort = crossing?.port_number;
+  useEffect(() => {
+    if (hash !== '#cameras' || !loadedPort) return;
+    const frame = requestAnimationFrame(() => document.getElementById('cameras')?.scrollIntoView());
+    return () => cancelAnimationFrame(frame);
+  }, [hash, loadedPort]);
 
   // Aggregate buckets are port-local; evaluate "today"/"now" in the port's
   // timezone once the crossing is known.
@@ -521,6 +529,10 @@ export default function CrossingDetail() {
       )}
 
       <CrossingShare key={canonicalSlug} name={crossing.name} slug={canonicalSlug} language={language} />
+
+      <div id="cameras" className="scroll-mt-20">
+        <CrossingCameras key={canonicalSlug} crossing={crossing} language={language} />
+      </div>
 
       {activeAnomaly && (
         <section

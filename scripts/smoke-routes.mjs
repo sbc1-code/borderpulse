@@ -4,6 +4,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
+import { checkLocalCrossings } from './check-local-crossings.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
 import { checkReportTimes } from './check-report-times.mjs';
@@ -318,6 +319,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
 
   try {
     await checkGrowthInteractions(page, context, baseUrl);
+    await checkLocalCrossings(page, context, baseUrl);
     await checkWalkDriveAvailability(page, context, baseUrl);
     await checkComparisonGuide(page, context, baseUrl);
   } catch (error) {

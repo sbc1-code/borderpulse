@@ -1,5 +1,15 @@
 # DECISIONS
 
+## 2026-10-13 · Local comparisons use eligible lanes; cameras load on request
+
+The owner requested competitor-inspired crossing features. Compare named
+corridors and the same northbound lane type without estimating total trip time.
+Suppress comparative winners on stale/unknown retrievals or unavailable hours;
+camera views are orientation, not proof of lane-specific conditions. Load the
+public YouTube player only after a user selects a camera; use official-source
+and provider fallback links. Real alerts/community reports remain separate
+backend work and do not override the ban on non-delivering notification CTAs.
+
 Short log of *why* something is the way it is. Append-only. Future-you (or
 the AI you're collaborating with) reads this when "wait, why did we…"
 comes up.

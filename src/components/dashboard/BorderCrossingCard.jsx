@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { camerasFor } from '@/lib/cameras';
 import { track } from '@/lib/analytics';
 import { FRESHNESS, freshnessOf, fetchLabel, reportTimeLabel } from '@/lib/trustState';
 import { Card, CardContent } from '@/components/ui/card';
@@ -435,6 +436,12 @@ export default function BorderCrossingCard({
               <span className="font-medium">{language === 'en' ? 'Advisory:' : 'Aviso:'}</span>{' '}
               {advisoryText}
             </div>
+          )}
+
+          {cardSlug && camerasFor(crossing.port_number).length > 0 && (
+            <Link to={`/crossing/${cardSlug}/#cameras`} className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-emerald-700 underline dark:text-emerald-400">
+              {language === 'es' ? 'Ver cámaras' : 'View cameras'}
+            </Link>
           )}
 
           {/* Lane details */}

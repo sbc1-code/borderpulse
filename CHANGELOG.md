@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2026-10-13 — Local comparison and camera feature batch (prepared)
+
+- Added nine named crossing corridors, remembered in browser storage and
+  compatible with existing state/search filters. El Paso–Juárez includes
+  Santa Teresa in New Mexico without treating the entire state as local.
+- Added northbound comparisons for standard passenger, Ready Lane, SENTRI
+  and pedestrian lanes. Missing reports, closed ports/lanes and unverifiable
+  operating hours are excluded. Ties, fewer than two available reports and
+  stale/unknown/future snapshot times suppress a shortest-wait claim. Report
+  clocks remain separate from retrieval time; extra driving is not estimated.
+- Added ten click-loaded camera views at five Juárez–El Paso bridges from
+  the official Fideicomiso directory, with view switching, closing, source and
+  playback fallback links, EN/ES provider disclosure and privacy copy.
+- Added comparison eligibility tests and desktop/mobile EN/ES interactions
+  to the existing release gate. No new npm dependency, account, database,
+  subscription, email service or production workflow change. Publication and
+  validation evidence belongs to the scoped pull request.
+
 ## 2026-10-13 — Document language ownership
 
 - Metadata cleanup preserves the document language during crossing data and

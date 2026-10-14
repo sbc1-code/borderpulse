@@ -16,6 +16,8 @@ import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
 import BorderLine from '@/components/dashboard/BorderLine';
 import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
+import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
+import { CORRIDORS, corridorFor } from '@/lib/corridors';
 import { dataService } from '@/components/utils/dataService';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
@@ -76,6 +78,10 @@ export default function Dashboard() {
     return 'ALL';
   });
   const [search, setSearch] = useState('');
+  const [corridor, setCorridor] = useState(() => {
+    try { return corridorFor(localStorage.getItem('borderPulse_corridor'))?.id || ''; }
+    catch { return ''; }
+  });
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -235,8 +241,24 @@ export default function Dashboard() {
 
   const changeRegion = (r) => {
     setRegion(r);
-    localStorage.setItem('borderPulse_region', r);
+    setCorridor('');
+    try {
+      localStorage.setItem('borderPulse_region', r);
+      localStorage.removeItem('borderPulse_corridor');
+    } catch { /* Filters still work when browser storage is unavailable. */ }
     track('region-filter', { region: r });
+  };
+
+  const changeCorridor = (id) => {
+    setCorridor(id);
+    setRegion('ALL');
+    setSearch('');
+    setFocusedPort(null);
+    try {
+      localStorage.setItem('borderPulse_corridor', id);
+      localStorage.setItem('borderPulse_region', 'ALL');
+    } catch { /* A blocked write must not prevent local comparison. */ }
+    track('corridor-filter', { corridor: id || 'all' });
   };
 
   // Map port_number → slug for /crossing/{slug} links and /data/aggregates/{slug}.json fetches.
@@ -249,13 +271,14 @@ export default function Dashboard() {
   const filteredCrossings = useMemo(() => {
     const q = search.trim().toLowerCase();
     return state.crossings.filter((c) => {
+      if (corridor && !corridorFor(corridor)?.ports.includes(String(c.port_number))) return false;
       if (region !== 'ALL' && c.state !== region) return false;
       if (!q) return true;
       const haystack = [c.name, c.port_name, c.crossing_name, c.state]
         .filter(Boolean).join(' ').toLowerCase();
       return haystack.includes(q);
     });
-  }, [state.crossings, region, search]);
+  }, [state.crossings, region, search, corridor]);
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
@@ -491,11 +514,20 @@ export default function Dashboard() {
             </div>
           </div>
 
+          <div className="mx-auto mb-4 flex max-w-3xl flex-wrap items-center gap-2">
+            <label htmlFor="local-corridor" className="text-sm font-medium text-slate-700 dark:text-slate-300">{language === 'es' ? 'Tu zona de cruce' : 'Your crossing area'}</label>
+            <select id="local-corridor" value={corridor} onChange={e => changeCorridor(e.target.value)} className="min-h-11 min-w-0 max-w-full flex-1 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
+              <option value="">{language === 'es' ? 'Todos los cruces' : 'All crossings'}</option>
+              {CORRIDORS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </select>
+          </div>
+          <LocalCrossingComparison crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
+
           <CommuterSnapshot
             crossings={filteredCrossings}
             selectedDirection={direction}
             language={language}
-            regionLabel={regionLabelFor(region, language)}
+            regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
           />
 
           {/* The border drawn to scale. Primary orientation layer: on small
@@ -672,7 +704,7 @@ export default function Dashboard() {
                 selectedDirection={direction}
                 language={language}
                 theme="light"
-                regionLabel={regionLabelFor(region, language)}
+                regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
                 layout="sidebar"
               />
             </aside>
