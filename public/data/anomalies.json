@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-15T11:06:37.511Z",
-  "snapshot_at": "2026-10-15T10:52:28.156Z",
+  "generated_at": "2026-10-15T16:38:24.138Z",
+  "snapshot_at": "2026-10-15T16:37:28.623Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 6,
-      "detected_at": "2026-10-12T07:06:18.190Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~700% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~700% de la mediana de 30 días. Planea alrededor.",
+      "severity": 9.5,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~1050% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~1050% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 105,
-        "overall_median": 15,
+        "overall_median": 10,
         "samples": 13,
-        "ratio": 7
+        "ratio": 10.5
       }
     },
     {
@@ -24,16 +24,16 @@
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
-      "severity": 3,
-      "detected_at": "2026-10-14T06:01:48.400Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 120 min around 6 PM — ~400% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 120 min cerca de las 6 PM — ~400% de la mediana de 30 días. Planea alrededor.",
+      "severity": 3.8,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 120 min around 6 PM — ~480% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 120 min cerca de las 6 PM — ~480% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 18,
         "peak_median": 120,
-        "overall_median": 30,
+        "overall_median": 25,
         "samples": 12,
-        "ratio": 4
+        "ratio": 4.8
       }
     },
     {
@@ -109,16 +109,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 1.9333333333333331,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 88 min around 4 PM — ~293% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 88 min cerca de las 4 PM — ~293% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.5142857142857142,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 88 min around 4 PM — ~251% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 88 min cerca de las 4 PM — ~251% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 16,
         "peak_median": 88,
-        "overall_median": 30,
+        "overall_median": 35,
         "samples": 10,
-        "ratio": 2.933333333333333
+        "ratio": 2.5142857142857142
       }
     },
     {
@@ -127,15 +127,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 15,
+        "overall_median": 10,
         "samples": 12
       }
     },
@@ -145,15 +145,15 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 30,
+        "overall_median": 25,
         "samples": 10
       }
     },
@@ -216,16 +216,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9666666666666667,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 2 AM (median 1 min) — ~97% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~97% debajo de la base de 30 días de 30 min.",
+      "severity": 0.9714285714285714,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 2 AM (median 1 min) — ~97% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~97% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 2,
         "best_median": 1,
-        "overall_median": 30,
+        "overall_median": 35,
         "samples": 8
       }
     },
@@ -234,16 +234,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9272727272727272,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 4 min) — ~93% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 55 min.",
+      "severity": 0.9285714285714286,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 4 min) — ~93% below the 30-day baseline of 56 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 56 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 4,
-        "overall_median": 55,
+        "overall_median": 56,
         "samples": 6
       }
     },
@@ -322,16 +322,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.7692307692307692,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 12 AM (median 15 min) — ~77% below the 30-day baseline of 65 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 12 AM (mediana 15 min) — ~77% debajo de la base de 30 días de 65 min.",
+      "severity": 0.7857142857142857,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 12 AM (median 15 min) — ~79% below the 30-day baseline of 70 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 12 AM (mediana 15 min) — ~79% debajo de la base de 30 días de 70 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 15,
-        "overall_median": 65,
+        "overall_median": 70,
         "samples": 6
       }
     },
@@ -354,23 +354,6 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6923076923076923,
-      "detected_at": "2026-10-15T11:06:37.511Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 110 min around 7 PM — ~169% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 110 min cerca de las 7 PM — ~169% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 110,
-        "overall_median": 65,
-        "samples": 12,
-        "ratio": 1.6923076923076923
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -386,6 +369,23 @@
         "best_median": 15,
         "overall_median": 45,
         "samples": 22
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5714285714285714,
+      "detected_at": "2026-10-15T16:38:24.138Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 110 min around 7 PM — ~157% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 110 min cerca de las 7 PM — ~157% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 110,
+        "overall_median": 70,
+        "samples": 12,
+        "ratio": 1.5714285714285714
       }
     },
     {
