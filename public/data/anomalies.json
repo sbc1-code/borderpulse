@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-16T17:53:31.484Z",
-  "snapshot_at": "2026-10-16T20:37:31.194Z",
+  "generated_at": "2026-10-16T23:20:36.822Z",
+  "snapshot_at": "2026-10-16T23:07:37.103Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 9.5,
-      "detected_at": "2026-10-15T16:38:24.138Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~1050% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~1050% de la mediana de 30 días. Planea alrededor.",
+      "severity": 7.75,
+      "detected_at": "2026-10-16T23:20:36.822Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 105 min around 10 PM — ~875% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 105 min cerca de las 10 PM — ~875% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 22,
         "peak_median": 105,
-        "overall_median": 10,
+        "overall_median": 12,
         "samples": 13,
-        "ratio": 10.5
+        "ratio": 8.75
       }
     },
     {
@@ -127,15 +127,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-16T08:53:33.167Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 10 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 10 min.",
+      "detected_at": "2026-10-16T23:20:36.822Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 12 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 12 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 1,
         "best_median": 0,
-        "overall_median": 10,
+        "overall_median": 12,
         "samples": 12
       }
     },
@@ -234,16 +234,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8928571428571429,
-      "detected_at": "2026-10-16T17:53:31.484Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 1 AM (median 6 min) — ~89% below the 30-day baseline of 56 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 56 min.",
+      "severity": 0.8947368421052632,
+      "detected_at": "2026-10-16T23:20:36.822Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 1 AM (median 6 min) — ~89% below the 30-day baseline of 57 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 57 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 1,
         "best_median": 6,
-        "overall_median": 56,
+        "overall_median": 57,
         "samples": 14
       }
     },
