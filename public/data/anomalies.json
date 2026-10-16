@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-15T23:35:31.491Z",
-  "snapshot_at": "2026-10-15T23:22:40.209Z",
+  "generated_at": "2026-10-16T03:53:30.019Z",
+  "snapshot_at": "2026-10-16T03:52:38.959Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -234,16 +234,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9272727272727272,
-      "detected_at": "2026-10-15T20:12:56.556Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 4 min) — ~93% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 55 min.",
+      "severity": 0.9285714285714286,
+      "detected_at": "2026-10-16T03:53:30.019Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 4 min) — ~93% below the 30-day baseline of 56 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 56 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 4,
-        "overall_median": 55,
+        "overall_median": 56,
         "samples": 6
       }
     },
@@ -341,7 +341,7 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.75,
-      "detected_at": "2026-10-15T23:35:31.491Z",
+      "detected_at": "2026-10-16T03:53:30.019Z",
       "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 6 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 6 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
       "evidence": {
@@ -350,7 +350,7 @@
         "best_hour": 18,
         "best_median": 5,
         "overall_median": 20,
-        "samples": 8
+        "samples": 9
       }
     },
     {
@@ -404,7 +404,9 @@
         "samples": 12,
         "ratio": 1.56
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "tecate",
@@ -423,6 +425,5 @@
         "samples": 9
       }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
