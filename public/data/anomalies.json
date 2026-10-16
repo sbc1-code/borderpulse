@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-16T13:50:27.034Z",
-  "snapshot_at": "2026-10-16T13:37:32.591Z",
+  "generated_at": "2026-10-16T17:53:31.484Z",
+  "snapshot_at": "2026-10-16T17:52:31.899Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -109,16 +109,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 1.6666666666666665,
-      "detected_at": "2026-10-16T13:50:27.034Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 88 min around 4 PM — ~267% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 88 min cerca de las 4 PM — ~267% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.5142857142857142,
+      "detected_at": "2026-10-16T17:53:31.484Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 88 min around 4 PM — ~251% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 88 min cerca de las 4 PM — ~251% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 16,
         "peak_median": 88,
-        "overall_median": 33,
+        "overall_median": 35,
         "samples": 10,
-        "ratio": 2.6666666666666665
+        "ratio": 2.5142857142857142
       }
     },
     {
@@ -216,16 +216,16 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9696969696969697,
-      "detected_at": "2026-10-16T13:50:27.034Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 2 AM (median 1 min) — ~97% below the 30-day baseline of 33 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~97% debajo de la base de 30 días de 33 min.",
+      "severity": 0.9714285714285714,
+      "detected_at": "2026-10-16T17:53:31.484Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 2 AM (median 1 min) — ~97% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~97% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 2,
         "best_median": 1,
-        "overall_median": 33,
+        "overall_median": 35,
         "samples": 9
       }
     },
@@ -234,16 +234,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8909090909090909,
-      "detected_at": "2026-10-16T08:53:33.167Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 1 AM (median 6 min) — ~89% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 55 min.",
+      "severity": 0.8928571428571429,
+      "detected_at": "2026-10-16T17:53:31.484Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 1 AM (median 6 min) — ~89% below the 30-day baseline of 56 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 1 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 56 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 1,
         "best_median": 6,
-        "overall_median": 55,
+        "overall_median": 56,
         "samples": 14
       }
     },
@@ -404,7 +404,9 @@
         "samples": 12,
         "ratio": 1.56
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "eagle-pass-bridge-i",
@@ -422,9 +424,7 @@
         "overall_median": 40,
         "samples": 4
       }
-    }
-  ],
-  "trailing_24h": [
+    },
     {
       "type": "lowest_today",
       "port_slug": "hidalgo-pharr-pharr",
