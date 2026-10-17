@@ -10,7 +10,7 @@ import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
 const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
 import AboutFooter from '@/components/dashboard/AboutFooter';
-import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import DashboardAd from '@/components/ads/DashboardAd';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
@@ -743,7 +743,7 @@ export default function Dashboard() {
           <PopularCrossings crossings={state.crossings} language={language} />
 
           <InstallPrompt language={language} />
-          <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
+          <DashboardAd label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
 
           <AboutFooter
             language={language}

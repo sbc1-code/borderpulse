@@ -1169,3 +1169,14 @@ Big push day — UX/product sprint phase 1+2, embed widget, /api, /best-time,
 ## Earlier sessions
 
 Before this changelog existed. Use `git log` for archeology.
+# AdSense manual placement preparation — 2026-10-17
+
+- Prepare BorderPulse's own responsive Google display unit behind a disabled
+  activation flag; retain existing automatic Adsterra at the dashboard bottom.
+  No ads are added to crossing, comparison, blog or embed pages.
+- Use Google's native CMP and European withdrawal callback; preserve Google's
+  US opt-out link. Production-only requests, singleton loading and no effect
+  replay refresh. No new consent gate, analytics change or added spending.
+- Google review is requested, not approved. Shared messages remain drafts.
+  Activation and live CMP checks require Google's decision and owner rollout
+  approval. See `docs/REFRESH-OPERATIONS.md` and the existing Drive Current Focus.
