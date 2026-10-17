@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2026-10-17 — Shared-account AdSense preparation (prepared)
+
+- Add conditional Google advertising and personalization-choice disclosures in
+  English and Spanish, describing Google ads/consent controls as inactive.
+  Preserve the existing Adsterra placement and its disclosures.
+- Serve both privacy notices visibly before JavaScript, using shared paragraph
+  text for the static HTML and interactive page. Replace internal draft-review
+  instructions with a factual description of the current public site.
+- Record the existing shared publisher, verified BorderPulse ownership,
+  separate Requires review status and ads.txt crawl discrepancy in the refresh
+  runbook. No Google runtime, domain migration or review submission is included.
+
 ## 2026-10-14 — Walk-or-drive retrieval freshness (prepared)
 
 - Preserve the actual snapshot retrieval time and suppress walk/drive/tie advice
