@@ -24,6 +24,7 @@ export function requestGoogleAd(element, onPrivacyReady, enabled = GOOGLE_ADS_EN
     window.__tcfapi?.('addEventListener', 0, (data, success) => {
       listenerId = data?.listenerId;
       if (active) onPrivacyReady(Boolean(success && data?.gdprApplies));
+      else if (listenerId !== undefined) window.__tcfapi?.('removeEventListener', 0, () => {}, listenerId);
     });
   } });
   if (!document.getElementById('google-adsense-runtime')) {
