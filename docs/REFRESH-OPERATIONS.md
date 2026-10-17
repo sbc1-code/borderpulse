@@ -6,11 +6,12 @@ BorderPulse and DIGITO are separate site entries under the existing publisher
 `pub-7889422382615234`. A domain migration is unnecessary for shared account
 management; preserve BorderPulse's own domain, brand and audience.
 
-- Current signed-in readback: BorderPulse **Requires review**, with a green
-  ownership-verification check and an available **Request review** button.
-  DIGITO **Getting ready / Review requested** is a separate evaluation. Neither
-  site has a verified **Ready** result. The September review-request evidence
-  below is historical and does not establish a currently pending BorderPulse review.
+- After Sebastian approved PR #134 publication and submission, it merged at
+  `365343210ed06e844e51aa0403614ce27d1bea74`; production run `39062790807`
+  succeeded and the live publication manifest matched. Google accepted the
+  review request. BorderPulse and DIGITO each show **Getting ready / Review
+  requested**. Neither has a verified **Ready** result. The September evidence
+  below is historical; this October submission is separately verified.
 - Live `https://borderpulse.com/ads.txt` returns HTTP 200, `text/plain`, with
   `google.com, pub-7889422382615234, DIRECT, f08c47fec0942fa0`. HTTP and www
   redirect to it. The ownership meta tag matches; robots permits the site and
@@ -24,24 +25,43 @@ management; preserve BorderPulse's own domain, brand and audience.
   inactive. Existing Adsterra, analytics, storage and camera disclosures are
   preserved. Both privacy routes now deliver the notice visibly before
   JavaScript, sharing paragraph text with React.
-- No Google ad or CMP loader is installed. The existing DIGITO ad-unit slot
-  belongs to DIGITO; do not reuse it as a BorderPulse placement. Before Google
-  activation, finish provider/purpose review, consent/refusal/withdrawal and
-  GPC/GPP testing, and coverage of the existing Adsterra runtime. A saved Google
-  message draft does not itself control Adsterra. Any future BorderPulse unit
-  must be explicitly placed away from crossing controls, without overlays,
-  interstitials or ad-dependent access.
+- Dormant manual integration now uses BorderPulse's own display unit
+  **BorderPulse dashboard footer | manual**, slot `2612112583`, read back from
+  Google's code generator. `src/lib/googleAds.js` keeps `GOOGLE_ADS_ENABLED`
+  **false**. The dashboard still uses the existing automatic Adsterra placement
+  unchanged. Future owner-approved activation switches that one bottom slot
+  to Google, without stacking providers. It loads no Google code while off;
+  preview hosts, crossing pages, embeds and other routes cannot request ads.
+  One SDK per document and one request per mounted slot prevent effect-replay
+  refreshes. Reserved space and blocked/unfilled handling preserve content.
+  No overlays, interstitials or ad-dependent access are introduced.
 - The existing unpublished European and US message drafts now include both
   sites, named **DIGITO + BorderPulse | European privacy choices** and
   **DIGITO + BorderPulse | US privacy choices**. Both were read back as
   **Draft**, two sites, Publish **OFF**. European language/refusal/optimization
   settings and US language/targeting settings were preserved. BorderPulse's
   display name and `https://borderpulse.com/privacy/` were saved; site-name
-  substitution remains dynamic. Account-wide provider/purpose defaults were
-  not changed. These are preparation settings, not active consent coverage.
-- Publication of this preparation and the final **Request review** action are
-  owner-approval gates. No publisher account, personal/payment information,
-  declarations, terms, spending or live-ad interaction was changed.
+  substitution remains dynamic. Google-native advertising and analytics
+  consent-mode interpretation plus RTB partner-consent checking are enabled.
+  The 198 common partners, legitimate-interest defaults and maximum-message
+  coverage remain enabled; special feature 2 and own-use purposes remain off.
+  These are preparation settings, not active consent coverage.
+- Google's tag will deliver the published CMP. The prepared European
+  withdrawal button appears when Google's TCF API reports European rules
+  apply; calls go through Google's supported callback queue. Keep Google's
+  automatic US Do Not Sell or Share link. No custom consent record, Adsterra
+  opt-in, analytics change or global blocking is added.
+- After Google approves, verify account onboarding and BorderPulse **Ready**,
+  obtain owner rollout approval, publish the existing Google drafts and change
+  the flag to true. Update conditional EN/ES privacy wording to the active
+  provider. Use Google's documented `fc=alwaysshow&fctype=gdpr` / `fctype=usnat`
+  previews on production for language, mobile/desktop, refusal, withdrawal,
+  US opt-out and GPC checks. Mocked checks cannot prove live CMP behavior.
+  Keep Auto ads/Auto optimize off and verify one provider, placement separation
+  and actual serving in Google reports. Restore the flag to false to return
+  to the existing Adsterra placement.
+- No publisher account, personal/payment information, declarations, terms,
+  spending or live-ad interaction was changed. Google drafts remain unpublished.
 
 Google references: [site management](https://support.google.com/adsense/answer/12131223),
 [privacy disclosures](https://support.google.com/adsense/answer/1348695), and
