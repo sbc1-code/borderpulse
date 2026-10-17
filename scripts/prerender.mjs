@@ -9,6 +9,8 @@ import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
 import { snapshotHtml, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
 import { crossingSearchTitle } from '../src/lib/crossingNames.js';
 import { cameraSourceFor } from '../src/lib/cameras.js';
+import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
+import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -663,7 +665,7 @@ async function main() {
     const enHead = {
       lang: 'en',
       title: 'Privacy and advertising | Border Pulse',
-      desc: 'How Border Pulse uses browser preferences, analytics, and Adsterra advertising.',
+      desc: 'How Border Pulse uses browser preferences, analytics, and third-party advertising.',
       canonical: enCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
@@ -673,13 +675,30 @@ async function main() {
       ...enHead,
       lang: 'es',
       title: 'Privacidad y publicidad | Border Pulse',
-      desc: 'Cómo Border Pulse usa preferencias del navegador, analítica y publicidad de Adsterra.',
+      desc: 'Cómo Border Pulse usa preferencias del navegador, analítica y publicidad de terceros.',
       canonical: esCanonical,
     };
     for (const [route, head] of [['privacy', enHead], ['privacidad', esHead]]) {
       const outDir = path.resolve(distDir, route);
       fs.mkdirSync(outDir, { recursive: true });
-      fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+      const es = head.lang === 'es';
+      const notice = privacyParagraphs(head.lang);
+      const google = googlePrivacyNotice(head.lang);
+      const section = (id, title, paragraphs, links = []) => `<section id="${esc(id)}" class="my-6"><h2 class="text-xl font-semibold">${esc(title)}</h2>${paragraphs.map(text => `<p class="my-3">${esc(text)}</p>`).join('')}${links.map(link => `<p><a class="underline" href="${esc(link.href)}" target="_blank" rel="noopener noreferrer">${esc(link.label)}</a></p>`).join('')}</section>`;
+      const body = `<main class="mx-auto max-w-[900px] p-4 sm:p-6">
+        <a href="/">${es ? 'Todos los cruces' : 'All crossings'}</a>
+        <h1 class="text-2xl font-bold">${es ? 'Privacidad y datos' : 'Privacy and data'}</h1>
+        ${section('cameras', es ? 'Cámaras públicas' : 'Public cameras', [notice.cameras], [{ href: 'https://policies.google.com/privacy', label: es ? 'Aviso de privacidad de Google' : 'Google Privacy Policy' }])}
+        ${section('public-site', es ? 'El sitio público' : 'The public site', [notice.publicSite, notice.analytics])}
+        ${section('advertising', es ? 'Publicidad' : 'Advertising', [notice.adsterra, notice.adsterraData, notice.adsterraChoices], [
+          { href: 'https://adsterra.com/privacy-policy-managed/', label: es ? 'Aviso de privacidad de Adsterra' : 'Adsterra Privacy Policy' },
+          { href: 'https://adsterra.com/cookies/', label: es ? 'Política de cookies de Adsterra' : 'Adsterra Cookies Policy' },
+        ])}
+        ${section('google-advertising', google.title, google.paragraphs, google.links)}
+        <p>${es ? 'Actualizado: 17 de octubre de 2026.' : 'Updated: October 17, 2026.'}</p>
+      </main>`;
+      const html = injectSnapshot(rewriteIndex(indexWithLinks, head), body);
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     }
   }
 

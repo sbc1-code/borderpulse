@@ -1,5 +1,52 @@
 # Public data refresh
 
+## AdSense preparation — 2026-10-17 UTC
+
+BorderPulse and DIGITO are separate site entries under the existing publisher
+`pub-7889422382615234`. A domain migration is unnecessary for shared account
+management; preserve BorderPulse's own domain, brand and audience.
+
+- Current signed-in readback: BorderPulse **Requires review**, with a green
+  ownership-verification check and an available **Request review** button.
+  DIGITO **Getting ready / Review requested** is a separate evaluation. Neither
+  site has a verified **Ready** result. The September review-request evidence
+  below is historical and does not establish a currently pending BorderPulse review.
+- Live `https://borderpulse.com/ads.txt` returns HTTP 200, `text/plain`, with
+  `google.com, pub-7889422382615234, DIRECT, f08c47fec0942fa0`. HTTP and www
+  redirect to it. The ownership meta tag matches; robots permits the site and
+  file. Google's separate ads.txt dashboard still says **Not found**. Retain
+  the correct public file while Google recrawls; do not rotate publisher IDs.
+- Google Auto ads is **OFF**. Auto optimize was changed from **ON** to **OFF**
+  and read back, leaving both sites without automatic Google placements or
+  experiments. Existing dashboard-only Adsterra code is preserved.
+- This patch adds conditional Google cookie/personalization disclosures and
+  opt-out links in EN/ES. It describes Google ads and site consent controls as
+  inactive. Existing Adsterra, analytics, storage and camera disclosures are
+  preserved. Both privacy routes now deliver the notice visibly before
+  JavaScript, sharing paragraph text with React.
+- No Google ad or CMP loader is installed. The existing DIGITO ad-unit slot
+  belongs to DIGITO; do not reuse it as a BorderPulse placement. Before Google
+  activation, finish provider/purpose review, consent/refusal/withdrawal and
+  GPC/GPP testing, and coverage of the existing Adsterra runtime. A saved Google
+  message draft does not itself control Adsterra. Any future BorderPulse unit
+  must be explicitly placed away from crossing controls, without overlays,
+  interstitials or ad-dependent access.
+- The existing unpublished European and US message drafts now include both
+  sites, named **DIGITO + BorderPulse | European privacy choices** and
+  **DIGITO + BorderPulse | US privacy choices**. Both were read back as
+  **Draft**, two sites, Publish **OFF**. European language/refusal/optimization
+  settings and US language/targeting settings were preserved. BorderPulse's
+  display name and `https://borderpulse.com/privacy/` were saved; site-name
+  substitution remains dynamic. Account-wide provider/purpose defaults were
+  not changed. These are preparation settings, not active consent coverage.
+- Publication of this preparation and the final **Request review** action are
+  owner-approval gates. No publisher account, personal/payment information,
+  declarations, terms, spending or live-ad interaction was changed.
+
+Google references: [site management](https://support.google.com/adsense/answer/12131223),
+[privacy disclosures](https://support.google.com/adsense/answer/1348695), and
+[European consent requirements](https://support.google.com/adsense/answer/13554116).
+
 ## Ads and sharing closeout — 2026-09-27 Pacific
 
 - Sebastian confirmed the public platform is supported by automatically served
