@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-18T00:44:18.007Z",
-  "snapshot_at": "2026-10-18T00:37:38.546Z",
+  "generated_at": "2026-10-18T05:34:19.014Z",
+  "snapshot_at": "2026-10-18T05:22:37.284Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -163,15 +163,33 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-10-17T08:23:35.598Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Saturday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
+      "detected_at": "2026-10-18T05:34:19.014Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Sunday hour so far is 2 AM (median 0 min) — ~100% below the 30-day baseline of 0 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Laredo - Colombia Solidarity es 2 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 0 min.",
       "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 0,
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 2,
         "best_median": 0,
         "overall_median": 0,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1,
+      "detected_at": "2026-10-18T05:34:19.014Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 7 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 7 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 7,
+        "best_median": 0,
+        "overall_median": 25,
         "samples": 8
       }
     },
@@ -248,19 +266,37 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.88,
+      "detected_at": "2026-10-18T05:34:19.014Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 2 AM (median 3 min) — ~88% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 2 AM (mediana 3 min) — ~88% debajo de la base de 30 días de 25 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 2,
+        "best_median": 3,
+        "overall_median": 25,
+        "samples": 1
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8620689655172413,
-      "detected_at": "2026-10-18T00:44:18.007Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 2 AM (median 8 min) — ~86% below the 30-day baseline of 58 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 8 min) — ~86% debajo de la base de 30 días de 58 min.",
+      "severity": 0.8666666666666667,
+      "detected_at": "2026-10-18T05:34:19.014Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 2 AM (median 8 min) — ~87% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 8 min) — ~87% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 2,
         "best_median": 8,
-        "overall_median": 58,
+        "overall_median": 60,
         "samples": 13
       }
     },
@@ -301,24 +337,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.7142857142857143,
-      "detected_at": "2026-10-17T08:23:35.598Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 1 AM (median 10 min) — ~71% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 1 AM (mediana 10 min) — ~71% debajo de la base de 30 días de 35 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 1,
-        "best_median": 10,
-        "overall_median": 35,
-        "samples": 12
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -333,24 +351,6 @@
         "best_median": 30,
         "overall_median": 90,
         "samples": 13
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.6,
-      "detected_at": "2026-10-17T22:03:41.843Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Saturday hour so far is 4 AM (median 10 min) — ~60% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Pharr es 4 AM (mediana 10 min) — ~60% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 4,
-        "best_median": 10,
-        "overall_median": 25,
-        "samples": 9
       }
     },
     {
@@ -372,6 +372,24 @@
     }
   ],
   "trailing_24h": [
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.7142857142857143,
+      "detected_at": "2026-10-17T08:23:35.598Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 1 AM (median 10 min) — ~71% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 1 AM (mediana 10 min) — ~71% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 1,
+        "best_median": 10,
+        "overall_median": 35,
+        "samples": 12
+      }
+    },
     {
       "type": "sunday_spike",
       "port_slug": "otay-mesa",
