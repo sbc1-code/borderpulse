@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-17T22:03:41.843Z",
-  "snapshot_at": "2026-10-17T21:52:37.918Z",
+  "generated_at": "2026-10-18T00:44:18.007Z",
+  "snapshot_at": "2026-10-18T00:37:38.546Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -24,16 +24,16 @@
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
-      "severity": 3.8,
-      "detected_at": "2026-10-17T08:23:35.598Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 120 min around 6 PM — ~480% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 120 min cerca de las 6 PM — ~480% de la mediana de 30 días. Planea alrededor.",
+      "severity": 3,
+      "detected_at": "2026-10-18T00:44:18.007Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 120 min around 6 PM — ~400% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 120 min cerca de las 6 PM — ~400% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 18,
         "peak_median": 120,
-        "overall_median": 25,
+        "overall_median": 30,
         "samples": 12,
-        "ratio": 4.8
+        "ratio": 4
       }
     },
     {
@@ -55,23 +55,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 2.3333333333333335,
-      "detected_at": "2026-10-17T16:12:52.944Z",
-      "summary_en": "Heads up: Calexico - West's Sunday peak hits 150 min around 10 PM — ~333% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 150 min cerca de las 10 PM — ~333% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 150,
-        "overall_median": 45,
-        "samples": 13,
-        "ratio": 3.3333333333333335
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -84,6 +67,23 @@
         "peak_median": 180,
         "overall_median": 60,
         "samples": 12,
+        "ratio": 3
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 2,
+      "detected_at": "2026-10-18T00:44:18.007Z",
+      "summary_en": "Heads up: Calexico - West's Sunday peak hits 150 min around 10 PM — ~300% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - West alcanza 150 min cerca de las 10 PM — ~300% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 150,
+        "overall_median": 50,
+        "samples": 13,
         "ratio": 3
       }
     },
@@ -145,15 +145,15 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-17T08:23:35.598Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-10-18T00:44:18.007Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 0,
-        "overall_median": 25,
+        "overall_median": 30,
         "samples": 1
       }
     },
@@ -180,16 +180,34 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.9571428571428572,
-      "detected_at": "2026-10-17T12:47:55.732Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 3 min) — ~96% below the 30-day baseline of 70 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 3 min) — ~96% debajo de la base de 30 días de 70 min.",
+      "severity": 0.96,
+      "detected_at": "2026-10-18T00:44:18.007Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 3 min) — ~96% below the 30-day baseline of 75 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 3 min) — ~96% debajo de la base de 30 días de 75 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 3,
-        "overall_median": 70,
+        "overall_median": 75,
+        "samples": 13
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-west",
+      "port_name": "Calexico - West",
+      "state": "CA",
+      "severity": 0.9,
+      "detected_at": "2026-10-18T00:44:18.007Z",
+      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 3 AM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 3 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 5,
+        "overall_median": 50,
         "samples": 13
       }
     },
@@ -230,37 +248,19 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-west",
-      "port_name": "Calexico - West",
-      "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-10-17T16:12:52.944Z",
-      "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 3 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 3 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 13
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.8596491228070176,
-      "detected_at": "2026-10-17T22:03:41.843Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 2 AM (median 8 min) — ~86% below the 30-day baseline of 57 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 8 min) — ~86% debajo de la base de 30 días de 57 min.",
+      "severity": 0.8620689655172413,
+      "detected_at": "2026-10-18T00:44:18.007Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 2 AM (median 8 min) — ~86% below the 30-day baseline of 58 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 8 min) — ~86% debajo de la base de 30 días de 58 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 2,
         "best_median": 8,
-        "overall_median": 57,
+        "overall_median": 58,
         "samples": 13
       }
     },
@@ -355,23 +355,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.5714285714285714,
-      "detected_at": "2026-10-17T08:23:35.598Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 110 min around 7 PM — ~157% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 110 min cerca de las 7 PM — ~157% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 110,
-        "overall_median": 70,
-        "samples": 12,
-        "ratio": 1.5714285714285714
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
@@ -388,5 +371,23 @@
       }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.5714285714285714,
+      "detected_at": "2026-10-17T08:23:35.598Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 110 min around 7 PM — ~157% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 110 min cerca de las 7 PM — ~157% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 19,
+        "peak_median": 110,
+        "overall_median": 70,
+        "samples": 12,
+        "ratio": 1.5714285714285714
+      }
+    }
+  ]
 }
