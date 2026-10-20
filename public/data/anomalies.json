@@ -1,24 +1,7 @@
 {
-  "generated_at": "2026-10-20T19:03:58.791Z",
-  "snapshot_at": "2026-10-20T18:52:41.925Z",
+  "generated_at": "2026-10-20T23:02:49.799Z",
+  "snapshot_at": "2026-10-20T22:52:34.444Z",
   "active": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 3.333333333333333,
-      "detected_at": "2026-10-19T05:59:06.013Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 65 min around 9 PM — ~433% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 65 min cerca de las 9 PM — ~433% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 65,
-        "overall_median": 15,
-        "samples": 17,
-        "ratio": 4.333333333333333
-      }
-    },
     {
       "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
@@ -51,6 +34,23 @@
         "overall_median": 35,
         "samples": 15,
         "ratio": 3.4285714285714284
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 2.25,
+      "detected_at": "2026-10-20T23:02:49.799Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 65 min around 9 PM — ~325% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 65 min cerca de las 9 PM — ~325% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 65,
+        "overall_median": 20,
+        "samples": 17,
+        "ratio": 3.25
       }
     },
     {
@@ -127,14 +127,14 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 1.1428571428571428,
-      "detected_at": "2026-10-18T22:53:45.678Z",
+      "detected_at": "2026-10-20T23:02:49.799Z",
       "summary_en": "Heads up: Hidalgo/Pharr - Hidalgo's Sunday peak hits 75 min around 5 PM — ~214% of the 30-day median. Plan around it.",
       "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Hidalgo alcanza 75 min cerca de las 5 PM — ~214% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 17,
         "peak_median": 75,
         "overall_median": 35,
-        "samples": 14,
+        "samples": 13,
         "ratio": 2.142857142857143
       }
     },
@@ -144,15 +144,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-20T19:03:58.791Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 4 PM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 4 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
+      "detected_at": "2026-10-20T23:02:49.799Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 4 PM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 4 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 16,
         "best_median": 0,
-        "overall_median": 15,
+        "overall_median": 20,
         "samples": 16
       }
     },
@@ -268,16 +268,16 @@
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
-      "severity": 0.9,
-      "detected_at": "2026-10-20T09:53:37.613Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 2 AM (median 6 min) — ~90% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 6 min) — ~90% debajo de la base de 30 días de 60 min.",
+      "severity": 0.8947368421052632,
+      "detected_at": "2026-10-20T23:02:49.799Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 2 AM (median 6 min) — ~89% below the 30-day baseline of 57 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 6 min) — ~89% debajo de la base de 30 días de 57 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 2,
         "best_median": 6,
-        "overall_median": 60,
+        "overall_median": 57,
         "samples": 16
       }
     },
