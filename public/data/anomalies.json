@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-20T14:50:26.620Z",
-  "snapshot_at": "2026-10-20T14:37:45.441Z",
+  "generated_at": "2026-10-20T19:03:58.791Z",
+  "snapshot_at": "2026-10-20T18:52:41.925Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -139,38 +139,21 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-10-20T09:53:37.613Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 180,
-        "overall_median": 90,
-        "samples": 17,
-        "ratio": 2
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-20T14:50:26.620Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 11 AM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 11 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
+      "detected_at": "2026-10-20T19:03:58.791Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Tuesday hour so far is 4 PM (median 0 min) — ~100% below the 30-day baseline of 15 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Deconcini es 4 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 15 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 11,
+        "best_hour": 16,
         "best_median": 0,
         "overall_median": 15,
-        "samples": 12
+        "samples": 16
       }
     },
     {
@@ -299,6 +282,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.894736842105263,
+      "detected_at": "2026-10-20T19:03:58.791Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 10 PM — ~189% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 10 PM — ~189% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 180,
+        "overall_median": 95,
+        "samples": 17,
+        "ratio": 1.894736842105263
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -356,16 +356,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-10-20T09:53:37.613Z",
-      "summary_en": "Right now San Ysidro's lightest Tuesday hour so far is 10 PM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en San Ysidro es 10 PM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "severity": 0.6842105263157895,
+      "detected_at": "2026-10-20T19:03:58.791Z",
+      "summary_en": "Right now San Ysidro's lightest Tuesday hour so far is 10 PM (median 30 min) — ~68% below the 30-day baseline of 95 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en San Ysidro es 10 PM (mediana 30 min) — ~68% debajo de la base de 30 días de 95 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 22,
         "best_median": 30,
-        "overall_median": 90,
+        "overall_median": 95,
         "samples": 13
       }
     },
