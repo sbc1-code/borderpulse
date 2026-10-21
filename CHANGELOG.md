@@ -1,6 +1,14 @@
 # CHANGELOG
 
-## 2026-10-21 — Browser resilience and navigation (prepared)
+## 2026-10-21 — Browser resilience and navigation (published)
+
+- PR #137 merged at `0ec918a897ee356d643afbd86c8957d84369c809`.
+  Production run `39649211670` succeeded; Vercel deployment
+  `dpl_5NcpUBPmGWf1KsBs4gGqwP13cV4b` was READY with matching public manifest.
+  The served EN/ES desktop/mobile app passed native readback and isolated
+  storage, favorites, keyboard and metadata fixtures. Fresh local build,
+  118 unit tests and full npm test passed; production checked 402 navigations
+  with the current snapshot. Eight moderate audit entries remain.
 
 - Keep the app usable when browser storage is blocked or contains malformed
   preferences. Validate saved favorites and language/theme values; show an

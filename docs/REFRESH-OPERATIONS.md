@@ -1,5 +1,38 @@
 # Public data refresh
 
+## Browser resilience release — 2026-10-21 UTC
+
+- After the owner approved the precise follow-up batch, its single authorized
+  push retry succeeded. [PR #137](https://github.com/sbc1-code/borderpulse/pull/137)
+  merged approved head `2c9c8bde2ac75f03926da7c16b63a92745597fe8` at
+  `0ec918a897ee356d643afbd86c8957d84369c809`. Both CI checks passed.
+- Existing production [run 39649211670](https://github.com/sbc1-code/borderpulse/actions/runs/39649211670)
+  succeeded without another dispatch. Vercel deployment
+  `dpl_5NcpUBPmGWf1KsBs4gGqwP13cV4b`,
+  `borderpulse-rep22mxmn-sbc1-codes-projects.vercel.app`, was READY with the
+  same source and existing apex/www aliases. Public publication.json matched,
+  prepared `2026-10-21T18:03:30.542Z`, with 42 crossings and 2,422 historical
+  observations. The separate live API returned HTTP 200 with 42 crossings.
+- Native EN/ES desktop/mobile readback confirmed the coordinate disclosure,
+  comparison route and viewport fit. Isolated synthetic browser fixtures
+  against the served bundle passed blocked reads/quota, malformed favorites,
+  successful/failed persistence, retained language, keyboard skip/Escape and
+  route metadata cleanup. Fixtures did not modify the public feed or use the
+  owner's browser profile, location or other task tabs. The shared browser
+  remains available; the task-owned headless process closed after checks.
+- Fresh local build and 118 unit tests passed. Full local and production npm
+  test each passed 402 navigations with the current snapshot's 171 canonical
+  routes and 29 aliases. Route capability rules did not change. The eight
+  moderate audit entries remain, with zero high/critical and no gate bypass.
+- CI also annotated actions/upload-artifact@v4's Node.js 20 runtime deprecation
+  and the ubuntu-latest image migration. No workflow, credential, permission,
+  security setting, ad or paid-service change was made. Preserve the existing
+  dependency follow-ups; limited checks do not certify complete security or
+  accessibility or establish SEO/conversion improvement.
+- The original operator checkout's 18 changed paths, generated files and newer
+  duplicate local files were preserved. Release evidence is this runbook,
+  PR #137 and the existing Drive Current Focus checkpoint, not a new tracker.
+
 ## Compare and Vite release — 2026-10-21 UTC
 
 - [PR #136](https://github.com/sbc1-code/borderpulse/pull/136) merged at
