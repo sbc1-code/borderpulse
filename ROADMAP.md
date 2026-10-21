@@ -27,7 +27,8 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   package entries remain; no usage or conversion increase is established.
 - [~] Prepare bounded browser-storage, keyboard-navigation and route-metadata
   corrections from the October 21 audit. Local build, 118 unit tests and full
-  npm test passed; review and release evidence belong to the follow-up PR.
+  npm test passed. The isolated local commit and patch are ready for review;
+  publishing this follow-up needs separate owner approval.
   Broader schema lifecycle, assistive-technology and cross-browser audits
   remain separate work.
 
