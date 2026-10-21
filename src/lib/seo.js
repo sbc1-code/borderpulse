@@ -38,8 +38,16 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
   if (ogTitle) setMeta('og:title', ogTitle, 'property');
   if (ogDescription) setMeta('og:description', ogDescription, 'property');
   if (ogImage) setMeta('og:image', ogImage, 'property');
+  if (ogTitle || title) setMeta('twitter:title', ogTitle || title);
+  if (ogDescription || description) setMeta('twitter:description', ogDescription || description);
+  if (ogImage) setMeta('twitter:image', ogImage);
   if (ogUrl) setMeta('og:url', ogUrl, 'property');
   if (canonical) {
+    // Keep the correct direct-entry schema through data/language updates, but
+    // never carry a previous route's FAQ, Place or Article into another page.
+    document.querySelectorAll('script[data-route-canonical]').forEach(script => {
+      if (script.getAttribute('data-route-canonical') !== canonical) script.remove();
+    });
     let link = document.querySelector('link[rel="canonical"]');
     if (!link) {
       link = document.createElement('link');
@@ -64,6 +72,9 @@ export function resetPageMeta() {
   setMeta('og:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
   setMeta('og:image', 'https://borderpulse.com/og-card.png', 'property');
   setMeta('og:url', 'https://borderpulse.com/', 'property');
+  setMeta('twitter:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times');
+  setMeta('twitter:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
+  setMeta('twitter:image', 'https://borderpulse.com/og-card.png');
   const link = document.querySelector('link[rel="canonical"]');
   if (link) link.setAttribute('href', 'https://borderpulse.com/');
 }

@@ -1,5 +1,31 @@
 # Public data refresh
 
+## Compare and Vite release — 2026-10-21 UTC
+
+- [PR #136](https://github.com/sbc1-code/borderpulse/pull/136) merged at
+  `f55167b6994c7b3e6532529566507352a7ff478d`. Its separate commits guard
+  untrusted pair-comparison snapshots and patch Vite 6.4.3 to 6.4.4.
+- Both CI runs passed. The existing production
+  [Actions run 39561576557](https://github.com/sbc1-code/borderpulse/actions/runs/39561576557)
+  succeeded. Vercel deployment `dpl_3fkPhCsCiPdpq62RhzNPfCU1b4yg`,
+  `borderpulse-1byel2036-sbc1-codes-projects.vercel.app`, was READY with that
+  commit and the existing borderpulse.com/www aliases. No hosting migration,
+  account, permission, security setting or paid-service change was needed.
+- Public `https://borderpulse.com/data/publication.json` matched the merge
+  commit, prepared at `2026-10-21T07:23:29.976Z`; its 42-crossing snapshot,
+  2,379-entry history and FX input matched their published timestamps.
+  Separate real-feed readback and synthetic fresh/stale/future tests against
+  the served app passed in EN/ES on desktop/mobile. This is a release receipt,
+  not a claim that the live feed failed or that future publications are healthy.
+- Fresh local build/full npm test passed with 416 route navigations. The
+  release had 114 unit tests; the subsequent bounded audit follow-up has 118.
+  Audit reports zero high/critical and eight moderate package entries outside
+  this patch. Limited browser/code checks do not establish complete security,
+  accessibility, provider playback, search performance or conversion lift.
+- Existing collector, Vercel publication path, Pages rollback, paused product
+  automation and advertising configuration remain as previously recorded.
+  Preserve the original operator checkout's 18 unrelated changed paths.
+
 ## AdSense preparation — 2026-10-17 UTC
 
 BorderPulse and DIGITO are separate site entries under the existing publisher

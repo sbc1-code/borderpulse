@@ -297,7 +297,7 @@ function rewriteIndex(indexHtml, head) {
   const jsonLdTags = head.jsonLd
     .map((obj) => {
       const body = JSON.stringify(obj).replace(/<\/script/gi, '<\\/script');
-      return `  <script type="application/ld+json">${body}</script>`;
+      return `  <script type="application/ld+json" data-route-canonical="${esc(head.canonical)}">${body}</script>`;
     })
     .join('\n');
   html = html.replace(/<\/head>/i, `${jsonLdTags}\n  </head>`);

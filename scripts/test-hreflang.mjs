@@ -32,6 +32,7 @@ test('SPA metadata replaces stale/duplicate hreflangs and preserves other altern
     const node = {
       tag, attrs: { ...attrs },
       setAttribute(name, value) { this.attrs[name] = value; },
+      getAttribute(name) { return this.attrs[name]; },
       remove() { nodes.splice(nodes.indexOf(this), 1); },
     };
     return node;
@@ -52,18 +53,32 @@ test('SPA metadata replaces stale/duplicate hreflangs and preserves other altern
   const actual = () => nodes.filter((node) => 'hreflang' in node.attrs).map((node) => ({ lang: node.attrs.hreflang, href: node.attrs.href }));
   try {
     const canonical = base + '/crossing/san-ysidro/';
+    const currentSchema = create('script', { 'data-route-canonical': canonical });
+    const otherSchema = create('script', { 'data-route-canonical': base + '/blog/previous/' });
+    const sharedSchema = create('script', { type: 'application/ld+json' });
+    nodes.push(currentSchema, otherSchema, sharedSchema);
     updatePageMeta({ canonical });
+    assert.ok(nodes.includes(currentSchema), 'same-route data updates retain the direct-entry schema');
+    assert.ok(!nodes.includes(otherSchema), 'a previous route cannot keep its schema');
+    assert.ok(nodes.includes(sharedSchema), 'shared schema is outside the route cleanup');
     assert.deepEqual(actual(), pageHreflangs(canonical));
     assert.ok(nodes.includes(rss));
     updatePageMeta({ title: 'Partial update' });
     assert.deepEqual(actual(), pageHreflangs(canonical));
     updatePageMeta({ canonical: base + '/blog/example/', hreflangs: [] });
+    assert.ok(!nodes.includes(currentSchema), 'leaving the crossing removes its route schema');
     assert.deepEqual(actual(), []);
     document.documentElement.lang = 'es';
     resetPageMeta();
     assert.equal(document.documentElement.lang, 'es', 'metadata cleanup must preserve the language selected by its owner');
     assert.deepEqual(actual(), pageHreflangs(base + '/'));
     assert.ok(nodes.includes(rss));
+    updatePageMeta({ title: 'New page', description: 'New description', ogTitle: 'New preview', ogDescription: 'Preview description', ogImage: base + '/og/new.png' });
+    for (const [name, expected] of [['twitter:title', 'New preview'], ['twitter:description', 'Preview description'], ['twitter:image', base + '/og/new.png']]) {
+      assert.equal(document.querySelector(`meta[name="${name}"]`).getAttribute('content'), expected);
+    }
+    resetPageMeta();
+    assert.equal(document.querySelector('meta[name="twitter:image"]').getAttribute('content'), base + '/og-card.png');
     for (const lang of ['en', 'es']) {
       updatePageMeta({ canonical: `${base}/blog/content-${lang}/`, lang });
       assert.equal(document.documentElement.lang, lang, 'explicit content language must still take ownership');

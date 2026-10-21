@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BarChart3, BookOpen, Menu, X, Moon, Sun, Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
+import { themeValue, readStorage, writeStorage } from '@/lib/browserStorage';
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 export default function Layout({ children }) {
   const location = useLocation();
-  const [language, setLanguage] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('borderPulse_language') || 'en' : 'en'
-  );
-  const [theme, setTheme] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('borderPulse_theme') || 'light' : 'light'
-  );
+  const language = usePersistentLanguage();
+  const [theme, setTheme] = useState(() => themeValue(readStorage('borderPulse_theme')));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButton = useRef(null);
 
   const applyTheme = useCallback((t) => {
     if (typeof document === 'undefined') return;
@@ -23,8 +22,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     const onStorage = (e) => {
-      if (e.key === 'borderPulse_language') setLanguage(e.newValue || 'en');
-      if (e.key === 'borderPulse_theme') setTheme(e.newValue || 'light');
+      if (e.key === 'borderPulse_theme') setTheme(themeValue(e.newValue));
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
@@ -41,12 +39,11 @@ export default function Layout({ children }) {
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
-    localStorage.setItem('borderPulse_theme', next);
+    writeStorage('borderPulse_theme', next);
   };
 
   const changeLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('borderPulse_language', lang);
+    writeStorage('borderPulse_language', lang);
     window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
   };
 
@@ -88,7 +85,12 @@ export default function Layout({ children }) {
         {language === 'en' ? 'Skip to content' : 'Ir al contenido'}
       </a>
       {/* Mobile header */}
-      <header className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
+      <header onKeyDown={event => {
+        if (event.key === 'Escape' && mobileOpen) {
+          setMobileOpen(false);
+          menuButton.current?.focus();
+        }
+      }} className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
           <Link to="/" aria-label="Border Pulse home" className="flex min-h-11 min-w-11 items-center gap-2 rounded-md">
             <BorderPulseLogo size={32} />
@@ -104,7 +106,7 @@ export default function Layout({ children }) {
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+            <Button ref={menuButton} variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} aria-controls={mobileOpen ? 'mobile-navigation' : undefined}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
@@ -175,7 +177,7 @@ export default function Layout({ children }) {
             ))}
           </nav>
         </aside>
-        <main id="main-content" className="flex-1 overflow-auto">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 overflow-auto">{children}</main>
       </div>
 
       {/* Footer (all viewports) */}

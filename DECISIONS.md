@@ -1,5 +1,20 @@
 # DECISIONS
 
+## 2026-10-21 · Browser persistence is optional and saved preferences are untrusted
+
+A blocked localStorage accessor or a parsed non-array favorite value must not
+break crossing decisions. Normalize saved preferences, keep temporary language
+and theme choices usable, and report favorite-write failure without emitting
+a success event. Describe the existing rounded-coordinate storage accurately;
+do not add data collection or change consent, ads or security settings.
+
+## 2026-10-21 · Route transitions must not inherit another page's schema
+
+Mark generated route schema with its canonical URL and remove it when that
+canonical changes. Keep it during same-route data/language updates and retain
+shared schema. Synchronize Twitter and Open Graph previews. This bounded
+cleanup does not promise schema regeneration for every client-side route.
+
 ## 2026-10-13 · Camera coverage cannot substitute nearby roads for inspection queues
 
 Use an explicit camera-area picker and distinguish embedded crossing views,

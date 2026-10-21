@@ -19,6 +19,7 @@ import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings, kmToMiles } from '@/lib/geo';
 import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { readFavorites } from '@/lib/browserStorage';
 import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
@@ -221,14 +222,7 @@ export default function CrossingDetail() {
   const [anomalies, setAnomalies] = useState(null);
   const language = usePersistentLanguage();
   const [favoriteError, setFavoriteError] = useState(false);
-  const [favorites, setFavorites] = useState(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem('borderPulse_favorites') || '[]');
-      return Array.isArray(stored) ? stored : [];
-    } catch {
-      return [];
-    }
-  });
+  const [favorites, setFavorites] = useState(readFavorites);
 
   const toggleFavorite = (portNumber) => {
     const adding = !favorites.includes(portNumber);
@@ -454,14 +448,14 @@ export default function CrossingDetail() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3 flex items-center justify-between gap-2">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">
               {language === 'en' ? 'All crossings' : 'Todos los cruces'}
             </span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <Button
           variant="outline"
           size="sm"
