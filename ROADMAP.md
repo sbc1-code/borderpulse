@@ -25,12 +25,12 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   Production commit `f55167b6`, Actions run `39561576557`, manifest and served
   EN/ES desktop/mobile app were verified October 21. Eight moderate audit
   package entries remain; no usage or conversion increase is established.
-- [~] Prepare bounded browser-storage, keyboard-navigation and route-metadata
-  corrections from the October 21 audit. Local build, 118 unit tests and full
-  npm test passed. The isolated local commit and patch are ready for review;
-  publishing this follow-up needs separate owner approval.
+- [x] Publish bounded browser-storage, keyboard-navigation and route-metadata
+  corrections (PR #137, merge `0ec918a8`). Production run `39649211670`,
+  deployment manifest and served EN/ES desktop/mobile behavior were verified
+  October 21. Fresh build, 118 unit tests and 402 route navigations passed.
   Broader schema lifecycle, assistive-technology and cross-browser audits
-  remain separate work.
+  remain separate work, alongside the eight moderate audit entries.
 
 - [~] QC the October 13 locality-first flow, shareable area URLs and familiar
   crossing names, with a visible inline camera entry on the homepage. Deliver
