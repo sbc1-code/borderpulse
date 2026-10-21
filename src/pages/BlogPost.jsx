@@ -112,12 +112,12 @@ export default function BlogPost() {
   return (
     <article className="p-3 sm:p-4 lg:p-6 max-w-[760px] mx-auto" lang={lang}>
       <div className="mb-4">
-        <Link to="/blog/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/blog/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{t.allPosts}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <header className="mb-6">

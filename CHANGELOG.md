@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 2026-10-21 — Browser resilience and navigation (prepared)
+
+- Keep the app usable when browser storage is blocked or contains malformed
+  preferences. Validate saved favorites and language/theme values; show an
+  EN/ES failure notice instead of claiming a favorite was saved. Language and
+  theme controls still work in the open document when persistence is denied.
+- Move skip-link focus into the main content, close mobile navigation with
+  Escape and return focus, and replace nested link/button back controls with
+  single links with 44px minimum height.
+- Update Twitter metadata with each page and remove a previous route's
+  generated schema after client navigation. Preserve same-route and shared
+  schema. Full runtime schema generation remains separate work.
+- Correct About's EN/ES description of existing locally saved rounded
+  coordinates. No new collection, transmission, dependency or service.
+- Validation: 118 unit tests, production build and full npm test passed,
+  including 416 desktop/mobile navigations and EN/ES storage-failure,
+  keyboard, metadata, sharing, feedback and freshness regressions. These are
+  bounded checks, not a security or accessibility certification.
+
+## 2026-10-21 — Compare and Vite production verification
+
+- PR #136 merged at `f55167b6994c7b3e6532529566507352a7ff478d`.
+  Actions run `39561576557` succeeded; Vercel deployment
+  `dpl_3fkPhCsCiPdpq62RhzNPfCU1b4yg` was READY with the same commit.
+  The public publication manifest and served app were verified on
+  borderpulse.com in EN/ES at desktop/mobile sizes, with synthetic fresh,
+  stale and future snapshots kept separate from the live feed readback.
+- The two October 20 local-review entries below are now published. Vite is
+  6.4.4; the audit gate reports zero high/critical and eight remaining moderate
+  package entries. No audit exception or security-setting change was made.
+
 ## 2026-10-20 — Vite audit unblock (local review)
 
 - Update the existing Vite development dependency from locked 6.4.3 to 6.4.4,

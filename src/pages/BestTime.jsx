@@ -160,12 +160,12 @@ export function BestTimeIndex() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{language === 'en' ? 'All crossings' : 'Todos los cruces'}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <header className="mb-5">
@@ -369,12 +369,12 @@ export default function BestTime() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[900px] mx-auto">
       <div className="mb-3">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{language === 'en' ? 'All crossings' : 'Todos los cruces'}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <header className="mb-5">

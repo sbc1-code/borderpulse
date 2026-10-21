@@ -21,6 +21,17 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [x] Publish the pair-comparison retrieval guard and Vite 6.4.4 patch (PR #136).
+  Production commit `f55167b6`, Actions run `39561576557`, manifest and served
+  EN/ES desktop/mobile app were verified October 21. Eight moderate audit
+  package entries remain; no usage or conversion increase is established.
+- [~] Prepare bounded browser-storage, keyboard-navigation and route-metadata
+  corrections from the October 21 audit. Local build, 118 unit tests and full
+  npm test passed. The isolated local commit and patch are ready for review;
+  publishing this follow-up needs separate owner approval.
+  Broader schema lifecycle, assistive-technology and cross-browser audits
+  remain separate work.
+
 - [~] QC the October 13 locality-first flow, shareable area URLs and familiar
   crossing names, with a visible inline camera entry on the homepage. Deliver
   useful visible homepage/crossing snapshots without

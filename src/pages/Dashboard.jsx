@@ -30,6 +30,7 @@ import { buildSlugMap } from '@/lib/slugs';
 import { track } from '@/lib/analytics';
 import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -77,11 +78,9 @@ export default function Dashboard() {
   const [region, setRegion] = useState(() => {
     if (corridorFor(searchParams.get('area'))) return 'ALL';
     // Stored region preference takes precedence; otherwise check the geolocation default.
-    const stored = localStorage.getItem('borderPulse_region');
-    if (stored) return stored;
-    const geoDefault = localStorage.getItem('borderPulse_defaultRegion');
-    if (geoDefault) return geoDefault;
-    return 'ALL';
+    const stored = readStorage('borderPulse_region');
+    const geoDefault = readStorage('borderPulse_defaultRegion');
+    return [stored, geoDefault].find(code => REGIONS.some(region => region.code === code)) || 'ALL';
   });
   const [search, setSearch] = useState('');
   const [corridor, setCorridor] = useState(() => {
@@ -107,37 +106,22 @@ export default function Dashboard() {
   const [shareOpen, setShareOpen] = useState(false);
   const [showGeoPrompt, setShowGeoPrompt] = useState(false);
   const [geoLocating, setGeoLocating] = useState(false);
-  const [favorites, setFavorites] = useState(() => {
-    try {
-      const stored = localStorage.getItem('borderPulse_favorites');
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  const toggleFavorite = useCallback((portNumber) => {
-    setFavorites((prev) => {
-      const next = prev.includes(portNumber)
-        ? prev.filter((p) => p !== portNumber)
-        : [...prev, portNumber];
-      localStorage.setItem('borderPulse_favorites', JSON.stringify(next));
-      // Analytics deliberately does NOT live in here. A state updater must be
-      // safe to call more than once (StrictMode, concurrent re-render), and a
-      // double-invoked updater would double-count the event.
-      return next;
-    });
-  }, []);
+  const [favorites, setFavorites] = useState(readFavorites);
+  const [favoriteError, setFavoriteError] = useState(false);
 
   const handleToggleFavorite = useCallback((portNumber) => {
-    const adding = !favoritesSetRef.current.has(portNumber);
-    toggleFavorite(portNumber);
+    const adding = !favorites.includes(portNumber);
+    const next = adding ? [...favorites, portNumber] : favorites.filter(port => port !== portNumber);
+    if (!writeStorage('borderPulse_favorites', JSON.stringify(next))) {
+      setFavoriteError(true);
+      return;
+    }
+    setFavorites(next);
+    setFavoriteError(false);
     track('favorite-toggle', { action: adding ? 'add' : 'remove' });
-  }, [toggleFavorite]);
+  }, [favorites]);
 
   const favoritesSet = useMemo(() => new Set(favorites), [favorites]);
-  const favoritesSetRef = useRef(favoritesSet);
-  useEffect(() => { favoritesSetRef.current = favoritesSet; }, [favoritesSet]);
 
   // 30-day medians for the ghost "typical" tick. One 8.6 KB request for all
   // ranked crossings, deliberately not 42 per-crossing aggregate fetches.
@@ -190,16 +174,16 @@ export default function Dashboard() {
   // explicit click (one-tap consent), not silently.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const denied = localStorage.getItem('borderPulse_geoConsent') === 'denied';
-    const defaultRegion = localStorage.getItem('borderPulse_defaultRegion');
-    const savedRegion = localStorage.getItem('borderPulse_region');
+    const denied = readStorage('borderPulse_geoConsent') === 'denied';
+    const defaultRegion = readStorage('borderPulse_defaultRegion');
+    const savedRegion = readStorage('borderPulse_region');
     if (denied || defaultRegion || savedRegion) return;
     if (!('geolocation' in navigator)) return;
     setShowGeoPrompt(true);
   }, []);
 
   const dismissGeoPrompt = useCallback(() => {
-    localStorage.setItem('borderPulse_geoConsent', 'denied');
+    writeStorage('borderPulse_geoConsent', 'denied');
     setShowGeoPrompt(false);
   }, []);
 
@@ -222,8 +206,8 @@ export default function Dashboard() {
         } catch { /* storage may be unavailable */ }
         const nearest = findNearestCrossing(state.crossings, latitude, longitude);
         if (nearest && nearest.state) {
-          localStorage.setItem('borderPulse_defaultRegion', nearest.state);
-          localStorage.setItem('borderPulse_region', nearest.state);
+          writeStorage('borderPulse_defaultRegion', nearest.state);
+          writeStorage('borderPulse_region', nearest.state);
           setRegion(nearest.state);
         }
         setGeoLocating(false);
@@ -231,7 +215,7 @@ export default function Dashboard() {
       },
       () => {
         // Treat geolocation errors / user cancellation as a denial so we don't re-prompt.
-        localStorage.setItem('borderPulse_geoConsent', 'denied');
+        writeStorage('borderPulse_geoConsent', 'denied');
         setGeoLocating(false);
         setShowGeoPrompt(false);
       },
@@ -444,6 +428,12 @@ export default function Dashboard() {
 
       {/* Offline / stale data warning */}
       <StaleDataBanner fetchedAt={state.fetchedAt} language={language} />
+
+      {favoriteError && <p role="status" className="mb-3 text-sm text-amber-800 dark:text-amber-300">
+        {language === 'en'
+          ? 'Your browser could not save this change. Allow site storage and try again.'
+          : 'Tu navegador no pudo guardar este cambio. Permite el almacenamiento del sitio e inténtalo de nuevo.'}
+      </p>}
 
       {view === 'analytics' ? (
         <Suspense

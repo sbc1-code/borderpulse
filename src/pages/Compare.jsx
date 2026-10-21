@@ -290,11 +290,9 @@ export default function Compare() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3">
-        <Link to="/">
-          <button className="inline-flex items-center gap-1 text-xs text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+        <Link to="/" className="inline-flex min-h-11 items-center gap-1 rounded-md text-xs text-slate-600 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 dark:text-slate-300 dark:hover:text-white">
             <ArrowLeft className="w-3.5 h-3.5" />
             {language === 'en' ? 'All crossings' : 'Todos los cruces'}
-          </button>
         </Link>
       </div>
 

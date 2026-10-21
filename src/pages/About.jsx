@@ -78,12 +78,12 @@ export default function About() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[900px] mx-auto">
       <div className="mb-3">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{language === 'en' ? 'All crossings' : 'Todos los cruces'}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <header className="mb-6">
@@ -168,8 +168,8 @@ export default function About() {
           </li>
           <li>
             {language === 'en'
-              ? 'Geolocation runs in the browser; only the resulting state filter (e.g., "California") is saved to localStorage.'
-              : 'La geolocalización corre en el navegador; solo se guarda el filtro de estado resultante (p.ej., "California") en localStorage.'}
+              ? 'If you choose nearby crossings, this browser saves the selected state and coordinates rounded to two decimal places to order nearby crossings.'
+              : 'Si eliges cruces cercanos, este navegador guarda el estado seleccionado y las coordenadas redondeadas a dos decimales para ordenar los cruces cercanos.'}
           </li>
         </ul>
       </section>
