@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-10-20 — Vite audit unblock (local review)
+
+- Update the existing Vite development dependency from locked 6.4.3 to 6.4.4,
+  the first fixed 6.x release for the bundled launch-editor advisories. Raise
+  its minimum range to ^6.4.4 and change only its package entry in the lockfile.
+  Keep the audit gate, runtime configuration and other package versions intact.
+  This dependency correction is separate from the Compare UX change below.
+
 ## 2026-10-20 — Compare retrieval confidence (local review)
 
 - Reuse walk-or-drive's 45/90-minute retrieval gate for pair comparisons.
