@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-10-20 — Compare retrieval confidence (local review)
+
+- Reuse walk-or-drive's 45/90-minute retrieval gate for pair comparisons.
+  Stale, unknown, invalid and future times suppress green advantage/tie claims;
+  reported waits, historical medians and parseable snapshot dates stay visible.
+- Re-evaluate age each minute without a new response and restore comparison
+  after a valid refresh. Show freshness even when both waits are missing.
+- Add shared-gate unit regressions and EN/ES desktop/mobile browser coverage
+  for expiry, failed/invalid refresh, recovery, zero ties and retained history.
+  This local change does not establish production feed failure or usage gains.
+
 ## 2026-10-17 — Dormant Google placement and native consent (prepared)
 
 - Prepare BorderPulse's own responsive Google display unit behind a disabled

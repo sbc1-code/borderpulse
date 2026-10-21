@@ -7,7 +7,8 @@ import { dataService } from '@/components/utils/dataService';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { standardPassengerWait } from '@/lib/standardPassengerWait';
-import { FRESHNESS, freshnessOf, formatAge } from '@/lib/trustState';
+import { FRESHNESS, formatAge } from '@/lib/trustState';
+import { walkDriveFreshness } from '@/lib/walkDriveFreshness';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
@@ -129,6 +130,12 @@ export default function Compare() {
   const [aggB, setAggB] = useState(null);
   const [feedback, setFeedback] = useState(null);
   const [copyState, setCopyState] = useState('idle');
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     setFeedback(null);
@@ -138,6 +145,7 @@ export default function Compare() {
   useEffect(() => {
     return subscribeToBorderData(data => {
       setState({ crossings: data.crossings || [], isLoading: false, isRefreshing: false, fetchedAt: data.timestamp });
+      setNow(Date.now());
     });
   }, []);
 
@@ -204,7 +212,8 @@ export default function Compare() {
 
   const waitA = standardPassengerWait(crossingA);
   const waitB = standardPassengerWait(crossingB);
-  const freshness = freshnessOf(state.fetchedAt);
+  const freshness = walkDriveFreshness(state.fetchedAt, now);
+  const canCompare = freshness.usable && waitA != null && waitB != null;
   const compareUrl = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}/`;
   const shareText = language === 'en'
     ? `Compare ${crossingA.name} and ${crossingB.name} northbound waits on Border Pulse. Check the data time before you travel.`
@@ -223,14 +232,18 @@ export default function Compare() {
       setCopyState('failed');
     }
   };
-  const snapshotTime = state.fetchedAt && freshness.state !== FRESHNESS.UNKNOWN
+  const snapshotTime = typeof state.fetchedAt === 'string' && Number.isFinite(Date.parse(state.fetchedAt))
     ? new Date(state.fetchedAt).toLocaleString(language === 'es' ? 'es-MX' : 'en-US', {
       timeZone: 'America/Los_Angeles', dateStyle: 'medium', timeStyle: 'short',
     })
     : null;
 
-  let liveSummary = null;
-  if (waitA != null && waitB != null) {
+  let liveSummary;
+  if (!freshness.usable) {
+    liveSummary = language === 'en'
+      ? 'A reliable wait comparison is unavailable because the snapshot is stale or its time cannot be verified. Reported values remain below; check for an update before choosing a crossing.'
+      : 'No se pueden comparar las esperas con confianza porque la consulta está desactualizada o su hora no se puede verificar. Los valores reportados siguen abajo; busca una actualización antes de elegir garita.';
+  } else if (canCompare) {
     if (waitA === waitB) {
       liveSummary = language === 'en'
         ? `Both ports report a ${waitA}-minute northbound standard-passenger wait. This does not compare total trip time.`
@@ -250,6 +263,10 @@ export default function Compare() {
     liveSummary = language === 'en'
       ? `${crossingA.name} has no reported standard-passenger wait. ${crossingB.name} reports ${waitB} min.`
       : `${crossingA.name} no tiene espera reportada para autos en carril estándar. ${crossingB.name} reporta ${waitB} min.`;
+  } else {
+    liveSummary = language === 'en'
+      ? 'Neither port has a reported standard-passenger wait. A wait comparison is unavailable.'
+      : 'Ninguna garita tiene espera reportada para autos en carril estándar. No se pueden comparar las esperas.';
   }
 
   // Aggregate-based comparisons (only show when both have data)
@@ -301,19 +318,19 @@ export default function Compare() {
         </Button>
       </header>
 
-      {liveSummary && (
-        <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40 px-4 py-3">
-          <div className="text-[10px] uppercase tracking-wider text-emerald-800 dark:text-emerald-300 font-semibold mb-0.5">
-            {language === 'en' ? 'Reported standard-passenger waits' : 'Esperas reportadas, auto estándar'}
-          </div>
-          <p className="text-sm text-slate-900 dark:text-white">{liveSummary}</p>
-          <p className={`mt-2 text-xs ${freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : 'text-slate-600 dark:text-slate-300'}`}>
-            {snapshotTime
-              ? `${language === 'en' ? 'Data snapshot' : 'Consulta de datos'}: ${snapshotTime} PT · ${formatAge(freshness.age, language)}${freshness.state === FRESHNESS.STALE ? (language === 'en' ? ' · stale data' : ' · datos desactualizados') : ''}`
-              : (language === 'en' ? 'Data time unknown' : 'Hora de los datos desconocida')}
-          </p>
+      <div data-testid="compare-summary" className={`mb-4 rounded-lg border px-4 py-3 ${canCompare
+        ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40'
+        : 'border-slate-200 bg-slate-50 dark:border-gray-700 dark:bg-gray-900'}`}>
+        <div className={`text-[10px] uppercase tracking-wider font-semibold mb-0.5 ${canCompare ? 'text-emerald-800 dark:text-emerald-300' : 'text-slate-600 dark:text-slate-300'}`}>
+          {language === 'en' ? 'Reported standard-passenger waits' : 'Esperas reportadas, auto estándar'}
         </div>
-      )}
+        <p className="text-sm text-slate-900 dark:text-white">{liveSummary}</p>
+        <p data-testid="compare-fetch-time" className={`mt-2 text-xs ${freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : 'text-slate-600 dark:text-slate-300'}`}>
+          {snapshotTime
+            ? `${language === 'en' ? 'Data snapshot' : 'Consulta de datos'}: ${snapshotTime} PT · ${formatAge(freshness.age, language)}${freshness.state === FRESHNESS.STALE ? (language === 'en' ? ' · stale data' : ' · datos desactualizados') : ''}`
+            : (language === 'en' ? 'Data time unknown' : 'Hora de los datos desconocida')}
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4">
         <CrossingPanel crossing={crossingA} slug={aSlug} aggregate={aggA} language={language} />

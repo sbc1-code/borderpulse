@@ -13,6 +13,7 @@ import {
 } from '../src/lib/trustState.js';
 import { availableLaneWait } from '../src/lib/crossingAvailability.js';
 import { standardPassengerWait } from '../src/lib/standardPassengerWait.js';
+import { walkDriveFreshness } from '../src/lib/walkDriveFreshness.js';
 import { track } from '../src/lib/analytics.js';
 
 const NOW = Date.parse('2026-08-21T12:00:00.000Z');
@@ -179,4 +180,24 @@ test('walk-drive retrieval gate handles fresh, aging, stale and inconsistent clo
   const stamp = minutesAgo(90);
   assert.equal(walkDriveFreshness(stamp, NOW + 60_000).state, FRESHNESS.STALE);
   assert.equal(walkDriveFreshness(stamp, NOW + 60_000).usable, false);
+});
+
+test('Compare shares the 45/90-minute gate and never treats a future retrieval as fresh', () => {
+  for (const [minutes, state, usable] of [
+    [0, FRESHNESS.FRESH, true], [45, FRESHNESS.FRESH, true],
+    [46, FRESHNESS.AGING, true], [90, FRESHNESS.AGING, true],
+    [91, FRESHNESS.STALE, false], [120, FRESHNESS.STALE, false],
+  ]) {
+    assert.deepEqual(walkDriveFreshness(minutesAgo(minutes), NOW), { state, age: minutes, usable });
+  }
+  for (const stamp of [null, undefined, '', 'invalid', new Date(NOW + 1).toISOString()]) {
+    assert.deepEqual(walkDriveFreshness(stamp, NOW), { state: FRESHNESS.UNKNOWN, age: null, usable: false });
+  }
+});
+
+test('comparison retrieval eligibility expires without a response and recovers with a new timestamp', () => {
+  const stamp = minutesAgo(90);
+  assert.equal(walkDriveFreshness(stamp, NOW).usable, true);
+  assert.equal(walkDriveFreshness(stamp, NOW + 61_000).usable, false);
+  assert.equal(walkDriveFreshness(new Date(NOW + 61_000).toISOString(), NOW + 61_000).usable, true);
 });
