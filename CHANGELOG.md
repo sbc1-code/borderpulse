@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## 2026-10-22 — Historical pattern confidence (prepared)
+## 2026-10-22 — Historical pattern confidence (published)
+
+- PR #139 merged at `9893047411d8545df8298eb196a8f585258b1598` after both
+  CI checks passed. Production run `39718320478` succeeded; Vercel deployment
+  `dpl_2ZwQiEBevGVAGAguBVvB1Jv5ATxR` was READY with matching public manifest.
+  Real API readback and served-bundle EN/ES mobile/desktop fixtures passed.
+  Fresh build, 126 unit tests and 402 local/production route navigations passed.
 
 - Replace the crossing callout's live-looking generated prose with validated
   weekday/hour evidence from the existing 30-day sample. A Sunday pattern

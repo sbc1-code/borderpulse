@@ -1,5 +1,40 @@
 # Public data refresh
 
+## Historical pattern release — 2026-10-22 UTC
+
+- [PR #139](https://github.com/sbc1-code/borderpulse/pull/139) merged reviewed
+  head `4ac65c1ffc92f72a0118f0e4ab2d1f34d5c39db5` at
+  `9893047411d8545df8298eb196a8f585258b1598`. Push and PR CI passed; original
+  operator edits and other worktrees were preserved. This is one data-confidence
+  correction, separate from the already published PRs #136–138.
+- Existing [production run 39718320478](https://github.com/sbc1-code/borderpulse/actions/runs/39718320478)
+  succeeded, including 402 navigations and the unchanged audit/freshness gates.
+  Vercel `dpl_2ZwQiEBevGVAGAguBVvB1Jv5ATxR` was READY at
+  `borderpulse-26xrkjobg-sbc1-codes-projects.vercel.app`, with existing apex/www
+  aliases and matching commit. Public manifest prepared 03:42:56.043Z; live API
+  HTTP 200 with 42 crossings. No second workflow dispatch was used.
+- Production EN/ES at 1440×900 and 390×844 showed the real dated historical
+  card. Separate synthetic fixtures against the served bundle passed weekday
+  scope, zero, malformed/future timing/evidence, recovery, dark mode and port
+  navigation, using isolated headless contexts with a different visitor
+  timezone. Shared Chrome tabs were untouched and headless processes closed.
+- Fresh local build, 126 unit tests and 402 route navigations passed. The new
+  fixture initially leaked a simulated clock; it was moved into independent
+  browser contexts and the entire suite rerun successfully before publication.
+  Existing freshness, sharing, feedback, favorites, language and metadata
+  regressions passed. The eight moderate audit entries reviewed below remain.
+- The consumer validates data shape and UTC timing, not the underlying CBP
+  observations or statistical methodology. Legacy generated summaries remain
+  in the feed for other consumers; no detector, threshold, feed or API changed.
+  This does not certify complete security/accessibility or imply conversion gain.
+- Revert only this release's runtime/source/test diff in a new branch and PR,
+  keeping release history and newer collector data. The inverse patch is
+  `git diff 98930474 98930474^1 --binary -- src scripts package.json`;
+  apply it with `git apply --index`, record the rollback in these docs, then
+  build/test/merge through the existing gates and verify the new deployment.
+  An inverse-patch check against main passed with a temporary index; no rollback
+  was executed. Avoid rolling the whole site back to an older data bundle.
+
 ## Bounded dependency review — 2026-10-22 UTC
 
 Official npm audit reports **eight moderate package entries**, zero high or
