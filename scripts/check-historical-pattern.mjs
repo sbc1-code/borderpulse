@@ -81,7 +81,10 @@ export async function checkHistoricalPatterns(owner, context, baseUrl) {
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
         await page.locator('#root a[href="/crossing/calexico-west/"]').first().click();
         await page.waitForFunction(() => location.pathname === '/crossing/calexico-west/');
-        await page.getByRole('heading', { level: 1 }).waitFor();
+        // History updates before React commits the new crossing. The previous
+        // port's h1 is still visible during that transition; verify the target
+        // identity before checking that its pattern is absent.
+        await page.waitForFunction(() => document.querySelector('link[rel="canonical"]')?.href === 'https://borderpulse.com/crossing/calexico-west/');
         assert.equal(await page.getByTestId('historical-pattern').count(), 0, 'another port cannot inherit the pattern');
         await page.goBack();
         await page.getByTestId('historical-pattern').waitFor();

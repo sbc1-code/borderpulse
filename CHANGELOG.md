@@ -17,6 +17,10 @@
   with isolated EN/ES desktop/mobile delayed-open expiry, loaded expiry without
   response, offline/online, stale/missing/invalid/future time, missing values,
   zero recovery, original chunk failure/recovery, keyboard/menu and metadata QA.
+- The first PR CI exposed a historical-fixture race: URL changed before React
+  committed the next port, and a generic h1 wait matched the previous page.
+  Wait for the target canonical before asserting no inherited pattern; retain
+  the absence assertion and all existing scenarios. No crossing-page code change.
 - Entry 61.69 KiB local, unchanged 62 KiB cap. Paired full initial JS measurement
   280,511 → 280,514 gzip bytes (+3); summary own chunk 5,861 → 6,520 bytes and
   one additional small shared retrieval-guard request on opening, not initial

@@ -35,6 +35,12 @@
   measurement, and no budget/build/audit configuration changed. Simulated
   150ms/200KiB/s cold opening was about 0.30–1.32s; samples are diagnostic, not
   evidence of production speed or conversion improvement.
+- The first PR CI (39729934526) failed only at the existing historical-pattern
+  navigation assertion, while push CI passed. Its generic h1 wait could match
+  the old crossing during React's transition after the URL changed. The fixture
+  now waits for the target canonical before checking the same no-inherited-card
+  assertion. Preserve the failed log; no product crossing-page code or check was
+  removed. Rerun the complete local suite and both CI on the final test head.
 - Release only after remote CI passes on the reviewed head and concurrent
   source changes are rechecked; use the existing production workflow once.
   Check the exact source/manifest, EN/ES rendered states and unchanged served
