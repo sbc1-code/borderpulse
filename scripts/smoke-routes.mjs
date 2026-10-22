@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkBrowserResilience } from './check-browser-resilience.mjs';
+import { checkHistoricalPatterns } from './check-historical-pattern.mjs';
 import { checkLocalCrossings } from './check-local-crossings.mjs';
 import { checkNoJsReports } from './check-nojs-reports.mjs';
 import { checkWalkDriveFreshness } from './check-walk-drive-freshness.mjs';
@@ -323,6 +324,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   try {
     await checkGrowthInteractions(page, context, baseUrl);
     await checkBrowserResilience(page, context, baseUrl);
+    await checkHistoricalPatterns(page, context, baseUrl);
     await checkLocalCrossings(page, context, baseUrl);
     await checkWalkDriveAvailability(page, context, baseUrl);
     await checkWalkDriveFreshness(context, baseUrl);

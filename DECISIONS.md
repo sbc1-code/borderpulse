@@ -1,5 +1,14 @@
 # DECISIONS
 
+## 2026-10-22 · Historical weekday medians are not live observations
+
+The anomaly feed's lowest_today scans 30-day weekday buckets, and sunday_spike
+always describes Sunday evenings. Render typed evidence with its actual day,
+nonempty sample count and source dates; never reuse generated Right now copy
+or a retained first-detection date as Last checked. Invalid evidence gets a
+neutral unavailable state. Preserve dated history without imposing a new
+live-feed expiry rule or changing detector thresholds.
+
 ## 2026-10-21 · Browser persistence is optional and saved preferences are untrusted
 
 A blocked localStorage accessor or a parsed non-array favorite value must not
