@@ -108,10 +108,12 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   Comparison sharing and a fixed-choice usefulness prompt are prepared for the
   next release. Read `compare-share` and `compare-feedback` alongside visits;
   a feedback click is stated usefulness, not evidence of a completed crossing.
-- [~] Correct the historical-pattern callout using validated weekday/hour
-  evidence, sample counts and source dates. Never present a Sunday pattern or
-  a 30-day weekday minimum as a live today observation. Source and regressions
-  are prepared October 22; publication evidence belongs to the scoped PR.
+- [x] Correct the historical-pattern callout using validated weekday/hour
+  evidence, sample counts and source dates (PR #139, `98930474`). Production
+  run `39718320478`, public manifest and served EN/ES mobile/desktop behavior
+  were verified October 22. No live claim is made from historical medians;
+  malformed sources get a neutral unavailable state. Audit review is recorded
+  in the existing runbook; the eight moderate entries remain separate work.
 - Sebastian reports that Stripe is connected for BorderPulse. Verify the
   account, mode, product/Price, webhook and checkout state in Stripe before
   describing any paid offering or accepting a charge. The free, ad-supported
