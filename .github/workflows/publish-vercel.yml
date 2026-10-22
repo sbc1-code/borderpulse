@@ -91,7 +91,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Retain publication evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: vercel-publication-${{ github.run_id }}
           path: public/data/publication.json
