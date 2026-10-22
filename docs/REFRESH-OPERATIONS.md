@@ -1,5 +1,57 @@
 # Public data refresh
 
+## Router release — 2026-10-22 UTC (PR #141)
+
+- Reviewed head `e0bac72fd4d978dfbbec7f3c68d804025d3ac45c`, dependency-only
+  commit `9c2d30d7`, merged at **5a681bad045eb4153830928021350844069cef98**.
+  [Push CI 39724848656](https://github.com/sbc1-code/borderpulse/actions/runs/39724848656)
+  and [PR CI 39724931617](https://github.com/sbc1-code/borderpulse/actions/runs/39724931617)
+  succeeded. The merge adds only newer collector inputs to the reviewed branch;
+  code, dependency and regression trees match the tested head.
+- [Production workflow 39725320432](https://github.com/sbc1-code/borderpulse/actions/runs/39725320432)
+  succeeded with no second dispatch. Vercel **dpl_45Wzsdoe5TwfipVhvHdLMqczfgfC**,
+  [exact deployment](https://borderpulse-g8ke3wl14-sbc1-codes-projects.vercel.app),
+  is READY and aliases include borderpulse.com/www. Manifest commit matches;
+  prepared 04:58:38.116Z, CBP/history latest 04:52:36.981Z, history 2,467 rows,
+  FX 04:52:37.345Z. Public API HTTP200/42 crossings was separately read back.
+- Served `/assets/index-BZeUcSFr.js` contains the 7.18.4 version marker and the
+  localized summary loader. SHA256:
+  `d56a13f84be9e21af9f0df53b4f9f3a5347e171fab992395e5453cb19f502054`.
+  It is 63,146 gzip bytes when recompressed with local Node25. All four initial
+  served JS chunks total 280,481 gzip bytes by the same calculation. CI's own
+  runtime reports 61.88 KiB entry, under the unchanged 62 KiB gate. The Vercel
+  build has its own asset hash; it is not claimed byte-identical to local Vite.
+  Provenance, version/code, exact served hashes and rendered behavior were checked.
+- Real production EN/ES desktop/mobile report/chart captures passed. The full
+  route suite passed **398 navigations** against unchanged published assets in
+  the task-owned localhost preview, including the existing guarded language
+  fixture, Router/summary loading/failure/recovery, keyboard, filters, storage,
+  sharing/feedback, history, metadata and aliases. All 24 fetched asset hashes
+  and the publication manifest were checked again; the local server was closed.
+- Route counts follow the data-derived inventory. The older local snapshot
+  generated 171 canonical/29 aliases (402 navigations); clean merge and CI have
+  169/29 (398). The only additional older paths are walk-or-drive Progreso and
+  Santa Teresa; their generation uses the existing capability test against the
+  snapshot. No paths were manually excluded, and no feed/capability rule changed.
+- Direct-host QA initially completed the inventory and functional fixtures but
+  exited nonzero only because the existing document-language fixture explicitly
+  requires localhost (two viewport guard failures). That failed harness log is
+  retained; it is not reported as a full PASS. A task-owned GET-only local preview
+  then serves unchanged public production bytes, forwarding no visitor headers,
+  cookies, authorization or bodies and blocking external providers/service workers.
+  It keeps that fixture guard intact, checks asset hashes again and requires the
+  same manifest before/after. No app/test guard or security configuration changed.
+- The short post-deploy Vercel grouped-error read returned no runtime clusters;
+  this is a bounded observation, not an uptime or complete security claim.
+  Six moderate build-chain entries remain. Tests cover headless Chrome EN/ES at
+  1440x900 and 390x844; no physical-device, Safari/Firefox or screen-reader certification.
+- Rollback: create an isolated branch from current main, prepare the inverse of
+  `git diff 5a681bad 5a681bad^1 -- src scripts package.json package-lock.json`,
+  apply it with `git apply --index`, record the reason in these existing docs,
+  and build/test/merge through the normal gates. The inverse was checked using
+  a temporary index, not applied. Preserve collector inputs and release history;
+  do not restore an old Vercel data bundle. No rollback was executed.
+
 ## Router follow-up — 2026-10-22 UTC (local release checks passed)
 
 The earlier candidate checkpoint below records the original failed gate. The

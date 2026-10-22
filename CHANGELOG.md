@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 2026-10-22 — Patched Router release (PR #141)
+
+- Merge/source `5a681bad045eb4153830928021350844069cef98` published by existing
+  workflow `39725320432` after both reviewed-head CI checks passed.
+  Vercel `dpl_45Wzsdoe5TwfipVhvHdLMqczfgfC` is READY with matching public
+  manifest and Router 7.18.4 marker in the served entry. No second dispatch.
+- Existing 62 KiB entry budget passes: 61.88 KiB in CI; served entry recompressed
+  locally is 63,146 bytes. The scoped initial-load reduction and first-open
+  request cost are recorded below, rather than claiming a production speed gain.
+- Real production EN/ES desktop/mobile report/chart captures passed. The full
+  route suite passed **398 navigations** against unchanged published assets in
+  the task-owned localhost preview, including the existing guarded language
+  fixture, Router/summary loading/failure/recovery, keyboard, filters, storage,
+  sharing/feedback, history, metadata and aliases. All 24 fetched asset hashes
+  and the publication manifest were checked again; the local server was closed.
+- Original work and newer collector data were preserved. Six moderate build
+  entries remain; 6.1.5 is the CSS parser, not a Router backport. No audit
+  exception, budget, credential, access, security-setting, ad or paid-service change.
+
 ## 2026-10-22 — Router performance gate follow-up (validated locally)
 
 - Keep the reviewed Router 7.18.4 security candidate and the unchanged 62 KiB
