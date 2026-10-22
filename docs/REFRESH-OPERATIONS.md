@@ -1,5 +1,47 @@
 # Public data refresh
 
+## Expanded-summary confidence follow-up — 2026-10-22 UTC
+
+- Reproduced against the served PR141 app, using synthetic input only: 120-minute
+  and future snapshots still rendered Moving well / Median wait now and colored
+  chart ticks after opening the deferred summary. The top-level old-data warning
+  did not alter the opened summary. This is not evidence of a failing live feed.
+- Scope: pass existing fetchedAt into DashboardSummary, reuse walkDriveFreshness
+  (45/90 minutes plus invalid/future guard), and track browser connectivity and
+  per-minute rerenders inside the existing optional chunk. Evaluate Date.now on
+  each render so an import or new response is not judged against an old timer.
+- Untrusted retrievals/offline views keep raw wait values and valid recorded fetch
+  dates, chart ticks, keyboard selection and filters. Current-condition labels,
+  categorical colors and legends become neutral reference readings; accessible
+  SVG descriptions also stop claiming current conditions. A stable status region
+  announces confidence changes; the changing age/date line is not a live region.
+- Missing/invalid timestamps are rejected upstream by the existing dataService
+  validator, so a cold load correctly has no rows/map rather than invented
+  history. The summary still explains unknown fetch time and missing readings.
+  Tests preserve that guard and prove a corrected zero-valued feed restores the
+  actual summary immediately. This change does not independently validate CBP
+  observation clocks, lane statistics or the numerical truth of the source.
+- Local verification: fresh build and 130 unit tests PASS; full npm test PASS,
+  420 navigations for its 181 canonical/28-alias input-derived inventory. Existing
+  loader failure/reload recovery, storage, sharing/feedback, keyboard/menu,
+  metadata and freshness fixtures pass. New independent-clock/context fixtures
+  cover expiry during held chunk download and after mounting without a new
+  response, offline/online, stale/missing/invalid/future times, dated numbers,
+  missing rows and genuine-zero recovery in EN/ES desktop/mobile.
+- Entry remains 61.69 KiB under the unchanged 62 KiB gate. Paired full initially
+  required JS is 280,511 → 280,514 gzip bytes (+3). The summary own chunk grows
+  5,861 → 6,520 bytes; the existing shared retrieval helper adds a small parallel
+  request when opening. No vendor chunk or mandatory payload is excluded from
+  measurement, and no budget/build/audit configuration changed. Simulated
+  150ms/200KiB/s cold opening was about 0.30–1.32s; samples are diagnostic, not
+  evidence of production speed or conversion improvement.
+- Release only after remote CI passes on the reviewed head and concurrent
+  source changes are rechecked; use the existing production workflow once.
+  Check the exact source/manifest, EN/ES rendered states and unchanged served
+  assets in a supported localhost preview for the language fixture. Roll back
+  only this scoped src/script diff through a normal tested PR, retaining collector
+  inputs, earlier Router mitigation, existing budgets and release history.
+
 ## Router release — 2026-10-22 UTC (PR #141)
 
 - Reviewed head `e0bac72fd4d978dfbbec7f3c68d804025d3ac45c`, dependency-only
