@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 2026-10-22 — Summary snapshot confidence (validated locally)
+
+- Reproduce PR141's expanded summary saying Moving well / Median wait now for
+  synthetic 120-minute-old and future retrievals in EN/ES desktop/mobile.
+- Pass the existing fetch timestamp into the deferred summary. Reuse the same
+  45/90-minute retrieval policy and future guard as Compare/walk-or-drive;
+  reevaluate each minute, at render after a delayed import/new response, and on
+  offline/online changes. Untrusted values remain dated reference readings:
+  neutral labels/ticks/metrics replace current-condition interpretations.
+- Preserve reported numbers, map selection, filters and zero readings. Keep the
+  existing empty-data validator behavior for missing/invalid source timestamps.
+  A stable polite status announces confidence changes, without announcing every
+  age-minute update. No loader, feed, threshold, dependency or configuration change.
+- Fresh build, 130 unit tests and full npm test PASS (420 local navigations),
+  with isolated EN/ES desktop/mobile delayed-open expiry, loaded expiry without
+  response, offline/online, stale/missing/invalid/future time, missing values,
+  zero recovery, original chunk failure/recovery, keyboard/menu and metadata QA.
+- The first PR CI exposed a historical-fixture race: URL changed before React
+  committed the next port, and a generic h1 wait matched the previous page.
+  Wait for the target canonical before asserting no inherited pattern; retain
+  the absence assertion and all existing scenarios. No crossing-page code change.
+- Entry 61.69 KiB local, unchanged 62 KiB cap. Paired full initial JS measurement
+  280,511 → 280,514 gzip bytes (+3); summary own chunk 5,861 → 6,520 bytes and
+  one additional small shared retrieval-guard request on opening, not initial
+  loading. Simulated opening remains a diagnostic 0.30–1.32s; no production
+  speed, usage or conversion gain is established. Publication awaits remote CI.
+
 ## 2026-10-22 — Patched Router release (PR #141)
 
 - Merge/source `5a681bad045eb4153830928021350844069cef98` published by existing

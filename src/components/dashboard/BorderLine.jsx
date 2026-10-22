@@ -97,6 +97,7 @@ export default function BorderLine({
   typicalByPort,
   focusedPort = null,
   onSelect,
+  trusted = true,
 }) {
   const t = STRINGS[language] || STRINGS.en;
   const isWide = useIsWide();
@@ -125,6 +126,9 @@ export default function BorderLine({
 
   const anchors = useMemo(() => (isWide ? resolveAnchors(ticks) : []), [ticks, isWide]);
   const reportingCount = ticks.filter((k) => k.reporting).length;
+  const description = trusted ? t.desc(ticks.length, reportingCount) : (language === 'en'
+    ? `${ticks.length} crossings. Retained reported values; current conditions cannot be verified.`
+    : `${ticks.length} cruces. Valores reportados conservados; no se pueden verificar las condiciones actuales.`);
 
   const handleSelect = useCallback(
     (tick) => {
@@ -150,7 +154,7 @@ export default function BorderLine({
   if (!ticks.length) return null;
 
   const strokeFor = (tick) =>
-    STATUS_STROKE[getStatusForDirection(tick.crossing, direction)] || STATUS_STROKE.unknown;
+    (trusted && STATUS_STROKE[getStatusForDirection(tick.crossing, direction)]) || STATUS_STROKE.unknown;
 
   // ---------------------------------------------------------------- desktop
   const W = 1000;
@@ -173,7 +177,7 @@ export default function BorderLine({
     >
       <title id="bp-line-title">{t.title}</title>
       <desc id="bp-line-desc">
-        {t.desc(ticks.length, reportingCount)}
+        {description}
       </desc>
 
       {/* drafting grid */}
@@ -314,7 +318,7 @@ export default function BorderLine({
     >
       <title id="bp-line-title-m">{t.title}</title>
       <desc id="bp-line-desc-m">
-        {t.desc(ticks.length, reportingCount)}
+        {description}
       </desc>
 
       <line className="bp-axis" x1={SPINE_X} y1={TOP - 10} x2={SPINE_X} y2={MH - 12} />
@@ -397,13 +401,15 @@ export default function BorderLine({
     >
       <div className="flex items-baseline justify-between gap-3 px-4 pt-3">
         <h2 className="bp-line-h">{t.title}</h2>
-        <span className="bp-line-legend">
+        {trusted && <span className="bp-line-legend">
           <i className="bp-sw bp-sw-good" /> {t.quick}
           <i className="bp-sw bp-sw-mod" /> {t.moderate}
           <i className="bp-sw bp-sw-heavy" /> {t.heavy}
-        </span>
+        </span>}
       </div>
-      <p className="bp-line-sub px-4">{showTypical ? t.subtitle : t.subtitleSb}</p>
+      <p className="bp-line-sub px-4">{!trusted
+        ? (language === 'en' ? 'Retained reported waits, not current conditions.' : 'Esperas reportadas conservadas, no condiciones actuales.')
+        : showTypical ? t.subtitle : t.subtitleSb}</p>
       <div className="px-1 pb-2">{isWide ? desktop : mobile}</div>
 
       {/* Accessible equivalent. Also the only copy a text-mode crawler sees,

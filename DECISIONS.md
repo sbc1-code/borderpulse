@@ -1,5 +1,16 @@
 # DECISIONS
 
+## 2026-10-22 · Deferred content must evaluate confidence when it actually opens
+
+A usable snapshot can expire while an optional chunk is downloading, while a
+page remains open without a successful response, or while the browser is offline.
+The expanded dashboard summary must evaluate the existing retrieval policy on
+its current render clock, then keep dated readings and controls available with
+neutral interpretation when confidence is lost. Keep the per-minute reevaluation
+local to this optional view and announce the confidence transition, not every
+minute of age. A fresh response restores interpretation immediately. Do not
+change feed validation, retrieval thresholds or gate budgets for this correction.
+
 ## 2026-10-22 · A patched dependency candidate must also pass the performance gate
 
 The first Router 7.18.4 candidate cleared both runtime audit entries but

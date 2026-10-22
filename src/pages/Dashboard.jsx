@@ -541,6 +541,7 @@ export default function Dashboard() {
 
           <DashboardSummaryDisclosure
             crossings={filteredCrossings}
+            fetchedAt={state.fetchedAt}
             direction={direction}
             language={language}
             regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
