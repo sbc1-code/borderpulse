@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2026-10-22 — Summary confidence released (PR #143)
+
+- Published source `a14654f32e0b83b11008a978d1fb085ff83db059` through existing
+  production run `39731300070` after both final CI checks passed on `84da4c8d`.
+  Vercel `dpl_8VJ9dSkAucq3E27fjCiDJiiH4CJN` is READY; public manifest matches.
+- Native EN/ES desktop/mobile served-bundle success/failure/recovery checks and
+  real/synthetic captures pass. Complete supported localhost preview of unchanged
+  production bytes passes 416 navigations; 24 asset hashes and manifest rechecked.
+- Entry gate remains 61.88 KiB in CI under the unchanged 62 KiB cap; paired
+  initial JS adds 3 gzip bytes. No dependency, feed, threshold, security setting,
+  account, ad, paid service or monitor changes. Original work/collector preserved.
+- Initial PR CI exposed a generic-heading navigation race in an existing history
+  fixture; target-canonical synchronization retains its absence assertion.
+  Final full local suite passed again with 420 routes; six pages passed at 4x CPU.
+  Product rollback inverse checked without applying; it keeps Router mitigation,
+  newer data, release history and the stronger historical identity wait.
+
 ## 2026-10-22 — Summary snapshot confidence (validated locally)
 
 - Reproduce PR141's expanded summary saying Moving well / Median wait now for
