@@ -47,9 +47,54 @@ export async function checkWalkDriveAvailability(page, context, baseUrl) {
       content = await page.locator('#root').innerText();
       assert.ok(!/RIGHT NOW|Right now|Ahora mismo|0 min/.test(content), 'pending wait must not support a recommendation');
     }
+    for (const lang of ['en', 'es']) {
+      await page.evaluate(value => localStorage.setItem('borderPulse_language', value), lang);
+      for (const [port, slug] of [
+        ['230901', 'progreso-progreso-international-bridge'],
+        ['240801', 'santa-teresa-santa-teresa-port-of-entry'],
+      ]) {
+        const c = snapshot.crossings.find(row => row.port_number === port);
+        assert.ok(c, 'verified capability fixture must exist');
+        c.port_status = 'Open';
+        c.lanes = { passenger_standard: lane(60), pedestrian_standard: null, pedestrian_ready: null };
+        const route = `/walk-or-drive/${slug}/`;
+        await page.goto(new URL(`/crossing/${slug}/`, baseUrl).href);
+        const link = page.locator(`#root a[href="${route}"]`);
+        await link.waitFor({ state: 'visible' });
+        await link.focus();
+        await link.press('Enter');
+        await page.waitForURL(url => url.pathname === route);
+        const missing = page.getByRole('heading', { level: 1, name: lang === 'en'
+          ? `${c.name}: no current pedestrian wait reported`
+          : `${c.name}: sin espera peatonal actual reportada`, exact: true });
+        await missing.waitFor();
+        await page.waitForFunction(url => document.querySelector('link[rel="canonical"]')?.href === url,
+          `https://borderpulse.com${route}`);
+        assert.ok(!/0 min|RIGHT NOW|Ahora mismo/.test(await page.locator('#root').innerText()), 'capability supplies neither a zero nor a verdict');
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'unavailable route fits viewport');
+        c.lanes.pedestrian_standard = lane(0, 'no delay');
+        await page.reload();
+        await page.getByRole('heading', { name: lang === 'en' ? 'Walk (standard)' : 'A pie (estándar)', exact: true }).waitFor();
+        assert.ok((await page.locator('#root').innerText()).includes('0 min'), 'a genuine zero restores the comparison');
+        c.port_status = 'Closed';
+        await page.reload();
+        await page.getByRole('heading', { level: 1, name: lang === 'en'
+          ? `${c.name}: closed now` : `${c.name}: cerrado ahora`, exact: true }).waitFor();
+        assert.ok(!(await page.locator('#root').innerText()).includes('0 min'), 'known capability does not override a closure');
+        c.port_status = 'Open';
+        delete c.lanes.pedestrian_standard;
+        delete c.lanes.pedestrian_ready;
+        await page.reload();
+        await missing.waitFor();
+        assert.ok(!(await page.locator('#root').innerText()).includes('0 min'), 'disappearing report removes the zero and comparison');
+        await page.goBack();
+        await page.waitForURL(url => url.pathname === `/crossing/${slug}/`);
+        await link.waitFor({ state: 'visible' });
+      }
+    }
   } finally {
     await context.unroute(feedMatcher, feedHandler);
     await page.evaluate(() => localStorage.setItem('borderPulse_language', 'en'));
   }
-  console.log('[walk-drive] PASS: EN/ES closed, Back, reopened zero-wait and pending-report states');
+  console.log('[walk-drive] PASS: EN/ES closed, Back, zero/pending and verified Progreso/Santa Teresa routes after missing/disappearing reports');
 }

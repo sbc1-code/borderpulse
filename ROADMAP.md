@@ -67,6 +67,10 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   objects in each snapshot, so the inventory fluctuates as reports change.
   Keep this separate from document-language ownership; do not invent capability
   or expand routes without source evidence.
+  Issue #59 has a local, source-backed candidate preserving existing Progreso
+  International Bridge and Santa Teresa routes across missing reports.
+  Review/publication and other-port curation remain open; see the refresh runbook
+  for exact input identities, coverage and gates.
 
 - [x] Separate CBP lane report times from snapshot retrieval on dashboard and
   crossing detail cards. Preserve raw report text and unknown dates; release

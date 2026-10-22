@@ -1,0 +1,119 @@
+[
+  {
+    "sourceCommit": "e0bac72fd4d978dfbbec7f3c68d804025d3ac45c",
+    "sourceBlob": "3f6ea59a17f8edc620605c93fa3c7335cfc119e9",
+    "sourceSha256": "8fd1d66e254e9412e37dd7e0b1876f83f1402c4c97218fade2d6332de0c83665",
+    "fetched_at": "2026-10-22T03:52:35.415Z",
+    "crossings": [
+      {
+        "port_number": "230901",
+        "name": "Progreso - Progreso International Bridge",
+        "port_status": "Open",
+        "lanes": {
+          "passenger_standard": {
+            "status": "delay",
+            "delay_minutes": 10,
+            "lanes_open": 2,
+            "update_time": "At 10:00 pm CDT"
+          },
+          "passenger_sentri": null,
+          "passenger_ready": null,
+          "pedestrian_standard": {
+            "status": "no delay",
+            "delay_minutes": 5,
+            "lanes_open": 1,
+            "update_time": "At 10:00 pm CDT"
+          },
+          "pedestrian_ready": null,
+          "commercial_standard": null,
+          "commercial_fast": null
+        }
+      },
+      {
+        "port_number": "240801",
+        "name": "Santa Teresa - Santa Teresa Port of Entry",
+        "port_status": "Open",
+        "lanes": {
+          "passenger_standard": {
+            "status": "delay",
+            "delay_minutes": 40,
+            "lanes_open": 1,
+            "update_time": "At 9:00 pm MDT"
+          },
+          "passenger_sentri": null,
+          "passenger_ready": {
+            "status": "delay",
+            "delay_minutes": 35,
+            "lanes_open": 1,
+            "update_time": "At 9:00 pm MDT"
+          },
+          "pedestrian_standard": {
+            "status": "no delay",
+            "delay_minutes": 5,
+            "lanes_open": 1,
+            "update_time": "At 9:00 pm MDT"
+          },
+          "pedestrian_ready": null,
+          "commercial_standard": {
+            "status": "delay",
+            "delay_minutes": 50,
+            "lanes_open": 1,
+            "update_time": "At 9:00 pm MDT"
+          },
+          "commercial_fast": {
+            "status": "delay",
+            "delay_minutes": 45,
+            "lanes_open": 1,
+            "update_time": "At 9:00 pm MDT"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "sourceCommit": "5a681bad045eb4153830928021350844069cef98",
+    "sourceBlob": "e3eb7c086794d306c8e1b2f6a93fe01667adeaf7",
+    "sourceSha256": "b7c8e0a77fd42526e5b5868eaf56a2ac85811740e0b0b00e031b11cc1bcdc0ee",
+    "fetched_at": "2026-10-22T04:52:36.981Z",
+    "crossings": [
+      {
+        "port_number": "230901",
+        "name": "Progreso - Progreso International Bridge",
+        "port_status": "Open",
+        "lanes": {
+          "passenger_standard": {
+            "status": "delay",
+            "delay_minutes": 10,
+            "lanes_open": 2,
+            "update_time": "At 11:00 pm CDT"
+          },
+          "passenger_sentri": null,
+          "passenger_ready": {
+            "status": "no delay",
+            "delay_minutes": 5,
+            "lanes_open": 1,
+            "update_time": "At 11:00 pm CDT"
+          },
+          "pedestrian_standard": null,
+          "pedestrian_ready": null,
+          "commercial_standard": null,
+          "commercial_fast": null
+        }
+      },
+      {
+        "port_number": "240801",
+        "name": "Santa Teresa - Santa Teresa Port of Entry",
+        "port_status": "Open",
+        "lanes": {
+          "passenger_standard": null,
+          "passenger_sentri": null,
+          "passenger_ready": null,
+          "pedestrian_standard": null,
+          "pedestrian_ready": null,
+          "commercial_standard": null,
+          "commercial_fast": null
+        }
+      }
+    ]
+  }
+]

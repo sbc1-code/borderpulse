@@ -11,7 +11,7 @@ import {
   reportTimeLabel,
   summarize,
 } from '../src/lib/trustState.js';
-import { availableLaneWait } from '../src/lib/crossingAvailability.js';
+import { availableLaneWait, hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { standardPassengerWait } from '../src/lib/standardPassengerWait.js';
 import { walkDriveFreshness } from '../src/lib/walkDriveFreshness.js';
 import { track } from '../src/lib/analytics.js';
@@ -142,6 +142,32 @@ test('a zero wait is a real reading and must survive summarization', () => {
   assert.equal(s.median, 0);
 });
 
+
+test('verified pedestrian capability survives disappearing reports without inventing a wait', () => {
+  for (const port_number of ['230901', '240801']) {
+    for (const lanes of [undefined, {}, { pedestrian_standard: null, pedestrian_ready: null },
+      { pedestrian_standard: { status: 'Update Pending', delay_minutes: null, lanes_open: 0 } }]) {
+      const crossing = { port_number, lanes };
+      assert.equal(hasPedestrianLane(crossing), true);
+      assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), null);
+      assert.equal(availableLaneWait(crossing, 'pedestrian_ready'), null);
+    }
+    const crossing = { port_number, lanes: { pedestrian_standard: { status: 'no delay', delay_minutes: 0, lanes_open: 1 } } };
+    assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), 0);
+    crossing.port_status = 'Closed';
+    assert.equal(hasPedestrianLane(crossing), true, 'capability is not current availability');
+    assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), null);
+  }
+});
+
+test('capability exceptions use exact port identity, never a similar name or nearby crossing', () => {
+  for (const port_number of ['230902', '240601', 'unknown', undefined]) {
+    assert.equal(hasPedestrianLane({ port_number, name: 'Progreso - Santa Teresa', lanes: {} }), false);
+  }
+  assert.equal(hasPedestrianLane(null), false);
+  assert.equal(hasPedestrianLane({ port_number: '250201', lanes: { pedestrian_standard: { status: 'Update Pending' } } }), true,
+    'unreviewed ports retain the existing lane-object behavior');
+});
 
 test('walk-or-drive ignores retained lane numbers at a closed crossing', () => {
   const crossing = { port_status: ' Closed ', lanes: {
