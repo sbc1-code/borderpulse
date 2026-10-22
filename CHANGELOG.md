@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2026-10-22 — Verified pedestrian route exceptions (local candidate, issue #59)
+
+- Keep the existing Progreso International Bridge (230901) and Santa Teresa
+  (240801) walk-or-drive pages and crossing-detail links when pedestrian reports
+  disappear. Capability is source-backed; current waits/closures still use the
+  unchanged report checks. No missing wait becomes zero or a recommendation.
+- Add recorded-snapshot generator regression, exact-identity/zero/closure checks
+  and EN/ES keyboard/navigation/recovery coverage. Official sources, input
+  identities, evidence and remaining publication gates are in the refresh runbook.
+- Local review candidate only. Other ports retain their existing report-based
+  behavior; #59 and the separate Search Console reconciliation remain open.
+
 ## 2026-10-22 — Summary confidence released (PR #143)
 
 - Published source `a14654f32e0b83b11008a978d1fb085ff83db059` through existing

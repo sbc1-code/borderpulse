@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { snapshotHtml, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
 import { crossingDisplayName, crossingSearchTerms, crossingSearchTitle } from '../src/lib/crossingNames.js';
 
@@ -72,4 +76,52 @@ test('built homepage and every crossing page contain their own useful visible sn
     assert.doesNotMatch(html, /<h1>US–Mexico border wait times<\/h1>/, dir);
   }
   assert.doesNotMatch(fs.readFileSync('dist/privacy/index.html', 'utf8'), /data-prerender="crossing-snapshot"/);
+});
+
+test('recorded pedestrian-report disappearance preserves the same sitemap and prerender canonicals', () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'bp-capability-build-'));
+  const snapshots = JSON.parse(fs.readFileSync(new URL('./fixtures/walk-drive-capability.json', import.meta.url)));
+  const expected = [
+    'https://borderpulse.com/walk-or-drive/progreso-progreso-international-bridge/',
+    'https://borderpulse.com/walk-or-drive/santa-teresa-santa-teresa-port-of-entry/',
+  ];
+  try {
+    for (const dir of ['src/lib', 'src/components/utils', 'scripts/lib']) {
+      fs.cpSync(path.join(root, dir), path.join(temporary, dir), { recursive: true });
+    }
+    for (const file of ['scripts/build-sitemap.mjs', 'scripts/prerender.mjs']) {
+      fs.copyFileSync(path.join(root, file), path.join(temporary, file));
+    }
+    fs.symlinkSync(path.join(root, 'node_modules'), path.join(temporary, 'node_modules'));
+    fs.writeFileSync(path.join(temporary, 'package.json'), '{"type":"module"}');
+    fs.mkdirSync(path.join(temporary, 'public/data'), { recursive: true });
+    const unavailable = { ...snapshots[1], crossings: snapshots[1].crossings.map(c => ({ ...c, port_status: 'Closed', lanes: {} })) };
+    for (const snapshot of [...snapshots, unavailable]) {
+      fs.rmSync(path.join(temporary, 'dist'), { recursive: true, force: true });
+      fs.mkdirSync(path.join(temporary, 'dist'));
+      fs.copyFileSync(path.join(root, 'index.html'), path.join(temporary, 'dist/index.html'));
+      // Donna is a different port; these two source-backed exceptions must not
+      // create a pedestrian route there merely because its name says Progreso.
+      const data = { ...snapshot, crossings: [...snapshot.crossings,
+        { port_number: '230902', name: 'Progreso - Donna International Bridge', lanes: {} }] };
+      fs.writeFileSync(path.join(temporary, 'public/data/crossings.json'), JSON.stringify(data));
+      for (const script of ['scripts/build-sitemap.mjs', 'scripts/prerender.mjs']) {
+        execFileSync(process.execPath, [script], { cwd: temporary, stdio: 'pipe' });
+      }
+      const sitemap = [...fs.readFileSync(path.join(temporary, 'public/sitemap.xml'), 'utf8')
+        .matchAll(/<loc>([^<]+\/walk-or-drive\/[^<]+)<\/loc>/g)].map(m => m[1]).sort();
+      assert.deepEqual(sitemap, expected, snapshot.sourceCommit);
+      const generated = fs.readdirSync(path.join(temporary, 'dist/walk-or-drive')).flatMap(slug => {
+        const html = fs.readFileSync(path.join(temporary, 'dist/walk-or-drive', slug, 'index.html'), 'utf8');
+        if (/http-equiv="refresh"/.test(html)) return [];
+        const url = `https://borderpulse.com/walk-or-drive/${slug}/`;
+        assert.ok(html.includes(`<link rel="canonical" href="${url}"`), 'page keeps its own canonical');
+        return [url];
+      }).sort();
+      assert.deepEqual(generated, expected, 'no missing, extra or leftover prerender pages');
+    }
+  } finally {
+    fs.rmSync(temporary, { recursive: true, force: true });
+  }
 });

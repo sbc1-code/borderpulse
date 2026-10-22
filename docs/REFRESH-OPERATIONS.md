@@ -1,5 +1,62 @@
 # Public data refresh
 
+## Walk-or-drive inventory candidate — 2026-10-22 UTC (issue #59, unreleased)
+
+- Review base: `a10706b5eb5ae48468e32c5fc21c657d63bd8153`, rebased cleanly
+  from initial base `42ca1fee`; incoming changes were collector inputs only.
+  Inspected current main,
+  existing worktrees, the updated issue and runbook before editing; no overlapping
+  open capability PR found. Preserve original 18 changed paths, prior worktrees
+  and newer collector inputs. The initial local stage performed no publication.
+  Review continuation authorizes one branch push and PR/CI, but no merge/deploy.
+- Recorded `public/data/crossings.json` inputs, both 42 canonical crossings:
+  `e0bac72fd4d978dfbbec7f3c68d804025d3ac45c`, retrieved 03:52:35.415Z,
+  blob `3f6ea59a17f8edc620605c93fa3c7335cfc119e9`, versus
+  `5a681bad045eb4153830928021350844069cef98`, retrieved 04:52:36.981Z.
+  Real sitemap/prerender generators agree within each input, but pedestrian
+  canonicals drop **28 → 26**. Only `/walk-or-drive/progreso-progreso-international-bridge/`
+  and `/walk-or-drive/santa-teresa-santa-teresa-port-of-entry/` disappear when
+  their lane objects become null. Collector mapping of absent/N/A/closed reports
+  to null is not evidence of absent pedestrian infrastructure.
+- Source review October 22 supports exactly two persistent positive exceptions,
+  by port number, without asserting current opening or changing waits:
+  **Progreso 230901**, [TxDOT 2021 guide, RGV-60/PDF194 and RGV-64/PDF198](https://ftp.txdot.gov/pub/txdot/move-texas-freight/studies/texas-mexico-border-crossings-guide-2021.pdf)
+  describes pedestrian infrastructure and northbound pedestrian processing;
+  the [bridge operator](https://texasmexicobridges.com/) also describes pedestrian
+  passage. **Santa Teresa 240801**, [City of El Paso, International Bridges,
+  Santa Teresa section](https://www.elpasotexas.gov/international-bridges),
+  explicitly includes pedestrians. These sources do not establish Donna 230902
+  or neighboring ports' capability. No source hours are encoded as current status.
+- Exact identity cross-check: [official CBP public feed](https://bwt.cbp.gov/api/bwtpublicmod)
+  returned HTTP200 at 20:13:25.210Z: 230901 = Progreso International Bridge,
+  230902 = Donna International Bridge, 240801 = Santa Teresa Port of Entry.
+  These rows corroborate identity only; the dated capability sources do not
+  establish current operating hours, open lanes or wait availability.
+- The shared predicate serves detail links, sitemap, prerender and legacy
+  aliases. Both recorded inputs now generate **28 canonicals**, identical across
+  sitemap/prerender. Missing reports still show unavailable; a real zero restores
+  comparison; closure overrides retained numbers. No wait parser, collector,
+  freshness threshold or generator implementation changes.
+- Broader curation remains open. Six sampled snapshots show other report-based
+  differences, including Eagle Pass I, Stanton, Pharr, Anzalduas, Lukeville,
+  Donna, Rio Grande City and San Luis II. No new claim or removal for those ports.
+  Obtain official port-specific/directional evidence before adding positive or
+  negative entries. Missing reports alone cannot establish lack of pedestrian
+  service. #59 stays open; Search Console reconciliation is separately unverified.
+- Initial local verification before rebase: fresh build PASS; entry **61.73 KiB**, CSS 19.09 KiB;
+  full npm test PASS (**133 unit tests, 402 browser navigations**), including both viewports and
+  EN/ES keyboard entry, canonical identity, missing/deleted reports, true zero,
+  closure and recovery. Regression runs real generators on recorded inputs in
+  temporary directories; source snapshots in this worktree are not overwritten.
+  No budget/audit gate or assertion was removed.
+- Publication gates: review the two-port patch; integrate current main while
+  preserving collector inputs; require fresh build/full suite and exact-head CI
+  under unchanged **62 KiB**; obtain release authorization for this candidate
+  (the review/CI continuation still forbids merge/deploy); use the existing workflow once, then verify
+  manifest/source, both sitemap/prerender pages and EN/ES mobile/desktop links,
+  missing/zero/closure recovery on served assets. No new dependency, security/
+  account setting, credential, ad, service, monitor or cost.
+
 ## Summary confidence release — 2026-10-22 UTC (PR #143)
 
 - Reviewed head **84da4c8d29bc77940736fc6851962585d4f7e56c**, merged/source

@@ -1,5 +1,15 @@
 # DECISIONS
 
+## 2026-10-22 · Verified capability and current lane reports answer different questions
+
+The existence of a pedestrian comparison page must survive a missing current
+report at a verified pedestrian crossing. Preserve Progreso International Bridge
+230901 and Santa Teresa 240801 by exact port identity, backed by the official
+sources in the refresh runbook. Do not infer Donna's capability from the Progreso
+name, copy another crossing's report, or manufacture zero waits. Availability,
+closures and freshness still gate recommendations. Keep other ports' existing
+behavior until separately sourced; this two-port exception is not full curation.
+
 ## 2026-10-22 · Deferred content must evaluate confidence when it actually opens
 
 A usable snapshot can expire while an optional chunk is downloading, while a
