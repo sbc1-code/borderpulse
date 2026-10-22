@@ -4,6 +4,14 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+// Name a newly created ref component in one pure factory call so unused
+// wrappers can be removed without losing any of the public exports.
+function namedRef(render, displayName) {
+  const component = React.forwardRef(render)
+  component.displayName = displayName
+  return component
+}
+
 const DropdownMenu = DropdownMenuPrimitive.Root
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
@@ -16,7 +24,7 @@ const DropdownMenuSub = DropdownMenuPrimitive.Sub
 
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
 
-const DropdownMenuSubTrigger = React.forwardRef(({ className, inset, children, ...props }, ref) => (
+const DropdownMenuSubTrigger = /*#__PURE__*/ namedRef(({ className, inset, children, ...props }, ref) => (
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
@@ -28,11 +36,9 @@ const DropdownMenuSubTrigger = React.forwardRef(({ className, inset, children, .
     {children}
     <ChevronRight className="ml-auto" />
   </DropdownMenuPrimitive.SubTrigger>
-))
-DropdownMenuSubTrigger.displayName =
-  DropdownMenuPrimitive.SubTrigger.displayName
+), DropdownMenuPrimitive.SubTrigger.displayName)
 
-const DropdownMenuSubContent = React.forwardRef(({ className, ...props }, ref) => (
+const DropdownMenuSubContent = /*#__PURE__*/ namedRef(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={cn(
@@ -40,9 +46,7 @@ const DropdownMenuSubContent = React.forwardRef(({ className, ...props }, ref) =
       className
     )}
     {...props} />
-))
-DropdownMenuSubContent.displayName =
-  DropdownMenuPrimitive.SubContent.displayName
+), DropdownMenuPrimitive.SubContent.displayName)
 
 const DropdownMenuContent = React.forwardRef(({ className, sideOffset = 4, ...props }, ref) => (
   <DropdownMenuPrimitive.Portal>
@@ -71,7 +75,7 @@ const DropdownMenuItem = React.forwardRef(({ className, inset, ...props }, ref) 
 ))
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName
 
-const DropdownMenuCheckboxItem = React.forwardRef(({ className, children, checked, ...props }, ref) => (
+const DropdownMenuCheckboxItem = /*#__PURE__*/ namedRef(({ className, children, checked, ...props }, ref) => (
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
@@ -87,11 +91,9 @@ const DropdownMenuCheckboxItem = React.forwardRef(({ className, children, checke
     </span>
     {children}
   </DropdownMenuPrimitive.CheckboxItem>
-))
-DropdownMenuCheckboxItem.displayName =
-  DropdownMenuPrimitive.CheckboxItem.displayName
+), DropdownMenuPrimitive.CheckboxItem.displayName)
 
-const DropdownMenuRadioItem = React.forwardRef(({ className, children, ...props }, ref) => (
+const DropdownMenuRadioItem = /*#__PURE__*/ namedRef(({ className, children, ...props }, ref) => (
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
@@ -106,24 +108,21 @@ const DropdownMenuRadioItem = React.forwardRef(({ className, children, ...props 
     </span>
     {children}
   </DropdownMenuPrimitive.RadioItem>
-))
-DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName
+), DropdownMenuPrimitive.RadioItem.displayName)
 
-const DropdownMenuLabel = React.forwardRef(({ className, inset, ...props }, ref) => (
+const DropdownMenuLabel = /*#__PURE__*/ namedRef(({ className, inset, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn("px-2 py-1.5 text-sm font-semibold", inset && "pl-8", className)}
     {...props} />
-))
-DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName
+), DropdownMenuPrimitive.Label.displayName)
 
-const DropdownMenuSeparator = React.forwardRef(({ className, ...props }, ref) => (
+const DropdownMenuSeparator = /*#__PURE__*/ namedRef(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
     className={cn("-mx-1 my-1 h-px bg-muted", className)}
     {...props} />
-))
-DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
+), DropdownMenuPrimitive.Separator.displayName)
 
 const DropdownMenuShortcut = ({
   className,

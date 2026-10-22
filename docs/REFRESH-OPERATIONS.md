@@ -1,5 +1,50 @@
 # Public data refresh
 
+## Router follow-up — 2026-10-22 UTC (local release checks passed)
+
+The earlier candidate checkpoint below records the original failed gate. The
+same isolated branch now passes the complete local suite without changing
+Vite configuration, the bundle/audit scripts, exceptions or any security setting.
+Dependency-only commit `9c2d30d7` remains separate from navigation regressions
+and this performance follow-up. Version 6.1.5 is the CSS parser, not Router.
+
+- Profile the exact same installed graph before/after. Direct Router imports,
+  production deep-entry aliases and pure call annotations alone did not solve
+  the gate; none of those experiments changed the app/config. Do not patch
+  upstream Router code or strip its navigation validation.
+- The native dashboard disclosure remains closed by default. Its existing
+  summary/map now loads once on first opening, retains mounted state across
+  close/reopen, and follows current filters/data. An asset failure produces a
+  localized status and leaves the report list and route navigation operational;
+  reloading after network recovery restores the section. No data/feed/threshold
+  or permissions change. Unused dropdown wrappers retain their API and names,
+  but their construction can be tree-shaken as a pure factory.
+- Exact entry gzip: **63,169 bytes / 61.68848 KiB**, below the unchanged 62 KiB
+  cap by 319 bytes. The original candidate was 68,623 bytes. Counting **all four
+  initially required JS chunks**, before is 285,958 and after 280,504 bytes:
+  **5,454 bytes actually removed from initial loading**. First opening adds one
+  5,861-byte gzip summary chunk; no new vendor waterfall. Across all routes JS
+  totals 427,793 versus 427,367 gzip bytes (+426 bytes of splitting/handling).
+  Neither total nor navigation cost is concealed by the entry-only gate.
+- Cold headless EN/ES desktop/mobile samples with simulated 150ms latency,
+  200KiB/s download and 80KiB/s upload: usable reports 2.00–2.05s after versus
+  2.02–2.11s before; first chart opening 0.30–1.34s versus 0.02–0.05s. Small
+  samples are diagnostic, not a production latency/usage/conversion claim.
+  Loading is visible/announced and list interaction works even while the asset
+  is deliberately held. This request cost is confined to formerly hidden work.
+- Fresh build and **full npm test PASS**, with 130 standalone unit tests and
+  402 existing navigations. New tests cover both languages and both viewports:
+  no chart work/request before opening, cold held asset, list filtering while
+  loading, map keyboard selection, close/reopen identity and cache reuse,
+  changed filters, menu lane toggle/route actions/Escape focus, asset failure
+  without ErrorBoundary and successful reload recovery. Existing snapshot aging,
+  history, sharing/feedback, browser resilience, SEO and alias checks pass.
+- Publication: await remote CI on the exact reviewed head, check concurrent
+  changes again, then use the existing single production workflow after merge.
+  No second deployment dispatch or new tool/monitor. Preserve newer collector
+  inputs. Rollback through a normal inverse/revert PR of this scoped code and
+  dependency diff, keeping collector data; do not roll the whole data bundle back.
+
 ## Router candidate review — 2026-10-22 UTC (not published)
 
 - Exact targets: **react-router-dom 6.30.6 → 7.18.4**, resolving **react-router

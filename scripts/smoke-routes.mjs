@@ -7,6 +7,7 @@ import { checkGrowthInteractions } from './check-growth-interactions.mjs';
 import { checkBrowserResilience } from './check-browser-resilience.mjs';
 import { checkHistoricalPatterns } from './check-historical-pattern.mjs';
 import { checkRouterNavigation } from './check-router-navigation.mjs';
+import { checkDashboardSummary } from './check-dashboard-summary.mjs';
 import { checkLocalCrossings } from './check-local-crossings.mjs';
 import { checkNoJsReports } from './check-nojs-reports.mjs';
 import { checkWalkDriveFreshness } from './check-walk-drive-freshness.mjs';
@@ -327,6 +328,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await checkBrowserResilience(page, context, baseUrl);
     await checkHistoricalPatterns(page, context, baseUrl);
     await checkRouterNavigation(page, context, baseUrl);
+    await checkDashboardSummary(page, context, baseUrl);
     await checkLocalCrossings(page, context, baseUrl);
     await checkWalkDriveAvailability(page, context, baseUrl);
     await checkWalkDriveFreshness(context, baseUrl);
