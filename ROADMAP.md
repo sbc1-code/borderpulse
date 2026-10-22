@@ -84,11 +84,11 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 - [ ] Verify fresh public history/FX after the repair and observe two subsequent
   scheduled publications. Keep first-week usage/cost review pending separately;
   no second monitoring automation or manual run counts as a scheduled success.
-- [~] Router runtime repair evaluated October 22: local 7.18.4 candidate removes
-  its two audit entries and passes functional QA, but exceeds the unchanged
-  initial-JS gate (67.01 vs 62 KiB). Not published. Reduce initial bytes without
-  weakening the gate before remote CI/publication. Six build-chain entries stay
-  separate; parser 6.1.5 is not a Router fix. See the existing refresh runbook.
+- [x] Publish Router/DOM 7.18.4 within the existing 62 KiB entry gate (PR #141,
+  merge/source `5a681bad`, production run `39725320432`, matching READY deployment
+  and public manifest). Both CI checks passed; served-version and EN/ES checks
+  are recorded in the refresh runbook. Six moderate build-chain entries stay
+  separate; parser 6.1.5 is not a Router fix. No security exception or budget change.
 - [x] Current-waits views refresh while open and on tab return/reconnection,
   including comparison, crossing, best-time, walk-or-drive and embed routes.
   Slow optional feeds no longer delay waits, and the service worker does not
