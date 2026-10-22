@@ -89,6 +89,11 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   and public manifest). Both CI checks passed; served-version and EN/ES checks
   are recorded in the refresh runbook. Six moderate build-chain entries stay
   separate; parser 6.1.5 is not a Router fix. No security exception or budget change.
+- [x] Keep the deferred dashboard summary within snapshot confidence (PR #143,
+  source `a14654f3`, production run `39731300070`). Retain dated numbers and
+  controls with neutral interpretation on stale/unknown/future/offline input;
+  recover immediately on a valid response. Both final CI and native EN/ES QA
+  pass; complete unmodified served-byte route suite passes 416 navigations.
 - [x] Current-waits views refresh while open and on tab return/reconnection,
   including comparison, crossing, best-time, walk-or-drive and embed routes.
   Slow optional feeds no longer delay waits, and the service worker does not

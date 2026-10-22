@@ -1,5 +1,58 @@
 # Public data refresh
 
+## Summary confidence release — 2026-10-22 UTC (PR #143)
+
+- Reviewed head **84da4c8d29bc77940736fc6851962585d4f7e56c**, merged/source
+  **a14654f32e0b83b11008a978d1fb085ff83db059**. Final [push CI 39730765971](https://github.com/sbc1-code/borderpulse/actions/runs/39730765971)
+  and [PR CI 39730769822](https://github.com/sbc1-code/borderpulse/actions/runs/39730769822)
+  SUCCESS, including the unchanged 62 KiB gate and all regressions. The merge
+  adds only collector inputs to the reviewed source; no concurrent code was lost.
+- [Existing production run 39731300070](https://github.com/sbc1-code/borderpulse/actions/runs/39731300070)
+  SUCCESS, with no second dispatch. Vercel **dpl_8VJ9dSkAucq3E27fjCiDJiiH4CJN**,
+  [exact deployment](https://borderpulse-mlvhdt1fc-sbc1-codes-projects.vercel.app),
+  READY, aliases include borderpulse.com/www. Public manifest source matches;
+  prepared 06:01:11.958Z, CBP/history latest 05:52:31.070Z, 2,471 snapshots,
+  FX 05:52:31.351Z. Public API separately returned HTTP200/42 crossings at
+  06:07:13.861Z; these are separate current-data and bundled-history paths.
+- Served entry `/assets/index-B0bOZyNq.js`, SHA256
+  `4cc4961f31f07d3b419c5db5f2cd452708528718f50a28078a8a5a4ddad0c9da`,
+  recompresses to 63,152 bytes with local Node25. Served summary
+  `/assets/DashboardSummary-4wzsRQOR.js`, SHA256
+  `ddd0c468ab74fbdd6847cda0b43b00c69167d1d6c9c68a931e8e5f41dce7cb9e`,
+  is 6,520 gzip bytes and contains the confidence notice. Router 7.18.4 remains.
+  CI measures entry 61.88 KiB; no budget/config/dependency change. Before/after
+  paired full-initial JS measurement is +3 bytes; opening adds the existing small
+  shared guard in parallel. No production speed/conversion gain is established.
+- Real production captures and synthetic native-host fixtures pass EN/ES at
+  1440x900/390x844: module load/failure/reload recovery, keyboard/menu/filter,
+  expiry during download and after mounting without a new response, offline/
+  online, stale/unknown/future dates, retained values/dates and zero recovery.
+  Synthetic input is not a statement that the public feed was malfunctioning.
+- The complete route suite also passed **416 navigations** in a task-owned
+  localhost preview serving unchanged production bytes, so the existing local-only
+  language fixture guard remains intact. Rechecked all **24 asset hashes** and
+  manifest at the end; preview and headless contexts closed. Local old-input
+  inventory was 420; CI/served clean inventory is 416 (data-derived routes/aliases,
+  no manual exclusions). Original storage, sharing/feedback, historical/Compare,
+  report-time, language/metadata, no-JS and alias checks all pass.
+- Retain the first failed PR CI 39729934526 as evidence: only the history test's
+  generic h1 wait matched the prior crossing during navigation. The final head
+  checks target canonical identity before the unchanged no-inherited-pattern
+  assertion, and passed the full suite again plus six owned pages at 4x CPU.
+- Product rollback: make a new branch from current main, apply the inverse of
+  this PR's four src files and added summary checks with git apply --index, then
+  build/test/CI/merge and verify production. The prepared inverse was checked
+  against the published merge using a temporary index and was not applied.
+  Keep the independent historical canonical-wait test fix, Router mitigation,
+  collector snapshots, budget/audit gates and release records. No whole-site
+  rollback to an old data bundle was performed.
+- All eight previous worktrees and the original 18 changes match their captured
+  HEAD/status readback. No accounts/security settings, credentials, ads, paid
+  services or new tools/monitors changed. Six moderate build-chain audit entries,
+  narrow bundle headroom and first-open network cost remain. This is Chrome
+  headless/DOM QA, not physical-device, assistive-technology or total security
+  certification, nor independent validation of CBP observation timestamps.
+
 ## Expanded-summary confidence follow-up — 2026-10-22 UTC
 
 - Reproduced against the served PR141 app, using synthetic input only: 120-minute
