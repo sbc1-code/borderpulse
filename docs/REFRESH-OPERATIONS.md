@@ -1,5 +1,33 @@
 # Public data refresh
 
+## Bounded dependency review — 2026-10-22 UTC
+
+Official npm audit reports **eight moderate package entries**, zero high or
+critical, from four distinct advisories across three dependency chains. This
+is a reachability review of the existing app, not a complete security audit.
+No dependency, lockfile, exception, permission or security setting changed.
+
+| Installed chain | Scope and observed reachability | Compatible repair assessment |
+| --- | --- | --- |
+| @tailwindcss/typography 0.5.19 → postcss-selector-parser 6.0.10 (2 entries) | CSS build plugin in src/index.css, parsing repository CSS. Neither package renders in browser chunks or is imported by the public API. No visitor-supplied CSS parsing endpoint was found. | Maintainer advisory lists fixed **6.1.5** as well as 7.1.6; official npm confirms 6.1.5 exists with the same dependency names/engine as 6.0.10. Typography 0.5.20 still pins 6.0.10. A same-major backport is a candidate for a scoped override and CSS-output regression review; it is not automatically installed by a compatible parent update. npm's advisory range still broadly flags <7.1.6, unlike the maintainer's backport range. Do not suppress the advisory to conceal that discrepancy. |
+| gray-matter 4.0.3 → js-yaml 3.15.2 → argparse 1.0.10 → sprintf-js 1.0.3 (4 entries) | Frontmatter build/prerender tools only; absent from rendered browser chunks. The vulnerable format-string path is argparse CLI help; js-yaml's argparse import is in bin/js-yaml.js, while repo code uses the YAML/frontmatter library API. No public request accepts such a format string. | sprintf-js latest is 1.1.3 and the advisory lists no patched release. npm suggests gray-matter 2.0.1, a major downgrade; do not treat that as a compatible fix or apply audit fix --force. |
+| react-router-dom 6.30.6 → react-router 6.30.6 (2 entries, 2 advisories) | Present in browser chunks. App uses BrowserRouter declarative mode and createRoot, with no SSR/hydration path. Reviewed navigation values are constants or controlled internal path builders; no bare attacker-supplied destination was found. This limits the reviewed paths, not all future usage. | Latest published 6.x is 6.30.6. Maintainer fixes are 7.18.0+, requiring a major migration; do not mix that migration into the data-confidence correction. |
+
+The Vite 6.4.4 rendered module graph independently confirmed zero rendered
+modules for the six build-chain packages and one each for react-router and
+react-router-dom. The public API imports the CBP parser, not these build tools.
+Package classification alone was not used as proof of runtime reachability.
+The current historical-pattern misrepresentation was selected as the one
+user-facing correction; the parser backport remains an explicitly untested
+separate candidate. Existing dependency PRs were inspected and left intact.
+
+Primary references: [parser maintainer advisory](https://github.com/postcss/postcss-selector-parser/security/advisories/GHSA-rj75-hqrm-r3gf),
+[sprintf-js disclosure](https://github.com/alexei/sprintf.js/issues/237),
+[router redirect advisory](https://github.com/remix-run/react-router/security/advisories/GHSA-wrjc-x8rr-h8h6),
+[router SSR advisory](https://github.com/remix-run/react-router/security/advisories/GHSA-337j-9hxr-rhxg).
+Versions/chains were read from the unchanged lockfile and official npm registry;
+these dated results do not imply zero exploitability or complete security.
+
 ## Browser resilience release — 2026-10-21 UTC
 
 - After the owner approved the precise follow-up batch, its single authorized

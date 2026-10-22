@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2026-10-22 — Historical pattern confidence (prepared)
+
+- Replace the crossing callout's live-looking generated prose with validated
+  weekday/hour evidence from the existing 30-day sample. A Sunday pattern
+  remains Sunday on other days; lowest_today names its evidenced weekday.
+  Preserve genuine zero medians and show sample counts and port-local source
+  snapshot/generation dates, rather than labeling first detection Last checked.
+- Invalid/future/missing source times, unknown types and malformed numerical
+  evidence yield a neutral unavailable interpretation. Old but dated historical
+  evidence remains visible. No detector, feed, threshold or current-wait change.
+- Add unit and isolated EN/ES desktop/mobile browser regressions for weekday
+  scope, zero, malformed/future sources, recovery, dark mode and port navigation.
+- Recheck the eight moderate audit entries and actual rendered dependency
+  graph. No package update or audit exception: parser 6.1.5 is a separately
+  documented same-major candidate; React Router needs a major migration and
+  sprintf-js has no published patched version. See the refresh runbook.
+
 ## 2026-10-21 — Browser resilience and navigation (published)
 
 - PR #137 merged at `0ec918a897ee356d643afbd86c8957d84369c809`.
