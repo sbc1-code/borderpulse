@@ -1,5 +1,39 @@
 # CHANGELOG
 
+## 2026-10-22 — Router performance gate follow-up (validated locally)
+
+- Keep the reviewed Router 7.18.4 security candidate and the unchanged 62 KiB
+  budget. Load the already-collapsed dashboard summary/chart on first opening,
+  retain its state on reopening, and isolate asset failures with an EN/ES notice
+  while crossing reports, filters and navigation stay usable.
+- Make unused local dropdown wrappers removable through a pure ref/name factory;
+  preserve every export and the rendered menu's refs, styles and actions.
+- Entry is 63,169 bytes / 61.6885 KiB gzip (319 bytes below budget), versus
+  68,623 bytes before. All initially required JS totals 280,504 versus 285,958
+  gzip bytes: a real 5,454-byte reduction, with no build/config/budget changes.
+  First summary opening requests one 5,861-byte gzip chunk. In cold headless
+  samples at 150ms latency/200KiB/s, first opening took 0.30–1.34s versus
+  0.02–0.05s before. Loading is announced; current reports stay interactive.
+  This is an explicit on-request cost for formerly hidden work, not a speed claim.
+- Fresh build, 130 unit tests and full npm test pass, including 402 route
+  navigations and new EN/ES desktop/mobile delayed/failed-asset recovery,
+  summary keyboard/filter/state and menu keyboard/focus/action checks.
+  Audit remains six moderate build-chain entries, zero high/critical.
+- Publication remains conditional on remote CI; no deployment is claimed here.
+
+## 2026-10-22 — Router security candidate (local, not published)
+
+- Verify the two Router advisories are fixed in react-router 7.18.0+, not in
+  the unrelated postcss-selector-parser 6.1.5 backport. Prepare Router DOM and
+  Router 6.30.6 → 7.18.4 with only their required runtime lock entries changed.
+- Candidate raw audit drops from eight to six moderate entries; the two Router
+  entries disappear. Build, 130 unit tests and 402 diagnostic route checks pass,
+  including mixed-separator rejection and EN/ES desktop/mobile navigation.
+- Full npm test **fails** the unchanged 62 KiB entry gate: candidate 67.0146 KiB
+  versus baseline 60.6943 KiB. No app code, build configuration, audit exception
+  or budget changed. No candidate push, PR, CI or deployment was performed.
+  Keep it for review; production remains the verified historical-pattern release.
+
 ## 2026-10-22 — Historical pattern confidence (published)
 
 - PR #139 merged at `9893047411d8545df8298eb196a8f585258b1598` after both

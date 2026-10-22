@@ -1,5 +1,17 @@
 # DECISIONS
 
+## 2026-10-22 · A patched dependency candidate must also pass the performance gate
+
+The first Router 7.18.4 candidate cleared both runtime audit entries but
+exceeded the existing entry budget. A bounded follow-up loads the existing
+closed summary/chart on request and removes unused local wrapper construction,
+with explicit loading/failure handling and EN/ES keyboard/recovery regressions.
+The full local release suite now passes under the unchanged budget. Release
+still requires green remote CI and served-app verification. Do not raise the
+budget, move bytes to another eagerly required chunk to hide them, or change
+unrelated build packages merely to reduce the advisory count. First summary
+opening has a measured cold-network cost; reports remain usable throughout.
+
 ## 2026-10-22 · Historical weekday medians are not live observations
 
 The anomaly feed's lowest_today scans 30-day weekday buckets, and sunday_spike

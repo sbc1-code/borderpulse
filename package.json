@@ -35,7 +35,7 @@
     "news:classify": "node scripts/build-curation-queue.mjs",
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
-    "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-local-comparison.mjs scripts/test-browser-state.mjs scripts/test-historical-pattern.mjs",
+    "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-local-comparison.mjs scripts/test-browser-state.mjs scripts/test-historical-pattern.mjs scripts/test-router-navigation.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
     "test:writer": "node --test scripts/test-generated-writer.mjs",
     "test:refresh": "node --test scripts/test-data-refresh.mjs"
@@ -86,7 +86,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.75.0",
     "react-resizable-panels": "^2.1.7",
-    "react-router-dom": "^6.26.0",
+    "react-router-dom": "^7.18.4",
     "recharts": "^2.15.4",
     "sonner": "^2.0.1",
     "tailwind-merge": "^3.6.0",

@@ -1,5 +1,96 @@
 # Public data refresh
 
+## Router follow-up — 2026-10-22 UTC (local release checks passed)
+
+The earlier candidate checkpoint below records the original failed gate. The
+same isolated branch now passes the complete local suite without changing
+Vite configuration, the bundle/audit scripts, exceptions or any security setting.
+Dependency-only commit `9c2d30d7` remains separate from navigation regressions
+and this performance follow-up. Version 6.1.5 is the CSS parser, not Router.
+
+- Profile the exact same installed graph before/after. Direct Router imports,
+  production deep-entry aliases and pure call annotations alone did not solve
+  the gate; none of those experiments changed the app/config. Do not patch
+  upstream Router code or strip its navigation validation.
+- The native dashboard disclosure remains closed by default. Its existing
+  summary/map now loads once on first opening, retains mounted state across
+  close/reopen, and follows current filters/data. An asset failure produces a
+  localized status and leaves the report list and route navigation operational;
+  reloading after network recovery restores the section. No data/feed/threshold
+  or permissions change. Unused dropdown wrappers retain their API and names,
+  but their construction can be tree-shaken as a pure factory.
+- Exact entry gzip: **63,169 bytes / 61.68848 KiB**, below the unchanged 62 KiB
+  cap by 319 bytes. The original candidate was 68,623 bytes. Counting **all four
+  initially required JS chunks**, before is 285,958 and after 280,504 bytes:
+  **5,454 bytes actually removed from initial loading**. First opening adds one
+  5,861-byte gzip summary chunk; no new vendor waterfall. Across all routes JS
+  totals 427,793 versus 427,367 gzip bytes (+426 bytes of splitting/handling).
+  Neither total nor navigation cost is concealed by the entry-only gate.
+- Cold headless EN/ES desktop/mobile samples with simulated 150ms latency,
+  200KiB/s download and 80KiB/s upload: usable reports 2.00–2.05s after versus
+  2.02–2.11s before; first chart opening 0.30–1.34s versus 0.02–0.05s. Small
+  samples are diagnostic, not a production latency/usage/conversion claim.
+  Loading is visible/announced and list interaction works even while the asset
+  is deliberately held. This request cost is confined to formerly hidden work.
+- Fresh build and **full npm test PASS**, with 130 standalone unit tests and
+  402 existing navigations. New tests cover both languages and both viewports:
+  no chart work/request before opening, cold held asset, list filtering while
+  loading, map keyboard selection, close/reopen identity and cache reuse,
+  changed filters, menu lane toggle/route actions/Escape focus, asset failure
+  without ErrorBoundary and successful reload recovery. Existing snapshot aging,
+  history, sharing/feedback, browser resilience, SEO and alias checks pass.
+- Publication: await remote CI on the exact reviewed head, check concurrent
+  changes again, then use the existing single production workflow after merge.
+  No second deployment dispatch or new tool/monitor. Preserve newer collector
+  inputs. Rollback through a normal inverse/revert PR of this scoped code and
+  dependency diff, keeping collector data; do not roll the whole data bundle back.
+
+## Router candidate review — 2026-10-22 UTC (not published)
+
+- Exact targets: **react-router-dom 6.30.6 → 7.18.4**, resolving **react-router
+  7.18.4**. Both advisories name react-router, not the CSS selector parser.
+  [GHSA-wrjc-x8rr-h8h6](https://github.com/remix-run/react-router/security/advisories/GHSA-wrjc-x8rr-h8h6)
+  affects >=6.0.0,<7.18.0; [GHSA-337j-9hxr-rhxg](https://github.com/remix-run/react-router/security/advisories/GHSA-337j-9hxr-rhxg)
+  affects >=6.4.0,<7.18.0. Both list fixes at 7.18.0+. Official npm's latest
+  stable 6.x is 6.30.6; parser 6.1.5 does not mitigate either Router advisory.
+- [Versioned official upgrade guide](https://reactrouter.com/7.18.4/upgrading/v6)
+  requires Node20+/React18+/ReactDOM18+. Current React/DOM 18.3.1, local Node25,
+  verification Node22 and publisher Node24 satisfy those baselines. The guide's
+  no-breaking statement is conditional on future flags, not a blanket promise.
+  This app has only single-segment '*' fallbacks, absolute internal links,
+  module-level lazy declarations and declarative BrowserRouter; unused data
+  router/fetcher/hydration changes were not introduced. No app API/import,
+  React/Vite, security-setting or future-flag change was needed for the candidate.
+- Minimal dependency diff: root Router DOM range, the two Router entries,
+  removal of their unused @remix-run/router, and required cookie/set-cookie-parser.
+  Six unrelated optional WASI lock additions from npm were excluded. Other
+  resolved packages are identical. No override or new audit exception.
+- Raw candidate audit: **six moderate, zero high/critical**, with both Router
+  entries absent. Four new library regressions check normalized separators,
+  external-navigation rejection, internal query/hash/replace/Back/Forward and
+  encoded separators inside internal parameters. Before/after library behavior
+  was captured; these tests do not imply the old public app exposed raw URLs.
+- Build and 130 unit tests pass. Full npm test **fails at test:bundle**:
+  68,623 bytes / **67.01465 KiB** initial JS against 62 KiB. Baseline is 62,151
+  bytes / 60.69434 KiB: **+6,472 bytes**. CSS remains 19.08 KiB under 20 KiB.
+  The budget and audit scripts are unchanged. No successful full-suite claim.
+- Standalone route diagnostics subsequently passed **402 navigations**, existing
+  freshness/history/share/feedback/language regressions, and added EN/ES
+  desktop/mobile nested navigation, unknown/encoded-path fallback and checks
+  against external main-frame navigation. These diagnostic results do not
+  bypass the failed release gate or authorize publication. Visual headless QA
+  passed in both languages and widths. SSR/hydration exploit execution was not
+  tested because the app does not use that mode; package mitigation is supported
+  by maintainer ranges and the raw audit, not a complete security certification.
+- Candidate stays local, with dependency-only and regression/documentation
+  commits separated. No remote candidate branch, CI, PR or deployment. Live
+  production remains 98930474 from PR #139. Rollback is local-only: revert the
+  candidate's support commit then dependency commit in its isolated branch;
+  preserve other worktrees and collector inputs. No production rollback needed.
+- Next: reduce actual initial bytes without raising/evading the gate, rerun
+  complete checks, then obtain passing remote CI and verify production under
+  the existing authorization. Do not mix in the separate parser/build-chain work.
+
 ## Historical pattern release — 2026-10-22 UTC
 
 - [PR #139](https://github.com/sbc1-code/borderpulse/pull/139) merged reviewed

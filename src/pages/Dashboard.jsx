@@ -15,8 +15,7 @@ import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
-import BorderLine from '@/components/dashboard/BorderLine';
-import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
+import DashboardSummaryDisclosure from '@/components/dashboard/DashboardSummaryDisclosure';
 import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
 import DashboardCameras from '@/components/dashboard/DashboardCameras';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
@@ -540,27 +539,16 @@ export default function Dashboard() {
           <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <LocalCrossingComparison crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
 
-          <details className="mb-4 rounded-lg border border-slate-200 bg-white/70 p-3 dark:border-gray-700 dark:bg-gray-900/70">
-            <summary className="min-h-11 cursor-pointer text-sm font-medium text-slate-700 dark:text-slate-300">{language === 'es' ? 'Ver resumen y mapa de esperas' : 'Show wait summary and border chart'}</summary>
-          <CommuterSnapshot
-            crossings={filteredCrossings}
-            selectedDirection={direction}
-            language={language}
-            regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
-          />
-
-          {/* The border drawn to scale. Primary orientation layer: on small
-              screens the card list below collapses behind it. */}
-          <BorderLine
+          <DashboardSummaryDisclosure
             crossings={filteredCrossings}
             direction={direction}
             language={language}
+            regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
             favoritesSet={favoritesSet}
             typicalByPort={typicalByPort}
             focusedPort={focusedPort}
             onSelect={handleTickSelect}
           />
-          </details>
 
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
