@@ -1,5 +1,51 @@
 # Public data refresh
 
+## Router candidate review — 2026-10-22 UTC (not published)
+
+- Exact targets: **react-router-dom 6.30.6 → 7.18.4**, resolving **react-router
+  7.18.4**. Both advisories name react-router, not the CSS selector parser.
+  [GHSA-wrjc-x8rr-h8h6](https://github.com/remix-run/react-router/security/advisories/GHSA-wrjc-x8rr-h8h6)
+  affects >=6.0.0,<7.18.0; [GHSA-337j-9hxr-rhxg](https://github.com/remix-run/react-router/security/advisories/GHSA-337j-9hxr-rhxg)
+  affects >=6.4.0,<7.18.0. Both list fixes at 7.18.0+. Official npm's latest
+  stable 6.x is 6.30.6; parser 6.1.5 does not mitigate either Router advisory.
+- [Versioned official upgrade guide](https://reactrouter.com/7.18.4/upgrading/v6)
+  requires Node20+/React18+/ReactDOM18+. Current React/DOM 18.3.1, local Node25,
+  verification Node22 and publisher Node24 satisfy those baselines. The guide's
+  no-breaking statement is conditional on future flags, not a blanket promise.
+  This app has only single-segment '*' fallbacks, absolute internal links,
+  module-level lazy declarations and declarative BrowserRouter; unused data
+  router/fetcher/hydration changes were not introduced. No app API/import,
+  React/Vite, security-setting or future-flag change was needed for the candidate.
+- Minimal dependency diff: root Router DOM range, the two Router entries,
+  removal of their unused @remix-run/router, and required cookie/set-cookie-parser.
+  Six unrelated optional WASI lock additions from npm were excluded. Other
+  resolved packages are identical. No override or new audit exception.
+- Raw candidate audit: **six moderate, zero high/critical**, with both Router
+  entries absent. Four new library regressions check normalized separators,
+  external-navigation rejection, internal query/hash/replace/Back/Forward and
+  encoded separators inside internal parameters. Before/after library behavior
+  was captured; these tests do not imply the old public app exposed raw URLs.
+- Build and 130 unit tests pass. Full npm test **fails at test:bundle**:
+  68,623 bytes / **67.01465 KiB** initial JS against 62 KiB. Baseline is 62,151
+  bytes / 60.69434 KiB: **+6,472 bytes**. CSS remains 19.08 KiB under 20 KiB.
+  The budget and audit scripts are unchanged. No successful full-suite claim.
+- Standalone route diagnostics subsequently passed **402 navigations**, existing
+  freshness/history/share/feedback/language regressions, and added EN/ES
+  desktop/mobile nested navigation, unknown/encoded-path fallback and checks
+  against external main-frame navigation. These diagnostic results do not
+  bypass the failed release gate or authorize publication. Visual headless QA
+  passed in both languages and widths. SSR/hydration exploit execution was not
+  tested because the app does not use that mode; package mitigation is supported
+  by maintainer ranges and the raw audit, not a complete security certification.
+- Candidate stays local, with dependency-only and regression/documentation
+  commits separated. No remote candidate branch, CI, PR or deployment. Live
+  production remains 98930474 from PR #139. Rollback is local-only: revert the
+  candidate's support commit then dependency commit in its isolated branch;
+  preserve other worktrees and collector inputs. No production rollback needed.
+- Next: reduce actual initial bytes without raising/evading the gate, rerun
+  complete checks, then obtain passing remote CI and verify production under
+  the existing authorization. Do not mix in the separate parser/build-chain work.
+
 ## Historical pattern release — 2026-10-22 UTC
 
 - [PR #139](https://github.com/sbc1-code/borderpulse/pull/139) merged reviewed

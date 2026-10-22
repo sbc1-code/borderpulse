@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-22 — Router security candidate (local, not published)
+
+- Verify the two Router advisories are fixed in react-router 7.18.0+, not in
+  the unrelated postcss-selector-parser 6.1.5 backport. Prepare Router DOM and
+  Router 6.30.6 → 7.18.4 with only their required runtime lock entries changed.
+- Candidate raw audit drops from eight to six moderate entries; the two Router
+  entries disappear. Build, 130 unit tests and 402 diagnostic route checks pass,
+  including mixed-separator rejection and EN/ES desktop/mobile navigation.
+- Full npm test **fails** the unchanged 62 KiB entry gate: candidate 67.0146 KiB
+  versus baseline 60.6943 KiB. No app code, build configuration, audit exception
+  or budget changed. No candidate push, PR, CI or deployment was performed.
+  Keep it for review; production remains the verified historical-pattern release.
+
 ## 2026-10-22 — Historical pattern confidence (published)
 
 - PR #139 merged at `9893047411d8545df8298eb196a8f585258b1598` after both

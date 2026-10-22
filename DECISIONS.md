@@ -1,5 +1,13 @@
 # DECISIONS
 
+## 2026-10-22 · A patched dependency candidate must also pass the performance gate
+
+Router 7.18.4 clears both runtime audit entries and matches the app's tested
+React/Node requirements, but increases initial JS above the existing budget.
+Keep the minimal package/lock change and regression evidence local. Do not
+raise the budget, move bytes to another eagerly required chunk to hide them,
+or change unrelated build packages merely to reduce the advisory count.
+
 ## 2026-10-22 · Historical weekday medians are not live observations
 
 The anomaly feed's lowest_today scans 30-day weekday buckets, and sunday_spike
