@@ -14,6 +14,7 @@ import { checkWalkDriveFreshness } from './check-walk-drive-freshness.mjs';
 import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
 import { checkComparisonGuide } from './check-comparison-guide.mjs';
 import { checkSentriRenewal } from './check-sentri-renewal.mjs';
+import { checkSantaTeresaActions } from './check-santa-teresa-actions.mjs';
 import { checkReportTimes } from './check-report-times.mjs';
 import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
 import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
@@ -335,6 +336,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await checkWalkDriveFreshness(context, baseUrl);
     await checkComparisonGuide(page, context, baseUrl);
     await checkSentriRenewal(page, context, baseUrl);
+    await checkSantaTeresaActions(context, baseUrl);
   } catch (error) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
   }

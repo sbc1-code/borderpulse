@@ -10,6 +10,7 @@ import CrossingShare from '@/components/dashboard/CrossingShare';
 import CrossingCameras from '@/components/dashboard/CrossingCameras';
 import { cameraSourceFor } from '@/lib/cameras';
 import { crossingDisplayName, crossingSearchTitle } from '@/lib/crossingNames';
+import SantaTeresaActions from '@/components/dashboard/SantaTeresaActions';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
@@ -426,6 +427,7 @@ export default function CrossingDetail() {
     };
   });
   const isSanYsidro = canonicalSlug === 'san-ysidro';
+  const isSantaTeresa = String(crossing.port_number) === '240801';
   const lowerCompareEntries = isSanYsidro
     ? compareEntries.filter(({ crossing: c }) => portToSlug[c.port_number] !== 'otay-mesa')
     : compareEntries;
@@ -477,6 +479,8 @@ export default function CrossingDetail() {
             : `Los tiempos de espera hacia EE.UU. en ${crossing.name} se obtienen de U.S. Customs and Border Protection con regularidad. Las estimaciones hacia México están pausadas.`}
         </p>
       </header>
+
+      {isSantaTeresa && <SantaTeresaActions slug={canonicalSlug} language={language} />}
 
       <div className="mb-6">
         <BorderCrossingCard
@@ -827,7 +831,7 @@ export default function CrossingDetail() {
               })}
             </div>
           )}
-          {hasPedestrianLane(crossing) && !isSanYsidro && (
+          {hasPedestrianLane(crossing) && !isSanYsidro && !isSantaTeresa && (
             <div className="mt-2 text-xs">
               <Link
                 to={`/walk-or-drive/${canonicalSlug}/`}
