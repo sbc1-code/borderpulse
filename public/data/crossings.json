@@ -1,7 +1,7 @@
 {
   "source": "U.S. Customs and Border Protection",
   "source_url": "https://bwt.cbp.gov/api/bwtpublicmod",
-  "fetched_at": "2026-10-23T10:52:37.823Z",
+  "fetched_at": "2026-10-23T11:07:46.638Z",
   "count": 42,
   "crossings": [
     {
@@ -16,7 +16,7 @@
       "hours": "6 am-10 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
+      "updated_at": "10/23/2026 04:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -70,21 +70,21 @@
       "port_number": "535501",
       "name": "Brownsville - B&M",
       "port_name": "Brownsville - B&M",
-      "crossing_name": "B&M Bridge",
+      "crossing_name": "B&M",
       "state": "TX",
       "border": "Mexican Border",
       "hours": "24 hrs/day",
       "port_status": "Open",
-      "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
-      "current_wait_time": null,
-      "status": "unknown",
+      "construction_notice": "Pedestrian access closes at 10:00 PM and reopens at 6:00 AM, seven days a week.",
+      "updated_at": "10/23/2026 06:07:22",
+      "current_wait_time": 90,
+      "status": "heavy",
       "lanes": {
         "passenger_standard": {
-          "status": "Update Pending",
-          "delay_minutes": null,
-          "lanes_open": 0,
-          "update_time": null
+          "status": "delay",
+          "delay_minutes": 90,
+          "lanes_open": 2,
+          "update_time": "At 6:00 am CDT"
         },
         "passenger_sentri": {
           "status": "Update Pending",
@@ -93,16 +93,16 @@
           "update_time": null
         },
         "passenger_ready": {
-          "status": "Update Pending",
-          "delay_minutes": null,
-          "lanes_open": 0,
-          "update_time": null
+          "status": "delay",
+          "delay_minutes": 90,
+          "lanes_open": 2,
+          "update_time": "At 6:00 am CDT"
         },
         "pedestrian_standard": {
-          "status": "Update Pending",
-          "delay_minutes": null,
-          "lanes_open": 0,
-          "update_time": null
+          "status": "delay",
+          "delay_minutes": 15,
+          "lanes_open": 2,
+          "update_time": "At 6:00 am CDT"
         },
         "pedestrian_ready": {
           "status": "Update Pending",
@@ -136,15 +136,15 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "BOTA Passenger/Ready Lanes is open west side of port; Passenger Hrs 24 hours/7days, BOTA CARGO Mon-FRI 6 am to 4 pm. SAT/SUN CLOSED. Tune into AM 1610 for info.",
-      "updated_at": "10/23/2026 04:52:14",
-      "current_wait_time": 5,
-      "status": "good",
+      "updated_at": "10/23/2026 05:07:22",
+      "current_wait_time": 60,
+      "status": "heavy",
       "lanes": {
         "passenger_standard": {
-          "status": "no delay",
-          "delay_minutes": 5,
+          "status": "delay",
+          "delay_minutes": 60,
           "lanes_open": 1,
-          "update_time": "At 2:00 am MDT"
+          "update_time": "At 5:00 am MDT"
         },
         "passenger_sentri": {
           "status": "Update Pending",
@@ -153,16 +153,16 @@
           "update_time": null
         },
         "passenger_ready": {
-          "status": "no delay",
-          "delay_minutes": 5,
-          "lanes_open": 2,
-          "update_time": "At 2:00 am MDT"
+          "status": "delay",
+          "delay_minutes": 55,
+          "lanes_open": 4,
+          "update_time": "At 5:00 am MDT"
         },
         "pedestrian_standard": {
           "status": "no delay",
           "delay_minutes": 5,
           "lanes_open": 1,
-          "update_time": "At 2:00 am MDT"
+          "update_time": "At 5:00 am MDT"
         },
         "pedestrian_ready": {
           "status": "Update Pending",
@@ -196,15 +196,15 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "The Pedestrian Dedicated Ready Lane is now operational at Gateway Bridge and may be used with a valid U.S. passport or SENTRI card.",
-      "updated_at": "10/23/2026 05:52:14",
-      "current_wait_time": 60,
+      "updated_at": "10/23/2026 06:07:22",
+      "current_wait_time": 90,
       "status": "heavy",
       "lanes": {
         "passenger_standard": {
           "status": "delay",
-          "delay_minutes": 60,
-          "lanes_open": 1,
-          "update_time": "At 5:00 am CDT"
+          "delay_minutes": 90,
+          "lanes_open": 2,
+          "update_time": "At 6:00 am CDT"
         },
         "passenger_sentri": {
           "status": "Update Pending",
@@ -214,21 +214,21 @@
         },
         "passenger_ready": {
           "status": "delay",
-          "delay_minutes": 60,
-          "lanes_open": 1,
-          "update_time": "At 5:00 am CDT"
+          "delay_minutes": 90,
+          "lanes_open": 2,
+          "update_time": "At 6:00 am CDT"
         },
         "pedestrian_standard": {
-          "status": "Update Pending",
-          "delay_minutes": null,
-          "lanes_open": 0,
-          "update_time": null
+          "status": "no delay",
+          "delay_minutes": 5,
+          "lanes_open": 2,
+          "update_time": "At 6:00 am CDT"
         },
         "pedestrian_ready": {
           "status": "no delay",
-          "delay_minutes": 0,
+          "delay_minutes": 5,
           "lanes_open": 1,
-          "update_time": "At 5:00 am CDT"
+          "update_time": "At 6:00 am CDT"
         },
         "commercial_standard": {
           "status": "Update Pending",
@@ -254,15 +254,25 @@
       "state": "TX",
       "border": "Mexican Border",
       "hours": "6 am-10 pm",
-      "port_status": "Closed",
+      "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
-      "current_wait_time": null,
-      "status": "unknown",
+      "updated_at": "10/23/2026 06:07:22",
+      "current_wait_time": 15,
+      "status": "moderate",
       "lanes": {
-        "passenger_standard": null,
+        "passenger_standard": {
+          "status": "delay",
+          "delay_minutes": 15,
+          "lanes_open": 1,
+          "update_time": "At 6:00 am CDT"
+        },
         "passenger_sentri": null,
-        "passenger_ready": null,
+        "passenger_ready": {
+          "status": "delay",
+          "delay_minutes": 15,
+          "lanes_open": 1,
+          "update_time": "At 6:00 am CDT"
+        },
         "pedestrian_standard": null,
         "pedestrian_ready": null,
         "commercial_standard": null,
@@ -279,16 +289,36 @@
       "state": "TX",
       "border": "Mexican Border",
       "hours": "6 am-Midnight",
-      "port_status": "Closed",
+      "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
-      "current_wait_time": null,
-      "status": "unknown",
+      "updated_at": "10/23/2026 06:07:22",
+      "current_wait_time": 30,
+      "status": "moderate",
       "lanes": {
-        "passenger_standard": null,
-        "passenger_sentri": null,
-        "passenger_ready": null,
-        "pedestrian_standard": null,
+        "passenger_standard": {
+          "status": "delay",
+          "delay_minutes": 30,
+          "lanes_open": 1,
+          "update_time": "At 6:00 am CDT"
+        },
+        "passenger_sentri": {
+          "status": "delay",
+          "delay_minutes": 10,
+          "lanes_open": 3,
+          "update_time": "At 6:00 am CDT"
+        },
+        "passenger_ready": {
+          "status": "delay",
+          "delay_minutes": 30,
+          "lanes_open": 1,
+          "update_time": "At 6:00 am CDT"
+        },
+        "pedestrian_standard": {
+          "status": "no delay",
+          "delay_minutes": 5,
+          "lanes_open": 1,
+          "update_time": "At 6:00 am CDT"
+        },
         "pedestrian_ready": null,
         "commercial_standard": null,
         "commercial_fast": null
@@ -306,7 +336,7 @@
       "hours": "6 am-10 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
+      "updated_at": "10/23/2026 04:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -331,39 +361,39 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
-      "current_wait_time": 15,
+      "updated_at": "10/23/2026 04:07:22",
+      "current_wait_time": 30,
       "status": "moderate",
       "lanes": {
         "passenger_standard": {
           "status": "delay",
-          "delay_minutes": 15,
-          "lanes_open": 3,
-          "update_time": "At 3:00 am PDT"
+          "delay_minutes": 30,
+          "lanes_open": 2,
+          "update_time": "At 4:00 am PDT"
         },
         "passenger_sentri": {
           "status": "no delay",
           "delay_minutes": 5,
-          "lanes_open": 1,
-          "update_time": "At 3:00 am PDT"
+          "lanes_open": 2,
+          "update_time": "At 4:00 am PDT"
         },
         "passenger_ready": {
           "status": "delay",
-          "delay_minutes": 15,
+          "delay_minutes": 30,
           "lanes_open": 3,
-          "update_time": "At 3:00 am PDT"
+          "update_time": "At 4:00 am PDT"
         },
         "pedestrian_standard": {
           "status": "no delay",
           "delay_minutes": 5,
-          "lanes_open": 2,
-          "update_time": "At 3:00 am PDT"
+          "lanes_open": 3,
+          "update_time": "At 4:00 am PDT"
         },
         "pedestrian_ready": {
           "status": "no delay",
           "delay_minutes": 5,
           "lanes_open": 3,
-          "update_time": "At 3:00 am PDT"
+          "update_time": "At 4:00 am PDT"
         },
         "commercial_standard": null,
         "commercial_fast": null
@@ -381,15 +411,15 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
-      "current_wait_time": 0,
+      "updated_at": "10/23/2026 05:07:22",
+      "current_wait_time": 5,
       "status": "good",
       "lanes": {
         "passenger_standard": {
           "status": "no delay",
-          "delay_minutes": 0,
+          "delay_minutes": 5,
           "lanes_open": 1,
-          "update_time": "At 4:00 am MDT"
+          "update_time": "At 5:00 am MDT"
         },
         "passenger_sentri": null,
         "passenger_ready": null,
@@ -397,7 +427,7 @@
           "status": "no delay",
           "delay_minutes": 0,
           "lanes_open": 1,
-          "update_time": "At 4:00 am MDT"
+          "update_time": "At 5:00 am MDT"
         },
         "pedestrian_ready": null,
         "commercial_standard": null,
@@ -416,7 +446,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "Ready Lane is open from 6AM until MIDNIGHT seven days a week.  Ready Lane is on the far left as you approach.\r\n\r\nGo to www.GetYouHome.gov for more information.",
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": 15,
       "status": "moderate",
       "lanes": {
@@ -451,15 +481,15 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
-      "current_wait_time": 1,
+      "updated_at": "10/23/2026 04:07:22",
+      "current_wait_time": 5,
       "status": "good",
       "lanes": {
         "passenger_standard": {
           "status": "no delay",
-          "delay_minutes": 1,
-          "lanes_open": 2,
-          "update_time": "At 3:00 am PST"
+          "delay_minutes": 5,
+          "lanes_open": 3,
+          "update_time": "At 4:00 am PST"
         },
         "passenger_sentri": null,
         "passenger_ready": null,
@@ -467,7 +497,7 @@
           "status": "no delay",
           "delay_minutes": 1,
           "lanes_open": 2,
-          "update_time": "At 3:00 am PST"
+          "update_time": "At 4:00 am PST"
         },
         "pedestrian_ready": null,
         "commercial_standard": null,
@@ -486,7 +516,7 @@
       "hours": "7 am-11 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -546,21 +576,21 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "File FinCEN105 - Currency and Monetary Instrument Report (CMIR)online at https://fincen105.cbp.dhs.gov/ Provide confirmation number to CBP Officer upon making entry or departing the U.S.",
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": 30,
       "status": "moderate",
       "lanes": {
         "passenger_standard": {
           "status": "delay",
           "delay_minutes": 30,
-          "lanes_open": 2,
-          "update_time": "At 5:00 am CDT"
+          "lanes_open": 3,
+          "update_time": "At 6:00 am CDT"
         },
         "passenger_sentri": {
           "status": "no delay",
           "delay_minutes": 1,
           "lanes_open": 1,
-          "update_time": "At 5:00 am CDT"
+          "update_time": "At 6:00 am CDT"
         },
         "passenger_ready": null,
         "pedestrian_standard": null,
@@ -581,7 +611,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -641,7 +671,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "Ready Lanes are open at PDN.  See www.getyouhome.gov for more information. Tune in to AM 1620 for border crossing information.",
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": 35,
       "status": "moderate",
       "lanes": {
@@ -701,7 +731,7 @@
       "hours": "6 am-Midnight",
       "port_status": "Closed",
       "construction_notice": "Be prepared for construction that may cause some delays in the southbound lanes of the Stanton bridge; early January - February.  Tune in to AM 1620 for border crossing information.",
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -761,7 +791,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:23",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -821,7 +851,7 @@
       "hours": "6 am-6 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -879,9 +909,9 @@
       "state": "TX",
       "border": "Mexican Border",
       "hours": "6 am-10 pm",
-      "port_status": "Closed",
+      "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -941,7 +971,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -999,9 +1029,9 @@
       "state": "TX",
       "border": "Mexican Border",
       "hours": "6 am-Midnight",
-      "port_status": "Closed",
+      "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1061,7 +1091,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1096,7 +1126,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "Ready Lanes are open from 8AM - Midnight seven days a week.\r\n\r\nGo to www.GetYouHome.gov for more information.",
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": 30,
       "status": "moderate",
       "lanes": {
@@ -1131,7 +1161,7 @@
       "hours": "8 am-Midnight",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1156,7 +1186,7 @@
       "hours": "7 am-Midnight",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1181,7 +1211,7 @@
       "hours": "6 am-8 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1241,7 +1271,7 @@
       "hours": "6 am-10 pm",
       "port_status": "Closed",
       "construction_notice": "CARGO Monday-Friday 8 am to 4 pm. Saturday/Sunday Closed.",
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1301,7 +1331,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
+      "updated_at": "10/23/2026 04:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1361,7 +1391,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "Ready Lane is open from 6AM - 10PM seven days a week.  Ready Lane is on the left side as you approach the port.\r\nGo to www.GetYouHome.gov for more information.",
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": 5,
       "status": "good",
       "lanes": {
@@ -1396,7 +1426,7 @@
       "hours": "6 am-10 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1456,7 +1486,7 @@
       "hours": "10 am-6 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1516,33 +1546,33 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "Entrance to Ready Lanes is on the far left as you approach the border.  Go to www.getyouhome.gov for more information\r\n\r\nGo to www.GetYouHome.gov for more information.",
-      "updated_at": "10/23/2026 03:52:14",
-      "current_wait_time": 35,
-      "status": "moderate",
+      "updated_at": "10/23/2026 04:07:22",
+      "current_wait_time": 90,
+      "status": "heavy",
       "lanes": {
         "passenger_standard": {
           "status": "delay",
-          "delay_minutes": 35,
-          "lanes_open": 1,
-          "update_time": "At 2:00 am PDT"
+          "delay_minutes": 90,
+          "lanes_open": 2,
+          "update_time": "At 4:00 am PDT"
         },
         "passenger_sentri": {
-          "status": "Update Pending",
-          "delay_minutes": null,
-          "lanes_open": 0,
-          "update_time": null
+          "status": "delay",
+          "delay_minutes": 10,
+          "lanes_open": 4,
+          "update_time": "At 4:00 am PDT"
         },
         "passenger_ready": {
           "status": "delay",
-          "delay_minutes": 10,
-          "lanes_open": 1,
-          "update_time": "At 2:00 am PDT"
+          "delay_minutes": 40,
+          "lanes_open": 4,
+          "update_time": "At 4:00 am PDT"
         },
         "pedestrian_standard": {
           "status": "no delay",
           "delay_minutes": 0,
-          "lanes_open": 3,
-          "update_time": "At 2:00 am PDT"
+          "lanes_open": 6,
+          "update_time": "At 4:00 am PDT"
         },
         "pedestrian_ready": {
           "status": "Update Pending",
@@ -1576,7 +1606,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": 0,
       "status": "good",
       "lanes": {
@@ -1609,9 +1639,9 @@
       "state": "TX",
       "border": "Mexican Border",
       "hours": "6 am-10 pm",
-      "port_status": "Closed",
+      "port_status": "Open",
       "construction_notice": "Ready Lane is open from 9am until 2pm. Go to www.getyouhome.gov for more information.",
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1671,7 +1701,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "The Pedestrian Ready lanes will be open daily from 12noon to 5pm.",
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1731,7 +1761,7 @@
       "hours": "7 am-11 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1791,7 +1821,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 05:52:14",
+      "updated_at": "10/23/2026 06:07:22",
       "current_wait_time": 0,
       "status": "good",
       "lanes": {
@@ -1851,28 +1881,28 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": "A Ready Lane is now open at the San Luis Port of Entry from 6:00 until midnight.  Go to www.getyouhome.gov for more information on Ready Lanes.  Tune in to AM 530 for border crossing information.",
-      "updated_at": "10/23/2026 04:52:14",
-      "current_wait_time": 40,
-      "status": "moderate",
+      "updated_at": "10/23/2026 05:07:23",
+      "current_wait_time": 75,
+      "status": "heavy",
       "lanes": {
         "passenger_standard": {
           "status": "delay",
-          "delay_minutes": 40,
-          "lanes_open": 4,
-          "update_time": "At 3:00 am MST"
+          "delay_minutes": 75,
+          "lanes_open": 5,
+          "update_time": "At 4:00 am MST"
         },
         "passenger_sentri": {
-          "status": "no delay",
-          "delay_minutes": 5,
+          "status": "delay",
+          "delay_minutes": 10,
           "lanes_open": 1,
-          "update_time": "At 3:00 am MST"
+          "update_time": "At 4:00 am MST"
         },
         "passenger_ready": null,
         "pedestrian_standard": {
-          "status": "delay",
-          "delay_minutes": 20,
+          "status": "no delay",
+          "delay_minutes": 5,
           "lanes_open": 4,
-          "update_time": "At 3:00 am MST"
+          "update_time": "At 4:00 am MST"
         },
         "pedestrian_ready": null,
         "commercial_standard": null,
@@ -1891,7 +1921,7 @@
       "hours": "9 am-5 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:23",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -1951,7 +1981,7 @@
       "hours": "24 hrs/day",
       "port_status": "Open",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
+      "updated_at": "10/23/2026 04:07:23",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -2011,7 +2041,7 @@
       "hours": "6 am-10 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 04:52:14",
+      "updated_at": "10/23/2026 05:07:23",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
@@ -2071,7 +2101,7 @@
       "hours": "6 am-10 pm",
       "port_status": "Closed",
       "construction_notice": null,
-      "updated_at": "10/23/2026 03:52:14",
+      "updated_at": "10/23/2026 04:07:23",
       "current_wait_time": null,
       "status": "unknown",
       "lanes": {
