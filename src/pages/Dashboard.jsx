@@ -554,47 +554,51 @@ export default function Dashboard() {
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
             <div className="xl:col-span-9">
-              {visibleCrossings.length === 0 ? (
-                <Card className="border-dashed">
-                  <CardContent className="p-8 text-center text-sm text-slate-500">
-                    {search
-                      ? (language === 'en'
-                        ? `No crossings match "${search}". Try a different name or clear the search.`
-                        : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
-                      : offlineCrossings.length > 0
+              {sortedCrossings.length > 0 && (
+                <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+                  <p className="text-xs text-slate-600 dark:text-slate-300">
+                    {language === 'en'
+                      ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
+                      : `Mostrando ${cardCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
+                    {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
+                    {search && ` · "${search}"`}
+                  </p>
+                  {offlineCrossings.length > 0 && (
+                    <button
+                      aria-expanded={showWithoutCurrentWaits}
+                      aria-controls="crossing-results"
+                      onClick={() => setShowWithoutCurrentWaits((value) => !value)}
+                      className="self-start min-h-11 py-2 text-left text-xs text-slate-600 underline decoration-dotted hover:text-slate-900 dark:text-slate-300 dark:hover:text-white sm:self-auto sm:text-right"
+                    >
+                      {showWithoutCurrentWaits
                         ? (language === 'en'
-                          ? 'No crossings currently have published wait times in this region.'
-                          : 'Ningún cruce tiene tiempos publicados en este momento en esta región.')
+                          ? `Hide ${offlineCrossings.length} without current waits`
+                          : `Ocultar ${offlineCrossings.length} sin tiempo actual`)
+                        : (language === 'en'
+                          ? `Show ${offlineCrossings.length} without current waits`
+                          : `Mostrar ${offlineCrossings.length} sin tiempo actual`)}
+                    </button>
+                  )}
+                </div>
+              )}
+              {visibleCrossings.length === 0 ? (
+                <Card id="crossing-results" className="border-dashed">
+                  <CardContent className="p-8 text-center text-sm text-slate-500">
+                    {offlineCrossings.length > 0
+                      ? (language === 'en'
+                        ? 'Matching crossings have no current published wait times. Show them to open their reports.'
+                        : 'Los cruces encontrados no tienen tiempos actuales publicados. Muéstralos para abrir sus reportes.')
+                      : search
+                        ? (language === 'en'
+                          ? `No crossings match "${search}". Try a different name or clear the search.`
+                          : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
                         : (language === 'en'
                           ? 'No crossings in this region right now.'
                           : 'No hay cruces en esta región ahora.')}
                   </CardContent>
                 </Card>
               ) : (
-                <>
-                  <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-                    <p className="text-xs text-slate-600 dark:text-slate-300">
-                      {language === 'en'
-                        ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
-                        : `Mostrando ${cardCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
-                      {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
-                      {search && ` · "${search}"`}
-                    </p>
-                    {offlineCrossings.length > 0 && (
-                      <button
-                        onClick={() => setShowWithoutCurrentWaits((value) => !value)}
-                        className="self-start min-h-11 py-2 text-left text-xs text-slate-600 underline decoration-dotted hover:text-slate-900 dark:text-slate-300 dark:hover:text-white sm:self-auto sm:text-right"
-                      >
-                        {showWithoutCurrentWaits
-                          ? (language === 'en'
-                            ? `Hide ${offlineCrossings.length} without current waits`
-                            : `Ocultar ${offlineCrossings.length} sin tiempo actual`)
-                          : (language === 'en'
-                            ? `Show ${offlineCrossings.length} without current waits`
-                            : `Mostrar ${offlineCrossings.length} sin tiempo actual`)}
-                      </button>
-                    )}
-                  </div>
+                <div id="crossing-results">
                   {(() => {
                     const favCrossings = cardCrossings.filter((c) => favoritesSet.has(c.port_number));
                     const restCrossings = cardCrossings.filter((c) => !favoritesSet.has(c.port_number));
@@ -701,7 +705,7 @@ export default function Dashboard() {
                         : `Ver los ${visibleCrossings.length} cruces`}
                     </button>
                   )}
-                </>
+                </div>
               )}
             </div>
 
