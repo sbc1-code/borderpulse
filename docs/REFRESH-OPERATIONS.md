@@ -1,5 +1,41 @@
 # Public data refresh
 
+## Zod validation candidate — 2026-10-24 UTC (local, unreleased)
+
+- Separate from PR #149; base main `3e803b6ef6e13f2e4ec213c1233821859f3d0cbe`.
+  Replace only Zod **3.25.76 → 4.6.7** and its declared range. Official npm
+  lists no stable 3.x release beyond 3.25.76. The
+  [reviewed advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5)
+  lists 4.6.6 as patched; the [maintainer fix](https://github.com/colinhacks/zod/pull/6652)
+  rejects oversized bounded collections before parsing their elements.
+  [4.6.7](https://github.com/colinhacks/zod/releases/tag/v4.6.7) is the next
+  published patch. This is an investigated major change, not a same-major fix.
+- Inspected application use is `src/lib/blog-schema.js`, consumed by the blog
+  index builder and both draft generators, including an LLM tool response.
+  No browser/API validation consumer was found. The installed Anthropic SDK
+  0.98.0 declares peer support for `^3.25.0 || ^4.0.0`; it resolves the same
+  new Zod version without changing the SDK or any other locked package.
+  The SDK module import was checked without making an API call or using a key.
+- Reviewed the [migration guide](https://zod.dev/v4/changelog), especially
+  defaults and error formatting. All 36 checked-in posts retain identical
+  normalized metadata. Defaults, explicit draft values, EN/ES, invalid-field
+  diagnostics and the existing six-tag boundary have focused regression tests.
+  On 10,000 invalid tags, the old version returned 10,001 issues; the candidate
+  returns only the size issue. The controlled case does not exhaust memory.
+- Clean baseline/candidate installs and builds pass. All 25 generated JS/CSS
+  assets are byte-identical; no visitor-payload increase or budget change.
+  Candidate audit removes the Zod finding, reports zero high/critical and
+  zero omit-dev entries, and passes the unchanged audit gate. The two existing
+  Typography/parser moderate entries remain; PR #149 is still separate.
+- Full local npm test passes: **138 unit tests and 416 browser navigations**,
+  including existing EN/ES mobile/desktop fixtures. Entry JS **61.81/62 KiB**
+  gzip and CSS **19.09/20 KiB**; budgets and audit policy are unchanged.
+- Unbounded collections are unchanged by the upstream fix. This review does
+  not establish zero resource-exhaustion risk or complete application security.
+  Before publication, require review of this major dependency change and fresh
+  final integration/CI. No push, merge, deployment, alert dismissal, exception,
+  credential, account/security-setting or paid-service change in this pass.
+
 ## Walk-or-drive inventory candidate — 2026-10-22 UTC (issue #59, unreleased)
 
 - Review base: `a10706b5eb5ae48468e32c5fc21c657d63bd8153`, rebased cleanly
