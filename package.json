@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "npm run test:ads && npm run test:writer && npm run test:refresh && npm run test:publish && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:metadata && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:ads && npm run test:writer && npm run test:refresh && npm run test:publish && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:css-parser && npm run test:metadata && npm run test:audit && npm run test:bundle && npm run test:routes",
     "test:metadata": "node --test scripts/test-faq-scope.mjs scripts/test-hreflang.mjs scripts/test-crossing-snapshot.mjs",
     "test:ads": "node --test scripts/test-ad-slot-diagnostics.mjs && node scripts/check-google-ads.mjs",
     "test:publish": "node --test scripts/test-publish-data.mjs scripts/test-public-crossings.mjs",
@@ -37,6 +37,7 @@
     "test:audit": "node scripts/check-audit.mjs",
     "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-local-comparison.mjs scripts/test-browser-state.mjs scripts/test-historical-pattern.mjs scripts/test-router-navigation.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs",
+    "test:css-parser": "node --test scripts/test-typography-parser.mjs",
     "test:writer": "node --test scripts/test-generated-writer.mjs",
     "test:refresh": "node --test scripts/test-data-refresh.mjs"
   },
@@ -113,5 +114,10 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^5.8.2",
     "vite": "^6.4.4"
+  },
+  "overrides": {
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "6.1.5"
+    }
   }
 }
