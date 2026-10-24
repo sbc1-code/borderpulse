@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-24T14:21:55.811Z",
-  "snapshot_at": "2026-10-24T14:07:43.377Z",
+  "generated_at": "2026-10-24T17:58:34.664Z",
+  "snapshot_at": "2026-10-24T17:52:47.127Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -21,23 +21,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 3,
-      "detected_at": "2026-10-24T05:33:14.404Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 9 PM — ~400% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 9 PM — ~400% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 21,
-        "peak_median": 120,
-        "overall_median": 30,
-        "samples": 15,
-        "ratio": 4
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
@@ -51,6 +34,23 @@
         "overall_median": 30,
         "samples": 17,
         "ratio": 4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 2.4285714285714284,
+      "detected_at": "2026-10-24T17:58:34.664Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 9 PM — ~343% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 9 PM — ~343% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 21,
+        "peak_median": 120,
+        "overall_median": 35,
+        "samples": 15,
+        "ratio": 3.4285714285714284
       }
     },
     {
@@ -282,6 +282,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.8571428571428572,
+      "detected_at": "2026-10-24T17:58:34.664Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 10 AM (median 5 min) — ~86% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 10 AM (mediana 5 min) — ~86% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 10,
+        "best_median": 5,
+        "overall_median": 35,
+        "samples": 17
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
@@ -296,24 +314,6 @@
         "best_median": 8,
         "overall_median": 55,
         "samples": 17
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-10-24T14:21:55.811Z",
-      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 7 AM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 7 AM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 7,
-        "best_median": 5,
-        "overall_median": 30,
-        "samples": 13
       }
     },
     {
