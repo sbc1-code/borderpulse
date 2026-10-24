@@ -1,5 +1,73 @@
 # Public data refresh
 
+## Combined validation security review — 2026-10-24 UTC (unreleased)
+
+- Isolated integration base main `f5d7a2f1dc4b6a8dbf9fe5da75838f0ec6a2c70a`.
+  Retains the original PR #149 commit `81e6069b` and Zod candidate
+  `27b4d1d3` as ancestors; neither source branch is rewritten. The only
+  integration conflict was adjacent test commands, resolved by keeping both.
+  Snapshot updates remain from current main. The dated standalone notes below
+  describe their earlier local passes, not a production receipt.
+- Every discovered frontmatter consumer now has CLI regression coverage in
+  temporary fixtures: the blog index builder, both anomaly templates and the
+  LLM drafter. Real SDK 0.98.0 runs against an intercepted fetch with a dummy
+  key and no inherited credentials. No external LLM request is made.
+  Mocked EN/ES tool responses preserve forced draft/human-review flags;
+  invalid fields and missing tool responses report failures without a draft.
+  Template failures preserve field diagnostics and continue to valid entries.
+  The index still excludes drafts and rejects unreviewed auto analysis.
+- The major-version review covers the SDK's declared `^3.25.0 || ^4.0.0`
+  peer range, actual request/response handling, defaults, URL/string/enum
+  validation, field diagnostics and generated-frontmatter serialization.
+  No production schema, generator or client implementation changes are needed.
+  Package/lock changes remain limited to Zod and the scoped parser backport.
+- Clean integrated install/build and full npm test pass: **148 unit tests and
+  416 browser navigations**, including EN/ES mobile/desktop regressions. All
+  25 JS/CSS assets and normalized metadata for 36 posts match the baseline.
+  Local entry **61.81/62 KiB** gzip; no budget change. Remote CI still required.
+- The upstream parser advisory-range discrepancy remains visible as two
+  moderate entries. No alert dismissal, accepted-advisory addition, threshold,
+  account/security setting or credential change. Unbounded collection parsing
+  is unchanged by the Zod fix; mocks do not validate real provider behavior.
+  Review and exact integrated CI are required before any later release.
+  This continuation permits a draft review PR, not merge or deployment.
+
+## Zod validation candidate — 2026-10-24 UTC (local, unreleased)
+
+- Separate from PR #149; base main `3e803b6ef6e13f2e4ec213c1233821859f3d0cbe`.
+  Replace only Zod **3.25.76 → 4.6.7** and its declared range. Official npm
+  lists no stable 3.x release beyond 3.25.76. The
+  [reviewed advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5)
+  lists 4.6.6 as patched; the [maintainer fix](https://github.com/colinhacks/zod/pull/6652)
+  rejects oversized bounded collections before parsing their elements.
+  [4.6.7](https://github.com/colinhacks/zod/releases/tag/v4.6.7) is the next
+  published patch. This is an investigated major change, not a same-major fix.
+- Inspected application use is `src/lib/blog-schema.js`, consumed by the blog
+  index builder and both draft generators, including an LLM tool response.
+  No browser/API validation consumer was found. The installed Anthropic SDK
+  0.98.0 declares peer support for `^3.25.0 || ^4.0.0`; it resolves the same
+  new Zod version without changing the SDK or any other locked package.
+  The SDK module import was checked without making an API call or using a key.
+- Reviewed the [migration guide](https://zod.dev/v4/changelog), especially
+  defaults and error formatting. All 36 checked-in posts retain identical
+  normalized metadata. Defaults, explicit draft values, EN/ES, invalid-field
+  diagnostics and the existing six-tag boundary have focused regression tests.
+  On 10,000 invalid tags, the old version returned 10,001 issues; the candidate
+  returns only the size issue. The controlled case does not exhaust memory.
+- Clean baseline/candidate installs and builds pass. All 25 generated JS/CSS
+  assets are byte-identical; no visitor-payload increase or budget change.
+  Candidate audit removes the Zod finding, reports zero high/critical and
+  zero omit-dev entries, and passes the unchanged audit gate. The two existing
+  Typography/parser moderate entries remain; PR #149 is still separate.
+- Full local npm test passes: **138 unit tests and 416 browser navigations**,
+  including existing EN/ES mobile/desktop fixtures. Entry JS **61.81/62 KiB**
+  gzip and CSS **19.09/20 KiB**; budgets and audit policy are unchanged.
+- Unbounded collections are unchanged by the upstream fix. This review does
+  not establish zero resource-exhaustion risk or complete application security.
+  Before publication, require review of this major dependency change and fresh
+  final integration/CI. No push, merge, deployment, alert dismissal, exception,
+  credential, account/security-setting or paid-service change in this pass.
+
 ## Walk-or-drive inventory candidate — 2026-10-22 UTC (issue #59, unreleased)
 
 - Review base: `a10706b5eb5ae48468e32c5fc21c657d63bd8153`, rebased cleanly
@@ -335,6 +403,41 @@ and this performance follow-up. Version 6.1.5 is the CSS parser, not Router.
   build/test/merge through the existing gates and verify the new deployment.
   An inverse-patch check against main passed with a temporary index; no rollback
   was executed. Avoid rolling the whole site back to an older data bundle.
+
+## Local Typography parser backport candidate — 2026-10-23 UTC
+
+This local candidate scopes an npm override to `@tailwindcss/typography` only:
+its parser changes from 6.0.10 to **6.1.5**. Typography stays at 0.5.19; no other
+package or dependency edge changes. npm hoists the replacement from the nested
+Typography directory to `node_modules/postcss-selector-parser`. This is a local
+review candidate, not a production publication receipt.
+
+The [maintainer advisory](https://github.com/postcss/postcss-selector-parser/security/advisories/GHSA-rj75-hqrm-r3gf)
+and [6.1.5 release](https://github.com/postcss/postcss-selector-parser/releases/tag/6.1.5)
+identify the security backport for the 6.x line. The separate
+[reviewed advisory range](https://github.com/advisories/GHSA-rj75-hqrm-r3gf)
+still says `<7.1.6`, so npm may keep reporting the two moderate package entries.
+Keep those findings visible: no advisory exception, audit threshold change,
+forced downgrade, or unrelated 7.x migration is part of this candidate.
+
+The inspected consumer is the CSS build plugin in `src/index.css`, parsing
+repository sources. No browser/API import or visitor-controlled selector
+parsing endpoint was found. That limited review does not establish zero risk
+for future consumers or other dependencies.
+
+`npm run test:css-parser` resolves the parser through Typography itself, checks
+the patched version and pseudo-element transformations, and parses a flat
+400KB class/id selector in a heap-limited worker with a five-second deadline.
+The old parser fails that bounded control; the backport completes it. The test
+stops only its own worker if parsing regresses, without leaving a blocked test
+process. It is also part of the full `npm test` gate.
+
+For review or a future parent upgrade, perform a clean `npm ci`, build and full
+test suite; compare generated CSS against the same source/data input before
+the override. Recheck the actual Typography resolution and advisory metadata.
+Remove this override only when the parent itself supplies a patched compatible
+parser, then repeat the output and route checks. Preserve the existing JS/CSS
+budgets and the dated historical review below.
 
 ## Bounded dependency review — 2026-10-22 UTC
 
