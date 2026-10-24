@@ -336,6 +336,41 @@ and this performance follow-up. Version 6.1.5 is the CSS parser, not Router.
   An inverse-patch check against main passed with a temporary index; no rollback
   was executed. Avoid rolling the whole site back to an older data bundle.
 
+## Local Typography parser backport candidate — 2026-10-23 UTC
+
+This local candidate scopes an npm override to `@tailwindcss/typography` only:
+its parser changes from 6.0.10 to **6.1.5**. Typography stays at 0.5.19; no other
+package or dependency edge changes. npm hoists the replacement from the nested
+Typography directory to `node_modules/postcss-selector-parser`. This is a local
+review candidate, not a production publication receipt.
+
+The [maintainer advisory](https://github.com/postcss/postcss-selector-parser/security/advisories/GHSA-rj75-hqrm-r3gf)
+and [6.1.5 release](https://github.com/postcss/postcss-selector-parser/releases/tag/6.1.5)
+identify the security backport for the 6.x line. The separate
+[reviewed advisory range](https://github.com/advisories/GHSA-rj75-hqrm-r3gf)
+still says `<7.1.6`, so npm may keep reporting the two moderate package entries.
+Keep those findings visible: no advisory exception, audit threshold change,
+forced downgrade, or unrelated 7.x migration is part of this candidate.
+
+The inspected consumer is the CSS build plugin in `src/index.css`, parsing
+repository sources. No browser/API import or visitor-controlled selector
+parsing endpoint was found. That limited review does not establish zero risk
+for future consumers or other dependencies.
+
+`npm run test:css-parser` resolves the parser through Typography itself, checks
+the patched version and pseudo-element transformations, and parses a flat
+400KB class/id selector in a heap-limited worker with a five-second deadline.
+The old parser fails that bounded control; the backport completes it. The test
+stops only its own worker if parsing regresses, without leaving a blocked test
+process. It is also part of the full `npm test` gate.
+
+For review or a future parent upgrade, perform a clean `npm ci`, build and full
+test suite; compare generated CSS against the same source/data input before
+the override. Recheck the actual Typography resolution and advisory metadata.
+Remove this override only when the parent itself supplies a patched compatible
+parser, then repeat the output and route checks. Preserve the existing JS/CSS
+budgets and the dated historical review below.
+
 ## Bounded dependency review — 2026-10-22 UTC
 
 Official npm audit reports **eight moderate package entries**, zero high or
