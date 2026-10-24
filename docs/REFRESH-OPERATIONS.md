@@ -1,5 +1,37 @@
 # Public data refresh
 
+## Combined validation security review — 2026-10-24 UTC (unreleased)
+
+- Isolated integration base main `f5d7a2f1dc4b6a8dbf9fe5da75838f0ec6a2c70a`.
+  Retains the original PR #149 commit `81e6069b` and Zod candidate
+  `27b4d1d3` as ancestors; neither source branch is rewritten. The only
+  integration conflict was adjacent test commands, resolved by keeping both.
+  Snapshot updates remain from current main. The dated standalone notes below
+  describe their earlier local passes, not a production receipt.
+- Every discovered frontmatter consumer now has CLI regression coverage in
+  temporary fixtures: the blog index builder, both anomaly templates and the
+  LLM drafter. Real SDK 0.98.0 runs against an intercepted fetch with a dummy
+  key and no inherited credentials. No external LLM request is made.
+  Mocked EN/ES tool responses preserve forced draft/human-review flags;
+  invalid fields and missing tool responses report failures without a draft.
+  Template failures preserve field diagnostics and continue to valid entries.
+  The index still excludes drafts and rejects unreviewed auto analysis.
+- The major-version review covers the SDK's declared `^3.25.0 || ^4.0.0`
+  peer range, actual request/response handling, defaults, URL/string/enum
+  validation, field diagnostics and generated-frontmatter serialization.
+  No production schema, generator or client implementation changes are needed.
+  Package/lock changes remain limited to Zod and the scoped parser backport.
+- Clean integrated install/build and full npm test pass: **148 unit tests and
+  416 browser navigations**, including EN/ES mobile/desktop regressions. All
+  25 JS/CSS assets and normalized metadata for 36 posts match the baseline.
+  Local entry **61.81/62 KiB** gzip; no budget change. Remote CI still required.
+- The upstream parser advisory-range discrepancy remains visible as two
+  moderate entries. No alert dismissal, accepted-advisory addition, threshold,
+  account/security setting or credential change. Unbounded collection parsing
+  is unchanged by the Zod fix; mocks do not validate real provider behavior.
+  Review and exact integrated CI are required before any later release.
+  This continuation permits a draft review PR, not merge or deployment.
+
 ## Zod validation candidate — 2026-10-24 UTC (local, unreleased)
 
 - Separate from PR #149; base main `3e803b6ef6e13f2e4ec213c1233821859f3d0cbe`.
