@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-25T14:10:42.997Z",
-  "snapshot_at": "2026-10-25T14:07:40.660Z",
+  "generated_at": "2026-10-25T18:15:17.817Z",
+  "snapshot_at": "2026-10-25T18:07:43.361Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -41,16 +41,16 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 2.4285714285714284,
-      "detected_at": "2026-10-24T23:00:39.700Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 9 PM — ~343% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 9 PM — ~343% de la mediana de 30 días. Planea alrededor.",
+      "severity": 2,
+      "detected_at": "2026-10-25T18:15:17.817Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 9 PM — ~300% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 9 PM — ~300% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 21,
         "peak_median": 120,
-        "overall_median": 35,
+        "overall_median": 40,
         "samples": 15,
-        "ratio": 3.4285714285714284
+        "ratio": 3
       }
     },
     {
@@ -353,6 +353,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.625,
+      "detected_at": "2026-10-25T18:15:17.817Z",
+      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 11 AM (median 15 min) — ~63% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 11 AM (mediana 15 min) — ~63% debajo de la base de 30 días de 40 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 11,
+        "best_median": 15,
+        "overall_median": 40,
+        "samples": 15
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -366,24 +384,6 @@
         "best_hour": 4,
         "best_median": 30,
         "overall_median": 75,
-        "samples": 12
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.5714285714285714,
-      "detected_at": "2026-10-25T09:04:28.457Z",
-      "summary_en": "Right now Calexico - East's lightest Sunday hour so far is 8 AM (median 15 min) — ~57% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - East es 8 AM (mediana 15 min) — ~57% debajo de la base de 30 días de 35 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 8,
-        "best_median": 15,
-        "overall_median": 35,
         "samples": 12
       }
     }
