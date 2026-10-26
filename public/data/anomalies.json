@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-26T17:11:14.110Z",
-  "snapshot_at": "2026-10-26T17:08:19.607Z",
+  "generated_at": "2026-10-26T22:27:47.574Z",
+  "snapshot_at": "2026-10-26T22:22:41.942Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -338,17 +338,17 @@
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
       "state": "CA",
-      "severity": 0.625,
-      "detected_at": "2026-10-26T10:51:03.329Z",
-      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 12 PM (median 15 min) — ~63% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 12 PM (mediana 15 min) — ~63% debajo de la base de 30 días de 40 min.",
+      "severity": 0.5,
+      "detected_at": "2026-10-26T22:27:47.574Z",
+      "summary_en": "Right now Calexico - East's lightest Monday hour so far is 12 AM (median 20 min) — ~50% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Calexico - East es 12 AM (mediana 20 min) — ~50% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 12,
-        "best_median": 15,
+        "best_hour": 0,
+        "best_median": 20,
         "overall_median": 40,
-        "samples": 16
+        "samples": 14
       }
     },
     {
@@ -388,24 +388,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.625,
-      "detected_at": "2026-10-25T21:32:50.311Z",
-      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 4 AM (median 30 min) — ~63% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 4 AM (mediana 30 min) — ~63% debajo de la base de 30 días de 80 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 30,
-        "overall_median": 80,
-        "samples": 12
-      }
-    }
-  ]
+  "trailing_24h": []
 }
