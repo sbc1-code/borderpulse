@@ -29,7 +29,7 @@ export function readAllHistory() {
         // sorting it would manufacture a sequence the recorder did not save.
         if (Number.isInteger(sample?.t) && sample.t > previous && sample.t <= now
           && Number.isFinite(sample.wait) && sample.wait >= 0) {
-          series.push(sample);
+          series.push({ t: sample.t, wait: sample.wait });
           previous = sample.t;
         }
       }

@@ -85,7 +85,7 @@ export class DataService {
         if (!res.ok) throw new Error(`HTTP ${res.status} for ${LIVE_DATA_PATH}`);
         return { doc: validateSnapshot(await res.json()), fromFallback: false };
       } catch (error) {
-        console.warn('[dataService] live CBP endpoint failed; using published snapshot', error);
+        console.warn('[dataService] CBP fallback', error);
         return { doc: validateSnapshot(await this.fetchJson(DATA_PATH)), fromFallback: true };
       }
     }
@@ -141,7 +141,7 @@ export class DataService {
             southbound_note: sb?.note || null,
           };
           this.notify(enriched);
-        }).catch(error => console.warn('[dataService] optional feed failed', error));
+        }).catch(error => console.warn('[dataService] optional feed', error));
       }
       return payload;
     } catch (err) {

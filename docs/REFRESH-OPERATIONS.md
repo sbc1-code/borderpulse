@@ -21,8 +21,14 @@
   synchronous, and invalid/future/expired/duplicate/older samples still fail
   closed. Remove redundant dashboard error wrapping; shared listener and
   storage boundaries continue to isolate failures. Official temporary Node
-  22/24 runtimes are now used for final size verification. Fresh final-head
-  CI and customer-path checks remain required before merge.
+  22/24 runtimes are now used for final size verification. A further independent
+  check found that an otherwise valid stored sample could retain unrelated
+  deeply nested fields and make later serialization throw. Keep only its
+  validated time/wait pair; the new regression and actual cached replay pass.
+  All 17 focused checks now pass on Node 22; its unchanged entry-size check
+  reports 61.98/62 KiB. Merge `a18bdd1` also preserves the newer data-only main
+  `29a4850d891c2908125845bc5272ed9fd3e4e0ee`. Fresh final-head CI and full
+  customer-path checks remain required before merge.
 - Ownership: the canonical checkout and the earlier October 20 worktree have
   unrelated changes. This continuation uses the isolated clone
   `task-6/borderpulse-candidate`, branch `fix/reliability-candidate-20261027`.

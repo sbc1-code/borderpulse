@@ -92,6 +92,18 @@ test('malformed stored data cannot break history consumers or introduce invalid 
   assert.equal(getHistory('250401').length, 2, 'a duplicate does not overwrite its recorded source');
 });
 
+test('stored samples retain only source time and wait before later writes', t => {
+  const { stored } = fixture(t);
+  const nested = '{"extra":'.repeat(10_000) + '0' + '}'.repeat(10_000);
+  stored.set(KEY, `{"250401":[{"t":${NOW - minute},"wait":0,"extra":${nested}}]}`);
+  assert.deepEqual(getHistory('250401'), [{ t: NOW - minute, wait: 0 }]);
+  assert.doesNotThrow(() => recordSnapshot([crossing(20)], 'northbound', iso(NOW)),
+    'unrelated nested storage fields cannot escape the cached subscriber replay');
+  assert.deepEqual(JSON.parse(stored.get(KEY)), {
+    '250401': [{ t: NOW - minute, wait: 0 }, { t: NOW, wait: 20 }],
+  });
+});
+
 test('directional samples remain separate and unavailable or closed waits are not zero', t => {
   fixture(t);
   const row = { ...crossing(10), southbound_wait_time: 30 };
