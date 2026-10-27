@@ -157,7 +157,7 @@ export default function Dashboard() {
       });
       if (data.success) {
         try {
-          recordSnapshot(data.crossings || [], 'northbound');
+          recordSnapshot(data.crossings || [], 'northbound', data.timestamp);
         } catch (e) {
           console.warn('[dashboard] snapshot error', e);
         }

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 const crossingPath = '/crossing/san-ysidro/';
 const enArticle = '/blog/san-ysidro-vs-otay-mesa/';
 const esArticle = '/blog/san-ysidro-vs-otay-cual-es-mas-rapida/';
-const keys = ['borderPulse_language', 'borderPulse_region', 'borderPulse_theme', 'borderPulse_geoConsent', 'borderPulse_waitHistory_v1'];
+const keys = ['borderPulse_language', 'borderPulse_region', 'borderPulse_theme', 'borderPulse_geoConsent', 'borderPulse_waitHistory_v1', 'borderPulse_waitHistory_v2'];
 
 // Run only against a local preview. Every data response is synthetic; the
 // caller blocks external providers and service workers before opening a page.

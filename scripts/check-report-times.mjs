@@ -7,7 +7,7 @@ const FEED_PATHS = ['/data/crossings.json', '/api/public/crossings'];
 const FIXTURE_HEADER = 'x-borderpulse-report-time-fixture';
 const STORAGE_KEYS = [
   'borderPulse_language', 'borderPulse_region', 'borderPulse_geoConsent',
-  'borderPulse_waitHistory_v1', 'borderPulse_theme',
+  'borderPulse_waitHistory_v1', 'borderPulse_waitHistory_v2', 'borderPulse_theme',
 ];
 const LANE_LABELS = {
   passenger_standard: { en: 'Standard', es: 'Estándar' },
