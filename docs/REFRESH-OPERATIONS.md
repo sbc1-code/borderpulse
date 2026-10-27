@@ -2,6 +2,27 @@
 
 ## Reliability continuation — 2026-10-27 UTC (local, unreleased)
 
+- Release continuation: the owner explicitly approved the scoped Zod 4
+  upgrade and freshness repairs on October 27, conditional on final review
+  and exact-commit checks. This does not authorize cancelling or approving
+  the obsolete Pages run. The existing Vercel publisher remains the release
+  path after a passing guarded merge; do not duplicate-dispatch it.
+- Existing PR #150 was fast-forwarded to public-metadata candidate
+  `cb414c5d63feb5d3fde68a8877bdcff6638bc188`. Initial private-email pushes
+  were rejected without changing the remote; metadata-only copies using the
+  verified GitHub noreply identity preserve identical tested file trees and
+  all original local branches. No email-privacy setting was changed.
+- Both exact-head CI jobs passed source tests and security audit, then failed
+  the unchanged size gate: the same entry compressed to 62.15 KiB on CI's
+  Node 22 versus 61.96 KiB on the earlier local Node 25. Keep the 62 KiB gate.
+  The follow-up moves directional history enumeration into the already lazy
+  Analytics view, reuses safe storage helpers and validates stored history
+  in one pass without sorting corrupted ordering. Snapshot writes remain
+  synchronous, and invalid/future/expired/duplicate/older samples still fail
+  closed. Remove redundant dashboard error wrapping; shared listener and
+  storage boundaries continue to isolate failures. Official temporary Node
+  22/24 runtimes are now used for final size verification. Fresh final-head
+  CI and customer-path checks remain required before merge.
 - Ownership: the canonical checkout and the earlier October 20 worktree have
   unrelated changes. This continuation uses the isolated clone
   `task-6/borderpulse-candidate`, branch `fix/reliability-candidate-20261027`.
@@ -74,9 +95,9 @@
   remain unrun.
 - No push, duplicate PR, merge to main, preview/production deployment,
   credential, service, account/access setting, audit exception or monitor.
-  The specific held release decision remains review and approval of the Zod
-  major upgrade and scoped parser change, plus these source repairs after
-  exact-head CI, before merging or invoking the existing production publisher.
+  The scoped release decision above supersedes the earlier hold; passing
+  final exact-head CI remains mandatory before merging or invoking the
+  existing production publisher.
   Fresh public manifest/history/FX readback and two subsequent scheduled runs
   must then establish publication recovery. No revenue result is measured.
 

@@ -156,11 +156,7 @@ export default function Dashboard() {
         fetchedAt: data.timestamp,
       });
       if (data.success) {
-        try {
-          recordSnapshot(data.crossings || [], 'northbound', data.timestamp);
-        } catch (e) {
-          console.warn('[dashboard] snapshot error', e);
-        }
+        recordSnapshot(data.crossings, 'northbound', data.timestamp);
       }
     };
     return subscribeToBorderData(applyData);

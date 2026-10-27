@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  recordSnapshot, getHistory, getHistoryForDirection, getPreviousWait, getAllHistory,
+  recordSnapshot, getHistory, getHistoryForDirection, getPreviousWait,
 } from '../src/components/utils/waitTimeHistory.js';
+import { getAllHistory } from '../src/components/utils/historyAnalytics.js';
 
 const KEY = 'borderPulse_waitHistory_v2';
 const LEGACY_KEY = 'borderPulse_waitHistory_v1';
@@ -80,10 +81,13 @@ test('malformed stored data cannot break history consumers or introduce invalid 
   }
   stored.set(KEY, JSON.stringify({ '250401': [
     null, { t: NOW + minute, wait: 99 }, { t: NOW - 8 * day, wait: 99 },
+    { t: NOW - 7 * day - 0.5, wait: 99 },
     { t: NOW, wait: -1 }, { t: 'invalid', wait: 99 }, { t: NOW, wait: '99' },
-    { t: NOW, wait: 20 }, { t: NOW - minute, wait: 0 }, { t: NOW, wait: 99 },
+    { t: NOW - 2 * minute, wait: 0 }, { t: NOW, wait: 20 },
+    { t: NOW - minute, wait: 99 }, { t: NOW, wait: 99 },
   ] }));
-  assert.deepEqual(getHistory('250401'), [{ t: NOW - minute, wait: 0 }, { t: NOW, wait: 20 }]);
+  assert.deepEqual(getHistory('250401'), [{ t: NOW - 2 * minute, wait: 0 }, { t: NOW, wait: 20 }],
+    'out-of-order stored entries are discarded rather than reordered into source history');
   recordSnapshot([crossing(30)], 'northbound', iso(NOW));
   assert.equal(getHistory('250401').length, 2, 'a duplicate does not overwrite its recorded source');
 });

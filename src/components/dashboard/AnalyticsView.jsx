@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { getAllHistory } from '@/components/utils/waitTimeHistory';
+import { getAllHistory } from '@/components/utils/historyAnalytics';
 import { getStorageKey } from '@/components/utils/crossingDirection';
 
 // Auto-derived volume proxy: sum of CBP-published lanes_open across all lane
