@@ -63,6 +63,9 @@ export class DataService {
   addListener(fn) { this.listeners.add(fn); }
   removeListener(fn) { this.listeners.delete(fn); }
   notify(payload) {
+    // Replay the latest outcome to new subscribers. Replacing the cached
+    // object also invalidates older requests' pending optional enrichment.
+    this.cache = payload;
     for (const fn of this.listeners) {
       try { fn(payload); } catch (e) { console.warn('listener failed', e); }
     }
@@ -82,7 +85,7 @@ export class DataService {
         if (!res.ok) throw new Error(`HTTP ${res.status} for ${LIVE_DATA_PATH}`);
         return { doc: validateSnapshot(await res.json()), fromFallback: false };
       } catch (error) {
-        console.warn('[dataService] live CBP endpoint failed; using published snapshot', error);
+        console.warn('[dataService] CBP fallback', error);
         return { doc: validateSnapshot(await this.fetchJson(DATA_PATH)), fromFallback: true };
       }
     }
@@ -123,7 +126,6 @@ export class DataService {
         southbound_note: sbDoc?.note || null,
         fromFallback,
       };
-      this.cache = payload;
       this.notify(payload);
       // Current waits do not depend on the optional feeds. Enrich the same
       // reading later, without overwriting a newer refresh or its timestamp.
@@ -138,9 +140,8 @@ export class DataService {
             southbound_timestamp: sb?.fetched_at || null,
             southbound_note: sb?.note || null,
           };
-          this.cache = enriched;
           this.notify(enriched);
-        }).catch(error => console.warn('[dataService] optional feed failed', error));
+        }).catch(error => console.warn('[dataService] optional feed', error));
       }
       return payload;
     } catch (err) {

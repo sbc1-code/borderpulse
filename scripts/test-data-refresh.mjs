@@ -133,6 +133,55 @@ test('an initial failure never invents a fresh timestamp', async () => {
   assert.deepEqual(data.crossings, []);
 });
 
+for (const interruptedBy of ['failed refresh', 'older fallback']) {
+  test(`delayed optional data cannot erase a ${interruptedBy}, including subscriber replay`, async t => {
+    t.mock.timers.enable({ apis: ['setInterval'] });
+    const service = new DataService();
+    let finishFx;
+    const fx = new Promise(resolve => { finishFx = resolve; });
+    const originalTime = '2026-09-28T01:00:00Z';
+    const doc = fetched_at => ({ fetched_at, crossings: [{ port_number: '250401', current_wait_time: 0 }] });
+    service.fetchCrossingsDoc = async () => ({ doc: doc(originalTime), fromFallback: false });
+    service.fetchJson = async path => path === '/data/exchange-rate.json' ? fx : null;
+    const received = [];
+    service.addListener(data => received.push(data));
+    await service.getBorderData();
+
+    service.fetchCrossingsDoc = interruptedBy === 'failed refresh'
+      ? async () => { throw new Error('interrupted waits refresh'); }
+      : async () => ({ doc: doc('2026-09-28T00:00:00Z'), fromFallback: true });
+    const retained = await service.getBorderData();
+    assert.equal(retained.success, false);
+    assert.equal(retained.fromFallback, true);
+    assert.equal(retained.timestamp, originalTime);
+    assert.equal(retained.crossings[0].current_wait_time, 0);
+    assert.equal(service.cache, retained);
+
+    finishFx({ rate: 18, fetched_at: originalTime });
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(received.length, 2, 'the old enrichment must not announce false recovery');
+    assert.equal(service.cache, retained);
+
+    const replayed = [];
+    const stop = subscribeToBorderData(data => replayed.push(data), {
+      service, page: new EventTarget(), connection: new EventTarget(),
+    });
+    assert.equal(replayed[0], retained, 'a new view replays the latest failure state');
+    await service.inFlight;
+    stop();
+    assert.equal(replayed.at(-1).success, false);
+
+    const recoveredTime = '2026-09-28T01:15:00Z';
+    service.fetchCrossingsDoc = async () => ({ doc: doc(recoveredTime), fromFallback: false });
+    const recovered = await service.getBorderData();
+    assert.equal(recovered.success, true);
+    assert.equal(recovered.fromFallback, false);
+    assert.equal(recovered.timestamp, recoveredTime);
+    assert.equal(service.cache.timestamp, recoveredTime);
+    assert.equal(service.cache.success, true);
+  });
+}
+
 test('live failure retains a newer browser reading, then accepts live recovery', async t => {
   const service = new DataService({ liveApi: true });
   let liveTime = '2026-09-29T01:00:00Z';
