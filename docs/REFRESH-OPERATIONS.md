@@ -1,5 +1,85 @@
 # Public data refresh
 
+## Reliability continuation — 2026-10-27 UTC (local, unreleased)
+
+- Ownership: the canonical checkout and the earlier October 20 worktree have
+  unrelated changes. This continuation uses the isolated clone
+  `task-6/borderpulse-candidate`, branch `fix/reliability-candidate-20261027`.
+  Merge `5abae6ad06c8ed1fd732be2da78dc02a1de9c536` preserves PR #150 head
+  `1a7433f8c9e1605d20e739d0973f058e064a440f` and collector main
+  `5f7693a74fb214708a9fd6c7e22c50a12b066d28`. The original branches and
+  dirty worktrees are unchanged. Source repair is
+  `07b114e6a1f9950926c92aec2511041af4cd5771`.
+- Why this is additional work: PR #150 patches validation dependencies; it
+  does not repair browser refresh state or browser-history timestamps. A
+  successful waits request, failed next request and late optional FX response
+  reproducibly emitted success again for the earlier reading. Cache each
+  notification's outcome so late enrichment cannot erase failure and a new
+  subscriber receives the actual last outcome. Valid recovery still works.
+- The dashboard also recorded the viewing clock for each successful refresh,
+  including an old static fallback. Record the supplied snapshot retrieval
+  time and reject repeated/older, missing, invalid, future or expired samples.
+  Zero remains a valid wait; missing and closed waits do not become zero.
+  Version 2 history deliberately starts without reusing version 1's
+  unverifiable viewing timestamps. The legacy raw value is retained unchanged.
+  Source retrieval time still does not establish an individual lane report's
+  date; existing raw CBP report labels and freshness thresholds are unchanged.
+- Public evidence at 02:46 UTC: `/api/public/crossings` returned HTTP 200,
+  42 crossings and `fetched_at=2026-10-27T02:46:39.503Z`. The publication
+  manifest still identifies `d214944c11d9b7da0935e4dde2d47b02f2c02e64` and
+  bundled CBP/history/FX retrievals from October 23 at approximately 17:22 UTC,
+  about 81.4 hours earlier. Collector success is therefore distinct from
+  bundled publication freshness. Vercel scheduled run `40346639406` failed
+  its unchanged audit (one high Zod and two moderate entries); upload was
+  skipped. At the later 02:59 UTC check, Pages run `40439591945` had been
+  cancelled without starting a job, successor `40440984634` was pending and
+  collector `40440913247` had succeeded. Main had advanced to data-only
+  `6ff010bc172e581a032a6ff5d771bff77888d976`; the local candidate retains
+  its explicitly tested earlier snapshot. No run was retried or cancelled here.
+- A further read-only check found Pages run `36763480106`, dispatched September
+  30 at source `9f6197138ffa7b6de4327ff518a12f423726c2f0`, still waiting at
+  `github-pages` with no steps. Its exact historical workflow and today's
+  workflow both use concurrency group `pages`. This supports a queue-blocker
+  diagnosis; GitHub does not expose a definitive pending-reason field here.
+  Pending-deployment readback reports no reviewer or timer and
+  `current_user_can_approve=false`; no in-progress run was reported. Do not
+  approve that obsolete source. Any separately authorized cancellation must
+  account for queued Pages publication being able to proceed afterward, and
+  retain environment/access policy and every release gate.
+- Clean locked install, normal and Vercel-mode builds, full `npm test` with
+  156 source/unit checks and 402 isolated headless browser navigations pass.
+  The initial addition exceeded the
+  62 KiB entry gate by 19 bytes; reusing the existing safe-storage writer and
+  consolidating cache notification state brought it to 61.96 KiB in the normal
+  build and 61.93 KiB in Vercel mode without a budget change. Current registry
+  audit reports zero findings and the
+  unchanged gate passes; separate synthetic high/unavailable reports both
+  correctly fail. This later registry result does not lift the dependency
+  review or publication hold. Audit, bundle and workflow policies are intact.
+- Local preview is `http://127.0.0.1:3426/`; shell readback verifies its
+  San Ysidro canonical, useful visible snapshot and 42-crossing input retrieved
+  at `2026-10-27T02:37:52.699Z`. It is a localhost artifact, not a hosted
+  preview or production release. Full route verification used only isolated
+  headless contexts after parent coordination; EN/ES desktop/mobile covers
+  retrieval aging, expiry, zero/missing/closed reports, interrupted refresh,
+  recovery, keyboard menus, Back/Forward, history, no-JavaScript reports and
+  metadata. Independent targeted browser checks also pass 25 flow groups:
+  EN/ES at 1440/390px plus denied-storage recovery, actual rendered zero/trend
+  states, source-dated history, preserved v1 data, repeated/enriched/older
+  snapshots, failed refresh followed by delayed FX, and keyboard/remount paths.
+  All 71 live endpoint requests were intercepted and no uncaught page errors
+  occurred. Eight final screenshots were captured and representative desktop/
+  mobile pixels inspected. Synthetic fixtures are local test evidence, not
+  measured crossing conditions. Native Safari, VoiceOver and physical devices
+  remain unrun.
+- No push, duplicate PR, merge to main, preview/production deployment,
+  credential, service, account/access setting, audit exception or monitor.
+  The specific held release decision remains review and approval of the Zod
+  major upgrade and scoped parser change, plus these source repairs after
+  exact-head CI, before merging or invoking the existing production publisher.
+  Fresh public manifest/history/FX readback and two subsequent scheduled runs
+  must then establish publication recovery. No revenue result is measured.
+
 ## Combined validation security review — 2026-10-24 UTC (unreleased)
 
 - Isolated integration base main `f5d7a2f1dc4b6a8dbf9fe5da75838f0ec6a2c70a`.

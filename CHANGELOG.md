@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-27 — Preserve refresh outcomes and source-dated browser history (local candidate)
+
+- Keep the last failed/older refresh outcome in the shared cache so late
+  optional FX data cannot announce false recovery or replay success to a new
+  subscriber. Preserve original waits, their timestamp and valid recovery.
+- Record browser history at snapshot retrieval time, deduplicate replayed or
+  older data and reject invalid samples. Keep legacy browser-clock history
+  unchanged in its old storage key; source-dated history starts separately.
+- Add delayed/interrupted/repeated-flow regressions and preserve both history
+  keys in existing browser-fixture cleanup. The source/data/bundle/security
+  verification and remaining release hold are in the refresh runbook.
+- Local preparation only; no production publication or revenue claim.
+
 ## 2026-10-22 — Verified pedestrian route exceptions (local candidate, issue #59)
 
 - Keep the existing Progreso International Bridge (230901) and Santa Teresa
