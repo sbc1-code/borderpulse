@@ -112,8 +112,8 @@ function svgForBestTime(crossing, aggregate) {
       Border Pulse<tspan dx="10" fill="${ACCENT}">●</tspan>
     </text>
 
-    <text x="80" y="170" font-size="22" font-weight="700" fill="${ACCENT}" letter-spacing="2">
-      BEST TIME TO CROSS
+    <text x="80" y="145" font-size="22" font-weight="700" fill="${ACCENT}" letter-spacing="2">
+      HISTORICAL WAIT PATTERN
     </text>
 
     <text font-size="68" font-weight="800" fill="${FG}" letter-spacing="-1.5">

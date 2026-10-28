@@ -38,8 +38,8 @@ function faqItems(crossing, aggregate) {
     const h = aggregate.overall_best_hour;
     const hourLabel = `${h % 12 || 12} ${h >= 12 ? 'PM' : 'AM'}`;
     items.push({
-      q: `What is the best time to cross at ${name}?`,
-      a: `Based on the last 30 days of CBP data, the lightest typical wait at ${name} is around ${hourLabel} (median ${aggregate.overall_best_median} min).`,
+      q: `What does the historical wait pattern show at ${name}?`,
+      a: `The last 30 days of standard-passenger CBP data show an overall historical low around ${hourLabel} at ${name} (median ${aggregate.overall_best_median} min). This full-day pattern includes hours already passed and is not a forecast.`,
     });
   }
   return items;
@@ -49,7 +49,7 @@ function renderCrossingHead(crossing, slug, aggregate) {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
   const title = crossingSearchTitle(crossing, 'en', cameraSourceFor(crossing.port_number)?.kind);
-  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
+  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and historical standard-passenger wait patterns.`;
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
@@ -310,8 +310,8 @@ function renderBestTimeHead(crossing, slug, aggregate) {
   const bestMedian = aggregate?.overall_best_median;
   const title = `Best Time to Cross ${crossing.name}: Hour-by-Hour CBP Data (2026) | Border Pulse`;
   const desc = bestHour != null && bestMedian != null
-    ? `Lightest typical hour to cross ${crossing.name}: ~${bestHour % 12 || 12} ${bestHour >= 12 ? 'PM' : 'AM'} (median ${bestMedian} min). Hour-by-hour from the last 30 days of CBP data.`
-    : `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`;
+    ? `Historical lightest hour across the weekly pattern at ${crossing.name}: ${bestHour % 12 || 12} ${bestHour >= 12 ? 'PM' : 'AM'} (median ${bestMedian} min). From 30 days of standard-passenger CBP data; not a forecast.`
+    : `Historical standard-passenger wait patterns at ${crossing.name} from 30 days of CBP data, by hour and weekday. Not a forecast.`;
   const canonical = `${BASE}/best-time/${slug}/`;
   // Per-best-time OG cards live under /og/best-time/<slug>.png.
   // Falls back to per-crossing card if the new generator hasn't run yet.
@@ -730,7 +730,7 @@ async function main() {
     };
     const indexHead = {
       title: 'Best time to cross every U.S.-Mexico border crossing | Border Pulse',
-      desc: `Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. ${crossings.length} crossings, hour by hour.`,
+      desc: `Historical lightest hour for each crossing’s local weekday, based on the last 30 days of standard-passenger CBP data. Not a forecast. ${crossings.length} crossings, hour by hour.`,
       canonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumb, itemList],
@@ -774,7 +774,7 @@ async function main() {
     if (!cA || !cB) continue;
     const pair = `${aSlug}-vs-${bSlug}`;
     const title = `${cA.name} vs ${cB.name}: Reported Northbound Waits | Border Pulse`;
-    const desc = `CBP-reported northbound standard-passenger waits, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. These figures do not include total trip time.`;
+    const desc = `CBP-reported northbound standard-passenger waits, historical lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. These figures do not include total trip time.`;
     const canonical = `${BASE}/compare/${pair}/`;
     const ogImage = `${BASE}/og-card.png`;
     const breadcrumb = {

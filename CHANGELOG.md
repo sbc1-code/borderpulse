@@ -1,6 +1,17 @@
 # CHANGELOG
 
-## 2026-10-27 — Preserve chosen lane across crossing journeys (review candidate)
+## 2026-10-27 — Historical hours, not remaining-today advice (review candidate)
+
+- Label lowest-hour summaries, chart highlights and shared annotations as
+  historical full-day patterns; explain that the hour may already have passed.
+- Put the current-report link beside the best-time result, including missing
+  historical data, and identify each index row’s port-local weekday.
+- Align EN/ES copy and static metadata/OG wording without changing source data,
+  selected hours, sample floors, operating-hour rules or prediction behavior.
+- Added elapsed-hour, local-day, sparse/unknown-hours and navigation regressions.
+  Preview/CI verification and a separate publication approval remain required.
+
+## 2026-10-27 — Preserve chosen lane across crossing journeys (released, PR #152)
 
 - Keep the selected Standard, Ready, SENTRI or pedestrian lane in comparison,
   crossing, camera and share URLs, including reload and browser Back/Forward.
@@ -9,9 +20,10 @@
   explicitly Standard and suppress Standard-only comparisons on other lanes.
 - Load the existing share dialog on request to remain within the unchanged
   entry budget, with loading/cancel and local failure/reload recovery states.
-- Add lane URL/unit and EN/ES browser regressions. Local production build,
-  non-browser checks and budget pass; browser suite needs CI because the cloud
-  sandbox cannot launch its task-owned Chromium. No production release yet.
+- Exact-head CI and the rebuilt production artifact passed all checks, including
+  402 browser navigations and lane coverage at 320/390/1440 px. Production merge
+  `75d80e1`, run `40609553503` and Vercel `dpl_9siJyd4tEthZtsfpz5WTxhDjWVbU`
+  were verified live in EN/ES. Automated data snapshots are preserved.
 
 ## 2026-10-27 — Preserve refresh outcomes and source-dated browser history (local candidate)
 

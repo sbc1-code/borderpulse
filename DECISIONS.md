@@ -486,3 +486,13 @@ lane update_time separately from fetched_at, and describe snapshot freshness
 as retrieval freshness rather than Live. Do not infer a report date, midnight
 rollover or DST occurrence from the feed export date. Existing snapshot stale
 thresholds and fallback timestamps remain unchanged.
+
+
+## 2026-10-27 · Historical lowest hours are not remaining-today advice
+
+A lowest median over the complete port-local weekday may identify a past hour.
+Keep that statistic and its existing sample/operating-hours filters, but label
+it historical, say that it may have passed, and offer current reports nearby.
+Do not imply a forecast or a best remaining departure time. All-week prerender
+aggregates keep their distinct scope; no browser-local weekday labels on the
+multi-port index. This copy/UX candidate awaits exact-head release approval.

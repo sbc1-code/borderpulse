@@ -115,8 +115,8 @@ export function BestTimeIndex() {
       : 'Mejor hora para cruzar cada cruce fronterizo EE.UU.-México | Border Pulse';
     const crossingCount = crossings.length;
     const description = language === 'en'
-      ? `Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data.${crossingCount ? ` ${crossingCount} crossings, hour by hour.` : ''}`
-      : `Hora típica más ligera para cada cruce fronterizo EE.UU.-México hoy, basado en los últimos 30 días de tiempos de espera de CBP.${crossingCount ? ` ${crossingCount} cruces, hora por hora.` : ''}`;
+      ? `Historical lightest hour for each crossing’s local weekday, based on the last 30 days of standard-passenger CBP data. Not a forecast.${crossingCount ? ` ${crossingCount} crossings, hour by hour.` : ''}`
+      : `Hora histórica más ligera para el día local de cada cruce, según 30 días de datos CBP de auto estándar. No es un pronóstico.${crossingCount ? ` ${crossingCount} cruces, hora por hora.` : ''}`;
     updatePageMeta({
       title,
       description,
@@ -128,10 +128,6 @@ export function BestTimeIndex() {
     return () => resetPageMeta();
   }, [language, crossings.length]);
 
-  // The heading is visitor-facing, while every recommendation below is still
-  // calculated in that port's local timezone.
-  const visitorToday = new Date().getDay();
-
   // Aggregate buckets are port-local; "today" must be evaluated per port.
   const rows = useMemo(() => {
     return crossings.map((c) => {
@@ -140,7 +136,7 @@ export function BestTimeIndex() {
       const { day: portToday } = nowInPortTz(c);
       const light = agg ? pickLightestHour(c, agg.by_hour, portToday) : null;
       const dayMed = agg ? dayMedianFor(agg.by_hour, portToday) : null;
-      return { crossing: c, slug, light, dayMedian: dayMed };
+      return { crossing: c, slug, light, day: portToday, dayMedian: dayMed };
     }).filter((r) => r.slug)
       .sort((a, b) => {
         // sort by lightest median asc, with no-data at the end
@@ -171,8 +167,8 @@ export function BestTimeIndex() {
       <header className="mb-5">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
           {language === 'en'
-            ? `Best time to cross every U.S.-Mexico border crossing today (${DAY_SHORT.en[visitorToday]})`
-            : `Mejor hora para cruzar cada cruce EE.UU.-México hoy (${DAY_SHORT.es[visitorToday]})`}
+            ? 'Best time to cross every U.S.-Mexico border crossing'
+            : 'Mejor hora para cruzar cada cruce EE.UU.-México'}
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'
@@ -188,8 +184,8 @@ export function BestTimeIndex() {
         <ul className="space-y-1 list-disc pl-5">
           <li>
             {language === 'en'
-              ? 'Lightest hour is the time of day on this day-of-week with the lowest median wait over the last 30 days at that crossing.'
-              : 'La hora más ligera es el momento del día (en este día de la semana) con la mediana de espera más baja sobre los últimos 30 días en ese cruce.'}
+              ? 'Historical lightest hour is the lowest median for each crossing’s local weekday over the last 30 days. It covers the full day, including hours already passed—not just the hours remaining today. It is not a forecast.'
+              : 'La hora histórica más ligera es la de menor mediana para el día local de cada cruce en los últimos 30 días. Incluye todo el día, incluso horas que ya pasaron, no solo las que quedan hoy. No es un pronóstico.'}
           </li>
           <li>
             {language === 'en' ? (
@@ -212,8 +208,8 @@ export function BestTimeIndex() {
           </li>
           <li>
             {language === 'en'
-              ? 'Click any crossing to see its full hour-by-hour heatmap and the live wait right now.'
-              : 'Haz clic en cualquier cruce para ver el heatmap completo hora por hora y la espera en vivo.'}
+              ? 'Open a crossing’s historical hour-by-hour pattern, then use its current-wait link to check the latest report.'
+              : 'Abre el patrón histórico hora por hora de un cruce y usa su enlace de espera actual para consultar el último reporte.'}
           </li>
         </ul>
       </div>
@@ -224,7 +220,7 @@ export function BestTimeIndex() {
             <tr>
               <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Crossing' : 'Cruce'}</th>
               <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'State' : 'Estado'}</th>
-              <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Lightest hour today' : 'Hora más ligera hoy'}</th>
+              <th className="text-left px-3 py-2 font-medium">{language === 'en' ? 'Historical lightest hour' : 'Hora histórica más ligera'}</th>
               <th className="text-right px-3 py-2 font-medium">{language === 'en' ? 'Median (min)' : 'Mediana (min)'}</th>
               <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">{language === 'en' ? 'Day avg' : 'Prom. día'}</th>
               <th className="px-3 py-2 font-medium">{language === 'en' ? 'Details' : 'Detalles'}</th>
@@ -238,7 +234,7 @@ export function BestTimeIndex() {
                 </td>
                 <td className="px-3 py-2 text-slate-600 dark:text-slate-400 text-xs">{r.crossing.state}</td>
                 <td className="px-3 py-2 text-slate-900 dark:text-slate-100 tabular-nums">
-                  {r.light ? formatHour12(r.light.hour, language) : '—'}
+                  {r.light ? `${formatHour12(r.light.hour, language)} · ${DAY_SHORT[language][r.day]}` : '—'}
                 </td>
                 <td className="px-3 py-2 text-right text-slate-900 dark:text-slate-100 tabular-nums">
                   {r.light?.median ?? '—'}
@@ -308,8 +304,8 @@ export default function BestTime() {
       ? `Best time to cross ${crossing.name} | Border Pulse`
       : `Mejor hora para cruzar ${crossing.name} | Border Pulse`;
     const description = language === 'en'
-      ? `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`
-      : `Hora típica más ligera para cruzar ${crossing.name} basado en los últimos 30 días de tiempos de espera de CBP, hora por hora, cada día de la semana.`;
+      ? `Historical standard-passenger wait patterns at ${crossing.name}, hour by hour and weekday, from the last 30 days of CBP data. Not a forecast.`
+      : `Patrones históricos de espera de auto estándar en ${crossing.name}, por hora y día, según 30 días de datos CBP. No es un pronóstico.`;
     const url = `https://borderpulse.com/best-time/${canonicalSlug}/`;
     updatePageMeta({
       title,
@@ -390,12 +386,12 @@ export default function BestTime() {
         </p>
       </header>
 
-      {/* Today's headline answer */}
-      <section className="mb-6 rounded-lg border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-900/20 p-4">
+      {/* Historical answer for the port-local weekday, not the remaining day. */}
+      <section data-testid="historical-hour-summary" className="mb-6 rounded-lg border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-900/20 p-4">
         <div className="flex items-center gap-2 mb-1">
           <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           <h2 className="text-sm font-semibold text-emerald-900 dark:text-emerald-200 uppercase tracking-wide">
-            {language === 'en' ? `Lightest hour today (${DAY_SHORT.en[today]})` : `Hora más ligera hoy (${DAY_SHORT.es[today]})`}
+            {language === 'en' ? `Historical lightest hour (${DAY_SHORT.en[today]})` : `Hora histórica más ligera (${DAY_SHORT.es[today]})`}
           </h2>
         </div>
         {todayLight ? (
@@ -412,16 +408,33 @@ export default function BestTime() {
         ) : (
           <p className="text-sm text-emerald-800 dark:text-emerald-200">
             {language === 'en'
-              ? `Not enough sampled data for ${DAY_LABELS.en[today]} yet. Try the live wait times instead.`
-              : `Aún no hay suficientes datos muestreados para ${DAY_LABELS.es[today]}. Consulta los tiempos en vivo.`}
+              ? `No eligible historical hour for ${DAY_LABELS.en[today]}: samples may be insufficient or operating hours unverified.`
+              : `Sin una hora histórica elegible para ${DAY_LABELS.es[today]}: puede faltar muestra suficiente u horario verificado.`}
           </p>
         )}
+        <p className="text-xs text-emerald-900 dark:text-emerald-100 mt-3" data-testid="historical-hour-caveat">
+          {language === 'en'
+            ? 'Full-day historical pattern in this crossing’s local time. Full-day patterns include hours already passed; this is not a recommendation for the hours remaining today or a forecast.'
+            : 'Patrón histórico de todo el día, en la hora local de este cruce. Los patrones de todo el día incluyen horas que ya pasaron; esto no es una recomendación para lo que queda de hoy ni un pronóstico.'}
+        </p>
+        <div className="mt-3">
+          <Link
+            to={`/crossing/${canonicalSlug}/`}
+            className="inline-flex items-center gap-2 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
+          >
+            <Clock className="w-4 h-4 text-emerald-600" />
+            {language === 'en'
+              ? `See current wait time at ${crossing.name}`
+              : `Ver tiempo de espera actual en ${crossing.name}`}
+            <ArrowRight className="w-4 h-4 ml-1" />
+          </Link>
+        </div>
       </section>
 
       {/* Today's hour-by-hour */}
       <section className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wide mb-3">
-          {language === 'en' ? `Hour by hour today (${DAY_LABELS.en[today]})` : `Hora por hora hoy (${DAY_LABELS.es[today]})`}
+          {language === 'en' ? `Historical waits by hour (${DAY_LABELS.en[today]})` : `Esperas históricas por hora (${DAY_LABELS.es[today]})`}
         </h2>
         <div className="rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 p-3 space-y-1.5">
           {todayHours.map((h) => (
@@ -458,7 +471,7 @@ export default function BestTime() {
       {/* Week summary */}
       <section className="mb-6">
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wide mb-3">
-          {language === 'en' ? 'Lightest hour by day of week' : 'Hora más ligera por día'}
+          {language === 'en' ? 'Historical lightest hour by weekday' : 'Hora histórica más ligera por día'}
         </h2>
         <div className="rounded-lg border border-slate-200 dark:border-gray-700 overflow-hidden">
           <table className="w-full text-sm">
@@ -495,20 +508,6 @@ export default function BestTime() {
         </div>
       </section>
 
-      {/* See current wait CTA */}
-      <section className="mb-6">
-        <Link
-          to={`/crossing/${canonicalSlug}/`}
-          className="inline-flex items-center gap-2 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
-        >
-          <Clock className="w-4 h-4 text-emerald-600" />
-          {language === 'en'
-            ? `See current wait time at ${crossing.name}`
-            : `Ver tiempo de espera actual en ${crossing.name}`}
-          <ArrowRight className="w-4 h-4 ml-1" />
-        </Link>
-      </section>
-
       {/* Nearby crossings */}
       {nearby.length > 0 && (
         <section className="mb-6">
@@ -541,7 +540,7 @@ export default function BestTime() {
         </a>
         {language === 'en'
           ? ' · Patterns derived from 30-day rolling standard-passenger sample.'
-          : ' · Patrones derivados de muestra rotativa de 30 días.'}
+          : ' · Patrones de auto estándar derivados de una muestra rotativa de 30 días.'}
       </footer>
     </div>
   );
