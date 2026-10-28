@@ -196,8 +196,8 @@ export default function BorderCrossingCard({
       ? (language === 'en' ? 'Dropping' : 'Bajando')
       : (language === 'en' ? 'Steady' : 'Estable');
 
-  // Lightest typical hour for today's day-of-week. Surfaces "best time today"
-  // as an inline pill so users see actionable guidance without clicking through
+  // Historical lightest hour for the port-local weekday, across the full day.
+  // The pill links to the historical pattern, not a remaining-today forecast
   // to /best-time. Northbound only — same reason as typicalDelta below.
   const bestTimeToday = useMemo(() => {
     if (isSouthbound || !isStandard) return null;
@@ -422,12 +422,12 @@ export default function BorderCrossingCard({
                   to={`/best-time/${cardSlug}/`}
                   className="inline-flex min-h-11 items-center gap-1 rounded-full border border-emerald-200 bg-white px-3 py-1 text-xs font-semibold text-emerald-800 transition-colors hover:bg-emerald-50 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-200 dark:hover:bg-emerald-900"
                   title={language === 'en'
-                    ? `Lightest typical hour today opens the full hour-by-hour pattern`
-                    : `Hora más ligera típica hoy abre el patrón hora por hora`}
+                    ? `Historical lowest median for the full local weekday; this hour may have passed. Opens the full pattern.`
+                    : `Menor mediana histórica del día local completo; esa hora puede haber pasado. Abre el patrón completo.`}
                 >
                   {language === 'en'
-                    ? `Best ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median}m)`
-                    : `Mejor ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median}m)`}
+                    ? `30-day pattern: ${formatHour12(bestTimeToday.hour, language)} (${bestTimeToday.median}m median)`
+                    : `Patrón de 30 días: ${formatHour12(bestTimeToday.hour, language)} (mediana ${bestTimeToday.median}m)`}
                 </Link>
               )}
             </div>

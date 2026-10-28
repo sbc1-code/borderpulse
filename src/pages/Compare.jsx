@@ -82,7 +82,7 @@ function CrossingPanel({ crossing, slug, aggregate, language }) {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <div className="mb-0.5 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                {language === 'en' ? 'Today’s lightest' : 'Hoy más ligero'}
+                {language === 'en' ? 'Historical lightest hour' : 'Hora histórica más ligera'}
               </div>
               <div className="text-sm font-medium text-slate-900 dark:text-white">
                 {lightest
@@ -193,8 +193,8 @@ export default function Compare() {
       ? `${crossingA.name} vs ${crossingB.name}: reported waits | Border Pulse`
       : `${crossingA.name} vs ${crossingB.name}: esperas reportadas | Border Pulse`;
     const desc = language === 'en'
-      ? `CBP-reported northbound standard-passenger waits, today's lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side.`
-      : `Esperas reportadas por CBP para autos en carril estándar hacia EE. UU., hora más ligera de hoy y patrones de 30 días en ${crossingA.name} y ${crossingB.name}.`;
+      ? `CBP-reported northbound standard-passenger waits, historical lightest hour, and 30-day patterns at ${crossingA.name} and ${crossingB.name} side by side.`
+      : `Esperas reportadas por CBP para autos en carril estándar hacia EE. UU., hora histórica más ligera y patrones de 30 días en ${crossingA.name} y ${crossingB.name}.`;
     const url = `https://borderpulse.com/compare/${aSlug}-vs-${bSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -418,8 +418,8 @@ export default function Compare() {
           </li>
           <li>
             {language === 'en'
-              ? `Today’s lightest is the lowest median hour for today’s day-of-week, from the last 30 days at each port.`
-              : `Hoy más ligero es la hora con mediana más baja para el día actual de la semana, en los últimos 30 días de cada garita.`}
+              ? `Historical lightest hour is the lowest median for the full local weekday, from the last 30 days at each port. It includes hours already passed, not just the hours remaining today, and is not a forecast. Check posted operating hours.`
+              : `La hora histórica más ligera es la de menor mediana del día local completo, según los últimos 30 días de cada garita. Incluye horas que ya pasaron, no solo las que quedan hoy, y no es un pronóstico. Revisa el horario publicado.`}
           </li>
           <li>
             {language === 'en'

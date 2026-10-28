@@ -107,10 +107,10 @@ function faqItems(crossing, aggregate, lang) {
     const best = pickLightestHour(crossing, aggregate.by_hour, today);
     if (best) {
       out.push({
-        q: lang === 'en' ? `What is the best time to cross at ${name} today?` : `¿Cuál es la mejor hora para cruzar en ${name} hoy?`,
+        q: lang === 'en' ? `What does the historical wait pattern show at ${name}?` : `¿Qué muestra el patrón histórico de espera en ${name}?`,
         a: lang === 'en'
-          ? `Based on the last 30 days of CBP data, the lightest typical wait at ${name} on ${DAY_LABELS.en[today]} is around ${formatHour12(best.hour, 'en')} (median ${best.median} min).`
-          : `Según los últimos 30 días de datos de CBP, la espera típica más ligera en ${name} los ${DAY_LABELS.es[today]} es alrededor de ${formatHour12(best.hour, 'es')} (mediana ${best.median} min).`,
+          ? `In the last 30 days of standard-passenger CBP data, the hour with the lowest median for the full local weekday (${DAY_LABELS.en[today]}) at ${name} is ${formatHour12(best.hour, 'en')} (median ${best.median} min). This hour may have passed; it is not a forecast.`
+          : `En los últimos 30 días de datos CBP de auto estándar, la hora con menor mediana del día local completo (${DAY_LABELS.es[today]}) en ${name} es ${formatHour12(best.hour, 'es')} (mediana ${best.median} min). Esa hora puede haber pasado; no es un pronóstico.`,
       });
     }
   }
@@ -589,19 +589,15 @@ export default function CrossingDetail() {
           </div>
           {bestForSelected && (
             <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-medium mb-2">
-              {isViewingToday
-                ? (language === 'en'
-                  ? `Best time to cross today: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
-                  : `Mejor hora para cruzar hoy: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)
-                : (language === 'en'
-                  ? `Lightest hour on ${DAY_LABELS.en[selectedDay]}: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
-                  : `Hora más ligera los ${DAY_LABELS.es[selectedDay]}: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)}
+              {language === 'en'
+                ? `Historical lightest hour (${DAY_LABELS.en[selectedDay]}): ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
+                : `Hora histórica más ligera (${DAY_LABELS.es[selectedDay]}): ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`}
             </p>
           )}
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? `Median standard-passenger wait by hour, last 30 days at ${crossing.name}.`
-              : `Mediana de espera de auto estándar por hora, últimos 30 días en ${crossing.name}.`}
+              ? `Median standard-passenger wait by hour, last 30 days at ${crossing.name}. Full local weekday, including hours already passed—not a forecast for the rest of today.`
+              : `Mediana de espera de auto estándar por hora, últimos 30 días en ${crossing.name}. Día local completo, incluidas horas que ya pasaron; no es un pronóstico para lo que queda de hoy.`}
           </p>
 
           <div

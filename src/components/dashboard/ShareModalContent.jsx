@@ -37,6 +37,7 @@ function buildStatusText(crossings, language, direction, portToSlug, aggregates,
     ? `🚦 Reported Border Waits ${directionLabel} · ${laneLabel(lane, language)} (data fetched ${time}):`
     : `🚦 Esperas Reportadas ${directionLabel} · ${laneLabel(lane, language)} (datos consultados ${time}):`;
   const isNorthbound = direction !== 'southbound';
+  let hasHistoricalHour = false;
   const lines = crossings
     .filter((c) => (direction === 'southbound' ? getWaitMinutes(c, direction) : availableLaneWait(c, lane)) != null)
     .slice(0, 17)
@@ -49,16 +50,20 @@ function buildStatusText(crossings, language, direction, portToSlug, aggregates,
       if (isNorthbound && lane === DEFAULT_LANE && slug && aggregates?.[slug]) {
         const best = lightestTodayFor(c, aggregates[slug]);
         if (best && best.hour != null) {
+          hasHistoricalHour = true;
           annotation = language === 'en'
-            ? ` (best ${formatHourCompact(best.hour)})`
-            : ` (mejor ${formatHourCompact(best.hour)})`;
+            ? ` (30-day pattern ${formatHourCompact(best.hour)})`
+            : ` (patrón de 30 días ${formatHourCompact(best.hour)})`;
         }
       }
       return `${c.name} ${wait}min${annotation}`;
     });
+  const historicalNote = !hasHistoricalHour ? '' : language === 'en'
+    ? 'Historical hours cover the full local weekday and may have passed; not a forecast.\n'
+    : 'Las horas históricas incluyen todo el día local y pueden haber pasado; no son un pronóstico.\n';
   const footer = language === 'en'
-    ? `📲 Check reports: https://borderpulse.com${withLane('/', lane)}`
-    : `📲 Consultar reportes: https://borderpulse.com${withLane('/', lane)}`;
+    ? `${historicalNote}📲 Check reports: https://borderpulse.com${withLane('/', lane)}`
+    : `${historicalNote}📲 Consultar reportes: https://borderpulse.com${withLane('/', lane)}`;
   return [header, '', ...lines, '', footer].join('\n');
 }
 

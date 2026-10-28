@@ -10,6 +10,7 @@ import { checkRouterNavigation } from './check-router-navigation.mjs';
 import { checkDashboardSummary } from './check-dashboard-summary.mjs';
 import { checkShareLoading } from './check-share-loading.mjs';
 import { checkLaneContext } from './check-lane-context.mjs';
+import { checkHistoricalHourLabels } from './check-historical-hour-labels.mjs';
 import { checkLocalCrossings } from './check-local-crossings.mjs';
 import { checkNoJsReports } from './check-nojs-reports.mjs';
 import { checkWalkDriveFreshness } from './check-walk-drive-freshness.mjs';
@@ -222,7 +223,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
           const headings = [...document.querySelectorAll('h1')].map((node) => node.textContent?.trim() || '');
           const body = document.body?.innerText || '';
           return headings.some((heading) =>
-            heading.startsWith('Best time to cross every U.S.-Mexico border crossing today'),
+            heading.startsWith('Best time to cross every U.S.-Mexico border crossing'),
           ) || body.includes('Something went wrong');
         }, null, { timeout: 5_000 });
       }
@@ -244,7 +245,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
         const types = schemaTypes(schemas);
         const itemList = schemas.find((schema) => schema?.['@type'] === 'ItemList');
         const routeHeading = rendered.headings.find((heading) =>
-          heading.startsWith('Best time to cross every U.S.-Mexico border crossing today'),
+          heading.startsWith('Best time to cross every U.S.-Mexico border crossing'),
         );
         if (!routeHeading) {
           throw new Error(`expected Best time heading; saw: ${rendered.headings.join(' | ') || '(none)'}`);
@@ -338,6 +339,8 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await checkLaneContext(browser, baseUrl, profile.viewport);
     if (profile.name === 'mobile') await checkLaneContext(browser, baseUrl, { width: 320, height: 720 });
     await checkShareLoading(browser, baseUrl, profile.viewport);
+    await checkHistoricalHourLabels(browser, baseUrl, profile.viewport);
+    if (profile.name === 'mobile') await checkHistoricalHourLabels(browser, baseUrl, { width: 320, height: 720 });
     await checkWalkDriveAvailability(page, context, baseUrl);
     await checkWalkDriveFreshness(context, baseUrl);
     await checkComparisonGuide(page, context, baseUrl);
