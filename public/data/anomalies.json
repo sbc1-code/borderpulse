@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-28T18:08:48.438Z",
-  "snapshot_at": "2026-10-28T18:07:46.090Z",
+  "generated_at": "2026-10-28T23:00:44.760Z",
+  "snapshot_at": "2026-10-28T22:52:46.697Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -250,16 +250,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9791666666666666,
-      "detected_at": "2026-10-28T11:08:58.099Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 12 AM (median 1 min) — ~98% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 12 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 48 min.",
+      "severity": 0.9787234042553191,
+      "detected_at": "2026-10-28T23:00:44.760Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Wednesday hour so far is 12 AM (median 1 min) — ~98% below the 30-day baseline of 47 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en El Paso - Paso Del Norte (PDN) es 12 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 47 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 0,
         "best_median": 1,
-        "overall_median": 48,
+        "overall_median": 47,
         "samples": 10
       }
     },
@@ -354,6 +354,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "el-paso-paso-del-norte-pdn",
+      "port_name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "severity": 0.8510638297872339,
+      "detected_at": "2026-10-28T23:00:44.760Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 87 min around 5 PM — ~185% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 87 min cerca de las 5 PM — ~185% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 17,
+        "peak_median": 87,
+        "overall_median": 47,
+        "samples": 17,
+        "ratio": 1.851063829787234
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
@@ -369,23 +386,6 @@
         "best_median": 10,
         "overall_median": 60,
         "samples": 10
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.8125,
-      "detected_at": "2026-10-28T04:53:33.963Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 87 min around 5 PM — ~181% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 87 min cerca de las 5 PM — ~181% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 17,
-        "peak_median": 87,
-        "overall_median": 48,
-        "samples": 17,
-        "ratio": 1.8125
       }
     },
     {
