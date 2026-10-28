@@ -336,6 +336,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await checkDashboardSummary(page, context, baseUrl);
     await checkLocalCrossings(page, context, baseUrl);
     await checkLaneContext(browser, baseUrl, profile.viewport);
+    if (profile.name === 'mobile') await checkLaneContext(browser, baseUrl, { width: 320, height: 720 });
     await checkShareLoading(browser, baseUrl, profile.viewport);
     await checkWalkDriveAvailability(page, context, baseUrl);
     await checkWalkDriveFreshness(context, baseUrl);

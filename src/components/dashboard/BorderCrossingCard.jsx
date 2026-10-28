@@ -354,7 +354,7 @@ export default function BorderCrossingCard({
               <div className="min-w-0">
                 <div className="text-xs font-semibold uppercase tracking-wide text-slate-700">
                   {!isSouthbound && <span className="block" data-testid="primary-lane">{laneLabel(selectedLane, language)}</span>}
-                  {waitMetaLabel}
+                  <span className="block">{waitMetaLabel}</span>
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
                   <span data-testid="primary-wait" className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>

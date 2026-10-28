@@ -107,7 +107,9 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await panel.getByText(lang === 'es' ? 'Solo compara SENTRI si cumples los requisitos de ese carril.' : 'Compare SENTRI only if you meet that lane’s requirements.', { exact: true }).waitFor();
       assert.ok(!(await panel.locator('[data-testid="local-comparison-summary"]').innerText()).includes('0 min'), 'ties cannot claim a shortest option');
       await lane.selectOption('pedestrian_standard');
-      assert.equal(await panel.getByText(lang === 'es' ? 'Sin reporte: Peatones' : 'No pedestrian report', { exact: true }).count(), 6);
+      const missingPedestrianReports = panel.getByText(lang === 'es' ? 'Sin reporte: Peatones' : 'No pedestrian report', { exact: true });
+      await missingPedestrianReports.first().waitFor();
+      assert.equal(await missingPedestrianReports.count(), 6);
       await page.evaluate(() => {
         const original = Storage.prototype.setItem;
         Storage.prototype.setItem = function(key, value) {
