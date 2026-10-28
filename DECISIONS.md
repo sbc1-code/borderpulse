@@ -1,5 +1,13 @@
 # DECISIONS
 
+## 2026-10-27 · A chosen lane is navigation context, not a historical data filter
+
+Use a validated URL lane key across local comparison, crossing and sharing.
+Missing lane reports never fall back to Standard or crossing-wide summary
+numbers. The existing aggregate and browser-history series remain Standard;
+label them and do not compare a SENTRI/Ready/pedestrian report with those series.
+Canonical SEO URLs remain the existing query-free crossing identity.
+
 ## 2026-10-22 · Verified capability and current lane reports answer different questions
 
 The existence of a pedestrian comparison page must survive a missing current

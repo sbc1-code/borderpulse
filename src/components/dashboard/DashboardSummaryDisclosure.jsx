@@ -25,6 +25,7 @@ export default function DashboardSummaryDisclosure(props) {
       <summary className="min-h-11 cursor-pointer text-sm font-medium text-slate-700 dark:text-slate-300">
         {es ? 'Ver resumen y mapa de esperas' : 'Show wait summary and border chart'}
       </summary>
+      <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">{es ? 'Resumen y datos históricos: auto estándar' : 'Summary and historical data: standard passenger lane'}</p>
       {Summary ? <Summary {...props} /> : state !== 'closed' && (
         <p role="status" className="py-3 text-sm">
           {state === 'failed'

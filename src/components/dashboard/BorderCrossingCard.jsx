@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DEFAULT_LANE, laneLabel, withLane } from '@/lib/laneContext';
+import { availableLaneWait } from '@/lib/crossingAvailability';
 import { camerasFor } from '@/lib/cameras';
 import { track } from '@/lib/analytics';
 import { FRESHNESS, freshnessOf, fetchLabel, reportTimeLabel } from '@/lib/trustState';
@@ -22,6 +24,7 @@ import LaneRow from '@/components/dashboard/LaneRow';
 import { isSparseCell } from '@/lib/aggregates';
 import {
   getStatusForDirection,
+  getStatusForWait,
   getWaitMinutes,
 } from '@/components/utils/crossingDirection';
 import {
@@ -117,6 +120,7 @@ export default function BorderCrossingCard({
   onToggleFavorite,
   slug,
   snapshotAt = null,
+  selectedLane = DEFAULT_LANE,
 }) {
   const [showLanes, setShowLanes] = useState(false);
   const [aggregate, setAggregate] = useState(null);
@@ -147,14 +151,15 @@ export default function BorderCrossingCard({
     };
   }, [cardSlug]);
 
-  const status = getStatusForDirection(crossing, selectedDirection);
+  const isSouthbound = selectedDirection === 'southbound';
+  const isStandard = selectedLane === DEFAULT_LANE;
+  const wait = isSouthbound ? getWaitMinutes(crossing, selectedDirection) : availableLaneWait(crossing, selectedLane);
+  const status = isSouthbound ? getStatusForDirection(crossing, selectedDirection) : getStatusForWait(wait);
   const s = STATUS_STYLES[status] || STATUS_STYLES.unknown;
-  const wait = getWaitMinutes(crossing, selectedDirection);
   const isHigh = typeof wait === 'number' && wait >= 45;
   // Retrieval freshness must not be confused with a lane's report time.
   // A timezone-less feed export timestamp is not a fallback fetch timestamp.
   const freshness = freshnessOf(snapshotAt);
-  const isSouthbound = selectedDirection === 'southbound';
   const portStatus = getPortStatus(crossing);
   const portStatusStyle = PORT_STATUS_STYLES[portStatus] || PORT_STATUS_STYLES.unknown;
   const sourceLabel = isSouthbound
@@ -195,7 +200,7 @@ export default function BorderCrossingCard({
   // as an inline pill so users see actionable guidance without clicking through
   // to /best-time. Northbound only — same reason as typicalDelta below.
   const bestTimeToday = useMemo(() => {
-    if (isSouthbound) return null;
+    if (isSouthbound || !isStandard) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || !byHour.length) return null;
     // Buckets are port-local; evaluate "today" in the port's timezone.
@@ -203,7 +208,7 @@ export default function BorderCrossingCard({
     const best = pickLightestHour(crossing, byHour, day);
     if (!best) return null;
     return { hour: best.hour, median: best.median };
-  }, [aggregate, isSouthbound, crossing]);
+  }, [aggregate, isSouthbound, isStandard, crossing]);
 
   // Suppress the pill when the current hour IS the lightest hour — pointing
   // a user to "leave at 8 AM" when it's currently 8 AM is noise. Within ±1
@@ -218,7 +223,7 @@ export default function BorderCrossingCard({
   // Only compute for northbound (CBP-backed) data; southbound waits are estimates
   // without a comparable aggregate in /data/aggregates.
   const typicalDelta = useMemo(() => {
-    if (isSouthbound) return null;
+    if (isSouthbound || !isStandard) return null;
     if (wait == null) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || byHour.length === 0) return null;
@@ -234,7 +239,7 @@ export default function BorderCrossingCard({
       return { delta: wait - aggregate.overall_median, median: aggregate.overall_median };
     }
     return null;
-  }, [aggregate, wait, isSouthbound, crossing]);
+  }, [aggregate, wait, isSouthbound, isStandard, crossing]);
 
   const lanes = crossing.lanes || {};
 
@@ -253,7 +258,7 @@ export default function BorderCrossingCard({
               <div className="flex items-center gap-1.5 mb-0.5">
                 <h2 className="min-w-0 text-base font-semibold text-slate-900 dark:text-slate-100 truncate" title={crossing.name}>
                   {cardSlug ? (
-                    <Link to={`/crossing/${cardSlug}/`} className="rounded-sm hover:underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
+                    <Link to={withLane(`/crossing/${cardSlug}/`, selectedLane)} className="rounded-sm hover:underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                       {crossing.name || crossing.port_name}
                     </Link>
                   ) : (
@@ -315,7 +320,7 @@ export default function BorderCrossingCard({
                 <DropdownMenuContent align="end" className="w-44">
                   {cardSlug ? (
                     <DropdownMenuItem asChild>
-                      <Link to={`/crossing/${cardSlug}/`} className="cursor-pointer" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
+                      <Link to={withLane(`/crossing/${cardSlug}/`, selectedLane)} className="cursor-pointer" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                         {language === 'en' ? 'View trends' : 'Ver tendencias'}
                       </Link>
                     </DropdownMenuItem>
@@ -348,7 +353,8 @@ export default function BorderCrossingCard({
             <div className="flex items-end justify-between gap-3">
               <div className="min-w-0">
                 <div className="text-xs font-semibold uppercase tracking-wide text-slate-700">
-                  {waitMetaLabel}
+                  {!isSouthbound && <span className="block" data-testid="primary-lane">{laneLabel(selectedLane, language)}</span>}
+                  <span className="block">{waitMetaLabel}</span>
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
                   <span data-testid="primary-wait" className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>
@@ -367,7 +373,7 @@ export default function BorderCrossingCard({
                 <Badge variant="outline" className={`text-xs font-semibold whitespace-nowrap py-0.5 ${s.badge}`}>
                   {s.label[language] || s.label.en}
                 </Badge>
-                {wait != null && (
+                {wait != null && (isSouthbound || isStandard) && (
                   <span className={`inline-flex items-center gap-1 text-xs font-medium ${trendColor}`}>
                     <TrendIcon className="w-3 h-3" />
                     {trendLabel}
@@ -377,7 +383,7 @@ export default function BorderCrossingCard({
             </div>
             {!isSouthbound && wait != null && (
               <p className="mt-2 text-xs text-slate-600 break-words" data-testid="cbp-report-time">
-                {reportTimeLabel(lanes.passenger_standard?.update_time, language)}
+                {reportTimeLabel(lanes[selectedLane]?.update_time, language)}
               </p>
             )}
             <div className={`mt-2.5 h-2 overflow-hidden rounded-full ${s.rail}`}>
@@ -439,7 +445,7 @@ export default function BorderCrossingCard({
           )}
 
           {cardSlug && camerasFor(crossing.port_number).length > 0 && (
-            <Link to={`/crossing/${cardSlug}/#cameras`} className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-emerald-700 underline dark:text-emerald-400">
+            <Link to={withLane(`/crossing/${cardSlug}/#cameras`, selectedLane)} className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-emerald-700 underline dark:text-emerald-400">
               {language === 'es' ? 'Ver cámaras' : 'View cameras'}
             </Link>
           )}

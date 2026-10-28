@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-27 — Preserve chosen lane across crossing journeys (review candidate)
+
+- Keep the selected Standard, Ready, SENTRI or pedestrian lane in comparison,
+  crossing, camera and share URLs, including reload and browser Back/Forward.
+- Label the primary wait and its source report clock for that lane; missing,
+  pending or closed reports do not substitute Standard. Keep aggregate history
+  explicitly Standard and suppress Standard-only comparisons on other lanes.
+- Load the existing share dialog on request to remain within the unchanged
+  entry budget, with loading/cancel and local failure/reload recovery states.
+- Add lane URL/unit and EN/ES browser regressions. Local production build,
+  non-browser checks and budget pass; browser suite needs CI because the cloud
+  sandbox cannot launch its task-owned Chromium. No production release yet.
+
 ## 2026-10-27 — Preserve refresh outcomes and source-dated browser history (local candidate)
 
 - Keep the last failed/older refresh outcome in the shared cache so late

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withLane } from '@/lib/laneContext';
 import { track } from '@/lib/analytics';
 
 const POPULAR_PORTS = [
@@ -17,7 +18,7 @@ const POPULAR_PORTS = [
   '230501', // Hidalgo/Pharr - Hidalgo
 ];
 
-export default function PopularCrossings({ crossings, language = 'en' }) {
+export default function PopularCrossings({ crossings, language = 'en', lane }) {
   if (!crossings || !crossings.length) return null;
   const byPort = new Map(crossings.map((c) => [c.port_number, c]));
   const items = POPULAR_PORTS.map((p) => byPort.get(p)).filter((c) => c && c.slug);
@@ -37,7 +38,7 @@ export default function PopularCrossings({ crossings, language = 'en' }) {
         {items.map((c) => (
           <li key={c.port_number} className="text-xs">
             <Link
-              to={`/crossing/${c.slug}/`}
+              to={withLane(`/crossing/${c.slug}/`, lane)}
               onClick={() => track('crossing-open', { slug: c.slug, source: 'popular' })}
               className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:underline"
             >

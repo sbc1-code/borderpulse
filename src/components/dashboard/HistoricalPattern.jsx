@@ -46,7 +46,7 @@ export default function HistoricalPattern({ feed, slug, crossing, language }) {
           </p>
           {verified && <>
             <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">
-              {es ? 'Resumen histórico, no una espera en vivo ni un pronóstico. Consulta los últimos reportes de arriba.' : 'Historical summary, not a live wait or a forecast. Check the latest reports above.'}
+              {es ? 'Auto estándar. Resumen histórico, no una espera en vivo ni un pronóstico. Consulta los últimos reportes de arriba.' : 'Standard passenger lane. Historical summary, not a live wait or a forecast. Check the latest reports above.'}
             </p>
             <dl className="mt-2 text-xs text-slate-600 dark:text-slate-300">
               <div><dt className="inline">{es ? 'Datos consultados: ' : 'Source snapshot: '}</dt><dd className="inline"><time dateTime={pattern.snapshotAt}>{dateLabel(pattern.snapshotAt)}</time></dd></div>

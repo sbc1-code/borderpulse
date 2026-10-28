@@ -1,3 +1,4 @@
+import { LOCAL_LANES } from './laneContext.js';
 import { availableLaneWait } from './crossingAvailability.js';
 import { parseOperatingHours, nowInTz, getPortTimezone } from '../components/utils/crossingMeta.js';
 import { freshnessOf, FRESHNESS } from './trustState.js';
@@ -15,12 +16,8 @@ export const CORRIDORS = [
   { id: 'progreso', name: 'Progreso–Nuevo Progreso', ports: ['230901', '230902'] },
 ];
 
-export const LOCAL_LANES = [
-  { key: 'passenger_standard', en: 'Standard passenger', es: 'Auto estándar' },
-  { key: 'passenger_ready', en: 'Ready Lane', es: 'Ready Lane' },
-  { key: 'passenger_sentri', en: 'SENTRI', es: 'SENTRI' },
-  { key: 'pedestrian_standard', en: 'Pedestrian', es: 'Peatones' },
-];
+export { LOCAL_LANES } from './laneContext.js';
+
 
 export function corridorFor(id) {
   return CORRIDORS.find(c => c.id === id) || null;

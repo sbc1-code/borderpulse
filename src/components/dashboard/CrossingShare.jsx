@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Copy, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DEFAULT_LANE, laneLabel, withLane } from '@/lib/laneContext';
 import { track } from '@/lib/analytics';
 
-export default function CrossingShare({ name, slug, language = 'en' }) {
+export default function CrossingShare({ name, slug, language = 'en', lane = DEFAULT_LANE }) {
   const es = language === 'es';
   const [status, setStatus] = useState('');
-  const url = `https://borderpulse.com/crossing/${slug}/`;
+  const url = `https://borderpulse.com${withLane(`/crossing/${slug}/`, lane)}`;
   const text = es
-    ? `Consulta los tiempos de espera y horarios de ${name} en BorderPulse.`
-    : `Check ${name} wait times and crossing hours on BorderPulse.`;
+    ? `Consulta los tiempos de espera y horarios de ${name} (${laneLabel(lane, language)}) en BorderPulse.`
+    : `Check ${name} (${laneLabel(lane, language)}) wait times and crossing hours on BorderPulse.`;
 
   const copy = async () => {
     try {

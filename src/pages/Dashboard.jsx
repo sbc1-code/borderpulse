@@ -16,14 +16,16 @@ import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
 import DashboardSummaryDisclosure from '@/components/dashboard/DashboardSummaryDisclosure';
+import LaneSelector from '@/components/dashboard/LaneSelector';
 import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
 import DashboardCameras from '@/components/dashboard/DashboardCameras';
+import { normalizeLane, withLane } from '@/lib/laneContext';
+import { availableLaneWait } from '@/lib/crossingAvailability';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
 import { crossingSearchTerms } from '@/lib/crossingNames';
 import { dataService } from '@/components/utils/dataService';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
-import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
 import { buildSlugMap } from '@/lib/slugs';
 import { track } from '@/lib/analytics';
@@ -73,6 +75,8 @@ export default function Dashboard() {
   const language = usePersistentLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const didSyncArea = useRef(false);
+  const lane = normalizeLane(searchParams.get('lane'));
+  const areaParam = searchParams.get('area');
   const direction = 'northbound';
   const [region, setRegion] = useState(() => {
     if (corridorFor(searchParams.get('area'))) return 'ALL';
@@ -96,7 +100,7 @@ export default function Dashboard() {
     setCorridor(id);
     setSearch('');
     if (id) { setRegion('ALL'); setShowGeoPrompt(false); }
-  }, [searchParams]);
+  }, [areaParam]);
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -264,6 +268,13 @@ export default function Dashboard() {
     setSearchParams(next);
   };
 
+  const changeLane = (value) => {
+    const next = new URLSearchParams(searchParams);
+    next.set('lane', normalizeLane(value));
+    if (corridor) next.set('area', corridor);
+    setSearchParams(next);
+  };
+
   // Map port_number → slug for /crossing/{slug} links and /data/aggregates/{slug}.json fetches.
   const portToSlug = useMemo(() => {
     if (!state.crossings.length) return {};
@@ -286,22 +297,22 @@ export default function Dashboard() {
       const aFav = favoritesSet.has(a.port_number) ? 1 : 0;
       const bFav = favoritesSet.has(b.port_number) ? 1 : 0;
       if (aFav !== bFav) return bFav - aFav;
-      const waitA = getWaitMinutes(a, direction);
-      const waitB = getWaitMinutes(b, direction);
+      const waitA = availableLaneWait(a, lane);
+      const waitB = availableLaneWait(b, lane);
       if (waitA == null && waitB == null) return 0;
       if (waitA == null) return 1;
       if (waitB == null) return -1;
       return waitB - waitA;
     });
-  }, [filteredCrossings, direction, favoritesSet]);
+  }, [filteredCrossings, lane, favoritesSet]);
 
   const reportingCrossings = useMemo(
-    () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) != null),
-    [sortedCrossings, direction],
+    () => sortedCrossings.filter((c) => availableLaneWait(c, lane) != null),
+    [sortedCrossings, lane],
   );
   const offlineCrossings = useMemo(
-    () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) == null),
-    [sortedCrossings, direction],
+    () => sortedCrossings.filter((c) => availableLaneWait(c, lane) == null),
+    [sortedCrossings, lane],
   );
   const visibleCrossings = showWithoutCurrentWaits ? sortedCrossings : reportingCrossings;
 
@@ -430,6 +441,7 @@ export default function Dashboard() {
           : 'Tu navegador no pudo guardar este cambio. Permite el almacenamiento del sitio e inténtalo de nuevo.'}
       </p>}
 
+      {view === 'analytics' && <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">{language === 'es' ? 'Historial: auto estándar' : 'History: standard passenger lane'}</p>}
       {view === 'analytics' ? (
         <Suspense
           fallback={
@@ -530,10 +542,11 @@ export default function Dashboard() {
           </div>
           {!corridor && <nav aria-label={language === 'es' ? 'Comparar cruces cercanos' : 'Compare nearby crossings'} className="mx-auto mb-4 flex max-w-3xl flex-wrap gap-2">
             <p className="w-full text-xs text-slate-600 dark:text-slate-400">{language === 'es' ? 'Elige tu zona para comparar el mismo carril en cruces cercanos.' : 'Choose your area to compare the same lane at nearby crossings.'}</p>
-            {CORRIDORS.slice(0, 3).map(c => <Link key={c.id} to={`/?area=${c.id}`} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; e.preventDefault(); changeCorridor(c.id); }} className="inline-flex min-h-11 items-center rounded-lg border border-emerald-200 bg-white px-3 text-sm font-medium text-emerald-800 dark:border-emerald-800 dark:bg-gray-900 dark:text-emerald-300">{c.name}</Link>)}
+            {CORRIDORS.slice(0, 3).map(c => <Link key={c.id} to={withLane(`/?area=${c.id}`, lane)} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; e.preventDefault(); changeCorridor(c.id); }} className="inline-flex min-h-11 items-center rounded-lg border border-emerald-200 bg-white px-3 text-sm font-medium text-emerald-800 dark:border-emerald-800 dark:bg-gray-900 dark:text-emerald-300">{c.name}</Link>)}
           </nav>}
+          {!corridor && <div className="mb-4"><LaneSelector lane={lane} onChange={changeLane} language={language} /></div>}
           <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
-          <LocalCrossingComparison crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
+          <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
 
           <DashboardSummaryDisclosure
             crossings={filteredCrossings}
@@ -630,6 +643,7 @@ export default function Dashboard() {
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                     snapshotAt={state.fetchedAt}
+                                selectedLane={lane}
                                   />
                                 </div>
                               ))}
@@ -660,6 +674,7 @@ export default function Dashboard() {
                                 onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
                                 snapshotAt={state.fetchedAt}
+                                selectedLane={lane}
                               />
                             </div>
                           ))}
@@ -682,6 +697,7 @@ export default function Dashboard() {
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                     snapshotAt={state.fetchedAt}
+                                selectedLane={lane}
                                   />
                                 </div>
                               ))}
@@ -708,6 +724,7 @@ export default function Dashboard() {
             {/* Sidebar: USD/MXN + stats. xl: shown to the right; mobile: stacked below. */}
             <aside className="xl:col-span-3 space-y-3">
               <ExchangeRateWidget exchangeRate={state.exchangeRate} language={language} theme="light" compact />
+              <p className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen: auto estándar' : 'Summary: standard passenger lane'}</p>
               <StatsOverview
                 crossings={filteredCrossings}
                 selectedDirection={direction}
@@ -719,7 +736,7 @@ export default function Dashboard() {
             </aside>
           </div>
 
-          <PopularCrossings crossings={state.crossings} language={language} />
+          <PopularCrossings lane={lane} crossings={state.crossings} language={language} />
 
           <InstallPrompt language={language} />
           <DashboardAd label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
@@ -734,6 +751,7 @@ export default function Dashboard() {
       )}
 
       <ShareModal
+        lane={lane}
         open={shareOpen}
         onOpenChange={setShareOpen}
         crossings={sortedCrossings}
