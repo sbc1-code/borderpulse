@@ -21,6 +21,10 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] Preserve chosen lane through local comparison, crossing detail and sharing,
+  with labeled current waits and explicitly Standard history. Separate review
+  candidate; production publication awaits the exact-head verification gate.
+
 - [x] Publish the pair-comparison retrieval guard and Vite 6.4.4 patch (PR #136).
   Production commit `f55167b6`, Actions run `39561576557`, manifest and served
   EN/ES desktop/mobile app were verified October 21. Eight moderate audit

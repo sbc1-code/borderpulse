@@ -35,7 +35,7 @@
     "news:classify": "node scripts/build-curation-queue.mjs",
     "test:bundle": "node scripts/check-bundle-size.mjs",
     "test:audit": "node scripts/check-audit.mjs",
-    "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-local-comparison.mjs scripts/test-browser-state.mjs scripts/test-historical-pattern.mjs scripts/test-router-navigation.mjs scripts/test-wait-history.mjs",
+    "test:trust": "node --test scripts/test-trust-state.mjs scripts/test-lane-context.mjs scripts/test-local-comparison.mjs scripts/test-browser-state.mjs scripts/test-historical-pattern.mjs scripts/test-router-navigation.mjs scripts/test-wait-history.mjs",
     "test:mdx": "node --test scripts/test-mdx-frontmatter.mjs scripts/test-blog-schema.mjs scripts/test-blog-generation.mjs",
     "test:css-parser": "node --test scripts/test-typography-parser.mjs",
     "test:writer": "node --test scripts/test-generated-writer.mjs",

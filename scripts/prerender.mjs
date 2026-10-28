@@ -381,7 +381,7 @@ function renderRedirectPage(targetUrl) {
     <meta http-equiv="refresh" content="0; url=${esc(localTarget)}" />
     <link rel="canonical" href="${esc(targetUrl)}" />
     <title>Redirecting | Border Pulse</title>
-    <script>window.location.replace(${JSON.stringify(localTarget)});</script>
+    <script>window.location.replace(${JSON.stringify(localTarget)} + window.location.search + window.location.hash);</script>
   </head>
   <body>
     <p>Redirecting to <a href="${esc(targetUrl)}">${esc(targetUrl)}</a>.</p>

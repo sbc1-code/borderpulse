@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, useLocation, Link, Navigate } from 'react-router-dom';
+import { useParams, useLocation, useSearchParams, useNavigate, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import LaneSelector from '@/components/dashboard/LaneSelector';
+import { normalizeLane, withLane } from '@/lib/laneContext';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
@@ -140,7 +142,7 @@ function lookupSlot(byHour, dayIdx, hour) {
   return { median: slot.median, samples: slot.samples || 0 };
 }
 
-function CompareRow({ entry, language, slug }) {
+function CompareRow({ entry, language, slug, lane }) {
   const { crossing, distanceKm, currentWait, vsTypical } = entry;
 
   let deltaLine = null;
@@ -163,7 +165,7 @@ function CompareRow({ entry, language, slug }) {
 
   return (
     <Link
-      to={`/crossing/${slug}/`}
+      to={withLane(`/crossing/${slug}/`, lane)}
       className="block group"
     >
       <div className="flex items-center justify-between gap-3 p-3 rounded-md border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors">
@@ -211,6 +213,14 @@ function CompareRow({ entry, language, slug }) {
 
 export default function CrossingDetail() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const lane = normalizeLane(searchParams.get('lane'));
+  const changeLane = value => {
+    const next = new URLSearchParams(searchParams);
+    next.set('lane', normalizeLane(value));
+    navigate({ search: next.toString(), hash });
+  };
   const [state, setState] = useState({
     crossings: [],
     isLoading: true,
@@ -277,7 +287,7 @@ export default function CrossingDetail() {
   }, [state.crossings, slug]);
 
   const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
-  const { hash } = useLocation();
+  const { hash, search } = useLocation();
   const loadedPort = crossing?.port_number;
   useEffect(() => {
     if (hash !== '#cameras' || !loadedPort) return;
@@ -399,7 +409,7 @@ export default function CrossingDetail() {
   }
 
   if (canonicalSlug && slug !== canonicalSlug) {
-    return <Navigate to={`/crossing/${canonicalSlug}/`} replace />;
+    return <Navigate to={`/crossing/${canonicalSlug}/${search}${hash}`} replace />;
   }
 
   const hoursSummary = getHoursSummary(crossing, language);
@@ -441,7 +451,7 @@ export default function CrossingDetail() {
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3 flex items-center justify-between gap-2">
         <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
-          <Link to="/">
+          <Link to={withLane('/', lane)}>
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">
               {language === 'en' ? 'All crossings' : 'Todos los cruces'}
@@ -482,8 +492,10 @@ export default function CrossingDetail() {
 
       {isSantaTeresa && <SantaTeresaActions slug={canonicalSlug} language={language} />}
 
+      <div className="mb-3"><LaneSelector lane={lane} onChange={changeLane} language={language} /></div>
       <div className="mb-6">
         <BorderCrossingCard
+          selectedLane={lane}
           crossing={crossing}
           language={language}
           index={0}
@@ -516,7 +528,7 @@ export default function CrossingDetail() {
         />
       )}
 
-      <CrossingShare key={canonicalSlug} name={crossing.name} slug={canonicalSlug} language={language} />
+      <CrossingShare lane={lane} key={`${canonicalSlug}:${lane}:${language}`} name={crossing.name} slug={canonicalSlug} language={language} />
 
       <div id="cameras" className="scroll-mt-20">
         <CrossingCameras key={canonicalSlug} crossing={crossing} language={language} />
@@ -588,8 +600,8 @@ export default function CrossingDetail() {
           )}
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? `Median northbound wait by hour, last 30 days at ${crossing.name}.`
-              : `Mediana de espera hacia EE.UU. por hora, últimos 30 días en ${crossing.name}.`}
+              ? `Median standard-passenger wait by hour, last 30 days at ${crossing.name}.`
+              : `Mediana de espera de auto estándar por hora, últimos 30 días en ${crossing.name}.`}
           </p>
 
           <div
@@ -793,8 +805,8 @@ export default function CrossingDetail() {
           </h2>
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? 'Closest by straight-line distance. Northbound wait times.'
-              : 'Más cercanos en línea recta. Tiempos de espera hacia EE.UU.'}
+              ? 'Closest by straight-line distance. Standard-passenger wait times.'
+              : 'Más cercanos en línea recta. Esperas de auto estándar.'}
           </p>
           <div className="space-y-2">
             {lowerCompareEntries.map((entry) => {
@@ -806,6 +818,7 @@ export default function CrossingDetail() {
                   entry={entry}
                   language={language}
                   slug={s}
+                  lane={lane}
                 />
               );
             })}

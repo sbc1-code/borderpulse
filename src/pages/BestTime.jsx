@@ -176,8 +176,8 @@ export function BestTimeIndex() {
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'
-            ? 'Sorted by typical lightest-hour median wait. 30-day rolling sample from U.S. Customs and Border Protection.'
-            : 'Ordenado por mediana de espera en la hora más ligera. Muestra rotativa de 30 días de U.S. Customs and Border Protection.'}
+            ? 'Sorted by typical lightest-hour median wait. 30-day rolling standard-passenger sample from U.S. Customs and Border Protection.'
+            : 'Ordenado por mediana de espera en la hora más ligera. Muestra rotativa de auto estándar de 30 días de U.S. Customs and Border Protection.'}
         </p>
       </header>
 
@@ -385,8 +385,8 @@ export default function BestTime() {
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'
-            ? `Based on the last 30 days of U.S. Customs and Border Protection wait time data at ${crossing.name}. Times reflect typical northbound passenger waits by hour and day-of-week. Patterns shift around U.S. federal holidays.`
-            : `Basado en los últimos 30 días de datos de tiempos de espera de U.S. Customs and Border Protection en ${crossing.name}. Los tiempos reflejan esperas típicas hacia EE.UU. por hora y día de la semana. Los patrones cambian en días festivos federales de EE.UU.`}
+            ? `Based on the last 30 days of U.S. Customs and Border Protection wait time data at ${crossing.name}. Times reflect typical northbound standard-passenger waits by hour and day-of-week. Patterns shift around U.S. federal holidays.`
+            : `Basado en los últimos 30 días de datos de tiempos de espera de U.S. Customs and Border Protection en ${crossing.name}. Los tiempos reflejan esperas típicas de auto estándar hacia EE.UU. por hora y día de la semana. Los patrones cambian en días festivos federales de EE.UU.`}
         </p>
       </header>
 
@@ -540,7 +540,7 @@ export default function BestTime() {
           U.S. Customs and Border Protection
         </a>
         {language === 'en'
-          ? ' · Patterns derived from 30-day rolling sample.'
+          ? ' · Patterns derived from 30-day rolling standard-passenger sample.'
           : ' · Patrones derivados de muestra rotativa de 30 días.'}
       </footer>
     </div>
