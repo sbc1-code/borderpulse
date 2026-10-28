@@ -46,7 +46,7 @@ export async function checkHistoricalHourLabels(browser, baseUrl, viewport) {
     try {
       await page.goto(new URL('/best-time/andrade/', baseUrl).href);
       await summary().getByText(en ? '8 AM' : '8 a. m.', { exact: true }).waitFor();
-      assert.match(await summary().innerText(), en ? /Historical lightest hour \(Tue\)/ : /Hora histórica más ligera \(Mar\)/);
+      assert.match(await summary().innerText(), en ? /Historical lightest hour \(Tue\)/i : /Hora histórica más ligera \(Mar\)/i);
       assert.match(await summary().innerText(), en ? /include hours already passed.*not a recommendation/s : /incluyen horas que ya pasaron.*no es una recomendación/s);
       assert.match(await summary().innerText(), /10 min/);
       await fits();
