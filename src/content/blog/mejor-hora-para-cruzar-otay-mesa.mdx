@@ -3,7 +3,7 @@ title: "Mejor hora para cruzar Otay Mesa: hora por hora con 30 días de datos de
 description: "Mediana de espera en Otay Mesa por hora y día, según CBP. La ventana más ligera: sábado de 5 a 7 a. m. con 10 minutos. El pico del domingo en la noche llega a 210."
 slug: mejor-hora-para-cruzar-otay-mesa
 date: "2026-04-24"
-updated: "2026-07-27"
+updated: "2026-10-29"
 author: sebastian
 pillar: data-analysis
 lang: es
@@ -23,6 +23,9 @@ officialSources:
   - label: "CBP Programa SENTRI"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
+
+> **Análisis histórico.** Las cifras fijas corresponden a la muestra fechada del artículo. Las gráficas usan historial publicado por separado. Revisa sus fechas de origen y los reportes recientes por carril antes de viajar.
+
 
 Otay Mesa es el segundo cruce comercial más transitado de la frontera EE.UU.-México y el carril de overflow para San Ysidro. La mediana de espera hacia el norte sobre 30 días en Otay es de **90 minutos**, 30 minutos completos por debajo de San Ysidro. La ventana más barata de toda la semana es la madrugada del sábado: **las 5, 6 y 7 a. m. tienen mediana de 10 minutos**, y juntando los siete días la hora más ligera del reloj son las 6 a. m. con 60. La peor ventana es el **pico de regreso del domingo en la noche, donde las 7, 8 y 9 p. m. tienen mediana de 210 minutos**. El sábado en la noche, en cambio, está tranquilo: las 7 p. m. andan en 60.
 
@@ -67,4 +70,4 @@ Otay tiene carril SENTRI para miembros del Trusted Traveler Program. El carril e
 
 ## Cómo calculamos estos números
 
-El cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica de arriba siempre refleja la ventana actual. Usamos mediana, no promedio, porque un solo outlier de 200 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
+El cron de Border Pulse jala el tiempo de espera oficial de CBP para Otay Mesa y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica integrada muestra el historial publicado por separado; revisa sus fechas de origen y cobertura. Usamos mediana, no promedio, porque un solo outlier de 200 minutos puede arrastrar el promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.

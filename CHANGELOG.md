@@ -1,5 +1,52 @@
 # CHANGELOG
 
+## 2026-10-29 (Pacific) — Authorized UI/motion/content release preparation
+
+Updated by ChatGPT (Codex), directed by Sebastian's explicit “Push it to prod after QC and security checks.” Integrate only the reviewed presentation, motion and existing-information corrections with current main, retaining the already published daily-blog pipeline and data snapshots. Preserve both changelog histories; no publisher, schedule, credential, permission or schema-policy edits are part of this candidate. Final security/QC, protected-PR and production receipts belong in the release PR and private review record; this entry does not claim an unperformed deployment.
+
+## 2026-10-29 (Pacific) — Initial motion pass, local review
+
+Updated by ChatGPT (Codex), directed by Sebastian. Add short region-selection underline and camera/summary/lane disclosure entrances. Replace staggered, initially hidden report/stat/FX entrances with visible-by-default 140ms opacity feedback. Remove continuous freshness pulsing. Exact waits, CBP report clocks, retrieval age, stale/missing states, data refresh and ads/security behavior retain their existing rules. No new dependency, media, publisher/generator change or production release. Reduced motion removes the added animations; closed content is removed immediately, with no exit queue or animated height. The existing stale-age browser fixture now pauses its mock clock so elapsed real minutes cannot invalidate exact-text checks; expiry and recovery still advance explicitly. Detailed final checks and limits are recorded in the private review receipt; review preview remains http://127.0.0.1:3473/.
+
+## 2026-10-29 — UI and existing-information audit (local review candidate)
+
+- Isolated `codex/ui-polish-20261029` starts from independently fetched main
+  `38127d7a87753dec74345fdb003520816fb7bd98`. Original worktrees are preserved.
+  Group search/area/lane controls, collapse optional location help, simplify
+  surfaces, retain complete crossing names and emphasize existing reported waits.
+  Missing, closed, stale and lane-specific states retain their underlying rules.
+- Reconcile README’s obsolete Pages-only/no-backend/disabled-publisher claims
+  with the actual endpoint/fallback implementation and existing guarded runbook;
+  retain uncertainty about external variables and runtime until read back.
+- Correct EN/ES About and Methodology descriptions against the actual endpoint/
+  fallback/history implementation. Remove complete-coverage/prediction claims,
+  old sample-density assertions, unused BTS weighting and an incorrect median
+  example. Distinguish report clocks from retrieval dates in embeds and metadata.
+- Rewrite both CDC dog guides against the official overview, low-risk page and
+  August 27 FAQ read October 29: six-month travel history, universal-scanner
+  microchips, conditional receipt reuse and distinct high-risk pathways. Remove
+  invented booth procedures, ISO-only claims and inspection-time guarantees.
+- Archive both July 3 Sunday articles, preserve their original figures as a
+  publication record, identify the unrecorded exact observation bounds and remove
+  holiday forecasts/current-trip advice. Clarify separately published charts in
+  sixteen other historical articles without remeasuring or replacing observations.
+- Remove unsupported bus-delay multipliers and lane-speed guarantees. Rework both
+  Algodones guides around actual report/hour and official-source checks; remove
+  unsupported parking prices/location/walking times, a blanket FMM exemption and
+  generalized medication/dog-document instructions. Keep publication dates and
+  add substantive editorial update dates; no cosmetic date-only refresh.
+- Validation: build and full suite pass, including 402 browser navigations.
+  Final editorial rebuild, MDX/metadata checks and unchanged size gates pass
+  (61.36/62 KiB entry JS, 19.62/20 KiB CSS). One moderate registry advisory
+  remains below the unchanged high/critical gate; no separate lint script exists.
+  IAB desktop/mobile EN/ES, repeated controls, missing lanes and synthetic stale
+  embeds pass. The share fixture now waits for the loading UI before Escape;
+  its original dismissal/reopen assertions remain. Build and QA evidence are outside Git.
+  No dependency, workflow, refresh service, security, ads, payment, analytics or
+  production change. Existing publication and owner-review gates remain.
+  Separate daily-blog pipeline work is owned elsewhere; this candidate does not
+  authorize or implement that pipeline.
+
 ## 2026-10-29 — Daily evidence-led blog pilot (release candidate)
 
 - Add a Pacific-morning daily attempt using AI-assisted bilingual templates,

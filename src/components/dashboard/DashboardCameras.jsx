@@ -23,9 +23,9 @@ export default function DashboardCameras({ crossings, language, corridorId }) {
       <button type="button" aria-labelledby="dashboard-cameras-label" aria-describedby="dashboard-cameras-coverage" aria-expanded={open} aria-controls="dashboard-camera-panel" onClick={() => setOpen(value => !value)} className="flex min-h-14 w-full items-center gap-3 rounded-xl p-4 text-left text-emerald-800 hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-gray-800">
         <Camera className="h-5 w-5 shrink-0" aria-hidden="true" />
         <span className="flex-1"><span id="dashboard-cameras-label" className="block text-base font-semibold">{es ? 'Cámaras' : 'Camera feeds'}</span><span id="dashboard-cameras-coverage" className="block text-xs">{es ? 'Elige una zona · la cobertura varía' : 'Choose an area · coverage varies'}</span></span>
-        <ChevronDown className={`h-5 w-5 shrink-0 ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+        <ChevronDown className={`bp-disclosure-icon h-5 w-5 shrink-0 ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
       </button>
-      {open && <div id="dashboard-camera-panel" className="px-4 pb-1">
+      {open && <div id="dashboard-camera-panel" className="bp-panel-enter px-4 pb-1">
         <label className="mb-3 block text-sm font-medium text-slate-700 dark:text-slate-300">{es ? 'Zona de cámaras' : 'Camera area'}
           <select value={areaId} onChange={event => { setAreaId(event.target.value); setPort(''); }} className="ml-2 min-h-11 max-w-full rounded-lg border border-slate-300 bg-white px-2 text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white">
             {CORRIDORS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}

@@ -25,6 +25,9 @@ export async function checkWalkDriveFreshness(context, baseUrl) {
   const page = await context.newPage();
   const now = Date.now();
   await page.clock.install({ time: now });
+  // Advance only through explicit runFor calls. Otherwise a slow browser run
+  // can cross a real minute between the failed-refresh label assertions.
+  await page.clock.pauseAt(now + 1_000);
   try {
     for (const lang of ['en', 'es']) {
       await page.goto(baseUrl.href);
@@ -68,6 +71,7 @@ export async function checkWalkDriveFreshness(context, baseUrl) {
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
     }
   } finally {
+    await page.clock.resume();
     await page.close();
     await context.unroute(feedMatcher, feedHandler);
   }

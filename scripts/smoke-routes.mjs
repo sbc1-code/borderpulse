@@ -223,7 +223,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
           const headings = [...document.querySelectorAll('h1')].map((node) => node.textContent?.trim() || '');
           const body = document.body?.innerText || '';
           return headings.some((heading) =>
-            heading.startsWith('Best time to cross every U.S.-Mexico border crossing'),
+            heading.startsWith('Best time to cross: historical patterns by crossing'),
           ) || body.includes('Something went wrong');
         }, null, { timeout: 5_000 });
       }
@@ -245,7 +245,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
         const types = schemaTypes(schemas);
         const itemList = schemas.find((schema) => schema?.['@type'] === 'ItemList');
         const routeHeading = rendered.headings.find((heading) =>
-          heading.startsWith('Best time to cross every U.S.-Mexico border crossing'),
+          heading.startsWith('Best time to cross: historical patterns by crossing'),
         );
         if (!routeHeading) {
           throw new Error(`expected Best time heading; saw: ${rendered.headings.join(' | ') || '(none)'}`);

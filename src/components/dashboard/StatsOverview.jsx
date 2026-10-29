@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, MapPin, Activity, AlertTriangle } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { getPortStatus, hasOperationalAdvisory } from '@/components/utils/crossingMeta';
 
@@ -79,13 +78,10 @@ export default function StatsOverview({
       <div className={`flex flex-wrap items-center gap-3 sm:gap-4 px-3 py-2 rounded-lg border ${
         theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-slate-200'
       }`}>
-        {stats.map((stat, index) => (
-          <motion.div
+        {stats.map((stat) => (
+          <div
             key={stat.label}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.04 }}
-            className="flex items-center gap-2 min-w-0"
+            className="bp-result-enter flex items-center gap-2 min-w-0"
           >
             <div className={`p-1 rounded-md ${stat.bg} shrink-0`}>
               <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
@@ -100,7 +96,7 @@ export default function StatsOverview({
                 {stat.value}
               </p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     );
@@ -110,12 +106,10 @@ export default function StatsOverview({
   if (layout === 'sidebar') {
     return (
       <div className="grid grid-cols-2 gap-2">
-        {stats.map((stat, index) => (
-          <motion.div
+        {stats.map((stat) => (
+          <div
             key={stat.label}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.04 }}
+            className="bp-result-enter"
           >
             <Card className={`${
               theme === 'dark'
@@ -138,7 +132,7 @@ export default function StatsOverview({
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         ))}
       </div>
     );
@@ -147,12 +141,10 @@ export default function StatsOverview({
   // Default 4-column grid (original layout, unchanged).
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
-      {stats.map((stat, index) => (
-        <motion.div
+      {stats.map((stat) => (
+        <div
           key={stat.label}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.04 }}
+          className="bp-result-enter"
         >
           <Card className={`${
             theme === 'dark'
@@ -178,7 +170,7 @@ export default function StatsOverview({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
