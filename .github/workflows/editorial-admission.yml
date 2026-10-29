@@ -1,0 +1,82 @@
+name: Admit source-reviewed AI editorial
+
+on:
+  # Event-driven receiver only. The parent owns the single authoring schedule.
+  push:
+    branches: [main]
+    paths: ['drafts/editorial/inbox/*.json']
+  workflow_dispatch:
+    inputs:
+      bundle_path:
+        description: Existing drafts/editorial/inbox/YYYY-MM-DD-topic.json
+        type: string
+        required: true
+      dry_run:
+        description: Verify sources without writing content
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: repository-writer
+  cancel-in-progress: false
+jobs:
+  admit:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Resolve one immutable submission path
+        id: submission
+        env:
+          INPUT_PATH: ${{ inputs.bundle_path }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+          const paths=process.env.GITHUB_EVENT_NAME==='workflow_dispatch'?[process.env.INPUT_PATH]:
+            [...new Set((event.commits||[]).flatMap(c=>[...(c.added||[]),...(c.modified||[])]))];
+          const selected=paths.filter(p=>/^drafts\/editorial\/inbox\/\d{4}-\d{2}-\d{2}-[a-z0-9-]+\.json$/.test(p||''));
+          if(selected.length!==1)throw new Error('Expected exactly one editorial submission; do not batch or execute input paths');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'path='+selected[0]+'\n');
+          JS
+      - name: Verify sources and prepare read-only plan
+        env:
+          EDITORIAL_BUNDLE_PATH: ${{ steps.submission.outputs.path }}
+        run: node scripts/editorial-bundle.mjs plan "$EDITORIAL_BUNDLE_PATH" --out /tmp/editorial-plan.json
+      - name: Publish through the existing guarded writer
+        id: publish
+        if: vars.AI_EDITORIAL_INGEST_ENABLED == 'true' && (github.event_name == 'push' || !inputs.dry_run)
+        env:
+          AI_EDITORIAL_INGEST_ENABLED: ${{ vars.AI_EDITORIAL_INGEST_ENABLED }}
+          EDITORIAL_BUNDLE_PATH: ${{ steps.submission.outputs.path }}
+        run: node scripts/publish-editorial.mjs
+      - name: Dispatch existing production publisher
+        if: steps.publish.outputs.has_report == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish-vercel.yml --ref main
+      - name: Record result
+        if: always()
+        env:
+          ENABLED: ${{ vars.AI_EDITORIAL_INGEST_ENABLED }}
+          CHANGED: ${{ steps.publish.outputs.changed }}
+          COMMIT_SHA: ${{ steps.publish.outputs.commit_sha }}
+        run: |
+          {
+            echo '### AI editorial admission'
+            echo "Enabled: $ENABLED; source changed: $CHANGED; source commit: $COMMIT_SHA"
+            echo 'Source existence/excerpts are machine-checked. Semantic support is a recorded AI review, not a schema guarantee.'
+            echo 'A source commit is not public deployment proof. Check the existing Vercel publisher and public manifest.'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -34,6 +34,11 @@ async function main() {
     const { validateAutonomousPosts } = await import('./lib/daily-blog.mjs');
     validateAutonomousPosts(root);
   }
+  if (files.some(file => { const fm = matter(fs.readFileSync(path.join(blogDir, file), 'utf8')).data;
+    return fm.source === 'ai-editorial' || fm.editorialReceipt || fm.editorialFingerprint; })) {
+    const { validateEditorialPosts } = await import('./lib/editorial-bundle.mjs');
+    validateEditorialPosts(root);
+  }
   const errors = [];
 
   for (const file of files) {
@@ -64,7 +69,7 @@ async function main() {
     if (fm.draft) continue;
     // Legacy AI drafts require human editing. The authorized pilot has already
     // passed its stricter receipt, grammar and bilingual validation above.
-    if (fm.pillar === 'data-analysis' && fm.source && fm.source !== 'human' && !fm.humanEdited && fm.source !== 'daily-pilot') {
+    if (fm.pillar === 'data-analysis' && fm.source && fm.source !== 'human' && !fm.humanEdited && !['daily-pilot', 'ai-editorial'].includes(fm.source)) {
       errors.push(`[${file}] pillar "data-analysis" with source "${fm.source}" requires humanEdited: true before publish.`);
       continue;
     }
