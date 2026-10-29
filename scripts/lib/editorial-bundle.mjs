@@ -1,6 +1,6 @@
 // Transport contract for genuine assistant synthesis. This module does not call
 // a model and cannot prove semantic entailment. It verifies the evidence and
-// review record, then renders plain text through a closed MDX grammar.
+// review record, then passes article strings as data to a trusted text renderer.
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -156,8 +156,7 @@ export async function verifyBundle(input, options = {}) {
   }
   return {version:'borderpulse-editorial-receipt-v1', admittedAt:clock(), fingerprint, bundle:b, confirmations};
 }
-const escaped = text => String(text).replace(/\s+/g, ' ').replace(/[\\`*_<>{}\[\]]/g, m => '\\' + m);
-const linkUrl = value => canonicalUrl(value).replace(/[(){}<>`\\]/g, ch => encodeURIComponent(ch));
+const plainText = text => String(text).replace(/\s+/g, ' ');
 export function renderEditorial(receipt, lang, draft = false) {
   assert(['en','es'].includes(lang), 'Unsupported editorial language');
   const b = receipt.bundle, es = lang === 'es', slug = b.id + (es ? '-es' : '');
@@ -169,13 +168,20 @@ export function renderEditorial(receipt, lang, draft = false) {
     officialSources:b.sources.filter(s=>s.role==='primary').map(s=>({label:s.title,url:s.url})),draft,source:'ai-editorial',humanEdited:false,
     editorialReceipt:b.id+'.json',editorialFingerprint:receipt.fingerprint,topicKey:b.topicKey};
   const primary = b.sources.filter(s=>s.role==='primary'), map = new Map(b.claims.map(c=>[c.id,c]));
-  const paragraphs = b.articleClaimIds.map(k=>{const c=map.get(k);const label=c.type==='inference'?(es?'**Interpretación:** ':'**Interpretation:** '):'';
+  const paragraphs = b.articleClaimIds.map(k=>{const c=map.get(k);const label=c.type==='inference'?(es?'Interpretación:':'Interpretation:'):null;
     const refs=[...new Set(c.evidence.map(e=>e.sourceId))].map(id=>primary.find(s=>s.id===id));
-    return label+escaped(c.text[lang])+' '+refs.map(s=>`[${escaped(s.title)}](${linkUrl(s.url)})`).join(' ');});
-  const disclosure=es?'**Redactado y revisado por IA. Sin revisión humana individual.**':'**Written and reviewed by AI. No individual human review.**';
-  const dates=primary.map(s=>`- [${escaped(s.title)}](${linkUrl(s.url)}): ${es?'publicación':'published'} ${s.publishedAt || (s.publishedDate ? s.publishedDate + (es?' (hora no indicada)':' (time not stated)') : (es?'no indicada':'not stated'))}; ${es?'verificada':'verified'} ${receipt.admittedAt}.`).join('\n');
+    return {label,text:plainText(c.text[lang]),sources:refs.map(s=>({label:plainText(s.title),url:canonicalUrl(s.url)}))};});
+  const disclosure=es?'Redactado y revisado por IA. Sin revisión humana individual.':'Written and reviewed by AI. No individual human review.';
+  const dates=primary.map(s=>({label:plainText(s.title),url:canonicalUrl(s.url),published:s.publishedAt || (s.publishedDate ? s.publishedDate + (es?' (hora no indicada)':' (time not stated)') : (es?'no indicada':'not stated'))}));
   const limits=es?'Las fuentes y fechas citadas delimitan este artículo. La revisión de IA puede pasar por alto contexto o diferencias de traducción; consulta la fuente enlazada para ver el aviso completo y sus actualizaciones.':'The cited sources and dates bound this article. AI review can miss context or translation differences; read the linked source for the complete notice and later updates.';
-  return '---\n'+Object.entries(fm).map(([k,v])=>`${k}: ${JSON.stringify(v)}`).join('\n')+'\n---\n\n'+disclosure+'\n\n'+paragraphs.join('\n\n')+'\n\n## '+(es?'Fuentes y límites':'Sources and limits')+'\n\n'+dates+'\n\n'+limits+`\n\n[${es?'Registro de evidencia y revisión':'Evidence and review record'}](https://borderpulse.com/data/editorial-evidence/${b.id}.json).\n`;
+  fm.editorialArticle={version:'borderpulse-editorial-article-v1',disclosure,paragraphs,sourcesHeading:es?'Fuentes y límites':'Sources and limits',
+    dates,publishedLabel:es?'publicación':'published',verifiedLabel:es?'verificada':'verified',verifiedAt:receipt.admittedAt,limits,
+    evidence:{label:es?'Registro de evidencia y revisión':'Evidence and review record',url:`https://borderpulse.com/data/editorial-evidence/${b.id}.json`}};
+  // The frontmatter plugin turns JSON/YAML values into ESTree literals. No
+  // claim, source label, or URL is interpolated into the fixed MDX program.
+  return '---\n'+Object.entries(fm).map(([k,v])=>`${k}: ${JSON.stringify(v)}`).join('\n')+'\n---\n\n'
+    +"import EditorialArticle from '@/components/blog/EditorialArticle.js';\n\n"
+    +'<EditorialArticle article={frontmatter.editorialArticle} />\n';
 }
 export function validateEditorialPosts(root) {
   const dir=path.join(root,'src/content/blog'),pairs=new Map();
