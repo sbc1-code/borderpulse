@@ -8,7 +8,7 @@ export const officialSourceSchema = z.object({
   url: z.string().url(),
 });
 
-export const SOURCES = ['human', 'auto-a', 'auto-b', 'curated'];
+export const SOURCES = ['human', 'auto-a', 'auto-b', 'curated', 'daily-pilot'];
 
 export const frontmatterSchema = z.object({
   title: z.string().min(1).max(80),
@@ -27,5 +27,7 @@ export const frontmatterSchema = z.object({
   officialSources: z.array(officialSourceSchema).optional().default([]),
   draft: z.boolean().optional().default(false),
   source: z.enum(SOURCES).optional().default('human'),
+  evidenceReceipt: z.string().regex(/^[a-z0-9-]+\.json$/).optional(),
+  evidenceFingerprint: z.string().regex(/^[a-f0-9]{64}$/).optional(),
   humanEdited: z.boolean().optional().default(true),
 });

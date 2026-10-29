@@ -3,6 +3,12 @@
     "id": "sebastian",
     "name": "Sebastian Becerra",
     "url": "https://borderpulse.com/about",
-    "bio": "Builder of Border Pulse. Bilingual EN/ES. Grew up between El Paso, Juárez, and San Diego."
+    "bio": "Builder of Border Pulse. Bilingual EN/ES. Grew up between El Paso, Ju\u00e1rez, and San Diego."
+  },
+  "borderpulse-automated": {
+    "id": "borderpulse-automated",
+    "name": "BorderPulse Automated Reports",
+    "url": "https://borderpulse.com/about",
+    "bio": "Automated CBP data reports using AI-assisted templates. No individual human review."
   }
 }

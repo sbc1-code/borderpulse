@@ -246,3 +246,21 @@ test('the executable refuses local use before fetching or pushing', () => {
     encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, GITHUB_ACTIONS: 'false' },
   }), error => error.status === 1 && /disposable GitHub Actions runners only/.test(error.stderr));
 });
+
+test('daily optional outputs support a clean skip and exact-path publication without staging build artifacts', async t => {
+  const f = fixture(t), head = git(f.remote, 'rev-parse', 'main');
+  const options = { ...f.options, paths: [], optionalPaths: ['posts/day-en.mdx','posts/day-es.mdx','evidence/day.json'] };
+  const skipped = await publishGeneratedData({ ...options, generate() {} });
+  assert.equal(skipped.changed, false);
+  assert.equal(git(f.remote,'rev-parse','main'), head);
+  const published = await publishGeneratedData({ ...options, generate(worktree) {
+    put(worktree,'posts/day-en.mdx','Verified EN'); put(worktree,'posts/day-es.mdx','Verified ES');
+    put(worktree,'evidence/day.json','{}'); put(worktree,'other.mdx','Must remain untracked');
+  }});
+  assert.equal(published.changed, true);
+  assert.deepEqual(git(f.remote,'diff-tree','--no-commit-id','--name-only','-r','main').split('\n'),
+    ['evidence/day.json','posts/day-en.mdx','posts/day-es.mdx']);
+  const rerun = await publishGeneratedData({ ...options, generate() {} });
+  assert.equal(rerun.changed, false);
+  assert.equal(rerun.commitSha, published.commitSha);
+});

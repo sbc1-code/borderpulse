@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2026-10-29 — Daily evidence-led blog pilot (release candidate)
+
+- Add a Pacific-morning daily attempt using AI-assisted bilingual templates,
+  immutable CBP evidence receipts and a closed machine-validated report grammar.
+  No daily LLM calls or new credentials. Thin, stale, duplicate or ordinary
+  changes skip; no article quota and no false claim of individual human review.
+- Preserve legacy draft review, news curation, collector/release/security gates;
+  use the existing serial writer and Vercel publisher with recoverable dispatch.
+- Policy, schedule, operating limits, evidence and rollback are in
+  `docs/DAILY-BLOG-PILOT.md`. Initial real-data dry run skipped: no eligible
+  well-covered material change. Release/activation evidence is pending.
+
 ## 2026-10-27 — Historical hours, not remaining-today advice (review candidate)
 
 - Label lowest-hour summaries, chart highlights and shared annotations as
