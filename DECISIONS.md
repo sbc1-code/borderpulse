@@ -507,3 +507,14 @@ it historical, say that it may have passed, and offer current reports nearby.
 Do not imply a forecast or a best remaining departure time. All-week prerender
 aggregates keep their distinct scope; no browser-local weekday labels on the
 multi-port index. This copy/UX candidate awaits exact-head release approval.
+
+## 2026-10-29 · Separate generative editorial work from guarded publication
+
+PR #154 is a deterministic reporting foundation, not completion of the requested
+AI-driven daily editorial workflow. A cloud scheduled assistant may research,
+synthesize and review routine factual content, then submit one source bundle
+through the existing authenticated GitHub file connector. A reviewed receiver
+performs mechanical evidence/release checks; it does not pretend that a schema
+proves semantic entailment. No extra authoring schedule, model credential or
+public-repo export of local account authentication is added by the receiver.
+Activation waits for the actual cloud source/tool/connector dry run.

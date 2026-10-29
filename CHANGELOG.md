@@ -1468,3 +1468,15 @@ Big push day — UX/product sprint phase 1+2, embed widget, /api, /best-time,
 ## Earlier sessions
 
 Before this changelog existed. Use `git log` for archeology.
+
+## 2026-10-29 — AI editorial receiver (review candidate, disabled)
+
+- Add an evidence-bundle contract and event-driven GitHub-file receiver for
+  genuine cloud-assistant EN/ES synthesis. No model call or authoring schedule
+  is created; ingestion stays off pending a verified cloud/connector dry run.
+- Re-fetch official primary sources, trace claim excerpts/numbers, retain AI
+  evidence-review provenance, escape narrative as literal MDX, enforce paired
+  receipts and coordinate one automated report per UTC day with the data pilot.
+- Schema/substring checks do not prove semantic accuracy; source/risk/language
+  review remains an explicit AI responsibility. Runtime/access limits and the
+  exact supported connector interface are in `docs/AI-EDITORIAL-INTERFACE.md`.

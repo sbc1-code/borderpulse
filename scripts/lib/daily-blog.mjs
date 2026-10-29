@@ -102,7 +102,7 @@ export function summarize(observations, publishedAt) {
 export function selectReport(inputs, existing, now = Date.now()) {
   validateInputs(inputs, now);
   const publicationDate = date(now);
-  if (existing.some(p => p.source === 'daily-pilot' && p.date === publicationDate)) return { status: 'skip', reason: 'already-published-today' };
+  if (existing.some(p => ['daily-pilot', 'ai-editorial'].includes(p.source) && p.date === publicationDate)) return { status: 'skip', reason: 'already-published-today' };
   const end = Date.parse(publicationDate + 'T00:00:00Z'), start = end - 14 * DAY;
   const candidates = [];
   for (const [port, meta] of Object.entries(PORTS)) {
