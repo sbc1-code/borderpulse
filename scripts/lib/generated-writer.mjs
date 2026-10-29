@@ -14,11 +14,12 @@ const git = (cwd, args) => execFileSync('git', args, {
  * The invoking checkout and unrelated work are never reset or cleaned.
  */
 export async function publishGeneratedData({
-  root, paths, message, generate, maxAttempts = 3, preserveWorktree = false,
+  root, paths, optionalPaths = [], message, generate, maxAttempts = 3, preserveWorktree = false,
   author = { name: 'borderpulse-bot', email: 'borderpulse-bot@users.noreply.github.com' },
 }) {
   if (!Number.isInteger(maxAttempts) || maxAttempts < 1) throw new Error('Invalid attempt limit');
-  if (!paths?.length) throw new Error('No generated paths supplied');
+  if (!paths?.length && !optionalPaths.length) throw new Error('No generated paths supplied');
+  const allowedPaths = [...paths, ...optionalPaths];
   const refreshMain = () => {
     // An explicit refspec avoids checkout's stale event SHA in origin/main.
     git(root, ['fetch', 'origin', '+refs/heads/main:refs/remotes/origin/main']);
@@ -35,10 +36,11 @@ export async function publishGeneratedData({
       added = true;
       console.log(`[writer] attempt ${attempt}/${maxAttempts} from ${base}`);
       await generate(worktree, { attempt, base });
-      git(worktree, ['add', '--', ...paths]);
+      const stagePaths = [...paths, ...optionalPaths.filter(file => fs.existsSync(path.join(worktree, file)))];
+      if (stagePaths.length) git(worktree, ['add', '--', ...stagePaths]);
       const staged = git(worktree, ['diff', '--cached', '--name-only', '-z']).split('\0').filter(Boolean);
-      if (staged.some(file => !paths.includes(file))) {
-        throw new Error(`Unexpected staged files: ${staged.filter(file => !paths.includes(file)).join(', ')}`);
+      if (staged.some(file => !allowedPaths.includes(file))) {
+        throw new Error(`Unexpected staged files: ${staged.filter(file => !allowedPaths.includes(file)).join(', ')}`);
       }
       let commitSha = base;
       if (staged.length) {

@@ -26,6 +26,14 @@ async function main() {
   const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.mdx'));
   const posts = [];
   const seenSlugs = new Set();
+  // Lazy import keeps legacy standalone drafters independent of the pilot.
+  if (files.some(file => {
+    const fm = matter(fs.readFileSync(path.join(blogDir, file), 'utf8')).data;
+    return fm.source === 'daily-pilot' || fm.evidenceReceipt || fm.evidenceFingerprint;
+  })) {
+    const { validateAutonomousPosts } = await import('./lib/daily-blog.mjs');
+    validateAutonomousPosts(root);
+  }
   const errors = [];
 
   for (const file of files) {
@@ -54,8 +62,9 @@ async function main() {
     }
     seenSlugs.add(fm.slug);
     if (fm.draft) continue;
-    // Hard gate: any AI-sourced post in the data-analysis pillar must be human-edited.
-    if (fm.pillar === 'data-analysis' && fm.source && fm.source !== 'human' && !fm.humanEdited) {
+    // Legacy AI drafts require human editing. The authorized pilot has already
+    // passed its stricter receipt, grammar and bilingual validation above.
+    if (fm.pillar === 'data-analysis' && fm.source && fm.source !== 'human' && !fm.humanEdited && fm.source !== 'daily-pilot') {
       errors.push(`[${file}] pillar "data-analysis" with source "${fm.source}" requires humanEdited: true before publish.`);
       continue;
     }

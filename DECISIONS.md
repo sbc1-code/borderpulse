@@ -1,5 +1,16 @@
 # DECISIONS
 
+## 2026-10-29 · Automatic blog reports use a narrow verified grammar
+
+The owner approved a BorderPulse-only automatic blog experiment. Start with
+AI-assisted templates for measured historical Standard northbound wait changes,
+not unsupported generated news or policy advice. Publish EN/ES together only
+when reproducible evidence and existing release checks pass, disclose machine
+authorship and preserve `humanEdited: false`. Skip weak/duplicate evidence.
+No LLM runtime credential or API spend is added. The existing manual news and
+legacy AI-draft review gates remain; see `docs/DAILY-BLOG-PILOT.md` for scope,
+schedule, audit and rollback.
+
 ## 2026-10-27 · A chosen lane is navigation context, not a historical data filter
 
 Use a validated URL lane key across local comparison, crossing and sharing.
