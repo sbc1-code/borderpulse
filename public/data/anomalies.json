@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-29T12:35:06.478Z",
-  "snapshot_at": "2026-10-29T12:22:44.020Z",
+  "generated_at": "2026-10-29T18:51:08.898Z",
+  "snapshot_at": "2026-10-29T18:37:50.420Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -143,16 +143,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-10-28T11:08:58.099Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 6 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1.1176470588235294,
+      "detected_at": "2026-10-29T18:51:08.898Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 6 PM — ~212% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 6 PM — ~212% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 18,
         "peak_median": 180,
-        "overall_median": 90,
+        "overall_median": 85,
         "samples": 19,
-        "ratio": 2
+        "ratio": 2.1176470588235294
       }
     },
     {
@@ -304,7 +304,7 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.875,
-      "detected_at": "2026-10-29T12:35:06.478Z",
+      "detected_at": "2026-10-29T18:51:08.898Z",
       "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 3 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 3 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
@@ -313,7 +313,7 @@
         "best_hour": 3,
         "best_median": 5,
         "overall_median": 40,
-        "samples": 6
+        "samples": 7
       }
     },
     {
@@ -321,16 +321,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-10-29T12:35:06.478Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 15 min) — ~83% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 15 min) — ~83% debajo de la base de 30 días de 90 min.",
+      "severity": 0.8235294117647058,
+      "detected_at": "2026-10-29T18:51:08.898Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 15 min) — ~82% below the 30-day baseline of 85 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 15 min) — ~82% debajo de la base de 30 días de 85 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 15,
-        "overall_median": 90,
+        "overall_median": 85,
         "samples": 37
       }
     },
@@ -441,24 +441,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-10-28T18:08:48.438Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Wednesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Bridge I es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 4,
-        "best_median": 0,
-        "overall_median": 25,
-        "samples": 3
-      }
-    }
-  ]
+  "trailing_24h": []
 }
