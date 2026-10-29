@@ -66,14 +66,14 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
  */
 export function resetPageMeta() {
   setHreflangs(pageHreflangs('https://borderpulse.com/'));
-  document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
-  setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
-  setMeta('og:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times', 'property');
-  setMeta('og:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
+  document.title = 'Border Pulse | Reported US-Mexico Border Crossing Wait Times';
+  setMeta('description', 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
+  setMeta('og:title', 'Border Pulse | Reported US-Mexico Border Crossing Wait Times', 'property');
+  setMeta('og:description', 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
   setMeta('og:image', 'https://borderpulse.com/og-card.png', 'property');
   setMeta('og:url', 'https://borderpulse.com/', 'property');
-  setMeta('twitter:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times');
-  setMeta('twitter:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
+  setMeta('twitter:title', 'Border Pulse | Reported US-Mexico Border Crossing Wait Times');
+  setMeta('twitter:description', 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
   setMeta('twitter:image', 'https://borderpulse.com/og-card.png');
   const link = document.querySelector('link[rel="canonical"]');
   if (link) link.setAttribute('href', 'https://borderpulse.com/');

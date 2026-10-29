@@ -59,7 +59,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
         </div>
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
           <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? 'Last updated' : 'Última actualización'}
+            {language === 'en' ? 'Snapshot retrieved' : 'Datos consultados'}
           </div>
           <div className="font-medium text-slate-900 dark:text-white text-sm">{updatedStr}</div>
         </div>

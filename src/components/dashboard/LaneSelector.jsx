@@ -4,7 +4,7 @@ import { LOCAL_LANES } from '@/lib/laneContext';
 export default function LaneSelector({ lane, onChange, language }) {
   const es = language === 'es';
   return <div className="min-w-0">
-    <label className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-600 dark:text-slate-300">{es ? 'Tu carril' : 'Your lane'}
+    <label className="grid min-w-0 gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">{es ? 'Tu carril' : 'Your lane'}
       <select aria-label={es ? 'Tu carril' : 'Your lane'} value={lane} onChange={e => onChange(e.target.value)} className="min-h-11 min-w-0 max-w-full rounded-lg border border-slate-300 bg-white px-2 text-sm text-slate-900 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
         {LOCAL_LANES.map(l => <option key={l.key} value={l.key}>{es ? l.es : l.en}</option>)}
       </select>

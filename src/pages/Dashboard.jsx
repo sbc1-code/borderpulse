@@ -1,6 +1,5 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -32,6 +31,7 @@ import { track } from '@/lib/analytics';
 import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
+import styles from './Dashboard.module.css';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -224,10 +224,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     const title = language === 'en'
-      ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
-      : 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real';
+      ? 'Border Pulse | Reported US-Mexico Border Wait Times'
+      : 'Border Pulse | Esperas reportadas en la frontera EE.UU.-México';
     const description = language === 'en'
-      ? 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
+      ? 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
       : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
     updatePageMeta({
       title,
@@ -376,16 +376,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1600px] overflow-x-hidden p-3 sm:p-4 lg:p-6">
+    <div className={`${styles.dashboard} mx-auto w-full max-w-[1600px] p-3 sm:p-4 lg:p-6`}>
       {/* Header */}
-      <header className="mb-4 sm:mb-5">
-        <motion.h1
-          initial={{ opacity: 0, x: -8 }}
-          animate={{ opacity: 1, x: 0 }}
+      <header className={`${styles.header} mb-4 sm:mb-5`}>
+        <h1
           className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
         >
           {language === 'en' ? 'US–Mexico border wait times' : 'Tiempos de espera en la frontera México–EE. UU.'}
-        </motion.h1>
+        </h1>
         <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">
           {language === 'en'
             ? 'Official CBP wait times to the U.S. · Historical patterns'
@@ -393,8 +391,8 @@ export default function Dashboard() {
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}
-        <div className="flex items-center gap-2 flex-wrap mt-3">
-          <div className="mr-auto flex items-center gap-1 text-xs text-slate-600 dark:text-slate-300">
+        <div className={styles.headerActions}>
+          <div className={styles.freshness}>
             <RefreshCw className="w-3 h-3" />
             <span>
               {language === 'en' ? 'Data fetched: ' : 'Datos consultados: '}
@@ -407,13 +405,14 @@ export default function Dashboard() {
             variant={view === 'analytics' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
-            className="gap-1 min-h-11"
+            className="gap-1 min-h-11 min-w-11"
+            aria-label={view === 'analytics' ? (language === 'en' ? 'Reports' : 'Reportes') : (language === 'en' ? 'Analytics' : 'Análisis')}
             aria-pressed={view === 'analytics'}
           >
             <BarChart3 className="w-3.5 h-3.5" />
-            <span className="text-xs">
+            <span className="text-xs hidden sm:inline">
               {view === 'analytics'
-                ? (language === 'en' ? 'Live' : 'En vivo')
+                ? (language === 'en' ? 'Reports' : 'Reportes')
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
@@ -459,17 +458,18 @@ export default function Dashboard() {
         </Suspense>
       ) : (
         <>
+          <div className={styles.filters}>
           {/* Geolocation prompt — first-visit only (#7). One-tap consent. */}
           {showGeoPrompt && (
-            <div className="mx-auto mb-3 flex w-full max-w-[calc(100vw-1.5rem)] flex-col gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 sm:max-w-3xl sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 min-w-0">
+            <details className={styles.geoPrompt}>
+              <summary className="flex min-h-11 cursor-pointer items-center gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 min-w-0">
                 <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
                 <span className="truncate">
                   {language === 'en'
                     ? '📍 Show crossings near you?'
                     : '📍 ¿Mostrar cruces cerca de ti?'}
                 </span>
-              </div>
+              </summary>
               <div className="flex items-center gap-1.5 shrink-0">
                 <Button
                   size="sm"
@@ -491,11 +491,11 @@ export default function Dashboard() {
                   {language === 'en' ? 'Not now' : 'Ahora no'}
                 </Button>
               </div>
-            </div>
+            </details>
           )}
 
           {/* Search + region filter */}
-          <div className="mx-auto mb-4 flex w-full max-w-[calc(100vw-1.5rem)] flex-col items-stretch gap-2 sm:max-w-3xl sm:flex-row sm:items-center">
+          <div className={styles.searchRow}>
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
@@ -517,7 +517,7 @@ export default function Dashboard() {
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:flex-wrap sm:justify-end" role="group" aria-label={language === 'en' ? 'Filter by region' : 'Filtrar por región'} tabIndex={0}>
+            <div className={styles.regions} role="group" aria-label={language === 'en' ? 'Filter by region' : 'Filtrar por región'} tabIndex={0}>
               {REGIONS.map((r) => (
                 <Button
                   key={r.code}
@@ -533,21 +533,21 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="mx-auto mb-4 flex max-w-3xl flex-wrap items-center gap-2">
+          <div className={styles.areaRow}>
+          <div className={styles.area}>
             <label htmlFor="local-corridor" className="text-sm font-medium text-slate-700 dark:text-slate-300">{language === 'es' ? 'Tu zona de cruce' : 'Your crossing area'}</label>
             <select id="local-corridor" value={corridor} onChange={e => changeCorridor(e.target.value)} className="min-h-11 min-w-0 max-w-full flex-1 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
               <option value="">{language === 'es' ? 'Todos los cruces' : 'All crossings'}</option>
               {CORRIDORS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </div>
-          {!corridor && <nav aria-label={language === 'es' ? 'Comparar cruces cercanos' : 'Compare nearby crossings'} className="mx-auto mb-4 flex max-w-3xl flex-wrap gap-2">
-            <p className="w-full text-xs text-slate-600 dark:text-slate-400">{language === 'es' ? 'Elige tu zona para comparar el mismo carril en cruces cercanos.' : 'Choose your area to compare the same lane at nearby crossings.'}</p>
-            {CORRIDORS.slice(0, 3).map(c => <Link key={c.id} to={withLane(`/?area=${c.id}`, lane)} onClick={e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; e.preventDefault(); changeCorridor(c.id); }} className="inline-flex min-h-11 items-center rounded-lg border border-emerald-200 bg-white px-3 text-sm font-medium text-emerald-800 dark:border-emerald-800 dark:bg-gray-900 dark:text-emerald-300">{c.name}</Link>)}
-          </nav>}
-          {!corridor && <div className="mb-4"><LaneSelector lane={lane} onChange={changeLane} language={language} /></div>}
-          <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
-          <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
+          {!corridor && <LaneSelector lane={lane} onChange={changeLane} language={language} />}
+          </div>
 
+          </div>
+          <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
+          <div className={styles.extras}>
+          <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <DashboardSummaryDisclosure
             crossings={filteredCrossings}
             fetchedAt={state.fetchedAt}
@@ -559,12 +559,13 @@ export default function Dashboard() {
             focusedPort={focusedPort}
             onSelect={handleTickSelect}
           />
+          </div>
 
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
             <div className="xl:col-span-9">
               {sortedCrossings.length > 0 && (
-                <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+                <div className="flex items-center justify-between gap-3 mb-2">
                   <p className="text-xs text-slate-600 dark:text-slate-300">
                     {language === 'en'
                       ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`

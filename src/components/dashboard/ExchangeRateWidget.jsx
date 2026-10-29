@@ -2,17 +2,14 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, DollarSign, Banknote } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function ExchangeRateWidget({ exchangeRate, language, theme, compact = false }) {
   const isPositive = exchangeRate?.change_percentage > 0;
 
   if (compact) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
+      <div
+        className="bp-result-enter"
       >
         <Card className={`${
           theme === 'dark'
@@ -63,15 +60,13 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.2 }}
+    <div
+      className="bp-result-enter"
     >
       <Card className={`${
         theme === 'dark'
@@ -150,6 +145,6 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }

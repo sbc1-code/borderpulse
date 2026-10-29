@@ -47,7 +47,7 @@ function svgForCrossing(crossing) {
     .map((line, i) => `<tspan x="80" y="${titleStartY + i * lineHeight}">${xmlEscape(line)}</tspan>`)
     .join('');
 
-  const footer = `Live wait times · ${state}${border ? ' · ' + border : ''}`;
+  const footer = `Reported waits · ${state}${border ? ' · ' + border : ''}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <rect width="${W}" height="${H}" fill="${BG}"/>

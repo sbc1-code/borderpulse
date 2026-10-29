@@ -14,7 +14,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 
-const LAST_REVIEWED = '2026-08-23';
+// Review of this explanation, not freshness of any report.
+const LAST_REVIEWED = '2026-10-29';
 
 const COPY = {
   en: {
@@ -36,7 +37,7 @@ const COPY = {
             </p>
             <p>
               Border Pulse re-fetches that feed on a schedule and stores each snapshot. We do not
-              modify the underlying numbers — every wait time on the site is what CBP last reported.
+              change the reported lane waits. Historical medians and comparisons are derived from stored reports; they are not new CBP measurements.
             </p>
           </>
         ),
@@ -63,15 +64,14 @@ const COPY = {
         body: (
           <>
             <p>
-              A scheduled GitHub Action fetches the CBP feed and writes a new{' '}
-              <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/crossings.json</code>.
-              GitHub's free cron can be delayed, so the site describes the cadence as regular
-              rather than exact. We do not interpolate or smooth between refreshes.
+              The dashboard requests the latest available BorderPulse snapshot. If the current-data
+              endpoint is unavailable, it can use a dated bundled snapshot. The original retrieval
+              time is retained; refreshing a page does not make an old report new.
             </p>
             <p>
-              The same scheduled job rolls up snapshots into per-port aggregates and refreshes the
-              public JSON files under{' '}
-              <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/</code>.
+              “Fetched” describes the snapshot retrieval. “CBP reported” is the separate clock for a
+              lane and may be older. Current waits and historical files update separately and can
+              have different source dates. Read the displayed age, stale warnings and unavailable states.
             </p>
           </>
         ),
@@ -86,10 +86,9 @@ const COPY = {
               the middle observation when the samples are sorted — not the arithmetic mean.
             </p>
             <p>
-              Concrete example. Ten Sunday-evening observations at one port: <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">[55, 58, 60, 60, 61, 62, 65, 70, 75, 240]</code>.
-              The mean is 81 minutes; the median is 61.5. A single 240-minute outlier moves the mean by
-              20 minutes. It does not move the median. Median is closer to "what to expect on a normal
-              Sunday."
+              Synthetic example, not measured crossing data: <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">[55, 58, 60, 60, 61, 62, 65, 70, 75, 240]</code>.
+              The mean is 80.6 minutes; the median is 61.5. Published aggregate medians are rounded
+              to whole minutes. A median describes the stored sample; it does not predict your next wait.
             </p>
           </>
         ),
@@ -100,26 +99,22 @@ const COPY = {
         body: (
           <>
             <p>
-              The historical patterns on every <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/crossing/&lt;slug&gt;</code>{' '}
+              Historical patterns on <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/crossing/&lt;slug&gt;</code>{' '}
               and <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/best-time/&lt;slug&gt;</code> page are computed across the last 30 days of stored snapshots,
-              recomputed on every refresh. Yesterday's data is in; the data from 31 days ago is out.
-              A holiday weekend three weeks ago is still in the window today; the same weekend will
-              roll out next week.
+              recomputed when historical files are published. The source dates and sample coverage
+              can differ from current reports. A 30-day window does not guarantee complete daily coverage.
             </p>
             <p>
-              A 7-day by 24-hour grid is finer than the refresh cadence can fill: on raw counts, the
-              typical (day-of-week, hour) cell holds about two observations, which is not enough to
-              call an hour "best." So each cell is estimated from a window centred on that hour,
+              Sample coverage varies by crossing, weekday and hour. Each cell can pool observations
+              from a window centred on that hour,
               widened to at most two hours either side, and only as far as it needs to go. Cells with
               enough observations of their own keep their exact hourly value. Hover any cell to see
               the sample count and the span it was drawn from.
             </p>
             <p>
-              We widen along the hour axis and never across days. Neighbouring hours behave alike;
-              days of the week do not. At San Ysidro the median Monday wait runs 160 minutes while
-              Friday runs 60, so averaging weekdays together would erase the most useful thing on
-              the page. Cells that still fall short of five observations are shown as "not enough
-              data" rather than filled with a number borrowed from somewhere else.
+              Pooling stays within the same local weekday. Cells with fewer than five observations
+              remain unavailable. The lightest-hour answer describes the full local weekday,
+              including hours already passed. It is not advice for the hours remaining today or a forecast.
             </p>
             <p>
               Best-time recommendations are also limited to the crossing's official operating
@@ -133,18 +128,18 @@ const COPY = {
       },
       {
         icon: AlertTriangle,
-        title: 'Anomaly callouts compare today to the port\'s own baseline.',
+        title: 'Callouts describe stored historical patterns.',
         body: (
           <>
             <p>
-              A separate scheduled job compares each port's current hour-of-day pattern against its
-              30-day median for the same (day-of-week, hour) cell. When the gap is large enough
-              (configured per port), the port page renders an inline callout above the heatmap
-              describing the surprise in plain language.
+              Historical callouts compare sampled weekday/hour medians with the crossing’s overall
+              median. They show source-snapshot and pattern-generation dates. They are not live
+              anomaly alerts or forecasts. If source evidence cannot be verified, the page says so.
             </p>
             <p>
-              Thresholds are tuned to surface real shifts, not normal day-to-day noise. The callout
-              always links back to the official CBP page so you can verify in source.
+              On Standard passenger cards, “vs. typical” uses a matching weekday/hour cell with
+              enough samples, or the crossing’s overall median if that cell is sparse. It is not
+              shown for another selected lane. Check the latest lane reports before leaving.
             </p>
           </>
         ),
@@ -185,8 +180,8 @@ const COPY = {
             <li><a href="https://www.cbp.gov/travel/trusted-traveler-programs/sentri" target="_blank" rel="noopener noreferrer" className="underline">CBP SENTRI program</a></li>
             <li><a href="https://www.cbp.gov/travel/clearing-customs/ready-lanes" target="_blank" rel="noopener noreferrer" className="underline">CBP Ready Lane program</a></li>
             <li><a href="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html" target="_blank" rel="noopener noreferrer" className="underline">U.S. Department of State Mexico travel advisory</a></li>
-            <li><a href="https://www.bts.gov/browse-statistical-products-and-data/border-crossing-data/border-crossingentry-data" target="_blank" rel="noopener noreferrer" className="underline">BTS Border Crossing/Entry Data</a>: annual port volume, used to weight network-wide aggregates</li>
-            <li><a href="/data/crossings.json" className="underline">Current Border Pulse JSON snapshot</a></li>
+
+            <li><a href="/data/crossings.json" className="underline">Bundled JSON snapshot; check its fetched_at date</a></li>
           </ul>
         ),
       },
@@ -210,8 +205,8 @@ const COPY = {
               SENTRI, Ready Lane, peatonal, comercial).
             </p>
             <p>
-              Border Pulse vuelve a jalar ese feed con una frecuencia fija y guarda cada snapshot. No
-              modificamos los números — cada tiempo en el sitio es lo que CBP reportó por última vez.
+              Border Pulse consulta ese feed con regularidad y guarda cada snapshot. No
+              modificamos las esperas reportadas por carril. Las medianas y comparaciones históricas se calculan con reportes guardados; no son mediciones nuevas de CBP.
             </p>
           </>
         ),
@@ -238,16 +233,14 @@ const COPY = {
         body: (
           <>
             <p>
-              Un GitHub Action programado jala el feed de CBP y escribe un
-              nuevo{' '}
-              <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/crossings.json</code>.
-              El cron gratuito de GitHub puede retrasarse, así que el sitio describe la cadencia
-              como regular y no exacta. No interpolamos ni suavizamos entre refrescos.
+              El panel solicita la versión más reciente disponible en BorderPulse. Si el servicio de
+              datos actuales no responde, puede usar una copia incluida con el sitio. Conserva su
+              hora de consulta original; recargar la página no convierte un reporte viejo en uno nuevo.
             </p>
             <p>
-              El mismo trabajo programado agrupa los snapshots en agregados por puerto y refresca los
-              archivos JSON públicos bajo{' '}
-              <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/data/</code>.
+              “Datos consultados” indica cuándo se obtuvo esa versión. “CBP reportó” es la hora
+              independiente de cada carril y puede ser anterior. Las esperas actuales y los archivos
+              históricos se actualizan por separado. Revisa sus fechas, antigüedad y estados sin datos.
             </p>
           </>
         ),
@@ -262,10 +255,9 @@ const COPY = {
               guardadas — la observación de en medio cuando se ordenan — no el promedio aritmético.
             </p>
             <p>
-              Ejemplo concreto. Diez observaciones de domingo por la tarde en un puerto: <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">[55, 58, 60, 60, 61, 62, 65, 70, 75, 240]</code>.
-              El promedio es 81 minutos; la mediana es 61.5. Un outlier único de 240 minutos mueve el
-              promedio 20 minutos. No mueve la mediana. La mediana se acerca más a "qué esperar en un
-              domingo normal".
+              Ejemplo sintético, no datos medidos de un cruce: <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">[55, 58, 60, 60, 61, 62, 65, 70, 75, 240]</code>.
+              El promedio es 80.6 minutos; la mediana es 61.5. Las medianas publicadas se redondean
+              a minutos enteros. Describen la muestra guardada; no predicen tu próxima espera.
             </p>
           </>
         ),
@@ -276,46 +268,40 @@ const COPY = {
         body: (
           <>
             <p>
-              Los patrones históricos en cada página{' '}
+              Los patrones históricos en las páginas{' '}
               <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/crossing/&lt;slug&gt;</code>{' '}
-              y <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/best-time/&lt;slug&gt;</code> se calculan sobre los últimos 30 días de snapshots guardados, recalculados con
-              cada refresco. Los datos de ayer entran; los de hace 31 días salen. Un fin de semana
-              festivo de hace tres semanas sigue en la ventana hoy; ese mismo fin de semana saldrá la
-              próxima semana.
+              y <code className="rounded bg-slate-100 dark:bg-gray-800 px-1 py-0.5 text-[12px]">/best-time/&lt;slug&gt;</code> se calculan sobre los últimos 30 días de snapshots guardados, recalculados al publicar los archivos históricos. Las fechas de origen y la cobertura
+              pueden diferir de los reportes actuales. Esa ventana no garantiza cobertura diaria completa.
             </p>
             <p>
-              Una cuadrícula de 7 días por 24 horas es más fina de lo que la cadencia de refresco
-              puede llenar: en conteos crudos, la celda típica (día de la semana, hora) tiene unas dos
-              observaciones, insuficiente para declarar una hora como la "mejor". Por eso cada celda
-              se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia
+              La cobertura varía por cruce, día y hora. Cada celda puede reunir observaciones
+              de una ventana centrada en esa hora, ampliada como máximo dos horas hacia
               cada lado, y solo lo necesario: las celdas con suficientes observaciones propias
               conservan su valor exacto. Pasa el cursor sobre cualquier celda para ver el número de
               muestras y el rango del que salió.
             </p>
             <p>
-              Ampliamos sobre el eje de las horas y nunca entre días. Las horas vecinas se comportan
-              parecido; los días de la semana no. En San Ysidro la mediana del lunes ronda los 160
-              minutos y la del viernes los 60, así que promediar los días entre semana borraría lo
-              más útil de la página. Las celdas que aun así no llegan a cinco observaciones se
-              muestran como "datos insuficientes" en lugar de rellenarse con un número prestado.
+              Las muestras se agrupan dentro del mismo día local de la semana. Las celdas con menos
+              de cinco observaciones siguen sin valor disponible. La menor mediana describe el día
+              completo, incluidas horas que ya pasaron; no aconseja sobre el resto de hoy ni es un pronóstico.
             </p>
           </>
         ),
       },
       {
         icon: AlertTriangle,
-        title: 'Las alertas de anomalía comparan hoy con el patrón del propio puerto.',
+        title: 'Los recuadros describen patrones históricos guardados.',
         body: (
           <>
             <p>
-              Un trabajo programado separado compara el patrón hora-por-hora actual de cada puerto
-              contra su mediana de 30 días para la misma celda (día de la semana, hora). Cuando la
-              diferencia es suficientemente grande (configurada por puerto), la página del puerto
-              muestra una alerta inline arriba del heatmap describiendo la sorpresa en lenguaje plano.
+              Los recuadros comparan medianas por día y hora con la mediana general del propio cruce.
+              Muestran las fechas de consulta y generación del patrón. No son alertas en vivo ni
+              pronósticos. Si la evidencia de origen no se puede verificar, la página lo indica.
             </p>
             <p>
-              Los umbrales están afinados para resaltar cambios reales, no ruido diario. La alerta
-              siempre enlaza a la página oficial de CBP para que verifiques en la fuente.
+              En las tarjetas de auto estándar, “vs. lo normal” usa la celda del mismo día y hora
+              con suficientes muestras, o la mediana general si esa celda tiene pocos datos. No se
+              muestra al elegir otro carril. Revisa los reportes más recientes antes de salir.
             </p>
           </>
         ),
@@ -357,8 +343,8 @@ const COPY = {
             <li><a href="https://www.cbp.gov/travel/trusted-traveler-programs/sentri" target="_blank" rel="noopener noreferrer" className="underline">Programa SENTRI de CBP</a></li>
             <li><a href="https://www.cbp.gov/travel/clearing-customs/ready-lanes" target="_blank" rel="noopener noreferrer" className="underline">Programa Ready Lane de CBP</a></li>
             <li><a href="https://travel.state.gov/en/international-travel/travel-advisories/mexico.html" target="_blank" rel="noopener noreferrer" className="underline">Departamento de Estado de EE.UU. Aviso de viaje a México</a></li>
-            <li><a href="https://www.bts.gov/browse-statistical-products-and-data/border-crossing-data/border-crossingentry-data" target="_blank" rel="noopener noreferrer" className="underline">BTS Border Crossing/Entry Data</a>: volumen anual por puerto, usado para ponderar agregados de la red</li>
-            <li><a href="/data/crossings.json" className="underline">Snapshot JSON actual de Border Pulse</a></li>
+
+            <li><a href="/data/crossings.json" className="underline">Copia JSON incluida con el sitio; revisa su fecha fetched_at</a></li>
           </ul>
         ),
       },
@@ -423,7 +409,7 @@ export default function Methodology({ lang = 'en' }) {
       </div>
 
       <footer className="mt-10 pt-3 border-t border-slate-200 dark:border-gray-700 text-xs text-slate-500 dark:text-slate-400">
-        {t.lastReviewed} {LAST_REVIEWED}
+        {t.lastReviewed} <time dateTime={LAST_REVIEWED}>{LAST_REVIEWED}</time>. {lang === 'es' ? 'Esta revisión del método no indica la actualidad de los reportes; revisa sus propias horas y fechas.' : 'This method review does not establish report freshness; check each report’s own clocks and dates.'}
       </footer>
     </div>
   );

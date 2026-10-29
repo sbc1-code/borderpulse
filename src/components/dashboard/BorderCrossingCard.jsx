@@ -12,7 +12,6 @@ import {
   Clock, MapPin, TrendingUp, TrendingDown, Minus, AlertTriangle,
   Car, User, Truck, Star, MoreHorizontal,
 } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -114,7 +113,6 @@ function advisoryLabel(type, language) {
 export default function BorderCrossingCard({
   crossing,
   language,
-  index = 0,
   selectedDirection = 'northbound',
   isFavorite = false,
   onToggleFavorite,
@@ -124,7 +122,6 @@ export default function BorderCrossingCard({
 }) {
   const [showLanes, setShowLanes] = useState(false);
   const [aggregate, setAggregate] = useState(null);
-  const reduceMotion = useReducedMotion();
 
   const cardSlug = slug || crossing.slug || null;
 
@@ -244,19 +241,15 @@ export default function BorderCrossingCard({
   const lanes = crossing.lanes || {};
 
   return (
-    <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={reduceMotion ? { duration: 0 } : { delay: Math.min(index * 0.02, 0.3) }}
-    >
-      <Card data-testid="border-crossing-card" data-port-number={crossing.port_number} className="h-full flex flex-col overflow-hidden rounded-lg border-slate-200/90 bg-white shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-700 dark:bg-slate-950">
-        <div className={`h-1.5 ${s.bar}`} />
-        <CardContent className="p-3 flex-1 flex flex-col">
+    <div className="bp-result-enter">
+      <Card data-testid="border-crossing-card" data-port-number={crossing.port_number} className="h-full flex flex-col overflow-hidden rounded-xl border-slate-200/90 bg-white shadow-xs dark:border-slate-700 dark:bg-slate-950">
+        <div className={`h-1 ${s.bar}`} />
+        <CardContent className="p-4 flex-1 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between gap-2 mb-1.5">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 mb-0.5">
-                <h2 className="min-w-0 text-base font-semibold text-slate-900 dark:text-slate-100 truncate" title={crossing.name}>
+                <h2 className="min-w-0 text-base leading-snug font-semibold text-slate-900 dark:text-slate-100 break-words" title={crossing.name}>
                   {cardSlug ? (
                     <Link to={withLane(`/crossing/${cardSlug}/`, selectedLane)} className="rounded-sm hover:underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                       {crossing.name || crossing.port_name}
@@ -275,19 +268,7 @@ export default function BorderCrossingCard({
                     : (language === 'en' ? 'To USA' : 'Hacia EE.UU.')}
                 </span>
               </div>
-              <div className="flex flex-wrap gap-1 mt-1.5">
-                <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap py-0.5 ${portStatusStyle.badge}`}>
-                  {portStatusStyle.label[language] || portStatusStyle.label.en}
-                </Badge>
-                <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-slate-50 text-slate-700 border-slate-200">
-                  {sourceLabel}
-                </Badge>
-                {hasAdvisory && (
-                  <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-amber-50 text-amber-700 border-amber-200">
-                    {advisoryLabel(advisoryType, language)}
-                  </Badge>
-                )}
-              </div>
+
             </div>
             <div className="flex items-center gap-1 shrink-0">
               <button
@@ -348,6 +329,20 @@ export default function BorderCrossingCard({
             </div>
           </div>
 
+              <div className="flex flex-wrap gap-1 mt-1.5">
+                <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap py-0.5 ${portStatusStyle.badge}`}>
+                  {portStatusStyle.label[language] || portStatusStyle.label.en}
+                </Badge>
+                <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-slate-50 text-slate-700 border-slate-200">
+                  {sourceLabel}
+                </Badge>
+                {hasAdvisory && (
+                  <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-amber-50 text-amber-700 border-amber-200">
+                    {advisoryLabel(advisoryType, language)}
+                  </Badge>
+                )}
+              </div>
+
           {/* Wait time */}
           <div className={`mt-2.5 rounded-lg border p-3 ${s.meter}`}>
             <div className="flex items-end justify-between gap-3">
@@ -357,7 +352,7 @@ export default function BorderCrossingCard({
                   <span className="block">{waitMetaLabel}</span>
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
-                  <span data-testid="primary-wait" className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>
+                  <span data-testid="primary-wait" className={`text-5xl font-semibold tracking-tight tabular-nums leading-none ${s.waitText}`}>
                     {wait == null ? '—' : wait}
                   </span>
                   <span className="text-sm font-medium text-slate-700">
@@ -451,15 +446,8 @@ export default function BorderCrossingCard({
           )}
 
           {/* Lane details */}
-          <AnimatePresence>
             {showLanes && (
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={reduceMotion ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-                transition={reduceMotion ? { duration: 0 } : undefined}
-                className="overflow-hidden"
-              >
+              <div className="bp-panel-enter overflow-hidden">
                 {isSouthbound ? (
                   <div className="mt-2 rounded-md border border-slate-200 bg-slate-50 p-2.5 space-y-1.5 text-xs text-slate-700">
                     <div className="flex items-center justify-between">
@@ -496,16 +484,15 @@ export default function BorderCrossingCard({
                     <LaneRow icon={Truck} label={{ en: 'FAST', es: 'FAST' }} data={lanes.commercial_fast} language={language} />
                   </div>
                 )}
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
 
           {/* Footer: snapshot retrieval freshness, separate from official lane reports. */}
           <div className="mt-auto mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-t border-slate-200 pt-2 text-xs text-slate-600 dark:border-slate-700 dark:text-slate-300">
             <div className="flex items-center gap-1.5">
               <span
                 className={`w-2 h-2 rounded-full ${
-                  freshness.state === FRESHNESS.FRESH ? `${s.dot} motion-safe:animate-pulse` : 'bg-slate-400'
+                  freshness.state === FRESHNESS.FRESH ? s.dot : 'bg-slate-400'
                 }`}
               />
               <span data-testid="snapshot-freshness" className={freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : undefined}>
@@ -521,6 +508,6 @@ export default function BorderCrossingCard({
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }

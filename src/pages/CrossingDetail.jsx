@@ -90,7 +90,7 @@ function faqItems(crossing, aggregate, lang) {
   out.push({
     q: lang === 'en' ? `What are the current wait times at ${name}?` : `¿Cuáles son los tiempos de espera actuales en ${name}?`,
     a: lang === 'en'
-      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the card above for the live number.`
+      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the lane report clock and retrieval age shown above.`
       : `Border Pulse toma el tiempo de espera más reciente de ${name} de U.S. Customs and Border Protection con regularidad. Consulta la tarjeta arriba para ver el número en vivo.`,
   });
 
@@ -384,7 +384,7 @@ export default function CrossingDetail() {
     const hasHistoricalPattern = Array.isArray(aggregate?.by_hour) && aggregate.by_hour.length > 0;
     const title = crossingSearchTitle(crossing, language, cameraSourceFor(crossing.port_number)?.kind);
     const desc = language === 'en'
-      ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
+      ? `Reported ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
       : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
     const url = `https://borderpulse.com/crossing/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
