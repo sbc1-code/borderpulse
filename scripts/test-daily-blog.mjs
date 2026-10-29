@@ -68,12 +68,12 @@ test('stale, future, missing and truncated source data are held', () => {
 
 test('thin, missing, noisy, reversed and invalid observations cannot produce a story', () => {
   for (const edit of [
-    x => { x.history.snapshots = x.history.snapshots.filter((s, i) => i % 4 !== 0 || i === x.history.snapshots.length - 1); x.history.snapshots[0].crossings[0].current_wait_time = null; },
-    x => { x.history.snapshots[0].crossings[0].current_wait_time = null; x.history.snapshots[1].crossings[0].current_wait_time = null; },
+    x => { x.history.snapshots = x.history.snapshots.filter(s => s.source === 'working-tree' || Number(s.fetched_at.slice(11,13)) < 11); },
+    x => { x.history.snapshots.forEach(s => { if (Number(s.fetched_at.slice(11,13)) < 13) s.crossings[0].current_wait_time = null; }); },
     x => x.history.snapshots.forEach(s => { s.crossings[0].current_wait_time = 30; }),
     x => x.history.snapshots.forEach(s => { s.crossings[0].current_wait_time = -1; }),
-    x => { for (let i = 0; i < 3; i++) x.history.snapshots[i].crossings[0].current_wait_time = '30'; },
-    x => { for (let i = 0; i < 3; i++) x.history.snapshots[i].crossings[0].current_wait_time = 1500; },
+    x => { for (let i = 0; i < 53; i++) x.history.snapshots[i].crossings[0].current_wait_time = '30'; },
+    x => { for (let i = 0; i < 53; i++) x.history.snapshots[i].crossings[0].current_wait_time = 1500; },
   ]) {
     const x = inputs(); edit(x); assert.equal(selectReport(x, [], now).status, 'skip');
   }
@@ -158,4 +158,22 @@ test('both languages compile with the site MDX pipeline and prerender the eviden
     assert.match(html,/data\/blog-evidence\/observed-waits-2026-10-29.json/);
     assert.match(html,/bwt.cbp.gov/); assert.match(html,/<li>/);
   }
+});
+
+
+test('missing overnight hours are compared only with the same hours in the earlier week', () => {
+  const x = inputs();
+  x.history.snapshots = x.history.snapshots.filter(s => s.source === 'working-tree' || Number(s.fetched_at.slice(11,13)) >= 6);
+  const result = selectReport(x, [], now);
+  assert.equal(result.status, 'publish');
+  assert.equal(result.receipt.summary.days[0].hours.length, 18);
+  assert.deepEqual(result.receipt.summary.days[0].hours, result.receipt.summary.days[7].hours);
+  assert.equal(result.receipt.summary.observations, 14 * 18 * 4);
+  validateReceipt(result.receipt);
+  const mismatch = inputs();
+  mismatch.history.snapshots = mismatch.history.snapshots.filter(s => {
+    if (s.source === 'working-tree') return true;
+    return s.fetched_at.slice(0,10) < '2026-10-22' ? Number(s.fetched_at.slice(11,13)) < 12 : Number(s.fetched_at.slice(11,13)) >= 12;
+  });
+  assert.equal(selectReport(mismatch, [], now).status, 'skip');
 });

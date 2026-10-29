@@ -56,9 +56,12 @@ rejected without a main advance, stop and report the policy/auth failure.
 - Use the existing immutable 30-day history artifact, restricted to the two
   prior complete seven-day UTC periods. Select only configured, verified port
   identities. Remote names and prose are ignored.
-- Every hour of all 14 days needs at least three numeric retained reports.
+- Each of seven weekday pairs needs at least 12 matching UTC hours, with
+  at least three numeric retained reports per included hour in both weeks.
   Missing, invalid and unavailable waits never become zero.
-- Compute hourly medians, then 24-hour daily medians, then seven-day medians.
+- Compute hourly medians, then daily medians of exactly the matching hours
+  within each weekday pair, then seven-day medians. Disclose every included
+  hour and count; these are not full-day estimates.
   This avoids overweighting frequently collected hours/days. Repeated CBP
   values are retained observations, not independent traveler measurements.
 - Require an absolute difference of at least 15 minutes and 25%, nonoverlapping

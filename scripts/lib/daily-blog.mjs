@@ -5,7 +5,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import matter from 'gray-matter';
 
-export const VERSION = 'cbp-observed-week-v1';
+export const VERSION = 'cbp-matched-week-v1';
 export const DAY = 86_400_000;
 export const PORTS = {
   '250401': { name: 'San Ysidro', slug: 'san-ysidro' },
@@ -66,20 +66,25 @@ export function summarize(observations, publishedAt) {
     if (!hours.has(hour)) hours.set(hour, []);
     hours.get(hour).push(row.minutes);
   }
-  const days = [];
-  for (let d = 0; d < 14; d++) {
-    const key = date(start + d * DAY);
-    const values = [];
-    let sufficient = true;
-    // At least three retained observations in every UTC hour. No low-coverage
-    // day can distort a period's reported median; incomplete days skip the story.
+  const days = Array(14);
+  for (let d = 0; d < 7; d++) {
+    const earlier = date(start + d * DAY), later = date(start + (d + 7) * DAY);
+    const priorValues = [], recentValues = [], matchedHours = [];
+    let priorSamples = 0, recentSamples = 0;
     for (let hour = 0; hour < 24; hour++) {
-      const a = hours.get(`${key}T${String(hour).padStart(2, '0')}`) || [];
-      if (a.length < 3) sufficient = false;
-      values.push(a.length ? median(a) : null);
+      const key = String(hour).padStart(2, '0');
+      const a = hours.get(`${earlier}T${key}`) || [];
+      const b = hours.get(`${later}T${key}`) || [];
+      if (a.length < 3 || b.length < 3) continue;
+      matchedHours.push(hour);
+      priorValues.push(median(a)); recentValues.push(median(b));
+      priorSamples += a.length; recentSamples += b.length;
     }
-    if (!sufficient) return null;
-    days.push({ date: key, median: median(values), samples: observations.filter(o => o.at.startsWith(key)).length });
+    // Require at least half of a UTC day in each of all seven weekday pairs.
+    // Both weeks use exactly the same eligible hours within each pair.
+    if (matchedHours.length < 12) return null;
+    days[d] = { date: earlier, median: median(priorValues), samples: priorSamples, hours: matchedHours };
+    days[d + 7] = { date: later, median: median(recentValues), samples: recentSamples, hours: matchedHours };
   }
   const prior = days.slice(0, 7).map(d => d.median);
   const recent = days.slice(7).map(d => d.median);
@@ -91,7 +96,7 @@ export function summarize(observations, publishedAt) {
   if (sameDirectionDays < 6) return null;
   return { days, priorMedian: oldMedian, recentMedian: newMedian, change, sameDirectionDays,
     priorStart: days[0].date, priorEnd: days[6].date, recentStart: days[7].date, recentEnd: days[13].date,
-    observations: observations.length };
+    observations: days.reduce((sum, day) => sum + day.samples, 0) };
 }
 
 export function selectReport(inputs, existing, now = Date.now()) {
@@ -145,10 +150,10 @@ export function renderPost(receipt, lang) {
     officialSources: [{ label: 'CBP Border Wait Times', url: 'https://bwt.cbp.gov/' }],
     draft: false, source: 'daily-pilot', humanEdited: false, evidenceReceipt: `${base}.json`, evidenceFingerprint: receipt.fingerprint,
   };
-  const table = s.days.map(d => es ? `- **${d.date}:** ${d.median} min; ${d.samples} reportes retenidos.` : `- **${d.date}:** ${d.median} min; ${d.samples} retained reports.`).join('\n');
+  const table = s.days.map(d => es ? `- **${d.date}:** ${d.median} min; ${d.samples} reportes retenidos; horas UTC: ${d.hours.join(", ")}.` : `- **${d.date}:** ${d.median} min; ${d.samples} retained reports; UTC hours: ${d.hours.join(", ")}.`).join('\n');
   const body = es ? `**Informe automatizado con plantillas redactadas con asistencia de IA. No tuvo revisión humana individual.**
 
-En ${meta.name}, la mediana de los resúmenes diarios de espera reportada para vehículos particulares en carriles Standard hacia EE. UU. pasó de **${s.priorMedian} min** (${s.priorStart} a ${s.priorEnd}) a **${s.recentMedian} min** (${s.recentStart} a ${s.recentEnd}). Son periodos completos en UTC. Es una comparación histórica de reportes retenidos, no una espera actual ni una predicción.
+En ${meta.name}, la mediana de los resúmenes diarios de espera reportada para vehículos particulares en carriles Standard hacia EE. UU. pasó de **${s.priorMedian} min** (${s.priorStart} a ${s.priorEnd}) a **${s.recentMedian} min** (${s.recentStart} a ${s.recentEnd}). Son periodos completos en UTC, comparados solo en las horas coincidentes con suficientes reportes de cada par de días. Es una comparación histórica de reportes retenidos, no una espera actual ni una predicción.
 
 ## Qué muestran los datos
 
@@ -159,9 +164,9 @@ ${table}
 
 ## Método y límites
 
-Usamos ${s.observations} observaciones retenidas. Cada hora incluye al menos tres observaciones; calculamos la mediana de cada hora, la mediana de las 24 horas de cada día y después la mediana de los siete resúmenes diarios de cada periodo. Así, una hora con más consultas no pesa más. Los reportes repetidos pueden reflejar el mismo dato de CBP; no son mediciones independientes de viajeros.
+Usamos ${s.observations} observaciones retenidas. Cada hora incluida tiene al menos tres observaciones en ambas semanas. Cada par de días de la semana comparte al menos 12 horas UTC. Calculamos la mediana de cada hora, la mediana de las horas coincidentes de cada día y después la mediana de los siete resúmenes diarios de cada periodo. Así, una hora con más consultas no pesa más. Los reportes repetidos pueden reflejar el mismo dato de CBP; no son mediciones independientes de viajeros.
 
-El filtro de publicación exige un cambio de al menos 15 minutos y 25%, separación entre los rangos centrales de los resúmenes diarios y coincidencia de dirección en al menos seis pares de días. No es una prueba de significación estadística. Los datos faltantes se excluyen; cero solo cuenta cuando la fuente registra cero. No cubre Ready, SENTRI, peatones, vehículos comerciales ni el cruce hacia México. Las fechas UTC pueden abarcar partes de dos días locales.
+El filtro de publicación exige un cambio de al menos 15 minutos y 25%, separación entre los rangos centrales de los resúmenes diarios y coincidencia de dirección en al menos seis pares de días. No es una prueba de significación estadística. Los datos faltantes se excluyen; cero solo cuenta cuando la fuente registra cero. Los pares de días pueden cubrir horas distintas, indicadas arriba; son resúmenes de horas coincidentes, no estimaciones de todo el día. No cubre Ready, SENTRI, peatones, vehículos comerciales ni el cruce hacia México. Las fechas UTC pueden abarcar partes de dos días locales.
 
 ## Cómo usar este informe
 
@@ -174,7 +179,7 @@ El cambio sirve como contexto para planear, pero no permite garantizar una hora 
 - [Evidencia de este informe, observaciones y cálculos](${evidenceUrl}). Preparado para publicación automatizada: ${receipt.publishedAt}.
 ` : `**Automated report using AI-assisted editorial templates. No individual human review.**
 
-At ${meta.name}, the median of daily summaries of reported northbound Standard passenger-vehicle waits changed from **${s.priorMedian} min** (${s.priorStart} to ${s.priorEnd}) to **${s.recentMedian} min** (${s.recentStart} to ${s.recentEnd}). Both are complete UTC periods. This compares retained historical reports; it is not a current wait or a forecast.
+At ${meta.name}, the median of daily summaries of reported northbound Standard passenger-vehicle waits changed from **${s.priorMedian} min** (${s.priorStart} to ${s.priorEnd}) to **${s.recentMedian} min** (${s.recentStart} to ${s.recentEnd}). Both are complete UTC periods, compared only at matching well-sampled hours within each weekday pair. This compares retained historical reports; it is not a current wait or a forecast.
 
 ## What the records show
 
@@ -185,9 +190,9 @@ ${table}
 
 ## Method and limits
 
-We used ${s.observations} retained observations. Each hour has at least three observations. We take each hour's median, the median of all 24 hourly values for each day, then the median of the seven daily summaries in each period. Hours with more collection requests therefore receive no extra weight. Repeated reports can reflect the same CBP reading; they are not independent measurements from travelers.
+We used ${s.observations} retained observations. Each included hour has at least three observations in both weeks. Every weekday pair shares at least 12 UTC hours. We take each hour's median, the median of the matching hours for each day, then the median of the seven daily summaries in each period. Hours with more collection requests therefore receive no extra weight. Repeated reports can reflect the same CBP reading; they are not independent measurements from travelers.
 
-The publication filter requires a change of at least 15 minutes and 25%, separation between the central ranges of daily summaries and matching direction in at least six weekday pairs. This is not a statistical significance test. Missing values are excluded; zero counts only when the source records zero. Coverage excludes Ready, SENTRI, pedestrians, commercial vehicles and southbound travel. UTC dates can include parts of two local days.
+The publication filter requires a change of at least 15 minutes and 25%, separation between the central ranges of daily summaries and matching direction in at least six weekday pairs. This is not a statistical significance test. Missing values are excluded; zero counts only when the source records zero. Different weekday pairs can cover different hours, as listed above; these are matched-hour summaries, not full-day estimates. Coverage excludes Ready, SENTRI, pedestrians, commercial vehicles and southbound travel. UTC dates can include parts of two local days.
 
 ## Using this report
 
