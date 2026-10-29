@@ -114,32 +114,24 @@
 
 @utility bp-shell {
   background-color: #f6f8f7;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(
-      135deg,
-      rgba(16, 185, 129, 0.08),
-      transparent 34%,
-      rgba(14, 165, 233, 0.07)
-    );
-  background-size:
-    32px 32px,
-    32px 32px,
-    100% 100%;
+}
+
+/* Short, interruptible presentation feedback. Report numerals, status colors
+   and freshness clocks update directly, with no interpolation or pulse. */
+@media (prefers-reduced-motion: no-preference) {
+  .bp-result-enter { animation: bp-result-enter 140ms ease-out; }
+  .bp-panel-enter { animation: bp-panel-enter 160ms ease-out; }
+  details:not([open]) > .bp-panel-enter { animation: none; }
+  .bp-disclosure-icon { transition: transform 160ms ease-out; }
+  @keyframes bp-result-enter { from { opacity: 0.85; } to { opacity: 1; } }
+  @keyframes bp-panel-enter {
+    from { opacity: 0.7; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
 @utility bp-shell-dark {
   background-color: #020617;
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-    linear-gradient(
-      135deg,
-      rgba(16, 185, 129, 0.08),
-      transparent 38%,
-      rgba(244, 63, 94, 0.08)
-    );
 }
 
 @utility bp-line {

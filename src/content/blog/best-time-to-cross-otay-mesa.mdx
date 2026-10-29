@@ -3,7 +3,7 @@ title: "Best time to cross Otay Mesa: hour by hour from 30 days of CBP data"
 description: "Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest window: Saturday 5 to 7 AM at a 10 minute median. The Sunday evening peak to plan around."
 slug: best-time-to-cross-otay-mesa
 date: "2026-04-24"
-updated: "2026-07-27"
+updated: "2026-10-29"
 author: sebastian
 pillar: data-analysis
 lang: en
@@ -23,6 +23,9 @@ officialSources:
   - label: "CBP SENTRI program"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
+
+> **Historical analysis.** Fixed figures describe the article’s dated sample. Charts use separately published history. Check their source dates and the latest lane reports before traveling.
+
 
 Otay Mesa is the second-busiest commercial crossing on the U.S.-Mexico border and the de facto overflow lane for San Ysidro. The 30-day median northbound wait at Otay is **90 minutes**, a full 30 minutes lighter than San Ysidro. The cheapest window all week is pre-dawn Saturday: **5, 6 and 7 AM all median 10 minutes**, and pooled across all seven days the lightest hour on the clock is 6 AM at 60. The worst window is the **Sunday evening return peak, where 7, 8 and 9 PM all median 210 minutes**. Saturday evening, by contrast, is mild: 7 PM sits at 60.
 
@@ -67,4 +70,4 @@ Otay has a SENTRI lane for Trusted Traveler Program members. The lane is open du
 
 ## How we compute these numbers
 
-The Border Pulse cron pulls the official CBP wait time for Otay Mesa and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. Because a 7 by 24 grid is finer than the refresh cadence can fill, each cell is estimated from a window centred on that hour, widened to at most two hours either side and only as far as it needs to go. Cells that still fall short of five observations are shown as "not enough data" instead of a number. We never pool across days, because the day of week is the pattern. The window is rolling, so these figures move as new snapshots arrive and older ones age out. The numbers quoted on this page were recomputed on July 27, 2026; the live chart above always reflects the current window. We use median, not mean, because a single 200 minute outlier can drag the average without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), which is the canonical source.
+The Border Pulse cron pulls the official CBP wait time for Otay Mesa and stores a snapshot. The chart above is the **median** wait per (day of week, hour of day) cell across the last 30 days of those snapshots. Because a 7 by 24 grid is finer than the refresh cadence can fill, each cell is estimated from a window centred on that hour, widened to at most two hours either side and only as far as it needs to go. Cells that still fall short of five observations are shown as "not enough data" instead of a number. We never pool across days, because the day of week is the pattern. The window is rolling, so these figures move as new snapshots arrive and older ones age out. The numbers quoted on this page were recomputed on July 27, 2026; the embedded chart shows separately published history; check its source dates and sample coverage. We use median, not mean, because a single 200 minute outlier can drag the average without telling you anything about the typical hour. Every number on this page comes from the [CBP BWT feed](https://bwt.cbp.gov/), which is the canonical source.

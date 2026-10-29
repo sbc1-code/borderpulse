@@ -111,8 +111,8 @@ export function BestTimeIndex() {
 
   useEffect(() => {
     const title = language === 'en'
-      ? 'Best time to cross every U.S.-Mexico border crossing | Border Pulse'
-      : 'Mejor hora para cruzar cada cruce fronterizo EE.UU.-México | Border Pulse';
+      ? 'Best time to cross: historical patterns by crossing | Border Pulse'
+      : 'Mejor hora para cruzar: patrones históricos por cruce | Border Pulse';
     const crossingCount = crossings.length;
     const description = language === 'en'
       ? `Historical lightest hour for each crossing’s local weekday, based on the last 30 days of standard-passenger CBP data. Not a forecast.${crossingCount ? ` ${crossingCount} crossings, hour by hour.` : ''}`
@@ -167,8 +167,8 @@ export function BestTimeIndex() {
       <header className="mb-5">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
           {language === 'en'
-            ? 'Best time to cross every U.S.-Mexico border crossing'
-            : 'Mejor hora para cruzar cada cruce EE.UU.-México'}
+            ? 'Best time to cross: historical patterns by crossing'
+            : 'Mejor hora para cruzar: patrones históricos por cruce'}
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'

@@ -49,7 +49,7 @@ function renderCrossingHead(crossing, slug, aggregate) {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
   const title = crossingSearchTitle(crossing, 'en', cameraSourceFor(crossing.port_number)?.kind);
-  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and historical standard-passenger wait patterns.`;
+  const desc = `Reported ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and historical standard-passenger wait patterns.`;
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
@@ -345,7 +345,7 @@ function renderBestTimeHead(crossing, slug, aggregate) {
 
 function renderEmbedHead(crossing, slug) {
   const title = `${crossing.name} wait time | Border Pulse`;
-  const desc = `Live wait time at ${crossing.name}, refreshed regularly.`;
+  const desc = `Reported wait time at ${crossing.name}, refreshed regularly.`;
   // Canonical points to the full crossing page so search engines consolidate
   // any accidental indexing on the canonical URL.
   const canonical = `${BASE}/crossing/${slug}/`;
@@ -613,7 +613,7 @@ async function main() {
     const enHead = {
       lang: 'en',
       title: 'Methodology | Border Pulse',
-      desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
+      desc: 'CBP sources, report and retrieval clocks, medians, historical coverage and BorderPulse limits.',
       canonical: enCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumbFor(enCanonical, 'Methodology')],
@@ -622,7 +622,7 @@ async function main() {
     const esHead = {
       lang: 'es',
       title: 'Metodología | Border Pulse',
-      desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
+      desc: 'Fuentes de CBP, horas de reporte y consulta, medianas, cobertura histórica y límites de BorderPulse.',
       canonical: esCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumbFor(esCanonical, 'Metodología')],
@@ -642,7 +642,7 @@ async function main() {
   {
     const aboutHead = {
       title: 'About Border Pulse | The U.S.-Mexico border wait time tracker',
-      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, refreshed regularly, with a 30-day rolling history.',
+      desc: 'Border Pulse is an independent, bilingual project that presents available northbound U.S.-Mexico crossing reports from official CBP data, refreshed regularly, with a 30-day rolling history.',
       canonical: `${BASE}/about/`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
@@ -729,7 +729,7 @@ async function main() {
       }),
     };
     const indexHead = {
-      title: 'Best time to cross every U.S.-Mexico border crossing | Border Pulse',
+      title: 'Best time to cross: historical patterns by crossing | Border Pulse',
       desc: `Historical lightest hour for each crossing’s local weekday, based on the last 30 days of standard-passenger CBP data. Not a forecast. ${crossings.length} crossings, hour by hour.`,
       canonical,
       ogImage: `${BASE}/og-card.png`,

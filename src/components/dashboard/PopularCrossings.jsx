@@ -31,8 +31,8 @@ export default function PopularCrossings({ crossings, language = 'en', lane }) {
       </h2>
       <p className="text-xs text-slate-500 mb-3">
         {language === 'en'
-          ? 'Live wait times, historical patterns, and best times to cross at each port.'
-          : 'Tiempos de espera en vivo, patrones históricos y mejores horas para cruzar en cada puerto.'}
+          ? 'Reported waits, historical patterns and crossing details. Availability varies by lane.'
+          : 'Esperas reportadas, patrones históricos y detalles de cada cruce. La disponibilidad varía por carril.'}
       </p>
       <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-1.5">
         {items.map((c) => (

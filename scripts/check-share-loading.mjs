@@ -39,6 +39,9 @@ export async function checkShareLoading(browser, baseUrl, viewport) {
       await page.route(chunkPattern, async route => { await successHold; await route.continue(); });
       await page.reload();
       await Promise.all([page.waitForRequest('**/assets/ShareModalContent-*.js', { timeout: 10_000 }), share().click()]);
+      // A requested chunk can precede React mounting the dialog and its Escape
+      // handler. Exercise dismissal only after the loading UI is present.
+      await dialog.getByRole('status').filter({ hasText: language === 'es' ? 'Cargando opciones' : 'Loading sharing' }).waitFor();
       await page.keyboard.press('Escape');
       await dialog.waitFor({ state: 'hidden' });
       const loaded = page.waitForResponse('**/assets/ShareModalContent-*.js', { timeout: 10_000 });
