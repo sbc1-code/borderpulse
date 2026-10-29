@@ -177,3 +177,13 @@ test('missing overnight hours are compared only with the same hours in the earli
   });
   assert.equal(selectReport(mismatch, [], now).status, 'skip');
 });
+
+
+test('receipt identities cannot resolve inherited object properties or unsupported categories', () => {
+  const receipt = selectReport(inputs(), [], now).receipt;
+  for (const port of ['__proto__', 'constructor', 'toString', '999999', ['250401']]) {
+    assert.throws(() => validateReceipt({...receipt,port}), /identity/);
+    assert.throws(() => renderPost({...receipt,port}, 'en'), /identity/);
+  }
+  assert.throws(() => validateReceipt({...receipt,category:'immigration-advice'}), /category/);
+});

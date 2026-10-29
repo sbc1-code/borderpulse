@@ -134,7 +134,7 @@ export function selectReport(inputs, existing, now = Date.now()) {
 
 export const evidenceName = receipt => `observed-waits-${receipt.publicationDate}`;
 export function renderPost(receipt, lang) {
-  const meta = PORTS[receipt.port];
+  const meta = typeof receipt.port === 'string' && Object.hasOwn(PORTS, receipt.port) ? PORTS[receipt.port] : null;
   requireValue(meta && ['en', 'es'].includes(lang), 'Unsupported report identity or language');
   const s = receipt.summary, es = lang === 'es', base = evidenceName(receipt);
   const slug = base + (es ? '-es' : '');
@@ -209,7 +209,7 @@ The change provides planning context, but cannot guarantee an arrival time, tota
 
 export function validateReceipt(receipt) {
   requireValue(receipt.version === VERSION && receipt.category === 'historical-operational-report', 'Unsupported autonomous report category');
-  requireValue(PORTS[receipt.port] && isIso(receipt.publishedAt) && receipt.publicationDate === date(receipt.publishedAt), 'Invalid receipt identity/date');
+  requireValue(typeof receipt.port === 'string' && Object.hasOwn(PORTS, receipt.port) && isIso(receipt.publishedAt) && receipt.publicationDate === date(receipt.publishedAt), 'Invalid receipt identity/date');
   requireValue(/^[a-f0-9]{40}$/.test(receipt.sourceCommit) && receipt.sourceUrl === 'https://bwt.cbp.gov/api/bwtpublicmod', 'Invalid source provenance');
   for (const timestamp of [receipt.fetchedAt, receipt.historyGeneratedAt]) {
     const age = Date.parse(receipt.publishedAt) - Date.parse(timestamp);
