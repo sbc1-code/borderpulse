@@ -1,9 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Copy, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DEFAULT_LANE, laneLabel, withLane } from '@/lib/laneContext';
 import { track } from '@/lib/analytics';
+
+const getShareApi = () => {
+  try {
+    if (typeof navigator === 'undefined') return null;
+    const fn = navigator.share;
+    return typeof fn === 'function' ? fn.bind(navigator) : null;
+  } catch {
+    return null;
+  }
+};
+
+const getClipboardWriteText = () => {
+  try {
+    if (typeof navigator === 'undefined') return null;
+    const clip = navigator.clipboard;
+    if (!clip) return null;
+    const fn = clip.writeText;
+    return typeof fn === 'function' ? fn.bind(clip) : null;
+  } catch {
+    return null;
+  }
+};
 
 export default function CrossingShare({ name, slug, language = 'en', lane = DEFAULT_LANE }) {
   const es = language === 'es';
@@ -13,24 +35,83 @@ export default function CrossingShare({ name, slug, language = 'en', lane = DEFA
     ? `Consulta los tiempos de espera y horarios de ${name} (${laneLabel(lane, language)}) en BorderPulse.`
     : `Check ${name} (${laneLabel(lane, language)}) wait times and crossing hours on BorderPulse.`;
 
-  const copy = async () => {
+  const contextKey = `${slug}|${lane}|${language}|${name}|${url}|${text}`;
+  const contextTokenRef = useRef(null);
+  const pendingRef = useRef(false);
+
+  useLayoutEffect(() => {
+    const token = {};
+    contextTokenRef.current = token;
+    pendingRef.current = false;
+    setStatus('');
+
+    return () => {
+      contextTokenRef.current = null;
+      pendingRef.current = false;
+    };
+  }, [contextKey]);
+
+  const performCopy = async (activeToken, targetUrl, isEs, targetSlug) => {
     try {
-      await navigator.clipboard.writeText(url);
-      setStatus(es ? 'Enlace copiado.' : 'Link copied.');
-      track('crossing-share', { slug, method: 'copy' });
+      const writeText = getClipboardWriteText();
+      if (!writeText) {
+        throw new Error('Clipboard API unavailable');
+      }
+      await writeText(targetUrl);
+      if (contextTokenRef.current !== activeToken) return;
+      setStatus(isEs ? 'Enlace copiado.' : 'Link copied.');
+      track('crossing-share', { slug: targetSlug, method: 'copy' });
     } catch {
-      setStatus(es ? 'Copia el enlace desde la barra de direcciones.' : 'Copy the link from your address bar.');
+      if (contextTokenRef.current !== activeToken) return;
+      setStatus(isEs ? 'Copia el enlace desde la barra de direcciones.' : 'Copy the link from your address bar.');
+    }
+  };
+
+  const copy = async () => {
+    if (pendingRef.current) return;
+    const activeToken = contextTokenRef.current;
+    if (!activeToken) return;
+    pendingRef.current = true;
+    try {
+      await performCopy(activeToken, url, es, slug);
+    } finally {
+      if (contextTokenRef.current === activeToken) {
+        pendingRef.current = false;
+      }
     }
   };
 
   const share = async () => {
-    if (!navigator.share) return copy();
+    if (pendingRef.current) return;
+    const activeToken = contextTokenRef.current;
+    if (!activeToken) return;
+    pendingRef.current = true;
+
     try {
-      await navigator.share({ title: `${name} | BorderPulse`, text, url });
-      setStatus('');
-      track('crossing-share', { slug, method: 'native' });
-    } catch (error) {
-      if (error.name !== 'AbortError') await copy();
+      const shareFn = getShareApi();
+      if (!shareFn) {
+        await performCopy(activeToken, url, es, slug);
+        return;
+      }
+      try {
+        await shareFn({ title: `${name} | BorderPulse`, text, url });
+        if (contextTokenRef.current !== activeToken) return;
+        setStatus('');
+        track('crossing-share', { slug, method: 'native' });
+      } catch (error) {
+        if (contextTokenRef.current !== activeToken) return;
+        if (error?.name !== 'AbortError') {
+          await performCopy(activeToken, url, es, slug);
+        }
+      }
+    } catch {
+      if (contextTokenRef.current === activeToken) {
+        await performCopy(activeToken, url, es, slug);
+      }
+    } finally {
+      if (contextTokenRef.current === activeToken) {
+        pendingRef.current = false;
+      }
     }
   };
 

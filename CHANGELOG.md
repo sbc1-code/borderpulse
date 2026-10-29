@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-10-29 — Keep crossing-share results tied to the current page (review candidate)
+
+- Ignore obsolete copy/native-share results after crossing, lane, language or
+  name changes and unmount; keep pending actions bounded and current retries
+  functional through React effect cleanup/replay.
+- Preserve browser API receivers, cancellation, honest unavailable/denied-copy
+  feedback, existing URLs, WhatsApp payloads and analytics fields.
+- Add actual-component regressions to the normal test pipeline. Test bundles
+  use isolated temporary files and the existing project React installation.
+- Implementation by Google Jules; independent review, test-harness corrections
+  and integration by ChatGPT (Codex), directed by Sebastian. Local review
+  candidate only; production publication requires separate approval.
+
 ## 2026-10-29 — Daily evidence-led blog pilot (release candidate)
 
 - Add a Pacific-morning daily attempt using AI-assisted bilingual templates,
