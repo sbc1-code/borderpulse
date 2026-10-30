@@ -1,0 +1,169 @@
+{
+  "version": "borderpulse-editorial-v1",
+  "id": "2026-10-29-california-road-information-tools",
+  "topicKey": "california-road-information-tools",
+  "category": "source-explainer",
+  "createdAt": "2026-10-29T23:06:20.000Z",
+  "synthesizedBy": {
+    "system": "chatgpt-interactive",
+    "runId": "root/prepare_borderpulse_editorial_bundle/2026-10-29",
+    "model": null,
+    "at": "2026-10-29T23:06:20.000Z"
+  },
+  "title": {
+    "en": "California border trips: where to look up road conditions",
+    "es": "Viajes fronterizos por California: dónde consultar el estado de las carreteras"
+  },
+  "readerValue": {
+    "en": "A short guide to choosing an official road-information resource for the California portion of a border trip, without claiming a particular road or crossing is clear.",
+    "es": "Una guía breve para elegir una fuente oficial de información vial para el tramo de California de un viaje fronterizo, sin afirmar que una carretera o un cruce estén despejados."
+  },
+  "relatedCrossings": [],
+  "sources": [
+    {
+      "id": "caltrans-travel",
+      "url": "https://dot.ca.gov/travel",
+      "title": "Caltrans Travel",
+      "role": "primary",
+      "publishedDate": null,
+      "publishedAt": null,
+      "checkedAt": "2026-10-29T23:04:50.000Z",
+      "publicationDateEvidence": null
+    },
+    {
+      "id": "caltrans-regional-information",
+      "url": "https://dot.ca.gov/programs/traffic-operations/traveler-information/511",
+      "title": "Caltrans regional traveler information",
+      "role": "primary",
+      "publishedDate": null,
+      "publishedAt": null,
+      "checkedAt": "2026-10-29T23:05:15.000Z",
+      "publicationDateEvidence": null
+    }
+  ],
+  "claims": [
+    {
+      "id": "choose-road-tool",
+      "type": "background",
+      "text": {
+        "en": "Caltrans provides several road-information tools through its Travel page. QuickMap is its linked option for traffic conditions; another tool searches reported restrictions by highway number.",
+        "es": "Caltrans reúne varias herramientas de información vial en su página Travel. QuickMap es la opción enlazada para consultar el tráfico; otra herramienta permite buscar restricciones reportadas por número de carretera."
+      },
+      "evidence": [
+        {
+          "sourceId": "caltrans-travel",
+          "excerpt": "QuickMap"
+        },
+        {
+          "sourceId": "caltrans-travel",
+          "excerpt": "Enter Highway Number to find the current reported traffic restrictions."
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "Caltrans",
+        "QuickMap"
+      ]
+    },
+    {
+      "id": "camera-views",
+      "type": "background",
+      "text": {
+        "en": "For a visual view, the same directory links to traffic cameras by region or area, with both list and map access.",
+        "es": "Para una consulta visual, ese mismo directorio enlaza cámaras de tráfico por región o zona y ofrece acceso mediante una lista o un mapa."
+      },
+      "evidence": [
+        {
+          "sourceId": "caltrans-travel",
+          "excerpt": "View live traffic conditions by regions and areas."
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": []
+    },
+    {
+      "id": "regional-information",
+      "type": "background",
+      "text": {
+        "en": "Caltrans describes 511 as a regional traveler-information service: a call is routed according to the caller's region. Its directory includes a San Diego regional service. Caltrans also notes that many regional systems offer web information and multimodal trip-planning resources; available features depend on the system.",
+        "es": "Caltrans describe el 511 como un servicio regional de información para viajeros: la llamada se dirige según la región desde la que se realiza. Su directorio incluye un servicio regional de San Diego. También señala que muchos sistemas ofrecen información web y recursos para planear viajes multimodales; las funciones disponibles dependen del sistema."
+      },
+      "evidence": [
+        {
+          "sourceId": "caltrans-regional-information",
+          "excerpt": "511 three-digit number routes the call to the region"
+        },
+        {
+          "sourceId": "caltrans-regional-information",
+          "excerpt": "multimodal planning, trip planning, ridesharing"
+        },
+        {
+          "sourceId": "caltrans-regional-information",
+          "excerpt": "San Diego Region 511"
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "Caltrans",
+        "511",
+        "San Diego"
+      ]
+    },
+    {
+      "id": "practical-use",
+      "type": "inference",
+      "text": {
+        "en": "For the California portion of a border trip, choose the tool that matches your question: a road-number lookup, a camera view, or regional travel information. This guide identifies resources; it does not establish conditions for your trip.",
+        "es": "Para el tramo de California de un viaje fronterizo, elige la herramienta que responda a tu pregunta: una búsqueda por carretera, una cámara o información regional. Esta guía identifica recursos; no confirma las condiciones de tu viaje."
+      },
+      "evidence": [
+        {
+          "sourceId": "caltrans-travel",
+          "excerpt": "QuickMap"
+        },
+        {
+          "sourceId": "caltrans-regional-information",
+          "excerpt": "San Diego Region 511"
+        }
+      ],
+      "basisClaimIds": [
+        "choose-road-tool",
+        "camera-views",
+        "regional-information"
+      ],
+      "preserveTerms": [
+        "California"
+      ]
+    }
+  ],
+  "articleClaimIds": [
+    "choose-road-tool",
+    "camera-views",
+    "regional-information",
+    "practical-use"
+  ],
+  "review": {
+    "performedBy": {
+      "system": "chatgpt-interactive",
+      "runId": "root/prepare_borderpulse_editorial_bundle/2026-10-29/self-review",
+      "model": null,
+      "at": "2026-10-29T23:07:45.962Z"
+    },
+    "method": "ai-source-and-language-review",
+    "claimIdsChecked": [
+      "choose-road-tool",
+      "camera-views",
+      "regional-information",
+      "practical-use"
+    ],
+    "semanticSupport": "pass",
+    "scopeAndDates": "pass",
+    "riskClassification": "routine-factual-reporting",
+    "translationConsistency": "pass",
+    "duplicateTopicCheck": "pass",
+    "headlineAndReaderValue": "pass",
+    "sourceInstructionsIgnored": true,
+    "holds": [],
+    "rationale": "Author completed same-agent source/language review and searched all 36 current blog source bodies for QuickMap, Caltrans and 511 with no matches. A distinct AI reviewer, root/review_borderpulse_editorial_evidence, independently read both complete web-extracted primary pages and checked all four EN/ES claims, titles, scope, dates, risk and quotation totals at 2026-10-29T23:10:08.587Z; no blocking correction found. Its recommended Spanish headline precision was adopted. This is AI review, not human review or direct-origin freshness certification. Receiver source re-fetch and publication dry-run remain required before activation."
+  }
+}
