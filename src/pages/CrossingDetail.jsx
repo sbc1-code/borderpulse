@@ -24,6 +24,7 @@ import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { readFavorites } from '@/lib/browserStorage';
 import HistoricalPattern from '@/components/dashboard/HistoricalPattern';
+import { recentTimelineEntries, RECENT_TIMELINE_DAYS } from '@/lib/timelineFreshness';
 import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
@@ -229,6 +230,7 @@ export default function CrossingDetail() {
   });
   const [aggregate, setAggregate] = useState(null);
   const [timeline, setTimeline] = useState(null);
+  const recentEntries = recentTimelineEntries(timeline?.entries);
   const [nearbyAggregates, setNearbyAggregates] = useState({}); // { port_number: aggregate|null }
   const [embedOpen, setEmbedOpen] = useState(false);
   const [anomalies, setAnomalies] = useState(null);
@@ -729,18 +731,18 @@ export default function CrossingDetail() {
         </section>
       )}
 
-      {timeline && timeline.entries && timeline.entries.length > 0 && (
+      {recentEntries.length > 0 && (
         <section className="mb-6">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
             {language === 'en' ? 'Recent at this crossing' : 'Reciente en este cruce'}
           </h2>
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? `Curated from public news and government feeds. ${timeline.entries.length} item${timeline.entries.length === 1 ? '' : 's'}.`
-              : `Curado de noticias públicas y feeds gubernamentales. ${timeline.entries.length} entrada${timeline.entries.length === 1 ? '' : 's'}.`}
+              ? `From public news and government feeds, published within the past ${RECENT_TIMELINE_DAYS} days. ${recentEntries.length} item${recentEntries.length === 1 ? '' : 's'}.`
+              : `De noticias públicas y fuentes gubernamentales, publicadas en los últimos ${RECENT_TIMELINE_DAYS} días. ${recentEntries.length} entrada${recentEntries.length === 1 ? '' : 's'}.`}
           </p>
           <div className="space-y-3">
-            {timeline.entries.slice(0, 8).map((e) => (
+            {recentEntries.map((e) => (
               <Card key={e.id || e.url}>
                 <CardContent className="p-4">
                   <div className="flex items-baseline justify-between gap-3 mb-1">

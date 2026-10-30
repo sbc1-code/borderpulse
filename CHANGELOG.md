@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-10-30 — Keep old crossing news out of the recent section
+
+- Show only stories with valid, non-future publication dates within 30 days;
+  state that window in English and Spanish and hide the section when empty.
+- Preserve historical timeline files, source links and original dates. Fetch
+  or timeline-update timestamps do not refresh an old story.
+- Regression coverage includes the March 31 San Ysidro card and time boundaries.
+
 ## 2026-10-30 — Simplify automated blog presentation
 
 - Remove reader-facing AI authorship labels from bilingual article summaries,
