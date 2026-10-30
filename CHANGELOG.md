@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2026-10-29 — Keep crossing-share results tied to the current page
+
+- Ignore obsolete copy/native-share results after crossing, lane, language or
+  name changes and unmount; keep pending actions bounded and current retries
+  functional through React effect cleanup/replay.
+- Preserve browser API receivers, cancellation, honest unavailable/denied-copy
+  feedback, existing URLs, WhatsApp payloads and analytics fields.
+- Add actual-component regressions to the normal test pipeline. Test bundles
+  use isolated temporary files and the existing project React installation.
+- Implementation by Google Jules; independent review, test-harness corrections
+  and integration by ChatGPT (Codex), directed by Sebastian. Publication
+  explicitly authorized October 29; exact-head checks and deployment/live
+  verification are recorded in PR #157.
+
 ## 2026-10-29 (Pacific) — Authorized UI/motion/content release preparation
 
 Updated by ChatGPT (Codex), directed by Sebastian's explicit “Push it to prod after QC and security checks.” Integrate only the reviewed presentation, motion and existing-information corrections with current main, retaining the already published daily-blog pipeline and data snapshots. Preserve both changelog histories; no publisher, schedule, credential, permission or schema-policy edits are part of this candidate. Final security/QC, protected-PR and production receipts belong in the release PR and private review record; this entry does not claim an unperformed deployment.
