@@ -1,12 +1,26 @@
 # CHANGELOG
 
-## 2026-10-30 — Resolve editorial push inputs from Git trees (review candidate)
+## 2026-10-30 — Resolve editorial push inputs from Git trees
 
 - Fix connector-triggered intake: GitHub Actions omits added/modified file
   arrays from push payloads. Resolve exactly one added/modified inbox file
   from the push range, fetching only missing commit objects in shallow clones.
 - Bind the publishing attempt to that input blob, retaining the one-input rule,
   evidence/review checks, original bundle dates and disabled ingestion state.
+
+## 2026-10-29 — Keep crossing-share results tied to the current page
+
+- Ignore obsolete copy/native-share results after crossing, lane, language or
+  name changes and unmount; keep pending actions bounded and current retries
+  functional through React effect cleanup/replay.
+- Preserve browser API receivers, cancellation, honest unavailable/denied-copy
+  feedback, existing URLs, WhatsApp payloads and analytics fields.
+- Add actual-component regressions to the normal test pipeline. Test bundles
+  use isolated temporary files and the existing project React installation.
+- Implementation by Google Jules; independent review, test-harness corrections
+  and integration by ChatGPT (Codex), directed by Sebastian. Publication
+  explicitly authorized October 29; exact-head checks and deployment/live
+  verification are recorded in PR #157.
 
 ## 2026-10-29 (Pacific) — Authorized UI/motion/content release preparation
 
@@ -702,7 +716,6 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-19
 
-<<<<<<< HEAD
 ### Added
 - **Blueprint Border Line on the dashboard.** The border drawn as an
   architect's elevation: one line from the Pacific to the Gulf, all 42 ports
@@ -719,8 +732,7 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   `npm test`). There was no size check and the entry chunk had already
   drifted from a documented ~161 KB to 177 KB with nothing to catch it.
 
-=======
->>>>>>> origin/main
+
 ### Fixed
 - **Port identity is pinned; CBP renames can no longer move a URL.** CBP's feed
   intermittently substitutes a different row for the same physical crossing
@@ -742,15 +754,13 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   exactly to 42.
 - **Southbound restored for Ysleta**, which was failing silently on a stale
   `240203` key in `fetch-sb.mjs`. Coordinate coverage 40/44 -> 42/42.
-<<<<<<< HEAD
 - **Border Line i18n and tap-target gaps caught in verification.** The SVG
   title block rendered "42 CROSSINGS · 18 CON DATOS" in Spanish (half
   translated) and the `<desc>` was English-only; both are localised now.
   Mobile tick rows measured 23 CSS px at a 375px viewport (iPhone SE/mini),
   just under the 24x24 AA floor, because the SVG scales down inside a
   narrower screen — row height raised so it clears at 375px too.
-=======
->>>>>>> origin/main
+
 - **Accessibility: single `<h1>` and WCAG 2.2 tap targets.** The sidebar brand
   was an `<h1>` inside `hidden lg:flex`, so every page had two h1s at every
   width. Controls raised to a 24x24 floor with 44x44 on primary actions, via a
