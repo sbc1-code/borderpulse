@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-10-30 — Additive crossing console (review candidate)
+
+- Add a lazy, bilingual San Ysidro/Otay corridor view from the existing area dashboard, with geographic waits, shared-element report details and transparent extra-drive arithmetic.
+- Reuse existing CBP refresh, availability, report-clock and freshness rules; suppress current arithmetic for untrusted retrievals. Load actual Standard-only replay observations on request, preserving gaps and source times.
+- Keep the dashboard, global navigation, PR160 presentation, PR161 news freshness, daily editorial, publishing and dependencies unchanged. Add model/browser coverage and repository-visible screenshots. Exact-head QC/CI and preview evidence belong in the draft PR; no production publication is claimed.
+- Correct intermediate-width map registration with one projection for geography and port anchors; translate the Spanish ocean label and retain fully missing replay retrievals as gaps. Add live-resize registration/occlusion tests, clean mobile/720px captures and a local integrated motion recording.
+
 ## 2026-10-30 — Keep old crossing news out of the recent section
 
 - Show only stories with valid, non-future publication dates within 30 days;

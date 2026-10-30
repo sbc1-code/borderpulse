@@ -24,6 +24,7 @@ import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
 import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
 import { checkBuiltHreflangs, checkHreflangNavigation } from './check-hreflang.mjs';
 import { checkDocumentLanguage } from './check-document-language.mjs';
+import { checkCrossingConsole } from './check-crossing-console.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -330,6 +331,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   }
 
   try {
+    await checkCrossingConsole(browser, baseUrl, profile.viewport);
     await checkGrowthInteractions(page, context, baseUrl);
     await checkBrowserResilience(page, context, baseUrl);
     await checkHistoricalPatterns(page, context, baseUrl);

@@ -21,6 +21,8 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [~] Review the additive bilingual San Ysidro/Otay crossing console with geographic reports, meaningful motion, observed replay and user-entered detour arithmetic. Draft PR, exact-head QC/CI and a protected preview precede any merge; the existing dashboard and editorial remain.
+
 - [x] Preserve chosen lane through local comparison, crossing detail and sharing
   (PR #152, production `75d80e1`, run `40609553503`). Current waits are labeled by
   lane; aggregate history remains explicitly Standard. Exact-head and live QA pass.

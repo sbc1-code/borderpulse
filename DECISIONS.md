@@ -518,3 +518,7 @@ performs mechanical evidence/release checks; it does not pretend that a schema
 proves semantic entailment. No extra authoring schedule, model credential or
 public-repo export of local account authentication is added by the receiver.
 Activation waits for the actual cloud source/tool/connector dry run.
+
+## 2026-10-30 · Add the crossing console alongside the proven dashboard
+
+The first corridor console is a lazy, reversible route for San Ysidro/Otay, not a dashboard replacement. Current data uses existing trust/availability guards; Standard-only historical observations are a separate, on-request replay. User-entered driving time supports explicit arithmetic, not routing or forecasting. Preserve existing editorial and publication paths; release follows exact-head review and QC.
