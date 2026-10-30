@@ -7,14 +7,16 @@
   },
   "borderpulse-automated": {
     "id": "borderpulse-automated",
-    "name": "BorderPulse Automated Reports",
+    "name": "BorderPulse",
     "url": "https://borderpulse.com/about",
-    "bio": "Automated CBP data reports using AI-assisted templates. No individual human review."
+    "bio": "Automated CBP data reports using AI-assisted templates. No individual human review.",
+    "type": "Organization"
   },
   "borderpulse-editorial-ai": {
     "id": "borderpulse-editorial-ai",
-    "name": "BorderPulse AI Editorial",
+    "name": "BorderPulse",
     "url": "https://borderpulse.com/about",
-    "bio": "AI-written bilingual reports with recorded source and language review. No individual human review."
+    "bio": "AI-written bilingual reports with recorded source and language review. No individual human review.",
+    "type": "Organization"
   }
 }

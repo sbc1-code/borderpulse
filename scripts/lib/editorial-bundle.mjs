@@ -161,8 +161,8 @@ export function renderEditorial(receipt, lang, draft = false) {
   assert(['en','es'].includes(lang), 'Unsupported editorial language');
   const b = receipt.bundle, es = lang === 'es', slug = b.id + (es ? '-es' : '');
   const fm = {title:b.title[lang],description:es
-    ? 'Informe redactado por IA con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.'
-    : 'An AI-written report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.',
+    ? 'Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.'
+    : 'A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.',
     slug,date:receipt.admittedAt.slice(0,10),author:'borderpulse-editorial-ai',pillar:'traveler-tips',lang,
     tags:['source-checked',b.category],translationKey:b.id,relatedCrossings:b.relatedCrossings,
     officialSources:b.sources.filter(s=>s.role==='primary').map(s=>({label:s.title,url:s.url})),draft,source:'ai-editorial',humanEdited:false,
@@ -173,7 +173,7 @@ export function renderEditorial(receipt, lang, draft = false) {
     return {label,text:plainText(c.text[lang]),sources:refs.map(s=>({label:plainText(s.title),url:canonicalUrl(s.url)}))};});
   const disclosure=es?'Redactado y revisado por IA. Sin revisión humana individual.':'Written and reviewed by AI. No individual human review.';
   const dates=primary.map(s=>({label:plainText(s.title),url:canonicalUrl(s.url),published:s.publishedAt || (s.publishedDate ? s.publishedDate + (es?' (hora no indicada)':' (time not stated)') : (es?'no indicada':'not stated'))}));
-  const limits=es?'Las fuentes y fechas citadas delimitan este artículo. La revisión de IA puede pasar por alto contexto o diferencias de traducción; consulta la fuente enlazada para ver el aviso completo y sus actualizaciones.':'The cited sources and dates bound this article. AI review can miss context or translation differences; read the linked source for the complete notice and later updates.';
+  const limits=es?'Las fuentes y fechas citadas delimitan este artículo. Los resúmenes y las traducciones pueden omitir contexto; consulta la fuente enlazada para ver el aviso completo y sus actualizaciones.':'The cited sources and dates bound this article. Summaries and translations can miss context; read the linked source for the complete notice and later updates.';
   fm.editorialArticle={version:'borderpulse-editorial-article-v1',disclosure,paragraphs,sourcesHeading:es?'Fuentes y límites':'Sources and limits',
     dates,publishedLabel:es?'publicación':'published',verifiedLabel:es?'verificada':'verified',verifiedAt:receipt.admittedAt,limits,
     evidence:{label:es?'Registro de evidencia y revisión':'Evidence and review record',url:`https://borderpulse.com/data/editorial-evidence/${b.id}.json`}};

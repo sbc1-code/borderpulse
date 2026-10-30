@@ -151,9 +151,7 @@ export function renderPost(receipt, lang) {
     draft: false, source: 'daily-pilot', humanEdited: false, evidenceReceipt: `${base}.json`, evidenceFingerprint: receipt.fingerprint,
   };
   const table = s.days.map(d => es ? `- **${d.date}:** ${d.median} min; ${d.samples} reportes retenidos; horas UTC: ${d.hours.join(", ")}.` : `- **${d.date}:** ${d.median} min; ${d.samples} retained reports; UTC hours: ${d.hours.join(", ")}.`).join('\n');
-  const body = es ? `**Informe automatizado con plantillas redactadas con asistencia de IA. No tuvo revisión humana individual.**
-
-En ${meta.name}, la mediana de los resúmenes diarios de espera reportada para vehículos particulares en carriles Standard hacia EE. UU. pasó de **${s.priorMedian} min** (${s.priorStart} a ${s.priorEnd}) a **${s.recentMedian} min** (${s.recentStart} a ${s.recentEnd}). Son periodos completos en UTC, comparados solo en las horas coincidentes con suficientes reportes de cada par de días. Es una comparación histórica de reportes retenidos, no una espera actual ni una predicción.
+  const body = es ? `En ${meta.name}, la mediana de los resúmenes diarios de espera reportada para vehículos particulares en carriles Standard hacia EE. UU. pasó de **${s.priorMedian} min** (${s.priorStart} a ${s.priorEnd}) a **${s.recentMedian} min** (${s.recentStart} a ${s.recentEnd}). Son periodos completos en UTC, comparados solo en las horas coincidentes con suficientes reportes de cada par de días. Es una comparación histórica de reportes retenidos, no una espera actual ni una predicción.
 
 ## Qué muestran los datos
 
@@ -177,9 +175,7 @@ El cambio sirve como contexto para planear, pero no permite garantizar una hora 
 - [CBP Border Wait Times](https://bwt.cbp.gov/): fuente primaria. Última consulta del archivo: ${receipt.fetchedAt}.
 - [Archivo histórico en la revisión utilizada](${sourceUrl}). Archivo generado: ${receipt.historyGeneratedAt}.
 - [Evidencia de este informe, observaciones y cálculos](${evidenceUrl}). Preparado para publicación automatizada: ${receipt.publishedAt}.
-` : `**Automated report using AI-assisted editorial templates. No individual human review.**
-
-At ${meta.name}, the median of daily summaries of reported northbound Standard passenger-vehicle waits changed from **${s.priorMedian} min** (${s.priorStart} to ${s.priorEnd}) to **${s.recentMedian} min** (${s.recentStart} to ${s.recentEnd}). Both are complete UTC periods, compared only at matching well-sampled hours within each weekday pair. This compares retained historical reports; it is not a current wait or a forecast.
+` : `At ${meta.name}, the median of daily summaries of reported northbound Standard passenger-vehicle waits changed from **${s.priorMedian} min** (${s.priorStart} to ${s.priorEnd}) to **${s.recentMedian} min** (${s.recentStart} to ${s.recentEnd}). Both are complete UTC periods, compared only at matching well-sampled hours within each weekday pair. This compares retained historical reports; it is not a current wait or a forecast.
 
 ## What the records show
 

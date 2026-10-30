@@ -7,7 +7,6 @@ export default function EditorialArticle({ article }) {
     throw new Error('Missing or unsupported editorial article data');
   }
   return h(Fragment, null,
-    h('p', null, h('strong', null, article.disclosure)),
     ...article.paragraphs.map((paragraph, index) => h('p', { key: `claim-${index}` },
       paragraph.label ? h('strong', null, paragraph.label + ' ') : null,
       paragraph.text,

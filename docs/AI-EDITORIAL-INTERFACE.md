@@ -152,8 +152,12 @@ node scripts/editorial-bundle.mjs check-published
 
 The plan contains one EN MDX file, one ES MDX file and the receipt in
 `public/data/editorial-evidence/`. Prepared posts are explicitly
-`source: ai-editorial`, `humanEdited: false`, with visible AI authorship. A
-plan is not a live publication and must not be represented as one.
+`source: ai-editorial`, `humanEdited: false`, and a machine author id. The
+reader-facing credit is the BorderPulse organization; AI authorship labels
+are hidden at the owner’s request (October 30, 2026 UTC). The unchanged public
+receipt preserves generation/review provenance, source checks and timestamps.
+This presentation choice does not claim human authorship or review. A plan is
+not a live publication and must not be represented as one.
 
 The receiver's guarded writer selects current main, revalidates/re-fetches on
 races, writes only those three exact files, runs the full existing build/test

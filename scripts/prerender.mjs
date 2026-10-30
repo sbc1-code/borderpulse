@@ -156,7 +156,7 @@ function renderBlogPostHead(post, author, allPosts) {
     datePublished,
     dateModified,
     author: {
-      '@type': 'Person',
+      '@type': author?.type || 'Person',
       name: author?.name || post.author,
       url: author?.url,
     },
