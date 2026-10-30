@@ -87,7 +87,7 @@ test('recorded pedestrian-report disappearance preserves the same sitemap and pr
     'https://borderpulse.com/walk-or-drive/santa-teresa-santa-teresa-port-of-entry/',
   ];
   try {
-    for (const dir of ['src/lib', 'src/components/utils', 'scripts/lib']) {
+    for (const dir of ['src/lib', 'src/components/utils', 'src/components/blog', 'scripts/lib']) {
       fs.cpSync(path.join(root, dir), path.join(temporary, dir), { recursive: true });
     }
     for (const file of ['scripts/build-sitemap.mjs', 'scripts/prerender.mjs']) {

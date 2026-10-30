@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import matter from 'gray-matter';
 import { compile } from '@mdx-js/mdx';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from './remark-mdx-frontmatter-local.mjs';
@@ -67,7 +68,7 @@ test('plan is read-only, publication files are a bilingual atomic unit, and rece
  fs.writeFileSync(path.join(root,en.path),en.content);fs.unlinkSync(path.join(root,plan.files.find(f=>f.path.endsWith('-es.mdx')).path));assert.throws(()=>validateEditorialPosts(root),/translation/);
  for(const f of plan.files)if(fs.existsSync(path.join(root,f.path)))fs.unlinkSync(path.join(root,f.path));assert.equal(validateEditorialPosts(root),0);
 });
-test('inferences require and display factual bases',async()=>{const b=bundle();b.claims[1].type='inference';assert.throws(()=>checkBundle(b,{now}),/basis/);b.claims[1].basisClaimIds=['date'];const r=await verifyBundle(b,{now,fetcher});assert.match(renderEditorial(r,'en'),/\*\*Interpretation:\*\*/);assert.match(renderEditorial(r,'es'),/\*\*Interpretación:\*\*/);});
+test('inferences require and display factual bases',async()=>{const b=bundle();b.claims[1].type='inference';assert.throws(()=>checkBundle(b,{now}),/basis/);b.claims[1].basisClaimIds=['date'];const r=await verifyBundle(b,{now,fetcher});assert.equal(matter(renderEditorial(r,'en')).data.editorialArticle.paragraphs[1].label,'Interpretation:');assert.equal(matter(renderEditorial(r,'es')).data.editorialArticle.paragraphs[1].label,'Interpretación:');});
 
 test('the actual blog index enforces the editorial receipt even if source metadata is relabeled',async t=>{
  const root=fixture(t);await prepareEditorial(root,bundle(),{now,fetcher,write:true});
