@@ -10,23 +10,37 @@ Review candidate at `/corridor/san-diego-tijuana/`. Enter from the existing dash
 
 These are local browser captures of the integrated application using the dated published data bundled with base `19713e904f6ad0d41ae20f727b82790e8284edb3`. They are visual implementation evidence, not claims about present crossing conditions or production deployment. The screenshots use the existing dark-theme control.
 
+### Responsive and motion review
+
+The original mobile full-page capture included a sticky header at a scrolled capture position. It has been replaced with a capture taken at scroll position zero. The clean viewport captures below show normal use before and after scrolling; the header stays at the top of the viewport. Both port controls were hit-tested as unobscured in the scrolled map views. The top-of-page screenshot naturally has content continuing below the viewport.
+
+![Spanish mobile at page top, 390 × 844](corridor-console-review/mobile-es-top.png)
+
+![Spanish mobile map after scrolling, 390 × 844](corridor-console-review/mobile-es-map.png)
+
+![Spanish map at intermediate width, 720 × 900](corridor-console-review/720px-es-map.png)
+
+![Spanish mobile report panel](corridor-console-review/mobile-es-detail.png)
+
+[Watch the 12-second integrated motion recording](corridor-console-review/motion-review.mp4). It records lane selection, the port-to-detail transition, keyboard historical replay and extra-drive input in the local built application. These are actual rendered interaction frames at 10 fps, using dated published data; it is not a deployed-preview recording or a smoothness measurement. [Capture metadata](corridor-console-review/capture-receipt.json) records the source state, viewport and scroll positions.
+
 ## Behavior and boundaries
 
 - Lazy route with scoped CSS and self-hosted licensed fonts. No new dependency or eager import of the console, archive or geographic assets.
 - Current reports use the existing `subscribeToBorderData` service and its refresh/fallback lifecycle. The existing port-hours, lane availability, exact canonical port identity and snapshot-freshness rules are reused. A stale, future, missing, failed or bundled-fallback retrieval cannot produce a current detour comparison. Retained reports keep their original clocks.
 - Standard, Ready, SENTRI and walking reports remain distinct and URL-backed. Missing lanes never borrow Standard or another facility. Walking reports disable vehicle detour arithmetic.
 - CBP's raw lane report clock stays separate from snapshot retrieval. No report calendar date is inferred from clock-only text. No wait is described as live.
-- Replay loads `/data/snapshot-history.json` only on request. It selects at most 18 actual observations from the latest available past port-local day. Missing observations stay missing. Only Standard summary waits were retained by that archive; other lanes, report clocks, counts and operational state are explicitly unavailable. The initial selection is the first sampled observation with both waits, when present; all sampled gaps remain available to scrub.
+- Replay loads `/data/snapshot-history.json` only on request. It selects at most 18 actual timestamped retrievals from the latest past port-local day having at least two valid retrieval records. A recorded retrieval with both waits missing, or with neither port present, stays selectable with both waits unavailable and no arithmetic. A latest day containing only gaps remains that day; it does not silently fall back to an older day with waits. Malformed timestamps/crossing containers and future/current-day records are excluded. Larger days are sampled, so unsampled records (including gaps) may be omitted; every missing value in a selected record remains missing. The chart draws no connecting line or zero for it. Only Standard summary waits were retained by the archive; other lanes, report clocks, counts and operational state are explicitly unavailable. The initial selection is the first sampled observation with both waits, when present; all sampled gaps remain available to scrub.
 - The calculator subtracts user-entered extra driving time from the reported wait difference. It calculates no route, arrival forecast, traffic simulation or confidence score. Both source clocks and the limits remain visible.
-- Real geographic west/east relationship, coarse country/coast geometry and approximate port coordinates. The straight-line distance is explicitly not a driving route.
+- Real geographic west/east relationship, coarse country/coast geometry and approximate port coordinates. Canvas geometry and port/wait anchors use the same coordinate projection and one viewport-derived compact-layout choice, including when the map is narrower than 700px inside a wider viewport. The straight-line distance is explicitly not a driving route. The ocean label is translated in Spanish.
 - Shared-element node/details transition, lane indicator and comparison bars. The motion preference subscribes to OS changes while the page is open; spatial and bar-width movement is removed under reduced motion.
 - Native sources modal, keyboard slider, Escape/return focus, Spanish copy, current-report links, guide links and a dated no-JavaScript report fallback. The new route is served directly on static hosts and has its own canonical; it is outside the sitemap in this first release.
 
 ## Verification
 
-Seven focused model tests cover lane identity, closure/hour guards, retrieval integrity, detour arithmetic, archive day selection, malformed/missing observations and bounded sampling. Browser regression coverage is part of the normal route suite and checks dashboard entry, lane URLs and Back/Forward, exact clocks, valid/invalid arithmetic, replay gaps, walking, keyboard, reduced motion, Spanish, stale data and failed refresh. Browser tests use explicitly synthetic fixtures; the screenshots above do not use those fixtures.
+Ten focused model tests cover lane identity, closure/hour guards, retrieval integrity, detour arithmetic, archive day selection, malformed/missing observations, all-missing records/days, bounded sampling and the shared map projection. Browser regression coverage is part of the normal route suite and checks dashboard entry, lane URLs and Back/Forward, exact clocks, valid/invalid arithmetic, partial and fully missing replay gaps, walking, keyboard, reduced motion, Spanish, stale data and failed refresh. It observes an actual drawn canvas vertex and DOM port/wait anchors at 1440, 1024, 900, 820, 780, 748, 720, 701, 700, 699, 640, 390 and 320px, then resizes back to 720 and 900px. It also checks timestamp/control separation and hit-tests port controls after scrolling at 720 and 390px. Browser tests use explicitly synthetic fixtures; the screenshots and recording above do not use those fixtures.
 
-Local `npm run build` and the full `npm test` pass, including 406 browser navigations and the new corridor journeys. The unchanged bundle gates pass at 61.53 / 62 KiB entry JS and 19.82 / 20 KiB entry CSS. Existing audit output has zero high/critical advisories and two moderate audit entries with locked dependencies unchanged. Remote CI and deployment results remain unperformed until the review branch is published.
+The original candidate passed local build/full tests (406 browser navigations) and remote CI (426 navigations on its merge ref). The responsive/gap repair requires fresh aggregate checks at its new head; exact-head results and the protected preview are recorded in draft PR #162. The bundle gates remain unchanged at 62 KiB entry JS and 20 KiB entry CSS. No dependency or lockfile change is involved.
 
 ## Scoped security review
 

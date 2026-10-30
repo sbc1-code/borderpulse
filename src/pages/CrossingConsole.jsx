@@ -46,6 +46,7 @@ import {
   selectConsoleHistory,
   replayConsoleRows,
   separationKm,
+  projectConsolePoint,
 } from "@/lib/crossingConsole";
 import { COPY } from "@/components/corridor/copy";
 import Geography from "@/components/corridor/Geography";
@@ -58,6 +59,14 @@ const motionPreference = () =>
   globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? true;
 function subscribeMotionPreference(listener) {
   const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+  query.addEventListener("change", listener);
+  return () => query.removeEventListener("change", listener);
+}
+const compactMapQuery = "(max-width: 700px)";
+const compactMapPreference = () =>
+  globalThis.matchMedia?.(compactMapQuery).matches ?? false;
+function subscribeCompactMap(listener) {
+  const query = window.matchMedia(compactMapQuery);
   query.addEventListener("change", listener);
   return () => query.removeEventListener("change", listener);
 }
@@ -122,6 +131,15 @@ export default function CrossingConsole() {
       motionPreference,
       () => true,
     );
+  const compactMap = useSyncExternalStore(
+    subscribeCompactMap,
+    compactMapPreference,
+    () => false,
+  );
+  const portPosition = (port) => {
+    const { x, y } = projectConsolePoint(port.lng, port.lat, compactMap);
+    return { "--port-x": `${x}%`, "--port-y": `${y}%` };
+  };
   useEffect(() => {
     alive.current = true;
     const unsubscribe = subscribeToBorderData((value) => {
@@ -394,7 +412,11 @@ export default function CrossingConsole() {
               <div
                 className={`map-stage ${selected ? "detail-open" : ""} ${replay ? "replaying" : ""}`}
               >
-                <Geography geo={geography} label={copy.mapLabel} />
+                <Geography
+                  geo={geography}
+                  label={copy.mapLabel}
+                  compact={compactMap}
+                />
                 <div className="map-tint" />
                 <div className="map-heading">
                   <p className="eyebrow">
@@ -425,15 +447,16 @@ export default function CrossingConsole() {
                   MÉXICO<span>Tijuana</span>
                 </div>
                 <div className="ocean">
-                  PACIFIC
+                  {copy.ocean[0]}
                   <br />
-                  OCEAN
+                  {copy.ocean[1]}
                 </div>
                 <div className="border-label">{copy.border}</div>
                 {CONSOLE_PORTS.map((port, i) => (
                   <div
                     key={port.id}
                     className={`port-position ${i ? "otay" : "sy"}`}
+                    style={portPosition(port)}
                   >
                     <PortDot />
                     <span className="port-coordinate">
@@ -445,6 +468,7 @@ export default function CrossingConsole() {
                   <div
                     key={port.id}
                     className={`wait-position ${i ? "otay" : "sy"}`}
+                    style={portPosition(port)}
                   >
                     <AnimatePresence initial={false}>
                       {selected !== port.id && (

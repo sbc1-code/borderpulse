@@ -22,6 +22,14 @@ export const CONSOLE_PORTS = [
   },
 ];
 export const CONSOLE_TIMEZONE = "America/Los_Angeles";
+// Both the drawn geography and DOM port anchors use this projection. The page
+// chooses compact once from the same viewport breakpoint as its responsive CSS.
+export function projectConsolePoint(lng, lat, compact = false) {
+  return {
+    x: ((lng + 117.15) / 0.29) * 100,
+    y: (((compact ? 32.69 : 32.66) - lat) / 0.24) * 100,
+  };
+}
 const localDay = new Intl.DateTimeFormat("en-CA", {
   timeZone: CONSOLE_TIMEZONE,
   year: "numeric",
@@ -128,7 +136,8 @@ export function selectConsoleHistory(document, now = Date.now()) {
         current_wait_time: Number.isFinite(value) && value >= 0 ? value : null,
       };
     });
-    if (!rows.some((row) => row.current_wait_time !== null)) continue;
+    // A timestamped retrieval with neither port available is still an observed
+    // gap. Keep it selectable; neither a missing value nor a missing port is 0.
     seen.add(time);
     const item = {
       fetched_at: snapshot.fetched_at,

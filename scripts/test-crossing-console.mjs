@@ -9,6 +9,7 @@ import {
   replayConsoleRows,
   dayKey,
   CONSOLE_PORTS,
+  projectConsolePoint,
 } from "../src/lib/crossingConsole.js";
 const now = Date.parse("2026-10-30T04:30:00Z");
 const port = (id, standard, ready) => ({
@@ -178,8 +179,8 @@ test("history is bounded and sampled only from actual observations, keeping endp
   const snapshots = Array.from({ length: 100 }, (_, i) =>
     observation(
       new Date(Date.parse("2026-10-28T12:00:00Z") + i * 300_000).toISOString(),
-      i,
-      50,
+      [0, 47, 99].includes(i) ? null : i,
+      [0, 47, 99].includes(i) ? null : 50,
     ),
   );
   const selected = selectConsoleHistory({ snapshots }, now);
@@ -189,7 +190,50 @@ test("history is bounded and sampled only from actual observations, keeping endp
       snapshots.some((original) => original.fetched_at === s.fetched_at),
     ),
   );
+  assert.equal(selected[0].fetched_at, snapshots[0].fetched_at);
   assert.equal(selected.at(-1).fetched_at, snapshots.at(-1).fetched_at);
+  for (const index of [0, 8, 17])
+    assert.ok(selected[index].crossings.every(row => row.current_wait_time === null));
   assert.ok(CONSOLE_PORTS[0].lng < CONSOLE_PORTS[1].lng);
   assert.ok(CONSOLE_PORTS[0].lat < CONSOLE_PORTS[1].lat);
+});
+test("map projection preserves coordinate registration in wide and compact layouts", () => {
+  for (const compact of [false, true]) {
+    const north = compact ? 32.69 : 32.66;
+    assert.deepEqual(projectConsolePoint(-117.15, north, compact), { x: 0, y: 0 });
+    const southeast = projectConsolePoint(-116.86, north - 0.24, compact);
+    assert.ok(Math.abs(southeast.x - 100) < 1e-9);
+    assert.ok(Math.abs(southeast.y - 100) < 1e-9);
+    const sy = projectConsolePoint(CONSOLE_PORTS[0].lng, CONSOLE_PORTS[0].lat, compact);
+    const otay = projectConsolePoint(CONSOLE_PORTS[1].lng, CONSOLE_PORTS[1].lat, compact);
+    assert.ok(sy.x < otay.x && sy.y > otay.y);
+  }
+});
+test("replay retains fully missing retrievals between reports and at day endpoints", () => {
+  const snapshots = [
+    observation("2026-10-28T16:00:00Z", null, null),
+    observation("2026-10-28T17:00:00Z", 0, 20),
+    { fetched_at: "2026-10-28T18:00:00Z", crossings: [] },
+    observation("2026-10-28T19:00:00Z", 10, 30),
+    observation("2026-10-28T20:00:00Z", null, null),
+  ];
+  const selected = selectConsoleHistory({ snapshots }, now);
+  assert.deepEqual(selected.map(s => s.fetched_at), snapshots.map(s => s.fetched_at));
+  for (const index of [0, 2, 4]) {
+    const rows = replayConsoleRows(selected, index, "passenger_standard");
+    assert.deepEqual(rows.map(row => [row.wait, row.reason]), [[null, "no_report"], [null, "no_report"]]);
+    assert.equal(detourMath(rows[0].wait, rows[1].wait, 20), null);
+  }
+  assert.equal(replayConsoleRows(selected, 1, "passenger_standard")[0].wait, 0);
+});
+test("the latest recorded past day remains visible even when both ports have only gaps", () => {
+  const selected = selectConsoleHistory({ snapshots: [
+    observation("2026-10-27T16:00:00Z", 50, 20),
+    observation("2026-10-27T17:00:00Z", 60, 30),
+    observation("2026-10-28T16:00:00Z", null, null),
+    observation("2026-10-28T17:00:00Z", null, null),
+  ] }, now);
+  assert.equal(selected.length, 2);
+  assert.ok(selected.every(s => dayKey(s.fetched_at) === "2026-10-28"));
+  assert.ok(selected.every(s => s.crossings.every(row => row.current_wait_time === null)));
 });

@@ -1,7 +1,23 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+const geographicVertex = JSON.parse(readFileSync(new URL("../src/components/corridor/geography.json", import.meta.url))).features[0].geometry.coordinates[0][0][0];
 
 export async function checkCrossingConsole(browser, baseUrl, viewport) {
   const context = await browser.newContext({ viewport });
+  // Observe a real canvas vertex rather than trusting projection metadata. Its
+  // painted position and DOM port centers must agree across live resizes.
+  await context.addInitScript(() => {
+    const clear = CanvasRenderingContext2D.prototype.clearRect;
+    CanvasRenderingContext2D.prototype.clearRect = function (...args) {
+      if (this.canvas.classList.contains("geography")) this.canvas.firstMapPoint = null;
+      return clear.apply(this, args);
+    };
+    const move = CanvasRenderingContext2D.prototype.moveTo;
+    CanvasRenderingContext2D.prototype.moveTo = function (x, y) {
+      if (this.canvas.classList.contains("geography") && !this.canvas.firstMapPoint) this.canvas.firstMapPoint = { x, y };
+      return move.call(this, x, y);
+    };
+  });
   await context.route('**/*', route => new URL(route.request().url()).origin === baseUrl.origin ? route.continue() : route.abort('blockedbyclient'));
   const page = await context.newPage();
   const clock = Date.parse("2026-10-30T04:15:00Z");
@@ -68,6 +84,13 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
             ],
           },
           {
+            fetched_at: "2026-10-28T18:30:00Z",
+            crossings: [
+              { port_number: "250401", current_wait_time: null },
+              { port_number: "250601", current_wait_time: null },
+            ],
+          },
+          {
             fetched_at: "2026-10-28T19:00:00Z",
             crossings: [
               { port_number: "250401", current_wait_time: null },
@@ -110,6 +133,47 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
           .map((n) => n.textContent)
           .join(",") === "45,30",
     );
+    await page.evaluate(() => document.fonts.ready);
+    for (const width of [1440, 1024, 900, 820, 780, 748, 720, 701, 700, 699, 640, 390, 320, 720, 900]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+      const map = await page.evaluate(() => {
+        const canvas = document.querySelector("canvas.geography");
+        const rect = canvas.getBoundingClientRect();
+        return {
+          width: rect.width, height: rect.height, firstPoint: canvas.firstMapPoint,
+          ports: [...document.querySelectorAll(".port-position")].map(node => {
+            const box = node.getBoundingClientRect();
+            return { x: box.x + box.width / 2 - rect.x, y: box.y + box.height / 2 - rect.y };
+          }),
+          waits: [...document.querySelectorAll(".wait-position")].map(node => Number.parseFloat(getComputedStyle(node).top)),
+          headingClear: [...document.querySelectorAll(".port-node")].every(node => {
+            const a = document.querySelector(".map-heading").getBoundingClientRect();
+            const b = node.getBoundingClientRect();
+            return a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top;
+          }),
+        };
+      });
+      const north = width <= 700 ? 32.69 : 32.66;
+      assert.equal(map.headingClear, true, `source timestamp clear of port controls at ${width}px`);
+      const point = ([lng, lat]) => ({ x: ((lng + 117.15) / 0.29) * map.width, y: ((north - lat) / 0.24) * map.height });
+      const expectedVertex = point(geographicVertex);
+      assert.ok(map.firstPoint, `canvas drawn at ${width}px`);
+      for (const axis of ["x", "y"]) assert.ok(Math.abs(map.firstPoint[axis] - expectedVertex[axis]) < 0.6, `canvas ${axis} co-registration at ${width}px / ${map.width}px canvas`);
+      for (const [index, coordinates] of [[-117.02972, 32.54333], [-116.938187, 32.550602]].entries()) {
+        const expected = point(coordinates);
+        for (const axis of ["x", "y"]) assert.ok(Math.abs(map.ports[index][axis] - expected[axis]) < 0.6, `port ${index} ${axis} co-registration at ${width}px / ${map.width}px canvas`);
+        assert.ok(Math.abs(map.waits[index] - expected.y) < 0.6, `wait anchor ${index} y at ${width}px`);
+      }
+      if (width === 720 || width === 390) {
+        await page.locator(".map-stage").scrollIntoViewIfNeeded();
+        assert.equal(await page.locator(".port-node").evaluateAll(nodes => nodes.every(node => {
+          const rect = node.getBoundingClientRect();
+          return document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2)?.closest("button") === node;
+        })), true, `both port controls unobscured after normal scroll at ${width}px`);
+      }
+    }
+    await page.setViewportSize(viewport);
     assert.equal(
       new URL(page.url()).searchParams.get("lane"),
       "passenger_ready",
@@ -175,6 +239,10 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     await expectValues(["—", "50"]);
     assert.equal(await page.locator(".result-head").count(), 0);
     await page.keyboard.press("ArrowLeft");
+    await expectValues(["—", "—"]);
+    assert.equal(await page.locator(".result-head").count(), 0);
+    assert.match(await page.locator(".replay-readout").innerText(), /11:30 AM/);
+    await page.keyboard.press("ArrowLeft");
     await expectValues(["110", "60"]);
     await page.getByRole("button", { name: "Ready Lane", exact: true }).click();
     await expectValues(["—", "—"]);
@@ -231,6 +299,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     await page.getByRole("button", { name: "Cambiar a español" }).click();
     assert.match(await page.locator("h1").innerText(), /Dos cruces/);
     assert.equal(await page.locator("html").getAttribute("lang"), "es");
+    assert.match(await page.locator(".ocean").innerText(), /OCÉANO\s+PACÍFICO/);
     assert.equal(
       await page
         .getByRole("button", { name: "Estándar", exact: true })
@@ -277,6 +346,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       await page.locator("h1").filter({ hasText: "Two crossings." }).count(),
       0,
     );
+    console.log(`[crossing-console] PASS: ${viewport.width}px interactions, 15 live map co-registration resizes, all-missing replay gap, Spanish ocean, keyboard and reduced motion`);
   } finally {
     await context.close();
   }

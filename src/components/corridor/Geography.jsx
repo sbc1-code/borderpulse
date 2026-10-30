@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import { projectConsolePoint } from "@/lib/crossingConsole";
 
-export default function Geography({ geo, label }) {
+export default function Geography({ geo, label, compact }) {
   const ref = useRef();
   useEffect(() => {
     const c = ref.current;
@@ -13,8 +14,8 @@ export default function Geography({ geo, label }) {
       const ctx = c.getContext("2d");
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, w, h);
-      const x = (lon) => ((lon + 117.15) / 0.29) * w,
-        y = (lat) => (((w < 700 ? 32.69 : 32.66) - lat) / 0.24) * h;
+      const x = (lon) => (projectConsolePoint(lon, 0, compact).x / 100) * w,
+        y = (lat) => (projectConsolePoint(0, lat, compact).y / 100) * h;
       ctx.fillStyle = "#14252c";
       ctx.fillRect(0, 0, w, h);
       if (geo)
@@ -74,7 +75,7 @@ export default function Geography({ geo, label }) {
     const observer = new ResizeObserver(draw);
     observer.observe(c);
     return () => observer.disconnect();
-  }, [geo]);
+  }, [geo, compact]);
   return (
     <canvas className="geography" ref={ref} aria-label={label} role="img" />
   );

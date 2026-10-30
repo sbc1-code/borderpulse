@@ -1,0 +1,163 @@
+{
+  "capturedAt": "2026-10-30T05:46:16.283Z",
+  "host": "local built release candidate",
+  "data": "Unmodified dated published snapshot and history, no synthetic browser fixture or time override",
+  "states": [
+    {
+      "name": "mobile-es-top",
+      "width": 390,
+      "scrollY": 0,
+      "headerTop": 0,
+      "headerHeight": 75,
+      "mapWidth": 368,
+      "heading": "Consulta reportada\n\n29 oct 2026 / 9:37 p.m. GMT-7",
+      "ports": [
+        {
+          "label": "San Ysidro, 60 min, abrir detalles del reporte",
+          "x": 66.609375,
+          "y": 768.84375,
+          "unobscured": false
+        },
+        {
+          "label": "Otay Mesa, 60 min, abrir detalles del reporte",
+          "x": 224.859375,
+          "y": 754.65625,
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "name": "mobile-es-clean-full",
+      "width": 390,
+      "scrollY": 0,
+      "headerTop": 0,
+      "headerHeight": 75,
+      "mapWidth": 368,
+      "heading": "Consulta reportada\n\n29 oct 2026 / 9:37 p.m. GMT-7",
+      "ports": [
+        {
+          "label": "San Ysidro, 60 min, abrir detalles del reporte",
+          "x": 66.609375,
+          "y": 768.84375,
+          "unobscured": false
+        },
+        {
+          "label": "Otay Mesa, 60 min, abrir detalles del reporte",
+          "x": 224.859375,
+          "y": 754.65625,
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "name": "mobile-es-map",
+      "width": 390,
+      "scrollY": 290,
+      "headerTop": 0,
+      "headerHeight": 75,
+      "mapWidth": 368,
+      "heading": "Consulta reportada\n\n29 oct 2026 / 9:37 p.m. GMT-7",
+      "ports": [
+        {
+          "label": "San Ysidro, 60 min, abrir detalles del reporte",
+          "x": 66.609375,
+          "y": 478.84375,
+          "unobscured": true
+        },
+        {
+          "label": "Otay Mesa, 60 min, abrir detalles del reporte",
+          "x": 224.859375,
+          "y": 464.65625,
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "name": "mobile-es-detail",
+      "width": 390,
+      "scrollY": 290,
+      "headerTop": 0,
+      "headerHeight": 75,
+      "mapWidth": 368,
+      "heading": "",
+      "ports": [
+        {
+          "label": "Otay Mesa, 60 min, abrir detalles del reporte",
+          "x": 224.859375,
+          "y": 464.65625,
+          "unobscured": false
+        }
+      ]
+    },
+    {
+      "name": "720px-es-map",
+      "width": 720,
+      "scrollY": 290,
+      "headerTop": 0,
+      "headerHeight": 75,
+      "mapWidth": 686,
+      "heading": "Consulta reportada\n\n29 oct 2026 / 9:37 p.m. GMT-7",
+      "ports": [
+        {
+          "label": "San Ysidro, 60 min, abrir detalles del reporte",
+          "x": 221.515625,
+          "y": 320.71875,
+          "unobscured": true
+        },
+        {
+          "label": "Otay Mesa, 60 min, abrir detalles del reporte",
+          "x": 438.046875,
+          "y": 306.703125,
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "name": "desktop-clean",
+      "width": 1440,
+      "scrollY": 0,
+      "headerTop": 0,
+      "headerHeight": 0,
+      "mapWidth": 1150,
+      "heading": "Reported snapshot\n\nOct 29, 2026 / 9:37 PM PDT",
+      "ports": [
+        {
+          "label": "San Ysidro, 60 min, open report details",
+          "x": 654.46875,
+          "y": 425.015625,
+          "unobscured": true
+        },
+        {
+          "label": "Otay Mesa, 60 min, open report details",
+          "x": 1017.4375,
+          "y": 411,
+          "unobscured": true
+        }
+      ]
+    },
+    {
+      "name": "replay-clean",
+      "width": 1440,
+      "scrollY": 0,
+      "headerTop": 0,
+      "headerHeight": 0,
+      "mapWidth": 1150,
+      "heading": "Historical replay · Not live\n\nOct 28, 2026 / 9:52 AM PDT",
+      "ports": [
+        {
+          "label": "San Ysidro, 90 min, open report details",
+          "x": 650.875,
+          "y": 377.015625,
+          "unobscured": true
+        },
+        {
+          "label": "Otay Mesa, 60 min, open report details",
+          "x": 1013.84375,
+          "y": 363,
+          "unobscured": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

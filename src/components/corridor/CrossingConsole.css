@@ -366,19 +366,15 @@
   justify-content: center;
 }
 .corridorConsole .sy {
-  --x: 41.069%;
-  --y: 49.042%;
   --port-color: var(--sand);
 }
 .corridorConsole .otay {
-  --x: 73.039%;
-  --y: 45.582%;
   --port-color: var(--mint);
 }
 .corridorConsole .port-position,
 .corridorConsole .wait-position {
-  left: var(--x);
-  top: var(--y);
+  left: var(--port-x);
+  top: var(--port-y);
 }
 .corridorConsole .port-dot {
   display: flex;
@@ -1399,21 +1395,11 @@
     font-size: 7px;
     margin-top: 5px;
   }
-  .corridorConsole .sy {
-    --x: 34%;
+  .corridorConsole .wait-position.sy {
+    left: 34%;
   }
-  .corridorConsole .otay {
-    --x: 77%;
-  }
-  .corridorConsole .port-position,
-  .corridorConsole .wait-position {
-    left: var(--x);
-  }
-  .corridorConsole .port-position.sy {
-    --x: 41.069%;
-  }
-  .corridorConsole .port-position.otay {
-    --x: 73.039%;
+  .corridorConsole .wait-position.otay {
+    left: 77%;
   }
   .corridorConsole .wait-position {
     margin-top: -20px;
@@ -1739,11 +1725,11 @@
   .corridorConsole .port-node .node-title svg {
     width: 12px;
   }
-  .corridorConsole .sy {
-    --x: 32%;
+  .corridorConsole .wait-position.sy {
+    left: 32%;
   }
-  .corridorConsole .otay {
-    --x: 78%;
+  .corridorConsole .wait-position.otay {
+    left: 78%;
   }
   .corridorConsole .replay-title p {
     max-width: 125px;
@@ -1887,6 +1873,9 @@
   margin-top: 10px;
 }
 @media (max-width: 1150px) and (min-width: 701px) {
+  .corridorConsole .map-heading {
+    max-width: 22%;
+  }
   .corridorConsole .node-report {
     font-size: 9px;
   }
@@ -1973,18 +1962,6 @@
   }
   .corridorConsole .map-country.mexico {
     top: 79%;
-  }
-  .corridorConsole .port-position.sy {
-    --y: 61.542%;
-  }
-  .corridorConsole .port-position.otay {
-    --y: 58.082%;
-  }
-  .corridorConsole .wait-position.sy {
-    --y: 61.542%;
-  }
-  .corridorConsole .wait-position.otay {
-    --y: 58.082%;
   }
   .corridorConsole .port-node {
     max-width: 145px;
@@ -2216,10 +2193,6 @@
     font-size: 9px;
   }
 }
-.corridorConsole .sy {
-  --x: 41.476%;
-  --y: 48.613%;
-}
 @media (max-width: 700px) {
   .corridorConsole .intro {
     display: block;
@@ -2258,14 +2231,6 @@
     font-size: 11px;
     white-space: nowrap;
   }
-  .corridorConsole .port-position.sy {
-    --x: 41.476%;
-    --y: 61.113%;
-  }
-  .corridorConsole .wait-position.sy {
-    --x: 34%;
-    --y: 61.113%;
-  }
 }
 @media (max-width: 370px) {
   .corridorConsole .intro-right > p:first-child {
@@ -2276,7 +2241,7 @@
     font-size: 10px;
   }
   .corridorConsole .wait-position.sy {
-    --x: 32%;
+    left: 32%;
   }
 }
 .corridorConsole .port-detail.west-detail {
