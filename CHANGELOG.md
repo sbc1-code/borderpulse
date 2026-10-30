@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2026-10-29 — Keep crossing-share results tied to the current page (review candidate)
+## 2026-10-29 — Keep crossing-share results tied to the current page
 
 - Ignore obsolete copy/native-share results after crossing, lane, language or
   name changes and unmount; keep pending actions bounded and current retries
@@ -10,8 +10,9 @@
 - Add actual-component regressions to the normal test pipeline. Test bundles
   use isolated temporary files and the existing project React installation.
 - Implementation by Google Jules; independent review, test-harness corrections
-  and integration by ChatGPT (Codex), directed by Sebastian. Local review
-  candidate only; production publication requires separate approval.
+  and integration by ChatGPT (Codex), directed by Sebastian. Publication
+  explicitly authorized October 29; exact-head checks and deployment/live
+  verification are recorded in PR #157.
 
 ## 2026-10-29 (Pacific) — Authorized UI/motion/content release preparation
 
@@ -1481,3 +1482,15 @@ Big push day — UX/product sprint phase 1+2, embed widget, /api, /best-time,
 ## Earlier sessions
 
 Before this changelog existed. Use `git log` for archeology.
+
+## 2026-10-29 — AI editorial receiver (review candidate, disabled)
+
+- Add an evidence-bundle contract and event-driven GitHub-file receiver for
+  genuine cloud-assistant EN/ES synthesis. No model call or authoring schedule
+  is created; ingestion stays off pending a verified cloud/connector dry run.
+- Re-fetch official primary sources, trace claim excerpts/numbers, retain AI
+  evidence-review provenance, escape narrative as literal MDX, enforce paired
+  receipts and coordinate one automated report per UTC day with the data pilot.
+- Schema/substring checks do not prove semantic accuracy; source/risk/language
+  review remains an explicit AI responsibility. Runtime/access limits and the
+  exact supported connector interface are in `docs/AI-EDITORIAL-INTERFACE.md`.

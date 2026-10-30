@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-29T18:51:08.898Z",
-  "snapshot_at": "2026-10-29T18:37:50.420Z",
+  "generated_at": "2026-10-29T23:08:53.165Z",
+  "snapshot_at": "2026-10-29T23:07:38.859Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
-      "severity": 5,
-      "detected_at": "2026-10-28T04:53:33.963Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 5 PM — ~600% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 5 PM — ~600% de la mediana de 30 días. Planea alrededor.",
+      "severity": 3.8,
+      "detected_at": "2026-10-29T23:08:53.165Z",
+      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 120 min around 5 PM — ~480% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 120 min cerca de las 5 PM — ~480% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 17,
         "peak_median": 120,
-        "overall_median": 20,
+        "overall_median": 25,
         "samples": 17,
-        "ratio": 6
+        "ratio": 4.8
       }
     },
     {
@@ -123,6 +123,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 1.25,
+      "detected_at": "2026-10-29T23:08:53.165Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 6 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 180,
+        "overall_median": 80,
+        "samples": 19,
+        "ratio": 2.25
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -139,37 +156,20 @@
       }
     },
     {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 1.1176470588235294,
-      "detected_at": "2026-10-29T18:51:08.898Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 6 PM — ~212% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 6 PM — ~212% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 180,
-        "overall_median": 85,
-        "samples": 19,
-        "ratio": 2.1176470588235294
-      }
-    },
-    {
       "type": "lowest_today",
       "port_slug": "nogales-deconcini",
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-29T12:35:06.478Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 20 min.",
+      "detected_at": "2026-10-29T23:08:53.165Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 20,
+        "overall_median": 25,
         "samples": 20
       }
     },
@@ -321,16 +321,16 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.8235294117647058,
-      "detected_at": "2026-10-29T18:51:08.898Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 15 min) — ~82% below the 30-day baseline of 85 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 15 min) — ~82% debajo de la base de 30 días de 85 min.",
+      "severity": 0.8125,
+      "detected_at": "2026-10-29T23:08:53.165Z",
+      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 15 min) — ~81% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 15 min) — ~81% debajo de la base de 30 días de 80 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 15,
-        "overall_median": 85,
+        "overall_median": 80,
         "samples": 37
       }
     },
@@ -368,6 +368,24 @@
         "best_median": 15,
         "overall_median": 60,
         "samples": 6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.75,
+      "detected_at": "2026-10-29T23:08:53.165Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 1 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 1 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 13,
+        "best_median": 5,
+        "overall_median": 20,
+        "samples": 4
       }
     },
     {
@@ -420,24 +438,6 @@
         "overall_median": 40,
         "samples": 16,
         "ratio": 1.5
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-10-29T05:03:09.089Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 4 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 4 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 4,
-        "best_median": 10,
-        "overall_median": 20,
-        "samples": 10
       }
     }
   ],

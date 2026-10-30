@@ -10,5 +10,11 @@
     "name": "BorderPulse Automated Reports",
     "url": "https://borderpulse.com/about",
     "bio": "Automated CBP data reports using AI-assisted templates. No individual human review."
+  },
+  "borderpulse-editorial-ai": {
+    "id": "borderpulse-editorial-ai",
+    "name": "BorderPulse AI Editorial",
+    "url": "https://borderpulse.com/about",
+    "bio": "AI-written bilingual reports with recorded source and language review. No individual human review."
   }
 }

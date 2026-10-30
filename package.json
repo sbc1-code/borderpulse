@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "npm run test:share && npm run test:daily-blog && npm run test:ads && npm run test:writer && npm run test:refresh && npm run test:publish && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:css-parser && npm run test:metadata && npm run test:audit && npm run test:bundle && npm run test:routes",
+    "test": "npm run test:share && npm run test:editorial && npm run test:daily-blog && npm run test:ads && npm run test:writer && npm run test:refresh && npm run test:publish && npm run test:hours && npm run test:trust && npm run test:mdx && npm run test:css-parser && npm run test:metadata && npm run test:audit && npm run test:bundle && npm run test:routes",
     "test:share": "node --test scripts/test-crossing-share.mjs",
     "test:metadata": "node --test scripts/test-faq-scope.mjs scripts/test-hreflang.mjs scripts/test-crossing-snapshot.mjs",
     "test:ads": "node --test scripts/test-ad-slot-diagnostics.mjs && node scripts/check-google-ads.mjs",
@@ -42,7 +42,9 @@
     "test:writer": "node --test scripts/test-generated-writer.mjs",
     "test:refresh": "node --test scripts/test-data-refresh.mjs",
     "blog:daily": "node scripts/daily-blog.mjs",
-    "test:daily-blog": "node --test scripts/test-daily-blog.mjs"
+    "test:daily-blog": "node --test scripts/test-daily-blog.mjs",
+    "editorial:bundle": "node scripts/editorial-bundle.mjs",
+    "test:editorial": "node --test scripts/test-editorial-bundle.mjs scripts/test-editorial-literal-text.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

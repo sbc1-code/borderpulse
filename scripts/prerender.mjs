@@ -3,6 +3,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { mdxBodyToHtml } from './lib/mdx-to-html.mjs';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import EditorialArticle from '../src/components/blog/EditorialArticle.js';
 import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
@@ -426,8 +429,10 @@ function renderBlogPostBody(post, author) {
   let bodyHtml;
   try {
     const raw = fs.readFileSync(mdxPath, 'utf8');
-    const { content } = matter(raw);
-    bodyHtml = mdxBodyToHtml(content);
+    const { content, data } = matter(raw);
+    bodyHtml = data.source === 'ai-editorial'
+      ? renderToStaticMarkup(createElement(EditorialArticle, { article: data.editorialArticle }))
+      : mdxBodyToHtml(content);
   } catch (e) {
     console.warn(`[prerender] failed to render body for ${post.slug}:`, e.message);
     return '';
