@@ -16,6 +16,8 @@ try {
   if (!/^drafts\/editorial\/inbox\/\d{4}-\d{2}-\d{2}-[a-z0-9-]+\.json$/.test(inputPath || '')) {
     throw new Error('Unsafe submission path');
   }
+  const expectedBlob = process.env.EDITORIAL_EXPECTED_BLOB;
+  if (!/^[a-f0-9]{40}$/.test(expectedBlob || '')) throw new Error('Missing triggering input blob');
   const id = path.basename(inputPath, '.json');
   let eligible = false;
   const result = await publishGeneratedData({
@@ -29,6 +31,8 @@ try {
     message: `blog: publish source-reviewed AI editorial ${id}`,
     async generate(worktree) {
       execFileSync('npm', ['ci'], { cwd: worktree, stdio: 'inherit' });
+      const actualBlob = execFileSync('git', ['rev-parse', `HEAD:${inputPath}`], {cwd:worktree,encoding:'utf8'}).trim();
+      if (actualBlob !== expectedBlob) throw new Error('Submission changed after this run was triggered; use its newer run');
       const input = JSON.parse(fs.readFileSync(path.join(worktree, inputPath), 'utf8'));
       if (input.id !== id) throw new Error('Submission id/path mismatch');
       const existing = path.join(worktree, `public/data/editorial-evidence/${id}.json`);

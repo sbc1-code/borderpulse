@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-10-30 — Resolve editorial push inputs from Git trees (review candidate)
+
+- Fix connector-triggered intake: GitHub Actions omits added/modified file
+  arrays from push payloads. Resolve exactly one added/modified inbox file
+  from the push range, fetching only missing commit objects in shallow clones.
+- Bind the publishing attempt to that input blob, retaining the one-input rule,
+  evidence/review checks, original bundle dates and disabled ingestion state.
+
 ## 2026-10-29 (Pacific) — Authorized UI/motion/content release preparation
 
 Updated by ChatGPT (Codex), directed by Sebastian's explicit “Push it to prod after QC and security checks.” Integrate only the reviewed presentation, motion and existing-information corrections with current main, retaining the already published daily-blog pipeline and data snapshots. Preserve both changelog histories; no publisher, schedule, credential, permission or schema-policy edits are part of this candidate. Final security/QC, protected-PR and production receipts belong in the release PR and private review record; this entry does not claim an unperformed deployment.
