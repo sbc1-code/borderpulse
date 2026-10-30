@@ -557,6 +557,12 @@ export default function CrossingConsole() {
                   <span>{copy.geographic}</span>
                 </div>
               </div>
+              <div className="map-key" role="group" aria-label={copy.mapLegend}>
+                <strong>{copy.mapLegend}:</strong>
+                <span><span className="legend-dot sand" aria-hidden="true" />San Ysidro</span>
+                <span><span className="legend-dot mint" aria-hidden="true" />Otay Mesa</span>
+                <span className="map-key-note">{copy.markerMeaning}</span>
+              </div>
               <Card className="replay-console">
                 <div className="replay-top">
                   <div className="replay-title">

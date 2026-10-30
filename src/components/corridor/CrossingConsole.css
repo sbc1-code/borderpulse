@@ -74,8 +74,8 @@
 .corridorConsole .port-dot > span { width: 7px; height: 7px; border-radius: 50%; background: var(--port-color); }
 .corridorConsole .port-coordinate { position: absolute; left: 25px; top: 4px; white-space: nowrap; font-size: 10px; color: var(--bp-ink); }
 .corridorConsole .wait-position { transform: translate(-50%, -100%); margin-top: -24px; z-index: 2; }
-.corridorConsole .port-node { position: relative; width: 180px; padding: 12px; text-align: left; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--port-color); border-radius: 12px; box-shadow: 0 2px 8px -6px #19352d38; }
-.corridorConsole .port-node:hover { border-color: var(--port-color); }
+.corridorConsole .port-node { position: relative; width: 180px; padding: 12px; text-align: left; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 2px 8px -6px #19352d38; }
+.corridorConsole .port-node:hover { border-color: var(--subtle); background: var(--surface-muted); }
 .corridorConsole .port-node::after { content: ''; position: absolute; width: 1px; height: 22px; left: 50%; bottom: -24px; background: var(--port-color); }
 .corridorConsole .node-title { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 14px; line-height: 1.4; font-weight: 600; }
 .corridorConsole .node-title svg { color: var(--link); flex-shrink: 0; width: 16px; height: 16px; }
@@ -88,6 +88,10 @@
 .corridorConsole .map-bottom { position: absolute; left: 16px; right: 16px; bottom: 12px; display: flex; justify-content: space-between; align-items: start; gap: 12px; font-size: 11px; color: var(--bp-ink); pointer-events: none; }
 .corridorConsole .map-bottom > span:first-child { display: inline-flex; align-items: center; gap: 5px; }
 .corridorConsole .map-bottom svg { flex-shrink: 0; margin-top: 2px; }
+.corridorConsole .map-key { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.corridorConsole .map-key strong { font-weight: 500; }
+.corridorConsole .map-key > span { display: inline-flex; align-items: center; gap: 5px; }
+.corridorConsole .map-key .legend-dot { margin: 0; }
 .corridorConsole .port-detail { position: absolute; z-index: 5; top: 12px; right: 12px; bottom: 12px; width: 340px; max-width: calc(100% - 24px); overflow: auto; border: 1px solid var(--line); border-radius: 12px; padding: 16px; color: var(--text); background: var(--surface); box-shadow: 0 8px 24px #0f172a1a; }
 .corridorConsole .port-detail.west-detail { right: auto; left: 12px; }
 .corridorConsole .detail-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--subtle); }

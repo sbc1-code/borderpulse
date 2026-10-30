@@ -404,7 +404,7 @@ export default function Dashboard() {
           <Button asChild variant="outline" size="sm" className="gap-1.5 min-h-11">
             <Link to={withLane('/corridor/san-diego-tijuana/', lane)} title={language === 'es' ? 'San Ysidro y Otay Mesa' : 'San Ysidro and Otay Mesa'}>
               <MapPin className="w-3.5 h-3.5" />
-              {language === 'es' ? 'Mapa de cruces' : 'Crossing map'}
+              {language === 'es' ? 'Mapa San Diego' : 'San Diego map'}
             </Link>
           </Button>
           <Button

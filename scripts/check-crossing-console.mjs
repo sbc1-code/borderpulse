@@ -105,12 +105,18 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     await page.goto(
       new URL("/?lane=passenger_ready", baseUrl).href,
     );
-    const entry = page.locator("main header").getByRole("link", { name: "Crossing map", exact: true });
+    const entry = page.locator("main header").getByRole("link", { name: "San Diego map", exact: true });
     await entry.waitFor();
     await entry.click();
     const laneSelect = page.getByRole("combobox", { name: "Your lane", exact: true });
     await laneSelect.waitFor();
     assert.equal(await laneSelect.inputValue(), "passenger_ready");
+    const markerKey = page.getByRole("group", { name: "Port markers", exact: true });
+    assert.match(await markerKey.innerText(), /San Ysidro[\s\S]*Otay Mesa[\s\S]*Colors identify the crossing/);
+    assert.equal(await page.locator(".port-node").evaluateAll(nodes => nodes.every(node => {
+      const style = getComputedStyle(node);
+      return style.borderTopColor === style.borderRightColor && style.borderTopWidth === style.borderRightWidth;
+    })), true, "map cards have neutral borders; marker colors are port identity, not wait categories");
     const values = () =>
       page
         .locator(".corridorConsole .port-node .wait-number > span")
@@ -312,6 +318,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     assert.match(await page.locator("h1").innerText(), /Mapa de cruces San Ysidro–Otay/);
     assert.equal(await page.locator("html").getAttribute("lang"), "es");
     assert.match(await page.locator(".ocean").innerText(), /OCÉANO\s+PACÍFICO/);
+    assert.match(await page.getByRole("group", { name: "Marcadores de cruces", exact: true }).innerText(), /Los colores identifican el cruce/);
     assert.equal(
       await page.getByRole("combobox", { name: "Tu carril", exact: true }).inputValue(),
       "passenger_standard",
@@ -367,17 +374,31 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     }
     if (viewport.width < 1024) {
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      const link = page.locator("#mobile-navigation").getByRole("link", { name: "Crossing map", exact: true });
+      const link = page.locator("#mobile-navigation").getByRole("link", { name: "San Diego map", exact: true });
       assert.equal(await link.getAttribute("aria-current"), "page");
       await link.click();
       assert.equal(await page.locator("#mobile-navigation").count(), 0, "mobile navigation closes after choosing the map");
       assert.equal(new URL(page.url()).searchParams.get("lane"), "passenger_ready", "global map navigation retains the chosen lane");
     } else {
-      const navLink = page.locator("aside").getByRole("link", { name: "Crossing map", exact: true });
+      const navLink = page.locator("aside").getByRole("link", { name: "San Diego map", exact: true });
       assert.equal(await navLink.getAttribute("aria-current"), "page");
       assert.match(await navLink.getAttribute("href"), /lane=passenger_ready/);
     }
-    console.log(`[crossing-console] PASS: ${viewport.width}px native theme/font, dashboard/nav/both-port discovery, lane select and URLs, 15 live map resizes, all-missing replay gap, Spanish, keyboard and reduced motion`);
+    await page.goto(new URL("/?lane=passenger_ready", baseUrl).href);
+    await page.getByRole("button", { name: "Cambiar a español", exact: true }).click();
+    const regionalEntry = page.locator("main header").getByRole("link", { name: "Mapa San Diego", exact: true });
+    await regionalEntry.waitFor();
+    await regionalEntry.click();
+    await page.getByRole("heading", { name: "Mapa de cruces San Ysidro–Otay", exact: true }).waitFor();
+    assert.equal(new URL(page.url()).searchParams.get("lane"), "passenger_ready");
+    if (viewport.width < 1024) {
+      await page.getByRole("button", { name: "Open menu", exact: true }).click();
+      await page.locator("#mobile-navigation").getByRole("link", { name: "Mapa San Diego", exact: true }).waitFor();
+      await page.keyboard.press("Escape");
+    } else {
+      await page.locator("aside").getByRole("link", { name: "Mapa San Diego", exact: true }).waitFor();
+    }
+    console.log(`[crossing-console] PASS: ${viewport.width}px regional EN/ES entries, neutral cards/marker identity legend, native theme/font, dashboard/nav/both-port discovery, lane select and URLs, 15 live map resizes, missing replay, keyboard and reduced motion`);
   } finally {
     await context.close();
   }

@@ -4,6 +4,7 @@
 
 - Replace the console's separate visual styling with the site's type, light/dark surfaces, existing controls and blueprint map tokens; retain purposeful, reduced-motion-aware transitions.
 - Add dashboard, main-navigation and relevant crossing-page map entry points while preserving lane context and primary reports.
+- Qualify global entries as the San Diego map; use neutral map-card borders and a port-marker legend so identity colors do not imply wait conditions.
 - Preserve data/clock integrity, replay gaps, detour logic and editorial/news behavior. Add native-theme/discoverability browser coverage and before/after review evidence; production is unchanged pending review.
 
 ## 2026-10-30 — Additive crossing console (review candidate)

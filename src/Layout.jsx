@@ -56,7 +56,7 @@ export default function Layout({ children }) {
       current: location.pathname === '/',
     },
     {
-      name: language === 'en' ? 'Crossing map' : 'Mapa de cruces',
+      name: language === 'en' ? 'San Diego map' : 'Mapa San Diego',
       href: withLane('/corridor/san-diego-tijuana/', normalizeLane(new URLSearchParams(location.search).get('lane'))),
       icon: MapPin,
       current: location.pathname.startsWith('/corridor/'),
