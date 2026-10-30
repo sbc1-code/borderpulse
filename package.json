@@ -44,7 +44,8 @@
     "blog:daily": "node scripts/daily-blog.mjs",
     "test:daily-blog": "node --test scripts/test-daily-blog.mjs",
     "editorial:bundle": "node scripts/editorial-bundle.mjs",
-    "test:editorial": "node --test scripts/test-editorial-bundle.mjs scripts/test-editorial-literal-text.mjs"
+    "test:editorial": "node --test scripts/test-editorial-bundle.mjs scripts/test-editorial-literal-text.mjs scripts/test-editorial-submission.mjs",
+    "test:editorial-resolver": "node --test scripts/test-editorial-submission.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

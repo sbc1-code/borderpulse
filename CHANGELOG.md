@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-10-30 — Resolve editorial push inputs from Git trees
+
+- Fix connector-triggered intake: GitHub Actions omits added/modified file
+  arrays from push payloads. Resolve exactly one added/modified inbox file
+  from the push range, fetching only missing commit objects in shallow clones.
+- Bind the publishing attempt to that input blob, retaining the one-input rule,
+  evidence/review checks, original bundle dates and disabled ingestion state.
+
 ## 2026-10-29 — Keep crossing-share results tied to the current page
 
 - Ignore obsolete copy/native-share results after crossing, lane, language or

@@ -41,16 +41,7 @@ jobs:
         id: submission
         env:
           INPUT_PATH: ${{ inputs.bundle_path }}
-        run: |
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-          const paths=process.env.GITHUB_EVENT_NAME==='workflow_dispatch'?[process.env.INPUT_PATH]:
-            [...new Set((event.commits||[]).flatMap(c=>[...(c.added||[]),...(c.modified||[])]))];
-          const selected=paths.filter(p=>/^drafts\/editorial\/inbox\/\d{4}-\d{2}-\d{2}-[a-z0-9-]+\.json$/.test(p||''));
-          if(selected.length!==1)throw new Error('Expected exactly one editorial submission; do not batch or execute input paths');
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,'path='+selected[0]+'\n');
-          JS
+        run: node scripts/resolve-editorial-submission.mjs
       - name: Verify sources and prepare read-only plan
         env:
           EDITORIAL_BUNDLE_PATH: ${{ steps.submission.outputs.path }}
@@ -60,6 +51,7 @@ jobs:
         if: vars.AI_EDITORIAL_INGEST_ENABLED == 'true' && (github.event_name == 'push' || !inputs.dry_run)
         env:
           AI_EDITORIAL_INGEST_ENABLED: ${{ vars.AI_EDITORIAL_INGEST_ENABLED }}
+          EDITORIAL_EXPECTED_BLOB: ${{ steps.submission.outputs.blob_sha }}
           EDITORIAL_BUNDLE_PATH: ${{ steps.submission.outputs.path }}
         run: node scripts/publish-editorial.mjs
       - name: Dispatch existing production publisher
