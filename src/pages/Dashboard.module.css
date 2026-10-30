@@ -41,7 +41,6 @@
 }
 
 @media (max-width: 639px) {
-  .freshness { flex-basis: 100%; }
   .extras > section > button > span > span:last-child { display: none; }
 }
 

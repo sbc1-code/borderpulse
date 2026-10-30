@@ -20,7 +20,7 @@ The target is BorderPulse's existing dashboard, crossing page and blog: system t
 
 - Inherit the site's system type and light/dark presentation. Remove the console font-face declarations, fixed dark background, display headline and bespoke navigation strip. Existing font/license files remain untouched but are no longer requested by this route.
 - Reuse `Layout`, `Button`, `Card`, `LaneSelector` and the existing `bp-line` blueprint map tokens. The canvas redraws when the shared theme changes. Existing slate/emerald report styles supply the surrounding surfaces and spacing.
-- Add a visibly regional **San Diego map / Mapa San Diego** item to desktop/mobile navigation and the default dashboard header. The page title identifies the actual San Ysidro–Otay pair; this does not suggest a map of all 42 crossings. Keep the contextual area link, and add links after the primary reports on both San Ysidro and Otay pages. Header/crossing/navigation links preserve the selected lane; the mobile menu closes normally.
+- Keep one visibly regional **San Diego map / Mapa San Diego** item in desktop/mobile navigation. The page title identifies the actual San Ysidro–Otay pair; this does not suggest a map of all 42 crossings. After the user's screenshot review, remove the duplicated dashboard header/area promotions and restore the compact header flow. On San Ysidro and Otay pages, use a small native emerald text link after the primary report instead of an outlined button. Navigation/crossing links preserve the selected lane; the mobile menu closes normally and the contextual links retain a 44px touch target.
 - Keep map report cards neutral. Colored markers and chart series identify the ports, with an explicit bilingual marker legend. They do not assign the green/blue port identity colors as congestion categories. Existing native crossing-report status classifications are unchanged; no new classification is introduced.
 - Keep the shared port-to-detail transition and comparison feedback, using a short 180ms transition rather than the previous spring. Reduced motion still removes spatial/width movement, and waits/clocks update directly.
 - Preserve the shared geographic projection, port identities, report/retrieval clocks, freshness guards, lane availability, actual-history gaps and user-supplied detour arithmetic. The data model, services, feeds, editorial pipeline and news logic are unchanged.
@@ -32,7 +32,9 @@ All captures and the recording use actual dated published data, with source date
 
 ![Native dark theme](native-corridor-review/after-desktop-dark.png)
 
-![Default dashboard entry on mobile](native-corridor-review/dashboard-entry-mobile.png)
+The following entry-point captures preserve the original `a197e76` candidate; the lean-access follow-up below supersedes their placements.
+
+![Original candidate dashboard entry on mobile](native-corridor-review/dashboard-entry-mobile.png)
 
 ![Crossing-page entry after the primary report](native-corridor-review/crossing-entry.png)
 
@@ -42,11 +44,25 @@ All captures and the recording use actual dated published data, with source date
 
 [Dark mobile](native-corridor-review/after-mobile-dark.png) · [Report panel](native-corridor-review/detail-panel.png) · [Historical replay](native-corridor-review/replay.png) · [10-second rendered interaction recording](native-corridor-review/native-motion.mp4). The recording contains actual frames at 10fps; it demonstrates interaction transitions and is not a smoothness benchmark.
 
+### Lean access after the user's screenshot review
+
+The user asked for more refined access without UI bloat. This bounded follow-up keeps the regional main-navigation entry, removes dashboard map promotions and replaces the two contextual map buttons with ordinary site text links. No new feature, panel or persistent control is added. The coordinator's warning-separation correction is retained in the parent commit `d139ba6f25f26145fc182d1b6e3edbe2be88be60`.
+
+| Before access refinement | After access refinement |
+| --- | --- |
+| ![Mobile dashboard with extra map action](native-corridor-review/lean-before-dashboard-390.png) | ![Compact mobile dashboard without map promotion](native-corridor-review/lean-after-dashboard-390.png) |
+| ![Desktop dashboard with extra map action](native-corridor-review/lean-before-dashboard-1440.png) | ![Desktop dashboard with one regional navigation entry](native-corridor-review/lean-after-dashboard-1440.png) |
+| ![Crossing page with outlined map button](native-corridor-review/lean-before-crossing-1440.png) | ![Crossing page with subtle contextual text link](native-corridor-review/lean-after-crossing-1440.png) |
+
+[Mobile crossing link after normal scrolling](native-corridor-review/lean-after-crossing-390.png) · [Spanish mobile navigation](native-corridor-review/lean-after-navigation-es-390.png) · [Spanish mobile crossing link](native-corridor-review/lean-after-crossing-es-390.png) · [Capture receipt](native-corridor-review/lean-capture-receipt.json). Before captures render `d139ba6`; after captures render the appended lean-access source. These are local production-mode renders using the same actual dated snapshot, without a synthetic fixture or clock override. They do not show live crossing conditions. The mobile crossing captures intentionally scroll to the contextual link.
+
 ## Validation and limits
 
 ### Retrieval-warning separation follow-up
 
 The coordinator independently reproduced a rendered concatenation in the original `a197e76923ee36533d572713ef0ff343e48fefab` production-mode artifact: the retrieval age and fallback/stale/failed-refresh warning ran together. The Codex worker restored the original block display for the warning span, without changing strings, clocks, state guards or the native styling. A focused geometry assertion fails on the original stylesheet and checks that the actual warning begins below the last retrieval-age line, starts at the paragraph edge, remains visible with the age and fits the viewport. The existing affected desktop/390px journeys cover EN/ES stale and failed-refresh states, plus the successful static-fallback warning in production API mode. Follow-up build/bundle/journey results are reported against the new commit; the coordinator's independent full-suite run on `a197e76` is not claimed as validation of that later commit. The original artifact remains preserved by its immutable commit and existing captures.
+
+For the appended access correction, the focused journeys enter through the regional navigation in both languages, verify that the dashboard has no duplicate map promotion, and follow both ports' native text links while preserving distinct lane selections. Rendered geometry checks keep those links after the primary report, touch sized, borderless and within the viewport. The same journeys retain all 12 visible warning text-flow checks at 1440px/390px and the existing console interactions. The worker's exact-head build, bundle and focused journey results are returned in the job outcome; no broad-suite, remote-CI or production claim is extended from the original artifact to this later head.
 
 The initial native-brand candidate passed the production-mode local build and full test suite, including 406 browser navigations and the ten unchanged model tests. After the bounded regional-label/marker-clarity refinement, the production-mode build and both focused desktop/mobile browser journeys passed again. These now assert visible regional EN/ES entry labels and neutral card borders with a marker-identity legend, alongside inherited typography, live light/dark canvas repainting, default-dashboard/nav/both-crossing discoverability and lane preservation. The journeys also retain 15 live map resizes each, raw clocks, missing lanes, detour break-even/invalid input, partial/fully missing history records, Spanish, keyboard/focus, dynamic reduced motion, stale/future retrievals and failed refresh. The bundle gates are unchanged and pass at 61.67 / 62 KiB entry JS and 19.83 / 20 KiB entry CSS. The full aggregate suite has not been repeated for this copy/style-only refinement; exact-head remote CI remains pending PR authorization.
 

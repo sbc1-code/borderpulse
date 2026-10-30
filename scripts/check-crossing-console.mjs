@@ -50,6 +50,34 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
   });
   await context.route('**/*', route => new URL(route.request().url()).origin === baseUrl.origin ? route.continue() : route.abort('blockedbyclient'));
   const page = await context.newPage();
+  const enterFromNavigation = async (name) => {
+    if (viewport.width < 1024) await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    const navigation = page.locator(viewport.width < 1024 ? "#mobile-navigation" : "aside");
+    const entry = navigation.getByRole("link", { name, exact: true });
+    assert.equal(await entry.count(), 1, "one region-qualified entry in the visible main navigation");
+    await entry.click();
+    if (viewport.width < 1024) assert.equal(await page.locator("#mobile-navigation").count(), 0, "choosing the map closes the mobile menu");
+  };
+  const enterFromCrossing = async (slug, key, label, heading) => {
+    await page.goto(new URL(`/crossing/${slug}/?lane=${key}`, baseUrl).href);
+    const mapEntry = page.locator("main").getByRole("link", { name: label, exact: true });
+    await mapEntry.waitFor();
+    assert.equal(await mapEntry.count(), 1, "each relevant crossing has one contextual map link");
+    const layout = await mapEntry.evaluate(link => {
+      const style = getComputedStyle(link);
+      return {
+        afterReport: link.getBoundingClientRect().top >= document.querySelector('[data-testid="border-crossing-card"]').getBoundingClientRect().bottom,
+        height: link.getBoundingClientRect().height,
+        border: style.borderTopWidth,
+        background: style.backgroundColor,
+        fits: document.documentElement.scrollWidth <= innerWidth,
+      };
+    });
+    assert.deepEqual(layout, { afterReport: true, height: 44, border: "0px", background: "rgba(0, 0, 0, 0)", fits: true }, "contextual link stays after the primary report, touch sized and free of button/card chrome");
+    await mapEntry.click();
+    await page.getByRole("heading", { name: heading, exact: true }).waitFor();
+    assert.equal(new URL(page.url()).searchParams.get("lane"), key);
+  };
   const clock = Date.parse("2026-10-30T04:15:00Z");
   await page.clock.install({ time: clock });
   const row = (port, standard, ready, sentri, walking) => ({
@@ -138,9 +166,9 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     await page.goto(
       new URL("/?lane=passenger_ready", baseUrl).href,
     );
-    const entry = page.locator("main header").getByRole("link", { name: "San Diego map", exact: true });
-    await entry.waitFor();
-    await entry.click();
+    await page.getByRole("searchbox", { name: "Search crossings by name or city", exact: true }).waitFor();
+    assert.equal(await page.locator('main a[href*="/corridor/"]').count(), 0, "dashboard waits have no redundant map promotion");
+    await enterFromNavigation("San Diego map");
     const laneSelect = page.getByRole("combobox", { name: "Your lane", exact: true });
     await laneSelect.waitFor();
     assert.equal(await laneSelect.inputValue(), "passenger_ready");
@@ -416,12 +444,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     );
     failed = false;
     for (const [slug, key] of [["san-ysidro", "passenger_sentri"], ["otay-mesa", "passenger_ready"]]) {
-      await page.goto(new URL(`/crossing/${slug}/?lane=${key}`, baseUrl).href);
-      const mapEntry = page.getByRole("link", { name: "Compare San Ysidro and Otay on the map", exact: true });
-      await mapEntry.waitFor();
-      await mapEntry.click();
-      await page.getByRole("heading", { name: "San Ysidro–Otay crossing map", exact: true }).waitFor();
-      assert.equal(new URL(page.url()).searchParams.get("lane"), key);
+      await enterFromCrossing(slug, key, "San Ysidro–Otay map", "San Ysidro–Otay crossing map");
     }
     if (viewport.width < 1024) {
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
@@ -437,9 +460,8 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     }
     await page.goto(new URL("/?lane=passenger_ready", baseUrl).href);
     await page.getByRole("button", { name: "Cambiar a español", exact: true }).click();
-    const regionalEntry = page.locator("main header").getByRole("link", { name: "Mapa San Diego", exact: true });
-    await regionalEntry.waitFor();
-    await regionalEntry.click();
+    assert.equal(await page.locator('main a[href*="/corridor/"]').count(), 0, "Spanish dashboard also avoids duplicated map promotion");
+    await enterFromNavigation("Mapa San Diego");
     await page.getByRole("heading", { name: "Mapa de cruces San Ysidro–Otay", exact: true }).waitFor();
     assert.equal(new URL(page.url()).searchParams.get("lane"), "passenger_ready");
     if (viewport.width < 1024) {
@@ -449,7 +471,10 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     } else {
       await page.locator("aside").getByRole("link", { name: "Mapa San Diego", exact: true }).waitFor();
     }
-    console.log(`[crossing-console] PASS: ${viewport.width}px regional EN/ES entries, neutral cards/marker identity legend, native theme/font, dashboard/nav/both-port discovery, lane select and URLs, 15 live map resizes, missing replay, keyboard and reduced motion`);
+    for (const [slug, key] of [["san-ysidro", "passenger_sentri"], ["otay-mesa", "passenger_ready"]]) {
+      await enterFromCrossing(slug, key, "Mapa San Ysidro–Otay", "Mapa de cruces San Ysidro–Otay");
+    }
+    console.log(`[crossing-console] PASS: ${viewport.width}px lean regional EN/ES navigation, no dashboard promotion, subtle both-port links after primary reports, lane preservation, neutral cards/marker identity legend, native theme/font, 15 live map resizes, missing replay, keyboard and reduced motion`);
   } finally {
     await context.close();
   }
