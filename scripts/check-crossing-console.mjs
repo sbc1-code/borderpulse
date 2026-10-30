@@ -2,6 +2,36 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const geographicVertex = JSON.parse(readFileSync(new URL("../src/components/corridor/geography.json", import.meta.url))).features[0].geometry.coordinates[0][0][0];
 
+async function checkRetrievalWarningBlock(page, label, agePattern, warningPattern) {
+  const warning = page.locator(".retrieval-status p > span").filter({ hasText: warningPattern });
+  await warning.waitFor();
+  await page.locator(".retrieval-status p").scrollIntoViewIfNeeded();
+  const flow = await page.locator(".retrieval-status p").evaluate(paragraph => {
+    const ageNode = [...paragraph.childNodes].find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+    const range = document.createRange();
+    range.selectNodeContents(ageNode);
+    const ageRects = [...range.getClientRects()].filter(rect => rect.width && rect.height);
+    const warning = paragraph.querySelector(":scope > span");
+    const box = warning.getBoundingClientRect();
+    return {
+      age: ageNode.textContent.trim(), warning: warning.textContent.trim(),
+      ageTop: Math.min(...ageRects.map(rect => rect.top)),
+      ageBottom: Math.max(...ageRects.map(rect => rect.bottom)),
+      warningTop: box.top, warningBottom: box.bottom, warningWidth: box.width,
+      paragraphLeft: paragraph.getBoundingClientRect().left, warningLeft: box.left,
+      viewportHeight: innerHeight, fitsViewport: document.documentElement.scrollWidth <= innerWidth,
+    };
+  });
+  assert.match(flow.age, agePattern, `${label}: retrieval age remains visible`);
+  assert.match(flow.warning, warningPattern, `${label}: warning remains visible`);
+  assert.ok(flow.warningWidth > 0 && flow.ageTop >= 0 && flow.warningBottom <= flow.viewportHeight, `${label}: both strings are in the viewport`);
+  assert.ok(flow.warningTop >= flow.ageBottom - 0.5, `${label}: warning must start below the last age-text line, not concatenate with it`);
+  assert.ok(Math.abs(flow.warningLeft - flow.paragraphLeft) < 1, `${label}: warning starts at the paragraph's left edge`);
+  assert.equal(flow.fitsViewport, true, `${label}: warning fits the viewport`);
+  assert.equal(await page.locator(".result-head").count(), 0, `${label}: warning state cannot present current detour arithmetic`);
+  console.log(`[console-warning] PASS: ${page.viewportSize().width}px ${label}; age bottom ${flow.ageBottom.toFixed(1)}, warning top ${flow.warningTop.toFixed(1)}`);
+}
+
 export async function checkCrossingConsole(browser, baseUrl, viewport) {
   const context = await browser.newContext({ viewport });
   // Observe a real canvas vertex rather than trusting projection metadata. Its
@@ -53,14 +83,17 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     fetched_at: "2026-10-30T04:00:00Z",
     crossings: [row("250401", 120, 45, 15, 10), row("250601", 60, 30, null, 5)],
   };
-  let failed = false,
+  let failed = false, apiFallback = false, apiRequests = 0,
     historyCalls = 0;
-  const reports = (route) =>
-    route.fulfill({
-      status: failed ? 503 : 200,
+  const reports = (route) => {
+    const api = new URL(route.request().url()).pathname === "/api/public/crossings";
+    if (api) apiRequests++;
+    return route.fulfill({
+      status: failed || (apiFallback && api) ? 503 : 200,
       contentType: "application/json",
       body: JSON.stringify(fixture),
     });
+  };
   await context.route("**/data/crossings.json*", reports);
   await context.route("**/api/public/crossings*", reports);
   await context.route("**/data/snapshot-history.json", (route) => {
@@ -333,9 +366,25 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
         .querySelector(".retrieval-status")
         ?.textContent.includes("desactualizada"),
     );
+    await checkRetrievalWarningBlock(page, "ES stale", /^Consulta/, /desactualizada/);
+    await page.getByRole("button", { name: "Switch to English" }).click();
+    await checkRetrievalWarningBlock(page, "EN stale", /\bFetched\b/, /snapshot is stale/);
+    await page.getByRole("button", { name: "Cambiar a español" }).click();
     assert.equal(await page.locator(".result-head").count(), 0);
     await expectValues(["120", "60"]);
     await page.clock.setSystemTime(clock);
+    // The production build uses the live endpoint, whose static fallback can
+    // succeed. Pages builds do not use that endpoint; stale/error checks above
+    // and below still exercise the same text-flow guard in either build mode.
+    if (apiRequests) {
+      apiFallback = true;
+      await page.getByRole("button", { name: "Actualizar reportes", exact: true }).click();
+      await checkRetrievalWarningBlock(page, "ES bundled fallback", /^Consulta/, /Datos de respaldo/);
+      await page.getByRole("button", { name: "Switch to English" }).click();
+      await checkRetrievalWarningBlock(page, "EN bundled fallback", /\bFetched\b/, /Bundled fallback/);
+      await page.getByRole("button", { name: "Cambiar a español" }).click();
+      apiFallback = false;
+    }
     failed = true;
     await page
       .getByRole("button", { name: "Actualizar reportes", exact: true })
@@ -345,6 +394,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
         .querySelector(".retrieval-status")
         ?.textContent.includes("No se pudo actualizar"),
     );
+    await checkRetrievalWarningBlock(page, "ES failed refresh", /^Consulta/, /No se pudo actualizar/);
     assert.equal(await page.locator(".result-head").count(), 0);
     await expectValues(["120", "60"]);
     assert.equal(
@@ -354,6 +404,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       true,
     );
     await page.getByRole("button", { name: "Switch to English" }).click();
+    await checkRetrievalWarningBlock(page, "EN failed refresh", /\bFetched\b/, /Refresh unavailable/);
     await page
       .getByRole("link", { name: "All crossings", exact: true })
       .click();
