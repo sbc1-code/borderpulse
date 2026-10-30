@@ -20,6 +20,7 @@ const Methodology = lazy(() => import('@/pages/Methodology'));
 const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
 const Privacy = lazy(() => import('@/pages/Privacy'));
+const CrossingConsole = lazy(() => import('@/pages/CrossingConsole'));
 
 function RouteFallback() {
   return (
@@ -45,6 +46,7 @@ function LayoutRoutes() {
           <Route path="/methodology" element={<Methodology lang="en" />} />
           <Route path="/metodologia" element={<Methodology lang="es" />} />
           <Route path="/compare/:pair" element={<Compare />} />
+          <Route path="/corridor/san-diego-tijuana" element={<CrossingConsole />} />
           <Route path="/walk-or-drive/:slug" element={<WalkOrDrive />} />
           <Route path="/privacy" element={<Privacy lang="en" />} />
           <Route path="/privacidad" element={<Privacy lang="es" />} />

@@ -546,6 +546,7 @@ export default function Dashboard() {
 
           </div>
           <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
+          {corridor === 'san-diego-tijuana' && <Link to={withLane('/corridor/san-diego-tijuana/', lane)} className="mb-4 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-300"><MapPin className="h-4 w-4" />{language === 'es' ? 'Explorar el corredor San Ysidro–Otay' : 'Explore the San Ysidro–Otay corridor'}</Link>}
           <div className={styles.extras}>
           <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <DashboardSummaryDisclosure

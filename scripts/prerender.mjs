@@ -14,6 +14,7 @@ import { crossingSearchTitle } from '../src/lib/crossingNames.js';
 import { cameraSourceFor } from '../src/lib/cameras.js';
 import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
 import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
+import { CONSOLE_CANONICAL, CONSOLE_PATH } from '../src/lib/crossingConsole.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -519,6 +520,16 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     crossingCount++;
+  }
+
+  // An additive corridor interface, outside the sitemap in this first release.
+  // Keep a real dated report fallback and serve direct requests on static hosts.
+  {
+    const head = { title: 'San Ysidro & Otay Mesa crossing console | Border Pulse', desc: 'Compare the same reported lane, inspect source clocks and account for your extra driving time.', canonical: CONSOLE_CANONICAL, ogImage: `${BASE}/og-card.png`, jsonLd: [] };
+    const html = injectSnapshot(rewriteIndex(indexWithLinks, head), snapshotHtml(crossings.filter(c => ['250401', '250601'].includes(String(c.port_number))), portToSlug, doc.fetched_at, true));
+    const outDir = path.resolve(distDir, `.${CONSOLE_PATH}`);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
   }
 
   let blogPageCount = 0;
