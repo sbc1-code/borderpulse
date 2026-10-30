@@ -2,6 +2,33 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const geographicVertex = JSON.parse(readFileSync(new URL("../src/components/corridor/geography.json", import.meta.url))).features[0].geometry.coordinates[0][0][0];
 
+async function checkMapThemePaint(page, dark, afterDraw = 0) {
+  await page.evaluate(() => document.fonts.ready);
+  // These interior ocean/US/Mexico patches avoid the grid and country strokes.
+  // The corner is covered by an antialiased grid stroke and an early read can
+  // precede the effect/ResizeObserver paint. Verify ready geometry and the real
+  // palette instead of retaining that first corner pixel as a golden value.
+  const palette = dark
+    ? [[2, 6, 23, 255], [16, 31, 43, 255], [23, 43, 50, 255]]
+    : [[244, 247, 249, 255], [237, 244, 240, 255], [227, 238, 233, 255]];
+  const ready = await page.waitForFunction(({ dark, afterDraw, palette }) => {
+    const canvas = document.querySelector("canvas.geography");
+    if (!canvas || document.documentElement.classList.contains("dark") !== dark || !(canvas.mapDrawCount > afterDraw)) return false;
+    const rect = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    if (rect.width <= 0 || rect.height <= 0 || canvas.width !== Math.floor(rect.width * dpr) || canvas.height !== Math.floor(rect.height * dpr)) return false;
+    const ctx = canvas.getContext("2d");
+    const patches = [[.03, .83], [.65, .21], [.65, .83]].map(([x, y], index) => {
+      const pixels = [...ctx.getImageData(Math.floor(canvas.width * x) - 2, Math.floor(canvas.height * y) - 2, 5, 5).data];
+      return { rgba: pixels.slice(48, 52), matches: pixels.every((value, channel) => Math.abs(value - palette[index][channel % 4]) <= 1) };
+    });
+    if (!patches.every(patch => patch.matches)) return false;
+    return { draws: canvas.mapDrawCount, css: [rect.width, rect.height], buffer: [canvas.width, canvas.height], dpr, palette: patches.map(patch => patch.rgba) };
+  }, { dark, afterDraw, palette });
+  const state = await ready.jsonValue();
+  await ready.dispose();
+  return state;
+}
+
 async function checkRetrievalWarningBlock(page, label, agePattern, warningPattern) {
   const warning = page.locator(".retrieval-status p > span").filter({ hasText: warningPattern });
   await warning.waitFor();
@@ -39,7 +66,10 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
   await context.addInitScript(() => {
     const clear = CanvasRenderingContext2D.prototype.clearRect;
     CanvasRenderingContext2D.prototype.clearRect = function (...args) {
-      if (this.canvas.classList.contains("geography")) this.canvas.firstMapPoint = null;
+      if (this.canvas.classList.contains("geography")) {
+        this.canvas.firstMapPoint = null;
+        this.canvas.mapDrawCount = (this.canvas.mapDrawCount || 0) + 1;
+      }
       return clear.apply(this, args);
     };
     const move = CanvasRenderingContext2D.prototype.moveTo;
@@ -200,19 +230,15 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     );
     assert.equal(await page.locator("h1").evaluate(node => getComputedStyle(node).fontFamily), await page.locator("body").evaluate(node => getComputedStyle(node).fontFamily), "map inherits the site's typeface");
     assert.ok(await page.locator("h1").evaluate(node => parseFloat(getComputedStyle(node).fontSize) <= 32), "map heading uses the site's normal page scale");
-    const lightPixel = await page.locator("canvas.geography").evaluate(canvas => [...canvas.getContext("2d").getImageData(0, 0, 1, 1).data].join(","));
+    const lightPaint = await checkMapThemePaint(page, false);
+    await expectValues(["45", "30"]);
     await page.getByRole("button", { name: "Switch to dark mode", exact: true }).click();
-    await page.waitForFunction(light => {
-      const canvas = document.querySelector("canvas.geography");
-      return document.documentElement.classList.contains("dark") && [...canvas.getContext("2d").getImageData(0, 0, 1, 1).data].join(",") !== light;
-    }, lightPixel);
+    const darkPaint = await checkMapThemePaint(page, true, lightPaint.draws);
     await expectValues(["45", "30"]);
     await page.getByRole("button", { name: "Switch to light mode", exact: true }).click();
-    await page.waitForFunction(light => {
-      const canvas = document.querySelector("canvas.geography");
-      return !document.documentElement.classList.contains("dark") && [...canvas.getContext("2d").getImageData(0, 0, 1, 1).data].join(",") === light;
-    }, lightPixel);
-    await page.evaluate(() => document.fonts.ready);
+    const returnedLightPaint = await checkMapThemePaint(page, false, darkPaint.draws);
+    await expectValues(["45", "30"]);
+    console.log(`[console-theme] PASS: ${viewport.width}px light/dark/light paints ${JSON.stringify({ lightPaint, darkPaint, returnedLightPaint })}; waits remain 45,30`);
     for (const width of [1440, 1024, 900, 820, 780, 748, 720, 701, 700, 699, 640, 390, 320, 720, 900]) {
       await page.setViewportSize({ width, height: 900 });
       await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
