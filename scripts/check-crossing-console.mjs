@@ -103,16 +103,14 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
   });
   try {
     await page.goto(
-      new URL("/?area=san-diego-tijuana&lane=passenger_ready", baseUrl).href,
+      new URL("/?lane=passenger_ready", baseUrl).href,
     );
-    const entry = page.getByRole("link", {
-      name: "Explore the San Ysidro–Otay corridor",
-    });
+    const entry = page.locator("main header").getByRole("link", { name: "Crossing map", exact: true });
     await entry.waitFor();
     await entry.click();
-    await page
-      .getByRole("button", { name: "Ready Lane", exact: true })
-      .waitFor();
+    const laneSelect = page.getByRole("combobox", { name: "Your lane", exact: true });
+    await laneSelect.waitFor();
+    assert.equal(await laneSelect.inputValue(), "passenger_ready");
     const values = () =>
       page
         .locator(".corridorConsole .port-node .wait-number > span")
@@ -133,6 +131,20 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
           .map((n) => n.textContent)
           .join(",") === "45,30",
     );
+    assert.equal(await page.locator("h1").evaluate(node => getComputedStyle(node).fontFamily), await page.locator("body").evaluate(node => getComputedStyle(node).fontFamily), "map inherits the site's typeface");
+    assert.ok(await page.locator("h1").evaluate(node => parseFloat(getComputedStyle(node).fontSize) <= 32), "map heading uses the site's normal page scale");
+    const lightPixel = await page.locator("canvas.geography").evaluate(canvas => [...canvas.getContext("2d").getImageData(0, 0, 1, 1).data].join(","));
+    await page.getByRole("button", { name: "Switch to dark mode", exact: true }).click();
+    await page.waitForFunction(light => {
+      const canvas = document.querySelector("canvas.geography");
+      return document.documentElement.classList.contains("dark") && [...canvas.getContext("2d").getImageData(0, 0, 1, 1).data].join(",") !== light;
+    }, lightPixel);
+    await expectValues(["45", "30"]);
+    await page.getByRole("button", { name: "Switch to light mode", exact: true }).click();
+    await page.waitForFunction(light => {
+      const canvas = document.querySelector("canvas.geography");
+      return !document.documentElement.classList.contains("dark") && [...canvas.getContext("2d").getImageData(0, 0, 1, 1).data].join(",") === light;
+    }, lightPixel);
     await page.evaluate(() => document.fonts.ready);
     for (const width of [1440, 1024, 900, 820, 780, 748, 720, 701, 700, 699, 640, 390, 320, 720, 900]) {
       await page.setViewportSize({ width, height: 900 });
@@ -180,13 +192,13 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     );
     assert.equal(historyCalls, 0);
     await page.evaluate(() => document.fonts.ready);
-    for (const [name, expected] of [
-      ["Standard", ["120", "60"]],
-      ["Ready Lane", ["45", "30"]],
-      ["SENTRI", ["15", "—"]],
-      ["Standard", ["120", "60"]],
+    for (const [key, expected] of [
+      ["passenger_standard", ["120", "60"]],
+      ["passenger_ready", ["45", "30"]],
+      ["passenger_sentri", ["15", "—"]],
+      ["passenger_standard", ["120", "60"]],
     ]) {
-      await page.getByRole("button", { name, exact: true }).click();
+      await laneSelect.selectOption(key);
       await expectValues(expected);
     }
     await page.goBack();
@@ -244,7 +256,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     assert.match(await page.locator(".replay-readout").innerText(), /11:30 AM/);
     await page.keyboard.press("ArrowLeft");
     await expectValues(["110", "60"]);
-    await page.getByRole("button", { name: "Ready Lane", exact: true }).click();
+    await laneSelect.selectOption("passenger_ready");
     await expectValues(["—", "—"]);
     assert.match(
       await page.locator(".replay-footnote").innerText(),
@@ -255,11 +267,11 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       .click();
     await expectValues(["45", "30"]);
     assert.equal(historyCalls, 1);
-    await page.getByRole("button", { name: "Walking", exact: true }).click();
+    await laneSelect.selectOption("pedestrian_standard");
     await expectValues(["10", "5"]);
     assert.equal(await drive.isDisabled(), true);
     assert.equal(await page.locator(".result-head").count(), 0);
-    await page.getByRole("button", { name: "Standard", exact: true }).click();
+    await laneSelect.selectOption("passenger_standard");
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.evaluate(
       () =>
@@ -297,14 +309,12 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       /Sources/,
     );
     await page.getByRole("button", { name: "Cambiar a español" }).click();
-    assert.match(await page.locator("h1").innerText(), /Dos cruces/);
+    assert.match(await page.locator("h1").innerText(), /Mapa de cruces San Ysidro–Otay/);
     assert.equal(await page.locator("html").getAttribute("lang"), "es");
     assert.match(await page.locator(".ocean").innerText(), /OCÉANO\s+PACÍFICO/);
     assert.equal(
-      await page
-        .getByRole("button", { name: "Estándar", exact: true })
-        .getAttribute("aria-pressed"),
-      "true",
+      await page.getByRole("combobox", { name: "Tu carril", exact: true }).inputValue(),
+      "passenger_standard",
     );
     assert.equal(
       await page.locator('link[rel="canonical"]').getAttribute("href"),
@@ -343,10 +353,31 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     await page.getByRole("searchbox", { name: "Search crossings by name or city", exact: true }).waitFor();
     assert.equal(new URL(page.url()).pathname, "/");
     assert.equal(
-      await page.locator("h1").filter({ hasText: "Two crossings." }).count(),
+      await page.locator("h1").filter({ hasText: "San Ysidro–Otay crossing map" }).count(),
       0,
     );
-    console.log(`[crossing-console] PASS: ${viewport.width}px interactions, 15 live map co-registration resizes, all-missing replay gap, Spanish ocean, keyboard and reduced motion`);
+    failed = false;
+    for (const [slug, key] of [["san-ysidro", "passenger_sentri"], ["otay-mesa", "passenger_ready"]]) {
+      await page.goto(new URL(`/crossing/${slug}/?lane=${key}`, baseUrl).href);
+      const mapEntry = page.getByRole("link", { name: "Compare San Ysidro and Otay on the map", exact: true });
+      await mapEntry.waitFor();
+      await mapEntry.click();
+      await page.getByRole("heading", { name: "San Ysidro–Otay crossing map", exact: true }).waitFor();
+      assert.equal(new URL(page.url()).searchParams.get("lane"), key);
+    }
+    if (viewport.width < 1024) {
+      await page.getByRole("button", { name: "Open menu", exact: true }).click();
+      const link = page.locator("#mobile-navigation").getByRole("link", { name: "Crossing map", exact: true });
+      assert.equal(await link.getAttribute("aria-current"), "page");
+      await link.click();
+      assert.equal(await page.locator("#mobile-navigation").count(), 0, "mobile navigation closes after choosing the map");
+      assert.equal(new URL(page.url()).searchParams.get("lane"), "passenger_ready", "global map navigation retains the chosen lane");
+    } else {
+      const navLink = page.locator("aside").getByRole("link", { name: "Crossing map", exact: true });
+      assert.equal(await navLink.getAttribute("aria-current"), "page");
+      assert.match(await navLink.getAttribute("href"), /lane=passenger_ready/);
+    }
+    console.log(`[crossing-console] PASS: ${viewport.width}px native theme/font, dashboard/nav/both-port discovery, lane select and URLs, 15 live map resizes, all-missing replay gap, Spanish, keyboard and reduced motion`);
   } finally {
     await context.close();
   }

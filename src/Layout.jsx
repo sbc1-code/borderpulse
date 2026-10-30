@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Clock3 } from 'lucide-react';
+import { BarChart3, BookOpen, Menu, X, Moon, Sun, Clock3, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import { themeValue, readStorage, writeStorage } from '@/lib/browserStorage';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { normalizeLane, withLane } from '@/lib/laneContext';
 
 export default function Layout({ children }) {
   const location = useLocation();
@@ -53,6 +54,12 @@ export default function Layout({ children }) {
       href: '/',
       icon: BarChart3,
       current: location.pathname === '/',
+    },
+    {
+      name: language === 'en' ? 'Crossing map' : 'Mapa de cruces',
+      href: withLane('/corridor/san-diego-tijuana/', normalizeLane(new URLSearchParams(location.search).get('lane'))),
+      icon: MapPin,
+      current: location.pathname.startsWith('/corridor/'),
     },
     {
       name: 'Blog',

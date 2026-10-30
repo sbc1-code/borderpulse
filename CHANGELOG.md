@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-10-30 — Match the crossing map to BorderPulse (review candidate)
+
+- Replace the console's separate visual styling with the site's type, light/dark surfaces, existing controls and blueprint map tokens; retain purposeful, reduced-motion-aware transitions.
+- Add dashboard, main-navigation and relevant crossing-page map entry points while preserving lane context and primary reports.
+- Preserve data/clock integrity, replay gaps, detour logic and editorial/news behavior. Add native-theme/discoverability browser coverage and before/after review evidence; production is unchanged pending review.
+
 ## 2026-10-30 — Additive crossing console (review candidate)
 
 - Add a lazy, bilingual San Ysidro/Otay corridor view from the existing area dashboard, with geographic waits, shared-element report details and transparent extra-drive arithmetic.

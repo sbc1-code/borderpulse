@@ -401,6 +401,12 @@ export default function Dashboard() {
                 : (language === 'en' ? 'unavailable' : 'no disponibles')}
             </span>
           </div>
+          <Button asChild variant="outline" size="sm" className="gap-1.5 min-h-11">
+            <Link to={withLane('/corridor/san-diego-tijuana/', lane)} title={language === 'es' ? 'San Ysidro y Otay Mesa' : 'San Ysidro and Otay Mesa'}>
+              <MapPin className="w-3.5 h-3.5" />
+              {language === 'es' ? 'Mapa de cruces' : 'Crossing map'}
+            </Link>
+          </Button>
           <Button
             variant={view === 'analytics' ? 'default' : 'outline'}
             size="sm"

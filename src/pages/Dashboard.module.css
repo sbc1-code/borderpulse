@@ -40,7 +40,10 @@
   .filters { padding: 1.25rem; }
 }
 
-@media (max-width: 639px) { .extras > section > button > span > span:last-child { display: none; } }
+@media (max-width: 639px) {
+  .freshness { flex-basis: 100%; }
+  .extras > section > button > span > span:last-child { display: none; }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .regions button { position: relative; transition: background-color 140ms, color 140ms; }
