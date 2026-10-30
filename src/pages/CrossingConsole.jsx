@@ -49,6 +49,9 @@ import {
   projectConsolePoint,
 } from "@/lib/crossingConsole";
 import { COPY } from "@/components/corridor/copy";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import LaneSelector from "@/components/dashboard/LaneSelector";
 import Geography from "@/components/corridor/Geography";
 import geography from "@/components/corridor/geography.json";
 import "@/components/corridor/CrossingConsole.css";
@@ -157,10 +160,7 @@ export default function CrossingConsole() {
     };
   }, []);
   useEffect(() => {
-    const title =
-      language === "es"
-        ? "San Ysidro y Otay Mesa: corredor de cruces | Border Pulse"
-        : "San Ysidro & Otay Mesa crossing console | Border Pulse";
+    const title = `${copy.title} | Border Pulse`;
     updatePageMeta({
       title,
       description: copy.intro,
@@ -169,7 +169,7 @@ export default function CrossingConsole() {
       lang: language,
     });
     return () => resetPageMeta();
-  }, [language, copy.intro]);
+  }, [language, copy.intro, copy.title]);
   function closeDetail() {
     const previous = selected;
     setSelected(null);
@@ -305,53 +305,35 @@ export default function CrossingConsole() {
   return (
     <MotionConfig
       reducedMotion={reduced ? "always" : "never"}
-      transition={{ type: "spring", stiffness: 330, damping: 34, mass: 0.85 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
     >
       <LayoutGroup id="crossing-console">
         <div className="corridorConsole">
           <div className="app">
             <nav className="nav" aria-label={copy.label}>
+              <Button asChild variant="ghost" size="sm" className="console-back min-h-11">
               <Link
                 to={withLane("/?area=san-diego-tijuana", lane)}
-                className="console-back"
               >
                 <ArrowLeft size={17} />
                 {copy.back}
               </Link>
-              <span className="nav-context">SAN DIEGO / TIJUANA</span>
-              <button
-                className="text-button sources-button"
+              </Button>
+              <Button
+                variant="outline" size="sm"
+                className="sources-button min-h-11"
                 ref={sourcesButton}
                 onClick={() => setSources(true)}
               >
                 {copy.sources}
                 <ArrowUpRight size={15} />
-              </button>
+              </Button>
             </nav>
-            <div className="prototype-notice">
-              <strong>{copy.label}</strong>
-              <span>{copy.notice}</span>
-            </div>
-            <section className="intro">
-              <div>
-                <p className="eyebrow">
-                  <span className="short-rule" />
-                  {copy.eyebrow}
-                </p>
-                <h1>
-                  {copy.title}
-                  <br />
-                  <span>{copy.titleAccent}</span>
-                </h1>
-              </div>
-              <div className="intro-right">
-                <p>{copy.intro}</p>
-                <a href="#corridor-map" className="intro-link">
-                  {copy.explore}
-                  <ArrowUpRight size={18} />
-                </a>
-              </div>
-            </section>
+            <header className="intro">
+              <h1>{copy.title}</h1>
+              <p>{copy.intro}</p>
+              <p className="prototype-notice">{copy.notice}</p>
+            </header>
             <section
               id="corridor-map"
               tabIndex={-1}
@@ -365,28 +347,7 @@ export default function CrossingConsole() {
                     <span>{copy.northbound}</span>
                   </div>
                 </div>
-                <div
-                  className="lane-group"
-                  role="group"
-                  aria-label={copy.laneGroup}
-                >
-                  {LANES.map(([key, label]) => (
-                    <button
-                      key={key}
-                      aria-pressed={lane === key}
-                      onClick={() => changeLane(key)}
-                      className={lane === key ? "selected" : ""}
-                    >
-                      {lane === key && (
-                        <motion.span
-                          layoutId="console-lane-indicator"
-                          className="lane-indicator"
-                        />
-                      )}
-                      <span>{copy[label]}</span>
-                    </button>
-                  ))}
-                </div>
+                <div className="lane-group"><LaneSelector lane={lane} onChange={changeLane} language={language} /></div>
               </div>
               {!replay && (
                 <div className="retrieval-status">
@@ -396,8 +357,8 @@ export default function CrossingConsole() {
                       : fetchLabel(trust.state, trust.age, language)}
                     {currentProblem && <span>{currentProblem}</span>}
                   </p>
-                  <button
-                    className="text-button"
+                  <Button
+                    variant="outline" size="sm" className="min-h-11"
                     onClick={() => {
                       setRefreshing(true);
                       dataService.getBorderData();
@@ -406,11 +367,11 @@ export default function CrossingConsole() {
                   >
                     <RefreshCw size={14} />
                     {refreshing ? copy.refreshing : copy.refresh}
-                  </button>
+                  </Button>
                 </div>
               )}
               <div
-                className={`map-stage ${selected ? "detail-open" : ""} ${replay ? "replaying" : ""}`}
+                className={`map-stage bp-line ${selected ? "detail-open" : ""} ${replay ? "replaying" : ""}`}
               >
                 <Geography
                   geo={geography}
@@ -596,7 +557,13 @@ export default function CrossingConsole() {
                   <span>{copy.geographic}</span>
                 </div>
               </div>
-              <div className="replay-console">
+              <div className="map-key" role="group" aria-label={copy.mapLegend}>
+                <strong>{copy.mapLegend}:</strong>
+                <span><span className="legend-dot sand" aria-hidden="true" />San Ysidro</span>
+                <span><span className="legend-dot mint" aria-hidden="true" />Otay Mesa</span>
+                <span className="map-key-note">{copy.markerMeaning}</span>
+              </div>
+              <Card className="replay-console">
                 <div className="replay-top">
                   <div className="replay-title">
                     <History size={18} />
@@ -614,7 +581,7 @@ export default function CrossingConsole() {
                     role="group"
                     aria-label={copy.archive}
                   >
-                    <button
+                    <Button variant={!replay ? "default" : "outline"} size="sm"
                       aria-pressed={!replay}
                       className={!replay ? "selected" : ""}
                       onClick={() => {
@@ -623,14 +590,14 @@ export default function CrossingConsole() {
                       }}
                     >
                       {copy.currentMode}
-                    </button>
-                    <button
+                    </Button>
+                    <Button variant={replay ? "default" : "outline"} size="sm"
                       aria-pressed={replay}
                       className={replay ? "selected" : ""}
                       onClick={enterReplay}
                     >
                       {copy.replayMode}
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 {replay && !historyReady ? (
@@ -718,8 +685,8 @@ export default function CrossingConsole() {
                     </div>
                   </>
                 )}
-              </div>
-              <section className="detour">
+              </Card>
+              <Card className="detour">
                 <div className="detour-input">
                   <p className="eyebrow">{copy.extraEyebrow}</p>
                   <h2>
@@ -854,7 +821,7 @@ export default function CrossingConsole() {
                     </div>
                   )}
                 </div>
-              </section>
+              </Card>
               <section className="field-notes">
                 <div>
                   <p className="eyebrow">{copy.before}</p>
@@ -1048,7 +1015,7 @@ function HistoryDots({ snapshots, index }) {
                 cx={(i / Math.max(1, snapshots.length - 1)) * 1000}
                 cy={46 - (value / max) * 40}
                 r={index === i ? 3 : 1.7}
-                fill={j ? "#b5d5c4" : "#e7bd8e"}
+                fill={j ? "var(--mint)" : "var(--sand)"}
               />
             ) : null;
           })}

@@ -521,6 +521,13 @@ export default function CrossingDetail() {
         )}
       </div>
 
+      {['san-ysidro', 'otay-mesa'].includes(canonicalSlug) && (
+        <Link to={withLane('/corridor/san-diego-tijuana/', lane)} className="mb-4 inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+          {language === 'es' ? 'Mapa San Ysidro–Otay' : 'San Ysidro–Otay map'}
+          <ArrowRight className="w-3 h-3 shrink-0" />
+        </Link>
+      )}
+
       {isSanYsidro && (
         <SanYsidroDecision
           sanYsidro={crossing}

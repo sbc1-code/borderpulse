@@ -1,5 +1,9 @@
 # DECISIONS
 
+## 2026-10-30 · The crossing map uses the existing BorderPulse design
+
+The map is an ordinary BorderPulse page. Its presentation inherits the existing shell, type, surfaces, controls and blueprint map language; a separate cinematic visual identity is no longer the target. Keep useful geography, explicit clocks, lane comparisons, honest replay and user-entered driving arithmetic. Entry points belong in the existing navigation/dashboard and relevant crossing pages. This correction awaits exact-head review before release.
+
 ## 2026-10-29 · Automatic blog reports use a narrow verified grammar
 
 The owner approved a BorderPulse-only automatic blog experiment. Start with

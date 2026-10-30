@@ -12,11 +12,13 @@ export default function Geography({ geo, label, compact }) {
       c.width = w * dpr;
       c.height = h * dpr;
       const ctx = c.getContext("2d");
+      const style = getComputedStyle(c);
+      const color = (token, fallback) => style.getPropertyValue(token).trim() || fallback;
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, w, h);
       const x = (lon) => (projectConsolePoint(lon, 0, compact).x / 100) * w,
         y = (lat) => (projectConsolePoint(0, lat, compact).y / 100) * h;
-      ctx.fillStyle = "#14252c";
+      ctx.fillStyle = color("--bp-field", "#f4f7f9");
       ctx.fillRect(0, 0, w, h);
       if (geo)
         for (const f of geo.features) {
@@ -30,13 +32,15 @@ export default function Geography({ geo, label, compact }) {
             }
           }
           ctx.fillStyle =
-            f.properties["ISO3166-1-Alpha-2"] === "US" ? "#25332f" : "#2d3430";
+            f.properties["ISO3166-1-Alpha-2"] === "US"
+              ? color("--map-land-us", "#edf4f0")
+              : color("--map-land-mx", "#e3eee9");
           ctx.fill();
-          ctx.strokeStyle = "#5b6458";
+          ctx.strokeStyle = color("--bp-line-soft", "rgba(30,58,95,.28)");
           ctx.lineWidth = 1.2;
           ctx.stroke();
         }
-      ctx.strokeStyle = "rgba(179,197,182,.075)";
+      ctx.strokeStyle = color("--bp-grid", "rgba(30,58,95,.1)");
       ctx.lineWidth = 1;
       for (let lon = -117.15; lon <= -116.85; lon += 0.025) {
         ctx.beginPath();
@@ -64,7 +68,7 @@ export default function Geography({ geo, label, compact }) {
             i ? ctx.lineTo(x(lon), y(lat)) : ctx.moveTo(x(lon), y(lat)),
           );
         }
-        ctx.strokeStyle = "#b9a781";
+        ctx.strokeStyle = color("--bp-line-strong", "#1e3a5f");
         ctx.lineWidth = 1.5;
         ctx.setLineDash([4, 5]);
         ctx.stroke();
@@ -74,7 +78,9 @@ export default function Geography({ geo, label, compact }) {
     draw();
     const observer = new ResizeObserver(draw);
     observer.observe(c);
-    return () => observer.disconnect();
+    const themeObserver = new MutationObserver(draw);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => { observer.disconnect(); themeObserver.disconnect(); };
   }, [geo, compact]);
   return (
     <canvas className="geography" ref={ref} aria-label={label} role="img" />

@@ -525,7 +525,7 @@ async function main() {
   // An additive corridor interface, outside the sitemap in this first release.
   // Keep a real dated report fallback and serve direct requests on static hosts.
   {
-    const head = { title: 'San Ysidro & Otay Mesa crossing console | Border Pulse', desc: 'Compare the same reported lane, inspect source clocks and account for your extra driving time.', canonical: CONSOLE_CANONICAL, ogImage: `${BASE}/og-card.png`, jsonLd: [] };
+    const head = { title: 'San Ysidro–Otay crossing map | Border Pulse', desc: 'Compare reported waits by lane, replay recorded observations and include your extra driving time.', canonical: CONSOLE_CANONICAL, ogImage: `${BASE}/og-card.png`, jsonLd: [] };
     const html = injectSnapshot(rewriteIndex(indexWithLinks, head), snapshotHtml(crossings.filter(c => ['250401', '250601'].includes(String(c.port_number))), portToSlug, doc.fetched_at, true));
     const outDir = path.resolve(distDir, `.${CONSOLE_PATH}`);
     fs.mkdirSync(outDir, { recursive: true });

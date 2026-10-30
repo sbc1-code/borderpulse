@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,7 +18,7 @@ import DashboardSummaryDisclosure from '@/components/dashboard/DashboardSummaryD
 import LaneSelector from '@/components/dashboard/LaneSelector';
 import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
 import DashboardCameras from '@/components/dashboard/DashboardCameras';
-import { normalizeLane, withLane } from '@/lib/laneContext';
+import { normalizeLane } from '@/lib/laneContext';
 import { availableLaneWait } from '@/lib/crossingAvailability';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
 import { crossingSearchTerms } from '@/lib/crossingNames';
@@ -546,7 +546,6 @@ export default function Dashboard() {
 
           </div>
           <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
-          {corridor === 'san-diego-tijuana' && <Link to={withLane('/corridor/san-diego-tijuana/', lane)} className="mb-4 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-300"><MapPin className="h-4 w-4" />{language === 'es' ? 'Explorar el corredor San Ysidro–Otay' : 'Explore the San Ysidro–Otay corridor'}</Link>}
           <div className={styles.extras}>
           <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <DashboardSummaryDisclosure
