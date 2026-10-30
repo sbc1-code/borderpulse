@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-10-30 — Simplify automated blog presentation
+
+- Remove reader-facing AI authorship labels from bilingual article summaries,
+  bodies and organization credits, including future editorial/pilot templates.
+- Preserve claim text, citations, dates, evidence receipts, machine author ids,
+  source types and `humanEdited: false`; credit BorderPulse as an organization.
+- Presentation change requested by Sebastian; implementation by ChatGPT (Codex).
+
 ## 2026-10-30 — Resolve editorial push inputs from Git trees
 
 - Fix connector-triggered intake: GitHub Actions omits added/modified file

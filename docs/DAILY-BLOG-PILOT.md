@@ -9,7 +9,10 @@ the associated GitHub pull request.
 The owner authorized an automatic BorderPulse-only blog experiment on October
 29, 2026. Routine measured-data reporting may publish after machine checks.
 No individual human review is claimed: posts use `source: daily-pilot`,
-`humanEdited: false`, a separate automated author and a visible EN/ES disclosure.
+`humanEdited: false`, and a separate machine author id. At the owner’s
+October 30, 2026 UTC request, the visible credit is the BorderPulse organization
+and authorship disclosure labels are hidden. Evidence records and timestamps
+remain intact; this presentation choice does not claim human review.
 The old `auto-a`/`auto-b` review gate remains in place.
 
 This first version uses AI-assisted editorial templates and deterministic
