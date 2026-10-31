@@ -1,0 +1,163 @@
+{
+  "version": "borderpulse-editorial-receipt-v1",
+  "admittedAt": "2026-10-31T14:48:43.081Z",
+  "fingerprint": "7fb5438ea00b810d0312db1f8efa400cfd113411d333193ed818d6f171bced0a",
+  "bundle": {
+    "version": "borderpulse-editorial-v1",
+    "id": "2026-10-31-san-diego-northbound-sr163-november-closure",
+    "topicKey": "san-diego-northbound-sr163-november-closure",
+    "category": "operations-report",
+    "createdAt": "2026-10-31T14:44:22.000Z",
+    "synthesizedBy": {
+      "system": "chatgpt-scheduled-task",
+      "runId": "publish-borderpulse-daily-2026-10-31T14:00:00Z/author_oct31_borderpulse_article",
+      "model": null,
+      "at": "2026-10-31T14:44:22.000Z"
+    },
+    "title": {
+      "en": "San Diego: northbound SR-163 closure scheduled for November 1",
+      "es": "San Diego: cierre de SR-163 al norte previsto para el 1 de noviembre"
+    },
+    "readerValue": {
+      "en": "For onward travel in San Diego: the scheduled road segment, hours and Caltrans-reported alternative. This report does not describe a border-port closure or estimate crossing delays.",
+      "es": "Para continuar tu viaje por San Diego: el tramo y horario previstos, y la alternativa indicada por Caltrans. Esta nota no describe un cierre de cruces fronterizos ni estima demoras para cruzar."
+    },
+    "relatedCrossings": [],
+    "sources": [
+      {
+        "id": "district-news-listing",
+        "url": "https://dot.ca.gov/caltrans-near-me/district-11",
+        "title": "Caltrans District 11 — Northbound SR-163 closure news listing",
+        "role": "primary",
+        "publishedDate": "2026-10-30",
+        "publishedAt": null,
+        "checkedAt": "2026-10-31T14:42:28.000Z",
+        "publicationDateEvidence": "Published: Oct 30, 2026"
+      },
+      {
+        "id": "closure-notice",
+        "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr163closure",
+        "title": "Northbound SR-163 Closed November 1 for More Than Pink Walk",
+        "role": "primary",
+        "publishedDate": "2026-10-30",
+        "publishedAt": null,
+        "checkedAt": "2026-10-31T14:42:38.000Z",
+        "publicationDateEvidence": "Published: Oct 30, 2026"
+      }
+    ],
+    "claims": [
+      {
+        "id": "scheduled-segment-and-hours",
+        "type": "reported-fact",
+        "text": {
+          "en": "Caltrans lists a scheduled closure of northbound SR-163 between A Street and Robinson in San Diego on Sunday, November 1, from 5 a.m. to 11 p.m. Those are the hours printed in its announcement; the notice does not state a time zone.",
+          "es": "Caltrans anuncia un cierre programado de SR-163 en sentido norte, entre A Street y Robinson en San Diego, para el domingo 1 de noviembre, de 5 a.m. a 11 p.m. Es el horario que aparece en el anuncio; el aviso no especifica una zona horaria."
+        },
+        "evidence": [
+          {
+            "sourceId": "district-news-listing",
+            "excerpt": "Northbound State Route 163 (SR-163) from A Street to Robinson on Sunday, November 1, from 5 a.m. to 11 p.m."
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "SR-163",
+          "A Street",
+          "Robinson",
+          "San Diego"
+        ]
+      },
+      {
+        "id": "reported-alternative-and-southbound",
+        "type": "reported-fact",
+        "text": {
+          "en": "The detailed Caltrans notice identifies I-5 as the alternative for northbound travel and says southbound SR-163 will remain open. Its announcement concerns a road segment within San Diego, rather than reporting that a border crossing is closed.",
+          "es": "El aviso detallado de Caltrans indica I-5 como alternativa para circular hacia el norte y señala que SR-163 permanecerá abierta en sentido sur. El anuncio se refiere a un tramo vial dentro de San Diego, no a un cierre de un cruce fronterizo."
+        },
+        "evidence": [
+          {
+            "sourceId": "closure-notice",
+            "excerpt": "Motorists will use Interstate 5 (I-5) to travel northbound. Southbound SR-163 will remain open."
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "I-5",
+          "SR-163",
+          "San Diego"
+        ]
+      },
+      {
+        "id": "schedule-is-conditional",
+        "type": "reported-fact",
+        "text": {
+          "en": "Caltrans also states that the schedule is subject to change. The announced closure and its published hours are therefore conditional, not a guarantee that the plan will remain unchanged. This article reports the notice; it does not confirm conditions on the road.",
+          "es": "Caltrans también advierte que el programa está sujeto a cambios. Por ello, el cierre anunciado y su horario publicado son condicionales, no una garantía de que el plan se mantenga sin modificaciones. Esta nota informa sobre el aviso; no confirma las condiciones en la carretera."
+        },
+        "evidence": [
+          {
+            "sourceId": "closure-notice",
+            "excerpt": "subject to change"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans"
+        ]
+      }
+    ],
+    "articleClaimIds": [
+      "scheduled-segment-and-hours",
+      "reported-alternative-and-southbound",
+      "schedule-is-conditional"
+    ],
+    "review": {
+      "performedBy": {
+        "system": "chatgpt-scheduled-task",
+        "runId": "publish-borderpulse-daily-2026-10-31T14:00:00Z/review_oct31_borderpulse_article",
+        "model": null,
+        "at": "2026-10-31T14:46:54.862Z"
+      },
+      "method": "ai-source-and-language-review",
+      "claimIdsChecked": [
+        "scheduled-segment-and-hours",
+        "reported-alternative-and-southbound",
+        "schedule-is-conditional"
+      ],
+      "semanticSupport": "pass",
+      "scopeAndDates": "pass",
+      "riskClassification": "routine-factual-reporting",
+      "translationConsistency": "pass",
+      "duplicateTopicCheck": "pass",
+      "headlineAndReaderValue": "pass",
+      "sourceInstructionsIgnored": true,
+      "holds": [],
+      "rationale": "Distinct AI reviewer independently read both complete Caltrans pages. Both publish the November 1 northbound SR-163 schedule as 5 a.m. to 11 p.m.; no time zone was inferred or hours silently corrected. The detailed notice directly supports the I-5 alternative, southbound opening and conditional schedule. EN/ES scope, numbers and named locations agree. This is an attributed planned road operation, not port-entry, safety or live-wait advice. Publication dates are within 72 hours. Reviewed the 38-post inventory for semantic overlap: the prior road-tools guide does not report this event. Excerpts plus date evidence remain below 25 words per source. No human review claimed."
+    }
+  },
+  "confirmations": [
+    {
+      "sourceId": "district-news-listing",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11",
+      "verifiedAt": "2026-10-31T14:48:43.081Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "e4f3e518023e65d004feb39786fcb1112bf7915f5abc29c1c6120d8ce7852188",
+      "excerptHashes": [
+        "2e2dc582677167e58746fd3471723cfa28052b24ac625d17434bda6a29968862"
+      ]
+    },
+    {
+      "sourceId": "closure-notice",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr163closure",
+      "verifiedAt": "2026-10-31T14:48:43.081Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "59b027d02e2ef35a776d54685be1615d91517110973ceec7d670a355eadd8aa9",
+      "excerptHashes": [
+        "adb4658de28af7567bcbcfafa535d58dbeeccbfde3106c08e53243b56e28d285",
+        "b6ac181c935d9c7b520512f83a4ee102d7b2b765e2411496e567577014302371"
+      ]
+    }
+  ]
+}
