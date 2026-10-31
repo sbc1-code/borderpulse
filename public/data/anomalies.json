@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-31T09:24:55.709Z",
-  "snapshot_at": "2026-10-31T09:22:50.784Z",
+  "generated_at": "2026-10-31T15:38:44.679Z",
+  "snapshot_at": "2026-10-31T15:37:48.184Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -89,6 +89,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 1.7999999999999998,
+      "detected_at": "2026-10-31T15:38:44.679Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 6 PM — ~280% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 6 PM — ~280% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 210,
+        "overall_median": 75,
+        "samples": 19,
+        "ratio": 2.8
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
@@ -102,23 +119,6 @@
         "overall_median": 60,
         "samples": 16,
         "ratio": 2.75
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1.625,
-      "detected_at": "2026-10-31T09:24:55.709Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 210 min around 6 PM — ~263% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 210 min cerca de las 6 PM — ~263% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 210,
-        "overall_median": 80,
-        "samples": 19,
-        "ratio": 2.625
       }
     },
     {
@@ -179,7 +179,7 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-10-31T09:24:55.709Z",
+      "detected_at": "2026-10-31T15:38:44.679Z",
       "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
       "evidence": {
@@ -188,7 +188,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 35,
-        "samples": 12
+        "samples": 16
       }
     },
     {
@@ -207,24 +207,6 @@
         "best_median": 0,
         "overall_median": 0,
         "samples": 12
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.9625,
-      "detected_at": "2026-10-31T09:24:55.709Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 3 min) — ~96% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 3 min) — ~96% debajo de la base de 30 días de 80 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 3,
-        "best_median": 3,
-        "overall_median": 80,
-        "samples": 17
       }
     },
     {
@@ -251,7 +233,7 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.9166666666666666,
-      "detected_at": "2026-10-31T09:24:55.709Z",
+      "detected_at": "2026-10-31T15:38:44.679Z",
       "summary_en": "Right now Calexico - West's lightest Saturday hour so far is 3 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - West es 3 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -260,7 +242,7 @@
         "best_hour": 3,
         "best_median": 5,
         "overall_median": 60,
-        "samples": 17
+        "samples": 21
       }
     },
     {
@@ -305,16 +287,34 @@
       "port_name": "Calexico - East",
       "state": "CA",
       "severity": 0.875,
-      "detected_at": "2026-10-31T09:24:55.709Z",
-      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 8 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 8 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
+      "detected_at": "2026-10-31T15:38:44.679Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 10 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 10 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
-        "best_hour": 8,
+        "best_hour": 10,
         "best_median": 5,
         "overall_median": 40,
         "samples": 17
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.8666666666666667,
+      "detected_at": "2026-10-31T15:38:44.679Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 10 min) — ~87% below the 30-day baseline of 75 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 10 min) — ~87% debajo de la base de 30 días de 75 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 3,
+        "best_median": 10,
+        "overall_median": 75,
+        "samples": 21
       }
     },
     {
@@ -340,7 +340,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.6666666666666667,
-      "detected_at": "2026-10-31T09:24:55.709Z",
+      "detected_at": "2026-10-31T15:38:44.679Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Saturday hour so far is 4 AM (median 10 min) — ~67% below the 30-day baseline of 30 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en Brownsville - Gateway es 4 AM (mediana 10 min) — ~67% debajo de la base de 30 días de 30 min.",
       "evidence": {
@@ -349,7 +349,7 @@
         "best_hour": 4,
         "best_median": 10,
         "overall_median": 30,
-        "samples": 20
+        "samples": 22
       }
     },
     {
@@ -358,7 +358,7 @@
       "port_name": "San Ysidro",
       "state": "CA",
       "severity": 0.625,
-      "detected_at": "2026-10-31T09:24:55.709Z",
+      "detected_at": "2026-10-31T15:38:44.679Z",
       "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 30 min) — ~63% below the 30-day baseline of 80 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 30 min) — ~63% debajo de la base de 30 días de 80 min.",
       "evidence": {
@@ -367,7 +367,7 @@
         "best_hour": 3,
         "best_median": 30,
         "overall_median": 80,
-        "samples": 17
+        "samples": 21
       }
     },
     {
@@ -423,24 +423,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-10-30T12:26:21.343Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 9 PM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 9 PM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 21,
-        "best_median": 20,
-        "overall_median": 60,
-        "samples": 17
-      }
-    }
-  ]
+  "trailing_24h": []
 }
