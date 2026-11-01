@@ -170,6 +170,8 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       await page.waitForFunction(() => !new URL(location.href).searchParams.has('port'));
       assert.equal(await page.getByRole('searchbox').evaluate(n => n === document.activeElement), true, 'filtering keeps search focus');
       await page.getByRole('searchbox').fill('');
+      await page.waitForURL(url => !url.searchParams.has('q'));
+      await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.length);
       await explorer().getByRole('button', {
         name: es ? 'Historial registrado' : 'Recorded history',
         exact: true
@@ -189,17 +191,37 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       assert.match(await page.locator('.recordedReport').innerText(), es ? /no conserva horas/ : /does not retain lane report clocks/);
       assert.equal(await page.getByTestId('cbp-report-time').count(), 0, 'history cannot invent lane clocks');
       await page.keyboard.press('Escape');
+      await page.waitForURL(url => !url.searchParams.has('port'));
+      await page.locator('#map-result-250401').waitFor();
       await explorer().getByRole('button', {
         name: es ? 'Últimos reportes' : 'Latest reports',
         exact: true
       }).click();
+      await page.waitForURL(url => !url.searchParams.has('mode'));
+      await page.waitForFunction(() => /Latest reports|Últimos reportes/.test(document.querySelector('.explorerMode button[aria-pressed="true"]')?.textContent || ''));
+      await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.length);
+      const beforeTexas = page.url();
       await page.getByRole('button', {
         name: 'Texas',
         exact: true
       }).click();
+      await page.waitForURL(url => url.searchParams.get('region') === 'TX');
+      await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.filter(row => row.state === 'TX').length);
       assert.ok((await page.locator('.crossingResultList button>span>small').allTextContents()).every(s => s.startsWith('TX')));
       await page.goBack();
-      await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.length);
+      try {
+        await page.waitForURL(beforeTexas);
+        await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.length);
+      } catch (error) {
+        console.error('[border-map-back-diagnostic]', JSON.stringify(await page.evaluate(() => ({
+          url: location.href,
+          rows: document.querySelectorAll('.crossingResultList li').length,
+          detail: document.querySelector('.explorerPane')?.innerText,
+          region: [...document.querySelectorAll('button[aria-pressed="true"]')].map(n => n.textContent),
+          search: document.querySelector('input[type="search"]')?.value
+        }))));
+        throw error;
+      }
       await page.goto(new URL('/crossing/san-ysidro/?lane=passenger_ready', baseUrl).href);
       await page.getByRole('link', {
         name: es ? 'Todos los cruces' : 'All crossings',
