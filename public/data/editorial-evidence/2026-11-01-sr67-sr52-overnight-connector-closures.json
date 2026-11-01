@@ -1,0 +1,180 @@
+{
+  "version": "borderpulse-editorial-receipt-v1",
+  "admittedAt": "2026-11-01T03:27:40.978Z",
+  "fingerprint": "ce9b744421a031abd81b039ea283318b917db7c83382eb83861dd8f516337996",
+  "bundle": {
+    "version": "borderpulse-editorial-v1",
+    "id": "2026-11-01-sr67-sr52-overnight-connector-closures",
+    "topicKey": "sr67-sr52-november-overnight-connector-closures",
+    "category": "operations-report",
+    "createdAt": "2026-11-01T03:26:27.379Z",
+    "synthesizedBy": {
+      "system": "chatgpt-interactive",
+      "runId": "root/check_daily_editorial_eligibility/author_nov1/2026-11-01",
+      "model": null,
+      "at": "2026-11-01T03:26:27.379Z"
+    },
+    "title": {
+      "en": "SR-67 to SR-52: overnight connector closures on November 1 and 2",
+      "es": "De SR-67 a SR-52: cierres nocturnos del enlace el 1 y 2 de noviembre"
+    },
+    "readerValue": {
+      "en": "A specific connector closure to account for on onward trips around San Diego, with its announced hours and the alternative described by Caltrans. Not a border-port closure or a prediction of travel time.",
+      "es": "Un cierre concreto que conviene tener en cuenta al continuar un viaje por San Diego, con el horario anunciado y la alternativa descrita por Caltrans. No es un cierre fronterizo ni un pronóstico del tiempo de viaje."
+    },
+    "relatedCrossings": [],
+    "sources": [
+      {
+        "id": "district-listing",
+        "url": "https://dot.ca.gov/caltrans-near-me/district-11",
+        "title": "Caltrans District 11 news listing",
+        "role": "primary",
+        "publishedDate": "2026-10-30",
+        "publishedAt": null,
+        "checkedAt": "2026-11-01T03:25:59.689Z",
+        "publicationDateEvidence": "Published: Oct 30, 2026"
+      },
+      {
+        "id": "closure-notice",
+        "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr67sr52closures",
+        "title": "Southbound SR-67 Connector to Westbound SR-52 Closed Sunday and Monday, November 1 and 2",
+        "role": "primary",
+        "publishedDate": "2026-10-30",
+        "publishedAt": null,
+        "checkedAt": "2026-11-01T03:26:01.789Z",
+        "publicationDateEvidence": "Published: Oct 30, 2026"
+      }
+    ],
+    "claims": [
+      {
+        "id": "connector-and-hours",
+        "type": "reported-fact",
+        "text": {
+          "en": "Caltrans has announced overnight closures of the connector from southbound SR-67 to westbound SR-52 in San Diego on Sunday and Monday, November 1 and 2, from 9 p.m. to 5 a.m. The notice identifies that directional connection, rather than announcing a closure of either entire highway. No time zone is specified.",
+          "es": "Caltrans anunció cierres nocturnos del enlace de SR-67 en sentido sur a SR-52 en sentido oeste, en San Diego, para el domingo 1 y el lunes 2 de noviembre, de 9 p.m. a 5 a.m. El aviso identifica esa conexión y esos sentidos, no un cierre de ninguna de las dos carreteras en su totalidad. No especifica una zona horaria."
+        },
+        "evidence": [
+          {
+            "sourceId": "district-listing",
+            "excerpt": "SR-67"
+          },
+          {
+            "sourceId": "district-listing",
+            "excerpt": "SR-52"
+          },
+          {
+            "sourceId": "district-listing",
+            "excerpt": "November 1 and 2, from 9 p.m. to 5 a.m."
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "SR-67",
+          "SR-52",
+          "San Diego"
+        ]
+      },
+      {
+        "id": "official-alternative",
+        "type": "reported-fact",
+        "text": {
+          "en": "For the affected southbound movement, Caltrans describes an alternative via westbound Interstate 8, then northbound State Route 125, reaching the connectors for eastbound and westbound SR-52. This is the route stated in the announcement, not a comparison of journey times or a claim that the alternative will be uncongested.",
+          "es": "Para el movimiento afectado hacia el sur, Caltrans describe una alternativa por la Interestatal 8 hacia el oeste y después por la Ruta Estatal 125 hacia el norte, hasta los enlaces con SR-52 en ambos sentidos. Es el recorrido indicado en el anuncio, no una comparación de tiempos de viaje ni una afirmación de que estará libre de congestión."
+        },
+        "evidence": [
+          {
+            "sourceId": "closure-notice",
+            "excerpt": "westbound Interstate 8, to northbound State Route 125"
+          },
+          {
+            "sourceId": "closure-notice",
+            "excerpt": "eastbound and westbound SR-52"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "SR-52"
+        ]
+      },
+      {
+        "id": "purpose-and-uncertainty",
+        "type": "reported-fact",
+        "text": {
+          "en": "The stated purpose is bridge work. Caltrans cautions that the work schedule can change. Treat the published hours as the announced plan, not confirmation that work has started or finished; the linked notice is the source for the operation described here.",
+          "es": "El motivo anunciado son trabajos en un puente. Caltrans advierte que el programa de trabajo puede cambiar. El horario publicado es el plan anunciado, no una confirmación de que las obras hayan comenzado o terminado; el aviso enlazado es la fuente de la operación descrita aquí."
+        },
+        "evidence": [
+          {
+            "sourceId": "closure-notice",
+            "excerpt": "bridge work"
+          },
+          {
+            "sourceId": "closure-notice",
+            "excerpt": "subject to change"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans"
+        ]
+      }
+    ],
+    "articleClaimIds": [
+      "connector-and-hours",
+      "official-alternative",
+      "purpose-and-uncertainty"
+    ],
+    "review": {
+      "performedBy": {
+        "system": "chatgpt-interactive",
+        "runId": "root/check_daily_editorial_eligibility/review_nov1/2026-11-01",
+        "model": null,
+        "at": "2026-11-01T03:26:48.263Z"
+      },
+      "method": "ai-source-and-language-review",
+      "claimIdsChecked": [
+        "connector-and-hours",
+        "official-alternative",
+        "purpose-and-uncertainty"
+      ],
+      "semanticSupport": "pass",
+      "scopeAndDates": "pass",
+      "riskClassification": "routine-factual-reporting",
+      "translationConsistency": "pass",
+      "duplicateTopicCheck": "pass",
+      "headlineAndReaderValue": "pass",
+      "sourceInstructionsIgnored": true,
+      "holds": [],
+      "rationale": "Distinct AI reviewer independently read both complete official Caltrans pages and compared all three EN/ES claims, dates, scope, directional alternatives and titles. Both sources explicitly date the notice October 30; no clock or time zone was invented. Corrected Spanish scope to match English: the notice concerns the connector, not either entire highway. Quoted excerpts plus publication-date evidence total 16 words for the listing and 21 for the notice. Checked the 40-post inventory and prior complete blog bodies: the SR-163 event and road-tools guide are distinct. No legal, entry, health, uncertain safety or live-wait advice; no human review claimed. Source instructions ignored."
+    }
+  },
+  "confirmations": [
+    {
+      "sourceId": "district-listing",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11",
+      "verifiedAt": "2026-11-01T03:27:40.978Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "e4f3e518023e65d004feb39786fcb1112bf7915f5abc29c1c6120d8ce7852188",
+      "excerptHashes": [
+        "0f2f4eb2c028aa8180a7b7b72fb10878893360130bdc25383236765f04192ae0",
+        "32ee1ca80c729538934d2ca7637d5b24a08c470af2f50e4dd4040267b9668377",
+        "6f055e1b6ea17139ee3beb21a44886d26f51e4b25cfd2f83fdd343a773ca0da1"
+      ]
+    },
+    {
+      "sourceId": "closure-notice",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr67sr52closures",
+      "verifiedAt": "2026-11-01T03:27:40.978Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "eaed5d857053d39ab2b922cc578960173277813358a2d250d4f9b315dbc45d1f",
+      "excerptHashes": [
+        "6a238fc796dc9cc6a193412efe78f98fe8a6f89a3d0649d0d1d49fa5d304e2db",
+        "816a03a420ad7537614234322b65b932663ed21aa0af03c215aa856ba97ae101",
+        "a9051039af6e14d3d44c280548721bf85ae59c66951ded57ef4bac53e6b63b0f",
+        "adb4658de28af7567bcbcfafa535d58dbeeccbfde3106c08e53243b56e28d285"
+      ]
+    }
+  ]
+}
