@@ -105,6 +105,11 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       const states = await page.locator('.crossingResultList button small').allTextContents();
       for (const state of ['CA', 'AZ', 'NM', 'TX']) assert.ok(states.some(s => s.startsWith(state)));
       assert.equal(await page.locator('nav a[href*="/corridor/"]').count(), 0, 'no regional navigation silo');
+      await page.locator('.mapSources summary').click();
+      await page.getByTestId('map-location-coverage').waitFor();
+      assert.match(await page.getByTestId('map-location-coverage').innerText(), es ? /38 puntos aproximados · 4 registros solo en la lista/ : /38 approximate points · 4 list-only records/);
+      assert.match(await page.locator('.mapSources').innerText(), es ? /26 puntos heredados sin verificación independiente/ : /26 inherited points without independent verification/);
+      await page.locator('.mapSources summary').click();
       const controls = page.getByRole('group', {
         name: es ? 'Vista de cruces' : 'Crossing view',
         exact: true
@@ -140,6 +145,7 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.length);
       await openResult();
       await expectWait('80');
+      assert.match(await page.getByTestId('location-evidence').innerText(), es ? /sin verificación independiente/ : /not independently verified/);
       assert.match(await page.getByTestId('cbp-report-time').innerText(), /11:11 am PST/, 'original report clock retained');
       assert.equal(new URL(page.url()).searchParams.get('port'), '250401');
       await lane().selectOption('passenger_ready');
@@ -248,6 +254,23 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       await explorer().waitFor();
       assert.equal(await lane().inputValue(), 'passenger_ready');
       await fits();
+    }
+    await page.goto(new URL('/?area=all', baseUrl).href);
+    await explorer().waitFor();
+    for (const id of ['240204', '260801', '250601', '230404', '260802', '240221']) {
+      await page.locator(`#map-result-${id}`).click();
+      await page.getByTestId('border-crossing-card').waitFor();
+      const evidence = page.getByTestId('location-evidence');
+      await evidence.waitFor();
+      if (['250601', '230404', '260802', '240221'].includes(id)) {
+        assert.match(await evidence.innerText(), /No map point|Sin punto en el mapa/);
+        assert.equal(await page.locator(`[data-map-node][data-port="${id}"]`).count(), 0);
+      } else {
+        assert.equal(await evidence.getByRole('link').count(), 1, 'source-backed location exposes its primary reference');
+        assert.match(await evidence.innerText(), id === '260801' ? /Federal Register/ : /directorio público|public directory/);
+      }
+      await page.keyboard.press('Escape');
+      await page.locator(`#map-result-${id}`).waitFor();
     }
     // Theme paint and intermediate resize use actual SVG computed colors/CTMs.
     await page.goto(new URL('/?area=all', baseUrl).href);

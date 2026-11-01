@@ -1,0 +1,132 @@
+{
+  "reviewed_at": "2026-11-01",
+  "primary_directory": "https://www.tabc.texas.gov/services/texas-ports-of-entry/ports-of-entry-locations/",
+  "method": "Named directory location-link targets supplied by independent geography review; directory identities confirmed by the implementation worker. !3d/!4d targets, not @ viewport centers. Map rendering was blocked and not bypassed. These are approximate facility/directory targets, not surveyed entrances.",
+  "corrections": [
+    {
+      "port_number": "240204",
+      "identity": "Stanton",
+      "target": {
+        "lat": 31.7498171,
+        "lng": -106.4835194
+      },
+      "former_fallback": {
+        "lat": 31.7641,
+        "lng": -106.448
+      }
+    },
+    {
+      "port_number": "230502",
+      "identity": "Pharr",
+      "target": {
+        "lat": 26.0668542,
+        "lng": -98.205208
+      },
+      "former_fallback": {
+        "lat": 26.1561,
+        "lng": -98.1944
+      }
+    },
+    {
+      "port_number": "535504",
+      "identity": "Gateway",
+      "target": {
+        "lat": 25.8987897,
+        "lng": -97.49755
+      },
+      "former_fallback": {
+        "lat": 26.0269,
+        "lng": -97.4123
+      }
+    },
+    {
+      "port_number": "535502",
+      "identity": "Veterans",
+      "target": {
+        "lat": 25.8857715,
+        "lng": -97.4763808
+      },
+      "former_fallback": {
+        "lat": 25.9445,
+        "lng": -97.4974
+      }
+    },
+    {
+      "port_number": "230902",
+      "identity": "Donna",
+      "target": {
+        "lat": 26.069075,
+        "lng": -98.073754
+      },
+      "former_fallback": {
+        "lat": 26.1611,
+        "lng": -98.0397
+      }
+    },
+    {
+      "port_number": "230302",
+      "identity": "Eagle Pass II",
+      "target": {
+        "lat": 28.6978826,
+        "lng": -100.5093898
+      },
+      "former_fallback": {
+        "lat": 28.6786,
+        "lng": -100.487
+      }
+    },
+    {
+      "port_number": "240301",
+      "identity": "Presidio",
+      "target": {
+        "lat": 29.562278,
+        "lng": -104.391103
+      },
+      "former_fallback": {
+        "lat": 29.5611,
+        "lng": -104.3725
+      }
+    },
+    {
+      "port_number": "535503",
+      "identity": "Los Indios",
+      "target": {
+        "lat": 26.0291368,
+        "lng": -97.738798
+      },
+      "former_fallback": {
+        "lat": 26.0419,
+        "lng": -97.7439
+      }
+    }
+  ],
+  "san_luis_i": {
+    "port_number": "260801",
+    "source": "https://public-inspection.federalregister.gov/2025-23091.pdf",
+    "page": 1,
+    "latitude_dms": [
+      32,
+      29,
+      3.77463
+    ],
+    "longitude_west_dms": [
+      114,
+      46,
+      47.57786
+    ],
+    "facility_scope": true,
+    "entrance_claim": false
+  },
+  "withheld": [
+    "240221",
+    "260802",
+    "250601",
+    "230404"
+  ],
+  "earlier_published_limited": [
+    "230401",
+    "230402",
+    "230403"
+  ],
+  "independently_verified_all_locations": false
+}

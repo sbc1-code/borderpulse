@@ -30,6 +30,10 @@ The camera interpolates geometry and inverse-sized markers in the same animation
 
 ## Geographic scope and limits
 
+**Superseded by the [geographic correction review](BORDERWIDE-GEOGRAPHY-REVIEW.md).** The original 40-pin candidate below contained material inherited errors. Current coverage is 38 approximate points and 4 list-only records; 26 inherited points remain unverified. The original images/recording are retained as the earlier review artifact. Updated regional evidence accompanies the geography correction.
+
+### Original candidate record (historical)
+
 The app's existing catalog supplies 42 records, not a newly certified inventory of physical entrances. This preview maps **40 approximate locations** and leaves **San Luis II** and the **aggregate El Paso record** in the list without guessed physical pins. Missing lane reports do not imply that the lane does not exist. The overview supports exploration, not navigation or routing.
 
 - Three Laredo coordinates were cross-checked against the indexed [TxDOT Texas Border Crossings](https://gis-txdot.opendata.arcgis.com/maps/texas-border-crossings) table: Gateway to Americas 27.499/-99.507, Juárez-Lincoln 27.501/-99.503, Colombia 27.700/-99.746, at the published approximate precision.

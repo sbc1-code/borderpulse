@@ -83,7 +83,7 @@ const labels = {
     back: 'Back to results',
     all: 'All crossings',
     unlocated: 'Location not verified',
-    approx: 'Approximate locations · Not directions',
+    approx: 'Approximate locations · Review incomplete · Not directions',
     coverage: 'Sources and map coverage',
     noReport: 'No report',
     closed: 'Port closed',
@@ -106,7 +106,7 @@ const labels = {
     back: 'Volver a resultados',
     all: 'Todos los cruces',
     unlocated: 'Ubicación no verificada',
-    approx: 'Ubicaciones aproximadas · No son indicaciones de ruta',
+    approx: 'Ubicaciones aproximadas · Revisión incompleta · No son rutas',
     coverage: 'Fuentes y cobertura del mapa',
     noReport: 'Sin reporte',
     closed: 'Cruce cerrado',
@@ -233,6 +233,15 @@ export default function CrossingMapExplorer({
     reporting = rows.filter(row => row.wait != null).length;
   const freshness = walkDriveFreshness(fetchedAt);
   const trusted = !replay && freshness.usable && !offline && success !== false && !fromFallback;
+  const locationLabel = location => ({
+    'directory-target': es ? 'Punto aproximado de un enlace del directorio público; no es una entrada.' : 'Approximate target linked by the public directory; not an entrance.',
+    'federal-facility': es ? 'Punto del recinto publicado en el Federal Register; no es una entrada.' : 'Facility point published in the Federal Register; not an entrance.',
+    'published-limited': es ? 'Aproximación publicada anteriormente; verificación numérica limitada.' : 'Earlier published approximation; numeric verification is limited.',
+    'inherited-unverified': es ? 'Ubicación heredada del catálogo; sin verificación independiente.' : 'Inherited catalog location; not independently verified.'
+  })[location.locationKind];
+  const supportedLocations = mapped.filter(row => ['directory-target', 'federal-facility'].includes(row.location.locationKind)).length;
+  const limitedLocations = mapped.filter(row => row.location.locationKind === 'published-limited').length;
+  const inheritedLocations = mapped.filter(row => row.location.locationKind === 'inherited-unverified').length;
   const stateLabel = row => row.reason === 'not_retained' ? t.notRetained : row.reason === 'port_closed' ? t.closed : row.reason === 'lane_closed' ? t.laneClosed : t.noReport;
   useEffect(() => {
     setCamera(scopeKey === 'ALL' || !rows.length ? WHOLE_BORDER : fitBorderPoints(rows.filter(r => r.point).map(r => r.point)));
@@ -410,7 +419,7 @@ export default function CrossingMapExplorer({
           });
         }} />{clock(selectedSnapshot?.fetched_at, language)}</label>}{unavailableInstant && <p>{es ? 'La observación solicitada no está en este archivo. Elige otra hora.' : 'The requested observation is absent from this archive. Choose another time.'}</p>}{lane !== 'passenger_standard' && <p>{t.notRetained}. <button onClick={() => onLaneChange('passenger_standard')}>{es ? 'Elegir auto estándar' : 'Choose Standard passenger'}</button></p>}</div> : !trusted && <div className="explorerNotice" role="status">{offline ? es ? 'Sin conexión. Conservamos reportes anteriores.' : 'Offline. Retained reports are shown.' : fromFallback ? es ? 'Datos de respaldo guardados. Las condiciones actuales no están verificadas.' : 'Saved fallback data. Current conditions are not verified.' : success === false ? es ? 'No se pudo actualizar. Conservamos la hora y los valores del último reporte.' : 'Refresh unavailable. The last report values and original time are retained.' : es ? 'Consulta desactualizada o de hora desconocida.' : 'Stale or unknown retrieval time.'} {clock(fetchedAt, language)}</div>}
     <div className="explorerWorkspace">
-      <div ref={frameRef} className="explorerMap bp-line" tabIndex="0" aria-label={es ? 'Mapa. Usa los botones para acercar o arrastra para mover.' : 'Map. Use zoom buttons or drag to pan.'} onKeyDown={e => {
+      <div ref={frameRef} className="explorerMap bp-line" tabIndex="0" aria-describedby="map-location-note" aria-label={es ? 'Mapa. Usa los botones para acercar o arrastra para mover.' : 'Map. Use zoom buttons or drag to pan.'} onKeyDown={e => {
         if (e.target !== e.currentTarget) return;
         if (e.key === '+' || e.key === '=') {
           e.preventDefault();
@@ -453,17 +462,23 @@ export default function CrossingMapExplorer({
           </g>
         </svg>
         <div className="mapTools"><Button variant="outline" size="icon" aria-label={es ? 'Acercar mapa' : 'Zoom in map'} onClick={() => zoomBy(1.8)}><Plus className="w-4 h-4" /></Button><Button variant="outline" size="icon" aria-label={es ? 'Alejar mapa' : 'Zoom out map'} onClick={() => zoomBy(1 / 1.8)}><Minus className="w-4 h-4" /></Button><Button variant="outline" size="icon" aria-label={es ? 'Ver toda la frontera' : 'Fit whole border'} onClick={() => setCamera(WHOLE_BORDER)}><LocateFixed className="w-4 h-4" /></Button></div>
-        <p className="mapLocationNote">{t.approx}</p>
+        <p id="map-location-note" className="mapLocationNote">{t.approx}</p>
       </div>
       <div className="explorerPane" ref={paneRef} id="map-crossing-results" tabIndex="-1" aria-label={selectedPort ? es ? 'Reporte seleccionado' : 'Selected crossing report' : t.list}>
         {selectedPort ? <><Button ref={backRef} variant="ghost" size="sm" className="detailBack" onClick={onClose}><ArrowLeft className="w-4 h-4" />{t.back}</Button>{selected ? <>
-          {!selected.location && <p className="locationWarning">{t.unlocated}. {es ? 'El reporte sigue disponible.' : 'The report remains available.'}</p>}
+          <p className="locationWarning" data-testid="location-evidence">{selected.location ? locationLabel(selected.location) : `${t.unlocated}. ${es ? 'Sin punto en el mapa mientras se revisa. El reporte sigue disponible.' : 'No map point while location review is pending. The report remains available.'}`} {selected.location?.locationSource && <a href={selected.location.locationSource} target="_blank" rel="noopener noreferrer" className="underline">{es ? 'Fuente de ubicación' : 'Location source'}</a>}</p>
           {replay ? <Card className="recordedReport"><CardContent className="p-4"><h3>{selected.crossing.name}</h3><p>{t.history} · {laneLabel(lane, language)}</p><strong className="recordedWait">{selected.wait == null ? '—' : selected.wait}<small>{t.minute}</small></strong><p>{selected.wait == null ? stateLabel(selected) : es ? 'Resumen registrado de auto estándar' : 'Recorded Standard summary'}</p><time dateTime={selectedSnapshot?.fetched_at || undefined}>{clock(selectedSnapshot?.fetched_at, language, getPortTimezone(selected.crossing))}</time><p>{t.clockMissing}</p>{selectedSnapshot?.source && <a href={`https://github.com/sbc1-code/borderpulse/blob/${selectedSnapshot.source.slice(7)}/public/data/crossings.json`} target="_blank" rel="noopener noreferrer">{es ? 'Ver observación original' : 'View source observation'}</a>}</CardContent></Card> : active && <BorderCrossingCard crossing={selected.crossing} language={language} selectedLane={lane} selectedDirection="northbound" snapshotAt={fetchedAt} slug={portToSlug[selected.id]} isFavorite={favoritesSet.has(selected.id)} onToggleFavorite={onToggleFavorite} index={0} />}
           <Link className="fullReportLink" to={withLane(`/crossing/${portToSlug[selected.id] || selected.crossing.slug}/`, lane)}>{es ? 'Abrir reporte completo y cámaras' : 'Open full report and cameras'}<ArrowUpRight className="w-4 h-4" /></Link>
         </> : <p role="status">{es ? 'Este cruce no aparece en la respuesta actual. No se muestra una espera supuesta.' : 'This crossing is absent from the current response. No wait is assumed.'}</p>}</> : <><div className="listHeading"><h3>{t.list}</h3><span>{rows.length}</span></div>{!rows.length ? <p className="emptyMap">{t.empty}</p> : <ol className="crossingResultList">{rows.map(row => <li key={row.id}><button id={`map-result-${row.id}`} onClick={e => select(row.id, e)} className={selectedPort === row.id ? 'active' : ''}><span><b>{row.crossing.name}</b><small>{row.crossing.state} · {replay ? t.history : row.report ? reportTimeLabel(row.report, language) : t.noReport}{!row.location && ` · ${t.unlocated}`}</small></span><strong className={trusted || replay ? getStatusForWait(row.wait) : 'retained'}>{row.wait == null ? '—' : row.wait}<small>{row.wait == null ? '' : t.minute}</small></strong></button></li>)}</ol>}</>}
       </div>
     </div>
     <div className="mapLegend"><span><i className="good" />{es ? 'Menos de 15 min' : 'Under 15 min'}</span><span><i className="moderate" />15–44 min</span><span><i className="heavy" />45+ min</span><span><i className="unknown" />{es ? 'Sin reporte de este carril' : 'No report for this lane'}</span></div>
-    <details className="mapSources"><summary>{t.coverage}</summary><p>{mapped.length} {es ? 'ubicaciones aproximadas en el mapa' : 'approximate mapped locations'} · {rows.length - mapped.length} {t.unlocated.toLowerCase()}.</p><p>{es ? 'Los puntos aproximados no son entradas, rutas ni indicaciones de tráfico. Los datos faltantes no significan cero ni prueban que un carril no exista.' : 'Approximate points are not entrances, routes or traffic directions. Missing observations are not zero and do not prove a lane does not exist.'}</p><p>{es ? 'Fuentes geográficas' : 'Geographic references'}: <a href={LOCATION_SOURCES.texas} target="_blank" rel="noopener noreferrer">TxDOT</a> · <a href={LOCATION_SOURCES.arizona} target="_blank" rel="noopener noreferrer">ADOT</a> · <a href={LOCATION_SOURCES.otay} target="_blank" rel="noopener noreferrer">FHWA</a> · <a href="https://github.com/datasets/geo-countries/tree/ca3b7150caa5d3cc3fb108a87fc6e3d57bd97d99" target="_blank" rel="noopener noreferrer">Natural Earth / geo-countries</a></p><p>{es ? 'Todavía falta validar numéricamente parte del catálogo geográfico. San Luis II y el registro agregado El Paso no reciben un punto supuesto.' : 'Part of the geographic catalog still needs numeric validation. San Luis II and the aggregate El Paso record are not assigned guessed pins.'}</p></details>
+    <details className="mapSources"><summary>{t.coverage}</summary>
+      <p data-testid="map-location-coverage">{mapped.length} {es ? 'puntos aproximados' : 'approximate points'} · {rows.length - mapped.length} {es ? 'registros solo en la lista' : 'list-only records'}.</p>
+      <p>{supportedLocations} {es ? 'puntos con referencia de ubicación primaria' : 'points supported by primary location references'} · {limitedLocations} {es ? 'aproximaciones publicadas con revisión limitada' : 'published approximations with limited review'} · {inheritedLocations} {es ? 'puntos heredados sin verificación independiente' : 'inherited points without independent verification'}.</p>
+      <p>{es ? 'Las ubicaciones no están todas verificadas. Los reportes de espera de CBP no certifican estas coordenadas. Los puntos no son entradas ni rutas; los datos faltantes no significan cero.' : 'Locations are not all verified. CBP wait reports do not certify these coordinates. Points are not entrances or routes; missing observations are not zero.'}</p>
+      <p>{es ? 'Referencias de ubicación' : 'Location references'}: <a href={LOCATION_SOURCES.directory} target="_blank" rel="noopener noreferrer">TABC</a> · <a href={LOCATION_SOURCES.federal} target="_blank" rel="noopener noreferrer">Federal Register</a> · <a href={LOCATION_SOURCES.texas} target="_blank" rel="noopener noreferrer">TxDOT</a> · <a href="https://github.com/datasets/geo-countries/tree/ca3b7150caa5d3cc3fb108a87fc6e3d57bd97d99" target="_blank" rel="noopener noreferrer">Natural Earth / geo-countries</a></p>
+      <p>{es ? 'Otay, World Trade, San Luis II y el registro agregado El Paso permanecen en la lista sin un punto supuesto. Las ubicaciones heredadas todavía necesitan revisión.' : 'Otay, World Trade, San Luis II and aggregate El Paso remain in the list without guessed pins. Inherited locations still require review.'}</p>
+    </details>
   </section>;
 }

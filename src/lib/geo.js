@@ -1,11 +1,15 @@
 // Haversine distance + nearest-crossing helpers.
 //
-// Coordinates are approximate US-side locations of CBP land ports of entry on
-// the U.S./Mexico border (port-of-entry centroid, decimal degrees). Used for
+// Coordinates are approximate facility/catalog points, not entrance pins.
+// Nine primary-source corrections and three earlier published approximations
+// are recorded in docs/BORDERWIDE-GEOGRAPHY-REVIEW.md. Other inherited points
+// remain unverified. Four suspect/aggregate locations are withheld. Used for
 // proximity-ranking ("nearest crossings") and the geolocation prompt — not
 // for navigation, not for southbound estimates.
 
 import { canonicalPortNumber } from './portIdentity.js';
+
+export const WITHHELD_LOCATION_IDS = new Set(['240221', '260802', '250601', '230404']);
 
 const PORT_COORDS = {
   // California
@@ -14,7 +18,6 @@ const PORT_COORDS = {
   '250302': { lat: 32.6655, lng: -115.4986 }, // Calexico - West
   '250401': { lat: 32.5436, lng: -117.0297 }, // San Ysidro
   '250501': { lat: 32.5772, lng: -116.6280 }, // Tecate
-  '250601': { lat: 32.5419, lng: -116.9667 }, // Otay Mesa
   // Arizona
   '260101': { lat: 31.3445, lng: -109.5453 }, // Douglas (Raul Hector Castro)
   '260201': { lat: 31.8786, lng: -112.8156 }, // Lukeville
@@ -22,40 +25,37 @@ const PORT_COORDS = {
   '260401': { lat: 31.3333, lng: -110.9425 }, // Nogales - Deconcini
   '260402': { lat: 31.3219, lng: -110.9729 }, // Nogales - Mariposa
   '260403': { lat: 31.3343, lng: -110.9408 }, // Nogales - Morley Gate
-  '260801': { lat: 32.4886, lng: -114.7783 }, // San Luis - San Luis I
-  '260802': { lat: 32.4886, lng: -114.7783 }, // San Luis - San Luis II
+  '260801': { lat: 32.4844, lng: -114.7799 }, // San Luis - San Luis I
   // New Mexico
   '240601': { lat: 31.8285, lng: -107.6362 }, // Columbus
   '240801': { lat: 31.7811, lng: -106.6936 }, // Santa Teresa - Santa Teresa Port of Entry
   // Texas - El Paso area
   '240201': { lat: 31.7647, lng: -106.4528 }, // El Paso - Bridge of the Americas (BOTA)
-  '240221': { lat: 31.7541, lng: -106.4877 }, // El Paso (umbrella)
   '240202': { lat: 31.7547, lng: -106.4870 }, // El Paso - Paso Del Norte (PDN)
   '240104': { lat: 31.6802, lng: -106.3072 }, // El Paso - Ysleta
-  '240204': { lat: 31.7641, lng: -106.4480 }, // El Paso - Stanton DCL
-  '240301': { lat: 29.5611, lng: -104.3725 }, // Presidio
+  '240204': { lat: 31.7498, lng: -106.4835 }, // El Paso - Stanton DCL
+  '240301': { lat: 29.5623, lng: -104.3911 }, // Presidio
   '240401': { lat: 31.4172, lng: -106.0719 }, // Marcelino Serna - Tornillo
   'l24501': { lat: 31.2826, lng: -105.8511 }, // Fort Hancock
   // Texas - Eagle Pass / Del Rio / Laredo
   '230201': { lat: 29.3271, lng: -100.9275 }, // Del Rio
   '230301': { lat: 28.7086, lng: -100.4970 }, // Eagle Pass - Bridge I
-  '230302': { lat: 28.6786, lng: -100.4870 }, // Eagle Pass - Bridge II
-  '230401': { lat: 27.5037, lng: -99.5078 },  // Laredo - Bridge I
-  '230402': { lat: 27.5219, lng: -99.5097 },  // Laredo - Bridge II
-  '230403': { lat: 27.5681, lng: -99.5894 },  // Laredo - Colombia Solidarity
-  '230404': { lat: 27.6464, lng: -99.5286 },  // Laredo - World Trade Bridge
+  '230302': { lat: 28.6979, lng: -100.5094 }, // Eagle Pass - Bridge II
+  '230401': { lat: 27.499, lng: -99.507 },  // Laredo - Bridge I
+  '230402': { lat: 27.501, lng: -99.503 },  // Laredo - Bridge II
+  '230403': { lat: 27.7, lng: -99.746 },  // Laredo - Colombia Solidarity
   // Texas - Rio Grande Valley
   '230501': { lat: 26.1023, lng: -98.2622 }, // Hidalgo/Pharr - Hidalgo
-  '230502': { lat: 26.1561, lng: -98.1944 }, // Hidalgo/Pharr - Pharr
+  '230502': { lat: 26.0669, lng: -98.2052 }, // Hidalgo/Pharr - Pharr
   '230503': { lat: 26.1129, lng: -98.3300 }, // Hidalgo/Pharr - Anzalduas
   '230701': { lat: 26.3786, lng: -98.8281 }, // Rio Grande City
   '230901': { lat: 26.0578, lng: -97.9669 }, // Progreso International
-  '230902': { lat: 26.1611, lng: -98.0397 }, // Progreso - Donna
+  '230902': { lat: 26.0691, lng: -98.0738 }, // Progreso - Donna
   '231001': { lat: 26.4078, lng: -99.0244 }, // Roma
   '535501': { lat: 25.9043, lng: -97.5021 }, // Brownsville - B&M
-  '535502': { lat: 25.9445, lng: -97.4974 }, // Brownsville - Veterans International
-  '535503': { lat: 26.0419, lng: -97.7439 }, // Brownsville - Los Indios
-  '535504': { lat: 26.0269, lng: -97.4123 }, // Brownsville - Gateway
+  '535502': { lat: 25.8858, lng: -97.4764 }, // Brownsville - Veterans International
+  '535503': { lat: 26.0291, lng: -97.7388 }, // Brownsville - Los Indios
+  '535504': { lat: 25.8988, lng: -97.4976 }, // Brownsville - Gateway
 };
 
 const TO_RAD = Math.PI / 180;
@@ -85,6 +85,8 @@ export function kmToMiles(km) {
  */
 export function getCrossingCoords(crossing) {
   if (!crossing) return null;
+  const id = canonicalPortNumber(crossing.port_number);
+  if (WITHHELD_LOCATION_IDS.has(id)) return null;
   const lat = typeof crossing.lat === 'number'
     ? crossing.lat
     : (typeof crossing.latitude === 'number' ? crossing.latitude : null);
@@ -93,7 +95,7 @@ export function getCrossingCoords(crossing) {
     : (typeof crossing.longitude === 'number' ? crossing.longitude : null);
   if (lat != null && lng != null) return { lat, lng };
   // Resolve through the canonical port so an alias number still finds coords.
-  const fallback = PORT_COORDS[canonicalPortNumber(crossing.port_number)];
+  const fallback = PORT_COORDS[id];
   return fallback || null;
 }
 

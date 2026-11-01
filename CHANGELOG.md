@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-01 — Correct geographic catalog errors (review preview)
+
+- Replace eight materially displaced Texas fallbacks with approximate targets linked from TABC’s named directory entries, and use the Federal Register facility point for San Luis I. Correct the shared catalog so map/proximity views agree.
+- Withhold unresolved Otay, World Trade, San Luis II and aggregate El Paso points while retaining all reports in the list. Explicitly separate 9 new source references, 3 limited-review published points and 26 unverified inherited points; do not claim the catalog or entrances are certified.
+- Add identity/displacement/coverage regressions and source evidence. Geographic and hosted-product review remain release gates; no production deployment.
+
 ## 2026-11-01 — Border-wide map in the main crossing experience (review preview)
 
 - Make the existing crossing screen a shared Map/List experience for the CA/AZ/NM/TX catalog, using native brand controls, report cards and actual source data. San Diego–Tijuana becomes an area filter; remove the separate regional navigation identity.

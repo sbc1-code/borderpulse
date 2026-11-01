@@ -9,33 +9,8 @@ export const WHOLE_BORDER = {
   width: MAP_WIDTH,
   height: MAP_HEIGHT
 };
-// Region/centroid locations, never navigation or approach coordinates. The
-// aggregate El Paso record is not a separate physical crossing. San Luis II's
-// duplicated legacy point is withheld pending an authoritative numeric fix.
-const MAP_LOCATION_OVERRIDES = {
-  '250601': {
-    lat: 32.550602,
-    lng: -116.938187
-  },
-  '230401': {
-    lat: 27.499,
-    lng: -99.507
-  },
-  '230402': {
-    lat: 27.501,
-    lng: -99.503
-  },
-  '230403': {
-    lat: 27.700,
-    lng: -99.746
-  }
-};
-const UNLOCATED = new Set(['240221', '260802']);
-export const LOCATION_SOURCES = {
-  texas: 'https://gis-txdot.opendata.arcgis.com/maps/texas-border-crossings',
-  arizona: 'https://azdot.gov/sites/default/files/2023-05/ADOT-Freight-Plan-Final.pdf',
-  otay: 'https://ops.fhwa.dot.gov/publications/fhwahop10051/chap_3.htm'
-};
+import { mapLocationProvenance, WITHHELD_MAP_PORTS } from './borderMapLocations.js';
+export { LOCATION_SOURCES } from './borderMapLocations.js';
 const mercator = lat => Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) * 180 / Math.PI;
 const north = mercator(34),
   south = mercator(24.6);
@@ -49,12 +24,16 @@ export function projectBorderPoint(lng, lat) {
 }
 export function crossingMapLocation(crossing) {
   const id = canonicalPortNumber(crossing?.port_number);
-  if (UNLOCATED.has(id)) return null;
-  const point = MAP_LOCATION_OVERRIDES[id] || getCrossingCoords(crossing);
+  if (WITHHELD_MAP_PORTS.has(id)) return null;
+  // Use the reviewed catalog path, never silently adopt unreviewed feed fields.
+  const point = getCrossingCoords({
+    port_number: id
+  });
   if (!point || !Number.isFinite(point.lat) || !Number.isFinite(point.lng) || point.lat < 24 || point.lat > 34 || point.lng < -119 || point.lng > -96) return null;
   return {
     ...point,
-    approximate: true
+    approximate: true,
+    ...mapLocationProvenance(id)
   };
 }
 export function fitBorderPoints(points) {
