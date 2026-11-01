@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Clock3, MapPin } from 'lucide-react';
+import { BookOpen, Menu, X, Moon, Sun, Clock3, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import { themeValue, readStorage, writeStorage } from '@/lib/browserStorage';
@@ -50,16 +50,10 @@ export default function Layout({ children }) {
 
   const nav = [
     {
-      name: language === 'en' ? 'Dashboard' : 'Panel',
-      href: '/',
-      icon: BarChart3,
-      current: location.pathname === '/',
-    },
-    {
-      name: language === 'en' ? 'San Diego map' : 'Mapa San Diego',
-      href: withLane('/corridor/san-diego-tijuana/', normalizeLane(new URLSearchParams(location.search).get('lane'))),
+      name: language === 'en' ? 'Crossings' : 'Cruces',
+      href: withLane('/?area=all', normalizeLane(new URLSearchParams(location.search).get('lane'))),
       icon: MapPin,
-      current: location.pathname.startsWith('/corridor/'),
+      current: location.pathname === '/' || location.pathname.startsWith('/corridor/'),
     },
     {
       name: 'Blog',

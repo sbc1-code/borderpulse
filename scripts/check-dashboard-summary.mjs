@@ -37,7 +37,7 @@ export async function checkDashboardSummary(owner, context, baseUrl) {
     const summary = page.locator('summary').filter({ hasText: language === 'en' ? 'Show wait summary and border chart' : 'Ver resumen y mapa de esperas' });
     const chart = page.getByRole('region', { name: language === 'en' ? 'The border, west to east' : 'La frontera, de oeste a este', exact: true });
     try {
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await search.waitFor();
       assert.equal(requests, 0, 'closed disclosure must not request the summary chunk');
       assert.equal(await chart.count(), 0, 'closed summary must not render hidden chart work');
@@ -92,7 +92,7 @@ export async function checkDashboardSummary(owner, context, baseUrl) {
       await page.waitForURL(url => url.pathname === '/crossing/san-ysidro/');
       await page.getByRole('heading', { level: 1 }).waitFor();
       fail = false;
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await search.waitFor();
       await summary.click();
       await chart.waitFor();
@@ -182,7 +182,7 @@ export async function checkSummaryConfidence(owner, context, baseUrl) {
       assert.ok(await chart.locator('[stroke="var(--bp-good)"]').count() > 0, 'valid observations restore the colored chart');
     };
     try {
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await open();
       await page.getByRole('status').getByText(language === 'en' ? 'Loading…' : 'Cargando…', { exact: true }).waitFor();
       fail = true;
@@ -206,7 +206,7 @@ export async function checkSummaryConfidence(owner, context, baseUrl) {
 
       // Loaded content must age without a successful new response as well.
       source.fetched_at = new Date(await page.evaluate(() => Date.now()) - 89 * 60_000).toISOString();
-      await page.goto(baseUrl.href); await open(); await trust(true);
+      await page.goto(new URL('/?display=list', baseUrl).href); await open(); await trust(true);
       await page.waitForFunction(value => document.querySelector('[data-testid="summary-freshness"] time')?.getAttribute('datetime') === value, source.fetched_at);
       fail = true;
       await page.clock.fastForward(2 * 60_000);
@@ -218,11 +218,11 @@ export async function checkSummaryConfidence(owner, context, baseUrl) {
         // Dashboard's existing validator rejects missing/invalid timestamps
         // before the summary sees any rows. Keep that guard and empty state.
         const accepted = typeof value === 'string' && Number.isFinite(Date.parse(value));
-        await page.goto(baseUrl.href); await open(); await neutral(accepted);
+        await page.goto(new URL('/?display=list', baseUrl).href); await open(); await neutral(accepted);
         if (accepted) await panel.getByText('8 min', { exact: true }).waitFor();
       }
       waits(null); source.fetched_at = null;
-      await page.goto(baseUrl.href); await open(); await neutral(false);
+      await page.goto(new URL('/?display=list', baseUrl).href); await open(); await neutral(false);
       await notice.getByText(language === 'en' ? 'Fetch time unknown' : 'Hora de consulta desconocida', { exact: true }).waitFor();
       assert.ok(await panel.getByText('—', { exact: true }).count() >= 3, 'missing waits remain missing');
       waits(0);

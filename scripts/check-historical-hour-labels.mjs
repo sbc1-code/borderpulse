@@ -77,7 +77,7 @@ export async function checkHistoricalHourLabels(browser, baseUrl, viewport) {
       assert.doesNotMatch(await page.getByRole('heading', { level: 1 }).innerText(), /today|hoy|Wed|Mié/);
       assert.match(await page.locator('meta[name="description"]').getAttribute('content'), en ? /Historical.*Not a forecast/ : /histórica.*No es un pronóstico/);
       await fits();
-      await page.goto(new URL('/', baseUrl).href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await page.getByRole('link', { name: en ? /30-day pattern: 8 AM/ : /Patrón de 30 días: 8 a\. m\./ }).first().waitFor();
       await page.getByRole('button', { name: en ? 'Share' : 'Compartir', exact: true }).click();
       const dialog = page.getByRole('dialog');

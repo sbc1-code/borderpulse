@@ -34,14 +34,14 @@ export async function checkHiddenCrossings(context, baseUrl) {
       setWait(missing, null);
       setWait(zero, 0);
       setWait(closed, 0);
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await page.evaluate(value => {
         localStorage.setItem('borderPulse_language', value);
         localStorage.setItem('borderPulse_region', 'ALL');
         localStorage.setItem('borderPulse_geoConsent', 'denied');
         localStorage.removeItem('borderPulse_corridor');
       }, lang);
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       const show = () => page.getByRole('button', { name: es ? /^Mostrar \d+ sin tiempo actual$/ : /^Show \d+ without current waits$/ });
       const hide = () => page.getByRole('button', { name: es ? /^Ocultar \d+ sin tiempo actual$/ : /^Hide \d+ without current waits$/ });
       const search = page.getByRole('searchbox');

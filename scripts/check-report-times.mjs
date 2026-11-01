@@ -217,7 +217,7 @@ export async function checkReportTimes(page, context, baseUrl) {
         localStorage.setItem('borderPulse_theme', 'light');
         localStorage.setItem('borderPulse_geoConsent', 'denied');
       }, language);
-      await page.goto(new URL('/', baseUrl).href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await search(language);
       await assertPrimary(card(), language, 37, 'At 11:00 pm MST');
       await assertFits(page, `${language} dashboard`);
@@ -295,7 +295,7 @@ export async function checkReportTimes(page, context, baseUrl) {
       crossing.updated_at = new Date().toISOString();
       crossing.port_status = 'Open';
       setStandard(17, 'At 1:15 am PST');
-      await page.goto(new URL('/', baseUrl).href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await search(language);
       const stale = language === 'en'
         ? /^Stale snapshot · Fetched 3 h(?: \d+ min)? ago$/

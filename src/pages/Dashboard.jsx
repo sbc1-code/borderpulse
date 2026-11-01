@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
 import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
+const CrossingMapExplorer = React.lazy(() => import('@/components/dashboard/CrossingMapExplorer'));
 const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
 import AboutFooter from '@/components/dashboard/AboutFooter';
 import DashboardAd from '@/components/ads/DashboardAd';
@@ -18,6 +19,7 @@ import DashboardSummaryDisclosure from '@/components/dashboard/DashboardSummaryD
 import LaneSelector from '@/components/dashboard/LaneSelector';
 import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
 import DashboardCameras from '@/components/dashboard/DashboardCameras';
+import { canonicalPortNumber } from '@/lib/portIdentity';
 import { normalizeLane } from '@/lib/laneContext';
 import { availableLaneWait } from '@/lib/crossingAvailability';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
@@ -70,37 +72,30 @@ export default function Dashboard() {
     isRefreshing: false,
     source: null,
     fetchedAt: null,
+    success: false,
+    fromFallback: false,
   });
 
   const language = usePersistentLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
-  const didSyncArea = useRef(false);
   const lane = normalizeLane(searchParams.get('lane'));
   const areaParam = searchParams.get('area');
+  const regionParam = searchParams.get('region');
+  const searchParam = searchParams.get('q') || '';
+  const presentation = searchParams.get('display') === 'list' ? 'list' : 'map';
+  const selectedPort = canonicalPortNumber(searchParams.get('port'));
   const direction = 'northbound';
-  const [region, setRegion] = useState(() => {
-    if (corridorFor(searchParams.get('area'))) return 'ALL';
-    // Stored region preference takes precedence; otherwise check the geolocation default.
-    const stored = readStorage('borderPulse_region');
-    const geoDefault = readStorage('borderPulse_defaultRegion');
-    return [stored, geoDefault].find(code => REGIONS.some(region => region.code === code)) || 'ALL';
-  });
-  const [search, setSearch] = useState('');
-  const [corridor, setCorridor] = useState(() => {
-    if (searchParams.has('area')) return corridorFor(searchParams.get('area'))?.id || '';
-    try { return corridorFor(localStorage.getItem('borderPulse_corridor'))?.id || ''; }
-    catch { return ''; }
-  });
+  // A bare home URL is the whole border. Explicit URL state, including Back,
+  // takes precedence over old saved regional preferences.
+  const [region, setRegion] = useState(() => REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL');
+  const [search, setSearch] = useState(searchParam);
+  const [corridor, setCorridor] = useState(() => corridorFor(areaParam)?.id || '');
   useEffect(() => {
-    if (!didSyncArea.current) {
-      didSyncArea.current = true;
-      if (!searchParams.has('area')) return;
-    }
-    const id = corridorFor(searchParams.get('area'))?.id || '';
+    const id = corridorFor(areaParam)?.id || '';
     setCorridor(id);
-    setSearch('');
-    if (id) { setRegion('ALL'); setShowGeoPrompt(false); }
-  }, [areaParam]);
+    setRegion(id || areaParam === 'all' ? 'ALL' : REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL');
+    setSearch(searchParam);
+  }, [areaParam, regionParam, searchParam]);
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -158,6 +153,8 @@ export default function Dashboard() {
         isRefreshing: false,
         source: data.source,
         fetchedAt: data.timestamp,
+        success: data.success,
+        fromFallback: Boolean(data.fromFallback),
       });
       if (data.success) {
         recordSnapshot(data.crossings, 'northbound', data.timestamp);
@@ -249,6 +246,8 @@ export default function Dashboard() {
     track('region-filter', { region: r });
     const next = new URLSearchParams(searchParams);
     next.delete('area');
+    next.delete('port');
+    next.set('region', r);
     setSearchParams(next);
   };
 
@@ -264,7 +263,10 @@ export default function Dashboard() {
     } catch { /* A blocked write must not prevent local comparison. */ }
     track('corridor-filter', { corridor: id || 'all' });
     const next = new URLSearchParams(searchParams);
-    id ? next.set('area', id) : next.delete('area');
+    next.set('area', id || 'all');
+    next.delete('region');
+    next.delete('q');
+    next.delete('port');
     setSearchParams(next);
   };
 
@@ -272,6 +274,34 @@ export default function Dashboard() {
     const next = new URLSearchParams(searchParams);
     next.set('lane', normalizeLane(value));
     if (corridor) next.set('area', corridor);
+    setSearchParams(next);
+  };
+
+  const changeSearch = (value) => {
+    setSearch(value);
+    const next = new URLSearchParams(searchParams);
+    value ? next.set('q', value) : next.delete('q');
+    next.delete('port');
+    setSearchParams(next, { replace: true });
+  };
+  const selectPort = (id) => {
+    const next = new URLSearchParams(searchParams);
+    next.set('port', id);
+    if (next.toString() !== searchParams.toString()) setSearchParams(next);
+  };
+  const closePort = useCallback(() => {
+    const next = new URLSearchParams(searchParams);
+    next.delete('port');
+    setSearchParams(next, { replace: true });
+  }, [searchParams, setSearchParams]);
+  const showWholeBorder = () => {
+    changeCorridor('');
+    setShowWithoutCurrentWaits(true);
+  };
+  const changePresentation = (display) => {
+    const next = new URLSearchParams(searchParams);
+    display === 'list' ? next.set('display', 'list') : next.delete('display');
+    if (display === 'list') { next.delete('mode'); next.delete('at'); }
     setSearchParams(next);
   };
 
@@ -337,6 +367,7 @@ export default function Dashboard() {
     if (!isNarrow || showAllCards) return visibleCrossings;
     const keep = new Set(nearestPorts);
     if (focusedPort) keep.add(focusedPort);
+    if (selectedPort) keep.add(selectedPort);
     const picked = visibleCrossings.filter(
       (c) => favoritesSet.has(c.port_number) || keep.has(c.port_number)
     );
@@ -345,7 +376,7 @@ export default function Dashboard() {
       if (!picked.includes(c)) picked.push(c);
     }
     return picked;
-  }, [isNarrow, showAllCards, visibleCrossings, favoritesSet, nearestPorts, focusedPort]);
+  }, [isNarrow, showAllCards, visibleCrossings, favoritesSet, nearestPorts, focusedPort, selectedPort]);
 
   const hiddenCardCount = visibleCrossings.length - cardCrossings.length;
 
@@ -460,7 +491,7 @@ export default function Dashboard() {
         <>
           <div className={styles.filters}>
           {/* Geolocation prompt — first-visit only (#7). One-tap consent. */}
-          {showGeoPrompt && (
+          {showGeoPrompt && presentation === 'list' && (
             <details className={styles.geoPrompt}>
               <summary className="flex min-h-11 cursor-pointer items-center gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 min-w-0">
                 <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
@@ -503,13 +534,13 @@ export default function Dashboard() {
                 inputMode="search"
                 placeholder={language === 'en' ? 'Search crossing or city (San Ysidro, Laredo, Nogales…)' : 'Buscar cruce o ciudad…'}
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => changeSearch(e.target.value)}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
                 className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
               />
               {search && (
                 <button
-                  onClick={() => setSearch('')}
+                  onClick={() => changeSearch('')}
                   aria-label={language === 'en' ? 'Clear search' : 'Borrar búsqueda'}
                   className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
                 >
@@ -541,11 +572,24 @@ export default function Dashboard() {
               {CORRIDORS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </div>
-          {!corridor && <LaneSelector lane={lane} onChange={changeLane} language={language} />}
+          {(presentation === 'map' || !corridor) && <LaneSelector lane={lane} onChange={changeLane} language={language} />}
           </div>
 
           </div>
-          <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />
+          {presentation === 'list' && <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />}
+          {presentation === 'list' && <div className="flex items-center justify-between gap-3 mb-3">
+            <div role="group" aria-label={language === 'es' ? 'Vista de cruces' : 'Crossing view'} className="flex gap-1">
+              <Button variant={presentation === 'map' ? 'default' : 'outline'} className="min-h-11" size="sm" aria-pressed={presentation === 'map'} onClick={() => changePresentation('map')}>{language === 'es' ? 'Mapa' : 'Map'}</Button>
+              <Button variant={presentation === 'list' ? 'default' : 'outline'} className="min-h-11" size="sm" aria-pressed={presentation === 'list'} onClick={() => changePresentation('list')}>{language === 'es' ? 'Lista' : 'List'}</Button>
+            </div>
+          </div>}
+          <div hidden={presentation !== 'map'}>
+            <Suspense fallback={<p role="status" className="py-8 text-sm text-slate-500">{language === 'es' ? 'Cargando mapa fronterizo…' : 'Loading border map…'}</p>}>
+              <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />
+            </Suspense>
+          </div>
+          {presentation === 'list' && <>
+          <p className="mb-2 text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Últimos reportes por cruce' : 'Latest reports by crossing'}</p>
           <div className={styles.extras}>
           <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <DashboardSummaryDisclosure
@@ -736,6 +780,8 @@ export default function Dashboard() {
               />
             </aside>
           </div>
+
+          </>}
 
           <PopularCrossings lane={lane} crossings={state.crossings} language={language} />
 

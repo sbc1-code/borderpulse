@@ -30,6 +30,7 @@ export async function checkGrowthInteractions(page, context, baseUrl) {
     assert.equal(await page.evaluate(() => window.testEvents.filter(e => e.event === 'favorite-toggle' && e.data.action === 'add').length), 1);
     // Follow the actual client-side route back to the dashboard.
     await page.getByRole('link', { name: lang === 'en' ? 'All crossings' : 'Todos los cruces', exact: true }).click();
+    await page.getByRole('group', { name: lang === 'en' ? 'Crossing view' : 'Vista de cruces', exact: true }).getByRole('button', { name: lang === 'en' ? 'List' : 'Lista', exact: true }).click();
     await page.getByRole('button', { name: remove, exact: true }).waitFor();
     await page.reload();
     await page.getByRole('button', { name: remove, exact: true }).waitFor();

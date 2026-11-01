@@ -24,7 +24,7 @@ export async function checkLocalCrossings(page, context, baseUrl) {
   await page.route(cameraImagePattern, cameraImage);
   try {
     for (const lang of ['en', 'es']) {
-      await page.goto(new URL('/', baseUrl).href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await page.evaluate(value => {
         localStorage.setItem('borderPulse_language', value);
         localStorage.setItem('borderPulse_region', 'ALL');
@@ -140,7 +140,7 @@ export async function checkLocalCrossings(page, context, baseUrl) {
       await cameraPanel.getByRole('button', { name: lang === 'es' ? 'Cerrar cámara' : 'Close camera', exact: true }).click();
       assert.equal(await cameraPanel.locator('iframe').count(), 0);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'camera panel must fit viewport');
-      await page.goto(new URL('/', baseUrl).href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await page.getByRole('button', { name: 'California', exact: true }).click();
       assert.equal(await chooser.inputValue(), '');
       assert.equal(await page.getByRole('region', { name: lang === 'es' ? 'Comparación local' : 'Local comparison', exact: true }).count(), 0);
