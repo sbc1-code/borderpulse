@@ -1,0 +1,105 @@
+{
+  "base": "6a4a0bdac51f37f8ab59fd236205ca3790427076",
+  "candidate": "working geography correction; exact commit recorded in PR",
+  "snapshotFetchedAt": "2026-11-01T20:37:32.153Z",
+  "clockFrozen": false,
+  "origin": "local production-mode build; not hosted QA",
+  "captures": [
+    {
+      "name": "overview",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "stanton",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Stanton&port=240204&lane=passenger_sentri",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "gateway",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Brownsville&port=535504",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "pharr",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Pharr&port=230502",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "san-luis-i",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=San+Luis&port=260801",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "otay-withheld",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Otay&port=250601",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "overview",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "stanton",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Stanton&port=240204&lane=passenger_sentri",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "gateway",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Brownsville&port=535504",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "pharr",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Pharr&port=230502",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "san-luis-i",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=San+Luis&port=260801",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "otay-withheld",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Otay&port=250601",
+      "errors": [],
+      "fixture": false
+    }
+  ]
+}

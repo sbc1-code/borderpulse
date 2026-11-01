@@ -34,14 +34,14 @@ export async function checkHiddenCrossings(context, baseUrl) {
       setWait(missing, null);
       setWait(zero, 0);
       setWait(closed, 0);
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       await page.evaluate(value => {
         localStorage.setItem('borderPulse_language', value);
         localStorage.setItem('borderPulse_region', 'ALL');
         localStorage.setItem('borderPulse_geoConsent', 'denied');
         localStorage.removeItem('borderPulse_corridor');
       }, lang);
-      await page.goto(baseUrl.href);
+      await page.goto(new URL('/?display=list', baseUrl).href);
       const show = () => page.getByRole('button', { name: es ? /^Mostrar \d+ sin tiempo actual$/ : /^Show \d+ without current waits$/ });
       const hide = () => page.getByRole('button', { name: es ? /^Ocultar \d+ sin tiempo actual$/ : /^Hide \d+ without current waits$/ });
       const search = page.getByRole('searchbox');
@@ -111,7 +111,7 @@ export async function checkHiddenCrossings(context, baseUrl) {
       await primary(zero).waitFor();
       assert.equal(await primary(zero).innerText(), '0', 'new zero report returns without resetting the user filter');
       await search.fill('zz-no-crossing-match-zz');
-      await page.getByText(es ? /^No hay cruces que coincidan con/ : /^No crossings match/).waitFor();
+      await page.locator('#crossing-results').getByText(es ? /^No hay cruces que coincidan con/ : /^No crossings match/).waitFor();
       assert.equal(await show().count() + await hide().count(), 0, 'true no-match search stays distinct');
       await page.getByRole('button', { name: es ? 'Borrar búsqueda' : 'Clear search', exact: true }).click();
       setWait(zero, null);

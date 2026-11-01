@@ -37,7 +37,7 @@ export async function checkLaneContext(browser, baseUrl, viewport = { width: 390
     };
     const fits = async () => assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${language} ${viewport.width}: viewport fits`);
     try {
-      await page.goto(new URL('/?area=san-diego-tijuana', baseUrl).href);
+      await page.goto(new URL('/?area=san-diego-tijuana&display=list', baseUrl).href);
       await lane().selectOption('passenger_sentri');
       await page.waitForURL(url => url.searchParams.get('lane') === 'passenger_sentri');
       await waitForPrimary('SENTRI', '30');

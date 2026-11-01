@@ -20,7 +20,7 @@ const Methodology = lazy(() => import('@/pages/Methodology'));
 const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
 const Privacy = lazy(() => import('@/pages/Privacy'));
-const CrossingConsole = lazy(() => import('@/pages/CrossingConsole'));
+const CrossingConsole = lazy(() => import('@/pages/CorridorRedirect'));
 
 function RouteFallback() {
   return (

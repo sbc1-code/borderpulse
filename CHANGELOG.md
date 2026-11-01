@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 2026-11-01 — Complete the facility-overview classification (review preview)
+
+- Apply the independent researchers' GSA facility representatives and remaining directory targets across CA/AZ/NM/TX; restore Otay and World Trade with named asset provenance. Use consistent US facility/site representatives, not entrances, averages or routing points.
+- Map 40 of 42 records: 26 GSA facilities, 12 directory targets, 1 federal facility point and Morley's explicitly limited contextual approximation. Keep conflicting San Luis II and aggregate El Paso list-only; preserve distinct Morley/DeConcini identities and all reports.
+- Add full-catalog identity/displacement/coverage regression evidence and updated EN/ES captures. Attribute supplied spreadsheet values/hash honestly: this worker confirmed the catalog but workbook download was blocked. Preview-only; no production deployment or unrelated resize-patch merge.
+
+## 2026-11-01 — Correct geographic catalog errors (review preview)
+
+- Replace eight materially displaced Texas fallbacks with approximate targets linked from TABC’s named directory entries, and use the Federal Register facility point for San Luis I. Correct the shared catalog so map/proximity views agree.
+- Withhold unresolved Otay, World Trade, San Luis II and aggregate El Paso points while retaining all reports in the list. Explicitly separate 9 new source references, 3 limited-review published points and 26 unverified inherited points; do not claim the catalog or entrances are certified.
+- Add identity/displacement/coverage regressions and source evidence. Geographic and hosted-product review remain release gates; no production deployment.
+
+## 2026-11-01 — Border-wide map in the main crossing experience (review preview)
+
+- Make the existing crossing screen a shared Map/List experience for the CA/AZ/NM/TX catalog, using native brand controls, report cards and actual source data. San Diego–Tijuana becomes an area filter; remove the separate regional navigation identity.
+- Correct All crossings links and old regional bookmarks; derive filters directly from router state so Back cannot retain a previous region. Preserve lane/filter/selection URLs, keyboard focus, reduced motion, recorded gaps and honest retrieval/report clocks.
+- Use one geographic SVG/camera projection, cluster nearby points and keep marker sizes steady during user-driven zoom. Label approximate locations and withhold two ambiguous pins; authoritative numeric catalog validation remains a release limit.
+- Add focused model/browser coverage and review evidence; retain existing list, comparison, camera, analytics and editorial flows. No production deployment or unrelated resize-patch merge.
+
 ## 2026-10-30 — Match the crossing map to BorderPulse (review candidate)
 
 - Restore a separate readable block for retrieval warnings after independent visual review; add EN/ES desktop/mobile text-flow assertions for stale, fallback and failed-refresh states, preserving the original source clocks and data guards.

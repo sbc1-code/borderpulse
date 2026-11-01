@@ -40,7 +40,7 @@ export async function checkBrowserResilience(owner, context, baseUrl) {
             });
             else Storage.prototype.setItem = () => { throw new DOMException('Fixture quota', 'QuotaExceededError'); };
           }, { failure, language });
-          await page.goto(baseUrl.href);
+          await page.goto(new URL('/?display=list', baseUrl).href);
           if (language === 'es') await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).click();
           await page.getByRole('searchbox', { name: searchName, exact: true }).waitFor();
           assert.equal(await page.locator('html').getAttribute('lang'), language);
@@ -71,7 +71,7 @@ export async function checkBrowserResilience(owner, context, baseUrl) {
           localStorage.setItem('borderPulse_theme', 'invalid');
           localStorage.setItem('borderPulse_region', 'invalid');
         });
-        await page.goto(baseUrl.href);
+        await page.goto(new URL('/?display=list', baseUrl).href);
         await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).waitFor();
         assert.equal(await page.locator('html').getAttribute('lang'), 'en');
         assert.ok(!await page.locator('html').evaluate(node => node.classList.contains('dark')));

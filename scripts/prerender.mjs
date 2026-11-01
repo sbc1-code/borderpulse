@@ -14,7 +14,7 @@ import { crossingSearchTitle } from '../src/lib/crossingNames.js';
 import { cameraSourceFor } from '../src/lib/cameras.js';
 import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
 import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
-import { CONSOLE_CANONICAL, CONSOLE_PATH } from '../src/lib/crossingConsole.js';
+import { CONSOLE_PATH } from '../src/lib/crossingConsole.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -522,11 +522,16 @@ async function main() {
     crossingCount++;
   }
 
-  // An additive corridor interface, outside the sitemap in this first release.
-  // Keep a real dated report fallback and serve direct requests on static hosts.
+  // Static hosts redirect legacy regional bookmarks into the shared map too.
+  // Preserve query/lane context with URLSearchParams, not query concatenation.
   {
-    const head = { title: 'San Ysidro–Otay crossing map | Border Pulse', desc: 'Compare reported waits by lane, replay recorded observations and include your extra driving time.', canonical: CONSOLE_CANONICAL, ogImage: `${BASE}/og-card.png`, jsonLd: [] };
-    const html = injectSnapshot(rewriteIndex(indexWithLinks, head), snapshotHtml(crossings.filter(c => ['250401', '250601'].includes(String(c.port_number))), portToSlug, doc.fetched_at, true));
+    const html = `<!doctype html><html lang="en"><head>
+      <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="robots" content="noindex, follow" />
+      <meta http-equiv="refresh" content="0; url=/?area=san-diego-tijuana" />
+      <link rel="canonical" href="${BASE}/" /><title>Redirecting | Border Pulse</title>
+      <script>const next=new URL('/',location.origin);next.search=location.search;next.searchParams.set('area','san-diego-tijuana');next.searchParams.delete('display');next.hash=location.hash;location.replace(next.pathname+next.search+next.hash);</script>
+      </head><body><p><a href="/?area=san-diego-tijuana">Open San Diego–Tijuana in the border map</a></p></body></html>`;
     const outDir = path.resolve(distDir, `.${CONSOLE_PATH}`);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);

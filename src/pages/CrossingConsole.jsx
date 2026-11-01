@@ -313,7 +313,7 @@ export default function CrossingConsole() {
             <nav className="nav" aria-label={copy.label}>
               <Button asChild variant="ghost" size="sm" className="console-back min-h-11">
               <Link
-                to={withLane("/?area=san-diego-tijuana", lane)}
+                to={withLane("/?area=all", lane)}
               >
                 <ArrowLeft size={17} />
                 {copy.back}

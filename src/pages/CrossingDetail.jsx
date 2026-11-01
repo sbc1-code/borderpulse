@@ -453,7 +453,7 @@ export default function CrossingDetail() {
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3 flex items-center justify-between gap-2">
         <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
-          <Link to={withLane('/', lane)}>
+          <Link to={withLane('/?area=all', lane)}>
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">
               {language === 'en' ? 'All crossings' : 'Todos los cruces'}
@@ -521,12 +521,10 @@ export default function CrossingDetail() {
         )}
       </div>
 
-      {['san-ysidro', 'otay-mesa'].includes(canonicalSlug) && (
-        <Link to={withLane('/corridor/san-diego-tijuana/', lane)} className="mb-4 inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
-          {language === 'es' ? 'Mapa San Ysidro–Otay' : 'San Ysidro–Otay map'}
-          <ArrowRight className="w-3 h-3 shrink-0" />
-        </Link>
-      )}
+      <Link to={withLane(`/?area=all&port=${encodeURIComponent(crossing.port_number)}`, lane)} className="mb-4 inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+        {language === 'es' ? 'Ver en el mapa fronterizo' : 'View on the border map'}
+        <ArrowRight className="w-3 h-3 shrink-0" />
+      </Link>
 
       {isSanYsidro && (
         <SanYsidroDecision
