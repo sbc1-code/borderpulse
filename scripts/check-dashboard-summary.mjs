@@ -60,7 +60,10 @@ export async function checkDashboardSummary(owner, context, baseUrl) {
       assert.ok(await page.evaluate(() => window.retainedSummary === document.querySelector('section.bp-line')), 'reopening keeps chart state and DOM');
       assert.equal(requests, 1, 'reopening must reuse the loaded module');
       await search.fill('Otay Mesa');
-      await chart.getByRole('button', { name: /^Otay Mesa:/ }).waitFor();
+      await page.locator('[data-testid="border-crossing-card"][data-port-number="250601"]').waitFor();
+      assert.equal(await chart.getByRole('button', { name: /^Otay Mesa:/ }).count(), 0, 'withheld Otay location cannot receive a geographic chart tick');
+      await search.fill('Brownsville - Gateway');
+      await chart.getByRole('button', { name: /^Brownsville - Gateway:/ }).waitFor();
       assert.equal(await chart.getByRole('button', { name: /^San Ysidro:/ }).count(), 0, 'loaded summary follows current filters');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
 
@@ -77,7 +80,7 @@ export async function checkDashboardSummary(owner, context, baseUrl) {
       assert.ok(await menu.evaluate(node => node === document.activeElement), 'Escape restores trigger focus');
       await menu.click();
       await page.getByRole('menuitem', { name: language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar', exact: true }).click();
-      await page.waitForURL(url => url.pathname === '/best-time/otay-mesa/');
+      await page.waitForURL(url => url.pathname === '/best-time/brownsville-gateway/');
       await page.goBack();
       await search.waitFor();
 
@@ -159,7 +162,10 @@ export async function checkSummaryConfidence(owner, context, baseUrl) {
         await chart.waitFor();
         assert.equal(await chart.locator('[stroke="var(--bp-good)"], [stroke="var(--bp-moderate)"], [stroke="var(--bp-heavy)"]').count(), 0, 'untrusted waits have neutral ticks');
         assert.doesNotMatch(await chart.locator('desc').textContent(), /currently reporting/i);
-        assert.equal(await chart.getByRole('button').count(), 2, 'map interactions remain available');
+        assert.equal(await chart.getByRole('button').count(), 1, 'the located San Ysidro interaction remains available');
+        assert.equal(await chart.getByRole('button', { name: /^San Ysidro:/ }).count(), 1);
+        assert.equal(await chart.getByRole('button', { name: /^Otay Mesa:/ }).count(), 0, 'unverified Otay location stays off the chart');
+        assert.equal(await page.locator('[data-testid="border-crossing-card"]').count(), 2, 'both reports remain available regardless of location evidence');
       } else {
         assert.equal(await chart.count(), 0, 'rejected source data must not invent map readings');
       }
