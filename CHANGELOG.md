@@ -3,7 +3,7 @@
 ## 2026-11-01 — Border-wide map in the main crossing experience (review preview)
 
 - Make the existing crossing screen a shared Map/List experience for the CA/AZ/NM/TX catalog, using native brand controls, report cards and actual source data. San Diego–Tijuana becomes an area filter; remove the separate regional navigation identity.
-- Correct All crossings links and old regional bookmarks; preserve lane/filter/selection URLs, keyboard focus, reduced motion, recorded gaps and honest retrieval/report clocks.
+- Correct All crossings links and old regional bookmarks; derive filters directly from router state so Back cannot retain a previous region. Preserve lane/filter/selection URLs, keyboard focus, reduced motion, recorded gaps and honest retrieval/report clocks.
 - Use one geographic SVG/camera projection, cluster nearby points and keep marker sizes steady during user-driven zoom. Label approximate locations and withhold two ambiguous pins; authoritative numeric catalog validation remains a release limit.
 - Add focused model/browser coverage and review evidence; retain existing list, comparison, camera, analytics and editorial flows. No production deployment or unrelated resize-patch merge.
 

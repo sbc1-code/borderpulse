@@ -87,15 +87,11 @@ export default function Dashboard() {
   const direction = 'northbound';
   // A bare home URL is the whole border. Explicit URL state, including Back,
   // takes precedence over old saved regional preferences.
-  const [region, setRegion] = useState(() => REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL');
-  const [search, setSearch] = useState(searchParam);
-  const [corridor, setCorridor] = useState(() => corridorFor(areaParam)?.id || '');
-  useEffect(() => {
-    const id = corridorFor(areaParam)?.id || '';
-    setCorridor(id);
-    setRegion(id || areaParam === 'all' ? 'ALL' : REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL');
-    setSearch(searchParam);
-  }, [areaParam, regionParam, searchParam]);
+  // Derive filters from the committed router location. Mirrored optimistic
+  // state can survive a Back navigation that interrupts a router transition.
+  const corridor = corridorFor(areaParam)?.id || '';
+  const region = corridor || areaParam === 'all' ? 'ALL' : REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL';
+  const search = searchParam;
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -204,7 +200,13 @@ export default function Dashboard() {
         if (nearest && nearest.state) {
           writeStorage('borderPulse_defaultRegion', nearest.state);
           writeStorage('borderPulse_region', nearest.state);
-          setRegion(nearest.state);
+          setSearchParams(params => {
+            const next = new URLSearchParams(params);
+            next.delete('area');
+            next.delete('port');
+            next.set('region', nearest.state);
+            return next;
+          });
         }
         setGeoLocating(false);
         setShowGeoPrompt(false);
@@ -217,7 +219,7 @@ export default function Dashboard() {
       },
       { timeout: 10000, maximumAge: 600000 },
     );
-  }, [state.crossings]);
+  }, [state.crossings, setSearchParams]);
 
   useEffect(() => {
     const title = language === 'en'
@@ -237,8 +239,6 @@ export default function Dashboard() {
   }, [language]);
 
   const changeRegion = (r) => {
-    setRegion(r);
-    setCorridor('');
     try {
       localStorage.setItem('borderPulse_region', r);
       localStorage.removeItem('borderPulse_corridor');
@@ -252,10 +252,7 @@ export default function Dashboard() {
   };
 
   const changeCorridor = (id) => {
-    setCorridor(id);
     setShowGeoPrompt(false);
-    setRegion('ALL');
-    setSearch('');
     setFocusedPort(null);
     try {
       localStorage.setItem('borderPulse_corridor', id);
@@ -278,7 +275,6 @@ export default function Dashboard() {
   };
 
   const changeSearch = (value) => {
-    setSearch(value);
     const next = new URLSearchParams(searchParams);
     value ? next.set('q', value) : next.delete('q');
     next.delete('port');

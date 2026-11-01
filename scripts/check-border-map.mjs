@@ -183,9 +183,18 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       }).click();
       assert.equal(await page.locator('#map-result-250401 strong').innerText(), '—', 'all-missing historical observation is preserved');
       const slider = page.locator('.archiveControl input');
-      await slider.focus();
-      await page.keyboard.press('Home');
-      await page.waitForFunction(() => document.querySelector('#map-result-250401 strong')?.textContent === '0min');
+      await slider.press('Home');
+      try {
+        await page.waitForFunction(() => document.querySelector('#map-result-250401 strong')?.textContent === '0min');
+      } catch (error) {
+        console.error('[border-map-replay-diagnostic]', JSON.stringify(await page.evaluate(() => ({
+          url: location.href,
+          range: document.querySelector('.archiveControl input')?.value,
+          focus: document.activeElement?.outerHTML,
+          row: document.querySelector('#map-result-250401')?.textContent
+        }))));
+        throw error;
+      }
       await page.locator('#map-result-250401').click();
       await page.locator('.recordedReport').waitFor();
       assert.match(await page.locator('.recordedReport').innerText(), es ? /no conserva horas/ : /does not retain lane report clocks/);
