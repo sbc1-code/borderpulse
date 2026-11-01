@@ -177,11 +177,15 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
         exact: true
       }).click();
       await page.locator('.archiveControl input').waitFor();
+      await page.waitForFunction(n => Number(document.querySelector('.archiveControl input')?.max) === n, archive.snapshots.length - 1);
       await page.getByRole('button', {
         name: es ? 'Elegir auto estándar' : 'Choose Standard passenger',
         exact: true
       }).click();
       assert.equal(await page.locator('#map-result-250401 strong').innerText(), '—', 'all-missing historical observation is preserved');
+      await page.waitForURL(url => url.searchParams.get('lane') === 'passenger_standard');
+      // Scrub immediately after the lane URL update: the range action must
+      // preserve Standard even when a router render is still in flight.
       const slider = page.locator('.archiveControl input');
       await slider.press('Home');
       try {

@@ -19,6 +19,7 @@ import DashboardSummaryDisclosure from '@/components/dashboard/DashboardSummaryD
 import LaneSelector from '@/components/dashboard/LaneSelector';
 import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
 import DashboardCameras from '@/components/dashboard/DashboardCameras';
+import { currentSearchParams } from '@/lib/queryState';
 import { canonicalPortNumber } from '@/lib/portIdentity';
 import { normalizeLane } from '@/lib/laneContext';
 import { availableLaneWait } from '@/lib/crossingAvailability';
@@ -200,8 +201,8 @@ export default function Dashboard() {
         if (nearest && nearest.state) {
           writeStorage('borderPulse_defaultRegion', nearest.state);
           writeStorage('borderPulse_region', nearest.state);
-          setSearchParams(params => {
-            const next = new URLSearchParams(params);
+          setSearchParams(() => {
+            const next = currentSearchParams();
             next.delete('area');
             next.delete('port');
             next.set('region', nearest.state);
@@ -244,7 +245,7 @@ export default function Dashboard() {
       localStorage.removeItem('borderPulse_corridor');
     } catch { /* Filters still work when browser storage is unavailable. */ }
     track('region-filter', { region: r });
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     next.delete('area');
     next.delete('port');
     next.set('region', r);
@@ -259,7 +260,7 @@ export default function Dashboard() {
       localStorage.setItem('borderPulse_region', 'ALL');
     } catch { /* A blocked write must not prevent local comparison. */ }
     track('corridor-filter', { corridor: id || 'all' });
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     next.set('area', id || 'all');
     next.delete('region');
     next.delete('q');
@@ -268,25 +269,25 @@ export default function Dashboard() {
   };
 
   const changeLane = (value) => {
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     next.set('lane', normalizeLane(value));
     if (corridor) next.set('area', corridor);
     setSearchParams(next);
   };
 
   const changeSearch = (value) => {
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     value ? next.set('q', value) : next.delete('q');
     next.delete('port');
     setSearchParams(next, { replace: true });
   };
   const selectPort = (id) => {
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     next.set('port', id);
-    if (next.toString() !== searchParams.toString()) setSearchParams(next);
+    if (next.toString() !== currentSearchParams().toString()) setSearchParams(next);
   };
   const closePort = useCallback(() => {
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     next.delete('port');
     setSearchParams(next, { replace: true });
   }, [searchParams, setSearchParams]);
@@ -295,7 +296,7 @@ export default function Dashboard() {
     setShowWithoutCurrentWaits(true);
   };
   const changePresentation = (display) => {
-    const next = new URLSearchParams(searchParams);
+    const next = currentSearchParams();
     display === 'list' ? next.set('display', 'list') : next.delete('display');
     if (display === 'list') { next.delete('mode'); next.delete('at'); }
     setSearchParams(next);

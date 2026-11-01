@@ -9,6 +9,7 @@ import { fetchLabel, reportTimeLabel } from '@/lib/trustState';
 import { walkDriveFreshness } from '@/lib/walkDriveFreshness';
 import { getStatusForWait } from '@/components/utils/crossingDirection';
 import { getPortTimezone } from '@/components/utils/crossingMeta';
+import { currentSearchParams } from '@/lib/queryState';
 import { withLane, laneLabel } from '@/lib/laneContext';
 import geography from './border-geography.json';
 import './CrossingMapExplorer.css';
@@ -361,7 +362,7 @@ export default function CrossingMapExplorer({
     if (!g.pointers.size) setDragging(false);
   }
   function changeMode(next) {
-    const query = new URLSearchParams(params);
+    const query = currentSearchParams();
     if (next === 'history') {
       query.set('mode', 'history');
       if (history.rows.length) query.set('at', history.rows.at(-1).fetched_at);
@@ -399,9 +400,11 @@ export default function CrossingMapExplorer({
         onAll();
         setCamera(WHOLE_BORDER);
       }}>{t.all}</Button>}<span>{replay ? clock(selectedSnapshot?.fetched_at, language) : fetchLabel(freshness.state, freshness.age, language)}</span></div>
-    {replay ? <div className="explorerNotice" role="status"><p>{t.historyNotice}</p>{history.status === 'loading' ? <p>{t.loading}</p> : history.status === 'failed' || history.status === 'empty' ? <p>{t.failed} <button onClick={() => setRetry(x => x + 1)}>{t.retry}</button></p> : <label className="archiveControl">{es ? 'Observación registrada' : 'Recorded observation'}<input type="range" min="0" max={Math.max(0, history.rows.length - 1)} value={activeIndex} onChange={e => {
-          const q = new URLSearchParams(params);
-          q.set('at', history.rows[+e.target.value].fetched_at);
+    {replay ? <div className="explorerNotice" role="status"><p>{t.historyNotice}</p>{history.status === 'idle' || history.status === 'loading' ? <p>{t.loading}</p> : history.status === 'failed' || history.status === 'empty' ? <p>{t.failed} <button onClick={() => setRetry(x => x + 1)}>{t.retry}</button></p> : <label className="archiveControl">{es ? 'Observación registrada' : 'Recorded observation'}<input type="range" min="0" max={Math.max(0, history.rows.length - 1)} value={activeIndex} onChange={e => {
+          const q = currentSearchParams();
+          const observation = history.rows[+e.target.value];
+          if (!observation) return;
+          q.set('at', observation.fetched_at);
           setParams(q, {
             replace: true
           });
