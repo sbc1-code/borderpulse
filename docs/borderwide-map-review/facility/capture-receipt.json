@@ -1,0 +1,169 @@
+{
+  "sourceBaseHead": "2103c9d9a517f0e07ad3f807bceda63950c61d33",
+  "candidate": "working facility-overview correction; final commit recorded in PR166",
+  "snapshotFetchedAt": "2026-11-01T20:37:32.153Z",
+  "clockFrozen": false,
+  "origin": "local API-enabled production-mode build with actual dated fallback snapshot; not hosted QA",
+  "captures": [
+    {
+      "name": "overview",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all",
+      "capturedAt": "2026-11-01T22:59:23.995Z",
+      "locationEvidence": null,
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "andrade",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Andrade&port=250201",
+      "capturedAt": "2026-11-01T22:59:24.589Z",
+      "locationEvidence": "Approximate US facility from the GSA inventory (CA0621); not an entrance. Location source",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "columbus",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Columbus&port=240601",
+      "capturedAt": "2026-11-01T22:59:25.173Z",
+      "locationEvidence": "Approximate US facility from the GSA inventory (NM8015); not an entrance. Location source",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "ysleta",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Ysleta&port=240104",
+      "capturedAt": "2026-11-01T22:59:25.759Z",
+      "locationEvidence": "Approximate US facility from the GSA inventory (TX0963); not an entrance. Location source",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "otay",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Otay&port=250601",
+      "capturedAt": "2026-11-01T22:59:26.463Z",
+      "locationEvidence": "Approximate US facility from the GSA inventory (CA0267); not an entrance. Location source",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "world-trade",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=World+Trade&port=230404",
+      "capturedAt": "2026-11-01T22:59:27.553Z",
+      "locationEvidence": "Approximate US facility from the GSA inventory (TX0730); not an entrance. Location source",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "morley",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=Morley&port=260403",
+      "capturedAt": "2026-11-01T22:59:28.425Z",
+      "locationEvidence": "Morley: approximate contextual position; numeric review is limited. This crossing is distinct from DeConcini. Location source",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "san-luis-ii",
+      "width": 1440,
+      "lang": "en",
+      "url": "http://127.0.0.1:4193/?area=all&q=San+Luis&port=260802",
+      "capturedAt": "2026-11-01T22:59:29.054Z",
+      "locationEvidence": "Location not verified. No map point while location review is pending. The report remains available.",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "overview",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all",
+      "capturedAt": "2026-11-01T22:59:30.252Z",
+      "locationEvidence": null,
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "andrade",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Andrade&port=250201",
+      "capturedAt": "2026-11-01T22:59:31.119Z",
+      "locationEvidence": "Recinto de EE.UU. aproximado según el inventario GSA (CA0621); no es una entrada. Fuente de ubicación",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "columbus",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Columbus&port=240601",
+      "capturedAt": "2026-11-01T22:59:31.980Z",
+      "locationEvidence": "Recinto de EE.UU. aproximado según el inventario GSA (NM8015); no es una entrada. Fuente de ubicación",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "ysleta",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Ysleta&port=240104",
+      "capturedAt": "2026-11-01T22:59:32.722Z",
+      "locationEvidence": "Recinto de EE.UU. aproximado según el inventario GSA (TX0963); no es una entrada. Fuente de ubicación",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "otay",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Otay&port=250601",
+      "capturedAt": "2026-11-01T22:59:33.447Z",
+      "locationEvidence": "Recinto de EE.UU. aproximado según el inventario GSA (CA0267); no es una entrada. Fuente de ubicación",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "world-trade",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=World+Trade&port=230404",
+      "capturedAt": "2026-11-01T22:59:34.222Z",
+      "locationEvidence": "Recinto de EE.UU. aproximado según el inventario GSA (TX0730); no es una entrada. Fuente de ubicación",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "morley",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=Morley&port=260403",
+      "capturedAt": "2026-11-01T22:59:35.111Z",
+      "locationEvidence": "Morley: posición contextual aproximada; revisión numérica limitada. Es un cruce distinto de DeConcini. Fuente de ubicación",
+      "errors": [],
+      "fixture": false
+    },
+    {
+      "name": "san-luis-ii",
+      "width": 390,
+      "lang": "es",
+      "url": "http://127.0.0.1:4193/?area=all&q=San+Luis&port=260802",
+      "capturedAt": "2026-11-01T22:59:35.972Z",
+      "locationEvidence": "Ubicación no verificada. Sin punto en el mapa mientras se revisa. El reporte sigue disponible.",
+      "errors": [],
+      "fixture": false
+    }
+  ]
+}

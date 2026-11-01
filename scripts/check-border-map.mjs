@@ -107,8 +107,8 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       assert.equal(await page.locator('nav a[href*="/corridor/"]').count(), 0, 'no regional navigation silo');
       await page.locator('.mapSources summary').click();
       await page.getByTestId('map-location-coverage').waitFor();
-      assert.match(await page.getByTestId('map-location-coverage').innerText(), es ? /38 puntos aproximados · 4 registros solo en la lista/ : /38 approximate points · 4 list-only records/);
-      assert.match(await page.locator('.mapSources').innerText(), es ? /26 puntos heredados sin verificación independiente/ : /26 inherited points without independent verification/);
+      assert.match(await page.getByTestId('map-location-coverage').innerText(), es ? /40 puntos aproximados · 2 registros solo en la lista/ : /40 approximate points · 2 list-only records/);
+      assert.match(await page.locator('.mapSources').innerText(), es ? /39 puntos con referencia de ubicación primaria · 1 aproximación contextual con revisión numérica limitada/ : /39 points supported by primary location references · 1 contextual approximation with limited numeric review/);
       await page.locator('.mapSources summary').click();
       const controls = page.getByRole('group', {
         name: es ? 'Vista de cruces' : 'Crossing view',
@@ -145,7 +145,7 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       await page.waitForFunction(n => document.querySelectorAll('.crossingResultList li').length === n, document.crossings.length);
       await openResult();
       await expectWait('80');
-      assert.match(await page.getByTestId('location-evidence').innerText(), es ? /sin verificación independiente/ : /not independently verified/);
+      assert.match(await page.getByTestId('location-evidence').innerText(), /GSA.*\(CA0335\)/);
       assert.match(await page.getByTestId('cbp-report-time').innerText(), /11:11 am PST/, 'original report clock retained');
       assert.equal(new URL(page.url()).searchParams.get('port'), '250401');
       await lane().selectOption('passenger_ready');
@@ -257,20 +257,40 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
     }
     await page.goto(new URL('/?area=all', baseUrl).href);
     await explorer().waitFor();
-    for (const id of ['240204', '260801', '250601', '230404', '260802', '240221']) {
+    for (const id of ['240204', '260801', '250601', '230404', '260403', '260802', '240221']) {
       await page.locator(`#map-result-${id}`).click();
       await page.getByTestId('border-crossing-card').waitFor();
       const evidence = page.getByTestId('location-evidence');
       await evidence.waitFor();
-      if (['250601', '230404', '260802', '240221'].includes(id)) {
+      if (['260802', '240221'].includes(id)) {
         assert.match(await evidence.innerText(), /No map point|Sin punto en el mapa/);
         assert.equal(await page.locator(`[data-map-node][data-port="${id}"]`).count(), 0);
       } else {
         assert.equal(await evidence.getByRole('link').count(), 1, 'source-backed location exposes its primary reference');
-        assert.match(await evidence.innerText(), id === '260801' ? /Federal Register/ : /directorio público|public directory/);
+        const expected = { '260801': /Federal Register/, '240204': /directorio público|public directory/, '250601': /GSA.*\(CA0267\)/, '230404': /GSA.*\(TX0730\)/, '260403': /Morley:.*contextual.*limit/ };
+        assert.match(await evidence.innerText(), expected[id]);
+        if (id === '250601' || id === '230404') {
+          assert.equal(await evidence.getByRole('link').getAttribute('href'), 'https://catalog.data.gov/dataset/inventory-of-owned-and-leased-properties-iolp');
+        }
       }
       await page.keyboard.press('Escape');
       await page.locator(`#map-result-${id}`).waitFor();
+    }
+    for (const [id, query, asset] of [['250601', 'Otay', 'CA0267'], ['230404', 'World Trade', 'TX0730']]) {
+      await page.goto(new URL(`/?area=all&q=${encodeURIComponent(query)}`, baseUrl).href);
+      const marker = page.locator(`[data-map-node][data-port="${id}"]`);
+      await marker.waitFor();
+      const location = crossingMapLocation({ port_number: id });
+      const painted = await marker.evaluate(inspectMapPoint, projectBorderPoint(location.lng, location.lat));
+      assert.ok(painted.error < .6, `${id}: restored facility marker uses the shared geographic transform`);
+      await marker.focus();
+      await page.keyboard.press('Enter');
+      await page.getByTestId('border-crossing-card').waitFor();
+      assert.match(await page.getByTestId('location-evidence').innerText(), new RegExp(asset));
+      assert.equal(await marker.getAttribute('aria-pressed'), 'true');
+      await page.keyboard.press('Escape');
+      await page.waitForFunction(id => document.activeElement?.matches(`[data-map-node][data-port="${id}"]`), id);
+      await fits();
     }
     // Theme paint and intermediate resize use actual SVG computed colors/CTMs.
     await page.goto(new URL('/?area=all', baseUrl).href);

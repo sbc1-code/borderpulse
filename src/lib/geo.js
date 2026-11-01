@@ -1,58 +1,60 @@
 // Haversine distance + nearest-crossing helpers.
 //
 // Coordinates are approximate facility/catalog points, not entrance pins.
-// Nine primary-source corrections and three earlier published approximations
-// are recorded in docs/BORDERWIDE-GEOGRAPHY-REVIEW.md. Other inherited points
-// remain unverified. Four suspect/aggregate locations are withheld. Used for
+// Named US facility representatives and directory targets are recorded in
+// docs/BORDERWIDE-GEOGRAPHY-REVIEW.md. Morley retains an explicitly limited
+// contextual approximation; two unresolved/aggregate records are withheld. Used for
 // proximity-ranking ("nearest crossings") and the geolocation prompt — not
 // for navigation, not for southbound estimates.
 
 import { canonicalPortNumber } from './portIdentity.js';
 
-export const WITHHELD_LOCATION_IDS = new Set(['240221', '260802', '250601', '230404']);
+export const WITHHELD_LOCATION_IDS = new Set(['240221', '260802']);
 
 const PORT_COORDS = {
   // California
-  '250201': { lat: 32.7270, lng: -114.6650 }, // Andrade
-  '250301': { lat: 32.6735, lng: -115.3886 }, // Calexico - East
-  '250302': { lat: 32.6655, lng: -115.4986 }, // Calexico - West
-  '250401': { lat: 32.5436, lng: -117.0297 }, // San Ysidro
-  '250501': { lat: 32.5772, lng: -116.6280 }, // Tecate
+  '250201': { lat: 32.7184, lng: -114.7282 }, // Andrade — CA0621
+  '250301': { lat: 32.6798, lng: -115.3828 }, // Calexico - East — CA0507
+  '250302': { lat: 32.6656, lng: -115.4962 }, // Calexico - West — CA0518
+  '250401': { lat: 32.5437, lng: -117.0287 }, // San Ysidro — CA0335
+  '250501': { lat: 32.5769, lng: -116.6275 }, // Tecate — CA0801
+  '250601': { lat: 32.5527, lng: -116.9391 }, // Otay Mesa — CA0267
   // Arizona
-  '260101': { lat: 31.3445, lng: -109.5453 }, // Douglas (Raul Hector Castro)
-  '260201': { lat: 31.8786, lng: -112.8156 }, // Lukeville
-  '260301': { lat: 31.3343, lng: -109.9479 }, // Naco
-  '260401': { lat: 31.3333, lng: -110.9425 }, // Nogales - Deconcini
-  '260402': { lat: 31.3219, lng: -110.9729 }, // Nogales - Mariposa
-  '260403': { lat: 31.3343, lng: -110.9408 }, // Nogales - Morley Gate
+  '260101': { lat: 31.3352, lng: -109.5602 }, // Douglas — AZ0611
+  '260201': { lat: 31.8816, lng: -112.8161 }, // Lukeville — AZ0670
+  '260301': { lat: 31.3346, lng: -109.9483 }, // Naco — AZ0681
+  '260401': { lat: 31.3329, lng: -110.9428 }, // Nogales - Deconcini — AZ0551
+  '260402': { lat: 31.3351, lng: -110.9677 }, // Nogales - Mariposa — AZ0334
+  '260403': { lat: 31.3343, lng: -110.9408 }, // Morley — limited contextual point; do not copy AZ0553's Deconcini duplicate
   '260801': { lat: 32.4844, lng: -114.7799 }, // San Luis - San Luis I
   // New Mexico
-  '240601': { lat: 31.8285, lng: -107.6362 }, // Columbus
-  '240801': { lat: 31.7811, lng: -106.6936 }, // Santa Teresa - Santa Teresa Port of Entry
+  '240601': { lat: 31.7838, lng: -107.6279 }, // Columbus — NM8015 site, not town-geocoded building rows
+  '240801': { lat: 31.7860, lng: -106.6799 }, // Santa Teresa — NM0560
   // Texas - El Paso area
-  '240201': { lat: 31.7647, lng: -106.4528 }, // El Paso - Bridge of the Americas (BOTA)
-  '240202': { lat: 31.7547, lng: -106.4870 }, // El Paso - Paso Del Norte (PDN)
-  '240104': { lat: 31.6802, lng: -106.3072 }, // El Paso - Ysleta
+  '240201': { lat: 31.7676, lng: -106.4509 }, // BOTA — TX0961
+  '240202': { lat: 31.7510, lng: -106.4869 }, // PDN — TX0986
+  '240104': { lat: 31.6720, lng: -106.3354 }, // Ysleta — TX0963
   '240204': { lat: 31.7498, lng: -106.4835 }, // El Paso - Stanton DCL
   '240301': { lat: 29.5623, lng: -104.3911 }, // Presidio
-  '240401': { lat: 31.4172, lng: -106.0719 }, // Marcelino Serna - Tornillo
-  'l24501': { lat: 31.2826, lng: -105.8511 }, // Fort Hancock
+  '240401': { lat: 31.4352, lng: -106.1424 }, // Tornillo — TX0711
+  'l24501': { lat: 31.2748, lng: -105.8536 }, // Fort Hancock — TX0705
   // Texas - Eagle Pass / Del Rio / Laredo
-  '230201': { lat: 29.3271, lng: -100.9275 }, // Del Rio
-  '230301': { lat: 28.7086, lng: -100.4970 }, // Eagle Pass - Bridge I
+  '230201': { lat: 29.3336, lng: -100.9186 }, // Del Rio — TX0409
+  '230301': { lat: 28.7054, lng: -100.5059 }, // Eagle Pass I — TX0201 administration facility
   '230302': { lat: 28.6979, lng: -100.5094 }, // Eagle Pass - Bridge II
-  '230401': { lat: 27.499, lng: -99.507 },  // Laredo - Bridge I
-  '230402': { lat: 27.501, lng: -99.503 },  // Laredo - Bridge II
-  '230403': { lat: 27.7, lng: -99.746 },  // Laredo - Colombia Solidarity
+  '230401': { lat: 27.4997, lng: -99.5075 }, // Laredo I — directory target
+  '230402': { lat: 27.5017, lng: -99.5027 }, // Laredo II — directory target
+  '230403': { lat: 27.7010, lng: -99.7423 }, // Colombia — TX0306
+  '230404': { lat: 27.5977, lng: -99.5343 }, // World Trade — TX0730 administration facility
   // Texas - Rio Grande Valley
-  '230501': { lat: 26.1023, lng: -98.2622 }, // Hidalgo/Pharr - Hidalgo
+  '230501': { lat: 26.1007, lng: -98.2665 }, // Hidalgo — TX1782
   '230502': { lat: 26.0669, lng: -98.2052 }, // Hidalgo/Pharr - Pharr
-  '230503': { lat: 26.1129, lng: -98.3300 }, // Hidalgo/Pharr - Anzalduas
-  '230701': { lat: 26.3786, lng: -98.8281 }, // Rio Grande City
-  '230901': { lat: 26.0578, lng: -97.9669 }, // Progreso International
+  '230503': { lat: 26.1453, lng: -98.3121 }, // Anzalduas — TX0610 US facility
+  '230701': { lat: 26.3680, lng: -98.8016 }, // Rio Grande City — TX2348
+  '230901': { lat: 26.0621, lng: -97.9500 }, // Progreso — directory target
   '230902': { lat: 26.0691, lng: -98.0738 }, // Progreso - Donna
-  '231001': { lat: 26.4078, lng: -99.0244 }, // Roma
-  '535501': { lat: 25.9043, lng: -97.5021 }, // Brownsville - B&M
+  '231001': { lat: 26.4039, lng: -99.0190 }, // Roma — directory target
+  '535501': { lat: 25.8937, lng: -97.5051 }, // Brownsville - B&M — TX0312
   '535502': { lat: 25.8858, lng: -97.4764 }, // Brownsville - Veterans International
   '535503': { lat: 26.0291, lng: -97.7388 }, // Brownsville - Los Indios
   '535504': { lat: 25.8988, lng: -97.4976 }, // Brownsville - Gateway

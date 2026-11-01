@@ -22,7 +22,7 @@ test('whole-border catalog retains every record and withholds ambiguous physical
   const rows = borderReportRows(catalog, 'passenger_standard');
   assert.equal(rows.length, catalog.length);
   for (const state of ['CA', 'AZ', 'NM', 'TX']) assert.ok(rows.some(r => r.crossing.state === state && r.point));
-  for (const id of ['240221', '260802', '250601', '230404', '250609']) assert.equal(crossingMapLocation({
+  for (const id of ['240221', '260802']) assert.equal(crossingMapLocation({
     port_number: id,
     lat: 31,
     lng: -106
@@ -32,8 +32,8 @@ test('whole-border catalog retains every record and withholds ambiguous physical
     lat: 0,
     lng: 0
   });
-  assert.deepEqual([laredo.lat, laredo.lng], [27.499, -99.507]);
-  assert.equal(laredo.locationKind, 'published-limited');
+  assert.deepEqual([laredo.lat, laredo.lng], [27.4997, -99.5075]);
+  assert.equal(laredo.locationKind, 'directory-target');
   assert.equal(crossingMapLocation({
     port_number: 'new-unreviewed',
     lat: 32,
@@ -42,18 +42,19 @@ test('whole-border catalog retains every record and withholds ambiguous physical
   const known = JSON.parse(fs.readFileSync(new URL('./fixtures/border-map-catalog.json', import.meta.url))).crossings;
   const coverage = borderReportRows(known, 'passenger_standard');
   assert.equal(known.length, 42);
-  assert.equal(coverage.filter(row => row.point).length, 38);
-  assert.deepEqual(coverage.filter(row => !row.point).map(row => row.id).sort(), ['230404', '240221', '250601', '260802']);
+  assert.equal(coverage.filter(row => row.point).length, 40);
+  assert.deepEqual(coverage.filter(row => !row.point).map(row => row.id).sort(), ['240221', '260802']);
   const count = kind => coverage.filter(row => row.location?.locationKind === kind).length;
-  assert.equal(count('directory-target'), 8);
+  assert.equal(count('directory-target'), 12);
   assert.equal(count('federal-facility'), 1);
-  assert.equal(count('published-limited'), 3);
-  assert.equal(count('inherited-unverified'), 26);
+  assert.equal(count('gsa-facility'), 26);
+  assert.equal(count('contextual-limited'), 1);
+  assert.equal(count('inherited-unverified'), 0);
   assert.deepEqual(Object.fromEntries(['CA', 'AZ', 'NM', 'TX'].map(state => [state, coverage.filter(row => row.crossing.state === state && row.point).length])), {
-    CA: 5,
+    CA: 6,
     AZ: 7,
     NM: 2,
-    TX: 24
+    TX: 25
   });
   assert.equal(crossingMapLocation({
     port_number: 'unknown',
@@ -204,7 +205,7 @@ test('corrected crossing identities remain physically distinct in nearby compari
   assert.ok(location('535504').lat > location('535502').lat, 'Gateway is north of Veterans');
   assert.ok(distance('535504', '535502') > 2 && distance('535504', '535502') < 3.5);
   assert.ok(location('230902').lng < location('230901').lng, 'Donna is a distinct target west of Progreso');
-  for (const id of geographyEvidence.withheld) {
+  for (const id of ['240221', '260802']) {
     assert.equal(getCrossingCoords({
       port_number: id
     }), null, 'suspect fallback is unavailable to shared proximity helpers');
@@ -214,4 +215,50 @@ test('corrected crossing identities remain physically distinct in nearby compari
       lng: -114
     }), null, 'supplied coordinates cannot bypass the shared withholding decision');
   }
+});
+const facilityEvidence = JSON.parse(fs.readFileSync(new URL('../docs/borderwide-map-review/geographic-facility-review.json', import.meta.url)));
+test('named US facility representatives and directory targets cover the remaining catalog', () => {
+  const { gsa_facilities: facilities, directory_targets: directory } = facilityEvidence;
+  assert.equal(facilities.length, 26);
+  assert.equal(new Set(facilities.map(row => row.port_number)).size, 26);
+  assert.equal(directory.length, 4);
+  for (const row of [...facilities, ...directory]) {
+    const record = catalog.find(c => c.port_number === row.port_number);
+    assert.ok(record, `known crossing identity ${row.port_number}`);
+    const actual = crossingMapLocation(record);
+    assert.deepEqual([actual.lat, actual.lng], [row.lat, row.lng], row.identity);
+    assert.deepEqual(getCrossingCoords({ port_number: row.port_number }), { lat: row.lat, lng: row.lng }, 'shared proximity catalog uses the same facility representative');
+    assert.equal(actual.approximate, true);
+    if (row.asset) {
+      assert.equal(actual.locationKind, 'gsa-facility');
+      assert.equal(actual.locationAsset, row.asset, 'named asset must match the crossing, not a neighboring facility');
+      assert.equal(row.asset.slice(0, 2), record.state);
+      assert.equal(actual.locationSource, facilityEvidence.source.catalog);
+    } else {
+      assert.equal(actual.locationKind, 'directory-target');
+      assert.equal(actual.locationSource, geographyEvidence.primary_directory);
+    }
+  }
+  assert.deepEqual(crossingMapLocation({ port_number: '250609', lat: 0, lng: 0 }), crossingMapLocation({ port_number: '250601' }), 'Otay alias resolves to CA0267 rather than a supplied or former commercial point');
+  assert.equal(crossingMapLocation({ port_number: '230404' }).locationAsset, 'TX0730', 'World Trade uses its named US facility');
+  for (const [id, lat, lng, minimumKm] of [
+    ['250201', 32.727, -114.665, 5.5], ['260101', 31.3445, -109.5453, 1.5],
+    ['260402', 31.3219, -110.9729, 1.3], ['240601', 31.8285, -107.6362, 4.5],
+    ['240801', 31.7811, -106.6936, 1.2], ['240104', 31.6802, -106.3072, 2.3],
+    ['240401', 31.4172, -106.0719, 6], ['230503', 26.1129, -98.33, 3],
+    ['230701', 26.3786, -98.8281, 2.5], ['535501', 25.9043, -97.5021, 1]
+  ]) {
+    const actual = crossingMapLocation({ port_number: id });
+    assert.ok(haversineKm(actual.lat, actual.lng, lat, lng) > minimumKm, `${id}: negative control rejects the displaced old point`);
+  }
+});
+test('Morley stays explicitly contextual and distinct while contradictory San Luis II remains list-only', () => {
+  const morley = crossingMapLocation({ port_number: '260403' });
+  const deconcini = crossingMapLocation({ port_number: '260401' });
+  assert.equal(morley.locationKind, 'contextual-limited');
+  assert.equal(morley.locationSource, facilityEvidence.contextual_limited.source);
+  assert.equal(morley.locationAsset, undefined, 'do not present the duplicated AZ0553 coordinate as numeric support');
+  assert.deepEqual([morley.lat, morley.lng], [31.3343, -110.9408]);
+  assert.ok(haversineKm(morley.lat, morley.lng, deconcini.lat, deconcini.lng) > .15, 'distinct facilities must not collapse onto the duplicated inventory point');
+  for (const row of facilityEvidence.withheld) assert.equal(crossingMapLocation({ port_number: row.port_number, lat: 32.515786, lng: -114.70114 }), null, 'conflicting or aggregate coordinates cannot be adopted from supplied fields');
 });

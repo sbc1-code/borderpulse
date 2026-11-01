@@ -83,7 +83,7 @@ const labels = {
     back: 'Back to results',
     all: 'All crossings',
     unlocated: 'Location not verified',
-    approx: 'Approximate locations · Review incomplete · Not directions',
+    approx: 'Facility overview · Approximate locations · Not directions',
     coverage: 'Sources and map coverage',
     noReport: 'No report',
     closed: 'Port closed',
@@ -106,7 +106,7 @@ const labels = {
     back: 'Volver a resultados',
     all: 'Todos los cruces',
     unlocated: 'Ubicación no verificada',
-    approx: 'Ubicaciones aproximadas · Revisión incompleta · No son rutas',
+    approx: 'Vista de recintos · Ubicaciones aproximadas · No son rutas',
     coverage: 'Fuentes y cobertura del mapa',
     noReport: 'Sin reporte',
     closed: 'Cruce cerrado',
@@ -236,11 +236,12 @@ export default function CrossingMapExplorer({
   const locationLabel = location => ({
     'directory-target': es ? 'Punto aproximado de un enlace del directorio público; no es una entrada.' : 'Approximate target linked by the public directory; not an entrance.',
     'federal-facility': es ? 'Punto del recinto publicado en el Federal Register; no es una entrada.' : 'Facility point published in the Federal Register; not an entrance.',
-    'published-limited': es ? 'Aproximación publicada anteriormente; verificación numérica limitada.' : 'Earlier published approximation; numeric verification is limited.',
+    'gsa-facility': es ? `Recinto de EE.UU. aproximado según el inventario GSA (${location.locationAsset}); no es una entrada.` : `Approximate US facility from the GSA inventory (${location.locationAsset}); not an entrance.`,
+    'contextual-limited': es ? 'Morley: posición contextual aproximada; revisión numérica limitada. Es un cruce distinto de DeConcini.' : 'Morley: approximate contextual position; numeric review is limited. This crossing is distinct from DeConcini.',
     'inherited-unverified': es ? 'Ubicación heredada del catálogo; sin verificación independiente.' : 'Inherited catalog location; not independently verified.'
   })[location.locationKind];
-  const supportedLocations = mapped.filter(row => ['directory-target', 'federal-facility'].includes(row.location.locationKind)).length;
-  const limitedLocations = mapped.filter(row => row.location.locationKind === 'published-limited').length;
+  const supportedLocations = mapped.filter(row => ['directory-target', 'federal-facility', 'gsa-facility'].includes(row.location.locationKind)).length;
+  const limitedLocations = mapped.filter(row => row.location.locationKind === 'contextual-limited').length;
   const inheritedLocations = mapped.filter(row => row.location.locationKind === 'inherited-unverified').length;
   const stateLabel = row => row.reason === 'not_retained' ? t.notRetained : row.reason === 'port_closed' ? t.closed : row.reason === 'lane_closed' ? t.laneClosed : t.noReport;
   useEffect(() => {
@@ -475,10 +476,10 @@ export default function CrossingMapExplorer({
     <div className="mapLegend"><span><i className="good" />{es ? 'Menos de 15 min' : 'Under 15 min'}</span><span><i className="moderate" />15–44 min</span><span><i className="heavy" />45+ min</span><span><i className="unknown" />{es ? 'Sin reporte de este carril' : 'No report for this lane'}</span></div>
     <details className="mapSources"><summary>{t.coverage}</summary>
       <p data-testid="map-location-coverage">{mapped.length} {es ? 'puntos aproximados' : 'approximate points'} · {rows.length - mapped.length} {es ? 'registros solo en la lista' : 'list-only records'}.</p>
-      <p>{supportedLocations} {es ? 'puntos con referencia de ubicación primaria' : 'points supported by primary location references'} · {limitedLocations} {es ? 'aproximaciones publicadas con revisión limitada' : 'published approximations with limited review'} · {inheritedLocations} {es ? 'puntos heredados sin verificación independiente' : 'inherited points without independent verification'}.</p>
-      <p>{es ? 'Las ubicaciones no están todas verificadas. Los reportes de espera de CBP no certifican estas coordenadas. Los puntos no son entradas ni rutas; los datos faltantes no significan cero.' : 'Locations are not all verified. CBP wait reports do not certify these coordinates. Points are not entrances or routes; missing observations are not zero.'}</p>
-      <p>{es ? 'Referencias de ubicación' : 'Location references'}: <a href={LOCATION_SOURCES.directory} target="_blank" rel="noopener noreferrer">TABC</a> · <a href={LOCATION_SOURCES.federal} target="_blank" rel="noopener noreferrer">Federal Register</a> · <a href={LOCATION_SOURCES.texas} target="_blank" rel="noopener noreferrer">TxDOT</a> · <a href="https://github.com/datasets/geo-countries/tree/ca3b7150caa5d3cc3fb108a87fc6e3d57bd97d99" target="_blank" rel="noopener noreferrer">Natural Earth / geo-countries</a></p>
-      <p>{es ? 'Otay, World Trade, San Luis II y el registro agregado El Paso permanecen en la lista sin un punto supuesto. Las ubicaciones heredadas todavía necesitan revisión.' : 'Otay, World Trade, San Luis II and aggregate El Paso remain in the list without guessed pins. Inherited locations still require review.'}</p>
+      <p>{supportedLocations} {es ? 'puntos con referencia de ubicación primaria' : 'points supported by primary location references'} · {limitedLocations} {es ? 'aproximación contextual con revisión numérica limitada' : 'contextual approximation with limited numeric review'}{inheritedLocations > 0 && <> · {inheritedLocations} {es ? 'puntos heredados sin verificación independiente' : 'inherited points without independent verification'}</>}.</p>
+      <p>{es ? 'Los puntos representan recintos de EE.UU. o ubicaciones enlazadas por un directorio, no entradas ni rutas. Morley conserva una aproximación contextual. Los reportes de espera de CBP no certifican coordenadas; los datos faltantes no significan cero.' : 'Points represent US facilities or directory-linked locations, not entrances or routes. Morley retains a contextual approximation. CBP wait reports do not certify coordinates; missing observations are not zero.'}</p>
+      <p>{es ? 'Referencias de ubicación' : 'Location references'}: <a href={LOCATION_SOURCES.gsa} target="_blank" rel="noopener noreferrer">GSA IOLP</a> · <a href={LOCATION_SOURCES.directory} target="_blank" rel="noopener noreferrer">TABC</a> · <a href={LOCATION_SOURCES.federal} target="_blank" rel="noopener noreferrer">Federal Register</a> · <a href={LOCATION_SOURCES.morley} target="_blank" rel="noopener noreferrer">FHWA</a> · <a href="https://github.com/datasets/geo-countries/tree/ca3b7150caa5d3cc3fb108a87fc6e3d57bd97d99" target="_blank" rel="noopener noreferrer">Natural Earth / geo-countries</a></p>
+      <p>{es ? 'San Luis II permanece solo en la lista por referencias de ubicación contradictorias. El registro agregado El Paso no representa un cruce físico separado.' : 'San Luis II remains list-only because location references conflict. Aggregate El Paso does not represent a separate physical crossing.'}</p>
     </details>
   </section>;
 }

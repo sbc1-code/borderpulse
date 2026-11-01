@@ -1,4 +1,5 @@
 {
+  "status": "Historical first-pass evidence at 58f3b74. Counts, limited classes and withholding decisions are superseded by geographic-facility-review.json; the eight directory targets and San Luis I permit conversion remain valid references.",
   "reviewed_at": "2026-11-01",
   "primary_directory": "https://www.tabc.texas.gov/services/texas-ports-of-entry/ports-of-entry-locations/",
   "method": "Named directory location-link targets supplied by independent geography review; directory identities confirmed by the implementation worker. !3d/!4d targets, not @ viewport centers. Map rendering was blocked and not bypassed. These are approximate facility/directory targets, not surveyed entrances.",

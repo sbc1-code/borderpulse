@@ -30,7 +30,7 @@ The camera interpolates geometry and inverse-sized markers in the same animation
 
 ## Geographic scope and limits
 
-**Superseded by the [geographic correction review](BORDERWIDE-GEOGRAPHY-REVIEW.md).** The original 40-pin candidate below contained material inherited errors. Current coverage is 38 approximate points and 4 list-only records; 26 inherited points remain unverified. The original images/recording are retained as the earlier review artifact. Updated regional evidence accompanies the geography correction.
+**Superseded by the [facility-overview review](BORDERWIDE-GEOGRAPHY-REVIEW.md).** The original 40-pin candidate below contained material inherited errors. Current corrected coverage is 40 approximate points and 2 list-only records: 39 primary location references and Morley's explicitly limited contextual approximation. The original images/recording are retained as historical artifacts; use the updated facility captures for current geographic review.
 
 ### Original candidate record (historical)
 
