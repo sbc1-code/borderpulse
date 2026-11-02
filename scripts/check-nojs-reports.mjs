@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { snapshotDocument } from './lib/crossing-snapshot-html.mjs';
 
 // This is a no-JavaScript visitor, not a special Googlebot response.
 export async function checkNoJsReports(browser, baseUrl) {
@@ -6,6 +8,16 @@ export async function checkNoJsReports(browser, baseUrl) {
     viewport: { width: 375, height: 812 }, serviceWorkers: 'block' });
   await context.route('**/*', route => new URL(route.request().url()).origin === baseUrl.origin
     ? route.continue() : route.abort('blockedbyclient'));
+  // vite preview does not execute Vercel functions. For an API-mode artifact,
+  // emulate only the function's bundled fallback; endpoint timing/cache tests
+  // separately exercise the actual handler. Pages artifacts use their real file.
+  if (!fs.existsSync(new URL('../dist/snapshot/index.html', import.meta.url))) {
+    const bundled = JSON.parse(fs.readFileSync(new URL('../public/data/crossings.json', import.meta.url)));
+    await context.route(url => url.origin === baseUrl.origin && /^\/snapshot\/(es\/)?$/.test(url.pathname), route =>
+      route.fulfill({ contentType: 'text/html', body: snapshotDocument(bundled, {
+        lang: new URL(route.request().url()).pathname.includes('/es/') ? 'es' : 'en', framed: true,
+      }) }));
+  }
   const page = await context.newPage();
   try {
     await page.goto(new URL('/', baseUrl).href);
@@ -22,6 +34,12 @@ export async function checkNoJsReports(browser, baseUrl) {
     assert.equal(await crossing.locator('tbody tr').count(), 1);
     assert.ok(await crossing.getByRole('link', { name: 'View official camera sources: Fideicomiso de Puentes Fronterizos de Chihuahua', exact: true }).isVisible());
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'no-JS crossing must fit mobile viewport');
+    await page.goto(new URL('/es/', baseUrl).href);
+    const spanishFrame = await page.locator('iframe[src="/snapshot/es/"]').count() > 0;
+    const spanish = spanishFrame ? page.frameLocator('iframe[src="/snapshot/es/"]') : page;
+    await spanish.getByRole('heading', { name: 'Tiempos de espera en la frontera EE.UU.-México', exact: true }).waitFor();
+    await spanish.getByText(/instantánea publicada, no un feed en vivo/).waitFor();
+    assert.equal(await spanish.locator('tbody tr').count(), 42);
   } finally { await context.close(); }
   console.log('[nojs-reports] PASS: mobile homepage → crossing → official camera path, visible reports, original timestamps and viewport fit without app JavaScript');
 }

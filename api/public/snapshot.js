@@ -2,8 +2,9 @@ import { CBP_URL, createCbpPayload } from '../../scripts/fetch-cbp.mjs';
 import { snapshotDocument } from '../../scripts/lib/crossing-snapshot-html.mjs';
 
 // HTML form of the cached official snapshot. The no-JS home frame uses it so
-// the published table is not stuck on the last full site build. Same five
-// minute CDN window as /api/public/crossings.
+// the published table is not stuck on the last full site build. CDN responses
+// may be reused for five minutes plus ten minutes of stale revalidation.
+// Retrieval and lane report clocks remain visible; this is not a freshness SLA.
 export const config = { maxDuration: 10 };
 
 function send(res, status, body, cache = false) {
@@ -31,10 +32,13 @@ function requestedLang(req) {
 export default async function handler(req, res) {
   if (req.method !== 'GET') return send(res, 405, 'Method not allowed');
   const lang = requestedLang(req);
+  // Leave 1.5 seconds for rendering/response within maxDuration. The fallback
+  // shares this deadline; it cannot start a second eight-second request.
+  const deadline = Date.now() + 8_500;
   try {
     const upstream = await fetch(CBP_URL, {
       headers: { 'User-Agent': 'borderpulse.com/1.0 (snapshot-cache)' },
-      signal: AbortSignal.timeout(8_000),
+      signal: AbortSignal.timeout(6_000),
     });
     if (!upstream.ok) throw new Error(`CBP source returned ${upstream.status}`);
     const payload = createCbpPayload(await upstream.json());
@@ -42,9 +46,10 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('[public-snapshot]', error);
     const host = req.headers?.host;
-    if (host) {
+    const allowedHosts = ['borderpulse.com', 'www.borderpulse.com', process.env.VERCEL_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL].filter(Boolean);
+    if (allowedHosts.includes(host) && Date.now() < deadline) {
       try {
-        const bundled = await fetch(`https://${host}/data/crossings.json`, { signal: AbortSignal.timeout(8_000) });
+        const bundled = await fetch(`https://${host}/data/crossings.json`, { signal: AbortSignal.timeout(Math.max(1, Math.min(2_500, deadline - Date.now()))) });
         if (bundled.ok) {
           const payload = await bundled.json();
           return send(res, 200, snapshotDocument(payload, { lang, framed: true }), false);
@@ -53,6 +58,8 @@ export default async function handler(req, res) {
         console.error('[public-snapshot] bundled fallback', fallbackError);
       }
     }
-    return send(res, 502, 'Official CBP data is temporarily unavailable');
+    return send(res, 502, lang === 'es'
+      ? '<p>Los datos de CBP no están disponibles temporalmente. <a href="https://bwt.cbp.gov/" target="_top">Consultar CBP</a></p>'
+      : '<p>Official CBP data is temporarily unavailable. <a href="https://bwt.cbp.gov/" target="_top">Check CBP</a></p>');
   }
 }

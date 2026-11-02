@@ -148,7 +148,7 @@ additional monthly spend; do not pause the shared Vercel team and DIGITO.
 ## 2026-09-29 · Evaluate Vercel with a public-app preview
 
 Keep the existing GitHub Pages site and automatic ads while testing Vercel.
-Vercel builds use the same Vite app plus a five-minute CDN-cached CBP endpoint;
+Vercel builds use the same Vite app plus a CBP endpoint with five minutes of CDN cache and up to ten further minutes of stale revalidation;
 the client retains the last successful reading and falls back to the published
 static snapshot with its original timestamp when the endpoint fails. A compact
 30-day snapshot artifact makes historical aggregates independent of build-host

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-02 — Bound snapshot recovery and keep the Spanish home consistent
+
+- Share an 8.5-second total fetch budget between the HTML endpoint’s upstream and known-host bundled recovery, leaving headroom under the existing ten-second function limit. Preserve fallback retrieval/report clocks and no-store errors.
+- Let `/es/` own the shell, footer and shared language preference; switching to English retains the query and hash. Cover fresh and saved-English visitors, mobile/desktop and both no-JS language entries.
+- Clarify that CDN reuse includes five minutes of cache plus up to ten minutes of stale revalidation; it is not a strict five-minute freshness guarantee.
+
 ## 2026-11-02 - Deploy focus race, Spanish home, fresher no-JS snapshot
 
 - Keep map selection focus from taking the search field when its callback arrives after the visitor has started filtering. This was the only failure in the Pages deploy at 06:23 UTC.

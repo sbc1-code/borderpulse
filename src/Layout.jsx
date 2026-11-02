@@ -10,7 +10,14 @@ import { normalizeLane, withLane } from '@/lib/laneContext';
 export default function Layout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const language = usePersistentLanguage();
+  const storedLanguage = usePersistentLanguage();
+  const spanishHome = /^\/es\/?$/.test(location.pathname);
+  const language = spanishHome ? 'es' : storedLanguage;
+  useEffect(() => {
+    if (!spanishHome || storedLanguage === 'es') return;
+    writeStorage('borderPulse_language', 'es');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: 'es' }));
+  }, [spanishHome, storedLanguage]);
   const [theme, setTheme] = useState(() => themeValue(readStorage('borderPulse_theme')));
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuButton = useRef(null);
@@ -47,13 +54,13 @@ export default function Layout({ children }) {
   const changeLanguage = (lang) => {
     writeStorage('borderPulse_language', lang);
     window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
-    if (lang === 'en' && /^\/es\/?$/.test(location.pathname)) navigate('/');
+    if (lang === 'en' && /^\/es\/?$/.test(location.pathname)) navigate({ pathname: '/', search: location.search, hash: location.hash });
   };
 
   const nav = [
     {
       name: language === 'en' ? 'Crossings' : 'Cruces',
-      href: withLane('/?area=all', normalizeLane(new URLSearchParams(location.search).get('lane'))),
+      href: withLane(`${spanishHome ? '/es/' : '/'}?area=all`, normalizeLane(new URLSearchParams(location.search).get('lane'))),
       icon: MapPin,
       current: location.pathname === '/' || /^\/es\/?$/.test(location.pathname) || location.pathname.startsWith('/corridor/'),
     },
@@ -95,7 +102,7 @@ export default function Layout({ children }) {
         }
       }} className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
-          <Link to="/" aria-label="Border Pulse home" className="flex min-h-11 min-w-11 items-center gap-2 rounded-md">
+          <Link to={spanishHome ? `/es/${location.search}` : "/"} aria-label="Border Pulse home" className="flex min-h-11 min-w-11 items-center gap-2 rounded-md">
             <BorderPulseLogo size={32} />
             <span className={`hidden truncate text-base font-bold sm:inline sm:text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Border Pulse
@@ -135,7 +142,7 @@ export default function Layout({ children }) {
       <div className="lg:flex min-h-screen">
         <aside aria-label={language === 'en' ? 'Site navigation' : 'Navegación del sitio'} className={`hidden lg:flex w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex-col`}>
           <div className={`p-5 border-b ${isDark ? 'border-gray-800' : 'border-slate-200'}`}>
-            <Link to="/" className="flex items-center gap-3">
+            <Link to={spanishHome ? `/es/${location.search}` : "/"} className="flex items-center gap-3">
               <BorderPulseLogo size={40} />
               <div>
                 {/* Not an <h1>: the sidebar is `hidden lg:flex` but stays in
