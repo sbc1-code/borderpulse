@@ -14,10 +14,10 @@ export default function Layout({ children }) {
   const spanishHome = /^\/es\/?$/.test(location.pathname);
   const language = spanishHome ? 'es' : storedLanguage;
   useEffect(() => {
-    if (!spanishHome || storedLanguage === 'es') return;
+    if (!spanishHome) return;
     writeStorage('borderPulse_language', 'es');
     window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: 'es' }));
-  }, [spanishHome, storedLanguage]);
+  }, [spanishHome]);
   const [theme, setTheme] = useState(() => themeValue(readStorage('borderPulse_theme')));
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuButton = useRef(null);
