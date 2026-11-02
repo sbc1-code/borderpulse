@@ -105,7 +105,7 @@ const stateForPort = (portName) => {
   return null;
 };
 
-const parseLane = (lane) => {
+const parseLane = (lane, sourceUpdatedAt) => {
   if (!lane) return null;
   const status = normalizeLaneStatus(lane.operational_status);
   if (!status) return null;
@@ -120,6 +120,7 @@ const parseLane = (lane) => {
     delay_minutes: Number.isFinite(delay) ? delay : null,
     lanes_open: Number.isFinite(open) ? open : (explicit ? null : 0),
     update_time: lane.update_time || null,
+    source_updated_at: sourceUpdatedAt || null,
   };
 };
 
@@ -174,15 +175,16 @@ const cleanCrossingName = (raw) => {
 };
 
 const mapPort = (p) => {
-  const passenger_standard = parseLane(p.passenger_vehicle_lanes?.standard_lanes);
-  const passenger_sentri = parseLane(p.passenger_vehicle_lanes?.NEXUS_SENTRI_lanes);
-  const passenger_ready = parseLane(p.passenger_vehicle_lanes?.ready_lanes);
-  const pedestrian_standard = parseLane(p.pedestrian_lanes?.standard_lanes);
-  const pedestrian_ready = parseLane(p.pedestrian_lanes?.ready_lanes);
-  const commercial_standard = parseLane(p.commercial_vehicle_lanes?.standard_lanes);
-  const commercial_fast = parseLane(p.commercial_vehicle_lanes?.FAST_lanes);
+  const sourceUpdatedAt = [p.date, p.time].filter(Boolean).join(' ') || null;
+  const passenger_standard = parseLane(p.passenger_vehicle_lanes?.standard_lanes, sourceUpdatedAt);
+  const passenger_sentri = parseLane(p.passenger_vehicle_lanes?.NEXUS_SENTRI_lanes, sourceUpdatedAt);
+  const passenger_ready = parseLane(p.passenger_vehicle_lanes?.ready_lanes, sourceUpdatedAt);
+  const pedestrian_standard = parseLane(p.pedestrian_lanes?.standard_lanes, sourceUpdatedAt);
+  const pedestrian_ready = parseLane(p.pedestrian_lanes?.ready_lanes, sourceUpdatedAt);
+  const commercial_standard = parseLane(p.commercial_vehicle_lanes?.standard_lanes, sourceUpdatedAt);
+  const commercial_fast = parseLane(p.commercial_vehicle_lanes?.FAST_lanes, sourceUpdatedAt);
 
-  const primaryDelay = passenger_standard?.delay_minutes ?? null;
+  const primaryDelay = reportedMinutes(passenger_standard);
 
   const portName = (p.port_name || '').trim();
   const crossingName = cleanCrossingName(p.crossing_name);

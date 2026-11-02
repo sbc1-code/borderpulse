@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-11-02 — Normalize primary waits and retain per-lane source clocks
+
+- Apply the same status-aware scalar normalization to the San Ysidro main-row path as other ports. Hypothetical retained-number tests cover closed, N/A and pending states, actual zero, and reversed source order; they do not describe an observed feed incident.
+- Preserve each lane’s originating CBP row date/time when duplicate rows contribute different lanes, alongside the original lane update clock.
+
 ## 2026-11-02 — Keep reported waits when CBP publishes two rows for one crossing
 
 - When two CBP rows map to the same crossing, a reported lane wait is kept ahead of an empty or Update Pending row. Ysleta keeps the reported Ready Lane, SENTRI, pedestrian, and commercial waits from port 240203. Standard stays Lanes Closed, with no minute invented for it.
