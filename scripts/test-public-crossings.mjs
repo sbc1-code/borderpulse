@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import { createCbpPayload } from './fetch-cbp.mjs';
 import { canonicalPortNumber } from '../src/lib/portIdentity.js';
 import handler from '../api/public/crossings.js';
+import snapshotHandler from '../api/public/snapshot.js';
 
 function response() {
   return {
@@ -48,6 +49,41 @@ test('public endpoint rejects mutations without contacting CBP', async t => {
   const res = response();
   await handler({ method: 'POST' }, res);
   assert.equal(res.statusCode, 405);
+});
+
+function htmlResponse() {
+  return {
+    headers: {},
+    status(code) { this.statusCode = code; },
+    setHeader(key, value) { this.headers[key] = value; },
+    end(body) { this.body = String(body); },
+  };
+}
+const snapshotFeed = () => ({ ok: true, json: async () =>
+  Array.from({ length: 42 }, (_, index) => ({
+    port_number: String(900000 + index), port_name: `Test crossing ${index}`,
+    border: 'Frontera mexicana', port_status: 'Abierto', date: '9/29/2026', time: '8:00 pm',
+    passenger_vehicle_lanes: { standard_lanes: { operational_status: 'Sin demora', delay_minutes: '0', lanes_open: '1' } },
+  })),
+});
+test('snapshot endpoint renders the cached official fetch as HTML', async t => {
+  t.mock.method(globalThis, 'fetch', snapshotFeed);
+  const res = htmlResponse();
+  await snapshotHandler({ method: 'GET', query: { lang: 'es' } }, res);
+  assert.equal(res.statusCode, 200);
+  assert.match(res.headers['Vercel-CDN-Cache-Control'], /s-maxage=300/);
+  assert.equal(res.headers['X-Robots-Tag'], 'noindex');
+  assert.match(res.body, /Tiempos de espera en la frontera EE\.UU\.-México/);
+  assert.match(res.body, /instantánea publicada, no un feed en vivo/);
+  assert.match(res.body, /datetime="\d{4}-\d{2}-\d{2}T/);
+});
+test('snapshot endpoint does not cache an official outage', async t => {
+  t.mock.method(globalThis, 'fetch', async () => { throw new Error('upstream unavailable'); });
+  const res = htmlResponse();
+  await snapshotHandler({ method: 'GET' }, res);
+  assert.equal(res.statusCode, 502);
+  assert.equal(res.headers['Cache-Control'], 'no-store');
+  assert.equal(res.headers['Vercel-CDN-Cache-Control'], undefined);
 });
 
 

@@ -115,6 +115,10 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
         localStorage.setItem('borderPulse_language', 'es');
       });
     }
+    await page.goto(new URL('/es/', baseUrl).href);
+    await inspect('/es/', 'es');
+    await switchTo('en');
+    await inspect('/', 'en');
     assert.ok(feedRequests > 1, 'must exercise a genuine feed refresh');
     assert.ok(aggregateRequests > 0, 'must exercise delayed aggregate arrival');
     console.log('[document-language] PASS: delayed aggregate, feed refresh, switching, Back/Forward, shared pages and EN/ES content-owned pages');

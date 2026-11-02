@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BookOpen, Menu, X, Moon, Sun, Clock3, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
@@ -9,6 +9,7 @@ import { normalizeLane, withLane } from '@/lib/laneContext';
 
 export default function Layout({ children }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const language = usePersistentLanguage();
   const [theme, setTheme] = useState(() => themeValue(readStorage('borderPulse_theme')));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,7 +33,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const pageOwnsLanguage =
       /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
-      /^\/(methodology|metodologia|privacy|privacidad)\/?$/.test(location.pathname);
+      /^\/(methodology|metodologia|privacy|privacidad|es)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
   }, [language, location.pathname]);
@@ -46,6 +47,7 @@ export default function Layout({ children }) {
   const changeLanguage = (lang) => {
     writeStorage('borderPulse_language', lang);
     window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
+    if (lang === 'en' && /^\/es\/?$/.test(location.pathname)) navigate('/');
   };
 
   const nav = [
@@ -53,7 +55,7 @@ export default function Layout({ children }) {
       name: language === 'en' ? 'Crossings' : 'Cruces',
       href: withLane('/?area=all', normalizeLane(new URLSearchParams(location.search).get('lane'))),
       icon: MapPin,
-      current: location.pathname === '/' || location.pathname.startsWith('/corridor/'),
+      current: location.pathname === '/' || /^\/es\/?$/.test(location.pathname) || location.pathname.startsWith('/corridor/'),
     },
     {
       name: 'Blog',

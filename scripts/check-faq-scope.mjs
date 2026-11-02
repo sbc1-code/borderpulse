@@ -100,7 +100,8 @@ export function checkBuiltFaqScope(distDir = path.join(root, 'dist')) {
 
   const twins = (en, es) => ({ en, es, 'x-default': en });
   const representatives = [
-    { route: '/', title: 'Border Pulse |', hreflangs: { en: '/', 'x-default': '/' } },
+    { route: '/', title: 'Border Pulse |', hreflangs: twins('/', '/es/') },
+    { route: '/es/', title: 'Border Pulse |', lang: 'es', hreflangs: twins('/', '/es/') },
     { route: '/methodology/', title: 'Methodology |', types: ['BreadcrumbList'], hreflangs: twins('/methodology/', '/metodologia/') },
     { route: '/metodologia/', title: 'Metodología |', lang: 'es', types: ['BreadcrumbList'], hreflangs: twins('/methodology/', '/metodologia/') },
     { route: '/privacy/', title: 'Privacy and advertising |', hreflangs: twins('/privacy/', '/privacidad/') },

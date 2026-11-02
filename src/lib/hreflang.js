@@ -1,8 +1,20 @@
 const BASE = 'https://borderpulse.com';
+export const HOME_URL = `${BASE}/`;
+export const HOME_ES_URL = `${BASE}/es/`;
 
-// Only these routes have separately crawlable translated pages. A language
-// preference on a shared URL does not create a Spanish alternate URL.
+// Shared crossing URLs stay one address. The home page is the exception:
+// /es/ is the indexable Spanish entry, and the in-page toggle does not
+// replace it.
+export function homeHreflangs() {
+  return [
+    { lang: 'en', href: HOME_URL },
+    { lang: 'es', href: HOME_ES_URL },
+    { lang: 'x-default', href: HOME_URL },
+  ];
+}
+
 export function pageHreflangs(canonical, lang = 'en') {
+  if (canonical === HOME_URL || canonical === HOME_ES_URL) return homeHreflangs();
   for (const [en, es] of [['methodology', 'metodologia'], ['privacy', 'privacidad']]) {
     const enUrl = `${BASE}/${en}/`;
     const esUrl = `${BASE}/${es}/`;

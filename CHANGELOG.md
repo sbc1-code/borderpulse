@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-02 - Deploy focus race, Spanish home, fresher no-JS snapshot
+
+- Keep map selection focus from taking the search field when its callback arrives after the visitor has started filtering. This was the only failure in the Pages deploy at 06:23 UTC.
+- Add `/es/` as the indexable Spanish home, with lang, title, description, reciprocal hreflang and a sitemap entry. Shared crossing URLs stay one address.
+- Serve the no-JS home snapshot from the cached official fetch on Vercel, and from the data-deploy file on Pages, still labeled as a published snapshot.
+- Describe DIGITO as an independent creative studio. No home city added.
+
 ## 2026-11-01 — Correct map report focus and selected-lane summaries
 
 - Reveal the selected report's focused Back control clear of the native header and nested pane clipping; restore the original list/document position and focus on Escape, button and browser Back, with immediate reduced-motion-safe scrolling.

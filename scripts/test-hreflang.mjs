@@ -4,7 +4,7 @@ import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
 
 const base = 'https://borderpulse.com';
 test('single URL routes point to themselves without inventing translations', () => {
-  for (const route of ['/', '/crossing/san-ysidro/', '/best-time/san-ysidro/', '/compare/san-ysidro-vs-otay-mesa/']) {
+  for (const route of ['/crossing/san-ysidro/', '/best-time/san-ysidro/', '/compare/san-ysidro-vs-otay-mesa/']) {
     assert.deepEqual(pageHreflangs(base + route), [{ lang: 'en', href: base + route }, { lang: 'x-default', href: base + route }]);
   }
 });
@@ -17,6 +17,15 @@ test('only published EN/ES blog twins create reciprocal alternates', () => {
   for (const post of [en, es, { slug: 'unpaired', lang: 'es' }]) {
     assert.deepEqual(blogHreflangs(post, [post]), [{ lang: post.lang, href: `${base}/blog/${post.slug}/` }, { lang: 'x-default', href: `${base}/blog/${post.slug}/` }]);
   }
+});
+test('the home page and /es/ are one reciprocal language pair', () => {
+  const expected = [
+    { lang: 'en', href: base + '/' },
+    { lang: 'es', href: base + '/es/' },
+    { lang: 'x-default', href: base + '/' },
+  ];
+  assert.deepEqual(pageHreflangs(base + '/'), expected);
+  assert.deepEqual(pageHreflangs(base + '/es/', 'es'), expected);
 });
 test('existing methodology and privacy twins remain reciprocal', () => {
   for (const [en, es] of [['methodology', 'metodologia'], ['privacy', 'privacidad']]) {
