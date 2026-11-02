@@ -9,7 +9,7 @@
     "test:share": "node --test scripts/test-crossing-share.mjs",
     "test:metadata": "node --test scripts/test-faq-scope.mjs scripts/test-hreflang.mjs scripts/test-crossing-snapshot.mjs",
     "test:ads": "node --test scripts/test-ad-slot-diagnostics.mjs && node scripts/check-google-ads.mjs",
-    "test:publish": "node --test scripts/test-publish-data.mjs scripts/test-public-crossings.mjs",
+    "test:publish": "node --test scripts/test-publish-data.mjs scripts/test-public-crossings.mjs scripts/test-cbp-duplicate-rows.mjs",
     "publish:validate": "node scripts/validate-publish-data.mjs",
     "test:hours": "node --test scripts/test-operating-hours.mjs",
     "audit:recommendations": "node scripts/audit-recommendations.mjs",

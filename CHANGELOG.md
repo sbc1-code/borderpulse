@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-02 — Keep reported waits when CBP publishes two rows for one crossing
+
+- When two CBP rows map to the same crossing, a reported lane wait is kept ahead of an empty or Update Pending row. Ysleta keeps the reported Ready Lane, SENTRI, pedestrian, and commercial waits from port 240203. Standard stays Lanes Closed, with no minute invented for it.
+- Store CBP's lane status (`Lanes Closed`, `Update Pending`, `N/A`) on the lane. Closed and N/A lanes are no longer dropped. Current wait wording is unchanged.
+- The same feed also dropped Otay Mesa's reported commercial waits, and let Update Pending replace an explicit status at BOTA, Paso Del Norte, Naco, Roma, and both Brownsville legacy crossings.
+- Correct the port-identity note that said those substitute rows never appear together.
+
 ## 2026-11-01 — Correct map report focus and selected-lane summaries
 
 - Reveal the selected report's focused Back control clear of the native header and nested pane clipping; restore the original list/document position and focus on Escape, button and browser Back, with immediate reduced-motion-safe scrolling.

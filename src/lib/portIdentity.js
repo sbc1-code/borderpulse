@@ -1,13 +1,12 @@
 // Canonical port identity.
 //
-// CBP's /api/bwtpublicmod intermittently substitutes a DIFFERENT row for the
-// same physical crossing: a different port_number AND a different port_name.
-// The two rows are mutually exclusive, verified across 200 committed snapshots
-// (git log public/data/crossings.json) -- they never co-occur, so this is not
-// a dedupe contest. The feed simply changes what it calls a bridge.
+// CBP's /api/bwtpublicmod sometimes publishes a different port_number and
+// port_name for the same physical crossing. Identity (port_number, name,
+// state) comes from this table, never from the feed. The feed still supplies
+// all live data (waits, lanes, status).
 //
-// That matters because slugs are derived from names (src/lib/slugs.js), so a
-// substitution moved the crossing's URL. Measured consequences before this fix:
+// Slugs are derived from names (src/lib/slugs.js), so a substitution used to
+// move the crossing's URL. Measured consequences before identity was pinned:
 //   - /crossing/paso-del-norte/ served a hard 404 while the sitemap advertised
 //     /crossing/el-paso-paso-del-norte-pdn/
 //   - ~22% of production deploys failed, because scripts/smoke-routes.mjs
@@ -17,10 +16,15 @@
 //   - favorites are stored by port_number in localStorage, so a favorited Naco
 //     silently vanished on 25% of loads
 //
-// Fix: identity (port_number, name, state) comes from this table, never from
-// the feed. The feed still supplies all live DATA (waits, lanes, status).
+// An early sample of 200 committed snapshots mostly saw these spellings
+// alternate rather than arrive together. That is not a rule. The raw feed
+// saved 2026-11-02 contains both rows at once for Ysleta (240104 and 240203),
+// Paso Del Norte, BOTA, Naco, Otay Mesa, and the Brownsville legacy pairs.
+// When both are present, scripts/fetch-cbp.mjs has to choose: a reported wait
+// outranks an empty or Update Pending row, and Lanes Closed or N/A stays on
+// the lane instead of being dropped.
 //
-// Substitution rates measured over 200 snapshots:
+// Substitution counts from that earlier 200-snapshot sample:
 //   240202 PDN 188 / 202401 12      240201 BOTA 188 / 240207 12
 //   240104 Ysleta 199 / 240203 1
 //   San Ysidro/PedWest was previously treated as a substitution. The raw CBP

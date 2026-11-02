@@ -81,7 +81,9 @@ test('San Ysidro keeps its own status and hours while all lane reports are pendi
 test('San Ysidro never adopts CBX lane waits when its own lane is unavailable', () => {
   const rows = structuredClone(sanYsidroRows);
   rows.find(row => row.port_number === '250401').pedestrian_lanes.standard_lanes.operational_status = 'N/A';
-  assert.equal(mainRow(rows).lanes.pedestrian_standard, null);
+  const lane = mainRow(rows).lanes.pedestrian_standard;
+  assert.equal(lane.status, 'N/A');
+  assert.equal(lane.delay_minutes, null, 'CBX zero is not a main-crossing wait');
 });
 test('San Ysidro preserves actual zero and positive waits from its main row', () => {
   for (const delay of ['0', '85']) {
