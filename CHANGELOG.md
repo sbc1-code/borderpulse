@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-02 — Scope Lane Flip Watch to retained evidence
+
+- Replace usual/never/right-now claims with descriptive counts and percentages from retained fetches. Repeated fetches can repeat one CBP report and are not independent observations or forecasts.
+- Show actual archive and per-lane intervals, an explicit stale state after a day without a retained fetch, both compared source clocks and lane eligibility reminders in EN/ES.
+- Rebuild coverage metadata from committed normalized snapshots only; raw historical CBP responses are unavailable, so clearly disclose earlier duplicate-row omissions. This does not retroactively apply the new normalizer to old data.
+
 ## 2026-11-02 — Lane Flip Watch (review candidate)
 
 - Add `/lane-flip/` and `/lane-flip/:slug/`: reported general, Ready Lane, SENTRI, and Ready pedestrian waits side by side, with a plain verdict and a tappable 24-hour strip.

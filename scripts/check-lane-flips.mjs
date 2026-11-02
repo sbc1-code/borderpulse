@@ -45,6 +45,8 @@ function snapshot() {
 const history = {
   lookback_days: 30,
   snapshot_count: 20,
+  window_start: '2026-10-01T10:00:00Z',
+  window_end: '2026-10-02T10:00:00Z',
   crossings: [
     {
       port_number: '250601',
@@ -124,14 +126,14 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     await page.getByTestId('period-passenger_ready').waitFor();
     await ready.waitFor();
     assert.equal(await ready.getAttribute('data-state'), 'slower');
-    assert.match(await ready.innerText(), /Right now, Ready Lane is reported 50 min slower than general/);
+    assert.match(await ready.innerText(), /In the latest fetch, Ready Lane is reported 50 min slower than general/);
     assert.equal(await page.getByTestId('verdict-passenger_sentri').getAttribute('data-state'), 'faster');
     assert.equal(await page.getByTestId('period-passenger_ready').getAttribute('data-slower'), '12');
     assert.equal(await page.getByTestId('period-passenger_ready').getAttribute('data-paired'), '80');
     assert.doesNotMatch(await page.locator('#root').innerText(), /30 min slower/);
     await page.getByTestId('hour-passenger_ready-8').click();
     await page.waitForFunction(() => document.querySelector('[data-testid="hour-detail-passenger_ready"]')?.getAttribute('data-hour') === '8');
-    assert.match(await page.getByTestId('hour-detail-passenger_ready').innerText(), /usually reported faster at this hour/);
+    assert.match(await page.getByTestId('hour-detail-passenger_ready').innerText(), /1 slower, 8 faster, and 1 the same, out of 10 fetches with both lane values/);
     await page.getByTestId('hour-passenger_ready-15').click();
     await page.waitForFunction(() => document.querySelector('[data-testid="hour-detail-passenger_ready"]')?.getAttribute('data-hour') === '15');
     const hour15 = await page.getByTestId('hour-detail-passenger_ready').innerText();
@@ -141,6 +143,15 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     assert.match(await page.getByTestId('lane-flip-share-text').innerText(), /110 min/);
     assert.match(await page.getByTestId('lane-flip-share-text').innerText(), /At 10:00 pm PST/);
     await page.waitForFunction(() => document.querySelector('link[rel="canonical"]')?.href === 'https://borderpulse.com/lane-flip/otay-mesa/');
+    assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /2026-/);
+    assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /without reconstruction from raw/);
+    assert.match(await page.getByTestId('pair-clocks-passenger_ready').innerText(), /General:.*Ready Lane:/);
+    assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /Stale archive/);
+    const radio = page.getByTestId('hour-passenger_ready-15');
+    await radio.focus();
+    await page.keyboard.press('ArrowRight');
+    await page.getByTestId('hour-passenger_ready-16').evaluate(el => { if (document.activeElement !== el) throw new Error('hour keyboard focus not moved'); });
+    assert.doesNotMatch(await page.locator('#root').innerText(), /Right now|usually|last 30 days/);
     assert.ok(await fits(page), 'detail overflows');
 
     const navName = viewport.width < 1024 ? null : 'Main navigation';
@@ -149,9 +160,11 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     await nav.getByRole('link', { name: 'Lane flips' }).waitFor();
 
     await page.getByRole('button', { name: 'Cambiar a español' }).click();
-    await page.getByRole('heading', { level: 1, name: '¿Hoy conviene el carril rápido en Otay Mesa?', exact: true }).waitFor();
-    assert.match(await page.getByTestId('verdict-passenger_ready').innerText(), /Ahora mismo, Ready Lane se reporta 50 min más lento que el general/);
+    await page.getByRole('heading', { level: 1, name: 'Ready y SENTRI frente al carril general en Otay Mesa', exact: true }).waitFor();
+    assert.match(await page.getByTestId('verdict-passenger_ready').innerText(), /En la última consulta, Ready Lane se reporta 50 min más lento que el general/);
     assert.match(await page.locator('#root').innerText(), /Revisa CBP antes de salir/);
+    assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /Archivo desactualizado/);
+    assert.match(await page.locator('#root').innerText(), /no autoriza el uso/);
     assert.match(await page.locator('#root').innerText(), /no un pronóstico/);
     assert.ok(await fits(page), 'Spanish detail overflows');
     if (viewport.width < 1024 && !(await page.locator('#mobile-navigation').isVisible())) {

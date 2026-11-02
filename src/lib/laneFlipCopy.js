@@ -1,7 +1,7 @@
 // Bilingual copy for Lane Flip Watch. Wording stays descriptive: reported
 // waits, CBP clocks, and no promise that a lane will stay faster.
 
-import { FAST_LANE_PAIRS, usuallyFaster, usuallySlower } from './laneFlips.js';
+import { FAST_LANE_PAIRS } from './laneFlips.js';
 
 const LABELS = {
   passenger_standard: { en: 'General', es: 'General' },
@@ -34,26 +34,26 @@ export function formatHour(hour, language = 'en') {
 
 export function indexTitle(language = 'en') {
   return language === 'es'
-    ? '¿Hoy conviene el carril rápido? Esperas reportadas de Ready y SENTRI | Border Pulse'
+    ? 'Ready y SENTRI frente al carril general | Border Pulse'
     : 'Lane Flip Watch: when Ready or SENTRI is reported slower | Border Pulse';
 }
 
 export function indexDescription(language = 'en') {
   return language === 'es'
-    ? 'Compara las esperas reportadas del carril general, Ready Lane, SENTRI y peatonal. Mira cuándo el carril rápido aparece más lento y cuántas veces pasó en los últimos 30 días.'
-    : 'Compare reported general, Ready Lane, SENTRI and pedestrian waits. See when a faster lane is reported slower, and how often that happened in the last 30 days.';
+    ? 'Compara las esperas reportadas del carril general, Ready Lane, SENTRI y peatonal. Mira cuándo el carril rápido aparece más lento y cuántas veces pasó en el archivo conservado.'
+    : 'Compare reported general, Ready Lane, SENTRI and pedestrian waits. See when a faster lane is reported slower, and how often that happened in the retained archive.';
 }
 
 export function detailTitle(name, language = 'en') {
   return language === 'es'
-    ? `¿Hoy conviene el carril rápido en ${name}? Esperas reportadas | Border Pulse`
+    ? `Ready y SENTRI frente al carril general en ${name} | Border Pulse`
     : `Lane Flip Watch at ${name} | Border Pulse`;
 }
 
 export function detailDescription(name, language = 'en') {
   return language === 'es'
-    ? `Esperas reportadas del general, Ready Lane y SENTRI en ${name}, lado a lado, y cuántas veces el carril rápido se reportó más lento en los últimos 30 días. Revisa CBP antes de salir.`
-    : `Reported general, Ready Lane and SENTRI waits at ${name}, side by side, plus how often the faster lane was reported slower in the last 30 days. Check CBP before leaving.`;
+    ? `Esperas reportadas del general, Ready Lane y SENTRI en ${name}, lado a lado, y cuántas veces el carril rápido se reportó más lento en el archivo conservado. Revisa CBP antes de salir.`
+    : `Reported general, Ready Lane and SENTRI waits at ${name}, side by side, plus how often the faster lane was reported slower in the retained archive. Check CBP before leaving.`;
 }
 
 export function checkNote(language = 'en') {
@@ -73,7 +73,7 @@ export function verdictSentence(row, language = 'en', usable = false) {
   const baseline = baselineLabel(row.general, language);
   const es = language === 'es';
   const when = usable
-    ? (es ? 'Ahora mismo' : 'Right now')
+    ? (es ? 'En la última consulta' : 'In the latest fetch')
     : (es ? 'En el último reporte' : 'In the latest report');
   const gap = Math.abs(row.gap || 0);
   if (row.state === 'slower') {
@@ -116,14 +116,14 @@ export function periodSentence(row, stats, language = 'en') {
   const paired = stats?.paired || 0;
   if (!paired) {
     return language === 'es'
-      ? `No hay reportes emparejados de ${laneLabel(row.key, language)} y ${baselineLabel(row.general, language)} en los últimos 30 días.`
-      : `No paired ${laneLabel(row.key, language)} and ${baselineLabel(row.general, language)} reports in the last 30 days.`;
+      ? `No hay consultas con datos de ambos carriles de ${laneLabel(row.key, language)} y ${baselineLabel(row.general, language)} en el archivo conservado.`
+      : `No paired ${laneLabel(row.key, language)} and ${baselineLabel(row.general, language)} reports in the retained archive.`;
   }
   const name = laneLabel(row.key, language);
   const baseline = baselineLabel(row.general, language);
   return language === 'es'
-    ? `En los últimos 30 días, ${name} se reportó más lento que ${baseline} en ${stats.slower} de ${paired} reportes emparejados.`
-    : `Over the last 30 days, ${name} was reported slower than ${baseline} in ${stats.slower} of ${paired} paired reports.`;
+    ? `En el archivo conservado, ${name} se reportó más lento que ${baseline} en ${stats.slower} de ${paired} consultas con datos de ambos carriles (${Math.round(100 * stats.slower / paired)}%).`
+    : `In the retained archive, ${name} was reported slower than ${baseline} in ${stats.slower} of ${paired} fetches with both lane values (${Math.round(100 * stats.slower / paired)}%).`;
 }
 
 export function hourDetail(row, stats, hour, language = 'en') {
@@ -133,41 +133,31 @@ export function hourDetail(row, stats, hour, language = 'en') {
   const baseline = baselineLabel(row.general, language);
   if (!paired) {
     return language === 'es'
-      ? `No hay reportes emparejados a las ${clock} en los últimos 30 días.`
-      : `No paired reports at ${clock} in the last 30 days.`;
+      ? `No hay consultas con datos de ambos carriles a las ${clock} en el archivo conservado.`
+      : `No fetches with both lane values at ${clock} in the retained archive.`;
   }
   const counts = language === 'es'
-    ? `${stats.slower} más lento, ${stats.faster} más rápido y ${stats.same} igual, de ${paired} reportes emparejados.`
-    : `${stats.slower} slower, ${stats.faster} faster, and ${stats.same} the same, out of ${paired} paired reports.`;
+    ? `${stats.slower} más lento, ${stats.faster} más rápido y ${stats.same} igual, de ${paired} consultas con datos de ambos carriles.`
+    : `${stats.slower} slower, ${stats.faster} faster, and ${stats.same} the same, out of ${paired} fetches with both lane values.`;
   const lead = language === 'es'
     ? `A las ${clock}, ${name} se reportó más lento que ${baseline} en ${stats.slower} de ${paired}.`
     : `At ${clock}, ${name} was reported slower than ${baseline} in ${stats.slower} of ${paired}.`;
-  let usual = '';
-  if (usuallyFaster(stats)) {
-    usual = language === 'es'
-      ? ` A esta hora, ${name} suele reportarse más rápido que ${baseline}.`
-      : ` ${name} is usually reported faster at this hour.`;
-  } else if (usuallySlower(stats)) {
-    usual = language === 'es'
-      ? ` A esta hora, ${name} suele reportarse más lento que ${baseline}.`
-      : ` ${name} is usually reported slower at this hour.`;
-  }
-  return `${lead} ${counts}${usual}`;
+  return `${lead} ${counts}`;
 }
 
 export function methodParagraph(language = 'en') {
   return language === 'es'
-    ? 'Un reporte emparejado es una consulta en la que ambos carriles traen una espera numérica, el carril está abierto y el estado es demora o sin demora. Quedan fuera los cruces cerrados, las actualizaciones pendientes, los carriles cerrados, N/A y los carriles sin casetas abiertas. Un conteo de casetas vacío no es cero. Eso no se cuenta como espera cero. Hay un giro cuando la espera reportada del carril rápido es mayor que la de su carril general en esa misma consulta. Ready Lane y SENTRI se comparan con el general de autos. El peatonal Ready se compara con el peatonal general. Las horas son la hora local del cruce cuando Border Pulse obtuvo el reporte, no el reloj impreso en la línea de CBP. El conteo usa los últimos 30 días de consultas guardadas, no un pronóstico. Cada consulta cuenta una vez: si el carril sigue más lento por varias horas, entra en cada consulta. El porcentaje es una parte de los reportes, no de los días. "Suele" solo aparece con 8 reportes emparejados o más en esa hora, cuando un resultado reúne al menos 60% y el otro queda bajo 40%.'
-    : 'A paired report is one fetch where both lanes have a numeric wait, the lane is open, and the status is delay or no delay. Closed crossings, pending updates, Lanes Closed, N/A, and lanes with no open booths are left out. A blank open-lane count is not zero. They are not counted as a zero wait. A flip means the fast lane\'s reported wait is higher than its general lane in that same fetch. Ready Lane and SENTRI are compared with general passenger. Ready pedestrian is compared with general pedestrian. Hours are the crossing\'s local time when Border Pulse fetched the report, not the clock printed on the CBP lane line. The count uses the last 30 days of stored fetches, not a forecast. Each fetch counts once: a lane that stays slower across several hours is counted in each fetch. The percentage is a share of reports, not of days. "Usually" appears only with 8 or more paired reports at that hour, when one result is at least 60% and the other is under 40%.';
+    ? 'Cada consulta cuenta una vez si ambos carriles tienen una espera numérica, estado demora o sin demora y no reportan cero casetas abiertas. Se excluyen cierres, N/A y actualizaciones pendientes; un dato ausente no es cero. Ready y SENTRI se comparan con el general de autos; Ready peatonal con el peatonal general. Las horas agrupan la hora local de consulta, no los relojes de los carriles. Consultas repetidas pueden contener el mismo reporte de CBP: no son observaciones independientes, días ni probabilidades. Los porcentajes describen solo las consultas guardadas, no un pronóstico.'
+    : 'Each fetch counts once when both lanes have numeric waits, delay or no-delay status and no reported zero open booths. Closures, N/A and pending updates are excluded; missing is not zero. Ready and SENTRI compare with general passenger; Ready pedestrian with general pedestrian. Hours group local retrieval time, not lane report clocks. Repeated fetches may contain the same CBP report: they are not independent observations, days or probabilities. Percentages describe only retained fetches, not a forecast.';
 }
 
 export function methodTitle(language = 'en') {
-  return language === 'es' ? 'Cómo se cuenta el periodo de 30 días' : 'How the 30-day count works';
+  return language === 'es' ? 'Cómo se cuenta el archivo' : 'How the archive count works';
 }
 
 export function flipsHeading(language = 'en', usable = false) {
-  if (language === 'es') return usable ? 'Más lentos que el general ahora' : 'Más lentos que el general en el último reporte';
-  return usable ? 'Slower than general right now' : 'Slower than general in the latest report';
+  if (language === 'es') return 'Más lentos que el general en la última consulta';
+  return 'Slower than general in the latest fetch';
 }
 
 export function emptyFlips(language = 'en') {
@@ -178,12 +168,12 @@ export function emptyFlips(language = 'en') {
 
 export function historyUnavailable(language = 'en') {
   return language === 'es'
-    ? 'Los conteos de 30 días no están disponibles en este momento. Las esperas de arriba siguen siendo el último reporte.'
-    : 'The 30-day counts are unavailable right now. The waits above are still the latest report.';
+    ? 'Los conteos históricos no están disponibles en este momento. Las esperas de arriba siguen siendo el último reporte.'
+    : 'The archive counts are unavailable right now. The waits above are still the latest report.';
 }
 
 export function historyLoading(language = 'en') {
-  return language === 'es' ? 'Cargando los conteos de 30 días…' : 'Loading the 30-day counts…';
+  return language === 'es' ? 'Cargando el archivo…' : 'Loading the archive…';
 }
 
 export function shareText({ language = 'en', name, rows = [], notes = [], url }) {
@@ -201,7 +191,7 @@ export function shareText({ language = 'en', name, rows = [], notes = [], url })
       : `${label}: reported ${row.minutes} min.${clock}`;
   });
   const intro = es
-    ? `¿Hoy conviene el carril rápido? ${name}.`
+    ? `Ready y SENTRI frente al carril general: ${name}.`
     : `Lane Flip Watch at ${name}.`;
   return [intro, ...lines, ...(notes || []), checkNote(language), url].filter(Boolean).join('\n');
 }
@@ -209,16 +199,16 @@ export function shareText({ language = 'en', name, rows = [], notes = [], url })
 export function heatLegend(language = 'en') {
   if (language === 'es') {
     return [
-      { level: 'none', label: 'Sin reportes emparejados' },
-      { level: 'none-slower', label: 'Nunca más lento en esa hora' },
+      { level: 'none', label: 'Sin consultas con datos de ambos carriles' },
+      { level: 'none-slower', label: '0% más lento en las consultas guardadas' },
       { level: 'low', label: 'Más lento en menos del 25%' },
       { level: 'mixed', label: 'Más lento en 25% a menos de 50%' },
       { level: 'often', label: 'Más lento en 50% o más' },
     ];
   }
   return [
-    { level: 'none', label: 'No paired reports' },
-    { level: 'none-slower', label: 'Not slower at that hour' },
+    { level: 'none', label: 'No fetches with both lane values' },
+    { level: 'none-slower', label: '0% slower in retained fetches' },
     { level: 'low', label: 'Slower in under 25%' },
     { level: 'mixed', label: 'Slower in 25% to under 50%' },
     { level: 'often', label: 'Slower in 50% or more' },
@@ -227,4 +217,41 @@ export function heatLegend(language = 'en') {
 
 export function pairFor(key) {
   return FAST_LANE_PAIRS.find(pair => pair.key === key) || null;
+}
+
+export function pairClocks(row, language = 'en') {
+  return [row.generalReport, row.fast].map(report => {
+    const clock = report?.reportTime || (language === 'es' ? 'hora CBP no disponible' : 'CBP time unavailable');
+    const source = report?.sourceUpdatedAt ? ` (${report.sourceUpdatedAt})` : '';
+    return `${laneLabel(report?.key, language)}: ${clock}${source}`;
+  }).join(' · ');
+}
+
+export function historyCoverage(artifact, now = Date.now()) {
+  const start = Date.parse(artifact?.window_start);
+  const end = Date.parse(artifact?.window_end);
+  const valid = Number.isFinite(start) && Number.isFinite(end) && start <= end && end <= now + 60_000;
+  return { valid, stale: valid && now - end > 24 * 60 * 60 * 1000 };
+}
+
+export function historyNotice(artifact, now, language = 'en') {
+  const es = language === 'es';
+  const coverage = historyCoverage(artifact, now);
+  const prefix = coverage.stale ? (es ? 'Archivo desactualizado. ' : 'Stale archive. ') : '';
+  const interval = coverage.valid
+    ? `${artifact.window_start} / ${artifact.window_end} (${artifact.snapshot_count} ${es ? 'consultas guardadas' : 'retained fetches'}).`
+    : (es ? 'Periodo del archivo no disponible.' : 'Archive interval unavailable.');
+  return `${prefix}${es ? 'Periodo conservado: ' : 'Retained interval: '}${interval}`;
+}
+
+export function archiveCaveat(language = 'en') {
+  return language === 'es'
+    ? 'Archivo de instantáneas normalizadas, sin reconstrucción de los datos originales. La normalización anterior podía perder carriles al combinar filas duplicadas. Estos conteos pueden estar incompletos; no representan todos los reportes de CBP.'
+    : 'Archive of normalized snapshots, without reconstruction from raw source data. Earlier duplicate-row normalization could lose lane values. These counts may be incomplete; they do not represent all CBP reports.';
+}
+
+export function eligibilityNote(language = 'en') {
+  return language === 'es'
+    ? 'Ready y SENTRI tienen requisitos de elegibilidad. Una diferencia de espera no autoriza el uso de un carril; verifica los requisitos de CBP.'
+    : 'Ready and SENTRI have eligibility requirements. A wait difference does not authorize lane use; check CBP requirements.';
 }

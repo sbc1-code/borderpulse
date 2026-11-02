@@ -12,9 +12,6 @@ export const FAST_LANE_PAIRS = [
   { key: 'pedestrian_ready', general: 'pedestrian_standard' },
 ];
 
-// Below this, "usually" would describe a handful of reports.
-export const MIN_USUAL_PAIRS = 8;
-
 const COMPARABLE = new Set(['delay', 'no delay']);
 const CLOSED_OR_NA = new Set(['lanes closed', 'n/a', 'na']);
 
@@ -82,21 +79,6 @@ export function heatLevel(stats) {
   return 'often';
 }
 
-function usualShare(stats, direction) {
-  if (!stats || stats.paired < MIN_USUAL_PAIRS) return false;
-  const favored = direction === 'faster' ? stats.faster : stats.slower;
-  const other = direction === 'faster' ? stats.slower : stats.faster;
-  return favored > other && favored / stats.paired >= 0.6 && other / stats.paired < 0.4;
-}
-
-export function usuallyFaster(stats) {
-  return usualShare(stats, 'faster');
-}
-
-export function usuallySlower(stats) {
-  return usualShare(stats, 'slower');
-}
-
 export function laneReport(crossing, key) {
   const lane = crossing?.lanes?.[key];
   const present = Boolean(lane && typeof lane === 'object');
@@ -108,6 +90,7 @@ export function laneReport(crossing, key) {
     reportTime: present && typeof lane.update_time === 'string' && lane.update_time.trim()
       ? lane.update_time.trim()
       : null,
+    sourceUpdatedAt: present ? lane.source_updated_at || null : null,
     status: present ? String(lane.status || '') : '',
     lanesOpen,
   };
@@ -206,7 +189,11 @@ export function accumulateSnapshot(ports, crossings, fetchedAt, portMeta, localH
         ports.set(port, entry);
       }
       if (!entry.lanes[pair.key]) entry.lanes[pair.key] = emptyLaneStats();
-      recordOutcome(entry.lanes[pair.key], hour, outcome);
+      const stats = entry.lanes[pair.key];
+      recordOutcome(stats, hour, outcome);
+      const iso = stamp.toISOString();
+      if (!stats.first_fetch || iso < stats.first_fetch) stats.first_fetch = iso;
+      if (!stats.last_fetch || iso > stats.last_fetch) stats.last_fetch = iso;
     }
   }
 }

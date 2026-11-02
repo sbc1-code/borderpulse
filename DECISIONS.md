@@ -1,5 +1,9 @@
 # DECISIONS
 
+## 2026-11-02 · Lane comparisons describe retained fetches
+
+Do not infer a usual lane advantage from repeated fetches or call values current just because retrieval is fresh. Display both source clocks and actual historical coverage; mark an archive stale after 24 hours without a retained fetch. Earlier snapshots were normalized before duplicate-row repair and raw responses are unavailable: retain an explicit incompleteness caveat rather than claim they were reconstructed. Counts and percentages describe those stored fetches only.
+
 ## 2026-11-02 · Lane flip counts use raw crossing snapshots, not the standard archive
 
 `snapshot-history.json` keeps only standard `current_wait_time`, so Ready, SENTRI, and Ready pedestrian cannot be compared from it. The collector's existing full-history walk of `public/data/crossings.json` also writes `public/data/lane-flips.json`. A paired report requires both lanes to have an open numeric delay or no-delay status in the same fetch. Missing, pending, closed, and zero-open lanes are omitted and never become zero. A flip is a strictly higher reported wait. Hours are the port-local hour of `fetched_at`, not the clock-only CBP lane string. Each fetch counts once, so a lane that stays slower for several hours is a share of reports, not of days. "Usually" needs at least 8 paired reports at that hour, with one result at least 60% and the other under 40%. The window is the rolling 30 days, not a calendar month. A failure to write the summary must not block the CBP snapshot.

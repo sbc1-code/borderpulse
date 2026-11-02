@@ -16,7 +16,7 @@ import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
 import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
 import { CONSOLE_PATH } from '../src/lib/crossingConsole.js';
 import { laneFlipEntries } from '../src/lib/laneFlips.js';
-import { checkNote, detailDescription, detailTitle, indexDescription, indexTitle, laneLabel } from '../src/lib/laneFlipCopy.js';
+import { archiveCaveat, eligibilityNote, historyNotice, checkNote, detailDescription, detailTitle, indexDescription, indexTitle, laneLabel } from '../src/lib/laneFlipCopy.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -853,7 +853,7 @@ async function main() {
     const entries = laneFlipEntries(artifact);
     const summary = (entry) => {
       const items = Object.entries(entry?.lanes || {}).map(([key, stats]) =>
-        `<li>${esc(laneLabel(key, 'en'))}: reported slower in ${Number(stats?.slower) || 0} of ${Number(stats?.paired) || 0} paired reports over the last 30 days.</li>`,
+        `<li>${esc(laneLabel(key, 'en'))}: reported slower in ${Number(stats?.slower) || 0} of ${Number(stats?.paired) || 0} fetches with both lane values in the retained archive.</li>`,
       ).join('');
       const title = entry ? `Lane Flip Watch at ${entry.name}` : 'Lane Flip Watch';
       return `<main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#0f172a">
@@ -861,7 +861,10 @@ async function main() {
         <h1>${esc(title)}</h1>
         <p>${esc(checkNote('en'))} <a href="https://bwt.cbp.gov/">CBP border wait times</a>.</p>
         <p>Ready Lane and SENTRI are compared with reported general passenger waits. Ready pedestrian is compared with reported general pedestrian waits. Hours use the crossing local time of each stored fetch. Missing reports are not counted as zero.</p>
-        ${items ? `<ul>${items}</ul>` : '<p>Paired counts for the last 30 days appear when both lanes were reported.</p>'}
+        <p>${esc(historyNotice(artifact, Date.now(), 'en'))}</p>
+        <p>${esc(archiveCaveat('en'))}</p>
+        <p>${esc(eligibilityNote('en'))}</p>
+        ${items ? `<ul>${items}</ul>` : '<p>Archive counts appear when both lane values were retained.</p>'}
       </main>`;
     };
     const indexCanonical = `${BASE}/lane-flip/`;

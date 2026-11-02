@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {
   accumulateSnapshot,
   currentFlips,
@@ -11,10 +12,14 @@ import {
   pairOutcome,
   recordOutcome,
   reportedLaneMinutes,
-  usuallyFaster,
-  usuallySlower,
 } from '../src/lib/laneFlips.js';
 import {
+  archiveCaveat,
+  historyCoverage,
+  historyNotice,
+  pairClocks,
+  heatLegend,
+  eligibilityNote,
   checkNote,
   detailTitle,
   hourDetail,
@@ -48,8 +53,8 @@ test('a reported fast lane slower than general is a flip, including the 50 minut
   const row = describePair(otay(), { key: 'passenger_ready', general: 'passenger_standard' });
   assert.equal(row.state, 'slower');
   assert.equal(row.gap, 50);
-  assert.equal(verdictSentence(row, 'en', true), 'Right now, Ready Lane is reported 50 min slower than general.');
-  assert.equal(verdictSentence(row, 'es', true), 'Ahora mismo, Ready Lane se reporta 50 min más lento que el general.');
+  assert.equal(verdictSentence(row, 'en', true), 'In the latest fetch, Ready Lane is reported 50 min slower than general.');
+  assert.equal(verdictSentence(row, 'es', true), 'En la última consulta, Ready Lane se reporta 50 min más lento que el general.');
   assert.equal(verdictSentence(row, 'en', false), 'In the latest report, Ready Lane is reported 50 min slower than general.');
 });
 
@@ -126,22 +131,20 @@ test('pedestrian Ready compares with pedestrian general, not with vehicles', () 
   assert.deepEqual(flips.map(flip => flip.key), ['passenger_ready', 'pedestrian_ready']);
 });
 
-test('hour counts and the usual claim need a real sample', () => {
+test('hour counts describe retained fetches without an inference from repeated values', () => {
   const stats = emptyLaneStats();
   recordOutcome(stats, 15, 'slower');
   recordOutcome(stats, 15, 'faster');
   recordOutcome(stats, 8, 'faster');
   assert.equal(hourStats(stats, 15).slower, 1);
-  assert.equal(usuallyFaster(hourStats(stats, 8)), false);
+  assert.equal(hourStats(stats, 8).paired, 1);
   const usual = { paired: 10, slower: 1, faster: 8, same: 1 };
   const mixed = { paired: 10, slower: 4, faster: 5, same: 1 };
-  assert.equal(usuallyFaster(usual), true);
-  assert.equal(usuallyFaster(mixed), false);
-  assert.equal(usuallySlower({ paired: 10, slower: 8, faster: 1, same: 1 }), true);
+
   assert.equal(heatLevel(usual), 'low');
   assert.equal(heatLevel(mixed), 'mixed');
   assert.equal(heatLevel({ paired: 4, slower: 2, faster: 2, same: 0 }), 'often');
-  assert.match(hourDetail({ key: 'passenger_ready', general: 'passenger_standard' }, usual, 8, 'en'), /usually reported faster at this hour/);
+  assert.match(hourDetail({ key: 'passenger_ready', general: 'passenger_standard' }, usual, 8, 'en'), /1 slower, 8 faster, and 1 the same, out of 10 fetches with both lane values/);
   assert.doesNotMatch(hourDetail({ key: 'passenger_ready', general: 'passenger_standard' }, mixed, 15, 'en'), /usually/);
 });
 
@@ -168,7 +171,7 @@ test('copy stays bilingual, dated, and free of em dashes', () => {
       language: 'es',
       name: 'Otay Mesa',
       url: 'https://borderpulse.com/lane-flip/otay-mesa/',
-      notes: ['Ahora mismo, Ready Lane se reporta 50 min más lento que el general.'],
+      notes: ['En la última consulta, Ready Lane se reporta 50 min más lento que el general.'],
       rows: [{ key: 'passenger_ready', minutes: 110, reportTime: 'At 10:00 pm PST' }],
     }),
   ];
@@ -179,4 +182,57 @@ test('copy stays bilingual, dated, and free of em dashes', () => {
   assert.match(pieces.at(-1), /110 min reportados/);
   assert.match(pieces.at(-1), /Revisa CBP antes de salir/);
   assert.match(pieces.at(-1), /https:\/\/borderpulse.com\/lane-flip\/otay-mesa\//);
+});
+
+test('eight repeated values yield counts, never a usual/independent prediction', () => {
+  const stats = emptyLaneStats();
+  for (let n = 0; n < 8; n++) recordOutcome(stats, 8, 'faster');
+  const row = { key: 'passenger_ready', general: 'passenger_standard' };
+  for (const language of ['en', 'es']) {
+    const text = hourDetail(row, hourStats(stats, 8), 8, language);
+    assert.match(text, /8/);
+    assert.doesNotMatch(text, /usually|suele|siempre|never|nunca/i);
+    assert.doesNotMatch(heatLegend(language).map(item => item.label).join(' '), /never|nunca/i);
+  }
+});
+test('coverage uses retained dates, marks stale/unknown/future windows and discloses legacy normalization', () => {
+  const artifact = { window_start: '2026-10-03T10:00:00Z', window_end: '2026-11-01T10:00:00Z', snapshot_count: 17 };
+  const now = Date.parse('2026-11-03T10:00:00Z');
+  assert.deepEqual(historyCoverage(artifact, now), { valid: true, stale: true });
+  assert.equal(historyCoverage(artifact, Date.parse('2026-11-01T11:00:00Z')).stale, false);
+  assert.equal(historyCoverage({}, now).valid, false);
+  assert.equal(historyCoverage({ ...artifact, window_end: '2027-01-01' }, now).valid, false);
+  assert.match(historyNotice(artifact, now, 'en'), /Stale archive.*2026-10-03.*2026-11-01.*17/);
+  assert.match(historyNotice(artifact, now, 'es'), /Archivo desactualizado/);
+  assert.match(archiveCaveat('en'), /without reconstruction from raw/);
+  assert.match(eligibilityNote('es'), /no autoriza/);
+});
+test('each compared lane keeps its own source clock, including missing clocks', () => {
+  const crossing = otay();
+  crossing.lanes.passenger_standard.update_time = 'At 9:00 pm PST';
+  crossing.lanes.passenger_ready.update_time = 'At 10:00 pm PST';
+  crossing.lanes.passenger_ready.source_updated_at = '11/2/2026 10:05 pm';
+  let row = describePair(crossing, { key: 'passenger_ready', general: 'passenger_standard' });
+  assert.match(pairClocks(row), /General: At 9:00 pm PST.*Ready Lane: At 10:00 pm PST.*11\/2\/2026/);
+  crossing.lanes.passenger_standard.update_time = null;
+  row = describePair(crossing, { key: 'passenger_ready', general: 'passenger_standard' });
+  assert.match(pairClocks(row), /General: CBP time unavailable/);
+});
+
+test('published archive coverage and paired counts reconcile without inventing raw reconstruction', () => {
+  const artifact = JSON.parse(fs.readFileSync(new URL('../public/data/lane-flips.json', import.meta.url)));
+  assert.equal(artifact.normalization, 'legacy-normalized-no-raw-reconstruction');
+  assert.ok(artifact.snapshot_count > 0);
+  assert.ok(artifact.window_start >= artifact.requested_window_start);
+  assert.ok(artifact.window_end <= artifact.generated_at);
+  for (const crossing of artifact.crossings) {
+    for (const stats of Object.values(crossing.lanes)) {
+      assert.ok(stats.first_fetch >= artifact.window_start);
+      assert.ok(stats.last_fetch <= artifact.window_end);
+      assert.ok(stats.first_fetch <= stats.last_fetch);
+      assert.ok(stats.paired <= artifact.snapshot_count);
+      assert.equal(stats.slower + stats.faster + stats.same, stats.paired);
+      assert.equal(Object.values(stats.by_hour).reduce((n, hour) => n + hour.paired, 0), stats.paired);
+    }
+  }
 });

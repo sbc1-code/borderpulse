@@ -20,6 +20,10 @@ import {
   laneStats,
 } from '@/lib/laneFlips';
 import {
+  archiveCaveat,
+  eligibilityNote,
+  historyNotice,
+  pairClocks,
   baselineLabel,
   checkNote,
   closedSentence,
@@ -64,7 +68,7 @@ function WaitCard({ report, language, closed }) {
   const es = language === 'es';
   const minutes = closed ? null : report.minutes;
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
+    <article className="min-w-0 break-words rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
       <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{laneLabel(report.key, language)}</h3>
       <p className="mt-2 text-3xl font-bold tabular-nums text-slate-900 dark:text-white">
         {closed ? (es ? 'Cerrado' : 'Closed') : minutes == null ? (es ? 'Sin reporte' : 'No report') : `${minutes} min`}
@@ -75,6 +79,7 @@ function WaitCard({ report, language, closed }) {
         </p>
       )}
       <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{reportTimeLabel(closed ? null : report.reportTime, language)}</p>
+      {report.sourceUpdatedAt && <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{es ? 'Fila CBP: ' : 'CBP row: '}{report.sourceUpdatedAt}</p>}
     </article>
   );
 }
@@ -256,13 +261,13 @@ export default function LaneFlip() {
       <header className="mb-4">
         <h1 data-testid="lane-flip-heading" className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
           {slug
-            ? (es ? `¿Hoy conviene el carril rápido en ${displayName || '…'}?` : `Lane Flip Watch at ${displayName || '…'}`)
-            : (es ? '¿Hoy conviene el carril rápido?' : 'Lane Flip Watch')}
+            ? (es ? `Ready y SENTRI frente al carril general en ${displayName || '…'}` : `Lane Flip Watch at ${displayName || '…'}`)
+            : (es ? 'Ready y SENTRI frente al carril general' : 'Lane Flip Watch')}
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-300">
           {es
-            ? 'Ready Lane y SENTRI se usan como carriles más rápidos. A veces CBP los reporta más lentos que el general. Aquí están las esperas reportadas, lado a lado, y cuántas veces pasó eso en los últimos 30 días.'
-            : 'People use Ready Lane and SENTRI as the faster lanes. Sometimes CBP reports them slower than general. This page shows the reported waits side by side, and how often that happened in the last 30 days.'}
+            ? 'Compara Ready y SENTRI frente al carril general con los valores guardados de CBP. La misma consulta puede incluir relojes de reporte distintos; no implica condiciones actuales ni simultáneas.'
+            : 'Compare Ready and SENTRI with general using retained CBP values. One fetch may contain different report clocks; it does not establish current or simultaneous conditions.'}
         </p>
         <p className="mt-2 text-xs text-slate-500 dark:text-slate-400" data-testid="lane-flip-fetched">
           {border.ready ? fetchLabel(freshness.state, freshness.age, language) : (es ? 'Cargando el reporte…' : 'Loading the report…')}
@@ -273,6 +278,11 @@ export default function LaneFlip() {
             {es ? 'Tiempos de espera de CBP' : 'CBP border wait times'}
           </a>
         </p>
+        <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">{eligibilityNote(language)}</p>
+        {historyDoc && <div data-testid="lane-flip-coverage" className="mt-2 break-words text-xs text-slate-600 dark:text-slate-300">
+          <p>{historyNotice(historyDoc, now, language)}</p>
+          <p className="mt-1">{archiveCaveat(language)}</p>
+        </div>}
       </header>
 
       <label className="mb-5 block text-sm font-medium text-slate-800 dark:text-slate-100">
@@ -315,7 +325,7 @@ export default function LaneFlip() {
                         <span className="mt-1 block">{verdictSentence(flip, language, freshness.usable)}</span>
                         <span className="mt-1 block text-xs">
                           {laneLabel(flip.general, language)} {flip.generalReport.minutes} min · {laneLabel(flip.key, language)} {flip.fast.minutes} min
-                          {' · '}{reportTimeLabel(flip.fast.reportTime, language)}
+                          <span className="mt-1 block">{pairClocks(flip, language)}</span>
                         </span>
                       </Link>
                     </li>
@@ -343,7 +353,7 @@ export default function LaneFlip() {
                             ? `${laneLabel(key, language)}: ${stats.slower} de ${stats.paired} más lento`
                             : `${laneLabel(key, language)}: ${stats.slower} of ${stats.paired} slower`
                         )).join(' · ')
-                        : (es ? 'Sin reportes emparejados en 30 días' : 'No paired reports in 30 days')}
+                        : (es ? 'Sin consultas comparables en el archivo' : 'No comparable fetches in the archive')}
                     </span>
                   </Link>
                 </li>
@@ -365,8 +375,8 @@ export default function LaneFlip() {
           {border.ready && !crossing && (
             <p className="mb-4 text-sm text-slate-600 dark:text-slate-300">
               {es
-                ? 'Este cruce no está en el último reporte. Los conteos de abajo, si aparecen, son de los últimos 30 días.'
-                : 'This crossing is not in the latest report. Counts below, when present, are from the last 30 days.'}
+                ? 'Este cruce no está en el último reporte. Los conteos de abajo, si aparecen, son del archivo conservado.'
+                : 'This crossing is not in the latest report. Counts below, when present, describe the retained archive.'}
             </p>
           )}
 
@@ -395,12 +405,14 @@ export default function LaneFlip() {
                 <p data-testid={`verdict-${row.key}`} data-state={row.state} className="mt-1 text-sm text-slate-800 dark:text-slate-100">
                   {verdictSentence(row, language, usable)}
                 </p>
+                <p data-testid={`pair-clocks-${row.key}`} className="mt-1 text-xs text-slate-600 dark:text-slate-300">{pairClocks(row, language)}</p>
                 {historyDoc === undefined && <p className="mt-2 text-xs text-slate-500">{historyLoading(language)}</p>}
                 {historyDoc === null && <p className="mt-2 text-xs text-slate-500">{historyUnavailable(language)}</p>}
                 {historyDoc && (
                   <>
                     <p className="mt-2 text-sm text-slate-700 dark:text-slate-200" data-testid={`period-${row.key}`} data-slower={row.stats.slower} data-paired={row.stats.paired}>
                       {periodSentence(row, row.stats, language)}
+                      {row.stats.first_fetch && row.stats.last_fetch && <span className="mt-1 block break-words text-xs">{historyNotice({ window_start: row.stats.first_fetch, window_end: row.stats.last_fetch, snapshot_count: row.stats.paired }, now, language)}</span>}
                     </p>
                     {row.stats.paired > 0 && (
                       <>
