@@ -2,6 +2,23 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DEFAULT_LANE, LOCAL_LANES, normalizeLane, laneLabel, withLane } from '../src/lib/laneContext.js';
 import { availableLaneWait } from '../src/lib/crossingAvailability.js';
+import { getWaitMinutes } from '../src/components/utils/crossingDirection.js';
+
+test('summary lane reads match reported availability without changing direction-only callers', () => {
+  const port = { port_status: 'Open', current_wait_time: 180, northbound_wait_time: 180, southbound_wait_time: 7, lanes: {
+    passenger_standard: {status:'Delay',delay_minutes:60,lanes_open:1},
+    passenger_sentri: {status:'No Delay',delay_minutes:0,lanes_open:1},
+    passenger_ready: {status:'Delay',delay_minutes:20,lanes_open:0},
+    pedestrian_standard: {status:'Update Pending',delay_minutes:5,lanes_open:1}
+  }};
+  assert.equal(getWaitMinutes(port, 'northbound', 'passenger_standard'), 60);
+  assert.equal(getWaitMinutes(port, 'northbound', 'passenger_sentri'), 0);
+  assert.equal(getWaitMinutes(port, 'northbound', 'passenger_ready'), null);
+  assert.equal(getWaitMinutes(port, 'northbound', 'pedestrian_standard'), null);
+  assert.equal(getWaitMinutes({...port,port_status:'Closed'}, 'northbound', 'passenger_sentri'), null);
+  assert.equal(getWaitMinutes(port), 180, 'existing direction-only callers retain their data contract');
+  assert.equal(getWaitMinutes(port, 'southbound', 'passenger_sentri'), 7, 'a northbound lane choice cannot invent a southbound reading');
+});
 
 test('only supported lane keys are accepted; invalid and absent URLs use labeled Standard', () => {
   for (const { key } of LOCAL_LANES) assert.equal(normalizeLane(key), key);

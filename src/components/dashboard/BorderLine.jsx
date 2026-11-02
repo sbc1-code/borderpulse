@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { buildTicks, resolveAnchors } from '@/lib/borderLineLayout';
 import { getCrossingCoords } from '@/lib/geo';
-import { getWaitMinutes, getStatusForDirection } from '@/components/utils/crossingDirection';
+import { getWaitMinutes, getStatusForWait } from '@/components/utils/crossingDirection';
 
 // The border drawn as an architect's elevation: one continuous line from the
 // Pacific to the Gulf, every port a tick placed by true longitude, tick length
@@ -92,6 +92,7 @@ function useIsWide(breakpoint = 768) {
 export default function BorderLine({
   crossings = [],
   direction = 'northbound',
+  lane = null,
   language = 'en',
   favoritesSet,
   typicalByPort,
@@ -106,14 +107,14 @@ export default function BorderLine({
 
   // rankings.json medians are built from current_wait_time, which is the
   // NORTHBOUND reading. Showing them behind a southbound tick would be a
-  // silent apples-to-oranges comparison, so the ghost is northbound only.
-  const showTypical = direction !== 'southbound';
+  // silent apples-to-oranges comparison. Keep the ghost northbound Standard only.
+  const showTypical = direction !== 'southbound' && (!lane || lane === 'passenger_standard');
 
   const { ticks } = useMemo(
     () =>
       buildTicks(crossings, {
         getCoords: getCrossingCoords,
-        getWait: (c) => getWaitMinutes(c, direction),
+        getWait: (c) => getWaitMinutes(c, direction, lane),
         getTypical: (c) =>
           showTypical && typicalByPort ? typicalByPort[c.port_number] ?? null : null,
         // Desktop has room for true longitude. Mobile rows are 24 units tall
@@ -121,7 +122,7 @@ export default function BorderLine({
         // the anchor labels carry the geography there instead of exact spacing.
         minGap: isWide ? 0.009 : 0.023,
       }),
-    [crossings, direction, typicalByPort, isWide, showTypical]
+    [crossings, direction, lane, typicalByPort, isWide, showTypical]
   );
 
   const anchors = useMemo(() => (isWide ? resolveAnchors(ticks) : []), [ticks, isWide]);
@@ -154,7 +155,7 @@ export default function BorderLine({
   if (!ticks.length) return null;
 
   const strokeFor = (tick) =>
-    (trusted && STATUS_STROKE[getStatusForDirection(tick.crossing, direction)]) || STATUS_STROKE.unknown;
+    (trusted && STATUS_STROKE[getStatusForWait(tick.wait)]) || STATUS_STROKE.unknown;
 
   // ---------------------------------------------------------------- desktop
   const W = 1000;
@@ -409,7 +410,7 @@ export default function BorderLine({
       </div>
       <p className="bp-line-sub px-4">{!trusted
         ? (language === 'en' ? 'Retained reported waits, not current conditions.' : 'Esperas reportadas conservadas, no condiciones actuales.')
-        : showTypical ? t.subtitle : t.subtitleSb}</p>
+        : showTypical ? t.subtitle : direction === 'southbound' ? t.subtitleSb : (language === 'en' ? 'Tick length is the reported wait for the selected lane.' : 'El largo indica la espera reportada del carril seleccionado.')}</p>
       <div className="px-1 pb-2">{isWide ? desktop : mobile}</div>
 
       {/* Accessible equivalent. Also the only copy a text-mode crawler sees,

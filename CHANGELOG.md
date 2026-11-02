@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-01 — Correct map report focus and selected-lane summaries
+
+- Reveal the selected report's focused Back control clear of the native header and nested pane clipping; restore the original list/document position and focus on Escape, button and browser Back, with immediate reduced-motion-safe scrolling.
+- Derive List summary counts, means/medians and current chart status from the selected lane, preserving zero/missing/closed semantics and separate official port status. Keep historical baselines Standard-only and current confidence neutral for saved API fallback.
+- Add visible-focus and all-lane regression coverage plus actual before/after evidence. Load the affected sidebar summary on demand to retain existing bundle limits. No geographic, feed, dependency, workflow, access or unrelated resize-patch change.
+
 ## 2026-11-01 — Complete the facility-overview classification (review preview)
 
 - Apply the independent researchers' GSA facility representatives and remaining directory targets across CA/AZ/NM/TX; restore Otay and World Trade with named asset provenance. Use consistent US facility/site representatives, not entrances, averages or routing points.

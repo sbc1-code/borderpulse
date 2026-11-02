@@ -164,6 +164,7 @@ export default function CrossingMapExplorer({
     paneRef = useRef(null),
     backRef = useRef(null),
     returnFocus = useRef(null),
+    returnPosition = useRef(null),
     previousSelection = useRef(undefined),
     selectionScope = useRef(scopeKey);
   const gesture = useRef({
@@ -255,25 +256,18 @@ export default function CrossingMapExplorer({
       const p = cameraPoint(selected.point, current);
       return p.x < 40 || p.x > MAP_WIDTH - 40 || p.y < 40 || p.y > MAP_HEIGHT - 40 ? fitBorderPoints([selected.point]) : current;
     });
-    if (changed && selectedPort) requestAnimationFrame(() => {
-      backRef.current?.focus({
-        preventScroll: true
-      });
-      if (innerWidth < 900) paneRef.current?.scrollIntoView({
-        block: 'nearest',
-        behavior: reduced() ? 'instant' : 'smooth'
-      });
-    });
+    if (changed && selectedPort) requestAnimationFrame(revealReport);
     if (changed && !selectedPort && previousSelection.current && selectionScope.current === scopeKey) requestAnimationFrame(() => {
       const origin = returnFocus.current;
       const replacement = origin?.id ? document.getElementById(origin.id) : null;
-      if (origin?.isConnected) origin.focus({
-        preventScroll: true
-      });else if (replacement) replacement.focus({
-        preventScroll: true
-      });else frameRef.current?.focus({
-        preventScroll: true
-      });
+      const position = returnPosition.current;
+      if (position) {
+        if (paneRef.current) paneRef.current.scrollTop = position.pane;
+        window.scrollTo({ left: position.x, top: position.y, behavior: 'instant' });
+      }
+      const target = origin?.isConnected ? origin : replacement || frameRef.current;
+      target?.focus({ preventScroll: true });
+      if (!position) target?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
     });
     previousSelection.current = selectedPort;
   }, [selectedPort, hasRows, active, scopeKey]);
@@ -290,12 +284,19 @@ export default function CrossingMapExplorer({
   }, [active, selectedPort, onClose]);
   const groups = clusterBorderRows(rows, camera, cssScale);
   const unit = 1 / (cssScale * zoom);
+  function revealReport() {
+    if (paneRef.current) paneRef.current.scrollTop = 0;
+    const back = backRef.current;
+    back?.focus({ preventScroll: true });
+    // Reveal the focused control itself, including nested pane scrolling and
+    // the mobile header offset. Focus must be visible before any camera motion.
+    back?.scrollIntoView({ block: innerWidth < 900 ? 'start' : 'nearest', behavior: 'instant' });
+  }
   function select(id, event) {
     returnFocus.current = event?.currentTarget;
+    returnPosition.current = { pane: paneRef.current?.scrollTop || 0, x: scrollX, y: scrollY };
     onSelect(id);
-    if (id === selectedPort) backRef.current?.focus({
-      preventScroll: true
-    });
+    if (id === selectedPort) revealReport();
   }
   function bounded(next) {
     return {

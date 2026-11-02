@@ -4,10 +4,12 @@ import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-re
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
-import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
 const CrossingMapExplorer = React.lazy(() => import('@/components/dashboard/CrossingMapExplorer'));
+const StatsOverview = React.lazy(() => import('@/components/dashboard/StatsOverview').catch(() => ({
+  default: ({ language }) => <p role="status" className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen no disponible. Recarga la página para reintentar.' : 'Summary unavailable. Reload the page to retry.'}</p>
+})));
 const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
 import AboutFooter from '@/components/dashboard/AboutFooter';
 import DashboardAd from '@/components/ads/DashboardAd';
@@ -21,7 +23,7 @@ import LocalCrossingComparison from '@/components/dashboard/LocalCrossingCompari
 import DashboardCameras from '@/components/dashboard/DashboardCameras';
 import { currentSearchParams } from '@/lib/queryState';
 import { canonicalPortNumber } from '@/lib/portIdentity';
-import { normalizeLane } from '@/lib/laneContext';
+import { normalizeLane, laneLabel } from '@/lib/laneContext';
 import { availableLaneWait } from '@/lib/crossingAvailability';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
 import { crossingSearchTerms } from '@/lib/crossingNames';
@@ -591,6 +593,9 @@ export default function Dashboard() {
           <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
           <DashboardSummaryDisclosure
             crossings={filteredCrossings}
+            lane={lane}
+            success={state.success}
+            fromFallback={state.fromFallback}
             fetchedAt={state.fetchedAt}
             direction={direction}
             language={language}
@@ -766,15 +771,18 @@ export default function Dashboard() {
             {/* Sidebar: USD/MXN + stats. xl: shown to the right; mobile: stacked below. */}
             <aside className="xl:col-span-3 space-y-3">
               <ExchangeRateWidget exchangeRate={state.exchangeRate} language={language} theme="light" compact />
-              <p className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen: auto estándar' : 'Summary: standard passenger lane'}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen: ' : 'Summary: '}{laneLabel(lane, language)}</p>
+              <Suspense fallback={<p role="status" className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Cargando resumen…' : 'Loading summary…'}</p>}>
               <StatsOverview
                 crossings={filteredCrossings}
+                lane={lane}
                 selectedDirection={direction}
                 language={language}
                 theme="light"
                 regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
                 layout="sidebar"
               />
+              </Suspense>
             </aside>
           </div>
 

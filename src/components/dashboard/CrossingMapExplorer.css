@@ -42,7 +42,8 @@
 .crossingResultList strong small { display:inline; margin-left:3px; font-weight:400; }
 .crossingResultList .good { color:#047857; }.crossingResultList .moderate { color:#b45309; }.crossingResultList .heavy { color:#be123c; }.crossingResultList .retained,.crossingResultList .unknown { color:var(--map-muted); }
 .dark .crossingResultList .good { color:#6ee7b7; }.dark .crossingResultList .moderate { color:#fbbf24; }.dark .crossingResultList .heavy { color:#fda4af; }
-.detailBack { margin-bottom:8px; min-height:44px; }
+.detailBack { margin-bottom:8px; min-height:44px; scroll-margin-top:86px; }
+.explorerMap,.crossingResultList button { scroll-margin-top:86px; }
 .fullReportLink { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:12px; color:var(--map-link); min-height:44px; margin-top:8px; }
 .explorerNotice { background:#fffbeb; color:#92400e; border:1px solid #fcd34d; border-radius:8px; padding:10px 12px; font-size:12px; margin-bottom:12px; }
 .dark .explorerNotice { background:#422006; color:#fde68a; border-color:#854d0e; }

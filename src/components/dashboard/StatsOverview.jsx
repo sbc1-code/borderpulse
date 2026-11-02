@@ -10,17 +10,18 @@ import { getPortStatus, hasOperationalAdvisory } from '@/components/utils/crossi
 //   heavy   >= 45
 // Null wait = CBP has no current report (closed lane, offline port). These
 // are NOT counted as "0 min" — they're excluded from math and shown as the
-// denominator-only contribution under "Open".
+// total-crossing denominator. "Open" independently uses official port status.
 export default function StatsOverview({
   crossings,
   selectedDirection = 'northbound',
+  lane = null,
   language,
   theme,
   regionLabel,
   layout = 'grid', // 'grid' (4-col), 'strip' (single horizontal row), 'sidebar' (vertical stack)
 }) {
   const reportingWaits = crossings
-    .map((crossing) => getWaitMinutes(crossing, selectedDirection))
+    .map((crossing) => getWaitMinutes(crossing, selectedDirection, lane))
     .filter((t) => t !== null);
   const totalCrossings = crossings.length;
   const reportingCount = reportingWaits.length;
@@ -75,7 +76,7 @@ export default function StatsOverview({
   // Compact horizontal strip — placed AFTER the wait list begins. Single row, no Card wrapper.
   if (layout === 'strip') {
     return (
-      <div className={`flex flex-wrap items-center gap-3 sm:gap-4 px-3 py-2 rounded-lg border ${
+      <div data-testid="stats-overview" className={`flex flex-wrap items-center gap-3 sm:gap-4 px-3 py-2 rounded-lg border ${
         theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-slate-200'
       }`}>
         {stats.map((stat) => (
@@ -105,7 +106,7 @@ export default function StatsOverview({
   // Vertical sidebar layout — stacked single-column cards for the right rail.
   if (layout === 'sidebar') {
     return (
-      <div className="grid grid-cols-2 gap-2">
+      <div data-testid="stats-overview" className="grid grid-cols-2 gap-2">
         {stats.map((stat) => (
           <div
             key={stat.label}
@@ -140,7 +141,7 @@ export default function StatsOverview({
 
   // Default 4-column grid (original layout, unchanged).
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
+    <div data-testid="stats-overview" className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
       {stats.map((stat) => (
         <div
           key={stat.label}

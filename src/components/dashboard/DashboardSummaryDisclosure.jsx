@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { laneLabel } from '@/lib/laneContext';
 
 // The chart is hidden behind the existing native disclosure. Load it only
 // on request, then keep it mounted so closing/reopening preserves its state.
@@ -26,7 +27,7 @@ export default function DashboardSummaryDisclosure(props) {
         {es ? 'Ver resumen y mapa de esperas' : 'Show wait summary and border chart'}
       </summary>
       <div className="bp-panel-enter">
-      <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">{es ? 'Resumen y datos históricos: auto estándar' : 'Summary and historical data: standard passenger lane'}</p>
+      <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">{es ? 'Resumen: ' : 'Summary: '}{laneLabel(props.lane, props.language)}. {es ? 'Datos históricos: solo auto estándar.' : 'Historical data: Standard passenger only.'}</p>
       {Summary ? <Summary {...props} /> : state !== 'closed' && (
         <p role="status" className="py-3 text-sm">
           {state === 'failed'

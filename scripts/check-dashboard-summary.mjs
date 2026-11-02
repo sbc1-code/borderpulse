@@ -107,7 +107,85 @@ export async function checkDashboardSummary(owner, context, baseUrl) {
   }
   assert.deepEqual(errors, [], 'summary loading/failure/recovery must not crash the app');
   await checkSummaryConfidence(owner, context, baseUrl);
+  await checkSummaryLanes(owner, context, baseUrl);
   console.log('[dashboard-summary] PASS: EN/ES closed-load budget, delayed first open, keyboard selection, retained state, current filters, menu actions/focus, failed asset isolation and recovery');
+}
+
+export async function checkSummaryLanes(owner, context, baseUrl) {
+  let checkedApiFallback = false;
+  const ids = ['230201','230301','230302','230401'];
+  const original = JSON.parse(fs.readFileSync(new URL('../public/data/crossings.json', import.meta.url)));
+  const spec = [
+    ['passenger_standard', [0,60,90], 3,50,60], ['passenger_sentri', [0,12,null], 2,6,6],
+    ['passenger_ready', [3,27,9], 2,15,15], ['pedestrian_standard', [5,25,45], 3,25,25]
+  ];
+  for (const language of ['en','es']) {
+    const es = language === 'es';
+    const source = {...original,fetched_at:new Date().toISOString(),crossings:ids.map((id,i)=>{
+      const row=structuredClone(original.crossings.find(c=>c.port_number===id));
+      row.port_status=i===3?'Closed':'Open'; row.current_wait_time=row.northbound_wait_time=999;
+      for(const [key,values] of spec) {const value=values[i]??(i===3?180:null);row.lanes[key]={status:value==null?'Update Pending':value===0?'No Delay':'Delay',delay_minutes:value,lanes_open:key==='passenger_ready'&&i===2?0:1};}
+      return row;
+    })};source.count=source.crossings.length;
+    const qa=await context.browser().newContext({viewport:owner.viewportSize(),serviceWorkers:'block',reducedMotion:'reduce'});
+    await qa.addInitScript(language=>localStorage.setItem('borderPulse_language',language),language);
+    let apiFailed=false,apiRequests=0,statsFailed=false;
+    await qa.route('**/*',route=>{
+      const u=new URL(route.request().url());if(u.origin!==baseUrl.origin)return route.abort();
+      if(statsFailed&&/\/assets\/StatsOverview-[^/]+\.js$/.test(u.pathname))return route.abort('failed');
+      if(['/data/crossings.json','/api/public/crossings'].includes(u.pathname)) {
+        if(u.pathname.startsWith('/api/')) {apiRequests++;if(apiFailed)return route.fulfill({status:503,body:'fixture unavailable'});}
+        return route.fulfill({contentType:'application/json',body:JSON.stringify(source)});
+      }
+      if(u.pathname==='/data/rankings.json')return route.fulfill({contentType:'application/json',body:JSON.stringify({crossings:ids.map(port_number=>({port_number,overall_median:40}))})});
+      if(u.pathname==='/data/snapshot-history.json')return route.fulfill({contentType:'application/json',body:JSON.stringify({snapshots:[{fetched_at:'2026-10-30T10:00:00Z',crossings:ids.map(port_number=>({port_number,current_wait_time:120}))}]})});
+      return route.continue();
+    });
+    const page=await qa.newPage();page.setDefaultTimeout(10000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
+    const open=async()=>{await page.getByTestId('stats-overview').waitFor();await page.locator('summary').filter({hasText:es?'Ver resumen y mapa de esperas':'Show wait summary and border chart'}).click();await page.getByTestId('dashboard-summary').waitFor();};
+    const panel=()=>page.getByRole('region',{name:es?'Resumen para commuters':'Commuter snapshot',exact:true});
+    const check=async(count,mean,median)=>{
+      await page.waitForFunction(({count,mean})=>{const s=document.querySelector('[data-testid="stats-overview"]')?.innerText||'';return s.includes(`${count}/4`)&&s.includes(mean==null?'—':`${mean} min`);},{count,mean});
+      const text=await page.getByTestId('stats-overview').innerText();
+      assert.match(text,new RegExp(`${es?'Tiempos disponibles':'Wait times available'}[^\\n]*\\s+${count}/4`,'i'));
+      assert.match(text,new RegExp(`${es?'Espera promedio':'Average wait'}\\s+${mean==null?'—':`${mean} min`}`,'i'));
+      assert.match(text,new RegExp(`${es?'Abiertos ahora':'Open now'}\\s+3/4`,'i'),'official port openness remains distinct from selected-lane report availability');
+      assert.match(await panel().innerText(),new RegExp(`${count}/4 ${es?'reportando':'reporting'}`));
+      await panel().getByText(median==null?'—':`${median} min`,{exact:true}).first().waitFor();
+    };
+    try {
+      await page.goto(new URL('/?region=TX&display=list',baseUrl).href);await open();
+      for(const [key,,count,mean,median] of spec) {
+        await page.getByLabel(es?'Tu carril':'Your lane',{exact:true}).selectOption(key);await check(count,mean,median);
+        const chart=page.getByRole('region',{name:es?'La frontera, de oeste a este':'The border, west to east',exact:true});
+        if(key==='passenger_standard')await page.waitForFunction(()=>document.querySelectorAll('.bp-ghost').length>0);
+        else assert.equal(await chart.locator('.bp-ghost').count(),0,'Standard history cannot be drawn as the selected lane baseline');
+        await panel().getByText(median>=45?(es?'Pesado ahora':'Heavy right now'):median>=15?(es?'Demora normal':'Typical delay'):(es?'Fluye bien':'Moving well'),{exact:true}).waitFor();
+        if(key==='passenger_sentri') {
+          const tick=chart.getByRole('button',{name:/^Del Rio:/});assert.match(await tick.getAttribute('aria-label'),/0 min/);
+          const paint=await tick.locator('.bp-stem').evaluate(n=>({stroke:getComputedStyle(n).stroke,good:getComputedStyle(document.querySelector('.bp-sw-good')).backgroundColor}));
+          assert.equal(paint.stroke,paint.good,'zero SENTRI paint follows the lane, not the heavy Standard summary status');
+        }
+      }
+      await page.goto(new URL('/?region=TX&lane=passenger_sentri&mode=history',baseUrl).href);
+      await page.locator('.archiveControl input').waitFor();
+      await page.getByRole('group',{name:es?'Vista de cruces':'Crossing view',exact:true}).getByRole('button',{name:es?'Lista':'List',exact:true}).click();
+      assert.equal(new URL(page.url()).searchParams.has('mode'),false,'List intentionally returns to labeled latest reports');
+      assert.equal(new URL(page.url()).searchParams.has('at'),false);await open();await check(2,6,6);
+      source.crossings.forEach(c=>c.lanes.passenger_sentri={status:'Update Pending',delay_minutes:null,lanes_open:1});
+      await page.reload();await open();await check(0,null,null);
+      source.crossings.forEach(c=>c.lanes.passenger_sentri={status:'No Delay',delay_minutes:0,lanes_open:1});
+      await page.reload();await open();await check(3,0,0);
+      if(apiRequests) {checkedApiFallback=true;apiFailed=true;await page.reload();await open();await page.waitForFunction(()=>document.querySelector('[data-testid="dashboard-summary"]')?.dataset.trusted==='false');assert.doesNotMatch(await panel().innerText(),/Moving well|Heavy right now|Median wait now|Fluye bien|Pesado ahora|Espera mediana ahora/);}
+      statsFailed=true;await page.reload();
+      await page.locator('aside').last().getByText(es?'Resumen no disponible. Recarga la página para reintentar.':'Summary unavailable. Reload the page to retry.',{exact:true}).waitFor();
+      assert.equal(await page.getByTestId('border-crossing-card').count(),4,'a failed summary asset leaves the real crossing list usable');
+      assert.doesNotMatch(await page.locator('#root').innerText(),/Something went wrong|Border Pulse encountered an error/);
+      statsFailed=false;apiFailed=false;await page.reload();await open();await check(3,0,0);
+      assert.deepEqual(errors,[]);
+    } finally {await qa.close();}
+  }
+  console.log(`[summary-lanes] PASS ${owner.viewportSize().width}px: EN/ES all lanes, mean/median/count/tier, zero/missing/closed overrides, Standard-only historical ghosts, history-to-latest List, summary-asset failure/recovery; ${checkedApiFallback ? 'API fallback neutrality' : 'Pages mode (API fallback not applicable)'}`);
 }
 
 // Independent clocks/contexts keep expiry and offline fixtures out of the
