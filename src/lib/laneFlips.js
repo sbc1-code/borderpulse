@@ -16,18 +16,29 @@ export const FAST_LANE_PAIRS = [
 export const MIN_USUAL_PAIRS = 8;
 
 const COMPARABLE = new Set(['delay', 'no delay']);
+const CLOSED_OR_NA = new Set(['lanes closed', 'n/a', 'na']);
 
 export function emptyLaneStats() {
   return { paired: 0, slower: 0, faster: 0, same: 0, by_hour: {} };
+}
+
+// A missing count is not a report of zero booths. Number(null) is 0, so it
+// cannot be used here. Only an actual numeric zero means the lane is closed.
+export function openLaneCount(value) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
+export function laneStatus(lane) {
+  return String(lane?.status || '').trim().toLowerCase();
 }
 
 export function reportedLaneMinutes(crossing, key) {
   if (String(crossing?.port_status || '').trim().toLowerCase() === 'closed') return null;
   const lane = crossing?.lanes?.[key];
   if (!lane || typeof lane !== 'object') return null;
-  const status = String(lane.status || '').trim().toLowerCase();
-  if (!COMPARABLE.has(status)) return null;
-  if (Number(lane.lanes_open) === 0) return null;
+  const status = laneStatus(lane);
+  if (CLOSED_OR_NA.has(status) || !COMPARABLE.has(status)) return null;
+  if (openLaneCount(lane.lanes_open) === 0) return null;
   if (typeof lane.delay_minutes !== 'number' || !Number.isFinite(lane.delay_minutes)) return null;
   if (lane.delay_minutes < 0) return null;
   return lane.delay_minutes;
@@ -89,7 +100,7 @@ export function usuallySlower(stats) {
 export function laneReport(crossing, key) {
   const lane = crossing?.lanes?.[key];
   const present = Boolean(lane && typeof lane === 'object');
-  const lanesOpen = present && Number.isFinite(Number(lane.lanes_open)) ? Number(lane.lanes_open) : null;
+  const lanesOpen = present ? openLaneCount(lane.lanes_open) : null;
   return {
     key,
     present,
@@ -106,9 +117,11 @@ export function describePair(crossing, pair) {
   const fast = laneReport(crossing, pair.key);
   const generalReport = laneReport(crossing, pair.general);
   const closed = String(crossing?.port_status || '').trim().toLowerCase() === 'closed';
+  const fastUnusable = CLOSED_OR_NA.has(laneStatus(crossing?.lanes?.[pair.key]));
   let state = 'absent';
   if (!fast.present && !generalReport.present) state = 'absent';
   else if (closed) state = 'closed';
+  else if (fastUnusable) state = 'fast-missing';
   else if (fast.present && fast.lanesOpen === 0) state = 'no-open';
   else if (fast.minutes == null && generalReport.minutes == null) state = 'both-missing';
   else if (fast.minutes == null) state = 'fast-missing';

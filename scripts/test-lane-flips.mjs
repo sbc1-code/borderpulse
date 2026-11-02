@@ -7,6 +7,7 @@ import {
   emptyLaneStats,
   heatLevel,
   hourStats,
+  openLaneCount,
   pairOutcome,
   recordOutcome,
   reportedLaneMinutes,
@@ -67,6 +68,41 @@ test('faster, equal, zero, pending, closed, and closed-booth lanes stay distinct
   closed.port_status = 'Closed';
   assert.equal(describePair(closed, { key: 'passenger_ready', general: 'passenger_standard' }).state, 'closed');
   assert.equal(reportedLaneMinutes(closed, 'passenger_standard'), null);
+});
+
+test('a null or missing open count is not zero, and Lanes Closed or N/A is not a comparison', () => {
+  assert.equal(openLaneCount(null), null);
+  assert.equal(openLaneCount(undefined), null);
+  assert.equal(openLaneCount(''), null);
+  assert.equal(openLaneCount(0), 0);
+  for (const status of ['Lanes Closed', 'N/A', 'n/a']) {
+    const crossing = otay();
+    crossing.lanes.passenger_ready = {
+      status,
+      delay_minutes: 110,
+      lanes_open: null,
+      update_time: 'At 10:00 pm PST',
+    };
+    const row = describePair(crossing, { key: 'passenger_ready', general: 'passenger_standard' });
+    assert.equal(reportedLaneMinutes(crossing, 'passenger_ready'), null, status);
+    assert.equal(row.fast.lanesOpen, null, status);
+    assert.equal(row.gap, null, status);
+    assert.equal(row.state, 'fast-missing', status);
+    assert.equal(currentFlips([crossing]).some(flip => flip.key === 'passenger_ready'), false, status);
+    const ports = new Map();
+    const meta = new Map([['250601', { slug: 'otay-mesa', name: 'Otay Mesa', timezone: 'America/Los_Angeles' }]]);
+    accumulateSnapshot(ports, [crossing], '2026-11-02T06:00:00.000Z', meta, () => 9);
+    assert.equal(ports.get('250601').lanes.passenger_sentri.paired, 1, status);
+    assert.equal(ports.get('250601').lanes.passenger_ready, undefined, status);
+  }
+  const omitted = otay();
+  delete omitted.lanes.passenger_ready.lanes_open;
+  omitted.lanes.passenger_ready.status = 'Lanes Closed';
+  omitted.lanes.passenger_ready.delay_minutes = 50;
+  const omittedRow = describePair(omitted, { key: 'passenger_ready', general: 'passenger_standard' });
+  assert.notEqual(omittedRow.state, 'no-open');
+  assert.notEqual(omittedRow.state, 'slower');
+  assert.equal(currentFlips([omitted]).length, 0);
 });
 
 test('a missing fast lane never borrows the general wait', () => {

@@ -6,6 +6,7 @@
 - Count flips from the same 30-day `crossings.json` history the collector already walks. `snapshot-history.json` still stores only standard waits. A paired report needs both lanes open, with a numeric delay or no-delay status. Missing, pending, and closed lanes stay missing.
 - Ship the summary as `public/data/lane-flips.json`. The collector writes it beside the standard archive and can skip it without blocking a CBP refresh. No new data source.
 - English and Spanish, sitemap, navigation, and share text that keeps the CBP report clock. Not published.
+- A null or missing open-lane count is not zero. `Lanes Closed` and `N/A` stay out of comparisons and flips.
 
 ## 2026-11-01 — Correct map report focus and selected-lane summaries
 
