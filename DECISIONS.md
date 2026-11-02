@@ -1,5 +1,9 @@
 # DECISIONS
 
+## 2026-11-02 · Lane flip counts use raw crossing snapshots, not the standard archive
+
+`snapshot-history.json` keeps only standard `current_wait_time`, so Ready, SENTRI, and Ready pedestrian cannot be compared from it. The collector's existing full-history walk of `public/data/crossings.json` also writes `public/data/lane-flips.json`. A paired report requires both lanes to have an open numeric delay or no-delay status in the same fetch. Missing, pending, closed, and zero-open lanes are omitted and never become zero. A flip is a strictly higher reported wait. Hours are the port-local hour of `fetched_at`, not the clock-only CBP lane string. Each fetch counts once, so a lane that stays slower for several hours is a share of reports, not of days. "Usually" needs at least 8 paired reports at that hour, with one result at least 60% and the other under 40%. The window is the rolling 30 days, not a calendar month. A failure to write the summary must not block the CBP snapshot.
+
 ## 2026-10-30 · The crossing map uses the existing BorderPulse design
 
 The map is an ordinary BorderPulse page. Its presentation inherits the existing shell, type, surfaces, controls and blueprint map language; a separate cinematic visual identity is no longer the target. Keep useful geography, explicit clocks, lane comparisons, honest replay and user-entered driving arithmetic. Entry points belong in the existing navigation/dashboard and relevant crossing pages. This correction awaits exact-head review before release.
@@ -445,7 +449,6 @@ is the implementation record.
 ---
 
 *Append a new section the next time a non-obvious decision lands.*
-
 
 ## 2026-10-06 · Accept Tailwind 4 browser floor to clear publication blockers
 

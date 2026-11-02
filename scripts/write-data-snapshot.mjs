@@ -10,6 +10,7 @@ const mode = process.argv[2];
 const modes = {
   cbp: {
     paths: ['public/data/crossings.json', 'public/data/exchange-rate.json', 'public/data/snapshot-history.json'],
+    optionalPaths: ['public/data/lane-flips.json'],
     message: 'chore(data): refresh CBP + FX snapshot',
     commands: [
       ['node', 'scripts/fetch-cbp.mjs'],

@@ -15,6 +15,8 @@ import { cameraSourceFor } from '../src/lib/cameras.js';
 import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
 import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
 import { CONSOLE_PATH } from '../src/lib/crossingConsole.js';
+import { laneFlipEntries } from '../src/lib/laneFlips.js';
+import { checkNote, detailDescription, detailTitle, indexDescription, indexTitle, laneLabel } from '../src/lib/laneFlipCopy.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -842,8 +844,86 @@ async function main() {
     walkOrDriveCount++;
   }
 
+  let laneFlipCount = 0;
+  {
+    const laneFlipFile = path.resolve(root, 'public/data/lane-flips.json');
+    const artifact = fs.existsSync(laneFlipFile)
+      ? JSON.parse(fs.readFileSync(laneFlipFile, 'utf8'))
+      : { crossings: [] };
+    const entries = laneFlipEntries(artifact);
+    const summary = (entry) => {
+      const items = Object.entries(entry?.lanes || {}).map(([key, stats]) =>
+        `<li>${esc(laneLabel(key, 'en'))}: reported slower in ${Number(stats?.slower) || 0} of ${Number(stats?.paired) || 0} paired reports over the last 30 days.</li>`,
+      ).join('');
+      const title = entry ? `Lane Flip Watch at ${entry.name}` : 'Lane Flip Watch';
+      return `<main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#0f172a">
+        <p><a href="/">${esc('All crossings')}</a>${entry ? ` · <a href="/lane-flip/">Lane Flip Watch</a>` : ''}</p>
+        <h1>${esc(title)}</h1>
+        <p>${esc(checkNote('en'))} <a href="https://bwt.cbp.gov/">CBP border wait times</a>.</p>
+        <p>Ready Lane and SENTRI are compared with reported general passenger waits. Ready pedestrian is compared with reported general pedestrian waits. Hours use the crossing local time of each stored fetch. Missing reports are not counted as zero.</p>
+        ${items ? `<ul>${items}</ul>` : '<p>Paired counts for the last 30 days appear when both lanes were reported.</p>'}
+      </main>`;
+    };
+    const indexCanonical = `${BASE}/lane-flip/`;
+    const indexHead = {
+      title: indexTitle('en'),
+      desc: indexDescription('en'),
+      canonical: indexCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Lane Flip Watch', item: indexCanonical },
+        ],
+      }, {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Lane Flip Watch crossings',
+        numberOfItems: entries.length,
+        itemListElement: entries.map((entry, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: entry.name,
+          url: `${BASE}/lane-flip/${entry.slug}/`,
+        })),
+      }],
+    };
+    const indexList = entries.map(entry => `    <li><a href="/lane-flip/${esc(entry.slug)}/">${esc(entry.name)}</a></li>`).join('\n');
+    const indexHtml = injectSnapshot(
+      rewriteIndex(indexWithLinks, indexHead),
+      `${summary(null)}<ul>\n${indexList}\n</ul>`,
+    );
+    fs.mkdirSync(path.resolve(distDir, 'lane-flip'), { recursive: true });
+    fs.writeFileSync(path.resolve(distDir, 'lane-flip/index.html'), indexHtml);
+    for (const entry of entries) {
+      const canonical = `${BASE}/lane-flip/${entry.slug}/`;
+      const head = {
+        title: detailTitle(entry.name, 'en'),
+        desc: detailDescription(entry.name, 'en'),
+        canonical,
+        ogImage: `${BASE}/og-card.png`,
+        jsonLd: [{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Lane Flip Watch', item: indexCanonical },
+            { '@type': 'ListItem', position: 3, name: entry.name, item: canonical },
+          ],
+        }],
+      };
+      const html = injectSnapshot(rewriteIndex(indexWithLinks, head), summary(entry));
+      const outDir = path.resolve(distDir, 'lane-flip', entry.slug);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+      laneFlipCount += 1;
+    }
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + ${laneFlipCount} lane-flip pages + crawlable nav on homepage`,
   );
 }
 

@@ -140,6 +140,8 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   describing any paid offering or accepting a charge. The free, ad-supported
   crossing experience remains the current offer.
 
+- [~] Lane Flip Watch (`/lane-flip/`): reported Ready Lane, SENTRI, and Ready pedestrian versus general, plus a 30-day hour strip. Review candidate only. No production release.
+
 ### Next: test one adjacent crossing job
 
 - Interview or observe repeat crossers to find a specific unresolved decision.
