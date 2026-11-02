@@ -172,9 +172,21 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     assert.match(await page.getByTestId('pair-clocks-passenger_ready').innerText(), /General:.*Ready Lane:/);
     assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /Stale archive/);
     const radio = page.getByTestId('hour-passenger_ready-15');
+    // Share actions scroll the strip offscreen. Establish committed keyboard
+    // selection after focus/scroll, with the pointer clear of hover handlers.
+    await page.mouse.move(0, 0);
     await radio.focus();
+    await page.waitForFunction(() => {
+      const el = document.querySelector('[data-testid="hour-passenger_ready-15"]');
+      return document.activeElement === el && el?.getAttribute('aria-checked') === 'true'
+        && document.querySelector('[data-testid="hour-detail-passenger_ready"]')?.getAttribute('data-hour') === '15';
+    }, null, { timeout: 2_000 });
     await page.keyboard.press('ArrowRight');
-    await page.getByTestId('hour-passenger_ready-16').evaluate(el => { if (document.activeElement !== el) throw new Error('hour keyboard focus not moved'); });
+    await page.waitForFunction(() => {
+      const el = document.querySelector('[data-testid="hour-passenger_ready-16"]');
+      return document.activeElement === el && el?.getAttribute('aria-checked') === 'true'
+        && document.querySelector('[data-testid="hour-detail-passenger_ready"]')?.getAttribute('data-hour') === '16';
+    }, null, { timeout: 2_000 });
     assert.doesNotMatch(await page.locator('#root').innerText(), /Right now|usually|last 30 days/);
     assert.ok(await fits(page), 'detail overflows');
 
