@@ -4,7 +4,7 @@ import CommuterSnapshot from './CommuterSnapshot';
 import { walkDriveFreshness } from '@/lib/walkDriveFreshness';
 import { fetchLabel } from '@/lib/trustState';
 
-export default function DashboardSummary({ direction, regionLabel, fetchedAt, ...props }) {
+export default function DashboardSummary({ direction, regionLabel, fetchedAt, success, fromFallback, ...props }) {
   const [offline, setOffline] = useState(() => !navigator.onLine);
   const [, tick] = useState(0);
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function DashboardSummary({ direction, regionLabel, fetchedAt, ..
   // Read the clock on every render: a new response must not be judged against
   // the previous minute's timer value, including after a delayed chunk load.
   const freshness = walkDriveFreshness(fetchedAt);
-  const trusted = freshness.usable && !offline;
+  const trusted = freshness.usable && !offline && success !== false && !fromFallback;
   const en = props.language === 'en';
   const timestamp = typeof fetchedAt === 'string' && Number.isFinite(Date.parse(fetchedAt))
     ? new Date(fetchedAt).toLocaleString(en ? 'en-US' : 'es-MX', { timeZoneName: 'short' })

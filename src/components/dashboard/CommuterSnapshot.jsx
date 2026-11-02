@@ -63,6 +63,7 @@ function SnapshotMetric({ icon: Icon, label, value, detail, tone = 'slate' }) {
 export default function CommuterSnapshot({
   crossings,
   selectedDirection = 'northbound',
+  lane = null,
   language = 'en',
   regionLabel,
   trusted = true,
@@ -71,7 +72,7 @@ export default function CommuterSnapshot({
   const stats = useMemo(() => {
     const rows = (crossings || []).map((crossing) => ({
       crossing,
-      wait: getWaitMinutes(crossing, selectedDirection),
+      wait: getWaitMinutes(crossing, selectedDirection, lane),
     }));
     const reporting = rows.filter((row) => row.wait != null);
     const total = rows.length;
@@ -111,7 +112,7 @@ export default function CommuterSnapshot({
       counts,
       overallTier: getStatusForWait(median),
     };
-  }, [crossings, selectedDirection]);
+  }, [crossings, selectedDirection, lane]);
 
   const tier = trusted ? (TIER_META[stats.overallTier] || TIER_META.unknown) : {
     ...TIER_META.unknown,

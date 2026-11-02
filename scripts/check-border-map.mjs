@@ -363,4 +363,42 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
   } finally {
     await context.close();
   }
+  await checkReportFocus(browser, baseUrl, viewport);
+}
+
+export async function checkReportFocus(browser, baseUrl, viewport) {
+  for (const language of ['en', 'es']) for (const motion of ['no-preference', 'reduce']) {
+    const context = await browser.newContext({ viewport, reducedMotion: motion, serviceWorkers: 'block' });
+    await context.addInitScript(language => localStorage.setItem('borderPulse_language', language), language);
+    await context.route('**/*', r => new URL(r.request().url()).origin === baseUrl.origin ? r.continue() : r.abort());
+    const page = await context.newPage();
+    try {
+      await page.goto(new URL('/?area=all', baseUrl).href);
+      await page.locator('.crossingResultList button').last().waitFor();
+      await page.evaluate(() => document.fonts.ready);
+      for (const close of ['Escape', 'button', 'history']) {
+        const origin = page.locator('.crossingResultList button').last();
+        await origin.scrollIntoViewIfNeeded(); await origin.focus();
+        const before = await origin.evaluate(n => ({ id: n.id, pane: n.closest('.explorerPane').scrollTop, y: scrollY }));
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.activeElement?.matches('.detailBack'));
+        const visible = await page.locator('.detailBack').evaluate(button => {
+          const r = button.getBoundingClientRect(), pane = button.closest('.explorerPane').getBoundingClientRect();
+          const stickyBottom = Math.max(0, ...Array.from(document.querySelectorAll('header')).filter(n => ['sticky','fixed'].includes(getComputedStyle(n).position) && n.getBoundingClientRect().top <= 1).map(n => n.getBoundingClientRect().bottom));
+          return { top: r.top, bottom: r.bottom, paneTop: pane.top, paneBottom: pane.bottom, stickyBottom, height: innerHeight,
+            hit: button.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2)) };
+        });
+        assert.ok(visible.hit && visible.top >= Math.max(0, visible.paneTop, visible.stickyBottom) - 1 && visible.bottom <= Math.min(visible.height, visible.paneBottom) + 1,
+          `${viewport.width}px ${language} ${motion}: focused report control must be painted, unclipped and clear of the header: ${JSON.stringify(visible)}`);
+        if (close === 'button') await page.locator('.detailBack').click();
+        else if (close === 'history') await page.goBack();
+        else await page.keyboard.press('Escape');
+        await page.waitForFunction(id => document.activeElement?.id === id, before.id);
+        const after = await page.locator(`#${before.id}`).evaluate(n => { const r = n.getBoundingClientRect(); return { pane: n.closest('.explorerPane').scrollTop, y: scrollY, hit: n.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2)) }; });
+        assert.ok(after.hit, 'restored keyboard origin must be visible, not only document.activeElement');
+        assert.ok(Math.abs(before.pane - after.pane) <= 1 && Math.abs(before.y - after.y) <= 2, `restore list/document position: ${JSON.stringify({before,after})}`);
+      }
+    } finally { await context.close(); }
+  }
+  console.log(`[report-focus] PASS ${viewport.width}px: lower-result selection, painted/unclipped Back control, header clearance, Escape/button/Back focus and scroll restoration; EN/ES normal/reduced motion`);
 }
