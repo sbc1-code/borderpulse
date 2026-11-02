@@ -93,7 +93,30 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     hasTouch: viewport.width < 800,
     serviceWorkers: 'block',
   });
+  // Capture share channels in memory: no OS clipboard or outbound message.
+  await context.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
+      writeText: async text => { window.__laneFlipCopied = text; },
+    } });
+    Object.defineProperty(navigator, 'share', { configurable: true, value: async payload => {
+      window.__laneFlipShared = payload;
+    } });
+  });
   const page = await context.newPage();
+  const verifyShare = async language => {
+    const es = language === 'es';
+    const expected = await page.getByTestId('lane-flip-share-text').innerText();
+    assert.match(expected, es ? /no confirma condiciones actuales ni simultáneas/ : /does not establish current or simultaneous conditions/);
+    assert.match(expected, es ? /requisitos de elegibilidad/ : /eligibility requirements/);
+    await page.getByRole('button', { name: es ? 'Copiar texto' : 'Copy text', exact: true }).click();
+    assert.equal(await page.evaluate(() => window.__laneFlipCopied), expected);
+    await page.getByRole('button', { name: es ? 'Compartir' : 'Share', exact: true }).click();
+    const shared = await page.evaluate(() => window.__laneFlipShared);
+    assert.equal(shared.text, expected);
+    assert.equal(shared.url, 'https://borderpulse.com/lane-flip/otay-mesa/');
+    const href = await page.getByRole('link', { name: 'WhatsApp', exact: true }).getAttribute('href');
+    assert.equal(new URL(href).searchParams.get('text'), expected);
+  };
   const feed = snapshot();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -142,6 +165,7 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     assert.match(await page.getByTestId('lane-flip-share-text').innerText(), /https:\/\/borderpulse.com\/lane-flip\/otay-mesa\//);
     assert.match(await page.getByTestId('lane-flip-share-text').innerText(), /110 min/);
     assert.match(await page.getByTestId('lane-flip-share-text').innerText(), /At 10:00 pm PST/);
+    await verifyShare('en');
     await page.waitForFunction(() => document.querySelector('link[rel="canonical"]')?.href === 'https://borderpulse.com/lane-flip/otay-mesa/');
     assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /2026-/);
     assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /without reconstruction from raw/);
@@ -166,6 +190,7 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     assert.match(await page.getByTestId('lane-flip-coverage').innerText(), /Archivo desactualizado/);
     assert.match(await page.locator('#root').innerText(), /no autoriza el uso/);
     assert.match(await page.locator('#root').innerText(), /no un pronóstico/);
+    await verifyShare('es');
     assert.ok(await fits(page), 'Spanish detail overflows');
     if (viewport.width < 1024 && !(await page.locator('#mobile-navigation').isVisible())) {
       await page.getByRole('button', { name: 'Open menu' }).click();

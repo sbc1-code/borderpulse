@@ -236,3 +236,19 @@ test('published archive coverage and paired counts reconcile without inventing r
     }
   }
 });
+
+test('shared text retains eligibility and source-clock cautions in both languages', () => {
+  for (const language of ['en', 'es']) {
+    for (const minutes of [0, 110, null]) {
+      const text = shareText({ language, name: 'Otay Mesa', url: 'https://borderpulse.com/lane-flip/otay-mesa/',
+        rows: [{ key: 'passenger_standard', minutes: 60, reportTime: 'At 9:00 pm PST' },
+          { key: 'passenger_ready', minutes, reportTime: 'At 10:00 pm PST' }] });
+      assert.ok(text.includes(eligibilityNote(language)));
+      assert.match(text, language === 'es' ? /horas de reporte distintas.*no confirma condiciones actuales ni simultáneas/ : /different report times.*does not establish current or simultaneous conditions/);
+      assert.match(text, /At 9:00 pm PST/);
+      if (minutes !== null) assert.match(text, /At 10:00 pm PST/);
+      if (minutes === 0) assert.match(text, /0 min/);
+      assert.ok(text.endsWith('https://borderpulse.com/lane-flip/otay-mesa/'));
+    }
+  }
+});

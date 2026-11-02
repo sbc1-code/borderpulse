@@ -193,7 +193,10 @@ export function shareText({ language = 'en', name, rows = [], notes = [], url })
   const intro = es
     ? `Ready y SENTRI frente al carril general: ${name}.`
     : `Lane Flip Watch at ${name}.`;
-  return [intro, ...lines, ...(notes || []), checkNote(language), url].filter(Boolean).join('\n');
+  const clockCaution = es
+    ? 'Una consulta puede incluir horas de reporte distintas; no confirma condiciones actuales ni simultáneas.'
+    : 'One fetch may include different report times; it does not establish current or simultaneous conditions.';
+  return [intro, ...lines, ...(notes || []), clockCaution, eligibilityNote(language), checkNote(language), url].filter(Boolean).join('\n');
 }
 
 export function heatLegend(language = 'en') {
