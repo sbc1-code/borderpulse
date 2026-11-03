@@ -117,7 +117,9 @@ test('San Ysidro keeps its own status and hours while all lane reports are pendi
 test('San Ysidro never adopts CBX lane waits when its own lane is unavailable', () => {
   const rows = structuredClone(sanYsidroRows);
   rows.find(row => row.port_number === '250401').pedestrian_lanes.standard_lanes.operational_status = 'N/A';
-  assert.equal(mainRow(rows).lanes.pedestrian_standard, null);
+  const lane = mainRow(rows).lanes.pedestrian_standard;
+  assert.equal(lane.status, 'N/A');
+  assert.equal(lane.delay_minutes, null, 'CBX zero is not a main-crossing wait');
 });
 test('San Ysidro preserves actual zero and positive waits from its main row', () => {
   for (const delay of ['0', '85']) {
@@ -203,4 +205,38 @@ test('slow upstream and slow bundled fallback finish within one function budget'
   assert.match(res.body, /no están disponibles temporalmente/);
   assert.match(res.body, /https:\/\/bwt.cbp.gov\//);
   assert.equal(res.headers['Cache-Control'], 'no-store');
+});
+
+// Hypothetical contradictory retained-number cases, not an observed CBP incident.
+test('San Ysidro scalar ignores retained closed/NA numbers and keeps actual zero in either source order', () => {
+  for (const [status, minutes, expected] of [['Lanes Closed', '5', null], ['N/A', '5', null], ['Update Pending', '5', null], ['No Delay', '0', 0], ['Delay', '5', 5]]) {
+    const rows = structuredClone(sanYsidroRows);
+    rows.find(row => row.port_number === '250401').passenger_vehicle_lanes.standard_lanes = {
+      operational_status: status, delay_minutes: minutes, lanes_open: '1', update_time: 'At 8:00 am PST',
+    };
+    for (const order of [rows, [...rows].reverse()]) {
+      const row = mainRow(order);
+      assert.equal(row.current_wait_time, expected, status);
+      assert.equal(row.status, expected === null ? 'unknown' : 'good', status);
+    }
+  }
+});
+test('duplicate lane merges retain each originating row clock rather than the winning row date', () => {
+  const original = { port_number: '240203', port_name: 'Ysleta', border: 'Mexican Border', port_status: 'Open',
+    date: '11/2/2026', time: '8:16 am', passenger_vehicle_lanes: {
+      standard_lanes: { operational_status: 'Delay', delay_minutes: '20', lanes_open: '1', update_time: 'At 8:10 am MST' },
+    } };
+  const sibling = { ...original, port_number: '240104', date: '11/1/2026', time: '11:50 pm', passenger_vehicle_lanes: {
+    standard_lanes: { operational_status: 'Update Pending', delay_minutes: '', lanes_open: '' },
+    ready_lanes: { operational_status: 'Delay', delay_minutes: '15', lanes_open: '1', update_time: 'At 11:45 pm MST' },
+  } };
+  for (const rows of [[original, sibling], [sibling, original]]) {
+    const row = createCbpPayload(withOtherPorts(rows)).crossings.find(row => row.port_number === '240104');
+    assert.ok(row);
+    assert.equal(row.current_wait_time, 20);
+    assert.equal(row.lanes.passenger_standard.update_time, 'At 8:10 am MST');
+    assert.equal(row.lanes.passenger_standard.source_updated_at, '11/2/2026 8:16 am');
+    assert.equal(row.lanes.passenger_ready.update_time, 'At 11:45 pm MST');
+    assert.equal(row.lanes.passenger_ready.source_updated_at, '11/1/2026 11:50 pm');
+  }
 });

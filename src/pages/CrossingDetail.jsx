@@ -118,10 +118,17 @@ function faqItems(crossing, aggregate, lang) {
 
   const laneList = [];
   const l = crossing.lanes || {};
-  if (l.passenger_sentri) laneList.push(lang === 'en' ? 'SENTRI' : 'SENTRI');
-  if (l.passenger_ready) laneList.push(lang === 'en' ? 'Ready Lane' : 'Ready Lane');
-  if (l.pedestrian_standard || l.pedestrian_ready) laneList.push(lang === 'en' ? 'pedestrian' : 'peatonal');
-  if (l.commercial_standard || l.commercial_fast) laneList.push(lang === 'en' ? 'commercial' : 'comercial');
+  // Closed and N/A used to be missing objects. Keeping the status must not
+  // add those lanes to this list.
+  const listed = (lane) => {
+    if (!lane || typeof lane !== 'object') return false;
+    const status = String(lane.status || '').trim().toLowerCase();
+    return status !== 'lanes closed' && status !== 'n/a';
+  };
+  if (listed(l.passenger_sentri)) laneList.push('SENTRI');
+  if (listed(l.passenger_ready)) laneList.push('Ready Lane');
+  if (listed(l.pedestrian_standard) || listed(l.pedestrian_ready)) laneList.push(lang === 'en' ? 'pedestrian' : 'peatonal');
+  if (listed(l.commercial_standard) || listed(l.commercial_fast)) laneList.push(lang === 'en' ? 'commercial' : 'comercial');
   if (laneList.length) {
     out.push({
       q: lang === 'en' ? `What lanes are available at ${name}?` : `¿Qué carriles están disponibles en ${name}?`,

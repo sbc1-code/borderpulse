@@ -230,9 +230,11 @@ gate.
 ## 2026-08-19 · Crossing identity is pinned in code, not read from the CBP feed
 
 CBP substitutes whole rows for the same bridge: `240202` "El Paso - Paso Del
-Norte (PDN)" becomes `202401` "Paso Del Norte", and back. The rows never
-co-occur (0/200 snapshots), so this is not something dedupe can arbitrate.
-Since slugs come from names, the crossing's URL moved on its own.
+Norte (PDN)" becomes `202401` "Paso Del Norte", and back. A 200-snapshot
+sample did not catch them together, so this was treated as something dedupe
+could not arbitrate. The 2026-11-02 feed shows that sample was incomplete;
+see the later note. Identity pinning still stands. Since slugs come from
+names, the crossing's URL moved on its own.
 
 `SLUG_ALIASES` was the wrong layer: it aliases *slugs* while the instability is
 in *port numbers*, so every rename needed a new manual entry, and
@@ -534,3 +536,7 @@ Activation waits for the actual cloud source/tool/connector dry run.
 ## 2026-10-30 · Add the crossing console alongside the proven dashboard
 
 The first corridor console is a lazy, reversible route for San Ysidro/Otay, not a dashboard replacement. Current data uses existing trust/availability guards; Standard-only historical observations are a separate, on-request replay. User-entered driving time supports explicit arithmetic, not routing or forecasting. Preserve existing editorial and publication paths; release follows exact-head review and QC.
+
+## 2026-11-02 · Co-occurring CBP rows keep the reported lane
+
+The raw `bwtpublicmod` feed saved 2026-11-02 contains both port numbers for Ysleta (`240104` and `240203`) and for the other pinned substitution pairs. Identity stays pinned. When both rows are present, a reported wait outranks an empty or Update Pending row. `Lanes Closed` and `N/A` stay on the lane so a closed lane is not stored as a blank one. San Ysidro still does not take PedWest or Cross Border Express waits. This supersedes the co-occurrence claim in the 2026-08-19 identity note.

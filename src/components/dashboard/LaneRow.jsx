@@ -6,6 +6,10 @@ import { reportTimeLabel } from '@/lib/trustState';
 // dashboard card's existing lane-drawer chrome.
 export default function LaneRow({ icon: Icon, label, data, language }) {
   if (!data) return null;
+  // Closed and N/A stay in the data. This drawer still shows a reported
+  // minute, or the existing dash for Update Pending.
+  const status = String(data.status || '').trim().toLowerCase();
+  if (status === 'lanes closed' || status === 'n/a') return null;
   return (
     <div className="py-1.5 text-xs" data-testid="lane-row">
       <div className="flex items-center justify-between gap-2">

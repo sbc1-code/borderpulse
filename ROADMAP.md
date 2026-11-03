@@ -21,6 +21,7 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [x] Keep a reported CBP lane wait ahead of an empty duplicate row, and store `Lanes Closed` / `N/A` instead of a blank lane. Ysleta 240104/240203 co-occur in the 2026-11-02 feed. Review-only until the collector publishes a new snapshot.
 - [~] Review the additive bilingual San Ysidro/Otay crossing console with geographic reports, meaningful motion, observed replay and user-entered detour arithmetic. Draft PR, exact-head QC/CI and a protected preview precede any merge; the existing dashboard and editorial remain.
 
 - [x] Preserve chosen lane through local comparison, crossing detail and sharing

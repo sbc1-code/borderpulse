@@ -7,11 +7,19 @@ const VERIFIED_PEDESTRIAN_PORTS = new Set(['230901', '240801']);
 
 // One rule for crossing-page links, sitemap and prerender. Other ports retain
 // the existing report-based fallback until their capability is reviewed.
+// Lanes Closed and N/A used to be dropped before they reached this check.
+// Keeping those statuses in the data must not invent a pedestrian lane.
+function pedestrianLaneReported(lane) {
+  if (!lane || typeof lane !== 'object') return false;
+  const status = String(lane.status || '').trim().toLowerCase();
+  return status !== 'lanes closed' && status !== 'n/a';
+}
+
 export function hasPedestrianLane(crossing) {
   return Boolean(
     VERIFIED_PEDESTRIAN_PORTS.has(crossing?.port_number) ||
-    crossing?.lanes?.pedestrian_standard ||
-    crossing?.lanes?.pedestrian_ready,
+    pedestrianLaneReported(crossing?.lanes?.pedestrian_standard) ||
+    pedestrianLaneReported(crossing?.lanes?.pedestrian_ready),
   );
 }
 
