@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-03T10:36:36.153Z",
-  "snapshot_at": "2026-11-03T10:23:00.303Z",
+  "generated_at": "2026-11-03T18:17:56.437Z",
+  "snapshot_at": "2026-11-03T18:08:27.719Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -181,33 +181,16 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-03T10:36:36.153Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-11-03T18:17:56.437Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Tuesday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en Brownsville - Gateway es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
         "best_hour": 1,
         "best_median": 0,
-        "overall_median": 30,
+        "overall_median": 35,
         "samples": 15
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-11-02T10:44:18.889Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 60 min around 10 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 60 min cerca de las 10 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 60,
-        "overall_median": 30,
-        "samples": 20,
-        "ratio": 2
       }
     },
     {
@@ -252,7 +235,7 @@
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "severity": 0.9272727272727272,
-      "detected_at": "2026-11-03T10:36:36.153Z",
+      "detected_at": "2026-11-03T18:17:56.437Z",
       "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 3 AM (median 4 min) — ~93% below the 30-day baseline of 55 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 55 min.",
       "evidence": {
@@ -261,7 +244,7 @@
         "best_hour": 3,
         "best_median": 4,
         "overall_median": 55,
-        "samples": 18
+        "samples": 20
       }
     },
     {
@@ -354,6 +337,23 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.7142857142857142,
+      "detected_at": "2026-11-03T18:17:56.437Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 60 min around 10 PM — ~171% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 60 min cerca de las 10 PM — ~171% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 60,
+        "overall_median": 35,
+        "samples": 20,
+        "ratio": 1.7142857142857142
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "calexico-east",
       "port_name": "Calexico - East",
@@ -441,24 +441,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-11-02T10:44:18.889Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Monday hour so far is 5 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Bridge I es 5 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 1,
-        "day_label": "Mon",
-        "best_hour": 5,
-        "best_median": 0,
-        "overall_median": 25,
-        "samples": 3
-      }
-    }
-  ]
+  "trailing_24h": []
 }
