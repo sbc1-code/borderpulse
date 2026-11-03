@@ -8,6 +8,14 @@ Do not infer a usual lane advantage from repeated fetches or call values current
 
 `snapshot-history.json` keeps only Standard `current_wait_time`, so Ready, SENTRI, and Ready pedestrian comparisons use the existing full-history walk of normalized `public/data/crossings.json`. These are not raw CBP bodies and cannot recover values omitted by the older duplicate-row normalizer. Each fetch counts once if both usable lane values exist; repeated fetches may repeat the same underlying source report. Hours group port-local retrieval time. Show actual retained dates and descriptive counts/percentages, never a usual/never or probability claim. The collector requests a 30-day lookback, but a retained artifact may be older: its coverage and stale state must remain visible. Failure to write the summary must not block the CBP snapshot.
 
+## 2026-11-02 · Spanish home is one indexable entry, not a translated URL tree
+
+Search engines need a Spanish document for the home page. `/es/` is that entry: its own lang, title, description, canonical and reciprocal hreflang with `/`. Shared crossing URLs stay one address with the in-page language preference. This does not open per-crossing or best-time Spanish duplicates while query evidence is still thin.
+
+## 2026-11-02 · The no-JS home snapshot is not frozen to the last site build
+
+Vercel publishes the app daily and on application changes, so HTML baked at build time can lag the live CBP fetch by hours. The no-JS home frame reads `/snapshot/`, which on Vercel is the existing cached CBP function rendered as HTML. GitHub Pages, the rollback host, keeps the snapshot file written by that data deploy. The frame is labeled as a published snapshot and keeps the retrieval time. It does not add a collector or rebuild the site on every data commit.
+
 ## 2026-10-30 · The crossing map uses the existing BorderPulse design
 
 The map is an ordinary BorderPulse page. Its presentation inherits the existing shell, type, surfaces, controls and blueprint map language; a separate cinematic visual identity is no longer the target. Keep useful geography, explicit clocks, lane comparisons, honest replay and user-entered driving arithmetic. Entry points belong in the existing navigation/dashboard and relevant crossing pages. This correction awaits exact-head review before release.
@@ -148,7 +156,7 @@ additional monthly spend; do not pause the shared Vercel team and DIGITO.
 ## 2026-09-29 · Evaluate Vercel with a public-app preview
 
 Keep the existing GitHub Pages site and automatic ads while testing Vercel.
-Vercel builds use the same Vite app plus a five-minute CDN-cached CBP endpoint;
+Vercel builds use the same Vite app plus a CBP endpoint with five minutes of CDN cache and up to ten further minutes of stale revalidation;
 the client retains the last successful reading and falls back to the published
 static snapshot with its original timestamp when the endpoint fails. A compact
 30-day snapshot artifact makes historical aggregates independent of build-host
@@ -230,9 +238,11 @@ gate.
 ## 2026-08-19 · Crossing identity is pinned in code, not read from the CBP feed
 
 CBP substitutes whole rows for the same bridge: `240202` "El Paso - Paso Del
-Norte (PDN)" becomes `202401` "Paso Del Norte", and back. The rows never
-co-occur (0/200 snapshots), so this is not something dedupe can arbitrate.
-Since slugs come from names, the crossing's URL moved on its own.
+Norte (PDN)" becomes `202401` "Paso Del Norte", and back. A 200-snapshot
+sample did not catch them together, so this was treated as something dedupe
+could not arbitrate. The 2026-11-02 feed shows that sample was incomplete;
+see the later note. Identity pinning still stands. Since slugs come from
+names, the crossing's URL moved on its own.
 
 `SLUG_ALIASES` was the wrong layer: it aliases *slugs* while the instability is
 in *port numbers*, so every rename needed a new manual entry, and
@@ -533,3 +543,7 @@ Activation waits for the actual cloud source/tool/connector dry run.
 ## 2026-10-30 · Add the crossing console alongside the proven dashboard
 
 The first corridor console is a lazy, reversible route for San Ysidro/Otay, not a dashboard replacement. Current data uses existing trust/availability guards; Standard-only historical observations are a separate, on-request replay. User-entered driving time supports explicit arithmetic, not routing or forecasting. Preserve existing editorial and publication paths; release follows exact-head review and QC.
+
+## 2026-11-02 · Co-occurring CBP rows keep the reported lane
+
+The raw `bwtpublicmod` feed saved 2026-11-02 contains both port numbers for Ysleta (`240104` and `240203`) and for the other pinned substitution pairs. Identity stays pinned. When both rows are present, a reported wait outranks an empty or Update Pending row. `Lanes Closed` and `N/A` stay on the lane so a closed lane is not stored as a blank one. San Ysidro still does not take PedWest or Cross Border Express waits. This supersedes the co-occurrence claim in the 2026-08-19 identity note.

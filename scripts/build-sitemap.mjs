@@ -5,6 +5,8 @@ import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 import { laneFlipEntries } from '../src/lib/laneFlips.js';
 
+import { homeHreflangs } from '../src/lib/hreflang.js';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
@@ -60,7 +62,8 @@ async function main() {
     { lang: 'x-default', href: `${BASE}/privacy/` },
   ];
   const urls = [
-    { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
+    { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today, alternates: homeHreflangs() },
+    { loc: `${BASE}/es/`, changefreq: 'hourly', priority: '0.9', lastmod: today, alternates: homeHreflangs() },
     { loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/best-time/`, changefreq: 'daily', priority: '0.7', lastmod: today },
     { loc: `${BASE}/privacy/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },

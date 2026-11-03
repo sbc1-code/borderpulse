@@ -174,6 +174,7 @@ export async function checkBorderMap(browser, baseUrl, viewport) {
       await openResult();
       await page.getByRole('searchbox').fill('San');
       await page.waitForFunction(() => !new URL(location.href).searchParams.has('port'));
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       assert.equal(await page.getByRole('searchbox').evaluate(n => n === document.activeElement), true, 'filtering keeps search focus');
       await page.getByRole('searchbox').fill('');
       await page.waitForURL(url => !url.searchParams.has('q'));

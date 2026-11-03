@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { snapshotHtml, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
+import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
 import { crossingDisplayName, crossingSearchTerms, crossingSearchTitle } from '../src/lib/crossingNames.js';
 
 const crossing = { port_number: '240202', name: 'El Paso - Paso Del Norte (PDN)',
@@ -49,6 +49,25 @@ test('feed values are escaped and cannot inject active HTML', () => {
   const html = snapshotHtml([{ ...crossing, name: '<script>bad</script>', port_number: 'unknown', hours: '<img src=x>' }], { unknown: 'safe' }, stamp, true);
   assert.doesNotMatch(html, /<script>|<img/);
   assert.match(html, /&lt;script&gt;/);
+});
+test('spanish home snapshot names reported waits and stays inside the language entry', () => {
+  const html = snapshotHtml([crossing], slugs, stamp, false, { lang: 'es' });
+  assert.match(html, /<h1>Tiempos de espera en la frontera EE\.UU\.-México<\/h1>/);
+  assert.match(html, /instantánea publicada, no un feed en vivo/);
+  assert.match(html, /href="\/es\/\?area=el-paso-juarez"/);
+  assert.match(html, /Espera reportada/);
+  assert.doesNotMatch(html, /—/);
+});
+test('the no-JS home can show a fresher snapshot frame without removing the packaged copy', () => {
+  const html = injectSnapshot('<html><body><div id="root"></div></body></html>', '<main>Packaged</main>', { refresh: true, lang: 'en' });
+  assert.match(html, /<iframe src="\/snapshot\/" title="Published snapshot of reported border waits"/);
+  assert.match(html, /#bp-baked-snapshot\{display:none !important\}/);
+  assert.match(html, /<div id="bp-baked-snapshot"><main>Packaged<\/main><\/div>/);
+  const document = snapshotDocument({ fetched_at: stamp, crossings: [crossing] }, { lang: 'es', framed: true });
+  assert.match(document, /noindex/);
+  assert.match(document, /href="https:\/\/borderpulse.com\/snapshot\/es\/"/);
+  assert.match(document, /target="_top"/);
+  assert.match(document, /instantánea publicada, no un feed en vivo/);
 });
 test('snapshot mounts in the visible React root, and rejects a non-empty target', () => {
   const html = injectSnapshot('<html><body><div id="root"></div></body></html>', '<main>Report</main>');

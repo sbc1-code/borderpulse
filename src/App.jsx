@@ -37,6 +37,7 @@ function LayoutRoutes() {
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/es" element={<Dashboard />} />
           <Route path="/crossing/:slug" element={<CrossingDetail />} />
           <Route path="/best-time" element={<BestTimeIndex />} />
           <Route path="/best-time/:slug" element={<BestTime />} />

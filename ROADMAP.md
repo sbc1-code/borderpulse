@@ -12,7 +12,7 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 BorderPulse is an independently branded product built by DIGITO. Its own domain,
 codebase, operating record and product decisions stay here; DIGITO may describe
 the product as proof of its work without folding the crossing experience into
-the trades-focused DIGITO site.
+the DIGITO site. DIGITO is an independent creative studio: Make more of technology.
 
 The long-term opportunity is practical, bilingual cross-border decision support
 for people who cross for work, family and everyday life. Wait times are the
@@ -21,6 +21,7 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [x] Keep a reported CBP lane wait ahead of an empty duplicate row, and store `Lanes Closed` / `N/A` instead of a blank lane. Ysleta 240104/240203 co-occur in the 2026-11-02 feed. Review-only until the collector publishes a new snapshot.
 - [~] Review the additive bilingual San Ysidro/Otay crossing console with geographic reports, meaningful motion, observed replay and user-entered detour arithmetic. Draft PR, exact-head QC/CI and a protected preview precede any merge; the existing dashboard and editorial remain.
 
 - [x] Preserve chosen lane through local comparison, crossing detail and sharing
@@ -225,10 +226,13 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [x] **Programmatic SEO `/compare/:slugA-vs-:slugB`** — shipped
       2026-05-09. 15 seed pairs prerendered + sitemap'd. Add more
       via the single `COMPARE_PAIRS` inventory in `src/lib/comparePairs.js`.
-- [ ] **Hreflang for ES variants** — currently EN/ES share the same URL
-      and toggle in localStorage. For better ES SEO, consider
-      `/mejor-hora/:slug` parallel routes with proper `<link
-      rel="alternate" hreflang="es">` pointing.
+- [~] **Spanish home entry:** `/es/` is prepared as the indexable Spanish
+      homepage, with its own lang, title, description and reciprocal hreflang.
+      The in-page toggle still changes shared URLs such as `/`. Not published.
+- [ ] **Hreflang for other ES variants:** crossing, best-time and compare
+      URLs still share one address and toggle in the browser. Parallel
+      routes such as `/mejor-hora/:slug` stay deferred while current
+      query evidence is thin.
 - [ ] **Refactor: extract `useTypicalDelta` hook** — duplicated in
       `BorderCrossingCard.jsx` and `Embed.jsx`. Pull into `src/lib/`
       once a third caller emerges. Low priority, no user impact.

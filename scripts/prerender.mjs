@@ -9,7 +9,8 @@ import EditorialArticle from '../src/components/blog/EditorialArticle.js';
 import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
-import { snapshotHtml, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
+import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
+import { SPANISH_HOME } from '../src/lib/homeMeta.js';
 import { crossingSearchTitle } from '../src/lib/crossingNames.js';
 import { cameraSourceFor } from '../src/lib/cameras.js';
 import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
@@ -502,7 +503,38 @@ async function main() {
   const authors = readAuthors();
 
   const indexWithLinks = injectCrawlableLinks(originalIndex, crossings, portToSlug, posts);
-  fs.writeFileSync(indexPath, injectSnapshot(indexWithLinks, snapshotHtml(crossings, portToSlug, doc.fetched_at)));
+  const homeSnapshot = snapshotHtml(crossings, portToSlug, doc.fetched_at);
+  fs.writeFileSync(indexPath, injectSnapshot(indexWithLinks, homeSnapshot, { refresh: true, lang: 'en' }));
+
+  const esCanonical = `${BASE}/es/`;
+  const esHead = {
+    lang: 'es',
+    title: SPANISH_HOME.title,
+    desc: SPANISH_HOME.description,
+    canonical: esCanonical,
+    ogImage: `${BASE}/og-card.png`,
+    jsonLd: [],
+  };
+  let esHtml = injectSnapshot(
+    rewriteIndex(indexWithLinks, esHead),
+    snapshotHtml(crossings, portToSlug, doc.fetched_at, false, { lang: 'es' }),
+    { refresh: true, lang: 'es' },
+  );
+  esHtml = esHtml
+    .replace(/<meta\s+property=["']og:locale["'][^>]*>/i, '<meta property="og:locale" content="es_MX" />')
+    .replace(/<meta\s+property=["']og:locale:alternate["'][^>]*>/i, '<meta property="og:locale:alternate" content="en_US" />');
+  const esDir = path.resolve(distDir, 'es');
+  fs.mkdirSync(esDir, { recursive: true });
+  fs.writeFileSync(path.resolve(esDir, 'index.html'), esHtml);
+
+  // Pages and local previews serve these files. Vercel rewrites the same
+  // paths to the cached CBP function, so a production build leaves them out
+  // and the published table is not frozen to this build.
+  if (process.env.VITE_PUBLIC_CBP_API !== 'true') {
+    fs.mkdirSync(path.resolve(distDir, 'snapshot', 'es'), { recursive: true });
+    fs.writeFileSync(path.resolve(distDir, 'snapshot', 'index.html'), snapshotDocument(doc, { lang: 'en', framed: true }));
+    fs.writeFileSync(path.resolve(distDir, 'snapshot', 'es', 'index.html'), snapshotDocument(doc, { lang: 'es', framed: true }));
+  }
 
   const aggregatesDir = path.resolve(root, 'public/data/aggregates');
   let crossingCount = 0;

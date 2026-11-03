@@ -16,6 +16,31 @@
 - English and Spanish, sitemap, navigation, and share text that keeps the CBP report clock. Not published.
 - A null or missing open-lane count is not zero. `Lanes Closed` and `N/A` stay out of comparisons and flips.
 
+## 2026-11-02 — Normalize primary waits and retain per-lane source clocks
+
+- Apply the same status-aware scalar normalization to the San Ysidro main-row path as other ports. Hypothetical retained-number tests cover closed, N/A and pending states, actual zero, and reversed source order; they do not describe an observed feed incident.
+- Preserve each lane’s originating CBP row date/time when duplicate rows contribute different lanes, alongside the original lane update clock.
+
+## 2026-11-02 — Keep reported waits when CBP publishes two rows for one crossing
+
+- When two CBP rows map to the same crossing, a reported lane wait is kept ahead of an empty or Update Pending row. Ysleta keeps the reported Ready Lane, SENTRI, pedestrian, and commercial waits from port 240203. Standard stays Lanes Closed, with no minute invented for it.
+- Store CBP's lane status (`Lanes Closed`, `Update Pending`, `N/A`) on the lane. Closed and N/A lanes are no longer dropped. Current wait wording is unchanged.
+- The same feed also dropped Otay Mesa's reported commercial waits, and let Update Pending replace an explicit status at BOTA, Paso Del Norte, Naco, Roma, and both Brownsville legacy crossings.
+- Correct the port-identity note that said those substitute rows never appear together.
+
+## 2026-11-02 — Bound snapshot recovery and keep the Spanish home consistent
+
+- Share an 8.5-second total fetch budget between the HTML endpoint’s upstream and known-host bundled recovery, leaving headroom under the existing ten-second function limit. Preserve fallback retrieval/report clocks and no-store errors.
+- Let `/es/` own the shell, footer and shared language preference; switching to English retains the query and hash. Cover fresh and saved-English visitors, mobile/desktop and both no-JS language entries.
+- Clarify that CDN reuse includes five minutes of cache plus up to ten minutes of stale revalidation; it is not a strict five-minute freshness guarantee.
+
+## 2026-11-02 - Deploy focus race, Spanish home, fresher no-JS snapshot
+
+- Keep map selection focus from taking the search field when its callback arrives after the visitor has started filtering. This was the only failure in the Pages deploy at 06:23 UTC.
+- Add `/es/` as the indexable Spanish home, with lang, title, description, reciprocal hreflang and a sitemap entry. Shared crossing URLs stay one address.
+- Serve the no-JS home snapshot from the cached official fetch on Vercel, and from the data-deploy file on Pages, still labeled as a published snapshot.
+- Describe DIGITO as an independent creative studio. No home city added.
+
 ## 2026-11-01 — Correct map report focus and selected-lane summaries
 
 - Reveal the selected report's focused Back control clear of the native header and nested pane clipping; restore the original list/document position and focus on Escape, button and browser Back, with immediate reduced-motion-safe scrolling.
@@ -788,7 +813,6 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-19
 
-<<<<<<< HEAD
 ### Added
 - **Blueprint Border Line on the dashboard.** The border drawn as an
   architect's elevation: one line from the Pacific to the Gulf, all 42 ports
@@ -805,8 +829,7 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   `npm test`). There was no size check and the entry chunk had already
   drifted from a documented ~161 KB to 177 KB with nothing to catch it.
 
-=======
->>>>>>> origin/main
+
 ### Fixed
 - **Port identity is pinned; CBP renames can no longer move a URL.** CBP's feed
   intermittently substitutes a different row for the same physical crossing
@@ -828,15 +851,13 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   exactly to 42.
 - **Southbound restored for Ysleta**, which was failing silently on a stale
   `240203` key in `fetch-sb.mjs`. Coordinate coverage 40/44 -> 42/42.
-<<<<<<< HEAD
 - **Border Line i18n and tap-target gaps caught in verification.** The SVG
   title block rendered "42 CROSSINGS · 18 CON DATOS" in Spanish (half
   translated) and the `<desc>` was English-only; both are localised now.
   Mobile tick rows measured 23 CSS px at a 375px viewport (iPhone SE/mini),
   just under the 24x24 AA floor, because the SVG scales down inside a
   narrower screen — row height raised so it clears at 375px too.
-=======
->>>>>>> origin/main
+
 - **Accessibility: single `<h1>` and WCAG 2.2 tap targets.** The sidebar brand
   was an `<h1>` inside `hidden lg:flex`, so every page had two h1s at every
   width. Controls raised to a 24x24 floor with 44x44 on primary actions, via a

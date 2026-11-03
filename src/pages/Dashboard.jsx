@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -35,6 +35,7 @@ import { buildSlugMap } from '@/lib/slugs';
 import { track } from '@/lib/analytics';
 import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { SPANISH_HOME } from '@/lib/homeMeta';
 import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
 import styles from './Dashboard.module.css';
 
@@ -79,7 +80,10 @@ export default function Dashboard() {
     fromFallback: false,
   });
 
-  const language = usePersistentLanguage();
+  const location = useLocation();
+  const spanishHome = /^\/es\/?$/.test(location.pathname);
+  const storedLanguage = usePersistentLanguage();
+  const language = spanishHome ? 'es' : storedLanguage;
   const [searchParams, setSearchParams] = useSearchParams();
   const lane = normalizeLane(searchParams.get('lane'));
   const areaParam = searchParams.get('area');
@@ -227,19 +231,23 @@ export default function Dashboard() {
   useEffect(() => {
     const title = language === 'en'
       ? 'Border Pulse | Reported US-Mexico Border Wait Times'
-      : 'Border Pulse | Esperas reportadas en la frontera EE.UU.-México';
-    const description = language === 'en'
-      ? 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
-      : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
+      : SPANISH_HOME.title;
+    const description = spanishHome
+      ? SPANISH_HOME.description
+      : language === 'en'
+        ? 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
+        : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
+    const canonical = spanishHome ? 'https://borderpulse.com/es/' : 'https://borderpulse.com/';
     updatePageMeta({
       title,
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com/',
-      canonical: 'https://borderpulse.com/',
+      ogUrl: canonical,
+      canonical,
+      lang: spanishHome ? 'es' : language,
     });
-  }, [language]);
+  }, [language, spanishHome]);
 
   const changeRegion = (r) => {
     try {

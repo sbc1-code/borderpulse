@@ -115,6 +115,24 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
         localStorage.setItem('borderPulse_language', 'es');
       });
     }
+    for (const preference of [null, 'en']) {
+      await page.evaluate(value => {
+        if (value === null) localStorage.removeItem('borderPulse_language');
+        else localStorage.setItem('borderPulse_language', value);
+      }, preference);
+      await page.goto(new URL('/es/?area=all&lane=sentri&display=list', baseUrl).href);
+      await inspect('/es/', 'es');
+      await page.locator('footer').getByRole('link', { name: 'Metodología', exact: true }).waitFor();
+      assert.equal(await page.locator('footer a[href="/methodology/"]').count(), 0);
+      const menu = page.getByRole('button', { name: 'Open menu', exact: true });
+      if (await menu.isVisible()) await menu.click();
+      await page.getByRole('navigation', { name: 'Navegación principal', exact: true }).filter({ visible: true })
+        .getByRole('link', { name: 'Cruces', exact: true }).waitFor();
+      await switchTo('en');
+      await inspect('/', 'en');
+      assert.equal(new URL(page.url()).search, '?area=all&lane=sentri&display=list');
+      await page.locator('footer').getByRole('link', { name: 'Methodology', exact: true }).waitFor();
+    }
     assert.ok(feedRequests > 1, 'must exercise a genuine feed refresh');
     assert.ok(aggregateRequests > 0, 'must exercise delayed aggregate arrival');
     console.log('[document-language] PASS: delayed aggregate, feed refresh, switching, Back/Forward, shared pages and EN/ES content-owned pages');

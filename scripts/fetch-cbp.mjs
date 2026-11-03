@@ -9,7 +9,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { canonicalPortNumber, pinIdentity, requiresPortCollapse } from '../src/lib/portIdentity.js';
+import { canonicalPortNumber, isAliasPort, pinIdentity, requiresPortCollapse } from '../src/lib/portIdentity.js';
 
 // bwt.cbp.gov serves two endpoints with the same JSON shape:
 //   /api/waittimes        — legacy, frozen on 3/26/2026 (do NOT use)
@@ -46,9 +46,9 @@ const PORT_STATUS_MAP = {
   'closed': 'Closed', 'cerrado': 'Closed',
 };
 
-// Lane statuses: lowercase "no delay"/"delay" and title-case "Update Pending"
-// are passed through to the UI; "Lanes Closed" and "N/A" are the two sentinels
-// parseLane treats as "no usable lane".
+// Lane statuses stay on the lane. "delay" / "no delay" carry reported minutes.
+// "Lanes Closed" and "N/A" are explicit CBP statuses, not blank lanes.
+// "Update Pending" is a row with no report yet.
 const LANE_STATUS_MAP = {
   'no delay': 'no delay', 'sin demora': 'no delay',
   'delay': 'delay', 'demora': 'delay',
@@ -105,19 +105,60 @@ const stateForPort = (portName) => {
   return null;
 };
 
-const parseLane = (lane) => {
+const parseLane = (lane, sourceUpdatedAt) => {
   if (!lane) return null;
   const status = normalizeLaneStatus(lane.operational_status);
-  if (status === 'N/A' || status === 'Lanes Closed') return null;
+  if (!status) return null;
   const delay = parseInt(lane.delay_minutes, 10);
   const open = parseInt(lane.lanes_open, 10);
+  // A blank open-count on Lanes Closed or N/A is not a report of zero lanes.
+  // Coercing it to 0 makes map and comparison copy call the lane closed,
+  // including for N/A. Leave the count empty unless CBP sent a number.
+  const explicit = status === 'N/A' || status === 'Lanes Closed';
   return {
-    status: status || null,
+    status,
     delay_minutes: Number.isFinite(delay) ? delay : null,
-    lanes_open: Number.isFinite(open) ? open : 0,
+    lanes_open: Number.isFinite(open) ? open : (explicit ? null : 0),
     update_time: lane.update_time || null,
+    source_updated_at: sourceUpdatedAt || null,
   };
 };
+
+// A reported minute, including a reported zero. Closed, N/A, and pending
+// lanes are not minutes.
+const reportedMinutes = (lane) => {
+  if (!lane || typeof lane !== 'object') return null;
+  const status = String(lane.status || '').trim().toLowerCase();
+  if (status !== 'delay' && status !== 'no delay') return null;
+  if (typeof lane.delay_minutes !== 'number' || !Number.isFinite(lane.delay_minutes)) return null;
+  if (lane.delay_minutes < 0) return null;
+  return lane.delay_minutes;
+};
+
+const EXPLICIT_LANE_STATUS = new Set(['Lanes Closed', 'N/A']);
+
+const LANE_KEYS = [
+  'passenger_standard',
+  'passenger_ready',
+  'passenger_sentri',
+  'pedestrian_standard',
+  'pedestrian_ready',
+  'commercial_standard',
+  'commercial_fast',
+];
+
+// Reported minutes outrank an explicit status, which outranks Update Pending
+// or a missing lane. Equal rank keeps the row already chosen.
+const laneRank = (lane) => {
+  if (reportedMinutes(lane) != null) return 3;
+  if (EXPLICIT_LANE_STATUS.has(lane?.status)) return 2;
+  if (lane) return 1;
+  return 0;
+};
+
+const preferLane = (current, incoming) => (
+  laneRank(incoming) > laneRank(current) ? incoming : (current ?? null)
+);
 
 const statusFromDelay = (minutes) => {
   if (minutes == null) return 'unknown';
@@ -134,15 +175,16 @@ const cleanCrossingName = (raw) => {
 };
 
 const mapPort = (p) => {
-  const passenger_standard = parseLane(p.passenger_vehicle_lanes?.standard_lanes);
-  const passenger_sentri = parseLane(p.passenger_vehicle_lanes?.NEXUS_SENTRI_lanes);
-  const passenger_ready = parseLane(p.passenger_vehicle_lanes?.ready_lanes);
-  const pedestrian_standard = parseLane(p.pedestrian_lanes?.standard_lanes);
-  const pedestrian_ready = parseLane(p.pedestrian_lanes?.ready_lanes);
-  const commercial_standard = parseLane(p.commercial_vehicle_lanes?.standard_lanes);
-  const commercial_fast = parseLane(p.commercial_vehicle_lanes?.FAST_lanes);
+  const sourceUpdatedAt = [p.date, p.time].filter(Boolean).join(' ') || null;
+  const passenger_standard = parseLane(p.passenger_vehicle_lanes?.standard_lanes, sourceUpdatedAt);
+  const passenger_sentri = parseLane(p.passenger_vehicle_lanes?.NEXUS_SENTRI_lanes, sourceUpdatedAt);
+  const passenger_ready = parseLane(p.passenger_vehicle_lanes?.ready_lanes, sourceUpdatedAt);
+  const pedestrian_standard = parseLane(p.pedestrian_lanes?.standard_lanes, sourceUpdatedAt);
+  const pedestrian_ready = parseLane(p.pedestrian_lanes?.ready_lanes, sourceUpdatedAt);
+  const commercial_standard = parseLane(p.commercial_vehicle_lanes?.standard_lanes, sourceUpdatedAt);
+  const commercial_fast = parseLane(p.commercial_vehicle_lanes?.FAST_lanes, sourceUpdatedAt);
 
-  const primaryDelay = passenger_standard?.delay_minutes ?? null;
+  const primaryDelay = reportedMinutes(passenger_standard);
 
   const portName = (p.port_name || '').trim();
   const crossingName = cleanCrossingName(p.crossing_name);
@@ -215,22 +257,25 @@ const canonicalKey = (row) => {
   return (row.port_name + '|' + (row.crossing_name || '')).toLowerCase().trim();
 };
 
-// Score a row for dedupe priority: higher is better.
+// Score a row for which non-lane fields to keep (hours, status, name).
+// A reported minute beats a lane object that is only Update Pending.
+// Presence alone used to prefer the empty duplicate: it still had a
+// passenger_standard object, while Lanes Closed had been dropped.
 const rowScore = (r) => {
   let s = 0;
-  if (r.current_wait_time != null) s += 100;         // real passenger data wins
-  if (r.lanes?.passenger_standard) s += 20;
-  if (r.lanes?.passenger_ready) s += 5;
-  if (r.lanes?.passenger_sentri) s += 5;
-  if (r.lanes?.pedestrian_standard) s += 3;
-  if (r.lanes?.commercial_standard) s += 2;
+  if (reportedMinutes(r.lanes?.passenger_standard) != null) s += 100;
+  for (const key of LANE_KEYS) {
+    if (reportedMinutes(r.lanes?.[key]) != null) s += 10;
+    else if (EXPLICIT_LANE_STATUS.has(r.lanes?.[key]?.status)) s += 1;
+  }
   if (r.name && r.name.includes(' - ')) s += 1;      // prefer "City - Crossing"
   if (/cargo|facility/i.test(r.name || '')) s -= 10; // cargo-only → last
   return s;
 };
 
-// Dedupe strategy: group by canonical key, pick the single highest-scoring
-// row. Merge any lane data the winner is missing from siblings.
+// Dedupe strategy: group by canonical key, keep the highest-scoring row's
+// hours and port status, then keep the better report for each lane.
+// A reported minute wins over Lanes Closed, N/A, or Update Pending.
 const dedupe = (rows) => {
   const groups = new Map();
   for (const r of rows) {
@@ -253,19 +298,23 @@ const dedupe = (rows) => {
       keep.push({ ...main, lanes: { ...main.lanes } });
       continue;
     }
-    arr.sort((a, b) => rowScore(b) - rowScore(a));
+    arr.sort((a, b) => {
+      const score = rowScore(b) - rowScore(a);
+      if (score) return score;
+      // Same evidence: keep the canonical row's hours and port status.
+      const alias = Number(isAliasPort(a.port_number)) - Number(isAliasPort(b.port_number));
+      if (alias) return alias;
+      return String(a.port_number).localeCompare(String(b.port_number));
+    });
     const winner = { ...arr[0], lanes: { ...arr[0].lanes } };
-    // Merge lane data from siblings if winner has gaps.
     for (const sib of arr.slice(1)) {
-      for (const k of Object.keys(sib.lanes || {})) {
-        if (!winner.lanes[k] && sib.lanes[k]) winner.lanes[k] = sib.lanes[k];
-      }
-      // If winner has no wait but sibling does, promote.
-      if (winner.current_wait_time == null && sib.current_wait_time != null) {
-        winner.current_wait_time = sib.current_wait_time;
-        winner.status = sib.status;
+      for (const key of LANE_KEYS) {
+        winner.lanes[key] = preferLane(winner.lanes[key], sib.lanes?.[key]);
       }
     }
+    const minutes = reportedMinutes(winner.lanes.passenger_standard);
+    winner.current_wait_time = minutes;
+    winner.status = statusFromDelay(minutes);
     keep.push(winner);
   }
   return keep;
