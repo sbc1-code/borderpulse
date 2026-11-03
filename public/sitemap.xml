@@ -5,6 +5,18 @@
     <lastmod>2026-08-20</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderpulse.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://borderpulse.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderpulse.com/" />
+  </url>
+  <url>
+    <loc>https://borderpulse.com/es/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borderpulse.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://borderpulse.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borderpulse.com/" />
   </url>
   <url>
     <loc>https://borderpulse.com/about/</loc>
