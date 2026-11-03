@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-02T20:40:04.815Z",
-  "snapshot_at": "2026-11-02T20:37:49.208Z",
+  "generated_at": "2026-11-03T02:48:54.747Z",
+  "snapshot_at": "2026-11-03T02:37:37.010Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -404,23 +404,6 @@
         "best_median": 10,
         "overall_median": 20,
         "samples": 7
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 1,
-      "detected_at": "2026-11-02T02:11:59.813Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 160 min around 7 PM — ~200% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 160 min cerca de las 7 PM — ~200% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 160,
-        "overall_median": 80,
-        "samples": 16,
-        "ratio": 2
       }
     }
   ]
