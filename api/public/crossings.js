@@ -1,6 +1,8 @@
 import { CBP_URL, createCbpPayload } from '../../scripts/fetch-cbp.mjs';
 
-// Serve one official snapshot from the CDN for five minutes. The frontend
+// The CDN reuses a response for five minutes, then may serve it for another
+// ten minutes while revalidating. This is not a five-minute freshness bound.
+// The frontend
 // keeps its last good response and can fall back to the static Pages feed.
 export const config = { maxDuration: 10 };
 

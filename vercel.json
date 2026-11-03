@@ -2,5 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "buildCommand": "VITE_PUBLIC_CBP_API=true npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/snapshot", "destination": "/api/public/snapshot" },
+    { "source": "/snapshot/", "destination": "/api/public/snapshot" },
+    { "source": "/snapshot/es", "destination": "/api/public/snapshot?lang=es" },
+    { "source": "/snapshot/es/", "destination": "/api/public/snapshot?lang=es" }
+  ]
 }

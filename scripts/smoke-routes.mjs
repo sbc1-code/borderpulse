@@ -301,6 +301,9 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   // The dashboard's Analytics view is a lazy-loaded chunk, so a route-only
   // sweep cannot prove its asset is present in the deploy artifact. Exercise
   // the toggle once per viewport and fail on the same ErrorBoundary users see.
+  // The canonical sweep includes /es/, which intentionally saves Spanish.
+  // This English-copy fixture must establish its own preference.
+  await page.evaluate(() => localStorage.setItem('borderPulse_language', 'en'));
   activeErrors = [];
   try {
     const response = await page.goto(new URL('/', baseUrl).href, {

@@ -1,5 +1,13 @@
 # DECISIONS
 
+## 2026-11-02 · Spanish home is one indexable entry, not a translated URL tree
+
+Search engines need a Spanish document for the home page. `/es/` is that entry: its own lang, title, description, canonical and reciprocal hreflang with `/`. Shared crossing URLs stay one address with the in-page language preference. This does not open per-crossing or best-time Spanish duplicates while query evidence is still thin.
+
+## 2026-11-02 · The no-JS home snapshot is not frozen to the last site build
+
+Vercel publishes the app daily and on application changes, so HTML baked at build time can lag the live CBP fetch by hours. The no-JS home frame reads `/snapshot/`, which on Vercel is the existing cached CBP function rendered as HTML. GitHub Pages, the rollback host, keeps the snapshot file written by that data deploy. The frame is labeled as a published snapshot and keeps the retrieval time. It does not add a collector or rebuild the site on every data commit.
+
 ## 2026-10-30 · The crossing map uses the existing BorderPulse design
 
 The map is an ordinary BorderPulse page. Its presentation inherits the existing shell, type, surfaces, controls and blueprint map language; a separate cinematic visual identity is no longer the target. Keep useful geography, explicit clocks, lane comparisons, honest replay and user-entered driving arithmetic. Entry points belong in the existing navigation/dashboard and relevant crossing pages. This correction awaits exact-head review before release.
@@ -140,7 +148,7 @@ additional monthly spend; do not pause the shared Vercel team and DIGITO.
 ## 2026-09-29 · Evaluate Vercel with a public-app preview
 
 Keep the existing GitHub Pages site and automatic ads while testing Vercel.
-Vercel builds use the same Vite app plus a five-minute CDN-cached CBP endpoint;
+Vercel builds use the same Vite app plus a CBP endpoint with five minutes of CDN cache and up to ten further minutes of stale revalidation;
 the client retains the last successful reading and falls back to the published
 static snapshot with its original timestamp when the endpoint fails. A compact
 30-day snapshot artifact makes historical aggregates independent of build-host

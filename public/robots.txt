@@ -7,6 +7,8 @@ Disallow: /category/
 # Embed widgets are meant for iframe use on third-party sites, not search.
 # They also have <meta name="robots" content="noindex"> as a second guard.
 Disallow: /embed/
+# Snapshot frames are noindex supplements for the home page, not extra landing pages.
+Disallow: /snapshot/
 
 # AI training crawlers — explicitly welcome
 User-agent: GPTBot

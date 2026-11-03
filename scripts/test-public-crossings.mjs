@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import { createCbpPayload } from './fetch-cbp.mjs';
 import { canonicalPortNumber } from '../src/lib/portIdentity.js';
 import handler from '../api/public/crossings.js';
+import snapshotHandler from '../api/public/snapshot.js';
 
 function response() {
   return {
@@ -48,6 +49,41 @@ test('public endpoint rejects mutations without contacting CBP', async t => {
   const res = response();
   await handler({ method: 'POST' }, res);
   assert.equal(res.statusCode, 405);
+});
+
+function htmlResponse() {
+  return {
+    headers: {},
+    status(code) { this.statusCode = code; },
+    setHeader(key, value) { this.headers[key] = value; },
+    end(body) { this.body = String(body); },
+  };
+}
+const snapshotFeed = () => ({ ok: true, json: async () =>
+  Array.from({ length: 42 }, (_, index) => ({
+    port_number: String(900000 + index), port_name: `Test crossing ${index}`,
+    border: 'Frontera mexicana', port_status: 'Abierto', date: '9/29/2026', time: '8:00 pm',
+    passenger_vehicle_lanes: { standard_lanes: { operational_status: 'Sin demora', delay_minutes: '0', lanes_open: '1' } },
+  })),
+});
+test('snapshot endpoint renders the cached official fetch as HTML', async t => {
+  t.mock.method(globalThis, 'fetch', snapshotFeed);
+  const res = htmlResponse();
+  await snapshotHandler({ method: 'GET', query: { lang: 'es' } }, res);
+  assert.equal(res.statusCode, 200);
+  assert.match(res.headers['Vercel-CDN-Cache-Control'], /s-maxage=300/);
+  assert.equal(res.headers['X-Robots-Tag'], 'noindex');
+  assert.match(res.body, /Tiempos de espera en la frontera EE\.UU\.-México/);
+  assert.match(res.body, /instantánea publicada, no un feed en vivo/);
+  assert.match(res.body, /datetime="\d{4}-\d{2}-\d{2}T/);
+});
+test('snapshot endpoint does not cache an official outage', async t => {
+  t.mock.method(globalThis, 'fetch', async () => { throw new Error('upstream unavailable'); });
+  const res = htmlResponse();
+  await snapshotHandler({ method: 'GET' }, res);
+  assert.equal(res.statusCode, 502);
+  assert.equal(res.headers['Cache-Control'], 'no-store');
+  assert.equal(res.headers['Vercel-CDN-Cache-Control'], undefined);
 });
 
 
@@ -123,4 +159,48 @@ test('public endpoint fails without caching if the main San Ysidro row is absent
   assert.equal(res.statusCode, 502);
   assert.equal(res.headers['Cache-Control'], 'no-store');
   assert.equal(res.headers['Vercel-CDN-Cache-Control'], undefined);
+});
+
+test('snapshot fallback retains its original clock and is never CDN cached', async t => {
+  t.mock.method(globalThis, 'fetch', async url => {
+    if (String(url).includes('bwt.cbp.gov')) throw new Error('upstream unavailable');
+    assert.equal(url, 'https://borderpulse.com/data/crossings.json');
+    return { ok: true, json: async () => ({ fetched_at: '2026-10-01T12:00:00Z', crossings: [] }) };
+  });
+  const res = htmlResponse();
+  await snapshotHandler({ method: 'GET', headers: { host: 'borderpulse.com' } }, res);
+  assert.equal(res.statusCode, 200);
+  assert.match(res.body, /2026-10-01T12:00:00Z/);
+  assert.match(res.body, /published snapshot, not a live feed/);
+  assert.equal(res.headers['Cache-Control'], 'no-store');
+  assert.equal(res.headers['Vercel-CDN-Cache-Control'], undefined);
+});
+test('snapshot does not fetch an untrusted Host as its fallback', async t => {
+  let calls = 0;
+  t.mock.method(globalThis, 'fetch', async () => { calls++; throw new Error('outage'); });
+  const res = htmlResponse();
+  await snapshotHandler({ method: 'GET', headers: { host: 'untrusted.example' } }, res);
+  assert.equal(calls, 1);
+  assert.equal(res.statusCode, 502);
+});
+test('slow upstream and slow bundled fallback finish within one function budget', { timeout: 10_000 }, async t => {
+  const signals = [];
+  t.mock.method(globalThis, 'fetch', async (url, { signal }) => {
+    signals.push(signal);
+    return new Promise((resolve, reject) => signal.addEventListener('abort', () => reject(signal.reason), { once: true }));
+  });
+  // AbortSignal.timeout uses unref timers. Keep the test alive until both fire.
+  const keepAlive = setInterval(() => {}, 100);
+  const start = performance.now();
+  const res = htmlResponse();
+  try {
+    await snapshotHandler({ method: 'GET', headers: { host: 'borderpulse.com' }, query: { lang: 'es' } }, res);
+  } finally { clearInterval(keepAlive); }
+  assert.equal(signals.length, 2);
+  assert.ok(signals.every(signal => signal.aborted));
+  assert.ok(performance.now() - start < 9_500, 'must leave response headroom under maxDuration=10s');
+  assert.equal(res.statusCode, 502);
+  assert.match(res.body, /no están disponibles temporalmente/);
+  assert.match(res.body, /https:\/\/bwt.cbp.gov\//);
+  assert.equal(res.headers['Cache-Control'], 'no-store');
 });

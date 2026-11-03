@@ -166,7 +166,10 @@ export default function CrossingMapExplorer({
     returnFocus = useRef(null),
     returnPosition = useRef(null),
     previousSelection = useRef(undefined),
-    selectionScope = useRef(scopeKey);
+    selectionScope = useRef(scopeKey),
+    liveScope = useRef(scopeKey);
+  liveScope.current = scopeKey;
+  const editingField = node => !!node && (node.isContentEditable || node.matches?.('input, textarea, select'));
   const gesture = useRef({
     pointers: new Map()
   });
@@ -256,20 +259,26 @@ export default function CrossingMapExplorer({
       const p = cameraPoint(selected.point, current);
       return p.x < 40 || p.x > MAP_WIDTH - 40 || p.y < 40 || p.y > MAP_HEIGHT - 40 ? fitBorderPoints([selected.point]) : current;
     });
-    if (changed && selectedPort) requestAnimationFrame(revealReport);
-    if (changed && !selectedPort && previousSelection.current && selectionScope.current === scopeKey) requestAnimationFrame(() => {
-      const origin = returnFocus.current;
-      const replacement = origin?.id ? document.getElementById(origin.id) : null;
-      const position = returnPosition.current;
-      if (position) {
-        if (paneRef.current) paneRef.current.scrollTop = position.pane;
-        window.scrollTo({ left: position.x, top: position.y, behavior: 'instant' });
-      }
-      const target = origin?.isConnected ? origin : replacement || frameRef.current;
-      target?.focus({ preventScroll: true });
-      if (!position) target?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
-    });
+    let frame = 0;
+    if (changed && selectedPort) frame = requestAnimationFrame(revealReport);
+    if (changed && !selectedPort && previousSelection.current && selectionScope.current === scopeKey) {
+      const restoreScope = scopeKey;
+      frame = requestAnimationFrame(() => {
+        if (liveScope.current !== restoreScope || editingField(document.activeElement)) return;
+        const origin = returnFocus.current;
+        const replacement = origin?.id ? document.getElementById(origin.id) : null;
+        const position = returnPosition.current;
+        if (position) {
+          if (paneRef.current) paneRef.current.scrollTop = position.pane;
+          window.scrollTo({ left: position.x, top: position.y, behavior: 'instant' });
+        }
+        const target = origin?.isConnected ? origin : replacement || frameRef.current;
+        target?.focus({ preventScroll: true });
+        if (!position) target?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+      });
+    }
     previousSelection.current = selectedPort;
+    return () => cancelAnimationFrame(frame);
   }, [selectedPort, hasRows, active, scopeKey]);
   useEffect(() => {
     if (!active || !selectedPort) return;
@@ -285,6 +294,7 @@ export default function CrossingMapExplorer({
   const groups = clusterBorderRows(rows, camera, cssScale);
   const unit = 1 / (cssScale * zoom);
   function revealReport() {
+    if (editingField(document.activeElement)) return;
     if (paneRef.current) paneRef.current.scrollTop = 0;
     const back = backRef.current;
     back?.focus({ preventScroll: true });

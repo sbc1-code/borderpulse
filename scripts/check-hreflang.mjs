@@ -16,6 +16,10 @@ const alternates = (html) => links(html).filter((a) => a.rel === 'alternate' && 
 export function checkBuiltHreflangs(dist = path.join(root, 'dist')) {
   const posts = JSON.parse(fs.readFileSync(path.join(dist, 'data/blog/index.json'), 'utf8')).posts;
   const expected = new Map([
+    ['/', pair('/', '/es/')],
+    ['/es/', pair('/', '/es/')],
+    ['/snapshot/', single('/snapshot/')],
+    ['/snapshot/es/', single('/snapshot/es/', 'es')],
     ['/methodology/', pair('/methodology/', '/metodologia/')],
     ['/metodologia/', pair('/methodology/', '/metodologia/')],
     ['/privacy/', pair('/privacy/', '/privacidad/')],
@@ -74,11 +78,12 @@ export async function checkHreflangNavigation(page, baseUrl) {
     assert.equal(await page.evaluate(() => window.hreflangDocument), marker, 'must stay in same SPA document');
     assert.deepEqual(await page.locator('link[rel="canonical"]').evaluateAll((nodes) => nodes.map((node) => node.href)), [origin + route]);
   };
+  const homePair = pair('/', '/es/');
   const click = async (route) => page.locator(`#root a[href="${route}"]:visible`).first().click();
-  await inspect('/');
+  await inspect('/', homePair);
   await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).click();
   await page.waitForFunction(() => document.documentElement.lang === 'es', null, { timeout: 10_000 });
-  await inspect('/'); // Shared URL; no invented Spanish route.
+  await inspect('/', homePair); // Shared URL keeps this canonical. Spanish points at /es/.
   await page.getByRole('button', { name: 'Switch to English', exact: true }).filter({ visible: true }).click();
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).fill('San Ysidro');
   await click('/crossing/san-ysidro/');
@@ -109,7 +114,7 @@ export async function checkHreflangNavigation(page, baseUrl) {
   await page.goBack();
   await inspect(enArticle, pair(enArticle, esArticle));
   await click('/');
-  await inspect('/');
+  await inspect('/', homePair);
   // A fresh translated entry also has to clear its prerendered pair on exit.
   await page.goto(new URL(esArticle, baseUrl).href);
   await page.locator('#root article[lang="es"]').waitFor();
@@ -117,7 +122,7 @@ export async function checkHreflangNavigation(page, baseUrl) {
   assert.deepEqual(await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) => nodes.map((node) => ({ lang: node.hreflang, href: node.href }))), entryExpected);
   await click('/');
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).waitFor();
-  assert.deepEqual(await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) => nodes.map((node) => ({ lang: node.hreflang, href: node.href }))), single('/'));
+  assert.deepEqual(await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) => nodes.map((node) => ({ lang: node.hreflang, href: node.href }))), homePair);
   console.log('[hreflang] PASS: SPA home/language switch → crossing → best-time → Back → compare → blog → EN/ES article → Back → home');
 }
 
