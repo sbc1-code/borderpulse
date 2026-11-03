@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-03T18:17:56.437Z",
-  "snapshot_at": "2026-11-03T18:08:27.719Z",
+  "generated_at": "2026-11-03T23:53:49.222Z",
+  "snapshot_at": "2026-11-03T23:52:46.228Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 7,
-      "detected_at": "2026-11-02T10:44:18.889Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 40 min around 7 PM — ~800% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 40 min cerca de las 7 PM — ~800% de la mediana de 30 días. Planea alrededor.",
+      "severity": 8,
+      "detected_at": "2026-11-03T23:53:49.222Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 45 min around 5 PM — ~900% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 45 min cerca de las 5 PM — ~900% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 19,
-        "peak_median": 40,
+        "peak_hour": 17,
+        "peak_median": 45,
         "overall_median": 5,
-        "samples": 21,
-        "ratio": 8
+        "samples": 17,
+        "ratio": 9
       }
     },
     {
@@ -34,6 +34,23 @@
         "overall_median": 45,
         "samples": 24,
         "ratio": 2.6666666666666665
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1.5714285714285716,
+      "detected_at": "2026-11-03T23:53:49.222Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~257% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~257% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 35,
+        "samples": 18,
+        "ratio": 2.5714285714285716
       }
     },
     {
@@ -72,6 +89,40 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 1.4,
+      "detected_at": "2026-11-03T23:53:49.222Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 48 min around 6 PM — ~240% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 48 min cerca de las 6 PM — ~240% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 48,
+        "overall_median": 20,
+        "samples": 18,
+        "ratio": 2.4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 1.25,
+      "detected_at": "2026-11-03T23:53:49.222Z",
+      "summary_en": "Heads up: San Ysidro's Sunday peak hits 180 min around 4 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 180 min cerca de las 4 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 180,
+        "overall_median": 80,
+        "samples": 18,
+        "ratio": 2.25
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
@@ -89,35 +140,18 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.25,
-      "detected_at": "2026-11-02T02:11:59.813Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 45 min around 7 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 45 min cerca de las 7 PM — ~225% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 19,
-        "peak_median": 45,
-        "overall_median": 20,
-        "samples": 21,
-        "ratio": 2.25
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 1.125,
-      "detected_at": "2026-11-02T02:11:59.813Z",
-      "summary_en": "Heads up: San Ysidro's Sunday peak hits 170 min around 5 PM — ~213% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de San Ysidro alcanza 170 min cerca de las 5 PM — ~213% de la mediana de 30 días. Planea alrededor.",
+      "detected_at": "2026-11-03T23:53:49.222Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 170 min around 4 PM — ~213% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 170 min cerca de las 4 PM — ~213% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 17,
+        "peak_hour": 16,
         "peak_median": 170,
         "overall_median": 80,
-        "samples": 21,
+        "samples": 18,
         "ratio": 2.125
       }
     },
@@ -270,16 +304,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.7708333333333333,
-      "detected_at": "2026-11-02T02:11:59.813Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 85 min around 4 PM — ~177% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 85 min cerca de las 4 PM — ~177% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.8125,
+      "detected_at": "2026-11-03T23:53:49.222Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 87 min around 5 PM — ~181% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 87 min cerca de las 5 PM — ~181% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
-        "peak_hour": 16,
-        "peak_median": 85,
+        "peak_hour": 17,
+        "peak_median": 87,
         "overall_median": 48,
-        "samples": 21,
-        "ratio": 1.7708333333333333
+        "samples": 17,
+        "ratio": 1.8125
       }
     },
     {
@@ -334,23 +368,6 @@
         "best_median": 5,
         "overall_median": 20,
         "samples": 3
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.7142857142857142,
-      "detected_at": "2026-11-03T18:17:56.437Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 60 min around 10 PM — ~171% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 60 min cerca de las 10 PM — ~171% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 60,
-        "overall_median": 35,
-        "samples": 20,
-        "ratio": 1.7142857142857142
       }
     },
     {
