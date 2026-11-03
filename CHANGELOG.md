@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-03 — Prepare the reviewed fixes as an ordered branch stack
+
+- Preserve current main data while reconciling the Spanish/snapshot, duplicate-lane and Lane Flip Watch branches in that order. Keep both endpoint regression groups, metadata imports and reviewed source-clock safeguards.
+- Refresh the retained lane archive from committed normalized snapshots; retain the explicit missing-raw-data caveat and actual coverage dates.
+- Add annotation-only Button prop and optional SEO field contracts for the configured JavaScript typecheck; no runtime, gate or dependency change. Remaining diagnostics are inherited from untouched main.
+
 ## 2026-11-02 — Scope Lane Flip Watch to retained evidence
 
 - Keep concise EN/ES eligibility and non-simultaneity cautions in copied, native-shared and WhatsApp text, alongside the source clocks and canonical URL.

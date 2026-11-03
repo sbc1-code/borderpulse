@@ -30,6 +30,10 @@ function setMeta(name, content, attr = 'name') {
  * Update page-level SEO tags. Call from useEffect in each page component.
  * Pass null/undefined for a field to skip it. A canonical update also replaces
  * language alternates; explicit hreflangs (including []) override the defaults.
+ * @param {{ title?: string|null, description?: string|null, ogTitle?: string|null,
+ * ogDescription?: string|null, ogImage?: string|null, ogUrl?: string|null,
+ * canonical?: string|null, lang?: string|null,
+ * hreflangs?: Array<{lang: string, href: string}>|null }} meta
  */
 export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical, lang, hreflangs }) {
   if (lang) document.documentElement.lang = lang;
