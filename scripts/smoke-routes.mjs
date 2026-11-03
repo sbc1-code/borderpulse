@@ -25,6 +25,7 @@ import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './che
 import { checkBuiltHreflangs, checkHreflangNavigation } from './check-hreflang.mjs';
 import { checkDocumentLanguage } from './check-document-language.mjs';
 import { checkBorderMap } from './check-border-map.mjs';
+import { checkLaneFlips } from './check-lane-flips.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -396,6 +397,11 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     failures.push(`${profile.name} metadata navigation: ${error.stack || error.message}`);
   } finally {
     clearTimeout(metadataDeadline);
+  }
+  try {
+    await checkLaneFlips(browser, baseUrl, profile.viewport);
+  } catch (error) {
+    failures.push(`${profile.name} lane flips: ${error.stack || error.message}`);
   }
   await context.close();
   console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);

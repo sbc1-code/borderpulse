@@ -1,5 +1,13 @@
 # DECISIONS
 
+## 2026-11-02 · Lane comparisons describe retained fetches
+
+Do not infer a usual lane advantage from repeated fetches or call values current just because retrieval is fresh. Display both source clocks and actual historical coverage; mark an archive stale after 24 hours without a retained fetch. Earlier snapshots were normalized before duplicate-row repair and raw responses are unavailable: retain an explicit incompleteness caveat rather than claim they were reconstructed. Counts and percentages describe those stored fetches only.
+
+## 2026-11-02 · Lane flip counts need normalized lane snapshots, not the Standard-only archive
+
+`snapshot-history.json` keeps only Standard `current_wait_time`, so Ready, SENTRI, and Ready pedestrian comparisons use the existing full-history walk of normalized `public/data/crossings.json`. These are not raw CBP bodies and cannot recover values omitted by the older duplicate-row normalizer. Each fetch counts once if both usable lane values exist; repeated fetches may repeat the same underlying source report. Hours group port-local retrieval time. Show actual retained dates and descriptive counts/percentages, never a usual/never or probability claim. The collector requests a 30-day lookback, but a retained artifact may be older: its coverage and stale state must remain visible. Failure to write the summary must not block the CBP snapshot.
+
 ## 2026-11-02 · Spanish home is one indexable entry, not a translated URL tree
 
 Search engines need a Spanish document for the home page. `/es/` is that entry: its own lang, title, description, canonical and reciprocal hreflang with `/`. Shared crossing URLs stay one address with the in-page language preference. This does not open per-crossing or best-time Spanish duplicates while query evidence is still thin.
@@ -455,7 +463,6 @@ is the implementation record.
 ---
 
 *Append a new section the next time a non-obvious decision lands.*
-
 
 ## 2026-10-06 · Accept Tailwind 4 browser floor to clear publication blockers
 

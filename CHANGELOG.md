@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 2026-11-03 — Prepare the reviewed fixes as an ordered branch stack
+
+- Preserve current main data while reconciling the Spanish/snapshot, duplicate-lane and Lane Flip Watch branches in that order. Keep both endpoint regression groups, metadata imports and reviewed source-clock safeguards.
+- Refresh the retained lane archive from committed normalized snapshots; retain the explicit missing-raw-data caveat and actual coverage dates.
+- Add annotation-only Button prop and optional SEO field contracts for the configured JavaScript typecheck; no runtime, gate or dependency change. Remaining diagnostics are inherited from untouched main.
+
+## 2026-11-02 — Scope Lane Flip Watch to retained evidence
+
+- Keep concise EN/ES eligibility and non-simultaneity cautions in copied, native-shared and WhatsApp text, alongside the source clocks and canonical URL.
+
+- Replace usual/never/right-now claims with descriptive counts and percentages from retained fetches. Repeated fetches can repeat one CBP report and are not independent observations or forecasts.
+- Show actual archive and per-lane intervals, an explicit stale state after a day without a retained fetch, both compared source clocks and lane eligibility reminders in EN/ES.
+- Rebuild coverage metadata from committed normalized snapshots only; raw historical CBP responses are unavailable, so clearly disclose earlier duplicate-row omissions. This does not retroactively apply the new normalizer to old data.
+
+## 2026-11-02 — Lane Flip Watch (review candidate)
+
+- Add `/lane-flip/` and `/lane-flip/:slug/`: reported general, Ready Lane, SENTRI, and Ready pedestrian waits side by side, with a plain verdict and a tappable 24-hour strip.
+- Count flips from the same 30-day `crossings.json` history the collector already walks. `snapshot-history.json` still stores only standard waits. A paired report needs both lanes open, with a numeric delay or no-delay status. Missing, pending, and closed lanes stay missing.
+- Ship the summary as `public/data/lane-flips.json`. The collector writes it beside the standard archive and can skip it without blocking a CBP refresh. No new data source.
+- English and Spanish, sitemap, navigation, and share text that keeps the CBP report clock. Not published.
+- A null or missing open-lane count is not zero. `Lanes Closed` and `N/A` stay out of comparisons and flips.
+
 ## 2026-11-02 — Normalize primary waits and retain per-lane source clocks
 
 - Apply the same status-aware scalar normalization to the San Ysidro main-row path as other ports. Hypothetical retained-number tests cover closed, N/A and pending states, actual zero, and reversed source order; they do not describe an observed feed incident.

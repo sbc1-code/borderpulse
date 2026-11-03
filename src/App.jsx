@@ -21,6 +21,7 @@ const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
 const Privacy = lazy(() => import('@/pages/Privacy'));
 const CrossingConsole = lazy(() => import('@/pages/CorridorRedirect'));
+const LaneFlip = lazy(() => import('@/pages/LaneFlip'));
 
 function RouteFallback() {
   return (
@@ -49,6 +50,8 @@ function LayoutRoutes() {
           <Route path="/compare/:pair" element={<Compare />} />
           <Route path="/corridor/san-diego-tijuana" element={<CrossingConsole />} />
           <Route path="/walk-or-drive/:slug" element={<WalkOrDrive />} />
+          <Route path="/lane-flip" element={<LaneFlip />} />
+          <Route path="/lane-flip/:slug" element={<LaneFlip />} />
           <Route path="/privacy" element={<Privacy lang="en" />} />
           <Route path="/privacidad" element={<Privacy lang="es" />} />
           <Route path="*" element={<Navigate to="/" replace />} />

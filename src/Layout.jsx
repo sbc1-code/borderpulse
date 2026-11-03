@@ -7,6 +7,14 @@ import { themeValue, readStorage, writeStorage } from '@/lib/browserStorage';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { normalizeLane, withLane } from '@/lib/laneContext';
 
+function LaneIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M4 7h16M4 12h10M4 17h16" />
+    </svg>
+  );
+}
+
 export default function Layout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -75,6 +83,12 @@ export default function Layout({ children }) {
       href: '/best-time/',
       icon: Clock3,
       current: location.pathname.startsWith('/best-time'),
+    },
+    {
+      name: language === 'en' ? 'Lane flips' : 'Carril rápido',
+      href: '/lane-flip/',
+      icon: LaneIcon,
+      current: location.pathname.startsWith('/lane-flip'),
     },
   ];
 
@@ -200,6 +214,9 @@ export default function Layout({ children }) {
             <span>·</span>
             <Link to="/best-time/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
+            </Link>
+            <Link to="/lane-flip/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'Lane flips' : 'Carril rápido'}
             </Link>
             <Link to="/about/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
