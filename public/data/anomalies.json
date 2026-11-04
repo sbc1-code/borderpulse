@@ -1,39 +1,22 @@
 {
-  "generated_at": "2026-11-04T14:01:00.833Z",
-  "snapshot_at": "2026-11-04T13:53:02.960Z",
+  "generated_at": "2026-11-04T21:07:14.796Z",
+  "snapshot_at": "2026-11-04T20:52:56.779Z",
   "active": [
     {
       "type": "sunday_spike",
       "port_slug": "laredo-colombia-solidarity",
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
-      "severity": 14,
-      "detected_at": "2026-11-04T05:35:09.028Z",
-      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 45 min around 5 PM — ~1500% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 45 min cerca de las 5 PM — ~1500% de la mediana de 30 días. Planea alrededor.",
+      "severity": 8,
+      "detected_at": "2026-11-04T21:07:14.796Z",
+      "summary_en": "Heads up: Laredo - Colombia Solidarity's Sunday peak hits 45 min around 5 PM — ~900% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Laredo - Colombia Solidarity alcanza 45 min cerca de las 5 PM — ~900% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 17,
         "peak_median": 45,
-        "overall_median": 3,
+        "overall_median": 5,
         "samples": 17,
-        "ratio": 15
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 2,
-      "detected_at": "2026-11-04T14:01:00.833Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~300% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~300% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 30,
-        "samples": 18,
-        "ratio": 3
+        "ratio": 9
       }
     },
     {
@@ -85,6 +68,23 @@
         "overall_median": 60,
         "samples": 16,
         "ratio": 2.5833333333333335
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1.5714285714285716,
+      "detected_at": "2026-11-04T21:07:14.796Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~257% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~257% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 35,
+        "samples": 18,
+        "ratio": 2.5714285714285716
       }
     },
     {
@@ -215,15 +215,15 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-04T14:01:00.833Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 3 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 3 min.",
+      "detected_at": "2026-11-04T21:07:14.796Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Wednesday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 3,
+        "overall_median": 5,
         "samples": 14
       }
     },
@@ -233,15 +233,15 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-04T14:01:00.833Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 11 PM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 11 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-11-04T21:07:14.796Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Wednesday hour so far is 11 PM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del miércoles en Brownsville - Gateway es 11 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 3,
         "day_label": "Wed",
         "best_hour": 23,
         "best_median": 0,
-        "overall_median": 30,
+        "overall_median": 35,
         "samples": 18
       }
     },
