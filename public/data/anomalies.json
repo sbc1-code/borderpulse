@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-05T18:35:12.026Z",
-  "snapshot_at": "2026-11-05T18:22:47.055Z",
+  "generated_at": "2026-11-05T23:58:29.528Z",
+  "snapshot_at": "2026-11-05T23:53:00.074Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -89,23 +89,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1.3684210526315788,
-      "detected_at": "2026-11-05T18:35:12.026Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~237% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~237% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 38,
-        "samples": 18,
-        "ratio": 2.3684210526315788
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -135,6 +118,23 @@
         "peak_median": 90,
         "overall_median": 40,
         "samples": 19,
+        "ratio": 2.25
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1.25,
+      "detected_at": "2026-11-05T23:58:29.528Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 40,
+        "samples": 18,
         "ratio": 2.25
       }
     },
@@ -215,15 +215,15 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-05T18:35:12.026Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 38 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 38 min.",
+      "detected_at": "2026-11-05T23:58:29.528Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 38,
+        "overall_median": 40,
         "samples": 36
       }
     },
