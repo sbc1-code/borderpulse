@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-05T10:32:28.377Z",
-  "snapshot_at": "2026-11-05T10:22:53.361Z",
+  "generated_at": "2026-11-05T18:35:12.026Z",
+  "snapshot_at": "2026-11-05T18:22:47.055Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,23 +72,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1.5714285714285716,
-      "detected_at": "2026-11-04T21:07:14.796Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~257% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~257% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 35,
-        "samples": 18,
-        "ratio": 2.5714285714285716
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -102,6 +85,23 @@
         "overall_median": 20,
         "samples": 18,
         "ratio": 2.4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1.3684210526315788,
+      "detected_at": "2026-11-05T18:35:12.026Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~237% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~237% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 38,
+        "samples": 18,
+        "ratio": 2.3684210526315788
       }
     },
     {
@@ -215,15 +215,15 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
+      "detected_at": "2026-11-05T18:35:12.026Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 38 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 38 min.",
       "evidence": {
         "day_of_week": 4,
         "day_label": "Thu",
         "best_hour": 0,
         "best_median": 0,
-        "overall_median": 35,
+        "overall_median": 38,
         "samples": 36
       }
     },
@@ -423,42 +423,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "laredo-bridge-i",
-      "port_name": "Laredo - Bridge I",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-11-04T14:01:00.833Z",
-      "summary_en": "Right now Laredo - Bridge I's lightest Wednesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Laredo - Bridge I es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 25 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 4,
-        "best_median": 0,
-        "overall_median": 25,
-        "samples": 3
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-11-04T14:01:00.833Z",
-      "summary_en": "Right now Calexico - East's lightest Wednesday hour so far is 12 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del miércoles en Calexico - East es 12 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 3,
-        "day_label": "Wed",
-        "best_hour": 0,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 8
-      }
-    }
-  ]
+  "trailing_24h": []
 }
