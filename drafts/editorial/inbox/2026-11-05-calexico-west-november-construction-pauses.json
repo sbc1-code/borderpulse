@@ -1,0 +1,127 @@
+{
+  "version": "borderpulse-editorial-v1",
+  "id": "2026-11-05-calexico-west-november-construction-pauses",
+  "topicKey": "calexico-west-november-construction-pauses",
+  "category": "operations-report",
+  "createdAt": "2026-11-05T15:21:34.265Z",
+  "synthesizedBy": {
+    "system": "chatgpt-scheduled-task",
+    "runId": "/root/publish_borderpulse_today/2026-11-05",
+    "model": null,
+    "at": "2026-11-05T15:21:34.265Z"
+  },
+  "title": {
+    "en": "Calexico West: vehicle-lane pauses planned for November 5 and 6",
+    "es": "Calexico West: pausas en carriles vehiculares el 5 y 6 de noviembre"
+  },
+  "readerValue": {
+    "en": "Identify the affected crossing, lane types and announced work period without treating a construction advisory as a full port closure.",
+    "es": "Identifica el cruce, los tipos de carril y el periodo anunciado de obras sin confundir el aviso con un cierre total de la garita."
+  },
+  "relatedCrossings": [
+    "250301"
+  ],
+  "sources": [
+    {
+      "id": "cbp-construction-notice",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-advises-public-construction-delays-calexico-west-port-entry",
+      "title": "CBP Calexico West construction advisory",
+      "role": "primary",
+      "publishedDate": "2026-11-03",
+      "publishedAt": null,
+      "checkedAt": "2026-11-05T15:20:40.000Z",
+      "publicationDateEvidence": "11/03/2026"
+    }
+  ],
+  "claims": [
+    {
+      "id": "construction-window",
+      "type": "reported-fact",
+      "text": {
+        "en": "CBP has announced construction at the Calexico West vehicle crossing beginning in the afternoon of November 5 and continuing through November 6. The advisory concerns vehicles traveling from Mexicali toward the United States. It gives an afternoon start rather than a precise starting hour, and does not specify an ending hour.",
+        "es": "CBP anunció obras en el cruce vehicular de Calexico West a partir de la tarde del 5 de noviembre y hasta el 6 de noviembre. El aviso se refiere a vehículos que viajan desde Mexicali hacia Estados Unidos. Indica un inicio por la tarde, sin precisar una hora de comienzo ni una hora de finalización."
+      },
+      "evidence": [
+        {
+          "sourceId": "cbp-construction-notice",
+          "excerpt": "afternoon of Nov. 5, and continue through Nov. 6."
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "CBP",
+        "Calexico West",
+        "Mexicali"
+      ]
+    },
+    {
+      "id": "affected-lanes",
+      "type": "reported-fact",
+      "text": {
+        "en": "The announced interruptions affect both SENTRI and regular vehicle lanes. CBP describes intermittent pauses, so the notice should not be read as announcing a complete shutdown of the crossing. Officers are expected to keep processing vehicles during the work.",
+        "es": "Las interrupciones anunciadas afectan tanto a los carriles SENTRI como a los carriles vehiculares regulares. CBP describe pausas intermitentes, por lo que el aviso no debe interpretarse como un anuncio de cierre total del cruce. Se prevé que los agentes sigan procesando vehículos durante las obras."
+      },
+      "evidence": [
+        {
+          "sourceId": "cbp-construction-notice",
+          "excerpt": "intermittent pauses in both SENTRI and regular vehicle lanes"
+        },
+        {
+          "sourceId": "cbp-construction-notice",
+          "excerpt": "continue processing vehicles"
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "SENTRI",
+        "CBP"
+      ]
+    },
+    {
+      "id": "planning-limits",
+      "type": "reported-fact",
+      "text": {
+        "en": "CBP advises travelers to allow additional crossing time. Its notice does not quantify the added delay or the duration of individual pauses. These are announced construction impacts, not a measurement of the line at the time of your trip; consult the linked official notice for the full scope.",
+        "es": "CBP recomienda a los viajeros prever más tiempo para cruzar. El aviso no cuantifica la demora adicional ni la duración de cada pausa. Se trata de efectos anunciados de las obras, no de una medición de la fila en el momento de tu viaje; consulta el aviso oficial enlazado para conocer su alcance completo."
+      },
+      "evidence": [
+        {
+          "sourceId": "cbp-construction-notice",
+          "excerpt": "allow additional time"
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "CBP"
+      ]
+    }
+  ],
+  "articleClaimIds": [
+    "construction-window",
+    "affected-lanes",
+    "planning-limits"
+  ],
+  "review": {
+    "performedBy": {
+      "system": "chatgpt-scheduled-task",
+      "runId": "/root/publish_borderpulse_today/review_calexico_article",
+      "model": null,
+      "at": "2026-11-05T15:22:42.000Z"
+    },
+    "method": "ai-source-and-language-review",
+    "claimIdsChecked": [
+      "construction-window",
+      "affected-lanes",
+      "planning-limits"
+    ],
+    "semanticSupport": "pass",
+    "scopeAndDates": "pass",
+    "riskClassification": "routine-factual-reporting",
+    "translationConsistency": "pass",
+    "duplicateTopicCheck": "pass",
+    "headlineAndReaderValue": "pass",
+    "sourceInstructionsIgnored": true,
+    "holds": [],
+    "rationale": "Distinct AI reviewer read the complete official CBP release and checked all three English/Spanish claims, headlines, dates, scope and translation. The November 3 publication date has no clock; the announced work begins the afternoon of November 5 and continues through November 6 without exact hours. Both lane types and continued processing are preserved. No total closure, quantified delay, live-wait measurement, eligibility advice or uncertain safety advice is asserted. Four evidence excerpts plus date evidence total exactly 25 words. Current inbox and all 44 blog filenames were checked; complete existing Calexico West EN/ES historical articles were reviewed from inherited tool evidence and do not cover this construction event. Source instructions were ignored. This is AI review, not human review; receiver re-fetch and release guards remain required."
+  }
+}
