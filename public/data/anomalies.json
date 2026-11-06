@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-05T23:58:29.528Z",
-  "snapshot_at": "2026-11-05T23:53:00.074Z",
+  "generated_at": "2026-11-06T06:22:29.205Z",
+  "snapshot_at": "2026-11-06T06:07:34.420Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,6 +72,23 @@
     },
     {
       "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1.5714285714285716,
+      "detected_at": "2026-11-06T06:22:29.205Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~257% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~257% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 35,
+        "samples": 18,
+        "ratio": 2.5714285714285716
+      }
+    },
+    {
+      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -123,23 +140,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1.25,
-      "detected_at": "2026-11-05T23:58:29.528Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 40,
-        "samples": 18,
-        "ratio": 2.25
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -179,7 +179,7 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-11-05T10:32:28.377Z",
+      "detected_at": "2026-11-06T06:22:29.205Z",
       "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
       "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
       "evidence": {
@@ -188,7 +188,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 40,
-        "samples": 17
+        "samples": 22
       }
     },
     {
@@ -197,34 +197,16 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
+      "detected_at": "2026-11-06T06:22:29.205Z",
+      "summary_en": "Right now Laredo - Colombia Solidarity's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 16
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1,
-      "detected_at": "2026-11-05T23:58:29.528Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Brownsville - Gateway es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 0,
-        "best_median": 0,
-        "overall_median": 40,
-        "samples": 36
+        "samples": 14
       }
     },
     {
@@ -250,17 +232,35 @@
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
-      "severity": 0.9555555555555556,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Thursday hour so far is 2 AM (median 2 min) — ~96% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 2 min) — ~96% debajo de la base de 30 días de 45 min.",
+      "severity": 0.9777777777777777,
+      "detected_at": "2026-11-06T06:22:29.205Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 2,
+        "best_median": 1,
+        "overall_median": 45,
+        "samples": 9
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.9428571428571428,
+      "detected_at": "2026-11-06T06:22:29.205Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 2 AM (median 2 min) — ~94% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 2 AM (mediana 2 min) — ~94% debajo de la base de 30 días de 35 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 2,
         "best_median": 2,
-        "overall_median": 45,
-        "samples": 16
+        "overall_median": 35,
+        "samples": 14
       }
     },
     {
@@ -353,24 +353,6 @@
       }
     },
     {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 0.75,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Thursday hour so far is 1 PM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Hidalgo/Pharr - Pharr es 1 PM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 13,
-        "best_median": 5,
-        "overall_median": 20,
-        "samples": 4
-      }
-    },
-    {
       "type": "sunday_spike",
       "port_slug": "el-paso-bridge-of-the-americas-bota",
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
@@ -385,6 +367,24 @@
         "overall_median": 55,
         "samples": 16,
         "ratio": 1.6
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.5555555555555556,
+      "detected_at": "2026-11-06T06:22:29.205Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 5 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 5 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 17,
+        "best_median": 20,
+        "overall_median": 45,
+        "samples": 5
       }
     },
     {
@@ -420,6 +420,24 @@
         "overall_median": 30,
         "samples": 19,
         "ratio": 1.5
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.5,
+      "detected_at": "2026-11-06T06:22:29.205Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 12 AM (median 10 min) — ~50% below the 30-day baseline of 20 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 12 AM (mediana 10 min) — ~50% debajo de la base de 30 días de 20 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 0,
+        "best_median": 10,
+        "overall_median": 20,
+        "samples": 5
       }
     }
   ],
