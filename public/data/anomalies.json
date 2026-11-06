@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-06T14:52:08.723Z",
-  "snapshot_at": "2026-11-06T14:38:13.807Z",
+  "generated_at": "2026-11-06T20:44:59.829Z",
+  "snapshot_at": "2026-11-06T20:37:36.035Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,23 +72,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 1.5714285714285716,
-      "detected_at": "2026-11-06T06:22:29.205Z",
-      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~257% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~257% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 35,
-        "samples": 18,
-        "ratio": 2.5714285714285716
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
@@ -135,6 +118,23 @@
         "peak_median": 90,
         "overall_median": 40,
         "samples": 19,
+        "ratio": 2.25
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 1.25,
+      "detected_at": "2026-11-06T20:44:59.829Z",
+      "summary_en": "Heads up: Brownsville - Gateway's Sunday peak hits 90 min around 6 PM — ~225% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Brownsville - Gateway alcanza 90 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 40,
+        "samples": 18,
         "ratio": 2.25
       }
     },
@@ -250,16 +250,16 @@
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
-      "severity": 0.8571428571428572,
-      "detected_at": "2026-11-06T14:52:08.723Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 5 min) — ~86% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 5 min) — ~86% debajo de la base de 30 días de 35 min.",
+      "severity": 0.875,
+      "detected_at": "2026-11-06T20:44:59.829Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
         "best_hour": 0,
         "best_median": 5,
-        "overall_median": 35,
+        "overall_median": 40,
         "samples": 38
       }
     },
@@ -336,6 +336,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "eagle-pass-bridge-i",
+      "port_name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "severity": 0.6666666666666667,
+      "detected_at": "2026-11-06T20:44:59.829Z",
+      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 5 PM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 5 PM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 17,
+        "best_median": 20,
+        "overall_median": 60,
+        "samples": 5
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -367,24 +385,6 @@
         "overall_median": 55,
         "samples": 16,
         "ratio": 1.6
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5555555555555556,
-      "detected_at": "2026-11-06T06:22:29.205Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 5 PM (median 20 min) — ~56% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 5 PM (mediana 20 min) — ~56% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 17,
-        "best_median": 20,
-        "overall_median": 45,
-        "samples": 5
       }
     },
     {
