@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-06T06:22:29.205Z",
-  "snapshot_at": "2026-11-06T06:07:34.420Z",
+  "generated_at": "2026-11-06T14:52:08.723Z",
+  "snapshot_at": "2026-11-06T14:38:13.807Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -157,38 +157,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 1,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Deconcini es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 0,
-        "best_median": 0,
-        "overall_median": 30,
-        "samples": 16
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-11-06T06:22:29.205Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Thursday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Nogales - Mariposa es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Friday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Mariposa es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 40,
-        "samples": 22
+        "samples": 17
       }
     },
     {
@@ -215,16 +197,16 @@
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
       "severity": 0.9791666666666666,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Thursday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 48 min.",
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Friday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 48 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 48 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 2,
         "best_median": 1,
         "overall_median": 48,
-        "samples": 20
+        "samples": 21
       }
     },
     {
@@ -233,34 +215,16 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.9777777777777777,
-      "detected_at": "2026-11-06T06:22:29.205Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Friday hour so far is 3 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 2,
+        "best_hour": 3,
         "best_median": 1,
         "overall_median": 45,
-        "samples": 9
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "brownsville-gateway",
-      "port_name": "Brownsville - Gateway",
-      "state": "TX",
-      "severity": 0.9428571428571428,
-      "detected_at": "2026-11-06T06:22:29.205Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 2 AM (median 2 min) — ~94% below the 30-day baseline of 35 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 2 AM (mediana 2 min) — ~94% debajo de la base de 30 días de 35 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 2,
-        "best_median": 2,
-        "overall_median": 35,
-        "samples": 14
+        "samples": 17
       }
     },
     {
@@ -269,12 +233,12 @@
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "severity": 0.9090909090909091,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Thursday hour so far is 12 AM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Friday hour so far is 12 AM (median 5 min) — ~91% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en El Paso - Bridge of the Americas (BOTA) es 12 AM (mediana 5 min) — ~91% debajo de la base de 30 días de 55 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 0,
         "best_median": 5,
         "overall_median": 55,
@@ -283,38 +247,38 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.8125,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now San Ysidro's lightest Thursday hour so far is 12 AM (median 15 min) — ~81% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en San Ysidro es 12 AM (mediana 15 min) — ~81% debajo de la base de 30 días de 80 min.",
+      "port_slug": "brownsville-gateway",
+      "port_name": "Brownsville - Gateway",
+      "state": "TX",
+      "severity": 0.8571428571428572,
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Friday hour so far is 12 AM (median 5 min) — ~86% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Brownsville - Gateway es 12 AM (mediana 5 min) — ~86% debajo de la base de 30 días de 35 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 0,
-        "best_median": 15,
-        "overall_median": 80,
-        "samples": 31
+        "best_median": 5,
+        "overall_median": 35,
+        "samples": 38
       }
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.8125,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Otay Mesa's lightest Thursday hour so far is 1 AM (median 15 min) — ~81% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Otay Mesa es 1 AM (mediana 15 min) — ~81% debajo de la base de 30 días de 80 min.",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 1 AM (median 5 min) — ~83% below the 30-day baseline of 30 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 1 AM (mediana 5 min) — ~83% debajo de la base de 30 días de 30 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 1,
-        "best_median": 15,
-        "overall_median": 80,
-        "samples": 20
+        "best_median": 5,
+        "overall_median": 30,
+        "samples": 21
       }
     },
     {
@@ -340,16 +304,52 @@
       "port_name": "Calexico - West",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Calexico - West's lightest Thursday hour so far is 12 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - West es 12 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now Calexico - West's lightest Friday hour so far is 12 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Calexico - West es 12 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
       "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
+        "day_of_week": 5,
+        "day_label": "Fri",
         "best_hour": 0,
         "best_median": 15,
         "overall_median": 60,
+        "samples": 17
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6875,
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now Otay Mesa's lightest Friday hour so far is 12 AM (median 25 min) — ~69% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Otay Mesa es 12 AM (mediana 25 min) — ~69% debajo de la base de 30 días de 80 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 0,
+        "best_median": 25,
+        "overall_median": 80,
         "samples": 8
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.625,
+      "detected_at": "2026-11-06T14:52:08.723Z",
+      "summary_en": "Right now San Ysidro's lightest Friday hour so far is 12 AM (median 30 min) — ~63% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en San Ysidro es 12 AM (mediana 30 min) — ~63% debajo de la base de 30 días de 80 min.",
+      "evidence": {
+        "day_of_week": 5,
+        "day_label": "Fri",
+        "best_hour": 0,
+        "best_median": 30,
+        "overall_median": 80,
+        "samples": 6
       }
     },
     {
@@ -385,24 +385,6 @@
         "best_median": 20,
         "overall_median": 45,
         "samples": 5
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.5,
-      "detected_at": "2026-11-05T10:32:28.377Z",
-      "summary_en": "Right now Tecate's lightest Thursday hour so far is 12 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Tecate es 12 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 0,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 16
       }
     },
     {
