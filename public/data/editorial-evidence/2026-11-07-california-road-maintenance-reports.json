@@ -1,0 +1,185 @@
+{
+  "version": "borderpulse-editorial-receipt-v1",
+  "admittedAt": "2026-11-07T15:18:20.823Z",
+  "fingerprint": "dbf184b80cd5f38d6dee66cde41c90ca0fa159a455d94b49017f5603dcfe9a6c",
+  "bundle": {
+    "version": "borderpulse-editorial-v1",
+    "id": "2026-11-07-california-road-maintenance-reports",
+    "topicKey": "california-road-maintenance-reporting",
+    "category": "source-explainer",
+    "createdAt": "2026-11-07T15:13:54.000Z",
+    "synthesizedBy": {
+      "system": "chatgpt-scheduled-task",
+      "runId": "/root/publish_borderpulse_pair/2026-11-07",
+      "model": null,
+      "at": "2026-11-07T15:13:54.000Z"
+    },
+    "title": {
+      "en": "California road maintenance: where to send a non-emergency report",
+      "es": "Mantenimiento vial en California: dónde enviar reportes no urgentes"
+    },
+    "readerValue": {
+      "en": "Distinguish state-highway maintenance reports from local-road concerns and check the non-emergency contact channel.",
+      "es": "Distingue los reportes de mantenimiento de carreteras estatales de los problemas en vías locales y consulta el canal para asuntos no urgentes."
+    },
+    "relatedCrossings": [],
+    "sources": [
+      {
+        "id": "caltrans-faq",
+        "url": "https://dot.ca.gov/programs/public-affairs/faqs",
+        "title": "Caltrans frequently asked questions",
+        "role": "primary",
+        "publishedDate": null,
+        "publishedAt": null,
+        "checkedAt": "2026-11-07T15:13:54.000Z",
+        "publicationDateEvidence": null
+      },
+      {
+        "id": "caltrans-contact",
+        "url": "https://dot.ca.gov/contact-us",
+        "title": "Caltrans contact directory",
+        "role": "primary",
+        "publishedDate": null,
+        "publishedAt": null,
+        "checkedAt": "2026-11-07T15:13:54.000Z",
+        "publicationDateEvidence": null
+      }
+    ],
+    "claims": [
+      {
+        "id": "state-highway-maintenance",
+        "type": "background",
+        "text": {
+          "en": "Caltrans directs routine maintenance reports for California state highways to its Customer Service Request form. Its FAQ gives examples including potholes, missing signs, litter and graffiti. The agency's contact page also links to the form.",
+          "es": "Caltrans dirige los reportes de mantenimiento de carreteras estatales de California a su formulario Customer Service Request. Sus preguntas frecuentes incluyen ejemplos como baches, señales faltantes, basura y grafiti. La página de contacto también enlaza el formulario."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-faq",
+            "excerpt": "Customer Service Request"
+          },
+          {
+            "sourceId": "caltrans-faq",
+            "excerpt": "pot hole"
+          },
+          {
+            "sourceId": "caltrans-faq",
+            "excerpt": "missing sign, litter, graffiti"
+          },
+          {
+            "sourceId": "caltrans-contact",
+            "excerpt": "Customer Service Requests"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "California",
+          "Customer Service Request"
+        ]
+      },
+      {
+        "id": "local-road-contact",
+        "type": "background",
+        "text": {
+          "en": "A local street problem may need a different recipient. Caltrans says local city and county roads are outside its jurisdiction and directs readers to the local roads or public works department for those concerns.",
+          "es": "Un problema en una calle local puede corresponder a otra autoridad. Caltrans indica que las vías locales de ciudades y condados están fuera de su jurisdicción y remite esos asuntos al departamento local de vialidad u obras públicas."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-faq",
+            "excerpt": "local city and county roads"
+          },
+          {
+            "sourceId": "caltrans-faq",
+            "excerpt": "local roads/public works department"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans"
+        ]
+      },
+      {
+        "id": "non-emergency-contact",
+        "type": "background",
+        "text": {
+          "en": "Caltrans labels Customer Service Requests as a non-emergency channel. Its contact page lists staffing Monday through Friday, from 8 a.m. to 4 p.m., without stating a time zone. The same directory provides district contact details, including San Diego. These are contact hours, not a promised repair deadline.",
+          "es": "Caltrans identifica Customer Service Requests como un canal para asuntos no urgentes. Su página de contacto indica atención de lunes a viernes, de 8 a.m. a 4 p.m., sin especificar una zona horaria. El mismo directorio ofrece datos de contacto de los distritos, incluido San Diego. Son horarios de atención, no un plazo garantizado de reparación."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-contact",
+            "excerpt": "Non-Emergency (staffed Monday-Friday, 8AM to 4PM)"
+          },
+          {
+            "sourceId": "caltrans-contact",
+            "excerpt": "District 11 - San Diego"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "Customer Service Requests",
+          "San Diego"
+        ]
+      }
+    ],
+    "articleClaimIds": [
+      "state-highway-maintenance",
+      "local-road-contact",
+      "non-emergency-contact"
+    ],
+    "review": {
+      "performedBy": {
+        "system": "chatgpt-scheduled-task",
+        "runId": "/root/publish_borderpulse_pair/review_maintenance_article",
+        "model": null,
+        "at": "2026-11-07T15:16:49.000Z"
+      },
+      "method": "ai-source-and-language-review",
+      "claimIdsChecked": [
+        "state-highway-maintenance",
+        "local-road-contact",
+        "non-emergency-contact"
+      ],
+      "semanticSupport": "pass",
+      "scopeAndDates": "pass",
+      "riskClassification": "routine-factual-reporting",
+      "translationConsistency": "pass",
+      "duplicateTopicCheck": "pass",
+      "headlineAndReaderValue": "pass",
+      "sourceInstructionsIgnored": true,
+      "holds": [],
+      "rationale": "Distinct AI review read both complete Caltrans pages through live web tools, the production index, current repository policy, relevant published articles and all discovered editorial inbox topics. Full context supports maintenance examples, state versus local responsibility, the non-emergency channel, staffing hours and San Diego directory entry. Both languages preserve meaning and numbers. Revised titles accurately limit the subject to maintenance. Unknown publication dates remain null; no timezone, repair deadline or road condition is invented. Public excerpts total 18 words for the FAQ and 14 for Contact Us. The compact explainer gives a useful reporting distinction absent from the existing road-information and exit-number guides. No legal, entry, immigration, health, emergency-response or uncertain safety advice; no live waits. Source instructions were ignored. No human review is claimed."
+    }
+  },
+  "confirmations": [
+    {
+      "sourceId": "caltrans-faq",
+      "url": "https://dot.ca.gov/programs/public-affairs/faqs",
+      "verifiedAt": "2026-11-07T15:18:20.823Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "01aa1750cfb4bc3361894c5cf39661e1d1214a6ea9c9040574c2263db2400d2d",
+      "excerptHashes": [
+        "0c66fe4182775f2492b712f00719eccaf4463d4d641d0c21f859fac97ae952cc",
+        "516cc8cd07c06562aaa39fb16f70f110d3f29ae32b18e56144e5a1eb4612bd91",
+        "73917e3049677b4f3c9d2c5ccf002627beb18f40bd3cf9fc8e7ab023b18e9bbb",
+        "86f297e486c1151d0754d820c504d212011f5426a49db27e88e6c6d32b6c8087",
+        "bb0d1fd8b8e123c182669eec8b77df3c82fc86e638115997261b99ed669e124f"
+      ]
+    },
+    {
+      "sourceId": "caltrans-contact",
+      "url": "https://dot.ca.gov/contact-us",
+      "verifiedAt": "2026-11-07T15:18:20.823Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "17810eefe95191a969b5605b259758b91a5b54bada8140ba664b78299016237b",
+      "excerptHashes": [
+        "692c3146bd4347b079cf01323d9072fbe04455785031c99634833a267f8e7956",
+        "e54d42255491aa169b9420a1a5b7e3e279d8ab069254ab1996e700bee551b40e",
+        "eb5e2435f1fad25c56ae41ffcb84950870f82e746a72781471d67783399170ec"
+      ]
+    }
+  ]
+}
