@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-07T18:32:11.698Z",
-  "snapshot_at": "2026-11-07T18:22:58.529Z",
+  "generated_at": "2026-11-07T22:33:53.455Z",
+  "snapshot_at": "2026-11-07T22:22:42.185Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -106,23 +106,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 1.25,
-      "detected_at": "2026-11-04T05:35:09.028Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 90 min around 6 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 90 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 90,
-        "overall_median": 40,
-        "samples": 19,
-        "ratio": 2.25
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -179,16 +162,33 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-11-07T13:49:05.200Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
+      "detected_at": "2026-11-07T22:33:53.455Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 1 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 1 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 1,
         "best_median": 0,
-        "overall_median": 40,
+        "overall_median": 45,
         "samples": 4
+      }
+    },
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 1,
+      "detected_at": "2026-11-07T22:33:53.455Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 90 min around 6 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 90 min cerca de las 6 PM — ~200% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 90,
+        "overall_median": 45,
+        "samples": 19,
+        "ratio": 2
       }
     },
     {
@@ -283,24 +283,6 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-11-07T18:32:11.698Z",
-      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 10 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 10 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 10,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 18
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
@@ -372,6 +354,24 @@
     },
     {
       "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.7111111111111111,
+      "detected_at": "2026-11-07T22:33:53.455Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 10 AM (median 13 min) — ~71% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 10 AM (mediana 13 min) — ~71% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 10,
+        "best_median": 13,
+        "overall_median": 45,
+        "samples": 20
+      }
+    },
+    {
+      "type": "lowest_today",
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
@@ -423,24 +423,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-11-06T20:44:59.829Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 5 PM (median 20 min) — ~67% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 5 PM (mediana 20 min) — ~67% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 17,
-        "best_median": 20,
-        "overall_median": 60,
-        "samples": 5
-      }
-    }
-  ]
+  "trailing_24h": []
 }
