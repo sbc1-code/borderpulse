@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-07 - Make visible controls do what they look like (Phase 2)
+
+- "View trends" in a crossing card's menu now opens `#trends`, the hourly pattern section, and scrolls to it. Before, it reloaded the same crossing page at the top. The menu skips its focus return for this link so the page does not jump back up.
+- New pages start at the top. A small `ScrollToTop` runs only when the path changes; Back/forward keeps the browser's restoration, `#hash` links scroll to their target, and query-only changes (lane, map selection) keep their position.
+- Stats tiles and the exchange-rate card no longer lift on hover, since they have no action.
+- Verified in headless Chrome at 500px: View trends lands on the section; a deep-scrolled crossing page opens Best time at the top. Back position restoration was not compared against the previous build.
+
 ## 2026-11-07 - Stop overstating Walk or Drive, Analytics and the embed (Phase 1)
 
 - Walk or Drive: the result no longer says "Walk." / "You save". It states the comparison it actually made (standard car lane vs a pedestrian lane plus an assumed 20 min for parking and the bridge), notes it applies only if you can use that lane and your trip works on foot, and reminds that Ready Lane needs an RFID document. Heading changed to "Comparison from reported waits, not a personal recommendation." EN/ES. Logic unchanged.

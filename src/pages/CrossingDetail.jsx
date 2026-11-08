@@ -299,10 +299,11 @@ export default function CrossingDetail() {
   const { hash, search } = useLocation();
   const loadedPort = crossing?.port_number;
   useEffect(() => {
-    if (hash !== '#cameras' || !loadedPort) return;
-    const frame = requestAnimationFrame(() => document.getElementById('cameras')?.scrollIntoView());
+    const target = hash === '#cameras' || hash === '#trends' ? hash.slice(1) : null;
+    if (!target || !loadedPort) return;
+    const frame = requestAnimationFrame(() => document.getElementById(target)?.scrollIntoView());
     return () => cancelAnimationFrame(frame);
-  }, [hash, loadedPort]);
+  }, [hash, loadedPort, aggregate]);
 
   // Aggregate buckets are port-local; evaluate "today"/"now" in the port's
   // timezone once the crossing is known.
@@ -587,7 +588,7 @@ export default function CrossingDetail() {
       })()}
 
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
-        <section className="mb-6">
+        <section id="trends" className="mb-6 scroll-mt-20">
           <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
               {language === 'en'

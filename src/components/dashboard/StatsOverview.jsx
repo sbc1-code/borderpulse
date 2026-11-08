@@ -116,7 +116,7 @@ export default function StatsOverview({
               theme === 'dark'
                 ? 'bg-gray-800/60 border-gray-700'
                 : 'bg-white border-slate-200'
-            } hover:shadow-md transition-all`}>
+            }`}>
               <CardContent className="p-2.5 flex items-start gap-2">
                 <div className={`p-1 rounded-md ${stat.bg} shrink-0`}>
                   <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
@@ -151,7 +151,7 @@ export default function StatsOverview({
             theme === 'dark'
               ? 'bg-gray-800/60 border-gray-700'
               : 'bg-white/80 border-slate-200'
-          } backdrop-blur-xs hover:shadow-md transition-all`}>
+          } backdrop-blur-xs`}>
             <CardContent className="p-3 min-h-[70px] sm:min-h-[80px] flex items-start gap-2">
               <div className={`p-1.5 rounded-lg ${stat.bg} shrink-0`}>
                 <stat.icon className={`w-4 h-4 ${stat.color}`} />
