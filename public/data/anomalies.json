@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-08T09:59:13.547Z",
-  "snapshot_at": "2026-11-08T09:52:43.060Z",
+  "generated_at": "2026-11-08T16:37:26.432Z",
+  "snapshot_at": "2026-11-08T16:22:54.344Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -162,7 +162,7 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.9777777777777777,
-      "detected_at": "2026-11-08T09:59:13.547Z",
+      "detected_at": "2026-11-08T16:37:26.432Z",
       "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Sunday hour so far is 4 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -171,7 +171,7 @@
         "best_hour": 4,
         "best_median": 1,
         "overall_median": 45,
-        "samples": 13
+        "samples": 17
       }
     },
     {
@@ -179,17 +179,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.92,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 4 AM (median 4 min) — ~92% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 4 AM (mediana 4 min) — ~92% debajo de la base de 30 días de 50 min.",
+      "severity": 0.9,
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Sunday hour so far is 3 AM (median 5 min) — ~90% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Paso Del Norte (PDN) es 3 AM (mediana 5 min) — ~90% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
-        "best_hour": 4,
-        "best_median": 4,
+        "best_hour": 3,
+        "best_median": 5,
         "overall_median": 50,
-        "samples": 16
+        "samples": 21
       }
     },
     {
@@ -211,74 +211,20 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.875,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 5 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 5 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 5,
-        "best_median": 5,
-        "overall_median": 40,
-        "samples": 17
-      }
-    },
-    {
-      "type": "lowest_today",
       "port_slug": "brownsville-gateway",
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 0.875,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 6 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 6 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 6,
-        "best_median": 5,
-        "overall_median": 40,
-        "samples": 16
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "el-paso-bridge-of-the-americas-bota",
-      "port_name": "El Paso - Bridge of the Americas (BOTA)",
-      "state": "TX",
-      "severity": 0.8545454545454545,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 3 AM (median 8 min) — ~85% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 8 min) — ~85% debajo de la base de 30 días de 55 min.",
-      "evidence": {
-        "day_of_week": 0,
-        "day_label": "Sun",
-        "best_hour": 3,
-        "best_median": 8,
-        "overall_median": 55,
-        "samples": 17
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "san-ysidro",
-      "port_name": "San Ysidro",
-      "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 5 AM (median 20 min) — ~75% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 5 AM (mediana 20 min) — ~75% debajo de la base de 30 días de 80 min.",
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now Brownsville - Gateway's lightest Sunday hour so far is 5 AM (median 5 min) — ~88% below the 30-day baseline of 40 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Brownsville - Gateway es 5 AM (mediana 5 min) — ~88% debajo de la base de 30 días de 40 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 5,
-        "best_median": 20,
-        "overall_median": 80,
-        "samples": 17
+        "best_median": 5,
+        "overall_median": 40,
+        "samples": 20
       }
     },
     {
@@ -286,17 +232,35 @@
       "port_slug": "calexico-west",
       "port_name": "Calexico - West",
       "state": "CA",
-      "severity": 0.75,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 4 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 4 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "severity": 0.8333333333333334,
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now Calexico - West's lightest Sunday hour so far is 4 AM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Calexico - West es 4 AM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 4,
-        "best_median": 15,
+        "best_median": 10,
         "overall_median": 60,
-        "samples": 16
+        "samples": 20
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "el-paso-bridge-of-the-americas-bota",
+      "port_name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "severity": 0.8181818181818181,
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Sunday hour so far is 5 AM (median 10 min) — ~82% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en El Paso - Bridge of the Americas (BOTA) es 5 AM (mediana 10 min) — ~82% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 5,
+        "best_median": 10,
+        "overall_median": 55,
+        "samples": 20
       }
     },
     {
@@ -305,7 +269,7 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.75,
-      "detected_at": "2026-11-08T09:59:13.547Z",
+      "detected_at": "2026-11-08T16:37:26.432Z",
       "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Sunday hour so far is 4 AM (median 5 min) — ~75% below the 30-day baseline of 20 min.",
       "summary_es": "Ahora mismo la hora más ligera del domingo en Hidalgo/Pharr - Pharr es 4 AM (mediana 5 min) — ~75% debajo de la base de 30 días de 20 min.",
       "evidence": {
@@ -314,7 +278,7 @@
         "best_hour": 4,
         "best_median": 5,
         "overall_median": 20,
-        "samples": 10
+        "samples": 12
       }
     },
     {
@@ -336,20 +300,56 @@
     },
     {
       "type": "lowest_today",
-      "port_slug": "otay-mesa",
-      "port_name": "Otay Mesa",
-      "state": "CA",
-      "severity": 0.6666666666666667,
-      "detected_at": "2026-11-08T09:59:13.547Z",
-      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 4 AM (median 30 min) — ~67% below the 30-day baseline of 90 min.",
-      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 4 AM (mediana 30 min) — ~67% debajo de la base de 30 días de 90 min.",
+      "port_slug": "nogales-deconcini",
+      "port_name": "Nogales - Deconcini",
+      "state": "AZ",
+      "severity": 0.7142857142857143,
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Sunday hour so far is 4 AM (median 10 min) — ~71% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Nogales - Deconcini es 4 AM (mediana 10 min) — ~71% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 0,
         "day_label": "Sun",
         "best_hour": 4,
-        "best_median": 30,
+        "best_median": 10,
+        "overall_median": 35,
+        "samples": 20
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "san-ysidro",
+      "port_name": "San Ysidro",
+      "state": "CA",
+      "severity": 0.6875,
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now San Ysidro's lightest Sunday hour so far is 6 AM (median 25 min) — ~69% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en San Ysidro es 6 AM (mediana 25 min) — ~69% debajo de la base de 30 días de 80 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 6,
+        "best_median": 25,
+        "overall_median": 80,
+        "samples": 22
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "otay-mesa",
+      "port_name": "Otay Mesa",
+      "state": "CA",
+      "severity": 0.6111111111111112,
+      "detected_at": "2026-11-08T16:37:26.432Z",
+      "summary_en": "Right now Otay Mesa's lightest Sunday hour so far is 3 AM (median 35 min) — ~61% below the 30-day baseline of 90 min.",
+      "summary_es": "Ahora mismo la hora más ligera del domingo en Otay Mesa es 3 AM (mediana 35 min) — ~61% debajo de la base de 30 días de 90 min.",
+      "evidence": {
+        "day_of_week": 0,
+        "day_label": "Sun",
+        "best_hour": 3,
+        "best_median": 35,
         "overall_median": 90,
-        "samples": 12
+        "samples": 16
       }
     },
     {
