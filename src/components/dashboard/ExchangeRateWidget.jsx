@@ -15,7 +15,7 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
           theme === 'dark'
             ? 'bg-gray-800/60 border-gray-700'
             : 'bg-white border-slate-200'
-        } transition-all hover:shadow-md`}>
+        }`}>
           <CardContent className="p-3">
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1">
@@ -72,7 +72,7 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
         theme === 'dark'
           ? 'bg-linear-to-br from-gray-800/50 to-gray-900/50 border-gray-700'
           : 'bg-linear-to-br from-white/90 to-blue-50/50 border-slate-200'
-      } backdrop-blur-xs transition-all duration-300 hover:shadow-xl`}>
+      } backdrop-blur-xs`}>
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-lg">
             <div className="flex items-center gap-1">

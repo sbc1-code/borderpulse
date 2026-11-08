@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DEFAULT_LANE, laneLabel, withLane } from '@/lib/laneContext';
 import { availableLaneWait } from '@/lib/crossingAvailability';
@@ -121,6 +121,9 @@ export default function BorderCrossingCard({
   selectedLane = DEFAULT_LANE,
 }) {
   const [showLanes, setShowLanes] = useState(false);
+  // Skip the menu's focus return when we are scrolling to #trends, or it
+  // pulls the page back up to the trigger.
+  const skipMenuFocusReturn = useRef(false);
   const [aggregate, setAggregate] = useState(null);
 
   const cardSlug = slug || crossing.slug || null;
@@ -298,10 +301,10 @@ export default function BorderCrossingCard({
                     <MoreHorizontal className="w-5 h-5" />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-44">
+                <DropdownMenuContent align="end" className="w-44" onCloseAutoFocus={(event) => { if (skipMenuFocusReturn.current) { event.preventDefault(); skipMenuFocusReturn.current = false; } }}>
                   {cardSlug ? (
                     <DropdownMenuItem asChild>
-                      <Link to={withLane(`/crossing/${cardSlug}/`, selectedLane)} className="cursor-pointer" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
+                      <Link to={withLane(`/crossing/${cardSlug}/#trends`, selectedLane)} className="cursor-pointer" onClick={() => { skipMenuFocusReturn.current = true; track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection }); }}>
                         {language === 'en' ? 'View trends' : 'Ver tendencias'}
                       </Link>
                     </DropdownMenuItem>
