@@ -318,7 +318,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await page.getByRole('button', { name: 'Analytics', exact: true }).click();
     await page.waitForFunction(() => {
       const body = document.body?.innerText || '';
-      return body.includes('Analytics populate as you use the app.')
+      return body.includes('This view uses waits saved in this browser only.')
         || body.includes('Average wait by hour')
         || body.includes('Something went wrong');
     }, null, { timeout: 5_000 });
@@ -326,7 +326,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     if (rendered.body.includes('Something went wrong') || rendered.body.includes('Border Pulse encountered an error')) {
       throw new Error('ErrorBoundary rendered');
     }
-    if (!rendered.body.includes('Analytics populate as you use the app.') && !rendered.body.includes('Average wait by hour')) {
+    if (!rendered.body.includes('This view uses waits saved in this browser only.') && !rendered.body.includes('Average wait by hour')) {
       throw new Error('Analytics view did not render');
     }
     if (activeErrors.length) throw new Error(activeErrors.join(' | '));

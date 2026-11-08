@@ -85,7 +85,7 @@ export async function checkSantaTeresaActions(context, baseUrl) {
       await action.focus();
       await page.keyboard.press('Enter');
       await page.waitForURL(url => url.pathname === comparisonPath);
-      await page.getByText(es ? 'Según las esperas reportadas' : 'Based on reported waits', { exact: true }).waitFor();
+      await page.getByText(es ? 'Comparación con esperas reportadas, no una recomendación personal' : 'Comparison from reported waits, not a personal recommendation', { exact: true }).waitFor();
       await page.goBack();
       await page.waitForURL(url => url.pathname === detailPath);
       // Enter from the promoted action just before the unchanged 90-minute limit.
@@ -93,16 +93,16 @@ export async function checkSantaTeresaActions(context, baseUrl) {
       await page.reload();
       await checkEntry();
       await action.click();
-      await page.getByText(es ? 'Según las esperas reportadas' : 'Based on reported waits', { exact: true }).waitFor();
+      await page.getByText(es ? 'Comparación con esperas reportadas, no una recomendación personal' : 'Comparison from reported waits, not a personal recommendation', { exact: true }).waitFor();
       fail = true;
       await page.clock.runFor(61_000);
       await page.getByTestId('walk-drive-unavailable').waitFor();
-      assert.ok(!/Based on reported waits|Según las esperas reportadas|Recommended|Recomendado|Walk\.|Camina\.|Drive\.|Maneja\.|It's a wash\.|Está parejo\./.test(await page.locator('#root').innerText()));
+      assert.ok(!/Comparison from reported waits|Comparación con esperas reportadas|On these reports|Con estos reportes|Recommended|Recomendado|Walk\.|Camina\.|Drive\.|Maneja\.|It's a wash\.|Está parejo\./.test(await page.locator('#root').innerText()));
       // A failed response did not create fresh advice; a new real timestamp does.
       fail = false;
       snapshot.fetched_at = new Date(now + 61_000).toISOString();
       await page.evaluate(() => window.dispatchEvent(new Event('online')));
-      await page.getByText(es ? 'Según las esperas reportadas' : 'Based on reported waits', { exact: true }).waitFor();
+      await page.getByText(es ? 'Comparación con esperas reportadas, no una recomendación personal' : 'Comparison from reported waits, not a personal recommendation', { exact: true }).waitFor();
       await page.goBack();
       await page.waitForURL(url => url.pathname === detailPath);
       for (const [drive, walk] of [[60, null], [null, null]]) {
@@ -120,7 +120,7 @@ export async function checkSantaTeresaActions(context, baseUrl) {
       await page.reload();
       await checkEntry();
       await action.click();
-      await page.getByText(es ? 'Según las esperas reportadas' : 'Based on reported waits', { exact: true }).waitFor();
+      await page.getByText(es ? 'Comparación con esperas reportadas, no una recomendación personal' : 'Comparison from reported waits, not a personal recommendation', { exact: true }).waitFor();
       assert.match(await page.locator('#root').innerText(), /\b0 min\b/, 'genuine zero is preserved');
       await page.goBack();
       crossing.port_status = 'Closed';

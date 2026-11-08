@@ -6,6 +6,7 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import { isSparseCell } from '@/lib/aggregates';
+import { DEFAULT_LANE, laneLabel } from '@/lib/laneContext';
 import { freshnessOf, fetchLabel, reportTimeLabel } from '@/lib/trustState';
 
 const FLAG = { CA: '🇺🇸', AZ: '🇺🇸', NM: '🇺🇸', TX: '🇺🇸' };
@@ -115,7 +116,7 @@ export default function Embed() {
 
   const sourceLabel = isSouthbound
     ? (lang === 'es' ? 'Estimación' : 'Estimate')
-    : 'CBP';
+    : `CBP · ${laneLabel(DEFAULT_LANE, lang)}`;
 
   const deltaText = (() => {
     if (!typicalDelta) return null;

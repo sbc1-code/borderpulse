@@ -226,7 +226,7 @@ export default function WalkOrDrive() {
               : recommendation.verdict === 'drive' ? 'text-sky-800 dark:text-sky-300'
               : 'text-slate-600 dark:text-slate-400'
           }`}>
-            {language === 'en' ? 'Based on reported waits' : 'Según las esperas reportadas'}
+            {language === 'en' ? 'Comparison from reported waits, not a personal recommendation' : 'Comparación con esperas reportadas, no una recomendación personal'}
           </div>
           <p className="text-sm text-slate-900 dark:text-white">
             {(() => {
@@ -234,14 +234,16 @@ export default function WalkOrDrive() {
               if (r.verdict === 'walk') {
                 const laneEn = r.via === 'ready' ? 'Ready Lane pedestrian' : 'standard pedestrian';
                 const laneEs = r.via === 'ready' ? 'peatonal Ready Lane' : 'peatonal estándar';
+                const readyEn = r.via === 'ready' ? ' Ready Lane requires an RFID-enabled document.' : '';
+                const readyEs = r.via === 'ready' ? ' Ready Lane requiere un documento con RFID.' : '';
                 return language === 'en'
-                  ? `Walk. The ${laneEn} wait plus ${FOOT_OVERHEAD_MIN} min for parking and the bridge totals ${r.footTotal} min, vs ${veh} min driving. You save about ${r.savings} min.`
-                  : `Camina. La espera ${laneEs} más ${FOOT_OVERHEAD_MIN} min de estacionar y cruzar el puente suma ${r.footTotal} min, contra ${veh} min manejando. Ahorras unos ${r.savings} min.`;
+                  ? `On these reports, walking is shorter. The ${laneEn} wait plus ${FOOT_OVERHEAD_MIN} min assumed for parking and the bridge totals ${r.footTotal} min, vs ${veh} min in the standard car lane. That is about ${r.savings} min less, if you can use that lane and your trip works on foot.${readyEn}`
+                  : `Con estos reportes, a pie es más corto. La espera ${laneEs} más ${FOOT_OVERHEAD_MIN} min supuestos para estacionar y cruzar el puente suma ${r.footTotal} min, contra ${veh} min en el carril estándar de auto. Son unos ${r.savings} min menos, si puedes usar ese carril y tu viaje funciona a pie.${readyEs}`;
               }
               if (r.verdict === 'drive') {
                 return language === 'en'
-                  ? `Drive. Vehicle wait is ${veh} min vs ${r.footTotal} min on foot (including ${FOOT_OVERHEAD_MIN} min parking + bridge). Driving saves about ${r.savings} min.`
-                  : `Maneja. La espera en auto es de ${veh} min vs ${r.footTotal} min a pie (incluyendo ${FOOT_OVERHEAD_MIN} min de estacionar + puente). Manejar ahorra unos ${r.savings} min.`;
+                  ? `On these reports, driving is shorter. ${veh} min in the standard car lane vs ${r.footTotal} min on foot, including ${FOOT_OVERHEAD_MIN} min assumed for parking and the bridge. That is about ${r.savings} min less.`
+                  : `Con estos reportes, en auto es más corto. ${veh} min en el carril estándar de auto contra ${r.footTotal} min a pie, incluyendo ${FOOT_OVERHEAD_MIN} min supuestos para estacionar y cruzar el puente. Son unos ${r.savings} min menos.`;
               }
               return language === 'en'
                 ? `It's a wash. Vehicle wait is ${veh} min, foot total ${r.footTotal} min (within ±${RECOMMEND_GAP_MIN}). Pick whichever is more convenient for your destination on the U.S. side.`

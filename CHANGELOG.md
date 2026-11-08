@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-07 - Stop overstating Walk or Drive, Analytics and the embed (Phase 1)
+
+- Walk or Drive: the result no longer says "Walk." / "You save". It states the comparison it actually made (standard car lane vs a pedestrian lane plus an assumed 20 min for parking and the bridge), notes it applies only if you can use that lane and your trip works on foot, and reminds that Ready Lane needs an RFID document. Heading changed to "Comparison from reported waits, not a personal recommendation." EN/ES. Logic unchanged.
+- Analytics: the empty state no longer says "check back after a few visits". It explains the view uses waits saved in this browser only, shows how many of the 10 it needs, and links to Best time for shared 30-day patterns.
+- Embed: northbound source label now names the lane ("CBP · Standard passenger").
+- Tests: smoke and Santa Teresa browser checks updated to the new text.
+
 ## 2026-11-07 - Keep the selected lane when opening Best time and returning (draft PR)
 
 - Fix: choosing SENTRI, Ready Lane or Pedestrian and then opening "Plan your crossing" (or the card menu's "Best time to cross") dropped the lane. "See current wait time" then returned to Standard. In the audit's sampled test the displayed wait changed from 25 to 185 minutes.
