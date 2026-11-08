@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Activity, AlertTriangle, Database, TrendingDown, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -355,12 +356,17 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
       <Card className="border-dashed border-slate-300 bg-white/80 dark:border-slate-700 dark:bg-slate-950/80">
         <CardContent className="p-8 text-center text-sm text-slate-500 dark:text-slate-400">
           <Database className="mx-auto mb-3 h-7 w-7 text-slate-300" />
-          {language === 'en'
-            ? 'Analytics populate as you use the app. Check back after a few visits.'
-            : 'Los análisis se llenan conforme uses la app. Vuelve después de varias visitas.'}
-          <div className="mt-2 text-[11px] text-slate-400">
-            {language === 'en' ? 'Samples collected' : 'Muestras recolectadas'}: {summary.totalSamples}
-          </div>
+          <p data-testid="analytics-local-empty">
+            {language === 'en'
+              ? `This view uses waits saved in this browser only. It has ${summary.totalSamples} of the 10 it needs.`
+              : `Esta vista usa solo las esperas guardadas en este navegador. Tiene ${summary.totalSamples} de las 10 que necesita.`}
+          </p>
+          <p className="mt-2">
+            {language === 'en' ? 'For 30-day hourly patterns from the shared record, open ' : 'Para patrones por hora de 30 días del registro compartido, abre '}
+            <Link to="/best-time/" className="font-medium text-emerald-700 underline underline-offset-4 dark:text-emerald-400">
+              {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
+            </Link>.
+          </p>
         </CardContent>
       </Card>
     );
