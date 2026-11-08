@@ -1,5 +1,9 @@
 # DECISIONS
 
+## 2026-11-07 · Claude may merge BorderPulse PRs Sebastian approves in chat
+
+`.claude/settings.json` allows one command, `gh api -X PUT repos/sbc1-code/borderpulse/pulls/*/merge*`, so an automated check does not block a merge Sebastian approved. It does not grant approval: Claude still merges only after Sebastian says so in the conversation. It covers this repo only, not DIGITO. Remove the file to revoke.
+
 ## 2026-11-07 · Every link between lane-aware pages carries the lane
 
 Extends the 2026-10-27 rule that a chosen lane is navigation context. Links from a crossing, card or share section to Best time, and Best time's return link, pass the validated lane key through `withLane()`. The Best time series stays Standard and is labeled as such when another lane is selected; it is not filtered or relabeled by lane.
