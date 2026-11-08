@@ -1,5 +1,9 @@
 # DECISIONS
 
+## 2026-11-07 · Every link between lane-aware pages carries the lane
+
+Extends the 2026-10-27 rule that a chosen lane is navigation context. Links from a crossing, card or share section to Best time, and Best time's return link, pass the validated lane key through `withLane()`. The Best time series stays Standard and is labeled as such when another lane is selected; it is not filtered or relabeled by lane.
+
 ## 2026-11-02 · Lane comparisons describe retained fetches
 
 Do not infer a usual lane advantage from repeated fetches or call values current just because retrieval is fresh. Display both source clocks and actual historical coverage; mark an archive stale after 24 hours without a retained fetch. Earlier snapshots were normalized before duplicate-row repair and raw responses are unavailable: retain an explicit incompleteness caveat rather than claim they were reconstructed. Counts and percentages describe those stored fetches only.

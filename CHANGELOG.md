@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-11-07 - Keep the selected lane when opening Best time and returning (draft PR)
+
+- Fix: choosing SENTRI, Ready Lane or Pedestrian and then opening "Plan your crossing" (or the card menu's "Best time to cross") dropped the lane. "See current wait time" then returned to Standard. In the audit's sampled test the displayed wait changed from 25 to 185 minutes.
+- The crossing-share link, both card best-time links and the best-time page's return link now carry the validated `?lane=` key through `withLane()`. Standard stays query-free.
+- Best time shows a short EN/ES note when a non-Standard lane is selected: the pattern is standard-passenger history and does not describe that lane. The history itself is unchanged.
+- Test: the share test previously asserted a lane-free best-time link for every lane, which encoded the bug. It now expects the lane key; added a `withLane` contract test.
+- Not changed: the "View trends" menu item, Walk or Drive wording, Analytics empty state, scroll position and the paused collector backup repair.
+
 ## 2026-11-03 — Prepare the reviewed fixes as an ordered branch stack
 
 - Preserve current main data while reconciling the Spanish/snapshot, duplicate-lane and Lane Flip Watch branches in that order. Keep both endpoint regression groups, metadata imports and reviewed source-clock safeguards.
