@@ -45,3 +45,10 @@ test('selected lane never falls back to a Standard or summary wait; zero remains
   }
   assert.equal(availableLaneWait({ ...crossing, port_status: 'Closed' }, 'passenger_sentri'), null);
 });
+
+test('best-time and crossing links carry a selected lane and drop the default', () => {
+  assert.equal(withLane('/best-time/san-ysidro/', 'passenger_sentri'), '/best-time/san-ysidro/?lane=passenger_sentri');
+  assert.equal(withLane('/crossing/san-ysidro/', 'passenger_sentri'), '/crossing/san-ysidro/?lane=passenger_sentri');
+  assert.equal(withLane('/best-time/san-ysidro/', DEFAULT_LANE), '/best-time/san-ysidro/');
+  assert.equal(withLane('/best-time/san-ysidro/?lane=passenger_sentri', 'not_a_lane'), '/best-time/san-ysidro/');
+});

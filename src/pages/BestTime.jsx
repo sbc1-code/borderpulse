@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, useSearchParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Clock, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
@@ -10,6 +10,7 @@ import { usePersistentLanguage } from '@/lib/useLanguage';
 import { nowInPortTz } from '@/components/utils/crossingMeta';
 import { isSparseCell } from '@/lib/aggregates';
 import { pickLightestHour } from '@/lib/recommendations';
+import { DEFAULT_LANE, laneLabel, normalizeLane, withLane } from '@/lib/laneContext';
 
 const DAY_LABELS = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -268,6 +269,8 @@ export function BestTimeIndex() {
 
 export default function BestTime() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const lane = normalizeLane(searchParams.get('lane'));
   const language = usePersistentLanguage();
   const [crossings, setCrossings] = useState([]);
   const [aggregate, setAggregate] = useState(null);
@@ -417,9 +420,16 @@ export default function BestTime() {
             ? 'Full-day historical pattern in this crossing’s local time. Full-day patterns include hours already passed; this is not a recommendation for the hours remaining today or a forecast.'
             : 'Patrón histórico de todo el día, en la hora local de este cruce. Los patrones de todo el día incluyen horas que ya pasaron; esto no es una recomendación para lo que queda de hoy ni un pronóstico.'}
         </p>
+        {lane !== DEFAULT_LANE && (
+          <p className="text-xs text-emerald-900 dark:text-emerald-100 mt-2" data-testid="best-time-lane-note">
+            {language === 'en'
+              ? `You selected ${laneLabel(lane, 'en')}. These patterns are standard-passenger history and do not describe that lane.`
+              : `Elegiste ${laneLabel(lane, 'es')}. Estos patrones son del historial de auto estándar y no describen ese carril.`}
+          </p>
+        )}
         <div className="mt-3">
           <Link
-            to={`/crossing/${canonicalSlug}/`}
+            to={withLane(`/crossing/${canonicalSlug}/`, lane)}
             className="inline-flex items-center gap-2 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900/40 px-4 py-3 text-sm font-medium text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors"
           >
             <Clock className="w-4 h-4 text-emerald-600" />

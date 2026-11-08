@@ -131,7 +131,7 @@ export default function CrossingShare({ name, slug, language = 'en', lane = DEFA
         <Button onClick={copy} variant="ghost" className="min-h-11 gap-2"><Copy aria-hidden="true" className="h-4 w-4" />{es ? 'Copiar enlace' : 'Copy link'}</Button>
       </div>
       <p role="status" className="mt-2 text-xs text-slate-600 dark:text-slate-300">{status}</p>
-      <Link to={`/best-time/${slug}/`} onClick={() => track('best-time-open', { slug, source: 'crossing-share' })} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-blue-700 underline underline-offset-4 dark:text-blue-300">
+      <Link to={withLane(`/best-time/${slug}/`, lane)} onClick={() => track('best-time-open', { slug, source: 'crossing-share' })} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-blue-700 underline underline-offset-4 dark:text-blue-300">
         {es ? `Planea tu cruce por ${name}` : `Plan your crossing at ${name}`}<ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0" />
       </Link>
     </section>

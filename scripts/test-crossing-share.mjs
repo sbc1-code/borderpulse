@@ -287,10 +287,10 @@ test('EN/ES rendering, WhatsApp payload, and best-time link formatting across al
   const root = createRoot(container);
 
   const testCases = [
-    { lane: 'passenger_standard', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/', labelEn: 'Standard passenger', labelEs: 'Auto estándar' },
-    { lane: 'passenger_ready', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/?lane=passenger_ready', labelEn: 'Ready Lane', labelEs: 'Ready Lane' },
-    { lane: 'passenger_sentri', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/?lane=passenger_sentri', labelEn: 'SENTRI', labelEs: 'SENTRI' },
-    { lane: 'pedestrian_standard', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/?lane=pedestrian_standard', labelEn: 'Pedestrian', labelEs: 'Peatones' },
+    { lane: 'passenger_standard', expectedBestTime: '/best-time/san-ysidro/', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/', labelEn: 'Standard passenger', labelEs: 'Auto estándar' },
+    { lane: 'passenger_ready', expectedBestTime: '/best-time/san-ysidro/?lane=passenger_ready', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/?lane=passenger_ready', labelEn: 'Ready Lane', labelEs: 'Ready Lane' },
+    { lane: 'passenger_sentri', expectedBestTime: '/best-time/san-ysidro/?lane=passenger_sentri', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/?lane=passenger_sentri', labelEn: 'SENTRI', labelEs: 'SENTRI' },
+    { lane: 'pedestrian_standard', expectedBestTime: '/best-time/san-ysidro/?lane=pedestrian_standard', expectedUrl: 'https://borderpulse.com/crossing/san-ysidro/?lane=pedestrian_standard', labelEn: 'Pedestrian', labelEs: 'Peatones' },
   ];
 
   for (const tc of testCases) {
@@ -304,7 +304,7 @@ test('EN/ES rendering, WhatsApp payload, and best-time link formatting across al
     });
 
     const linksEn = getLinks(container);
-    assert.equal(linksEn.bestTimeLink.href, '/best-time/san-ysidro/');
+    assert.equal(linksEn.bestTimeLink.href, tc.expectedBestTime, 'best-time link keeps the selected lane');
     assert.equal(
       linksEn.whatsappLink.href,
       'https://wa.me/?text=' + encodeURIComponent(`Check San Ysidro (${tc.labelEn}) wait times and crossing hours on BorderPulse.\n${tc.expectedUrl}`)
@@ -320,7 +320,7 @@ test('EN/ES rendering, WhatsApp payload, and best-time link formatting across al
     });
 
     const linksEs = getLinks(container);
-    assert.equal(linksEs.bestTimeLink.href, '/best-time/san-ysidro/');
+    assert.equal(linksEs.bestTimeLink.href, tc.expectedBestTime, 'best-time link keeps the selected lane');
     assert.equal(
       linksEs.whatsappLink.href,
       'https://wa.me/?text=' + encodeURIComponent(`Consulta los tiempos de espera y horarios de San Ysidro (${tc.labelEs}) en BorderPulse.\n${tc.expectedUrl}`)
