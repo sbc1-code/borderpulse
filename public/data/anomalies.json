@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-07T22:33:53.455Z",
-  "snapshot_at": "2026-11-07T22:22:42.185Z",
+  "generated_at": "2026-11-08T02:09:05.513Z",
+  "snapshot_at": "2026-11-08T02:07:47.855Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -126,16 +126,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 1.125,
-      "detected_at": "2026-11-03T23:53:49.222Z",
-      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 170 min around 4 PM — ~213% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 170 min cerca de las 4 PM — ~213% de la mediana de 30 días. Planea alrededor.",
+      "severity": 1,
+      "detected_at": "2026-11-08T02:09:05.513Z",
+      "summary_en": "Heads up: Otay Mesa's Sunday peak hits 170 min around 4 PM — ~200% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Otay Mesa alcanza 170 min cerca de las 4 PM — ~200% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 16,
         "peak_median": 170,
-        "overall_median": 80,
+        "overall_median": 85,
         "samples": 18,
-        "ratio": 2.125
+        "ratio": 2
       }
     },
     {
@@ -144,15 +144,15 @@
       "port_name": "Nogales - Deconcini",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-11-07T13:49:05.200Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Saturday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 30 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Deconcini es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 30 min.",
+      "detected_at": "2026-11-08T02:09:05.513Z",
+      "summary_en": "Right now Nogales - Deconcini's lightest Saturday hour so far is 3 AM (median 0 min) — ~100% below the 30-day baseline of 35 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Deconcini es 3 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 35 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 0,
-        "overall_median": 30,
+        "overall_median": 35,
         "samples": 21
       }
     },
@@ -232,16 +232,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9375,
-      "detected_at": "2026-11-07T13:49:05.200Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 3 min) — ~94% below the 30-day baseline of 48 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 3 min) — ~94% debajo de la base de 30 días de 48 min.",
+      "severity": 0.94,
+      "detected_at": "2026-11-08T02:09:05.513Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 3 min) — ~94% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 3 min) — ~94% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 2,
         "best_median": 3,
-        "overall_median": 48,
+        "overall_median": 50,
         "samples": 18
       }
     },
@@ -322,16 +322,16 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.8125,
-      "detected_at": "2026-11-07T13:49:05.200Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 15 min) — ~81% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 15 min) — ~81% debajo de la base de 30 días de 80 min.",
+      "severity": 0.8235294117647058,
+      "detected_at": "2026-11-08T02:09:05.513Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 15 min) — ~82% below the 30-day baseline of 85 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 15 min) — ~82% debajo de la base de 30 días de 85 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
         "best_median": 15,
-        "overall_median": 80,
+        "overall_median": 85,
         "samples": 21
       }
     },
@@ -340,16 +340,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.8125,
-      "detected_at": "2026-11-03T23:53:49.222Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 87 min around 5 PM — ~181% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 87 min cerca de las 5 PM — ~181% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.74,
+      "detected_at": "2026-11-08T02:09:05.513Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 87 min around 5 PM — ~174% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 87 min cerca de las 5 PM — ~174% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 17,
         "peak_median": 87,
-        "overall_median": 48,
+        "overall_median": 50,
         "samples": 17,
-        "ratio": 1.8125
+        "ratio": 1.74
       }
     },
     {
@@ -403,23 +403,6 @@
         "overall_median": 55,
         "samples": 16,
         "ratio": 1.6
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.5,
-      "detected_at": "2026-11-04T14:01:00.833Z",
-      "summary_en": "Heads up: Nogales - Deconcini's Sunday peak hits 45 min around 6 PM — ~150% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Deconcini alcanza 45 min cerca de las 6 PM — ~150% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 45,
-        "overall_median": 30,
-        "samples": 19,
-        "ratio": 1.5
       }
     }
   ],
