@@ -3,6 +3,7 @@ import OfficialSource from './OfficialSource';
 import BestTimeChart from './BestTimeChart';
 import CrossingRankings from './CrossingRankings';
 import InArticleAd from './InArticleAd';
+import CrossingWaitLinks from './CrossingWaitLinks';
 
 function CrossingLink({ slug, children }) {
   return (
@@ -18,6 +19,7 @@ export const mdxComponents = {
   CrossingRankings,
   CrossingLink,
   InArticleAd,
+  CrossingWaitLinks,
   a: (props) => {
     const isExternal = /^https?:\/\//.test(props.href || '');
     if (isExternal) {

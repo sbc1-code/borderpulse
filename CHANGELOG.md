@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-10 - Current-wait links near the top of the medication guide (draft)
+
+- The prescription-medication guide (EN and ES) now has a "Crossing soon? Current wait times" box right after the intro, linking to San Ysidro, Andrade, Nogales DeConcini, El Paso Paso del Norte and Progreso. Umami, last 30 days: the guide had 618 visitors, a 95% bounce rate and a 21 s average visit, and only 7 opened waits from the end-of-post button, which linked to the home page.
+- Why several crossings: the guide's readers are spread nationwide (California 20%, Texas 18%, Arizona 11%, then Wisconsin, Pennsylvania and others), so no single crossing fits. The links cover the border states readers come from.
+- New MDX component `<CrossingWaitLinks items={[[slug, label], ...]} />`. Clicks log `blog-to-waits` with `crossing` and `placement: top` (slugs only, no free text). The end-of-post button is unchanged.
+- Checks: full `npm test` passes after a prerendered build. Headless Chrome 390px EN/ES: one box at about 850-890px, five correct crossing links, the first opens `/crossing/san-ysidro/`, no horizontal overflow.
+
 ## 2026-11-10 - Ads where readers land (draft)
 
 - The existing Adsterra native banner (placement 29055831) now also loads on crossing pages, after Latest lane reports, and on blog guides, after the "Crossing soon?" box. Before, only the home page loaded it, and the home page is 25% of visitors (Umami, last 30 days).
