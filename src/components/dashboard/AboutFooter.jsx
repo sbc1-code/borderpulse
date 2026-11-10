@@ -28,33 +28,21 @@ export default function AboutFooter({ language, count, direction = 'northbound' 
               <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
           )}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? (isSouthbound ? 'Method' : 'Source') : (isSouthbound ? 'Método' : 'Fuente')}
-          </div>
-          <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {isSouthbound ? 'Border Pulse estimate' : 'U.S. Customs and Border Protection'}
-          </div>
-          <a
-            href={isSouthbound ? 'https://developers.google.com/maps/documentation/distance-matrix' : 'https://bwt.cbp.gov/api/bwtpublicmod'}
-            className="text-[10px] text-slate-500 hover:underline break-all"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {isSouthbound ? 'Uses Google Maps Platform Distance Matrix API' : 'bwt.cbp.gov/api/bwtpublicmod'}
-          </a>
-        </div>
-        <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? 'Refresh rate' : 'Frecuencia'}
-          </div>
-          <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {language === 'en' ? 'Regular schedule' : 'Horario regular'}
-          </div>
+          <p>
+            {language === 'en' ? (isSouthbound ? 'Method: ' : 'Source: ') : (isSouthbound ? 'Método: ' : 'Fuente: ')}
+            <span className="font-medium text-slate-900 dark:text-white">
+              {isSouthbound ? 'Border Pulse estimate' : 'U.S. Customs and Border Protection'}
+            </span>
+            {' · '}
+            <a
+              href={isSouthbound ? 'https://developers.google.com/maps/documentation/distance-matrix' : 'https://bwt.cbp.gov/api/bwtpublicmod'}
+              className="underline break-all hover:text-slate-900 dark:hover:text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {isSouthbound ? 'Google Maps Platform Distance Matrix API' : 'bwt.cbp.gov/api/bwtpublicmod'}
+            </a>
+          </p>
         </div>
       </div>
 

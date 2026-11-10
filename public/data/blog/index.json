@@ -1,6 +1,370 @@
 {
   "posts": [
     {
+      "title": "Mantenimiento vial en California: dónde enviar reportes no urgentes",
+      "description": "Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.",
+      "slug": "2026-11-07-california-road-maintenance-reports-es",
+      "date": "2026-11-07",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "source-checked",
+        "source-explainer"
+      ],
+      "translationKey": "2026-11-07-california-road-maintenance-reports",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans frequently asked questions",
+          "url": "https://dot.ca.gov/programs/public-affairs/faqs"
+        },
+        {
+          "label": "Caltrans contact directory",
+          "url": "https://dot.ca.gov/contact-us"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-07-california-road-maintenance-reports.json",
+      "editorialFingerprint": "dbf184b80cd5f38d6dee66cde41c90ca0fa159a455d94b49017f5603dcfe9a6c",
+      "topicKey": "california-road-maintenance-reporting",
+      "humanEdited": false
+    },
+    {
+      "title": "California road maintenance: where to send a non-emergency report",
+      "description": "A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.",
+      "slug": "2026-11-07-california-road-maintenance-reports",
+      "date": "2026-11-07",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "source-checked",
+        "source-explainer"
+      ],
+      "translationKey": "2026-11-07-california-road-maintenance-reports",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans frequently asked questions",
+          "url": "https://dot.ca.gov/programs/public-affairs/faqs"
+        },
+        {
+          "label": "Caltrans contact directory",
+          "url": "https://dot.ca.gov/contact-us"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-07-california-road-maintenance-reports.json",
+      "editorialFingerprint": "dbf184b80cd5f38d6dee66cde41c90ca0fa159a455d94b49017f5603dcfe9a6c",
+      "topicKey": "california-road-maintenance-reporting",
+      "humanEdited": false
+    },
+    {
+      "title": "Salidas de autopista en California: qué significan los números",
+      "description": "Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.",
+      "slug": "2026-11-06-california-freeway-exit-numbers-es",
+      "date": "2026-11-06",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "source-checked",
+        "source-explainer"
+      ],
+      "translationKey": "2026-11-06-california-freeway-exit-numbers",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans Cal-NExUS exit-numbering guide",
+          "url": "https://dot.ca.gov/programs/safety-programs/exit"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-06-california-freeway-exit-numbers.json",
+      "editorialFingerprint": "159cea1823713d7116978a19c901cd0115e1d5fd04291fd8333206f0e0f5ca23",
+      "topicKey": "california-freeway-exit-numbering",
+      "humanEdited": false
+    },
+    {
+      "title": "California freeway exits: what the numbers mean",
+      "description": "A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.",
+      "slug": "2026-11-06-california-freeway-exit-numbers",
+      "date": "2026-11-06",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "source-checked",
+        "source-explainer"
+      ],
+      "translationKey": "2026-11-06-california-freeway-exit-numbers",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans Cal-NExUS exit-numbering guide",
+          "url": "https://dot.ca.gov/programs/safety-programs/exit"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-06-california-freeway-exit-numbers.json",
+      "editorialFingerprint": "159cea1823713d7116978a19c901cd0115e1d5fd04291fd8333206f0e0f5ca23",
+      "topicKey": "california-freeway-exit-numbering",
+      "humanEdited": false
+    },
+    {
+      "title": "De SR-75 norte a I-5 norte: cierre del enlace el 7 de noviembre",
+      "description": "Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.",
+      "slug": "2026-11-04-sr75-i5-november7-connector-closure-es",
+      "date": "2026-11-04",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "source-checked",
+        "operations-report"
+      ],
+      "translationKey": "2026-11-04-sr75-i5-november7-connector-closure",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans District 11 news listing",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11"
+        },
+        {
+          "label": "Caltrans connector closure notice",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261103-sr75i5closure"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-04-sr75-i5-november7-connector-closure.json",
+      "editorialFingerprint": "f9af716f908b5dc9d5e5000d5e82fd539b5ded12b02b4596068abe68049a2ed2",
+      "topicKey": "sr75-i5-november7-connector-closure",
+      "humanEdited": false
+    },
+    {
+      "title": "Northbound SR-75 to northbound I-5: November 7 connector closure",
+      "description": "A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.",
+      "slug": "2026-11-04-sr75-i5-november7-connector-closure",
+      "date": "2026-11-04",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "source-checked",
+        "operations-report"
+      ],
+      "translationKey": "2026-11-04-sr75-i5-november7-connector-closure",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans District 11 news listing",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11"
+        },
+        {
+          "label": "Caltrans connector closure notice",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261103-sr75i5closure"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-04-sr75-i5-november7-connector-closure.json",
+      "editorialFingerprint": "f9af716f908b5dc9d5e5000d5e82fd539b5ded12b02b4596068abe68049a2ed2",
+      "topicKey": "sr75-i5-november7-connector-closure",
+      "humanEdited": false
+    },
+    {
+      "title": "De SR-67 a SR-52: cierres nocturnos del enlace el 1 y 2 de noviembre",
+      "description": "Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.",
+      "slug": "2026-11-01-sr67-sr52-overnight-connector-closures-es",
+      "date": "2026-11-01",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "source-checked",
+        "operations-report"
+      ],
+      "translationKey": "2026-11-01-sr67-sr52-overnight-connector-closures",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans District 11 news listing",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11"
+        },
+        {
+          "label": "Southbound SR-67 Connector to Westbound SR-52 Closed Sunday and Monday, November 1 and 2",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr67sr52closures"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-01-sr67-sr52-overnight-connector-closures.json",
+      "editorialFingerprint": "ce9b744421a031abd81b039ea283318b917db7c83382eb83861dd8f516337996",
+      "topicKey": "sr67-sr52-november-overnight-connector-closures",
+      "humanEdited": false
+    },
+    {
+      "title": "SR-67 to SR-52: overnight connector closures on November 1 and 2",
+      "description": "A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.",
+      "slug": "2026-11-01-sr67-sr52-overnight-connector-closures",
+      "date": "2026-11-01",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "source-checked",
+        "operations-report"
+      ],
+      "translationKey": "2026-11-01-sr67-sr52-overnight-connector-closures",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans District 11 news listing",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11"
+        },
+        {
+          "label": "Southbound SR-67 Connector to Westbound SR-52 Closed Sunday and Monday, November 1 and 2",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr67sr52closures"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-11-01-sr67-sr52-overnight-connector-closures.json",
+      "editorialFingerprint": "ce9b744421a031abd81b039ea283318b917db7c83382eb83861dd8f516337996",
+      "topicKey": "sr67-sr52-november-overnight-connector-closures",
+      "humanEdited": false
+    },
+    {
+      "title": "San Diego: cierre de SR-163 al norte previsto para el 1 de noviembre",
+      "description": "Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.",
+      "slug": "2026-10-31-san-diego-northbound-sr163-november-closure-es",
+      "date": "2026-10-31",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "source-checked",
+        "operations-report"
+      ],
+      "translationKey": "2026-10-31-san-diego-northbound-sr163-november-closure",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans District 11 — Northbound SR-163 closure news listing",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11"
+        },
+        {
+          "label": "Northbound SR-163 Closed November 1 for More Than Pink Walk",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr163closure"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-10-31-san-diego-northbound-sr163-november-closure.json",
+      "editorialFingerprint": "7fb5438ea00b810d0312db1f8efa400cfd113411d333193ed818d6f171bced0a",
+      "topicKey": "san-diego-northbound-sr163-november-closure",
+      "humanEdited": false
+    },
+    {
+      "title": "San Diego: northbound SR-163 closure scheduled for November 1",
+      "description": "A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.",
+      "slug": "2026-10-31-san-diego-northbound-sr163-november-closure",
+      "date": "2026-10-31",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "source-checked",
+        "operations-report"
+      ],
+      "translationKey": "2026-10-31-san-diego-northbound-sr163-november-closure",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans District 11 — Northbound SR-163 closure news listing",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11"
+        },
+        {
+          "label": "Northbound SR-163 Closed November 1 for More Than Pink Walk",
+          "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261030-sr163closure"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-10-31-san-diego-northbound-sr163-november-closure.json",
+      "editorialFingerprint": "7fb5438ea00b810d0312db1f8efa400cfd113411d333193ed818d6f171bced0a",
+      "topicKey": "san-diego-northbound-sr163-november-closure",
+      "humanEdited": false
+    },
+    {
+      "title": "Viajes fronterizos por California: dónde consultar el estado de las carreteras",
+      "description": "Informe con enlaces a fuentes primarias, revisión de evidencia y traducción, fechas explícitas y límites de interpretación.",
+      "slug": "2026-10-29-california-road-information-tools-es",
+      "date": "2026-10-30",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "es",
+      "tags": [
+        "source-checked",
+        "source-explainer"
+      ],
+      "translationKey": "2026-10-29-california-road-information-tools",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans Travel",
+          "url": "https://dot.ca.gov/travel"
+        },
+        {
+          "label": "Caltrans regional traveler information",
+          "url": "https://dot.ca.gov/programs/traffic-operations/traveler-information/511"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-10-29-california-road-information-tools.json",
+      "editorialFingerprint": "e95ade4228a0994bded08d81f3e9065a0f76c43049f1699400d746fd92dee28f",
+      "topicKey": "california-road-information-tools",
+      "humanEdited": false
+    },
+    {
+      "title": "California border trips: where to look up road conditions",
+      "description": "A report with primary-source links, recorded evidence and translation review, explicit dates and limits on interpretation.",
+      "slug": "2026-10-29-california-road-information-tools",
+      "date": "2026-10-30",
+      "author": "borderpulse-editorial-ai",
+      "pillar": "traveler-tips",
+      "lang": "en",
+      "tags": [
+        "source-checked",
+        "source-explainer"
+      ],
+      "translationKey": "2026-10-29-california-road-information-tools",
+      "relatedCrossings": [],
+      "officialSources": [
+        {
+          "label": "Caltrans Travel",
+          "url": "https://dot.ca.gov/travel"
+        },
+        {
+          "label": "Caltrans regional traveler information",
+          "url": "https://dot.ca.gov/programs/traffic-operations/traveler-information/511"
+        }
+      ],
+      "draft": false,
+      "source": "ai-editorial",
+      "editorialReceipt": "2026-10-29-california-road-information-tools.json",
+      "editorialFingerprint": "e95ade4228a0994bded08d81f3e9065a0f76c43049f1699400d746fd92dee28f",
+      "topicKey": "california-road-information-tools",
+      "humanEdited": false
+    },
+    {
       "title": "Best time to cross back from Los Algodones: 30 days of Andrade data",
       "description": "Median northbound waits at Andrade by hour, from CBP data. Waits are short all day, then triple in the final hours before the 10 PM close. Time the dentist, not the line.",
       "slug": "best-time-to-cross-back-from-los-algodones",
@@ -44,6 +408,7 @@
       "description": "Median northbound waits by hour and day at Calexico East, from CBP data. The 6 AM opening window, the late-morning double hump, and the evening dip most drivers miss.",
       "slug": "best-time-to-cross-calexico-east",
       "date": "2026-07-03",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -78,10 +443,11 @@
       "humanEdited": true
     },
     {
-      "title": "Domingos de verano: lo que dicen 30 días de datos de CBP sobre el regreso",
-      "description": "Esperas hacia EE.UU. los domingos en San Ysidro, Otay, Tecate, PDN y Nogales, hora por hora. La trampa es más grande que el pico de las 5 PM y se cierra temprano.",
+      "title": "Domingos de verano: análisis archivado de julio de 2026",
+      "description": "Cifras históricas del artículo del 3 de julio de 2026, con enlaces a reportes actuales y gráficas publicadas por separado. No son consejos para este fin de semana.",
       "slug": "cruzar-domingo-verano-frontera",
       "date": "2026-07-03",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -125,6 +491,7 @@
       "description": "Esperas medianas hacia EE.UU. en Calexico East, hora por hora, con datos de CBP. La ventana de las 6 AM, la joroba de media mañana y el bajón de la tarde que casi nadie usa.",
       "slug": "mejor-hora-para-cruzar-calexico-east",
       "date": "2026-07-03",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -278,10 +645,11 @@
       "humanEdited": true
     },
     {
-      "title": "Summer Sunday returns: what 30 days of CBP data say about crossing back",
-      "description": "Sunday northbound waits at San Ysidro, Otay Mesa, Tecate, Paso del Norte and Nogales, hour by hour. The trap is bigger than the 5 PM rush, and the escape window closes early.",
+      "title": "Summer Sunday returns: archived July 2026 analysis",
+      "description": "Historical figures retained from the July 3, 2026 article, with current-report links and separately published charts. Not advice for this weekend.",
       "slug": "summer-sunday-border-waits",
       "date": "2026-07-03",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -391,7 +759,7 @@
       "description": "Median northbound wait times by hour and day at Calexico West, from CBP data. The early weekend morning window, and the weekday midday wall nobody plans around.",
       "slug": "best-time-to-cross-calexico-west",
       "date": "2026-05-09",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -430,7 +798,7 @@
       "description": "Median northbound wait times by hour and day at the Hidalgo bridge, from CBP data. Mornings here clear faster than at any San Diego crossing.",
       "slug": "best-time-to-cross-hidalgo",
       "date": "2026-05-09",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -471,7 +839,7 @@
       "description": "Median northbound wait times by hour and day at Tecate, from CBP data. Mornings run near an hour; Monday evening peaks at 260 minutes.",
       "slug": "best-time-to-cross-tecate",
       "date": "2026-05-09",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -542,10 +910,11 @@
       "humanEdited": true
     },
     {
-      "title": "Bringing your dog back from Mexico: the 2024 CDC rule, plain English",
-      "description": "What changed in August 2024 and what CBP officers actually check at the U.S.-Mexico land border. The CDC Dog Import Form, the microchip rule, and the high-risk-country exception.",
+      "title": "Bringing a dog back from Mexico: check its six-month travel history",
+      "description": "CDC requirements depend on the dog’s travel history, not vaccination country alone. Low-risk documentation, microchip checks and links for high-risk travel.",
       "slug": "cdc-dog-import-rule-2024-mexico-border",
       "date": "2026-05-09",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "policy-programs",
       "lang": "en",
@@ -571,6 +940,14 @@
         {
           "label": "CBP traveling with pets",
           "url": "https://www.cbp.gov/travel/clearing-customs/pets"
+        },
+        {
+          "label": "CDC low-risk entry requirements",
+          "url": "https://www.cdc.gov/importation/dogs/rabies-free-low-risk-countries.html"
+        },
+        {
+          "label": "CDC dog importation FAQs",
+          "url": "https://www.cdc.gov/importation/dogs/faqs.html"
         }
       ],
       "draft": false,
@@ -578,10 +955,11 @@
       "humanEdited": true
     },
     {
-      "title": "Cruce Los Algodones 2026: datos, documentos y la trampa de las 10 p. m.",
-      "description": "Planea tu viaje a Los Algodones para dental, farmacia o anteojos. Horarios del puerto Andrade, esperas en vivo, qué declarar y la trampa del cierre a las 10 p. m.",
+      "title": "Cruce de Los Algodones: reportes, horarios y preparativos",
+      "description": "Consulta las esperas reportadas de Andrade, sus horarios y las fuentes oficiales sobre documentos y viaje antes de visitar Los Algodones.",
       "slug": "guia-cruce-fronterizo-los-algodones",
       "date": "2026-05-09",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "traveler-tips",
       "lang": "es",
@@ -624,10 +1002,11 @@
       "humanEdited": true
     },
     {
-      "title": "Los Algodones border crossing guide 2026: data, docs, and the 10 PM trap",
-      "description": "Plan your trip to Los Algodones, Mexico for dental, pharmacy, or eyewear visits. Andrade port hours, live wait times, what to declare, and the 10 PM closing trap.",
+      "title": "Los Algodones crossing guide: reports, hours and travel checks",
+      "description": "Check Andrade’s reported waits, posted hours, documents and official travel guidance before visiting Los Algodones.",
       "slug": "los-algodones-border-crossing-guide",
       "date": "2026-05-09",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "traveler-tips",
       "lang": "en",
@@ -674,7 +1053,7 @@
       "description": "Tiempos medianos hacia EE.UU. en Calexico West, hora por hora, con datos de CBP. La ventana de la madrugada del fin de semana y el muro del mediodía entre semana.",
       "slug": "mejor-hora-para-cruzar-calexico-west",
       "date": "2026-05-09",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -713,7 +1092,7 @@
       "description": "Tiempos medianos hacia EE.UU. en el puente Hidalgo, hora por hora, con datos de CBP. Las mañanas aquí se despejan más rápido que en cualquier garita de San Diego.",
       "slug": "mejor-hora-para-cruzar-hidalgo",
       "date": "2026-05-09",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -754,7 +1133,7 @@
       "description": "Tiempos medianos hacia EE.UU. en Tecate, hora por hora, con datos de CBP. Las mañanas rondan la hora; el domingo por la tarde la mediana sube a cuatro o cinco horas.",
       "slug": "mejor-hora-para-cruzar-tecate",
       "date": "2026-05-09",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -789,10 +1168,11 @@
       "humanEdited": true
     },
     {
-      "title": "Traer tu perro de México: la regla del CDC de 2024, en español plano",
-      "description": "Qué cambió en agosto de 2024 y qué revisan los oficiales de CBP en la frontera EE.UU.-México. El Formulario CDC, el microchip y la excepción de país de alto riesgo.",
+      "title": "Regresar con un perro de México: revisa sus últimos seis meses",
+      "description": "Los requisitos del CDC dependen de los países visitados, no solo de dónde se vacunó el perro. Documentación, microchip y rutas para viajes de alto riesgo.",
       "slug": "regla-cdc-perros-2024-frontera-mexico",
       "date": "2026-05-09",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "policy-programs",
       "lang": "es",
@@ -818,6 +1198,14 @@
         {
           "label": "CBP viajar con mascotas",
           "url": "https://www.cbp.gov/travel/clearing-customs/pets"
+        },
+        {
+          "label": "CDC requisitos de entrada de bajo riesgo",
+          "url": "https://www.cdc.gov/importation/dogs/rabies-free-low-risk-countries.html"
+        },
+        {
+          "label": "CDC preguntas frecuentes",
+          "url": "https://www.cdc.gov/importation/dogs/faqs.html"
         }
       ],
       "draft": false,
@@ -825,10 +1213,11 @@
       "humanEdited": true
     },
     {
-      "title": "Renovación SENTRI 2026: paso a paso, con lo que más detiene renovaciones",
-      "description": "Cómo renovar tu membresía SENTRI en 2026: tiempos, el portal TTP, costos, la ventana de aprobación condicional y la cita de huellas que se les pasa.",
+      "title": "Renovación SENTRI: cómo renovar en el portal TTP",
+      "description": "Renueva SENTRI en el portal oficial TTP. Revisa cuándo solicitarla, qué significa una renovación pendiente, la entrevista y la activación de tarjeta.",
       "slug": "renovacion-sentri-2026-paso-a-paso",
       "date": "2026-05-09",
+      "updated": "2026-10-22",
       "author": "sebastian",
       "pillar": "policy-programs",
       "lang": "es",
@@ -843,16 +1232,12 @@
       "relatedCrossings": [],
       "officialSources": [
         {
-          "label": "CBP programa SENTRI",
-          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+          "label": "FAQ de renovación de DHS TTP",
+          "url": "https://ttp.dhs.gov/faq"
         },
         {
           "label": "Portal TTP DHS",
           "url": "https://ttp.dhs.gov/"
-        },
-        {
-          "label": "CBP centro de Trusted Traveler Programs",
-          "url": "https://www.cbp.gov/travel/trusted-traveler-programs"
         }
       ],
       "draft": false,
@@ -860,10 +1245,11 @@
       "humanEdited": true
     },
     {
-      "title": "SENTRI renewal 2026: step by step, with what trips most renewals",
-      "description": "How to renew your SENTRI membership in 2026: timing, the TTP portal, fees, the conditional approval window, and the fingerprint reschedule that catches people.",
+      "title": "SENTRI renewal: how to renew in the TTP portal",
+      "description": "Renew SENTRI through the official TTP portal. Check when to apply, what a pending renewal means, interview instructions and card activation.",
       "slug": "sentri-renewal-2026-step-by-step",
       "date": "2026-05-09",
+      "updated": "2026-10-22",
       "author": "sebastian",
       "pillar": "policy-programs",
       "lang": "en",
@@ -878,16 +1264,12 @@
       "relatedCrossings": [],
       "officialSources": [
         {
-          "label": "CBP SENTRI program",
-          "url": "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
+          "label": "DHS TTP renewal FAQ",
+          "url": "https://ttp.dhs.gov/faq"
         },
         {
           "label": "TTP DHS portal",
           "url": "https://ttp.dhs.gov/"
-        },
-        {
-          "label": "CBP Trusted Traveler Programs hub",
-          "url": "https://www.cbp.gov/travel/trusted-traveler-programs"
         }
       ],
       "draft": false,
@@ -935,7 +1317,7 @@
       "description": "Median wait at Nogales DeConcini (Arizona) by hour and day, from CBP. Overall median 45 minutes. Monday is the wall; Wednesday 1 AM medians 0.",
       "slug": "best-time-to-cross-nogales-deconcini",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -971,7 +1353,7 @@
       "description": "Median wait at Otay Mesa by hour and day, from CBP over the last 30 days. Lightest window: Saturday 5 to 7 AM at a 10 minute median. The Sunday evening peak to plan around.",
       "slug": "best-time-to-cross-otay-mesa",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -1006,7 +1388,7 @@
       "description": "Median wait at Paso Del Norte (El Paso, TX) by hour and day, from CBP. Overall median 54 minutes. Wednesday 2 AM medians 24; Saturday afternoon hits 85.",
       "slug": "best-time-to-cross-paso-del-norte",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -1042,7 +1424,7 @@
       "description": "Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Mediana general de 45 minutos. El lunes es la pared; el miércoles a la 1 a. m. marca 0.",
       "slug": "mejor-hora-para-cruzar-nogales-deconcini",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -1078,7 +1460,7 @@
       "description": "Mediana de espera en Otay Mesa por hora y día, según CBP. La ventana más ligera: sábado de 5 a 7 a. m. con 10 minutos. El pico del domingo en la noche llega a 210.",
       "slug": "mejor-hora-para-cruzar-otay-mesa",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -1113,7 +1495,7 @@
       "description": "Mediana de espera en Paso del Norte (El Paso, TX) por hora y día, según CBP. Mediana general de 54 minutos. Miércoles 2 a. m. marca 24; sábado en la tarde llega a 85.",
       "slug": "mejor-hora-para-cruzar-paso-del-norte",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -1149,7 +1531,7 @@
       "description": "Tiempos de espera medianos en San Ysidro por hora y día, sacados directo de U.S. Customs and Border Protection. Lo que la mayoría de los fronterizos ya sabe pero ahora con números.",
       "slug": "mejor-hora-para-cruzar-san-ysidro",
       "date": "2026-04-24",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -1248,10 +1630,11 @@
       "humanEdited": true
     },
     {
-      "title": "San Ysidro vs Otay Mesa: cuál es más rápida según 30 días de datos de CBP",
-      "description": "Mediana de espera en las dos garitas principales de Tijuana a San Diego, hora por hora, según CBP. Otay gana en general, pero San Ysidro gana el lunes en la madrugada.",
+      "title": "San Ysidro vs Otay Mesa: compara las esperas antes de elegir",
+      "description": "Compara las esperas reportadas en San Ysidro y Otay Mesa, consulta los patrones recientes de 30 días y toma en cuenta tu carril y el tiempo de manejo.",
       "slug": "san-ysidro-vs-otay-cual-es-mas-rapida",
       "date": "2026-04-24",
+      "updated": "2026-10-11",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "es",
@@ -1287,10 +1670,11 @@
       "humanEdited": true
     },
     {
-      "title": "San Ysidro vs Otay Mesa: which is faster, and what 30 days of CBP data says",
-      "description": "Median wait at the two main Tijuana to San Diego crossings, hour by hour, from CBP. Otay wins overall, but San Ysidro wins the Monday morning trucker rush.",
+      "title": "San Ysidro vs Otay Mesa: compare current waits before choosing",
+      "description": "Compare the latest reported waits at San Ysidro and Otay Mesa, understand rolling 30-day patterns, and account for your lane and extra driving time.",
       "slug": "san-ysidro-vs-otay-mesa",
       "date": "2026-04-24",
+      "updated": "2026-10-11",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -1330,7 +1714,7 @@
       "description": "Median wait times for every hour of every day at San Ysidro, pulled from U.S. Customs and Border Protection over the last 30 days. The patterns most travelers miss.",
       "slug": "best-time-to-cross-san-ysidro",
       "date": "2026-04-23",
-      "updated": "2026-07-27",
+      "updated": "2026-10-29",
       "author": "sebastian",
       "pillar": "data-analysis",
       "lang": "en",
@@ -1365,5 +1749,5 @@
       "humanEdited": true
     }
   ],
-  "generated_at": "2026-08-20T17:22:35.361Z"
+  "generated_at": "2026-11-10T18:33:06.232Z"
 }

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-11-10 - Main screen, second pass (Phase 3, session 2, draft)
+
+- One clock on the main screen: the map explorer no longer repeats "Fetched X min ago" under Latest reports. The header already shows the fetch time, and stale, offline and fallback states still show the explorer's own notice with its clock. Recorded history still shows the observation clock.
+- Footer: the separate "Source" and "Refresh rate: Regular schedule" tiles are folded into one "Source:" line inside How Border Pulse works. "Regular schedule" said nothing the paragraph above did not. EN/ES.
+- Phones (390px) are 153px shorter. No horizontal overflow at 390 or 1280.
+- Checks: full `npm test` passes after a prerendered build. Entry bundle 61.97 KB gzip. Before/after 390px screenshots shared in chat.
+- Decided from Umami data (see DECISIONS.md 2026-11-10): keep all three filters and Popular border crossings.
+
 ## 2026-11-09 - Main screen, first pass (Phase 3, session 1, draft)
 
 - Phones (under 900px): the crossing results list now comes before the map, so the first thing after the controls is a wait. A starred crossing is already sorted first, so returning visitors see their own crossing's wait first. Desktop layout unchanged.
