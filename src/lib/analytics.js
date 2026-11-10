@@ -27,7 +27,7 @@
 //   crossing-share      crossing-page distribution; method=native|copy|whatsapp
 //   compare-share       comparison-page distribution; method=copy|whatsapp
 //   blog-share          guide distribution; slug and method=copy|whatsapp
-//   blog-to-waits       guide reader opening the current waits dashboard
+//   blog-to-waits       guide reader opening current waits; crossing + placement=top for the in-guide links
 //
 // Diagnostics (not audited ad-network statistics):
 //   ad-slot-diagnostic  slot=dashboard-native; state=script-ready|script-error|

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T18:49:28.534Z",
+  "generated_at": "2026-11-10T19:37:39.141Z",
   "lookback_days": 30,
   "source": "U.S. Customs and Border Protection",
   "count": 35,
@@ -12,7 +12,7 @@
       "overall_median": 90,
       "best_hour": 1,
       "best_median": 25,
-      "sample_count": 2923
+      "sample_count": 2921
     },
     {
       "slug": "san-ysidro",
@@ -22,7 +22,7 @@
       "overall_median": 80,
       "best_hour": 1,
       "best_median": 20,
-      "sample_count": 2813
+      "sample_count": 2811
     },
     {
       "slug": "calexico-west",
@@ -32,17 +32,7 @@
       "overall_median": 60,
       "best_hour": 0,
       "best_median": 15,
-      "sample_count": 2954
-    },
-    {
-      "slug": "brownsville-b-and-m",
-      "port_number": "535501",
-      "name": "Brownsville - B&M",
-      "state": "TX",
-      "overall_median": 60,
-      "best_hour": 23,
-      "best_median": 5,
-      "sample_count": 2718
+      "sample_count": 2952
     },
     {
       "slug": "tecate",
@@ -52,7 +42,7 @@
       "overall_median": 60,
       "best_hour": 21,
       "best_median": 30,
-      "sample_count": 2243
+      "sample_count": 2241
     },
     {
       "slug": "eagle-pass-bridge-i",
@@ -72,7 +62,17 @@
       "overall_median": 55,
       "best_hour": 1,
       "best_median": 6,
-      "sample_count": 2835
+      "sample_count": 2833
+    },
+    {
+      "slug": "brownsville-b-and-m",
+      "port_number": "535501",
+      "name": "Brownsville - B&M",
+      "state": "TX",
+      "overall_median": 55,
+      "best_hour": 23,
+      "best_median": 5,
+      "sample_count": 2716
     },
     {
       "slug": "el-paso-paso-del-norte-pdn",
@@ -82,7 +82,7 @@
       "overall_median": 50,
       "best_hour": 2,
       "best_median": 1,
-      "sample_count": 2670
+      "sample_count": 2668
     },
     {
       "slug": "brownsville-veterans-international",
@@ -92,7 +92,7 @@
       "overall_median": 50,
       "best_hour": 6,
       "best_median": 0,
-      "sample_count": 2084
+      "sample_count": 2082
     },
     {
       "slug": "calexico-east",
@@ -102,7 +102,7 @@
       "overall_median": 50,
       "best_hour": 6,
       "best_median": 30,
-      "sample_count": 2035
+      "sample_count": 2033
     },
     {
       "slug": "nogales-deconcini",
@@ -112,7 +112,7 @@
       "overall_median": 45,
       "best_hour": 1,
       "best_median": 5,
-      "sample_count": 2935
+      "sample_count": 2933
     },
     {
       "slug": "laredo-bridge-ii",
@@ -122,7 +122,7 @@
       "overall_median": 45,
       "best_hour": 23,
       "best_median": 0,
-      "sample_count": 2934
+      "sample_count": 2932
     },
     {
       "slug": "hidalgo-pharr-hidalgo",
@@ -132,7 +132,7 @@
       "overall_median": 45,
       "best_hour": 3,
       "best_median": 1,
-      "sample_count": 2702
+      "sample_count": 2700
     },
     {
       "slug": "nogales-mariposa",
@@ -142,7 +142,7 @@
       "overall_median": 45,
       "best_hour": 6,
       "best_median": 0,
-      "sample_count": 2162
+      "sample_count": 2160
     },
     {
       "slug": "hidalgo-pharr-anzalduas-international-bridge",
@@ -152,7 +152,7 @@
       "overall_median": 45,
       "best_hour": 6,
       "best_median": 15,
-      "sample_count": 2139
+      "sample_count": 2137
     },
     {
       "slug": "santa-teresa-santa-teresa-port-of-entry",
@@ -162,7 +162,7 @@
       "overall_median": 45,
       "best_hour": 21,
       "best_median": 40,
-      "sample_count": 2079
+      "sample_count": 2077
     },
     {
       "slug": "progreso-donna-international-bridge",
@@ -172,7 +172,7 @@
       "overall_median": 45,
       "best_hour": 10,
       "best_median": 25,
-      "sample_count": 1896
+      "sample_count": 1891
     },
     {
       "slug": "brownsville-gateway",
@@ -182,7 +182,7 @@
       "overall_median": 40,
       "best_hour": 23,
       "best_median": 5,
-      "sample_count": 2832
+      "sample_count": 2830
     },
     {
       "slug": "eagle-pass-bridge-ii",
@@ -192,7 +192,7 @@
       "overall_median": 30,
       "best_hour": 2,
       "best_median": 5,
-      "sample_count": 2954
+      "sample_count": 2952
     },
     {
       "slug": "san-luis-san-luis-i",
@@ -202,7 +202,7 @@
       "overall_median": 30,
       "best_hour": 1,
       "best_median": 15,
-      "sample_count": 2938
+      "sample_count": 2936
     },
     {
       "slug": "douglas-raul-hector-castro",
@@ -212,7 +212,7 @@
       "overall_median": 30,
       "best_hour": 0,
       "best_median": 1,
-      "sample_count": 2768
+      "sample_count": 2766
     },
     {
       "slug": "marcelino-serna-tornillo",
@@ -222,7 +222,7 @@
       "overall_median": 20,
       "best_hour": 21,
       "best_median": 18,
-      "sample_count": 2235
+      "sample_count": 2233
     },
     {
       "slug": "progreso-progreso-international-bridge",
@@ -232,7 +232,7 @@
       "overall_median": 20,
       "best_hour": 0,
       "best_median": 5,
-      "sample_count": 2217
+      "sample_count": 2220
     },
     {
       "slug": "andrade",
@@ -242,7 +242,7 @@
       "overall_median": 20,
       "best_hour": 10,
       "best_median": 10,
-      "sample_count": 2146
+      "sample_count": 2144
     },
     {
       "slug": "brownsville-los-indios",
@@ -252,7 +252,7 @@
       "overall_median": 20,
       "best_hour": 6,
       "best_median": 0,
-      "sample_count": 1814
+      "sample_count": 1812
     },
     {
       "slug": "hidalgo-pharr-pharr",
@@ -272,7 +272,7 @@
       "overall_median": 15,
       "best_hour": 0,
       "best_median": 0,
-      "sample_count": 2743
+      "sample_count": 2741
     },
     {
       "slug": "columbus",
@@ -282,7 +282,7 @@
       "overall_median": 5,
       "best_hour": 0,
       "best_median": 0,
-      "sample_count": 2980
+      "sample_count": 2978
     },
     {
       "slug": "presidio-presidio-port-of-entry",
@@ -292,7 +292,7 @@
       "overall_median": 5,
       "best_hour": 1,
       "best_median": 0,
-      "sample_count": 2888
+      "sample_count": 2886
     },
     {
       "slug": "roma",
@@ -302,7 +302,7 @@
       "overall_median": 5,
       "best_hour": 0,
       "best_median": 0,
-      "sample_count": 2444
+      "sample_count": 2442
     },
     {
       "slug": "fort-hancock",
@@ -310,9 +310,9 @@
       "name": "Fort Hancock",
       "state": "TX",
       "overall_median": 5,
-      "best_hour": 13,
+      "best_hour": 14,
       "best_median": 5,
-      "sample_count": 2239
+      "sample_count": 2237
     },
     {
       "slug": "naco",
@@ -322,7 +322,7 @@
       "overall_median": 5,
       "best_hour": 19,
       "best_median": 1,
-      "sample_count": 2176
+      "sample_count": 2174
     },
     {
       "slug": "rio-grande-city",
@@ -330,9 +330,9 @@
       "name": "Rio Grande City",
       "state": "TX",
       "overall_median": 5,
-      "best_hour": 13,
+      "best_hour": 14,
       "best_median": 5,
-      "sample_count": 1964
+      "sample_count": 1962
     },
     {
       "slug": "laredo-colombia-solidarity",
@@ -342,7 +342,7 @@
       "overall_median": 5,
       "best_hour": 19,
       "best_median": 0,
-      "sample_count": 1471
+      "sample_count": 1469
     },
     {
       "slug": "lukeville",
@@ -350,9 +350,9 @@
       "name": "Lukeville",
       "state": "AZ",
       "overall_median": 0,
-      "best_hour": 11,
+      "best_hour": 14,
       "best_median": 0,
-      "sample_count": 1998
+      "sample_count": 1996
     }
   ]
 }
