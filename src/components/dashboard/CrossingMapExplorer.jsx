@@ -73,6 +73,8 @@ const clock = (value, language, zone = 'UTC') => value && Number.isFinite(Date.p
   timeZone: zone,
   timeZoneName: 'short'
 }).format(new Date(value)) : '—';
+// The page header shows fetch time in the visitor's zone; the notice matches it.
+const localZone = () => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'; } catch { return 'UTC'; } };
 const labels = {
   en: {
     title: 'Explore the border',
@@ -434,7 +436,7 @@ export default function CrossingMapExplorer({
           setParams(q, {
             replace: true
           });
-        }} />{clock(selectedSnapshot?.fetched_at, language)}</label>}{unavailableInstant && <p>{es ? 'La observación solicitada no está en este archivo. Elige otra hora.' : 'The requested observation is absent from this archive. Choose another time.'}</p>}{lane !== 'passenger_standard' && <p>{t.notRetained}. <button onClick={() => onLaneChange('passenger_standard')}>{es ? 'Elegir auto estándar' : 'Choose Standard passenger'}</button></p>}</div> : !trusted && <div className="explorerNotice" role="status">{noData ? t.unavailable : offline ? es ? 'Sin conexión. Conservamos reportes anteriores.' : 'Offline. Retained reports are shown.' : fromFallback ? es ? 'Datos de respaldo guardados. Las condiciones actuales no están verificadas.' : 'Saved fallback data. Current conditions are not verified.' : success === false ? es ? 'No se pudo actualizar. Conservamos la hora y los valores del último reporte.' : 'Refresh unavailable. The last report values and original time are retained.' : es ? 'Consulta desactualizada o de hora desconocida.' : 'Stale or unknown retrieval time.'} {clock(fetchedAt, language)}</div>}
+        }} />{clock(selectedSnapshot?.fetched_at, language)}</label>}{unavailableInstant && <p>{es ? 'La observación solicitada no está en este archivo. Elige otra hora.' : 'The requested observation is absent from this archive. Choose another time.'}</p>}{lane !== 'passenger_standard' && <p>{t.notRetained}. <button onClick={() => onLaneChange('passenger_standard')}>{es ? 'Elegir auto estándar' : 'Choose Standard passenger'}</button></p>}</div> : !trusted && <div className="explorerNotice" role="status">{noData ? t.unavailable : offline ? es ? 'Sin conexión. Conservamos reportes anteriores.' : 'Offline. Retained reports are shown.' : fromFallback ? es ? 'Datos de respaldo guardados. Las condiciones actuales no están verificadas.' : 'Saved fallback data. Current conditions are not verified.' : success === false ? es ? 'No se pudo actualizar. Conservamos la hora y los valores del último reporte.' : 'Refresh unavailable. The last report values and original time are retained.' : es ? 'Consulta desactualizada o de hora desconocida.' : 'Stale or unknown retrieval time.'} {clock(fetchedAt, language, localZone())}</div>}
     <div className="explorerWorkspace">
       <div ref={frameRef} className="explorerMap bp-line" tabIndex="0" aria-describedby="map-location-note" aria-label={es ? 'Mapa. Usa los botones para acercar o arrastra para mover.' : 'Map. Use zoom buttons or drag to pan.'} onKeyDown={e => {
         if (e.target !== e.currentTarget) return;

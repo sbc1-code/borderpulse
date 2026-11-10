@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-09 - Main screen, first pass (Phase 3, session 1, draft)
+
+- Phones (under 900px): the crossing results list now comes before the map, so the first thing after the controls is a wait. A starred crossing is already sorted first, so returning visitors see their own crossing's wait first. Desktop layout unchanged.
+- One clock: the saved-data / refresh notice now shows its time in the visitor's zone, matching the header, instead of UTC. The duplicate "Snapshot retrieved" tile in the footer is removed; the header and the "Fetched ... ago" line already show it.
+- Checks: full `npm test` (including route and border-map browser checks) passes after a prerendered build. Before/after phone screenshots captured in EN and ES. Entry bundle 62.00 KB gzip.
+- Not in this pass: a "your crossing" hero, removing repeated info between map, list and crossing page, and lane cues in Standard-only sections (sessions 2-3).
+
 ## 2026-11-09 - Fresher backup data and an honest "could not load" state
 
 - Fallback freshness: when the live CBP endpoint fails, the site now also reads the collector's committed feed through a same-origin rewrite (`/data/latest/crossings.json` -> `main/public/data/crossings.json` on GitHub). It keeps whichever valid backup is newer, the collector feed or the bundled copy. The bundled copy only changes when Vercel deploys (daily), so it could be most of a day old; the collector commits every 15 minutes. Backup readings are still labeled as fallback with their original clock.

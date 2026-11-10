@@ -5,8 +5,7 @@ import React from 'react';
  * Goal: give LLMs and SEO crawlers explicit, citable facts about this
  * site's data, coverage, update frequency, and privacy model.
  */
-export default function AboutFooter({ language, fetchedAt, count, direction = 'northbound' }) {
-  const updatedStr = fetchedAt ? new Date(fetchedAt).toLocaleString() : '—';
+export default function AboutFooter({ language, count, direction = 'northbound' }) {
   const isSouthbound = direction === 'southbound';
 
   return (
@@ -32,7 +31,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
           <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
             {language === 'en' ? (isSouthbound ? 'Method' : 'Source') : (isSouthbound ? 'Método' : 'Fuente')}
@@ -56,12 +55,6 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
           <div className="font-medium text-slate-900 dark:text-white text-sm">
             {language === 'en' ? 'Regular schedule' : 'Horario regular'}
           </div>
-        </div>
-        <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? 'Snapshot retrieved' : 'Datos consultados'}
-          </div>
-          <div className="font-medium text-slate-900 dark:text-white text-sm">{updatedStr}</div>
         </div>
       </div>
 
