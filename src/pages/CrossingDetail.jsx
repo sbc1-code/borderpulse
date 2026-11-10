@@ -29,6 +29,7 @@ import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
 import { track } from '@/lib/analytics';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -586,6 +587,8 @@ export default function CrossingDetail() {
           </section>
         );
       })()}
+
+      <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
 
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
         <section id="trends" className="mb-6 scroll-mt-20">
