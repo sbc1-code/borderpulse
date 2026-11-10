@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-10T09:29:44.048Z",
-  "snapshot_at": "2026-11-10T09:22:43.964Z",
+  "generated_at": "2026-11-10T17:34:32.054Z",
+  "snapshot_at": "2026-11-10T17:22:54.637Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -162,7 +162,7 @@
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-11-10T09:29:44.048Z",
+      "detected_at": "2026-11-10T17:34:32.054Z",
       "summary_en": "Right now Nogales - Mariposa's lightest Tuesday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -171,7 +171,7 @@
         "best_hour": 4,
         "best_median": 0,
         "overall_median": 45,
-        "samples": 10
+        "samples": 14
       }
     },
     {
@@ -234,7 +234,7 @@
       "port_name": "Hidalgo/Pharr - Hidalgo",
       "state": "TX",
       "severity": 0.9777777777777777,
-      "detected_at": "2026-11-10T09:29:44.048Z",
+      "detected_at": "2026-11-10T17:34:32.054Z",
       "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Tuesday hour so far is 3 AM (median 1 min) — ~98% below the 30-day baseline of 45 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Hidalgo/Pharr - Hidalgo es 3 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 45 min.",
       "evidence": {
@@ -243,7 +243,7 @@
         "best_hour": 3,
         "best_median": 1,
         "overall_median": 45,
-        "samples": 14
+        "samples": 16
       }
     },
     {
@@ -252,7 +252,7 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.9444444444444444,
-      "detected_at": "2026-11-10T09:29:44.048Z",
+      "detected_at": "2026-11-10T17:34:32.054Z",
       "summary_en": "Right now Otay Mesa's lightest Tuesday hour so far is 1 AM (median 5 min) — ~94% below the 30-day baseline of 90 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en Otay Mesa es 1 AM (mediana 5 min) — ~94% debajo de la base de 30 días de 90 min.",
       "evidence": {
@@ -261,7 +261,7 @@
         "best_hour": 1,
         "best_median": 5,
         "overall_median": 90,
-        "samples": 11
+        "samples": 13
       }
     },
     {
@@ -270,16 +270,16 @@
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "severity": 0.9272727272727272,
-      "detected_at": "2026-11-10T09:29:44.048Z",
-      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 2 AM (median 4 min) — ~93% below the 30-day baseline of 55 min.",
-      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 2 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 55 min.",
+      "detected_at": "2026-11-10T17:34:32.054Z",
+      "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Tuesday hour so far is 3 AM (median 4 min) — ~93% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del martes en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 4 min) — ~93% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 2,
         "day_label": "Tue",
-        "best_hour": 2,
+        "best_hour": 3,
         "best_median": 4,
         "overall_median": 55,
-        "samples": 19
+        "samples": 20
       }
     },
     {
@@ -323,7 +323,7 @@
       "port_name": "San Ysidro",
       "state": "CA",
       "severity": 0.75,
-      "detected_at": "2026-11-10T09:29:44.048Z",
+      "detected_at": "2026-11-10T17:34:32.054Z",
       "summary_en": "Right now San Ysidro's lightest Tuesday hour so far is 1 AM (median 20 min) — ~75% below the 30-day baseline of 80 min.",
       "summary_es": "Ahora mismo la hora más ligera del martes en San Ysidro es 1 AM (mediana 20 min) — ~75% debajo de la base de 30 días de 80 min.",
       "evidence": {
@@ -332,7 +332,7 @@
         "best_hour": 1,
         "best_median": 20,
         "overall_median": 80,
-        "samples": 11
+        "samples": 13
       }
     },
     {
