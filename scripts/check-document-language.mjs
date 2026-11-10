@@ -49,7 +49,7 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
   };
   const click = route => page.locator(`#root a[href="${route}"]:visible`).first().click();
   const switchTo = lang => page.getByRole('button', {
-    name: lang === 'es' ? 'Cambiar a español' : 'Switch to English', exact: true,
+    name: lang === 'es' ? 'ES, Cambiar a español' : 'EN, Switch to English', exact: true,
   }).filter({ visible: true }).click();
   page.setDefaultTimeout(5_000);
   await context.route(feedMatch, feedHandler);
@@ -89,7 +89,7 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
     await inspect('/best-time/san-ysidro/', 'es');
     await click('/');
     await inspect('/', 'es');
-    const menu = page.getByRole('button', { name: 'Open menu', exact: true });
+    const menu = page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ });
     if (await menu.isVisible()) await menu.click();
     await click('/blog/');
     await inspect('/blog/', 'es');
@@ -124,7 +124,7 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
       await inspect('/es/', 'es');
       await page.locator('footer').getByRole('link', { name: 'Metodología', exact: true }).waitFor();
       assert.equal(await page.locator('footer a[href="/methodology/"]').count(), 0);
-      const menu = page.getByRole('button', { name: 'Open menu', exact: true });
+      const menu = page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ });
       if (await menu.isVisible()) await menu.click();
       await page.getByRole('navigation', { name: 'Navegación principal', exact: true }).filter({ visible: true })
         .getByRole('link', { name: 'Cruces', exact: true }).waitFor();

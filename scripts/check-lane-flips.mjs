@@ -191,11 +191,11 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     assert.ok(await fits(page), 'detail overflows');
 
     const navName = viewport.width < 1024 ? null : 'Main navigation';
-    if (viewport.width < 1024) await page.getByRole('button', { name: 'Open menu' }).click();
+    if (viewport.width < 1024) await page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ }).click();
     const nav = navName ? page.getByRole('navigation', { name: navName }) : page.locator('#mobile-navigation');
     await nav.getByRole('link', { name: 'Lane flips' }).waitFor();
 
-    await page.getByRole('button', { name: 'Cambiar a español' }).click();
+    await page.getByRole('button', { name: 'ES, Cambiar a español' }).click();
     await page.getByRole('heading', { level: 1, name: 'Ready y SENTRI frente al carril general en Otay Mesa', exact: true }).waitFor();
     assert.match(await page.getByTestId('verdict-passenger_ready').innerText(), /En la última consulta, Ready Lane se reporta 50 min más lento que el general/);
     assert.match(await page.locator('#root').innerText(), /Revisa CBP antes de salir/);
@@ -205,7 +205,7 @@ export async function checkLaneFlips(browser, baseUrl, viewport) {
     await verifyShare('es');
     assert.ok(await fits(page), 'Spanish detail overflows');
     if (viewport.width < 1024 && !(await page.locator('#mobile-navigation').isVisible())) {
-      await page.getByRole('button', { name: 'Open menu' }).click();
+      await page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ }).click();
     }
     const spanishNav = viewport.width < 1024
       ? page.locator('#mobile-navigation')

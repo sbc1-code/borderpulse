@@ -23,7 +23,7 @@ export default function AboutFooter({ language, count, direction = 'northbound' 
             </>
           ) : (
             <>
-              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante un job programado.</p>
+              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante una tarea programada.</p>
               <p>Las estimaciones hacia México están pausadas. Este panel muestra únicamente datos oficiales hacia Estados Unidos. La hora del reporte de CBP de cada carril puede ser anterior a la consulta del sitio.</p>
               <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
@@ -58,7 +58,7 @@ export default function AboutFooter({ language, count, direction = 'northbound' 
             <p>
               {language === 'en'
                 ? 'Directly from U.S. Customs and Border Protection (CBP). Each port officer reports current conditions; we refresh the feed regularly via a scheduled job.'
-                : 'Directamente de U.S. Customs and Border Protection (CBP). Cada oficial del puerto reporta las condiciones actuales; actualizamos el feed con regularidad mediante un job programado.'}
+                : 'Directamente de U.S. Customs and Border Protection (CBP). Cada oficial del puerto reporta las condiciones actuales; actualizamos el feed con regularidad mediante una tarea programada.'}
             </p>
           </div>
           <div>

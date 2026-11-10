@@ -508,3 +508,8 @@
     }
   }
 }
+
+/* WCAG AA: slate-500 small text measured 4.47:1 on the light page background.
+   One notch darker in light mode (4.75:1); dark mode keeps the stock value. */
+:root { --color-slate-500: #5e7088; }
+.dark { --color-slate-500: #62748e; }

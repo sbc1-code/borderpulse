@@ -81,28 +81,28 @@ export async function checkHreflangNavigation(page, baseUrl) {
   const homePair = pair('/', '/es/');
   const click = async (route) => page.locator(`#root a[href="${route}"]:visible`).first().click();
   await inspect('/', homePair);
-  await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).click();
   await page.waitForFunction(() => document.documentElement.lang === 'es', null, { timeout: 10_000 });
   await inspect('/', homePair); // Shared URL keeps this canonical. Spanish points at /es/.
-  await page.getByRole('button', { name: 'Switch to English', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: 'EN, Switch to English', exact: true }).filter({ visible: true }).click();
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).fill('San Ysidro');
   await click('/crossing/san-ysidro/');
   await inspect('/crossing/san-ysidro/');
-  await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).click();
   // A background crossing update can reset html.lang through the existing
   // metadata cleanup. Verify the rendered language preference, independently
   // of that separate lifecycle issue, then assert the full alternate set.
   await page.locator('#root').getByRole('link', { name: 'Todos los cruces', exact: true }).waitFor({ timeout: 10_000 });
-  assert.equal(await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).getAttribute('aria-pressed'), 'true');
   await inspect('/crossing/san-ysidro/');
-  await page.getByRole('button', { name: 'Switch to English', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: 'EN, Switch to English', exact: true }).filter({ visible: true }).click();
   await click('/best-time/san-ysidro/');
   await inspect('/best-time/san-ysidro/');
   await page.goBack();
   await inspect('/crossing/san-ysidro/');
   await click('/compare/san-ysidro-vs-otay-mesa/');
   await inspect('/compare/san-ysidro-vs-otay-mesa/');
-  const menu = page.getByRole('button', { name: 'Open menu', exact: true });
+  const menu = page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ });
   if (await menu.isVisible()) await menu.click();
   await page.getByRole('navigation', { name: 'Main navigation', exact: true }).getByRole('link', { name: 'Blog', exact: true }).click();
   await page.getByRole('heading', { level: 1, name: 'Border Pulse Blog', exact: true }).waitFor();

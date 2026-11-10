@@ -569,3 +569,11 @@ The bundled `/data/crossings.json` only refreshes on Vercel deploys, so as a fal
 ## 2026-11-10 - Ads follow readers onto crossing pages and guides
 
 Adsterra reported 21 impressions and $0.03 for Nov 5 to 9 from the single home-page slot, while 75% of visitors land on guides and crossing pages that loaded no ad. The same native placement now renders below the answer on crossing pages and guides; long guides can opt into one mid-article slot instead of the end slot. Never above the wait, never in embeds, one container per page. The dormant Google switch in `DashboardAd` still covers only the dashboard slot; these pages use `AdsterraBanner` directly.
+
+## 2026-11-10 - Do not commit build-regenerated files from a local build
+
+`npm run build` runs prebuild scripts that rewrite `public/` outputs (aggregates, rankings, stats, sitemap lastmod, RSS, OG cards, blog index). Every deploy regenerates them, and the data bot owns the data files, so commits from a local build only add noise (PRs #184-#187 included them by mistake; production was unaffected). Run `git checkout -- public/` before committing unless the change is meant to edit a `public/` file.
+
+## 2026-11-10 - Light-mode slate-500 is one notch darker for AA contrast
+
+Stock `slate-500` (#62748e) measured 4.47:1 on the light page background, just under 4.5:1, on every page. Light mode overrides `--color-slate-500` to #5e7088 (4.75:1) instead of editing hundreds of class names; `.dark` restores the stock value so dark mode does not lose contrast.

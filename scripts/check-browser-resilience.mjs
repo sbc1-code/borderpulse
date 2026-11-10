@@ -41,7 +41,7 @@ export async function checkBrowserResilience(owner, context, baseUrl) {
             else Storage.prototype.setItem = () => { throw new DOMException('Fixture quota', 'QuotaExceededError'); };
           }, { failure, language });
           await page.goto(new URL('/?display=list', baseUrl).href);
-          if (language === 'es') await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).click();
+          if (language === 'es') await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).click();
           await page.getByRole('searchbox', { name: searchName, exact: true }).waitFor();
           assert.equal(await page.locator('html').getAttribute('lang'), language);
           await page.getByRole('button', { name: 'Switch to dark mode', exact: true }).filter({ visible: true }).click();
@@ -75,7 +75,7 @@ export async function checkBrowserResilience(owner, context, baseUrl) {
         await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).waitFor();
         assert.equal(await page.locator('html').getAttribute('lang'), 'en');
         assert.ok(!await page.locator('html').evaluate(node => node.classList.contains('dark')));
-        if (language === 'es') await page.getByRole('button', { name: 'Cambiar a español', exact: true }).filter({ visible: true }).click();
+        if (language === 'es') await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).click();
         await page.getByRole('searchbox', { name: searchName, exact: true }).fill('San Ysidro');
         await page.getByRole('button', { name: add, exact: true }).first().click();
         assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('borderPulse_favorites'))), ['250401']);
@@ -100,9 +100,9 @@ export async function checkBrowserResilience(owner, context, baseUrl) {
         await page.keyboard.press('Enter');
         assert.equal(await page.evaluate(() => document.activeElement.id), 'main-content', 'skip link moves keyboard focus into main');
         if (page.viewportSize().width < 1024) {
-          const menu = page.getByRole('button', { name: 'Open menu', exact: true });
+          const menu = page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ });
           await menu.click();
-          assert.equal(await page.getByRole('button', { name: 'Close menu', exact: true }).getAttribute('aria-controls'), 'mobile-navigation');
+          assert.equal(await page.getByRole('button', { name: /^(Close menu|Cerrar menú)$/ }).getAttribute('aria-controls'), 'mobile-navigation');
           await page.keyboard.press('Tab');
           await page.keyboard.press('Escape');
           assert.equal(await menu.getAttribute('aria-expanded'), 'false');
