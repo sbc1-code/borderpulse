@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-11-10 - Ads where readers land (draft)
+
+- The existing Adsterra native banner (placement 29055831) now also loads on crossing pages, after Latest lane reports, and on blog guides, after the "Crossing soon?" box. Before, only the home page loaded it, and the home page is 25% of visitors (Umami, last 30 days).
+- The prescription-medication guide (EN and ES), 41% of visitors, places the slot mid-article after the four core rules (`<InArticleAd />` plus `inArticleAd: true` frontmatter) instead of at the end. On a 390px phone it sits at about 3,600px of 8,800 instead of 8,555px. One ad container per page.
+- Ads sit below the answer on each page, never above the wait or the guide's core rules. No new provider, script or dependency. Embeds stay ad-free.
+- Privacy notice (EN/ES, React and prerendered) now says the main dashboard, crossing pages and guides load Adsterra's script.
+- Checks: full `npm test` passes after a prerendered build. Headless Chrome at 390px: one container on each page, the Adsterra script requested, no horizontal overflow. Creatives do not fill on localhost, so live fill and revenue are not verified.
+
 ## 2026-11-10 - Main screen, second pass (Phase 3, session 2, draft)
 
 - One clock on the main screen: the map explorer no longer repeats "Fetched X min ago" under Latest reports. The header already shows the fetch time, and stale, offline and fallback states still show the explorer's own notice with its clock. Recorded history still shows the observation clock.

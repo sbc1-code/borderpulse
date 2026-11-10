@@ -565,3 +565,7 @@ The bundled `/data/crossings.json` only refreshes on Vercel deploys, so as a fal
 - Filters: region tabs logged 83 uses and the crossing-area dropdown 77, out of about 2.35k visits. Both are used at similar rates, so neither is cut. Search use is not tracked (no free text is sent), so there is no evidence either way for it. Revisit only with a no-text search-use count.
 - Popular border crossings stays: 3 of the 20 most recent `crossing-open` events came from it, and 98% of visitors arrive from search engines, so its internal links matter more than the repetition costs.
 - Context for priorities: the home page is 25% of visitors. The prescription-medication blog post is 41% and crossing pages most of the rest. Main-screen polish reaches a minority of visitors; crossing pages and the blog-to-waits path reach the majority (blog-to-waits: 7 events against 617 post visitors).
+
+## 2026-11-10 - Ads follow readers onto crossing pages and guides
+
+Adsterra reported 21 impressions and $0.03 for Nov 5 to 9 from the single home-page slot, while 75% of visitors land on guides and crossing pages that loaded no ad. The same native placement now renders below the answer on crossing pages and guides; long guides can opt into one mid-article slot instead of the end slot. Never above the wait, never in embeds, one container per page. The dormant Google switch in `DashboardAd` still covers only the dashboard slot; these pages use `AdsterraBanner` directly.

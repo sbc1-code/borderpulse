@@ -13,8 +13,8 @@ const paragraphs = {
     "en": "Page views are measured with Umami, a cookieless analytics service. Border Pulse does not receive travel documents or precise location."
   },
   "adsterra": {
-    "es": "Border Pulse muestra anuncios de terceros para ayudar a mantener la plataforma. El panel carga el script publicitario de Adsterra; los anuncios pueden no mostrarse si el servicio o el navegador los bloquea.",
-    "en": "Border Pulse displays third-party ads to help support the platform. The dashboard loads Adsterra’s advertising script; ads may not appear if the service or browser blocks them."
+    "es": "Border Pulse muestra anuncios de terceros para ayudar a mantener la plataforma. El panel principal, las páginas de cruces y las guías cargan el script publicitario de Adsterra; los anuncios pueden no mostrarse si el servicio o el navegador los bloquea.",
+    "en": "Border Pulse displays third-party ads to help support the platform. The main dashboard, crossing pages and guides load Adsterra’s advertising script; ads may not appear if the service or browser blocks them."
   },
   "adsterraData": {
     "es": "Cuando se carga el script, tu navegador se conecta directamente con Adsterra. Su aviso de privacidad indica que puede procesar datos técnicos como la dirección IP, información del navegador y dispositivo, detalles de anuncios y datos de uso. Adsterra también describe el uso de cookies y otras tecnologías; las tecnologías concretas pueden variar según el anuncio o la campaña.",
