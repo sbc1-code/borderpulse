@@ -6,7 +6,7 @@
 - Footer: the separate "Source" and "Refresh rate: Regular schedule" tiles are folded into one "Source:" line inside How Border Pulse works. "Regular schedule" said nothing the paragraph above did not. EN/ES.
 - Phones (390px) are 153px shorter. No horizontal overflow at 390 or 1280.
 - Checks: full `npm test` passes after a prerendered build. Entry bundle 61.97 KB gzip. Before/after 390px screenshots shared in chat.
-- Not in this pass, owner decisions: overlapping filters (search, region tabs and crossing area), and whether Popular border crossings stays on the home page.
+- Decided from Umami data (see DECISIONS.md 2026-11-10): keep all three filters and Popular border crossings.
 
 ## 2026-11-09 - Main screen, first pass (Phase 3, session 1, draft)
 

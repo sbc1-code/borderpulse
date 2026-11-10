@@ -559,3 +559,9 @@ The raw `bwtpublicmod` feed saved 2026-11-02 contains both port numbers for Ysle
 ## 2026-11-09 · Backup data reads the collector feed through a same-origin rewrite
 
 The bundled `/data/crossings.json` only refreshes on Vercel deploys, so as a fallback it could be most of a day old. `vercel.json` rewrites `/data/latest/crossings.json` to the collector's committed file on GitHub `main`, and the client keeps whichever valid backup is newer. Same origin, so no CORS and no new client-side host; GitHub already hosts the code and the Pages rollback. If GitHub is unreachable the bundled copy still serves. "Nothing loaded" is a separate `unavailable` state, never labeled as saved data.
+
+## 2026-11-10 - Keep all three home filters and Popular border crossings (Umami, last 30 days)
+
+- Filters: region tabs logged 83 uses and the crossing-area dropdown 77, out of about 2.35k visits. Both are used at similar rates, so neither is cut. Search use is not tracked (no free text is sent), so there is no evidence either way for it. Revisit only with a no-text search-use count.
+- Popular border crossings stays: 3 of the 20 most recent `crossing-open` events came from it, and 98% of visitors arrive from search engines, so its internal links matter more than the repetition costs.
+- Context for priorities: the home page is 25% of visitors. The prescription-medication blog post is 41% and crossing pages most of the rest. Main-screen polish reaches a minority of visitors; crossing pages and the blog-to-waits path reach the majority (blog-to-waits: 7 events against 617 post visitors).
