@@ -78,6 +78,7 @@ export default function Dashboard() {
     fetchedAt: null,
     success: false,
     fromFallback: false,
+    unavailable: false,
   });
 
   const location = useLocation();
@@ -158,6 +159,7 @@ export default function Dashboard() {
         fetchedAt: data.timestamp,
         success: data.success,
         fromFallback: Boolean(data.fromFallback),
+        unavailable: Boolean(data.unavailable),
       });
       if (data.success) {
         recordSnapshot(data.crossings, 'northbound', data.timestamp);
@@ -592,7 +594,7 @@ export default function Dashboard() {
           </div>}
           <div hidden={presentation !== 'map'}>
             <Suspense fallback={<p role="status" className="py-8 text-sm text-slate-500">{language === 'es' ? 'Cargando mapa fronterizo…' : 'Loading border map…'}</p>}>
-              <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />
+              <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} unavailable={state.unavailable} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />
             </Suspense>
           </div>
           {presentation === 'list' && <>
@@ -648,7 +650,11 @@ export default function Dashboard() {
               {visibleCrossings.length === 0 ? (
                 <Card id="crossing-results" className="border-dashed">
                   <CardContent className="p-8 text-center text-sm text-slate-500">
-                    {offlineCrossings.length > 0
+                    {state.unavailable && state.crossings.length === 0
+                      ? (language === 'en'
+                        ? 'Reports could not load. No waits are shown.'
+                        : 'No cargaron los reportes. No se muestran esperas.')
+                      : offlineCrossings.length > 0
                       ? (language === 'en'
                         ? 'Matching crossings have no current published wait times. Show them to open their reports.'
                         : 'Los cruces encontrados no tienen tiempos actuales publicados. Muéstralos para abrir sus reportes.')

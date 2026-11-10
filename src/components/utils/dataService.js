@@ -6,6 +6,10 @@ import { buildSlugMap } from '../../lib/slugs.js';
 
 const DATA_PATH = '/data/crossings.json';
 const LIVE_DATA_PATH = '/api/public/crossings';
+// Same-origin rewrite (vercel.json) to the collector's committed feed on main.
+// The bundled DATA_PATH only changes when Vercel deploys (daily), so it can be
+// most of a day old; the collector commits every 15 minutes.
+export const COLLECTOR_DATA_PATH = '/data/latest/crossings.json';
 const FX_PATH = '/data/exchange-rate.json';
 const SB_PATH = '/data/crossings-sb.json';
 
@@ -86,10 +90,21 @@ export class DataService {
         return { doc: validateSnapshot(await res.json()), fromFallback: false };
       } catch (error) {
         console.warn('[dataService] CBP fallback', error);
-        return { doc: validateSnapshot(await this.fetchJson(DATA_PATH)), fromFallback: true };
+        return { doc: await this.fetchNewestBackup(), fromFallback: true };
       }
     }
     return { doc: validateSnapshot(await this.fetchJson(DATA_PATH)), fromFallback: false };
+  }
+
+  // Try the collector feed and the bundled copy together and keep whichever
+  // valid snapshot is newer. Either one alone is enough; if neither validates,
+  // throw so the caller keeps the browser's last reading or reports unavailable.
+  async fetchNewestBackup() {
+    const docs = (await Promise.allSettled([COLLECTOR_DATA_PATH, DATA_PATH]
+      .map(path => this.fetchJson(path).then(validateSnapshot))))
+      .filter(result => result.value).map(result => result.value);
+    if (!docs.length) throw new Error('No valid backup snapshot');
+    return docs.sort((a, b) => Date.parse(b.fetched_at) - Date.parse(a.fetched_at))[0];
   }
 
   getBorderData() {
@@ -157,7 +172,9 @@ export class DataService {
   }
 
   async refreshBorderData() { return this.getBorderData(); }
-  getFallbackData() { return { success: false, crossings: [], exchange_rate: null, timestamp: null, source: 'fallback', fromFallback: true }; }
+  // Nothing loaded and nothing retained. This is not saved data, so it must not
+  // be labeled as a fallback reading.
+  getFallbackData() { return { success: false, crossings: [], exchange_rate: null, timestamp: null, source: 'unavailable', fromFallback: false, unavailable: true }; }
 
   startAutoRefresh(intervalMs = 15 * 60 * 1000) {
     if (this.refreshTimer) return;

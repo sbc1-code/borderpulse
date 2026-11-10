@@ -91,6 +91,7 @@ const labels = {
     notRetained: 'Not recorded for this lane',
     minute: 'min',
     empty: 'No crossings match these filters.',
+    unavailable: 'Current reports could not be loaded. No waits are shown.',
     historyNotice: 'Recorded observations · Not current conditions. Only Standard summary waits were retained; gaps remain missing.',
     clockMissing: 'The archive does not retain lane report clocks or lane counts.',
     failed: 'Recorded history unavailable.',
@@ -114,6 +115,7 @@ const labels = {
     notRetained: 'No se registró este carril',
     minute: 'min',
     empty: 'No hay cruces con estos filtros.',
+    unavailable: 'No se pudieron cargar los reportes actuales. No se muestran esperas.',
     historyNotice: 'Observaciones registradas · No son condiciones actuales. Solo se conservaron resúmenes de auto estándar; los datos faltantes siguen sin datos.',
     clockMissing: 'El archivo no conserva horas de reporte por carril ni número de carriles.',
     failed: 'Historial registrado no disponible.',
@@ -129,6 +131,7 @@ export default function CrossingMapExplorer({
   fetchedAt,
   success,
   fromFallback,
+  unavailable,
   selectedPort,
   onSelect,
   onClose,
@@ -237,6 +240,8 @@ export default function CrossingMapExplorer({
     reporting = rows.filter(row => row.wait != null).length;
   const freshness = walkDriveFreshness(fetchedAt);
   const trusted = !replay && freshness.usable && !offline && success !== false && !fromFallback;
+  // Nothing loaded at all (unfiltered count is zero): not saved data, not a filter result.
+  const noData = !replay && unavailable && !allCount;
   const locationLabel = location => ({
     'directory-target': es ? 'Punto aproximado de un enlace del directorio público; no es una entrada.' : 'Approximate target linked by the public directory; not an entrance.',
     'federal-facility': es ? 'Punto del recinto publicado en el Federal Register; no es una entrada.' : 'Facility point published in the Federal Register; not an entrance.',
@@ -429,7 +434,7 @@ export default function CrossingMapExplorer({
           setParams(q, {
             replace: true
           });
-        }} />{clock(selectedSnapshot?.fetched_at, language)}</label>}{unavailableInstant && <p>{es ? 'La observación solicitada no está en este archivo. Elige otra hora.' : 'The requested observation is absent from this archive. Choose another time.'}</p>}{lane !== 'passenger_standard' && <p>{t.notRetained}. <button onClick={() => onLaneChange('passenger_standard')}>{es ? 'Elegir auto estándar' : 'Choose Standard passenger'}</button></p>}</div> : !trusted && <div className="explorerNotice" role="status">{offline ? es ? 'Sin conexión. Conservamos reportes anteriores.' : 'Offline. Retained reports are shown.' : fromFallback ? es ? 'Datos de respaldo guardados. Las condiciones actuales no están verificadas.' : 'Saved fallback data. Current conditions are not verified.' : success === false ? es ? 'No se pudo actualizar. Conservamos la hora y los valores del último reporte.' : 'Refresh unavailable. The last report values and original time are retained.' : es ? 'Consulta desactualizada o de hora desconocida.' : 'Stale or unknown retrieval time.'} {clock(fetchedAt, language)}</div>}
+        }} />{clock(selectedSnapshot?.fetched_at, language)}</label>}{unavailableInstant && <p>{es ? 'La observación solicitada no está en este archivo. Elige otra hora.' : 'The requested observation is absent from this archive. Choose another time.'}</p>}{lane !== 'passenger_standard' && <p>{t.notRetained}. <button onClick={() => onLaneChange('passenger_standard')}>{es ? 'Elegir auto estándar' : 'Choose Standard passenger'}</button></p>}</div> : !trusted && <div className="explorerNotice" role="status">{noData ? t.unavailable : offline ? es ? 'Sin conexión. Conservamos reportes anteriores.' : 'Offline. Retained reports are shown.' : fromFallback ? es ? 'Datos de respaldo guardados. Las condiciones actuales no están verificadas.' : 'Saved fallback data. Current conditions are not verified.' : success === false ? es ? 'No se pudo actualizar. Conservamos la hora y los valores del último reporte.' : 'Refresh unavailable. The last report values and original time are retained.' : es ? 'Consulta desactualizada o de hora desconocida.' : 'Stale or unknown retrieval time.'} {clock(fetchedAt, language)}</div>}
     <div className="explorerWorkspace">
       <div ref={frameRef} className="explorerMap bp-line" tabIndex="0" aria-describedby="map-location-note" aria-label={es ? 'Mapa. Usa los botones para acercar o arrastra para mover.' : 'Map. Use zoom buttons or drag to pan.'} onKeyDown={e => {
         if (e.target !== e.currentTarget) return;
@@ -481,7 +486,7 @@ export default function CrossingMapExplorer({
           <p className="locationWarning" data-testid="location-evidence">{selected.location ? locationLabel(selected.location) : `${t.unlocated}. ${es ? 'Sin punto en el mapa mientras se revisa. El reporte sigue disponible.' : 'No map point while location review is pending. The report remains available.'}`} {selected.location?.locationSource && <a href={selected.location.locationSource} target="_blank" rel="noopener noreferrer" className="underline">{es ? 'Fuente de ubicación' : 'Location source'}</a>}</p>
           {replay ? <Card className="recordedReport"><CardContent className="p-4"><h3>{selected.crossing.name}</h3><p>{t.history} · {laneLabel(lane, language)}</p><strong className="recordedWait">{selected.wait == null ? '—' : selected.wait}<small>{t.minute}</small></strong><p>{selected.wait == null ? stateLabel(selected) : es ? 'Resumen registrado de auto estándar' : 'Recorded Standard summary'}</p><time dateTime={selectedSnapshot?.fetched_at || undefined}>{clock(selectedSnapshot?.fetched_at, language, getPortTimezone(selected.crossing))}</time><p>{t.clockMissing}</p>{selectedSnapshot?.source && <a href={`https://github.com/sbc1-code/borderpulse/blob/${selectedSnapshot.source.slice(7)}/public/data/crossings.json`} target="_blank" rel="noopener noreferrer">{es ? 'Ver observación original' : 'View source observation'}</a>}</CardContent></Card> : active && <BorderCrossingCard crossing={selected.crossing} language={language} selectedLane={lane} selectedDirection="northbound" snapshotAt={fetchedAt} slug={portToSlug[selected.id]} isFavorite={favoritesSet.has(selected.id)} onToggleFavorite={onToggleFavorite} index={0} />}
           <Link className="fullReportLink" to={withLane(`/crossing/${portToSlug[selected.id] || selected.crossing.slug}/`, lane)}>{es ? 'Abrir reporte completo y cámaras' : 'Open full report and cameras'}<ArrowUpRight className="w-4 h-4" /></Link>
-        </> : <p role="status">{es ? 'Este cruce no aparece en la respuesta actual. No se muestra una espera supuesta.' : 'This crossing is absent from the current response. No wait is assumed.'}</p>}</> : <><div className="listHeading"><h3>{t.list}</h3><span>{rows.length}</span></div>{!rows.length ? <p className="emptyMap">{t.empty}</p> : <ol className="crossingResultList">{rows.map(row => <li key={row.id}><button id={`map-result-${row.id}`} onClick={e => select(row.id, e)} className={selectedPort === row.id ? 'active' : ''}><span><b>{row.crossing.name}</b><small>{row.crossing.state} · {replay ? t.history : row.report ? reportTimeLabel(row.report, language) : t.noReport}{!row.location && ` · ${t.unlocated}`}</small></span><strong className={trusted || replay ? getStatusForWait(row.wait) : 'retained'}>{row.wait == null ? '—' : row.wait}<small>{row.wait == null ? '' : t.minute}</small></strong></button></li>)}</ol>}</>}
+        </> : <p role="status">{es ? 'Este cruce no aparece en la respuesta actual. No se muestra una espera supuesta.' : 'This crossing is absent from the current response. No wait is assumed.'}</p>}</> : <><div className="listHeading"><h3>{t.list}</h3><span>{rows.length}</span></div>{!rows.length ? <p className="emptyMap">{noData ? t.unavailable : t.empty}</p> : <ol className="crossingResultList">{rows.map(row => <li key={row.id}><button id={`map-result-${row.id}`} onClick={e => select(row.id, e)} className={selectedPort === row.id ? 'active' : ''}><span><b>{row.crossing.name}</b><small>{row.crossing.state} · {replay ? t.history : row.report ? reportTimeLabel(row.report, language) : t.noReport}{!row.location && ` · ${t.unlocated}`}</small></span><strong className={trusted || replay ? getStatusForWait(row.wait) : 'retained'}>{row.wait == null ? '—' : row.wait}<small>{row.wait == null ? '' : t.minute}</small></strong></button></li>)}</ol>}</>}
       </div>
     </div>
     <div className="mapLegend"><span><i className="good" />{es ? 'Menos de 15 min' : 'Under 15 min'}</span><span><i className="moderate" />15–44 min</span><span><i className="heavy" />45+ min</span><span><i className="unknown" />{es ? 'Sin reporte de este carril' : 'No report for this lane'}</span></div>

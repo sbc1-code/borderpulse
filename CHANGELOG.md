@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-11-09 - Fresher backup data and an honest "could not load" state
+
+- Fallback freshness: when the live CBP endpoint fails, the site now also reads the collector's committed feed through a same-origin rewrite (`/data/latest/crossings.json` -> `main/public/data/crossings.json` on GitHub). It keeps whichever valid backup is newer, the collector feed or the bundled copy. The bundled copy only changes when Vercel deploys (daily), so it could be most of a day old; the collector commits every 15 minutes. Backup readings are still labeled as fallback with their original clock.
+- Both sources down: with nothing loaded and nothing retained, the map no longer says "Saved fallback data" and the lists no longer say no crossings match the filters or region. EN/ES now say current reports could not load and no waits are shown. `getFallbackData()` returns `unavailable: true` and `fromFallback: false`.
+- Tests: two new regression tests in `test-data-refresh.mjs` (newest-backup selection with collector up, older or down; unavailable state). Both fail on the previous code. Full `npm test` passes after a prerendered build. Headless Chrome check with all three sources returning 503: EN 1280px and ES 390px show the unavailable copy, no saved-data or filter wording, no horizontal overflow.
+- Entry budget 62 -> 62.25 KB gzip (+0.19 KB measured) for this fix.
+- Rebuilt from current main. The Nov 5 candidate lived in a cloud workspace that was never pushed and is not reachable from here.
+- Not verified: the Vercel external rewrite in production (needs a preview deploy), native Safari, physical devices.
+
 ## 2026-11-07 - Make visible controls do what they look like (Phase 2)
 
 - "View trends" in a crossing card's menu now opens `#trends`, the hourly pattern section, and scrolls to it. Before, it reloaded the same crossing page at the top. The menu skips its focus return for this link so the page does not jump back up.
