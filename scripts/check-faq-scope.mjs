@@ -182,7 +182,7 @@ export async function checkFaqNavigation(page, baseUrl) {
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).fill('San Ysidro');
   await page.locator('#root a[href="/crossing/san-ysidro/"]:visible').first().click();
   await inspect('/crossing/san-ysidro/');
-  const menu = page.getByRole('button', { name: 'Open menu', exact: true });
+  const menu = page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ });
   if (await menu.isVisible()) await menu.click();
   await page.getByRole('navigation', { name: 'Main navigation', exact: true }).getByRole('link', { name: 'Blog', exact: true }).click();
   await page.getByRole('heading', { level: 1, name: 'Border Pulse Blog', exact: true }).waitFor();

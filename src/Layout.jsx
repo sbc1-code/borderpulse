@@ -124,13 +124,13 @@ export default function Layout({ children }) {
           </Link>
           <div className="flex shrink-0 items-center gap-1">
             <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Switch to English" aria-pressed={language === 'en'}>EN</Button>
-              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
+              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="EN, Switch to English" aria-pressed={language === 'en'}>EN</Button>
+              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="ES, Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
             </div>
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button ref={menuButton} variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} aria-controls={mobileOpen ? 'mobile-navigation' : undefined}>
+            <Button ref={menuButton} variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? (language === 'es' ? 'Cerrar menú' : 'Close menu') : (language === 'es' ? 'Abrir menú' : 'Open menu')} aria-expanded={mobileOpen} aria-controls={mobileOpen ? 'mobile-navigation' : undefined}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
@@ -177,8 +177,8 @@ export default function Layout({ children }) {
                 on tall pages. */}
             <div className="mt-3 flex items-center gap-2">
               <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Switch to English" aria-pressed={language === 'en'}>EN</Button>
-                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
+                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="EN, Switch to English" aria-pressed={language === 'en'}>EN</Button>
+                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="ES, Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
               </div>
               <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}

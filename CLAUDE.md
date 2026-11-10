@@ -30,6 +30,9 @@ If the user just says **"what's new"** or **"catch me up"** or
   surfaced.
 - Leave the working tree clean (`git status` shows nothing modified
   except intentional artifacts).
+- A local `npm run build` rewrites generated files under `public/`. Run
+  `git checkout -- public/` before committing unless you meant to edit one
+  (see DECISIONS.md 2026-11-10).
 
 ## Quick repo facts
 

@@ -112,7 +112,7 @@ export default function About() {
           <div className="text-xs text-slate-500">{language === 'en' ? 'Loading stats…' : 'Cargando estadísticas…'}</div>
         )}
         {stats?.generated_at && (
-          <div className="text-[10px] text-slate-400 dark:text-slate-500 mt-2">
+          <div className="text-[10px] text-slate-600 dark:text-slate-400 mt-2">
             {language === 'en' ? 'Snapshot generated ' : 'Snapshot generado '}
             {new Date(stats.generated_at).toLocaleString(language === 'es' ? 'es-MX' : 'en-US')}
           </div>

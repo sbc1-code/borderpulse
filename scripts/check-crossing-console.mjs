@@ -81,7 +81,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
   await context.route('**/*', route => new URL(route.request().url()).origin === baseUrl.origin ? route.continue() : route.abort('blockedbyclient'));
   const page = await context.newPage();
   const enterFromNavigation = async (name) => {
-    if (viewport.width < 1024) await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    if (viewport.width < 1024) await page.getByRole("button", { name: /^(Open menu|Abrir menú)$/ }).click();
     const navigation = page.locator(viewport.width < 1024 ? "#mobile-navigation" : "aside");
     const entry = navigation.getByRole("link", { name, exact: true });
     assert.equal(await entry.count(), 1, "one region-qualified entry in the visible main navigation");
@@ -401,7 +401,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       await page.evaluate(() => document.activeElement?.textContent || ""),
       /Sources/,
     );
-    await page.getByRole("button", { name: "Cambiar a español" }).click();
+    await page.getByRole("button", { name: "ES, Cambiar a español" }).click();
     assert.match(await page.locator("h1").innerText(), /Mapa de cruces San Ysidro–Otay/);
     assert.equal(await page.locator("html").getAttribute("lang"), "es");
     assert.match(await page.locator(".ocean").innerText(), /OCÉANO\s+PACÍFICO/);
@@ -421,9 +421,9 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
         ?.textContent.includes("desactualizada"),
     );
     await checkRetrievalWarningBlock(page, "ES stale", /^Consulta/, /desactualizada/);
-    await page.getByRole("button", { name: "Switch to English" }).click();
+    await page.getByRole("button", { name: "EN, Switch to English" }).click();
     await checkRetrievalWarningBlock(page, "EN stale", /\bFetched\b/, /snapshot is stale/);
-    await page.getByRole("button", { name: "Cambiar a español" }).click();
+    await page.getByRole("button", { name: "ES, Cambiar a español" }).click();
     assert.equal(await page.locator(".result-head").count(), 0);
     await expectValues(["120", "60"]);
     await page.clock.setSystemTime(clock);
@@ -434,9 +434,9 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       apiFallback = true;
       await page.getByRole("button", { name: "Actualizar reportes", exact: true }).click();
       await checkRetrievalWarningBlock(page, "ES bundled fallback", /^Consulta/, /Datos de respaldo/);
-      await page.getByRole("button", { name: "Switch to English" }).click();
+      await page.getByRole("button", { name: "EN, Switch to English" }).click();
       await checkRetrievalWarningBlock(page, "EN bundled fallback", /\bFetched\b/, /Bundled fallback/);
-      await page.getByRole("button", { name: "Cambiar a español" }).click();
+      await page.getByRole("button", { name: "ES, Cambiar a español" }).click();
       apiFallback = false;
     }
     failed = true;
@@ -457,7 +457,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       ),
       true,
     );
-    await page.getByRole("button", { name: "Switch to English" }).click();
+    await page.getByRole("button", { name: "EN, Switch to English" }).click();
     await checkRetrievalWarningBlock(page, "EN failed refresh", /\bFetched\b/, /Refresh unavailable/);
     await page
       .getByRole("link", { name: "All crossings", exact: true })
@@ -473,7 +473,7 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       await enterFromCrossing(slug, key, "San Ysidro–Otay map", "San Ysidro–Otay crossing map");
     }
     if (viewport.width < 1024) {
-      await page.getByRole("button", { name: "Open menu", exact: true }).click();
+      await page.getByRole("button", { name: /^(Open menu|Abrir menú)$/ }).click();
       const link = page.locator("#mobile-navigation").getByRole("link", { name: "San Diego map", exact: true });
       assert.equal(await link.getAttribute("aria-current"), "page");
       await link.click();
@@ -485,13 +485,13 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
       assert.match(await navLink.getAttribute("href"), /lane=passenger_ready/);
     }
     await page.goto(new URL("/?lane=passenger_ready", baseUrl).href);
-    await page.getByRole("button", { name: "Cambiar a español", exact: true }).click();
+    await page.getByRole("button", { name: "ES, Cambiar a español", exact: true }).click();
     assert.equal(await page.locator('main a[href*="/corridor/"]').count(), 0, "Spanish dashboard also avoids duplicated map promotion");
     await enterFromNavigation("Mapa San Diego");
     await page.getByRole("heading", { name: "Mapa de cruces San Ysidro–Otay", exact: true }).waitFor();
     assert.equal(new URL(page.url()).searchParams.get("lane"), "passenger_ready");
     if (viewport.width < 1024) {
-      await page.getByRole("button", { name: "Open menu", exact: true }).click();
+      await page.getByRole("button", { name: /^(Open menu|Abrir menú)$/ }).click();
       await page.locator("#mobile-navigation").getByRole("link", { name: "Mapa San Diego", exact: true }).waitFor();
       await page.keyboard.press("Escape");
     } else {

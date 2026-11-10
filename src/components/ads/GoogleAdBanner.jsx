@@ -8,7 +8,7 @@ export default function GoogleAdBanner({ language = 'en' }) {
   const es = language === 'es';
   return (
     <aside aria-label={es ? 'Publicidad' : 'Advertisement'} className="w-full my-6 border-t border-slate-200 pt-4">
-      <p className="mb-2 text-center text-[10px] uppercase tracking-wider text-slate-400">{es ? 'Publicidad' : 'Advertisement'}</p>
+      <p className="mb-2 text-center text-[10px] uppercase tracking-wider text-slate-600 dark:text-slate-400">{es ? 'Publicidad' : 'Advertisement'}</p>
       <div className="mx-auto min-h-[280px] w-full max-w-[970px] overflow-hidden">
         <ins ref={slot} className="adsbygoogle" style={{ display: 'block' }}
           data-ad-client={GOOGLE_PUBLISHER} data-ad-slot={GOOGLE_SLOT}

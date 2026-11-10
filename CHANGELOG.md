@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-11-10 - Spanish and accessibility polish (Phase 4, draft)
+
+- Spanish: the mobile menu button is announced as "Abrir menú" / "Cerrar menú" instead of English. The blog index title, "Todos" tab, filter label and empty state follow the site language; all posts stay listed by default so Spanish readers can still open English guides. FAQ wording "job programado" is now "tarea programada".
+- Accessibility (axe-core 4, WCAG 2.2 AA, 390px light mode): every audited page had two issue types, now zero on 14 pages in EN and ES (home, `/es/`, two crossing pages, best time, compare, walk or drive, lane flip, about, blog index, both medication guides, methodology, privacy).
+  - Contrast: `slate-500` small text measured 4.47:1 on the light page background. Light mode now uses #5e7088 (4.75:1); dark mode keeps the stock value. Ad labels and an About footnote moved from `slate-400` (2.46:1) to `slate-600`.
+  - Label in name: the EN/ES buttons are now announced "EN, Switch to English" and "ES, Cambiar a español", so the visible text is part of the accessible name. Browser checks updated to the new names.
+- Checks: full `npm test` passes after a prerendered build. Entry bundle 62.00 KB gzip (budget 62.25).
+- Not audited: dark mode contrast, screen-reader walkthroughs, physical devices.
+
 ## 2026-11-10 - Medication guide answers first (draft)
 
 - The prescription-medication guide (EN and ES) now opens with its TL;DR, right after the intro and before the current-wait links. It was the last section. Wording unchanged, only moved. Umami, last 30 days: 95% bounce and a 21 s average visit, so most readers left before reaching it.
