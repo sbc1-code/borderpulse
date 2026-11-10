@@ -7,6 +7,7 @@
     { "source": "/snapshot", "destination": "/api/public/snapshot" },
     { "source": "/snapshot/", "destination": "/api/public/snapshot" },
     { "source": "/snapshot/es", "destination": "/api/public/snapshot?lang=es" },
-    { "source": "/snapshot/es/", "destination": "/api/public/snapshot?lang=es" }
+    { "source": "/snapshot/es/", "destination": "/api/public/snapshot?lang=es" },
+    { "source": "/data/latest/crossings.json", "destination": "https://raw.githubusercontent.com/sbc1-code/borderpulse/main/public/data/crossings.json" }
   ]
 }

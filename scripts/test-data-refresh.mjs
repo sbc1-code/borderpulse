@@ -217,3 +217,39 @@ test('malformed live response falls back to the static timestamp; missing timest
   service.cache = null;
   assert.equal((await service.getBorderData()).timestamp, null);
 });
+
+test('live failure uses the newer of the collector feed and the bundled copy', async t => {
+  t.mock.method(globalThis, 'fetch', async () => { throw new Error('upstream down'); });
+  const doc = fetched_at => ({ fetched_at, crossings: [{ port_number: '250401', current_wait_time: 5 }] });
+  const collectorTime = '2026-11-05T01:15:00Z';
+  const bundledTime = '2026-11-04T16:22:00Z';
+
+  const fresher = new DataService({ liveApi: true });
+  fresher.fetchJson = async path => path === '/data/latest/crossings.json' ? doc(collectorTime) : doc(bundledTime);
+  const fromCollector = await fresher.getBorderData();
+  assert.equal(fromCollector.timestamp, collectorTime);
+  assert.equal(fromCollector.fromFallback, true, 'a backup reading is still labeled as fallback');
+
+  const olderCollector = new DataService({ liveApi: true });
+  olderCollector.fetchJson = async path => path === '/data/latest/crossings.json' ? doc(bundledTime) : doc(collectorTime);
+  assert.equal((await olderCollector.getBorderData()).timestamp, collectorTime, 'the bundled copy wins when it is newer');
+
+  const collectorDown = new DataService({ liveApi: true });
+  collectorDown.fetchJson = async path => {
+    if (path === '/data/latest/crossings.json') throw new Error('HTTP 502');
+    return doc(bundledTime);
+  };
+  assert.equal((await collectorDown.getBorderData()).timestamp, bundledTime);
+});
+
+test('when no source loads and nothing is retained, the result is unavailable, not saved fallback data', async t => {
+  t.mock.method(globalThis, 'fetch', async () => { throw new Error('upstream down'); });
+  const service = new DataService({ liveApi: true });
+  service.fetchJson = async () => { throw new Error('offline'); };
+  const result = await service.getBorderData();
+  assert.equal(result.success, false);
+  assert.equal(result.unavailable, true);
+  assert.equal(result.fromFallback, false);
+  assert.equal(result.timestamp, null);
+  assert.deepEqual(result.crossings, []);
+});

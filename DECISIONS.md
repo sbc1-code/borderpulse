@@ -555,3 +555,7 @@ The first corridor console is a lazy, reversible route for San Ysidro/Otay, not 
 ## 2026-11-02 · Co-occurring CBP rows keep the reported lane
 
 The raw `bwtpublicmod` feed saved 2026-11-02 contains both port numbers for Ysleta (`240104` and `240203`) and for the other pinned substitution pairs. Identity stays pinned. When both rows are present, a reported wait outranks an empty or Update Pending row. `Lanes Closed` and `N/A` stay on the lane so a closed lane is not stored as a blank one. San Ysidro still does not take PedWest or Cross Border Express waits. This supersedes the co-occurrence claim in the 2026-08-19 identity note.
+
+## 2026-11-09 · Backup data reads the collector feed through a same-origin rewrite
+
+The bundled `/data/crossings.json` only refreshes on Vercel deploys, so as a fallback it could be most of a day old. `vercel.json` rewrites `/data/latest/crossings.json` to the collector's committed file on GitHub `main`, and the client keeps whichever valid backup is newer. Same origin, so no CORS and no new client-side host; GitHub already hosts the code and the Pages rollback. If GitHub is unreachable the bundled copy still serves. "Nothing loaded" is a separate `unavailable` state, never labeled as saved data.
