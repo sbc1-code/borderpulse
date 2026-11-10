@@ -1,5 +1,8 @@
 {
   "tags": {
+    "source-checked": 12,
+    "source-explainer": 6,
+    "operations-report": 6,
     "los-algodones": 6,
     "andrade": 4,
     "medical-tourism": 3,
@@ -58,5 +61,5 @@
     "bridge-of-the-americas": 1,
     "bota": 1
   },
-  "generated_at": "2026-08-20T17:22:35.362Z"
+  "generated_at": "2026-11-10T18:33:06.233Z"
 }
