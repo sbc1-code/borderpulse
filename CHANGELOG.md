@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-11-10 - Medication guide answers first (draft)
+
+- The prescription-medication guide (EN and ES) now opens with its TL;DR, right after the intro and before the current-wait links. It was the last section. Wording unchanged, only moved. Umami, last 30 days: 95% bounce and a 21 s average visit, so most readers left before reaching it.
+- Checks: full `npm test` passes after a prerendered build. Headless Chrome 390px: TL;DR is the first H2 at about 870-910px in EN and ES, no horizontal overflow.
+
 ## 2026-11-10 - Current-wait links near the top of the medication guide (draft)
 
 - The prescription-medication guide (EN and ES) now has a "Crossing soon? Current wait times" box right after the intro, linking to San Ysidro, Andrade, Nogales DeConcini, El Paso Paso del Norte and Progreso. Umami, last 30 days: the guide had 618 visitors, a 95% bounce rate and a 21 s average visit, and only 7 opened waits from the end-of-post button, which linked to the home page.
