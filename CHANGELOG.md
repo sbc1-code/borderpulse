@@ -1,17 +1,17 @@
 # CHANGELOG
 
-## 2026-11-10 - Sponsor WhatsApp message names Border Pulse (draft)
+## 2026-11-10 - Sponsor WhatsApp message names Border Pulse
 
 - The sponsor card's WhatsApp button now opens a prefilled message saying the patient found the clinic on Border Pulse (EN/ES). The visitor can edit it before sending. This lets the business see the source in its own inbox, which analytics cannot show.
 - Checks: full `npm test` passes after a prerendered build.
 
-## 2026-11-10 - Sponsor link goes to the live clinic site; bolder CBP report time (draft)
+## 2026-11-10 - Sponsor link goes to the live clinic site; bolder CBP report time
 
 - The Constandse sponsor card now links to the clinic's live site (constandse-dental.vercel.app) instead of its preview deployment.
 - Crossing cards show the "CBP reported" time in semibold so the report's age is easier to see. Wording unchanged.
 - Checks: full `npm test` passes after a prerendered build.
 
-## 2026-11-10 - One commercial spot per page; Juárez dentist crossing guide (draft)
+## 2026-11-10 - One commercial spot per page; Juárez dentist crossing guide
 
 - Rule: a page shows a sponsor card or a network ad, never both. On the five El Paso/Juárez crossing pages and on sponsored guides, the sponsor replaces the Adsterra unit.
 - New guide (EN and ES): going to a dentist in Ciudad Juárez from El Paso or New Mexico. Covers which bridge to check, documents, how to look up a dentist's cédula, and timing the return. Agency rules link to CBP, SEP and CONAMED. No prices or treatment advice. The sponsor card sits in the guide under the vetting checklist via `<FeaturedSponsor />`.
@@ -19,14 +19,15 @@
 - Sponsor links have distinct accessible names (for example "WhatsApp: <business>").
 - Checks: full `npm test` passes after a prerendered build; entry bundle 61.92 KB gzip. Headless Chrome 390px: sponsored pages show 1 card and 0 ads; San Ysidro and the SENTRI guide show 0 cards and 1 ad.
 
-## 2026-11-10 - Sponsored listings, first sponsor (draft)
+## 2026-11-10 - Sponsored listings, first sponsor
 
 - New `SponsoredCard` and `src/lib/sponsors.js`: one labeled sponsor per placement, set by port number or guide slug, with optional `since`/`until` dates. Each card is marked Sponsored/Patrocinado and says Border Pulse has not evaluated the business's care.
 - First sponsor: Constandse Esthetic & Dent (Ciudad Juárez dentist), on the five El Paso/Juárez crossing pages (above the ad) and on both medication guides (under the current-wait links). Links carry UTM tags; clicks log `sponsor-click` with sponsor, placement and action (site or WhatsApp), no free text.
 - Privacy notice (EN/ES) now says clicks on sponsored listings are counted with Umami and that sponsored listings are labeled placements from local businesses.
 - Checks: full `npm test` passes after a prerendered build; entry bundle 62.02 KB gzip (budget 62.25). Headless Chrome 390px: card on PDN and both guides, none on San Ysidro, click logs the event, no overflow.
-- Open: the site link points at the clinic's preview deployment until its own domain is live.
-## 2026-11-10 - Crossing titles and descriptions match how people search (draft)
+- Resolved the same day: the link now points at the clinic's live site (see the entry above).
+
+## 2026-11-10 - Crossing titles and descriptions match how people search
 
 - Crossing page titles now follow the query shape from Search Console: "<crossing> border wait times today" (EN) and "Tiempos de espera en <crossing> hoy" (ES). Bridges and ports of entry use the name people type: "Anzalduas International Bridge (Hidalgo/Pharr)", "Santa Teresa Port of Entry", "Andrade (Los Algodones)", "Eagle Pass International Bridge II" and others.
 - Descriptions are built per crossing instead of one shared template: the search name, the hour with the shortest typical wait over the last 30 days, and cameras where they exist. One function feeds the prerendered page and the client.
@@ -34,7 +35,7 @@
 - New `src/lib/crossingSeo.js`, loaded only by crossing pages and prerender, so the entry bundle stays at 61.89 KB gzip (budget 62.25).
 - Checks: full `npm test` passes after a prerendered build. Measure: click rate per crossing page in Search Console 2 to 4 weeks after deploy.
 
-## 2026-11-10 - Spanish and accessibility polish (Phase 4, draft)
+## 2026-11-10 - Spanish and accessibility polish (Phase 4)
 
 - Spanish: the mobile menu button is announced as "Abrir menú" / "Cerrar menú" instead of English. The blog index title, "Todos" tab, filter label and empty state follow the site language; all posts stay listed by default so Spanish readers can still open English guides. FAQ wording "job programado" is now "tarea programada".
 - Accessibility (axe-core 4, WCAG 2.2 AA, 390px light mode): every audited page had two issue types, now zero on 14 pages in EN and ES (home, `/es/`, two crossing pages, best time, compare, walk or drive, lane flip, about, blog index, both medication guides, methodology, privacy).
@@ -43,19 +44,19 @@
 - Checks: full `npm test` passes after a prerendered build. Entry bundle 62.00 KB gzip (budget 62.25).
 - Not audited: dark mode contrast, screen-reader walkthroughs, physical devices.
 
-## 2026-11-10 - Medication guide answers first (draft)
+## 2026-11-10 - Medication guide answers first
 
 - The prescription-medication guide (EN and ES) now opens with its TL;DR, right after the intro and before the current-wait links. It was the last section. Wording unchanged, only moved. Umami, last 30 days: 95% bounce and a 21 s average visit, so most readers left before reaching it.
 - Checks: full `npm test` passes after a prerendered build. Headless Chrome 390px: TL;DR is the first H2 at about 870-910px in EN and ES, no horizontal overflow.
 
-## 2026-11-10 - Current-wait links near the top of the medication guide (draft)
+## 2026-11-10 - Current-wait links near the top of the medication guide
 
 - The prescription-medication guide (EN and ES) now has a "Crossing soon? Current wait times" box right after the intro, linking to San Ysidro, Andrade, Nogales DeConcini, El Paso Paso del Norte and Progreso. Umami, last 30 days: the guide had 618 visitors, a 95% bounce rate and a 21 s average visit, and only 7 opened waits from the end-of-post button, which linked to the home page.
 - Why several crossings: the guide's readers are spread nationwide (California 20%, Texas 18%, Arizona 11%, then Wisconsin, Pennsylvania and others), so no single crossing fits. The links cover the border states readers come from.
 - New MDX component `<CrossingWaitLinks items={[[slug, label], ...]} />`. Clicks log `blog-to-waits` with `crossing` and `placement: top` (slugs only, no free text). The end-of-post button is unchanged.
 - Checks: full `npm test` passes after a prerendered build. Headless Chrome 390px EN/ES: one box at about 850-890px, five correct crossing links, the first opens `/crossing/san-ysidro/`, no horizontal overflow.
 
-## 2026-11-10 - Ads where readers land (draft)
+## 2026-11-10 - Ads where readers land
 
 - The existing Adsterra native banner (placement 29055831) now also loads on crossing pages, after Latest lane reports, and on blog guides, after the "Crossing soon?" box. Before, only the home page loaded it, and the home page is 25% of visitors (Umami, last 30 days).
 - The prescription-medication guide (EN and ES), 41% of visitors, places the slot mid-article after the four core rules (`<InArticleAd />` plus `inArticleAd: true` frontmatter) instead of at the end. On a 390px phone it sits at about 3,600px of 8,800 instead of 8,555px. One ad container per page.
@@ -63,7 +64,7 @@
 - Privacy notice (EN/ES, React and prerendered) now says the main dashboard, crossing pages and guides load Adsterra's script.
 - Checks: full `npm test` passes after a prerendered build. Headless Chrome at 390px: one container on each page, the Adsterra script requested, no horizontal overflow. Creatives do not fill on localhost, so live fill and revenue are not verified.
 
-## 2026-11-10 - Main screen, second pass (Phase 3, session 2, draft)
+## 2026-11-10 - Main screen, second pass (Phase 3, session 2)
 
 - One clock on the main screen: the map explorer no longer repeats "Fetched X min ago" under Latest reports. The header already shows the fetch time, and stale, offline and fallback states still show the explorer's own notice with its clock. Recorded history still shows the observation clock.
 - Footer: the separate "Source" and "Refresh rate: Regular schedule" tiles are folded into one "Source:" line inside How Border Pulse works. "Regular schedule" said nothing the paragraph above did not. EN/ES.
@@ -71,7 +72,7 @@
 - Checks: full `npm test` passes after a prerendered build. Entry bundle 61.97 KB gzip. Before/after 390px screenshots shared in chat.
 - Decided from Umami data (see DECISIONS.md 2026-11-10): keep all three filters and Popular border crossings.
 
-## 2026-11-09 - Main screen, first pass (Phase 3, session 1, draft)
+## 2026-11-09 - Main screen, first pass (Phase 3, session 1)
 
 - Phones (under 900px): the crossing results list now comes before the map, so the first thing after the controls is a wait. A starred crossing is already sorted first, so returning visitors see their own crossing's wait first. Desktop layout unchanged.
 - One clock: the saved-data / refresh notice now shows its time in the visitor's zone, matching the header, instead of UTC. The duplicate "Snapshot retrieved" tile in the footer is removed; the header and the "Fetched ... ago" line already show it.

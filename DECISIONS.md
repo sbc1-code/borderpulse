@@ -581,3 +581,7 @@ Stock `slate-500` (#62748e) measured 4.47:1 on the light page background, just u
 ## 2026-11-10 - One commercial spot per page
 
 A page carries a sponsor card or a network ad, never both, and always below the answer. A sponsor replaces the Adsterra unit on its pages. Sponsors are configured in `src/lib/sponsors.js`, one per port or guide, always labeled Sponsored/Patrocinado with the "has not evaluated" line. Sponsor copy states facts only (name, city, links); no medical or price claims in Border Pulse's voice.
+
+## 2026-11-10 - Sponsor traffic is measured in three steps, and only those are claimed
+
+Sponsor reporting counts what the existing Umami property records: clicks on the sponsor card (`sponsor-click`), visits to the sponsor's site that arrive with `utm_source=borderpulse`, and taps on that site's contact buttons by source. The WhatsApp button opens a prefilled, editable message naming Border Pulse so the business can see the source in its own inbox. Booked appointments and revenue are outside what is measured, so reports do not state them. The sponsor's site reports into the same Umami property (the plan allows one site); filter by hostname when reading Border Pulse numbers.

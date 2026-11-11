@@ -346,3 +346,22 @@ Snapshot of features live on borderpulse.com today.
 - City guides as sponsor inventory: Tijuana, Los Algodones, Nuevo Progreso, Nogales. One featured business per category section.
 - Self-serve "feature your business" page, after 2 to 3 paying sponsors and a real click number to show.
 - Swap the first sponsor's link to its own domain once it has one (currently constandse-dental.vercel.app).
+
+### Shipped 2026-11-10
+
+- [x] Sponsored card and `src/lib/sponsors.js`, one commercial spot per page (#190).
+- [x] First sponsor live on five El Paso/Juárez crossing pages and four guides (#190, #191).
+- [x] Juárez dentist crossing guide, EN and ES (#190).
+- [x] Sponsor WhatsApp message names Border Pulse (#192).
+
+### Checks due
+
+- 2026-11-16, then weekly: sponsor card clicks, tagged visits and contact taps. Day one of tracking is 2026-11-11; earlier clicks include tests.
+- 2026-11-17: Adsterra impressions against the 2026-11-05 to 11-09 baseline (21 impressions, home slot only), `blog-to-waits` top-placement clicks against 7, medication guide bounce against 95%.
+- 2 to 4 weeks after 2026-11-10: click rate per crossing page in Search Console against 1.2%.
+
+### Not started
+
+- Sourced line on how often CBP updates its wait times.
+- Clearer title for the SENTRI renewal guide (424 impressions, 2 clicks in 28 days).
+- Spanish crossing pages.
