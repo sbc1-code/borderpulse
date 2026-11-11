@@ -12,7 +12,7 @@ export const SPONSORS = [
       en: 'Dental clinic in Ciudad Juárez, a short trip from the El Paso bridges.',
       es: 'Clínica dental en Ciudad Juárez, a poca distancia de los puentes de El Paso.',
     },
-    url: 'https://dr-constandse-preview.vercel.app/',
+    url: 'https://constandse-dental.vercel.app/',
     whatsapp: '19153007751',
     // Ciudad Juárez crossings: PDN, BOTA, Ysleta, Stanton DCL, El Paso (combined).
     ports: ['240202', '240201', '240104', '240204', '240221'],

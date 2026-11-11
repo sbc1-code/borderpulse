@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-10 - Sponsor link goes to the live clinic site; bolder CBP report time (draft)
+
+- The Constandse sponsor card now links to the clinic's live site (constandse-dental.vercel.app) instead of its preview deployment.
+- Crossing cards show the "CBP reported" time in semibold so the report's age is easier to see. Wording unchanged.
+- Checks: full `npm test` passes after a prerendered build.
+
 ## 2026-11-10 - One commercial spot per page; Juárez dentist crossing guide (draft)
 
 - Rule: a page shows a sponsor card or a network ad, never both. On the five El Paso/Juárez crossing pages and on sponsored guides, the sponsor replaces the Adsterra unit.
