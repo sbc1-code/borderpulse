@@ -32,7 +32,7 @@ export default function SponsoredCard({ sponsor, placement, language = 'en' }) {
         </a>
         {sponsor.whatsapp && (
           <a
-            href={`https://wa.me/${sponsor.whatsapp}`}
+            href={`https://wa.me/${sponsor.whatsapp}${sponsor.whatsappText ? `?text=${encodeURIComponent(sponsor.whatsappText[es ? 'es' : 'en'])}` : ''}`}
             target="_blank"
             rel="sponsored noopener"
             onClick={() => log('whatsapp')}

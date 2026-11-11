@@ -14,6 +14,11 @@ export const SPONSORS = [
     },
     url: 'https://constandse-dental.vercel.app/',
     whatsapp: '19153007751',
+    // Prefilled so the business sees where the patient came from.
+    whatsappText: {
+      en: 'Hi, I found your clinic on Border Pulse and would like to book an appointment.',
+      es: 'Hola, encontré su consultorio en Border Pulse y quiero agendar una cita.',
+    },
     // Ciudad Juárez crossings: PDN, BOTA, Ysleta, Stanton DCL, El Paso (combined).
     ports: ['240202', '240201', '240104', '240204', '240221'],
     guides: [
