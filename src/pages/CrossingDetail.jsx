@@ -11,7 +11,8 @@ import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
 import CrossingCameras from '@/components/dashboard/CrossingCameras';
 import { cameraSourceFor } from '@/lib/cameras';
-import { crossingDisplayName, crossingSearchTitle } from '@/lib/crossingNames';
+import { crossingDisplayName } from '@/lib/crossingNames';
+import { crossingSearchDescription, crossingSearchTitle } from '@/lib/crossingSeo';
 import SantaTeresaActions from '@/components/dashboard/SantaTeresaActions';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
@@ -394,11 +395,9 @@ export default function CrossingDetail() {
 
   useEffect(() => {
     if (!crossing) return;
-    const hasHistoricalPattern = Array.isArray(aggregate?.by_hour) && aggregate.by_hour.length > 0;
-    const title = crossingSearchTitle(crossing, language, cameraSourceFor(crossing.port_number)?.kind);
-    const desc = language === 'en'
-      ? `Reported ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
-      : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
+    const cameraKind = cameraSourceFor(crossing.port_number)?.kind;
+    const title = crossingSearchTitle(crossing, language, cameraKind);
+    const desc = crossingSearchDescription(crossing, language, { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraKind) });
     const url = `https://borderpulse.com/crossing/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -590,9 +589,10 @@ export default function CrossingDetail() {
         );
       })()}
 
-      <SponsoredCard sponsor={sponsorForPort(crossing.port_number)} placement={`crossing-${canonicalSlug}`} language={language} />
-
-      <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
+      {/* One commercial spot per page: a sponsor replaces the network ad. */}
+      {sponsorForPort(crossing.port_number)
+        ? <SponsoredCard sponsor={sponsorForPort(crossing.port_number)} placement={`crossing-${canonicalSlug}`} language={language} />
+        : <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />}
 
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
         <section id="trends" className="mb-6 scroll-mt-20">

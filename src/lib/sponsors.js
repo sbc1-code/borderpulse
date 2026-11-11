@@ -16,7 +16,10 @@ export const SPONSORS = [
     whatsapp: '19153007751',
     // Ciudad Juárez crossings: PDN, BOTA, Ysleta, Stanton DCL, El Paso (combined).
     ports: ['240202', '240201', '240104', '240204', '240221'],
-    guides: ['bringing-prescription-medication-back-from-mexico', 'traer-medicamentos-con-receta-de-mexico'],
+    guides: [
+      'bringing-prescription-medication-back-from-mexico', 'traer-medicamentos-con-receta-de-mexico',
+      'dentist-in-juarez-from-el-paso-new-mexico', 'dentista-en-juarez-desde-el-paso-nuevo-mexico',
+    ],
     since: '2026-11-10',
     until: null,
   },

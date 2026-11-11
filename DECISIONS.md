@@ -577,3 +577,7 @@ Adsterra reported 21 impressions and $0.03 for Nov 5 to 9 from the single home-p
 ## 2026-11-10 - Light-mode slate-500 is one notch darker for AA contrast
 
 Stock `slate-500` (#62748e) measured 4.47:1 on the light page background, just under 4.5:1, on every page. Light mode overrides `--color-slate-500` to #5e7088 (4.75:1) instead of editing hundreds of class names; `.dark` restores the stock value so dark mode does not lose contrast.
+
+## 2026-11-10 - One commercial spot per page
+
+A page carries a sponsor card or a network ad, never both, and always below the answer. A sponsor replaces the Adsterra unit on its pages. Sponsors are configured in `src/lib/sponsors.js`, one per port or guide, always labeled Sponsored/Patrocinado with the "has not evaluated" line. Sponsor copy states facts only (name, city, links); no medical or price claims in Border Pulse's voice.

@@ -10,6 +10,7 @@ import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { track } from '@/lib/analytics';
 import { blogHreflangs } from '@/lib/hreflang';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import { sponsorForGuide } from '@/lib/sponsors';
 
 const STRINGS = {
   en: {
@@ -169,7 +170,7 @@ export default function BlogPost() {
         </div>
         {copyStatus && <p className="mt-2 text-xs text-slate-600 dark:text-slate-300" role="status">{copyStatus}</p>}
       </section>
-      {!fm.inArticleAd && <AdsterraBanner label={lang === 'es' ? 'Publicidad' : 'Advertisement'} language={lang} />}
+      {!fm.inArticleAd && !sponsorForGuide(slug) && <AdsterraBanner label={lang === 'es' ? 'Publicidad' : 'Advertisement'} language={lang} />}
       <footer className="mt-10 border-t border-slate-200 dark:border-gray-800 pt-4 text-xs text-slate-500">
         {t.footer}{' '}
         <a

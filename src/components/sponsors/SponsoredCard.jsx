@@ -25,6 +25,7 @@ export default function SponsoredCard({ sponsor, placement, language = 'en' }) {
           target="_blank"
           rel="sponsored noopener"
           onClick={() => log('site')}
+          aria-label={`${es ? 'Ver sitio' : 'Visit site'}: ${sponsor.name}`}
           className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50 dark:border-gray-700 dark:text-slate-100 dark:hover:bg-gray-800"
         >
           {es ? 'Ver sitio' : 'Visit site'}<ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
@@ -35,6 +36,7 @@ export default function SponsoredCard({ sponsor, placement, language = 'en' }) {
             target="_blank"
             rel="sponsored noopener"
             onClick={() => log('whatsapp')}
+            aria-label={`WhatsApp: ${sponsor.name}`}
             className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-emerald-700 px-3 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
           >
             <MessageCircle aria-hidden="true" className="h-3.5 w-3.5" />WhatsApp

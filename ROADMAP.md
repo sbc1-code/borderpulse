@@ -339,3 +339,10 @@ Snapshot of features live on borderpulse.com today.
 - Bounded dashboard ad-slot diagnostics through existing Umami: script/DOM/
   container visibility stages only, not billed impressions or revenue. Actual
   ad-network totals still require publisher reports.
+
+## Backlog: sponsored placements (added 2026-11-10)
+
+- Pharmacy sponsor for the medication guides (highest-traffic slot). Not being pitched yet; needs a trusted contact and a vetting pass first.
+- City guides as sponsor inventory: Tijuana, Los Algodones, Nuevo Progreso, Nogales. One featured business per category section.
+- Self-serve "feature your business" page, after 2 to 3 paying sponsors and a real click number to show.
+- Swap the first sponsor's link from the preview deployment to its own address once that site launches.
