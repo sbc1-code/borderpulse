@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-11-10 - Sponsored listings, first sponsor (draft)
+
+- New `SponsoredCard` and `src/lib/sponsors.js`: one labeled sponsor per placement, set by port number or guide slug, with optional `since`/`until` dates. Each card is marked Sponsored/Patrocinado and says Border Pulse has not evaluated the business's care.
+- First sponsor: Constandse Esthetic & Dent (Ciudad Juárez dentist), on the five El Paso/Juárez crossing pages (above the ad) and on both medication guides (under the current-wait links). Links carry UTM tags; clicks log `sponsor-click` with sponsor, placement and action (site or WhatsApp), no free text.
+- Privacy notice (EN/ES) now says clicks on sponsored listings are counted with Umami and that sponsored listings are labeled placements from local businesses.
+- Checks: full `npm test` passes after a prerendered build; entry bundle 62.02 KB gzip (budget 62.25). Headless Chrome 390px: card on PDN and both guides, none on San Ysidro, click logs the event, no overflow.
+- Open: the site link points at the clinic's preview deployment until its own domain is live.
+
 ## 2026-11-10 - Spanish and accessibility polish (Phase 4, draft)
 
 - Spanish: the mobile menu button is announced as "Abrir menú" / "Cerrar menú" instead of English. The blog index title, "Todos" tab, filter label and empty state follow the site language; all posts stay listed by default so Spanish readers can still open English guides. FAQ wording "job programado" is now "tarea programada".

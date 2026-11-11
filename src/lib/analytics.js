@@ -29,6 +29,9 @@
 //   blog-share          guide distribution; slug and method=copy|whatsapp
 //   blog-to-waits       guide reader opening current waits; crossing + placement=top for the in-guide links
 //
+// Sponsors:
+//   sponsor-click       sponsor id, placement (crossing-<slug> | guide-<slug>), action=site|whatsapp
+//
 // Diagnostics (not audited ad-network statistics):
 //   ad-slot-diagnostic  slot=dashboard-native; state=script-ready|script-error|
 //                       container-populated|slot-visible. At most once per

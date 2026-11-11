@@ -9,8 +9,8 @@ const paragraphs = {
     "en": "Border Pulse works without an account. Language, theme, and filter preferences may be saved in your browser’s local storage. Wait times come from the public U.S. Customs and Border Protection feed."
   },
   "analytics": {
-    "es": "Las vistas de página se miden con Umami, una analítica sin cookies. Border Pulse no recibe documentos de viaje ni ubicación precisa.",
-    "en": "Page views are measured with Umami, a cookieless analytics service. Border Pulse does not receive travel documents or precise location."
+    "es": "Las vistas de página y los clics en anuncios patrocinados se miden con Umami, una analítica sin cookies. Los anuncios patrocinados son espacios de negocios locales y están marcados como tales. Border Pulse no recibe documentos de viaje ni ubicación precisa.",
+    "en": "Page views and clicks on sponsored listings are measured with Umami, a cookieless analytics service. Sponsored listings are placements from local businesses and are labeled as such. Border Pulse does not receive travel documents or precise location."
   },
   "adsterra": {
     "es": "Border Pulse muestra anuncios de terceros para ayudar a mantener la plataforma. El panel principal, las páginas de cruces y las guías cargan el script publicitario de Adsterra; los anuncios pueden no mostrarse si el servicio o el navegador los bloquea.",

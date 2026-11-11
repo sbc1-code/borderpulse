@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { LangContext } from '@/lib/LangContext';
 import { track } from '@/lib/analytics';
+import SponsoredCard from '@/components/sponsors/SponsoredCard';
+import { sponsorForGuide } from '@/lib/sponsors';
 
 // Compact current-wait links near the top of a guide, for readers who skim.
 // items: [[crossingSlug, label], ...]. Labels are display text only.
@@ -11,6 +13,7 @@ export default function CrossingWaitLinks({ items = [] }) {
   const { slug } = useParams();
   const es = lang === 'es';
   return (
+    <>
     <aside className="not-prose my-6 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4 dark:border-emerald-900 dark:bg-emerald-950/20" aria-label={es ? 'Tiempos de espera actuales' : 'Current wait times'}>
       <p className="text-sm font-semibold text-slate-900 dark:text-white">{es ? '¿Cruzarás pronto? Tiempos de espera actuales:' : 'Crossing soon? Current wait times:'}</p>
       <ul className="mt-2 flex flex-wrap gap-2">
@@ -27,5 +30,7 @@ export default function CrossingWaitLinks({ items = [] }) {
         ))}
       </ul>
     </aside>
+    <SponsoredCard sponsor={sponsorForGuide(slug)} placement={`guide-${slug}`} language={lang} />
+    </>
   );
 }
