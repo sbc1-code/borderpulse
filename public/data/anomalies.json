@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-11T10:32:19.774Z",
-  "snapshot_at": "2026-11-11T10:22:56.900Z",
+  "generated_at": "2026-11-11T18:29:10.064Z",
+  "snapshot_at": "2026-11-11T18:23:02.873Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -457,7 +457,9 @@
         "samples": 19,
         "ratio": 1.6
       }
-    },
+    }
+  ],
+  "trailing_24h": [
     {
       "type": "lowest_today",
       "port_slug": "eagle-pass-bridge-i",
@@ -476,6 +478,5 @@
         "samples": 7
       }
     }
-  ],
-  "trailing_24h": []
+  ]
 }
