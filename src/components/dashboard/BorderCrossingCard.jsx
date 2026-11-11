@@ -380,7 +380,7 @@ export default function BorderCrossingCard({
               </div>
             </div>
             {!isSouthbound && wait != null && (
-              <p className="mt-2 text-xs text-slate-600 break-words" data-testid="cbp-report-time">
+              <p className="mt-2 text-xs font-semibold text-slate-700 dark:text-slate-300 break-words" data-testid="cbp-report-time">
                 {reportTimeLabel(lanes[selectedLane]?.update_time, language)}
               </p>
             )}
