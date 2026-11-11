@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-11-10 - Sponsor WhatsApp message names Border Pulse (draft)
+
+- The sponsor card's WhatsApp button now opens a prefilled message saying the patient found the clinic on Border Pulse (EN/ES). The visitor can edit it before sending. This lets the business see the source in its own inbox, which analytics cannot show.
+- Checks: full `npm test` passes after a prerendered build.
+
 ## 2026-11-10 - Sponsor link goes to the live clinic site; bolder CBP report time (draft)
 
 - The Constandse sponsor card now links to the clinic's live site (constandse-dental.vercel.app) instead of its preview deployment.
