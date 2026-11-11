@@ -11,7 +11,7 @@ import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
 import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
 import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
 import { SPANISH_HOME } from '../src/lib/homeMeta.js';
-import { crossingSearchTitle } from '../src/lib/crossingNames.js';
+import { crossingSearchDescription, crossingSearchTitle } from '../src/lib/crossingSeo.js';
 import { cameraSourceFor } from '../src/lib/cameras.js';
 import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
 import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
@@ -56,7 +56,7 @@ function renderCrossingHead(crossing, slug, aggregate) {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
   const title = crossingSearchTitle(crossing, 'en', cameraSourceFor(crossing.port_number)?.kind);
-  const desc = `Reported ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and historical standard-passenger wait patterns.`;
+  const desc = crossingSearchDescription(crossing, 'en', { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraSourceFor(crossing.port_number)?.kind) });
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 

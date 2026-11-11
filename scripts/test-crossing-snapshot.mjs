@@ -6,7 +6,8 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
-import { crossingDisplayName, crossingSearchTerms, crossingSearchTitle } from '../src/lib/crossingNames.js';
+import { crossingDisplayName, crossingSearchTerms } from '../src/lib/crossingNames.js';
+import { crossingSearchTitle } from '../src/lib/crossingSeo.js';
 
 const crossing = { port_number: '240202', name: 'El Paso - Paso Del Norte (PDN)',
   hours: '24 hrs/day', port_status: 'Open', lanes: { passenger_standard: { status: 'No Delay', lanes_open: 1, delay_minutes: 0, update_time: 'At 6:00 pm MDT' } } };
@@ -79,8 +80,8 @@ test('local naming helps search without changing official identity or canonical 
   assert.match(crossingDisplayName(crossing), /Santa Fe/);
   assert.ok(crossingSearchTerms({ port_number: '240201', name: 'BOTA' }).includes('puente libre'));
   assert.ok(crossingSearchTerms({ port_number: '240801', name: 'Santa Teresa' }).includes('san jeronimo'));
-  assert.match(crossingSearchTitle(crossing, 'en', true), /CBP wait times & cameras/);
-  assert.match(crossingSearchTitle(crossing, 'es', true), /esperas CBP y cámaras/);
+  assert.match(crossingSearchTitle(crossing, 'en', true), /wait times today & cameras/);
+  assert.match(crossingSearchTitle(crossing, 'es', true), /hoy y cámaras/);
 });
 test('built homepage and every crossing page contain their own useful visible snapshot', () => {
   if (!fs.existsSync('dist/index.html')) return;
