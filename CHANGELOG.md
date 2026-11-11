@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2026-11-10 - One commercial spot per page; Juárez dentist crossing guide (draft)
+
+- Rule: a page shows a sponsor card or a network ad, never both. On the five El Paso/Juárez crossing pages and on sponsored guides, the sponsor replaces the Adsterra unit.
+- New guide (EN and ES): going to a dentist in Ciudad Juárez from El Paso or New Mexico. Covers which bridge to check, documents, how to look up a dentist's cédula, and timing the return. Agency rules link to CBP, SEP and CONAMED. No prices or treatment advice. The sponsor card sits in the guide under the vetting checklist via `<FeaturedSponsor />`.
+- Medication guides place the sponsor with `<FeaturedSponsor />` after the current-wait links.
+- Sponsor links have distinct accessible names (for example "WhatsApp: <business>").
+- Checks: full `npm test` passes after a prerendered build; entry bundle 61.92 KB gzip. Headless Chrome 390px: sponsored pages show 1 card and 0 ads; San Ysidro and the SENTRI guide show 0 cards and 1 ad.
+
+## 2026-11-10 - Sponsored listings, first sponsor (draft)
+
+- New `SponsoredCard` and `src/lib/sponsors.js`: one labeled sponsor per placement, set by port number or guide slug, with optional `since`/`until` dates. Each card is marked Sponsored/Patrocinado and says Border Pulse has not evaluated the business's care.
+- First sponsor: Constandse Esthetic & Dent (Ciudad Juárez dentist), on the five El Paso/Juárez crossing pages (above the ad) and on both medication guides (under the current-wait links). Links carry UTM tags; clicks log `sponsor-click` with sponsor, placement and action (site or WhatsApp), no free text.
+- Privacy notice (EN/ES) now says clicks on sponsored listings are counted with Umami and that sponsored listings are labeled placements from local businesses.
+- Checks: full `npm test` passes after a prerendered build; entry bundle 62.02 KB gzip (budget 62.25). Headless Chrome 390px: card on PDN and both guides, none on San Ysidro, click logs the event, no overflow.
+- Open: the site link points at the clinic's preview deployment until its own domain is live.
 ## 2026-11-10 - Crossing titles and descriptions match how people search (draft)
 
 - Crossing page titles now follow the query shape from Search Console: "<crossing> border wait times today" (EN) and "Tiempos de espera en <crossing> hoy" (ES). Bridges and ports of entry use the name people type: "Anzalduas International Bridge (Hidalgo/Pharr)", "Santa Teresa Port of Entry", "Andrade (Los Algodones)", "Eagle Pass International Bridge II" and others.

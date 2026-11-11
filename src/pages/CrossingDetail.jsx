@@ -31,6 +31,8 @@ import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
 import { track } from '@/lib/analytics';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import SponsoredCard from '@/components/sponsors/SponsoredCard';
+import { sponsorForPort } from '@/lib/sponsors';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -587,7 +589,10 @@ export default function CrossingDetail() {
         );
       })()}
 
-      <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
+      {/* One commercial spot per page: a sponsor replaces the network ad. */}
+      {sponsorForPort(crossing.port_number)
+        ? <SponsoredCard sponsor={sponsorForPort(crossing.port_number)} placement={`crossing-${canonicalSlug}`} language={language} />
+        : <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />}
 
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
         <section id="trends" className="mb-6 scroll-mt-20">
