@@ -345,7 +345,8 @@ Snapshot of features live on borderpulse.com today.
 - Pharmacy sponsor for the medication guides (highest-traffic slot). Not being pitched yet; needs a trusted contact and a vetting pass first.
 - City guides as sponsor inventory: Tijuana, Los Algodones, Nuevo Progreso, Nogales. One featured business per category section.
 - [x] Self-serve "feature your business" page (2026-11-11, shipped early at Sebastian's call).
-- Next: a city directory page per city listing every active sponsor by category (Phase 3), then the return-trip guide (Phase 4).
+- [x] City directory pages, one per sponsor city (Phase 3, 2026-11-11).
+- Next: the return-trip guide (Phase 4): what to declare, return wait.
 - Swap the first sponsor's link to its own domain once it has one (currently constandse-dental.vercel.app).
 
 ### Shipped 2026-11-10

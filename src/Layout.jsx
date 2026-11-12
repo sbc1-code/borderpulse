@@ -48,6 +48,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const pageOwnsLanguage =
       /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
+      /^\/(city|ciudad)\/[^/]+\/?$/.test(location.pathname) ||
       /^\/(methodology|metodologia|privacy|privacidad|feature-your-business|anunciate|es)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;

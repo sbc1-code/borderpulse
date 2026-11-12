@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-11 - City pages (Phase 3); one checkout link per spot
+
+- New bilingual city pages `/city/:id/` and `/ciudad/:id/` for Ciudad Juárez, Tijuana, Los Algodones, Nogales and Nuevo Progreso: links to that city's crossing waits, then one section per category with its sponsor card or an open-spot link to checkout. Prerendered, hreflang-paired, in the sitemap. No network ad on these pages. Crossing pages in those cities link to their city page under the sponsor or ad spot; the feature page links each city name.
+- Spot protection: each open spot now has its own Stripe Payment Link limited to one completed purchase, so Stripe retires the link after the sale and a second buyer sees "this spot was just taken". Links live in `SLOT_CHECKOUT` in `src/lib/sponsors.js`. A spot with no link shows as taken on the feature page and as "reserved, in review" on its city page. The earlier shared dropdown link is retired.
+- Checks: full `npm test` passes after a prerendered build. Entry JS 62.16 KB gzip (budget 62.25), CSS 19.93 KB (budget 20). Headless Chrome 390px: Juárez city page shows Juan's card and 5 open spots; Tijuana (ES) shows 6; PDN shows the city link.
+
 ## 2026-11-11 - Sponsor card stands out; self-serve "Feature your business" page
 
 - Sponsor card redesign: green-tinted card with an accent edge, larger business name, the services the business lists (as chips), an optional business offer with an end date (hidden after it), and WhatsApp as the main filled button. Still labeled Sponsored/Patrocinado with the "has not evaluated" line, still below the answer and never alongside an ad.

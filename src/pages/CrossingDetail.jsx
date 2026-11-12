@@ -32,7 +32,7 @@ import { pickLightestHour } from '@/lib/recommendations';
 import { track } from '@/lib/analytics';
 import AdsterraBanner from '@/components/ads/AdsterraBanner';
 import SponsoredCard from '@/components/sponsors/SponsoredCard';
-import { sponsorForPort } from '@/lib/sponsors';
+import { sponsorForPort, cityForPort } from '@/lib/sponsors';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -593,6 +593,13 @@ export default function CrossingDetail() {
       {sponsorForPort(crossing.port_number)
         ? <SponsoredCard sponsor={sponsorForPort(crossing.port_number)} placement={`crossing-${canonicalSlug}`} language={language} />
         : <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />}
+      {cityForPort(crossing.port_number) && (
+        <p className="-mt-3 mb-6 text-sm">
+          <Link to={`/${language === 'es' ? 'ciudad' : 'city'}/${cityForPort(crossing.port_number).id}/`} className="inline-flex min-h-11 items-center text-emerald-700 underline dark:text-emerald-400">
+            {language === 'es' ? `Negocios en ${cityForPort(crossing.port_number).name}` : `Businesses in ${cityForPort(crossing.port_number).name}`}
+          </Link>
+        </p>
+      )}
 
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
         <section id="trends" className="mb-6 scroll-mt-20">
