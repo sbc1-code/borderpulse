@@ -48,7 +48,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const pageOwnsLanguage =
       /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
-      /^\/(methodology|metodologia|privacy|privacidad|es)\/?$/.test(location.pathname);
+      /^\/(methodology|metodologia|privacy|privacidad|feature-your-business|anunciate|es)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
   }, [language, location.pathname]);
@@ -220,6 +220,12 @@ export default function Layout({ children }) {
             </Link>
             <Link to="/about/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
+            </Link>
+            <Link
+              to={language === 'es' ? '/anunciate/' : '/feature-your-business/'}
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              {language === 'es' ? 'Anuncia tu negocio' : 'Feature your business'}
             </Link>
             <span>·</span>
             <Link

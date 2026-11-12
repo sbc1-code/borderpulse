@@ -585,3 +585,7 @@ A page carries a sponsor card or a network ad, never both, and always below the 
 ## 2026-11-10 - Sponsor traffic is measured in three steps, and only those are claimed
 
 Sponsor reporting counts what the existing Umami property records: clicks on the sponsor card (`sponsor-click`), visits to the sponsor's site that arrive with `utm_source=borderpulse`, and taps on that site's contact buttons by source. The WhatsApp button opens a prefilled, editable message naming Border Pulse so the business can see the source in its own inbox. Booked appointments and revenue are outside what is measured, so reports do not state them. The sponsor's site reports into the same Umami property (the plan allows one site); filter by hostname when reading Border Pulse numbers.
+
+## 2026-11-11 - Self-serve sponsor listings before 2 to 3 paying sponsors
+
+The roadmap said to wait for 2 to 3 paying sponsors before a self-serve page. Sebastian approved building it now so businesses can buy without a call. A listing is one business per category per city, $99/month through a Stripe Payment Link. Every paid listing is reviewed before it is added to `src/lib/sponsors.js`, and refunded if not approved. Rotation is by day, not per view, so prerendered pages and the client agree. Business offers are shown attributed to the business and with an end date.

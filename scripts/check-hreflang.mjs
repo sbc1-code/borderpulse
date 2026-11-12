@@ -24,6 +24,8 @@ export function checkBuiltHreflangs(dist = path.join(root, 'dist')) {
     ['/metodologia/', pair('/methodology/', '/metodologia/')],
     ['/privacy/', pair('/privacy/', '/privacidad/')],
     ['/privacidad/', pair('/privacy/', '/privacidad/')],
+    ['/feature-your-business/', pair('/feature-your-business/', '/anunciate/')],
+    ['/anunciate/', pair('/feature-your-business/', '/anunciate/')],
   ]);
   for (const post of posts) {
     const twins = post.translationKey ? posts.filter((p) => p.translationKey === post.translationKey) : [];
