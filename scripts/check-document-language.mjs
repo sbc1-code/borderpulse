@@ -106,7 +106,7 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
     await click('/');
     await inspect('/', 'es');
     // Explicit EN/ES routes must not inherit a contradictory UI preference.
-    for (const [route, lang] of [['/methodology/', 'en'], ['/metodologia/', 'es'], ['/privacy/', 'en'], ['/privacidad/', 'es']]) {
+    for (const [route, lang] of [['/methodology/', 'en'], ['/metodologia/', 'es'], ['/privacy/', 'en'], ['/privacidad/', 'es'], ['/feature-your-business/', 'en'], ['/anunciate/', 'es']]) {
       await page.goto(new URL(route, baseUrl).href);
       await inspect(route, lang);
       await switchTo(lang === 'en' ? 'es' : 'en');

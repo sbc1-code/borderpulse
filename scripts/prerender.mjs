@@ -693,6 +693,36 @@ async function main() {
     fs.writeFileSync(path.resolve(esDir, 'index.html'), esHtml);
   }
 
+  // /feature-your-business + /anunciate — self-serve sponsor page, hreflang-paired.
+  {
+    const enCanonical = `${BASE}/feature-your-business/`;
+    const esCanonical = `${BASE}/anunciate/`;
+    const hreflangs = [
+      { lang: 'en', href: enCanonical },
+      { lang: 'es', href: esCanonical },
+      { lang: 'x-default', href: enCanonical },
+    ];
+    const heads = [
+      ['feature-your-business', {
+        lang: 'en',
+        title: 'Feature your business | Border Pulse',
+        desc: 'A labeled spot on Border Pulse crossing pages for one business per category in each border city. $99 a month.',
+        canonical: enCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+      }],
+      ['anunciate', {
+        lang: 'es',
+        title: 'Anuncia tu negocio | Border Pulse',
+        desc: 'Un espacio patrocinado en las páginas de cruces de Border Pulse para un negocio por categoría en cada ciudad fronteriza. $99 dólares al mes.',
+        canonical: esCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+      }],
+    ];
+    for (const [route, head] of heads) {
+      const outDir = path.resolve(distDir, route);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+    }
+  }
+
   // /about — trust signal page with methodology + public stats + privacy
   {
     const aboutHead = {

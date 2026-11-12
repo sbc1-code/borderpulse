@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-11-11 - Sponsor card stands out; self-serve "Feature your business" page
+
+- Sponsor card redesign: green-tinted card with an accent edge, larger business name, the services the business lists (as chips), an optional business offer with an end date (hidden after it), and WhatsApp as the main filled button. Still labeled Sponsored/Patrocinado with the "has not evaluated" line, still below the answer and never alongside an ad.
+- First sponsor now shows as "Dr. J Constandse" (the name on his site and signage) with implants, veneers and smile design, crowns and full oral rehabilitation, per his site, and his 25% offer through Nov 30, attributed to the clinic.
+- New bilingual page `/feature-your-business/` and `/anunciate/` (hreflang-paired, in the sitemap, linked from the footer and each sponsor card). Five cities (Ciudad Juárez, Tijuana, Los Algodones, Nogales, Nuevo Progreso) by six categories (dentist, pharmacy, medical clinic, food, auto, salon and beauty). Open spots link to a $99/month Stripe Payment Link with `client_reference_id` set to the slot; taken spots show as taken. Clicks log `sponsor-checkout` with the slot id only.
+- Sponsors are now set by city and category in `src/lib/sponsors.js`. A city's crossing pages show one sponsor; with several in a city, they rotate by UTC calendar day.
+- Checks: full `npm test` passes after a prerendered build. Entry JS 62.05 KB gzip (budget 62.25), CSS 19.92 KB (budget 20). Headless Chrome 390px: card on PDN and the Juárez dentist guide; feature page renders EN and ES.
+
 ## 2026-11-10 - Sponsor WhatsApp message names Border Pulse
 
 - The sponsor card's WhatsApp button now opens a prefilled message saying the patient found the clinic on Border Pulse (EN/ES). The visitor can edit it before sending. This lets the business see the source in its own inbox, which analytics cannot show.

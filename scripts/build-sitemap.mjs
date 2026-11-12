@@ -61,6 +61,11 @@ async function main() {
     { lang: 'es', href: `${BASE}/privacidad/` },
     { lang: 'x-default', href: `${BASE}/privacy/` },
   ];
+  const featureAlternates = [
+    { lang: 'en', href: `${BASE}/feature-your-business/` },
+    { lang: 'es', href: `${BASE}/anunciate/` },
+    { lang: 'x-default', href: `${BASE}/feature-your-business/` },
+  ];
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today, alternates: homeHreflangs() },
     { loc: `${BASE}/es/`, changefreq: 'hourly', priority: '0.9', lastmod: today, alternates: homeHreflangs() },
@@ -70,6 +75,8 @@ async function main() {
     { loc: `${BASE}/privacidad/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },
     { loc: `${BASE}/methodology/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
     { loc: `${BASE}/metodologia/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
+    { loc: `${BASE}/feature-your-business/`, changefreq: 'monthly', priority: '0.4', lastmod: today, alternates: featureAlternates },
+    { loc: `${BASE}/anunciate/`, changefreq: 'monthly', priority: '0.4', lastmod: today, alternates: featureAlternates },
   ];
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
