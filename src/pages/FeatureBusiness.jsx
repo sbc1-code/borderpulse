@@ -4,7 +4,7 @@ import { ArrowLeft, Check } from 'lucide-react';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { track } from '@/lib/analytics';
 import SponsoredCard from '@/components/sponsors/SponsoredCard';
-import { CITIES, CATEGORIES, CHECKOUT_URL, LISTING_PRICE_USD, SPONSORS, slotTaken } from '@/lib/sponsors';
+import { CITIES, CATEGORIES, checkoutFor, LISTING_PRICE_USD, SPONSORS, slotTaken } from '@/lib/sponsors';
 
 const COPY = {
   en: {
@@ -76,7 +76,7 @@ const COPY = {
 };
 
 function checkoutHref(slot) {
-  const u = new URL(CHECKOUT_URL);
+  const u = new URL(checkoutFor(slot));
   u.searchParams.set('client_reference_id', slot);
   return u.toString();
 }
@@ -127,7 +127,9 @@ export default function FeatureBusiness({ lang = 'en' }) {
           <div className="mt-3 space-y-4">
             {CITIES.map(city => (
               <div key={city.id}>
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{city.name}</h3>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <Link to={`/${es ? 'ciudad' : 'city'}/${city.id}/`} className="underline">{city.name}</Link>
+                </h3>
                 <ul className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {CATEGORIES.map(cat => {
                     const slot = `${city.id}-${cat.id}`;

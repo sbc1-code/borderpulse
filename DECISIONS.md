@@ -589,3 +589,7 @@ Sponsor reporting counts what the existing Umami property records: clicks on the
 ## 2026-11-11 - Self-serve sponsor listings before 2 to 3 paying sponsors
 
 The roadmap said to wait for 2 to 3 paying sponsors before a self-serve page. Sebastian approved building it now so businesses can buy without a call. A listing is one business per category per city, $99/month through a Stripe Payment Link. Every paid listing is reviewed before it is added to `src/lib/sponsors.js`, and refunded if not approved. Rotation is by day, not per view, so prerendered pages and the client agree. Business offers are shown attributed to the business and with an end date.
+
+## 2026-11-11 - City pages carry several labeled sponsors; one checkout link per spot
+
+City pages are directories, so they list one labeled sponsor per category instead of following the one-spot-per-page rule, and they carry no network ad. Each open spot has its own Stripe Payment Link with a one-purchase limit, so a spot cannot be sold twice without a server or webhook. After a sale, remove that slot from `SLOT_CHECKOUT` (it then shows as reserved), review the listing, then add the sponsor or refund. If a sponsor cancels, create a fresh link for the slot. Rare edge: two checkouts already open at the same moment can both complete; the second is refunded under the review promise.

@@ -24,6 +24,7 @@ const Privacy = lazy(() => import('@/pages/Privacy'));
 const CrossingConsole = lazy(() => import('@/pages/CorridorRedirect'));
 const LaneFlip = lazy(() => import('@/pages/LaneFlip'));
 const FeatureBusiness = lazy(() => import('@/pages/FeatureBusiness'));
+const CityGuide = lazy(() => import('@/pages/CityGuide'));
 
 function RouteFallback() {
   return (
@@ -58,6 +59,8 @@ function LayoutRoutes() {
           <Route path="/privacidad" element={<Privacy lang="es" />} />
           <Route path="/feature-your-business" element={<FeatureBusiness lang="en" />} />
           <Route path="/anunciate" element={<FeatureBusiness lang="es" />} />
+          <Route path="/city/:city" element={<CityGuide lang="en" />} />
+          <Route path="/ciudad/:city" element={<CityGuide lang="es" />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

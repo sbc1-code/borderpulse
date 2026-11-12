@@ -723,6 +723,39 @@ async function main() {
     }
   }
 
+  // /city/:id + /ciudad/:id — one directory page per sponsor city, hreflang-paired.
+  {
+    const { CITIES } = await import(path.resolve(root, 'src/lib/sponsors.js'));
+    for (const city of CITIES) {
+      const enCanonical = `${BASE}/city/${city.id}/`;
+      const esCanonical = `${BASE}/ciudad/${city.id}/`;
+      const hreflangs = [
+        { lang: 'en', href: enCanonical },
+        { lang: 'es', href: esCanonical },
+        { lang: 'x-default', href: enCanonical },
+      ];
+      const heads = [
+        [['city', city.id], {
+          lang: 'en',
+          title: `${city.name}: border crossings and local businesses | Border Pulse`,
+          desc: `Wait times for the crossings into ${city.name} from ${city.from.en}, and local businesses by category.`,
+          canonical: enCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+        }],
+        [['ciudad', city.id], {
+          lang: 'es',
+          title: `${city.name}: cruces y negocios locales | Border Pulse`,
+          desc: `Tiempos de espera de los cruces a ${city.name} desde ${city.from.es}, y negocios locales por categoría.`,
+          canonical: esCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+        }],
+      ];
+      for (const [parts, head] of heads) {
+        const outDir = path.resolve(distDir, ...parts);
+        fs.mkdirSync(outDir, { recursive: true });
+        fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+      }
+    }
+  }
+
   // /about — trust signal page with methodology + public stats + privacy
   {
     const aboutHead = {

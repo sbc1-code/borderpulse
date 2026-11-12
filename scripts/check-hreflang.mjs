@@ -26,6 +26,10 @@ export function checkBuiltHreflangs(dist = path.join(root, 'dist')) {
     ['/privacidad/', pair('/privacy/', '/privacidad/')],
     ['/feature-your-business/', pair('/feature-your-business/', '/anunciate/')],
     ['/anunciate/', pair('/feature-your-business/', '/anunciate/')],
+    ...['juarez', 'tijuana', 'algodones', 'nogales', 'progreso'].flatMap((c) => [
+      [`/city/${c}/`, pair(`/city/${c}/`, `/ciudad/${c}/`)],
+      [`/ciudad/${c}/`, pair(`/city/${c}/`, `/ciudad/${c}/`)],
+    ]),
   ]);
   for (const post of posts) {
     const twins = post.translationKey ? posts.filter((p) => p.translationKey === post.translationKey) : [];

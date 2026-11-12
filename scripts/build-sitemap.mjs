@@ -78,6 +78,16 @@ async function main() {
     { loc: `${BASE}/feature-your-business/`, changefreq: 'monthly', priority: '0.4', lastmod: today, alternates: featureAlternates },
     { loc: `${BASE}/anunciate/`, changefreq: 'monthly', priority: '0.4', lastmod: today, alternates: featureAlternates },
   ];
+  const { CITIES } = await import('../src/lib/sponsors.js');
+  for (const city of CITIES) {
+    const alternates = [
+      { lang: 'en', href: `${BASE}/city/${city.id}/` },
+      { lang: 'es', href: `${BASE}/ciudad/${city.id}/` },
+      { lang: 'x-default', href: `${BASE}/city/${city.id}/` },
+    ];
+    urls.push({ loc: `${BASE}/city/${city.id}/`, changefreq: 'weekly', priority: '0.6', lastmod: today, alternates });
+    urls.push({ loc: `${BASE}/ciudad/${city.id}/`, changefreq: 'weekly', priority: '0.6', lastmod: today, alternates });
+  }
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
