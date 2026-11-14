@@ -118,6 +118,7 @@ export const SPONSORS = [
     guides: [
       'bringing-prescription-medication-back-from-mexico', 'traer-medicamentos-con-receta-de-mexico',
       'dentist-in-juarez-from-el-paso-new-mexico', 'dentista-en-juarez-desde-el-paso-nuevo-mexico',
+      'coming-back-from-juarez-to-el-paso', 'regresar-de-juarez-a-el-paso',
     ],
     since: '2026-11-10',
     until: null,
