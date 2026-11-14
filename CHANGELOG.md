@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-14 - Return-trip guide: Juárez to El Paso (EN/ES)
+
+- New paired guides `/blog/coming-back-from-juarez-to-el-paso/` and `/blog/regresar-de-juarez-a-el-paso/` (ROADMAP Phase 4): documents CBP accepts by land, the $800 / $200 personal exemptions (CBP: the 48-hour minimum does not apply to Mexico), CBP vs TABC alcohol and cigarette rules and the TABC booths at PDN, BOTA and Ysleta, agricultural items that need a permit or are prohibited, FinCEN 105 over $10,000, which bridge to use, and the PDN best-time chart. Every rule links to CBP, USDA or TABC.
+- The first sponsor's card now also shows on both guides (`guides` list in `src/lib/sponsors.js`).
+- Written as lists, not markdown tables: the MDX pipeline has no GFM support, so tables render as raw pipe text (see DECISIONS.md 2026-11-14).
+- Checks: full `npm test` passes after a prerendered build (516 browser navigations). Entry JS 62.22 KB gzip (budget 62.25). Headless Chrome 390px: both pages render the sponsor card and chart, no page errors, no raw table text.
+
 ## 2026-11-14 - Owner analytics opt-out link
 
 - Opening any page with `?notrack` sets Umami's documented `umami.disabled` flag in that browser, so the owner's own visits and test clicks stop counting; `?track` removes it. Per browser and per device. Added because every sponsor click logged since Nov 10 came from the owner's own test session.
