@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-14T16:30:06.159Z",
-  "snapshot_at": "2026-11-14T16:23:04.803Z",
+  "generated_at": "2026-11-14T21:13:07.868Z",
+  "snapshot_at": "2026-11-14T21:08:01.010Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -72,23 +72,6 @@
     },
     {
       "type": "sunday_spike",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 1.4,
-      "detected_at": "2026-11-14T02:04:16.852Z",
-      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~240% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~240% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 120,
-        "overall_median": 50,
-        "samples": 12,
-        "ratio": 2.4
-      }
-    },
-    {
-      "type": "sunday_spike",
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
@@ -139,20 +122,37 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 1.1818181818181817,
+      "detected_at": "2026-11-14T21:13:07.868Z",
+      "summary_en": "Heads up: Calexico - East's Sunday peak hits 120 min around 10 PM — ~218% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Calexico - East alcanza 120 min cerca de las 10 PM — ~218% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 22,
+        "peak_median": 120,
+        "overall_median": 55,
+        "samples": 12,
+        "ratio": 2.1818181818181817
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "nogales-mariposa",
       "port_name": "Nogales - Mariposa",
       "state": "AZ",
       "severity": 1,
-      "detected_at": "2026-11-14T16:30:06.159Z",
-      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 50 min.",
+      "detected_at": "2026-11-14T21:13:07.868Z",
+      "summary_en": "Right now Nogales - Mariposa's lightest Saturday hour so far is 4 AM (median 0 min) — ~100% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Nogales - Mariposa es 4 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 4,
         "best_median": 0,
-        "overall_median": 50,
+        "overall_median": 60,
         "samples": 16
       }
     },
@@ -179,16 +179,16 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9795918367346939,
-      "detected_at": "2026-11-14T16:30:06.159Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 49 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 49 min.",
+      "severity": 0.98,
+      "detected_at": "2026-11-14T21:13:07.868Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 50 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 50 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 2,
         "best_median": 1,
-        "overall_median": 49,
+        "overall_median": 50,
         "samples": 18
       }
     },
@@ -305,29 +305,12 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.7346938775510203,
-      "detected_at": "2026-11-14T16:30:06.159Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 85 min around 7 PM — ~173% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 85 min cerca de las 7 PM — ~173% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.7,
+      "detected_at": "2026-11-14T21:13:07.868Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 85 min around 7 PM — ~170% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 85 min cerca de las 7 PM — ~170% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 19,
-        "peak_median": 85,
-        "overall_median": 49,
-        "samples": 19,
-        "ratio": 1.7346938775510203
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.7,
-      "detected_at": "2026-11-13T21:18:05.346Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 85 min around 4 PM — ~170% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 85 min cerca de las 4 PM — ~170% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
         "peak_median": 85,
         "overall_median": 50,
         "samples": 19,
@@ -349,6 +332,24 @@
         "overall_median": 45,
         "samples": 19,
         "ratio": 1.6666666666666667
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.6363636363636364,
+      "detected_at": "2026-11-14T21:13:07.868Z",
+      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 4 AM (median 20 min) — ~64% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 4 AM (mediana 20 min) — ~64% debajo de la base de 30 días de 55 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 20,
+        "overall_median": 55,
+        "samples": 11
       }
     },
     {
@@ -385,25 +386,25 @@
         "samples": 19,
         "ratio": 1.6
       }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.6,
-      "detected_at": "2026-11-14T16:30:06.159Z",
-      "summary_en": "Right now Calexico - East's lightest Saturday hour so far is 4 AM (median 20 min) — ~60% below the 30-day baseline of 50 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Calexico - East es 4 AM (mediana 20 min) — ~60% debajo de la base de 30 días de 50 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 4,
-        "best_median": 20,
-        "overall_median": 50,
-        "samples": 11
-      }
     }
   ],
-  "trailing_24h": []
+  "trailing_24h": [
+    {
+      "type": "sunday_spike",
+      "port_slug": "nogales-mariposa",
+      "port_name": "Nogales - Mariposa",
+      "state": "AZ",
+      "severity": 0.7,
+      "detected_at": "2026-11-13T21:18:05.346Z",
+      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 85 min around 4 PM — ~170% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 85 min cerca de las 4 PM — ~170% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 16,
+        "peak_median": 85,
+        "overall_median": 50,
+        "samples": 19,
+        "ratio": 1.7
+      }
+    }
+  ]
 }
