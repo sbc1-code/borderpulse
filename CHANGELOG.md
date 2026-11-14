@@ -6,6 +6,11 @@
 - Why: the prescription guide is the top traffic page, but its readers are national, while Juárez sponsor inventory needs El Paso and New Mexico readers. This targets pharmacy intent in Juárez specifically.
 - Checks: full `npm test` passes after a prerendered build (524 browser navigations). Entry JS 62.16 KB gzip (budget 62.25), CSS 19.93 KB (budget 20).
 
+## 2026-11-14 - Owner analytics opt-out link
+
+- Opening any page with `?notrack` sets Umami's documented `umami.disabled` flag in that browser, so the owner's own visits and test clicks stop counting; `?track` removes it. Per browser and per device. Added because every sponsor click logged since Nov 10 came from the owner's own test session.
+- Checks: full `npm test` passes after a prerendered build. Entry JS 62.22 KB gzip (budget 62.25), CSS 19.93 KB (budget 20).
+
 ## 2026-11-11 - City pages (Phase 3); one checkout link per spot
 
 - New bilingual city pages `/city/:id/` and `/ciudad/:id/` for Ciudad Juárez, Tijuana, Los Algodones, Nogales and Nuevo Progreso: links to that city's crossing waits, then one section per category with its sponsor card or an open-spot link to checkout. Prerendered, hreflang-paired, in the sitemap. No network ad on these pages. Crossing pages in those cities link to their city page under the sponsor or ad spot; the feature page links each city name.
