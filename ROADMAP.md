@@ -346,8 +346,8 @@ Snapshot of features live on borderpulse.com today.
 - City guides as sponsor inventory: Tijuana, Los Algodones, Nuevo Progreso, Nogales. One featured business per category section.
 - [x] Self-serve "feature your business" page (2026-11-11, shipped early at Sebastian's call).
 - [x] City directory pages, one per sponsor city (Phase 3, 2026-11-11).
-- [~] Return-trip guide (Phase 4), EN and ES: PR open 2026-11-14.
-- Markdown tables in guides render as raw text (no remark-gfm). Affects the live Juárez dentist guide and the pharmacy guide PR. Fix needs a new dev dependency; waiting on owner OK.
+- [x] Return-trip guide (Phase 4), EN and ES (#199).
+- [x] Markdown tables in guides render as tables (remark-gfm, 2026-11-14).
 - Swap the first sponsor's link to its own domain once it has one (currently constandse-dental.vercel.app).
 
 ### Shipped 2026-11-10
