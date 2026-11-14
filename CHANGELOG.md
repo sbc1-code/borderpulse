@@ -7,6 +7,12 @@
 - Written as lists, not markdown tables: the MDX pipeline has no GFM support, so tables render as raw pipe text (see DECISIONS.md 2026-11-14).
 - Checks: full `npm test` passes after a prerendered build (516 browser navigations). Entry JS 62.22 KB gzip (budget 62.25). Headless Chrome 390px: both pages render the sponsor card and chart, no page errors, no raw table text.
 
+## 2026-11-14 - Juárez pharmacy guide (EN/ES)
+
+- New paired guides `/blog/pharmacy-in-juarez-from-el-paso/` and `/blog/farmacia-en-juarez-desde-el-paso/`: Mexico's counter rules (over-the-counter, prescription, antibiotics since Aug 25, 2010, controlled medicines and the barcoded special prescription, tramadol moved to controlled in July 2026), pharmacies with an adjacent doctor's office, which bridge to use from El Paso and New Mexico, and the PDN best-time chart. Links the existing U.S.-side prescription guide and the Juárez dentist guide and city page. No sponsor; the standard end-of-guide ad slot applies.
+- Why: the prescription guide is the top traffic page, but its readers are national, while Juárez sponsor inventory needs El Paso and New Mexico readers. This targets pharmacy intent in Juárez specifically.
+- Checks: full `npm test` passes after a prerendered build (524 browser navigations). Entry JS 62.16 KB gzip (budget 62.25), CSS 19.93 KB (budget 20).
+
 ## 2026-11-14 - Owner analytics opt-out link
 
 - Opening any page with `?notrack` sets Umami's documented `umami.disabled` flag in that browser, so the owner's own visits and test clicks stop counting; `?track` removes it. Per browser and per device. Added because every sponsor click logged since Nov 10 came from the owner's own test session.
