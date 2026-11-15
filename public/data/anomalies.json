@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-14T21:13:07.868Z",
-  "snapshot_at": "2026-11-14T21:08:01.010Z",
+  "generated_at": "2026-11-15T01:36:18.850Z",
+  "snapshot_at": "2026-11-15T01:23:07.485Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -388,23 +388,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "nogales-mariposa",
-      "port_name": "Nogales - Mariposa",
-      "state": "AZ",
-      "severity": 0.7,
-      "detected_at": "2026-11-13T21:18:05.346Z",
-      "summary_en": "Heads up: Nogales - Mariposa's Sunday peak hits 85 min around 4 PM — ~170% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Nogales - Mariposa alcanza 85 min cerca de las 4 PM — ~170% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 16,
-        "peak_median": 85,
-        "overall_median": 50,
-        "samples": 19,
-        "ratio": 1.7
-      }
-    }
-  ]
+  "trailing_24h": []
 }
