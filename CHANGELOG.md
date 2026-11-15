@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-11-14 - Markdown tables render in guides
+
+- Added `remark-gfm` (dev dependency) to the MDX plugin in `vite.config.js`. Tables in guides were rendering as literal `| a | b |` text. Fixed on six live pages: the Juárez dentist and pharmacy guides and Paso del Norte vs Bridge of the Americas, EN and ES.
+- Checks: headless Chrome compared the rendered text of all 54 guides before and after. Only those six changed, now showing real tables with no horizontal overflow at 390px. Full `npm test` passes after a prerendered build. Lockfile also moves `unist-util-visit-parents` 6.0.2 to 6.1.0 (dev-only, same major).
+
 ## 2026-11-14 - Return-trip guide: Juárez to El Paso (EN/ES)
 
 - New paired guides `/blog/coming-back-from-juarez-to-el-paso/` and `/blog/regresar-de-juarez-a-el-paso/` (ROADMAP Phase 4): documents CBP accepts by land, the $800 / $200 personal exemptions (CBP: the 48-hour minimum does not apply to Mexico), CBP vs TABC alcohol and cigarette rules and the TABC booths at PDN, BOTA and Ysleta, agricultural items that need a permit or are prohibited, FinCEN 105 over $10,000, which bridge to use, and the PDN best-time chart. Every rule links to CBP, USDA or TABC.

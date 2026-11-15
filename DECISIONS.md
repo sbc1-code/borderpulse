@@ -593,4 +593,4 @@ The roadmap said to wait for 2 to 3 paying sponsors before a self-serve page. Se
 ## 2026-11-11 - City pages carry several labeled sponsors; one checkout link per spot
 
 City pages are directories, so they list one labeled sponsor per category instead of following the one-spot-per-page rule, and they carry no network ad. Each open spot has its own Stripe Payment Link with a one-purchase limit, so a spot cannot be sold twice without a server or webhook. After a sale, remove that slot from `SLOT_CHECKOUT` (it then shows as reserved), review the listing, then add the sponsor or refund. If a sponsor cancels, create a fresh link for the slot. Rare edge: two checkouts already open at the same moment can both complete; the second is refunded under the review promise.
-- 2026-11-14: Guides use lists instead of markdown tables until GFM is enabled in the MDX pipeline; without remark-gfm, `| a | b |` renders as literal text.
+- 2026-11-14: GFM enabled in the MDX pipeline (`remark-gfm`, dev dependency, owner-approved) so markdown tables in guides render as tables. Before this, `| a | b |` rendered as literal text on six live guides.
