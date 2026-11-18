@@ -1,5 +1,35 @@
 import assert from 'node:assert/strict';
 
+export async function checkCrossingSearch(page, baseUrl, language) {
+  const home = language === 'es' ? '/es/' : '/';
+  await page.goto(new URL(home + '?notrack&lane=passenger_ready', baseUrl).href, { waitUntil: 'domcontentloaded' });
+  const input = page.getByRole('searchbox');
+  const clear = page.getByRole('button', { name: language === 'es' ? 'Borrar búsqueda' : 'Clear search', exact: true });
+  const lane = page.getByRole('combobox', { name: language === 'es' ? 'Tu carril' : 'Your lane', exact: true });
+  for (const name of ['Paso del Norte', 'Otay Mesa']) {
+    await input.pressSequentially(name);
+    assert.equal(await input.inputValue(), name, 'fast typing preserves the full crossing name');
+    await page.waitForURL(url => url.searchParams.get('q') === name && url.searchParams.get('lane') === 'passenger_ready');
+    await page.locator('#map-crossing-results').getByRole('button', { name: new RegExp(name, 'i') }).first().waitFor();
+    await clear.click();
+    await page.waitForURL(url => !url.searchParams.has('q'));
+    assert.equal(await input.inputValue(), '');
+  }
+  await input.fill('Otay Mesa');
+  await lane.selectOption('passenger_standard');
+  await page.waitForURL(url => url.searchParams.get('q') === 'Otay Mesa' && url.searchParams.get('lane') === 'passenger_standard');
+  await clear.click();
+  await page.waitForURL(url => !url.searchParams.has('q'));
+  await page.goBack();
+  await page.waitForURL(url => url.searchParams.get('q') === 'Otay Mesa' && url.searchParams.get('lane') === 'passenger_ready');
+  await page.waitForFunction(() => document.querySelector('input[type="search"]')?.value === 'Otay Mesa');
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  assert.equal(await input.inputValue(), 'Otay Mesa', 'opening the shared URL restores the query');
+  await page.goForward();
+  await page.waitForURL(url => !url.searchParams.has('q'));
+  await page.waitForFunction(() => document.querySelector('input[type="search"]')?.value === '');
+}
+
 export async function checkRouterNavigation(owner, context, baseUrl) {
   const errors = [], external = [];
   for (const language of ['en', 'es']) {
@@ -17,6 +47,7 @@ export async function checkRouterNavigation(owner, context, baseUrl) {
     page.on('pageerror', error => errors.push(error.message));
     page.on('console', message => { if (message.type() === 'error' && /ErrorBoundary|Uncaught|TypeError|ReferenceError/.test(message.text())) errors.push(message.text()); });
     try {
+      await checkCrossingSearch(page, baseUrl, language);
       await page.goto(new URL('/crossing/san-ysidro/', baseUrl).href);
       await page.locator('#root').getByRole('link', { name: language === 'en' ? 'All crossings' : 'Todos los cruces', exact: true }).waitFor();
       await page.locator('#root a[href="/best-time/san-ysidro/"]').first().click();

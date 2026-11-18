@@ -47,3 +47,11 @@ and [refresh runbook](docs/REFRESH-OPERATIONS.md). The older Pages workflow rema
 in the repository; its presence does not prove which artifact serves the public
 host. Work on a branch, preserve publication/security gates, and obtain the owner’s
 explicit approval before a production release. A source commit is not a deployment.
+
+The release build pins picomatch 4.0.7 and disables its repeated-pattern
+operators during installation. BorderPulse does not require those operators.
+The registry still lists [GHSA-fc5q-39xc-vjpf](https://github.com/advisories/GHSA-fc5q-39xc-vjpf).
+The audit checks the installed parser's fingerprint and behavior and follows
+each dependency back to its reported advisory. An unpatched installation,
+an unexpected copy, or a new high-severity finding fails the check. When an
+upstream release fixes the advisory, replace the guard and pin with that release.

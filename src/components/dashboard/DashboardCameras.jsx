@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Camera, ChevronDown } from 'lucide-react';
-import CrossingCameras from '@/components/dashboard/CrossingCameras';
 import { CORRIDORS, corridorFor } from '@/lib/corridors';
-import { camerasFor } from '@/lib/cameras';
+import { cameraSourceFor, camerasFor } from '@/lib/cameras';
 import { crossingDisplayName } from '@/lib/crossingNames';
+
+// Download the player only when a visitor opens the camera panel.
+const CrossingCameras = lazy(() => import('./CrossingCameras').catch(() => ({
+  default: function CameraSourceLink({ crossing, language }) {
+    const source = cameraSourceFor(crossing.port_number);
+    return <a className="underline" href={source.sourceUrl} target="_blank" rel="noopener noreferrer">
+      {language === 'es' ? 'Ver fuente oficial de cámaras' : 'Open official camera source'}
+    </a>;
+  },
+})));
 
 export default function DashboardCameras({ crossings, language, corridorId }) {
   const [open, setOpen] = useState(false);
@@ -35,7 +44,9 @@ export default function DashboardCameras({ crossings, language, corridorId }) {
         <div role="group" aria-label={es ? 'Elegir cruce' : 'Choose a crossing'} className="mb-3 flex flex-wrap gap-2">
           {cameraCrossings.map(c => <button key={c.port_number} type="button" aria-pressed={c.port_number === selected.port_number} onClick={() => setPort(String(c.port_number))} className={`min-h-11 max-w-full rounded-lg border px-3 py-2 text-sm ${c.port_number === selected.port_number ? 'border-emerald-700 bg-emerald-50 text-emerald-900 dark:border-emerald-500 dark:bg-emerald-950 dark:text-emerald-200' : 'border-slate-300 text-slate-900 dark:border-gray-600 dark:text-white'}`}>{crossingDisplayName(c, language)}</button>)}
         </div>
-        {selected && <CrossingCameras key={selected.port_number} crossing={selected} language={language} />}
+        {selected && <Suspense fallback={<p role="status">{es ? 'Cargando cámaras…' : 'Loading cameras…'}</p>}>
+          <CrossingCameras key={selected.port_number} crossing={selected} language={language} />
+        </Suspense>}
       </div>}
     </section>
   );
