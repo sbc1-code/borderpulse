@@ -28,6 +28,7 @@
  */
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { advisory, verifyInstalledGuard } from './guard-picomatch.mjs';
 
 const run = promisify(execFile);
 const THRESHOLD = ['critical', 'high'];
@@ -48,8 +49,24 @@ const advisoryIds = (v) =>
 // A vulnerability is excused only when EVERY advisory behind it is accepted.
 const isFullyAccepted = (v) => {
   const ids = advisoryIds(v);
-  return ids.length > 0 && ids.every((id) => ACCEPTED_ADVISORIES.has(id));
+  return ids.length > 0 && ids.length === v.via.length && ids.every((id) => ACCEPTED_ADVISORIES.has(id));
 };
+
+// npm audit reads the lockfile. Follow each reported dependency edge to its
+// advisory, then verify our installed parser before recognizing the local fix.
+function coveredByGuard(name, vulnerabilities, ancestors = new Set()) {
+  const entry = vulnerabilities[name];
+  if (!entry || ancestors.has(name) || !entry.via?.length) return false;
+  const next = new Set(ancestors).add(name);
+  if (name === 'picomatch') {
+    return entry.via.every(item =>
+      item?.url === 'https://github.com/advisories/' + advisory
+    );
+  }
+  return entry.via.every(item =>
+    typeof item === 'string' && coveredByGuard(item, vulnerabilities, next)
+  );
+}
 
 let raw;
 try {
@@ -78,8 +95,15 @@ if (report.error || !report.metadata?.vulnerabilities || !report.vulnerabilities
 }
 const counts = report.metadata.vulnerabilities;
 const vulns = Object.values(report.vulnerabilities ?? {});
+const entries = report.vulnerabilities;
+const guarded = coveredByGuard('picomatch', entries);
+if (guarded) {
+  verifyInstalledGuard(entries.picomatch.nodes);
+  console.log('[audit] verified installed parser guard for ' + advisory);
+}
 const blocking = vulns.filter(
-  (v) => THRESHOLD.includes(v.severity) && !isFullyAccepted(v)
+  (v) => THRESHOLD.includes(v.severity) && !isFullyAccepted(v) &&
+    !(guarded && coveredByGuard(v.name, entries))
 );
 
 console.log(
