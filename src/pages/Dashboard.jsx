@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -100,6 +100,13 @@ export default function Dashboard() {
   const corridor = corridorFor(areaParam)?.id || '';
   const region = corridor || areaParam === 'all' ? 'ALL' : REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL';
   const search = searchParam;
+  // Keep typing synchronous while the router renders the filtered results.
+  const [searchInput, setSearchInput] = useState(search);
+  useLayoutEffect(() => {
+    // Ignore superseded router commits. Clear, shared links and Back/Forward
+    // still restore the field from the active URL.
+    if ((currentSearchParams().get('q') || '') === search) setSearchInput(search);
+  }, [location.key, search]);
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -288,6 +295,7 @@ export default function Dashboard() {
   };
 
   const changeSearch = (value) => {
+    setSearchInput(value);
     const next = currentSearchParams();
     value ? next.set('q', value) : next.delete('q');
     next.delete('port');
@@ -542,12 +550,12 @@ export default function Dashboard() {
                 type="search"
                 inputMode="search"
                 placeholder={language === 'en' ? 'Search crossing or city (San Ysidro, Laredo, Nogales…)' : 'Buscar cruce o ciudad…'}
-                value={search}
+                value={searchInput}
                 onChange={(e) => changeSearch(e.target.value)}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
                 className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
               />
-              {search && (
+              {searchInput && (
                 <button
                   onClick={() => changeSearch('')}
                   aria-label={language === 'en' ? 'Clear search' : 'Borrar búsqueda'}
