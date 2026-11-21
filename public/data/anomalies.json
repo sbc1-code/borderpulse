@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-21T09:25:50.406Z",
-  "snapshot_at": "2026-11-21T09:22:58.795Z",
+  "generated_at": "2026-11-21T17:13:33.451Z",
+  "snapshot_at": "2026-11-21T17:08:11.711Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -179,35 +179,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.9814814814814815,
-      "detected_at": "2026-11-21T09:25:50.406Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 54 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 54 min.",
+      "severity": 0.9818181818181818,
+      "detected_at": "2026-11-21T17:13:33.451Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Saturday hour so far is 2 AM (median 1 min) — ~98% below the 30-day baseline of 55 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Paso Del Norte (PDN) es 2 AM (mediana 1 min) — ~98% debajo de la base de 30 días de 55 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 2,
         "best_median": 1,
-        "overall_median": 54,
+        "overall_median": 55,
         "samples": 14
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "hidalgo-pharr-hidalgo",
-      "port_name": "Hidalgo/Pharr - Hidalgo",
-      "state": "TX",
-      "severity": 0.9333333333333333,
-      "detected_at": "2026-11-21T09:25:50.406Z",
-      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 4 AM (median 3 min) — ~93% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 3 min) — ~93% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 6,
-        "day_label": "Sat",
-        "best_hour": 4,
-        "best_median": 3,
-        "overall_median": 45,
-        "samples": 12
       }
     },
     {
@@ -270,7 +252,7 @@
       "port_name": "El Paso - Bridge of the Americas (BOTA)",
       "state": "TX",
       "severity": 0.9166666666666666,
-      "detected_at": "2026-11-21T09:25:50.406Z",
+      "detected_at": "2026-11-21T17:13:33.451Z",
       "summary_en": "Right now El Paso - Bridge of the Americas (BOTA)'s lightest Saturday hour so far is 3 AM (median 5 min) — ~92% below the 30-day baseline of 60 min.",
       "summary_es": "Ahora mismo la hora más ligera del sábado en El Paso - Bridge of the Americas (BOTA) es 3 AM (mediana 5 min) — ~92% debajo de la base de 30 días de 60 min.",
       "evidence": {
@@ -279,7 +261,25 @@
         "best_hour": 3,
         "best_median": 5,
         "overall_median": 60,
-        "samples": 17
+        "samples": 21
+      }
+    },
+    {
+      "type": "lowest_today",
+      "port_slug": "hidalgo-pharr-hidalgo",
+      "port_name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "severity": 0.9111111111111111,
+      "detected_at": "2026-11-21T17:13:33.451Z",
+      "summary_en": "Right now Hidalgo/Pharr - Hidalgo's lightest Saturday hour so far is 4 AM (median 4 min) — ~91% below the 30-day baseline of 45 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Hidalgo/Pharr - Hidalgo es 4 AM (mediana 4 min) — ~91% debajo de la base de 30 días de 45 min.",
+      "evidence": {
+        "day_of_week": 6,
+        "day_label": "Sat",
+        "best_hour": 4,
+        "best_median": 4,
+        "overall_median": 45,
+        "samples": 16
       }
     },
     {
@@ -287,17 +287,17 @@
       "port_slug": "otay-mesa",
       "port_name": "Otay Mesa",
       "state": "CA",
-      "severity": 0.8125,
-      "detected_at": "2026-11-21T09:25:50.406Z",
-      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 15 min) — ~81% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 15 min) — ~81% debajo de la base de 30 días de 80 min.",
+      "severity": 0.8375,
+      "detected_at": "2026-11-21T17:13:33.451Z",
+      "summary_en": "Right now Otay Mesa's lightest Saturday hour so far is 3 AM (median 13 min) — ~84% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en Otay Mesa es 3 AM (mediana 13 min) — ~84% debajo de la base de 30 días de 80 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
-        "best_median": 15,
+        "best_median": 13,
         "overall_median": 80,
-        "samples": 16
+        "samples": 20
       }
     },
     {
@@ -323,17 +323,17 @@
       "port_slug": "san-ysidro",
       "port_name": "San Ysidro",
       "state": "CA",
-      "severity": 0.6875,
-      "detected_at": "2026-11-21T09:25:50.406Z",
-      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 25 min) — ~69% below the 30-day baseline of 80 min.",
-      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 25 min) — ~69% debajo de la base de 30 días de 80 min.",
+      "severity": 0.7125,
+      "detected_at": "2026-11-21T17:13:33.451Z",
+      "summary_en": "Right now San Ysidro's lightest Saturday hour so far is 3 AM (median 23 min) — ~71% below the 30-day baseline of 80 min.",
+      "summary_es": "Ahora mismo la hora más ligera del sábado en San Ysidro es 3 AM (mediana 23 min) — ~71% debajo de la base de 30 días de 80 min.",
       "evidence": {
         "day_of_week": 6,
         "day_label": "Sat",
         "best_hour": 3,
-        "best_median": 25,
+        "best_median": 23,
         "overall_median": 80,
-        "samples": 12
+        "samples": 16
       }
     },
     {
@@ -341,73 +341,18 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.5740740740740742,
-      "detected_at": "2026-11-21T01:13:05.924Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 85 min around 4 PM — ~157% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 85 min cerca de las 4 PM — ~157% de la mediana de 30 días. Planea alrededor.",
+      "severity": 0.5454545454545454,
+      "detected_at": "2026-11-21T17:13:33.451Z",
+      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 85 min around 4 PM — ~155% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 85 min cerca de las 4 PM — ~155% de la mediana de 30 días. Planea alrededor.",
       "evidence": {
         "peak_hour": 16,
         "peak_median": 85,
-        "overall_median": 54,
+        "overall_median": 55,
         "samples": 17,
-        "ratio": 1.5740740740740742
+        "ratio": 1.5454545454545454
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "lowest_today",
-      "port_slug": "nogales-deconcini",
-      "port_name": "Nogales - Deconcini",
-      "state": "AZ",
-      "severity": 0.8888888888888888,
-      "detected_at": "2026-11-20T11:06:24.372Z",
-      "summary_en": "Right now Nogales - Deconcini's lightest Friday hour so far is 1 AM (median 5 min) — ~89% below the 30-day baseline of 45 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Nogales - Deconcini es 1 AM (mediana 5 min) — ~89% debajo de la base de 30 días de 45 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 1,
-        "best_median": 5,
-        "overall_median": 45,
-        "samples": 20
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "tecate",
-      "port_name": "Tecate",
-      "state": "CA",
-      "severity": 0.8333333333333334,
-      "detected_at": "2026-11-20T11:06:24.372Z",
-      "summary_en": "Right now Tecate's lightest Friday hour so far is 11 PM (median 10 min) — ~83% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Tecate es 11 PM (mediana 10 min) — ~83% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 23,
-        "best_median": 10,
-        "overall_median": 60,
-        "samples": 17
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "eagle-pass-bridge-i",
-      "port_name": "Eagle Pass - Bridge I",
-      "state": "TX",
-      "severity": 0.5,
-      "detected_at": "2026-11-20T11:06:24.372Z",
-      "summary_en": "Right now Eagle Pass - Bridge I's lightest Friday hour so far is 5 AM (median 30 min) — ~50% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Eagle Pass - Bridge I es 5 AM (mediana 30 min) — ~50% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 5,
-        "day_label": "Fri",
-        "best_hour": 5,
-        "best_median": 30,
-        "overall_median": 60,
-        "samples": 3
-      }
-    }
-  ]
+  "trailing_24h": []
 }
