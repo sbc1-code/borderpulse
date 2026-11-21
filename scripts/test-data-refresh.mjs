@@ -78,6 +78,9 @@ test('current-waits views refresh while open, on tab return and online; cleanup 
   page.visibilityState = 'hidden';
   page.dispatchEvent(new Event('visibilitychange'));
   assert.equal(calls, beforeHidden);
+  t.mock.timers.tick(15 * 60_000);
+  await service.inFlight;
+  assert.equal(calls, beforeHidden, 'hidden tabs do not poll, even with multiple subscribers');
   wait = 45;
   page.visibilityState = 'visible';
   page.dispatchEvent(new Event('visibilitychange'));
@@ -252,4 +255,17 @@ test('when no source loads and nothing is retained, the result is unavailable, n
   assert.equal(result.fromFallback, false);
   assert.equal(result.timestamp, null);
   assert.deepEqual(result.crossings, []);
+});
+
+test('auto-refresh without a page retains its default polling behavior', async t => {
+  t.mock.timers.enable({ apis: ['setInterval'] });
+  const service = new DataService();
+  let calls = 0;
+  service.getBorderData = () => { calls++; };
+  service.startAutoRefresh(1000);
+  t.mock.timers.tick(1000);
+  assert.equal(calls, 1);
+  service.stopAutoRefresh();
+  t.mock.timers.tick(1000);
+  assert.equal(calls, 1);
 });
