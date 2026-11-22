@@ -42,15 +42,15 @@ If the user just says **"what's new"** or **"catch me up"** or
   data-only commits do not deploy to Vercel. Current waits use its cached CBP
   endpoint. Two scheduled production observations and first-week cost review
   remain pending; no separate monitoring automation was created.
-  **GitHub Pages is preserved for rollback.**
-  `.github/workflows/deploy.yml` is the SOLE Pages deployer
-  (`concurrency: pages`). It runs on push to `main` AND on
-  `workflow_dispatch`.
-- **Scheduled CBP refresh** runs `.github/workflows/fetch-cbp.yml`
-  every **15 min**. Those commits use `chore(data): refresh ...` and are
-  skipped by `deploy.yml`'s push trigger, so fetch-cbp explicitly
-  `workflow_dispatch`es deploy.yml with the exact commit SHA — bot pushes
-  do not trigger workflows on their own.
+  **GitHub Pages is manual recovery only.**
+  `.github/workflows/deploy.yml` remains the sole Pages deployer
+  (`concurrency: pages`), with `workflow_dispatch` only. Its existing site
+  becomes stale between recovery runs. A successful fresh build and an
+  explicitly approved DNS change are required before using Pages as production.
+- **Scheduled CBP refresh** uses `.github/workflows/fetch-cbp.yml`.
+  The external scheduler requests quarter-hour runs; the GitHub cron remains
+  a fallback. Those commits use `chore(data): refresh ...` and no longer
+  dispatch a Pages deployment. Requested cadence is not measured delivery.
 - **`fetch-depth: 0` is load-bearing for the collector**, which materializes
   `public/data/snapshot-history.json`. Site builds read that explicit artifact
   and can use shallow clones. Never regenerate history from a shallow clone.

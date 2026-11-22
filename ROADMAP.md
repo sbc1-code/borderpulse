@@ -327,10 +327,12 @@ Snapshot of features live on borderpulse.com today.
 ### Infra
 - Vercel production via `.github/workflows/publish-vercel.yml`; daily prebuilt
   Actions publication plus application changes. IONOS owns domain/DNS.
-- GitHub Pages deploy via `.github/workflows/deploy.yml` retained for rollback;
-  recent jobs are pending/canceled, so verify a successful build before rollback.
-- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; changed,
-  validated snapshots explicitly dispatch the sole deployer with their SHA
+- GitHub Pages via `.github/workflows/deploy.yml` is manual recovery only.
+  Its existing artifact becomes stale; verify a fresh successful build and
+  obtain specific DNS approval before using it as production.
+- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml` commits validated
+  snapshots and rolling history without deploying Pages. Vercel's latest-data
+  fallback reads the committed collector feed independently.
 - Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild
 - Desktop/mobile browser smoke gate covers every sitemap URL and generated alias
 - Code-split leaf routes (main bundle ~161 KB)

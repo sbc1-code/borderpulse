@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2026-11-22 - Retire automatic Pages publishing
+
+- Removed the main-push trigger and the collector's Pages dispatch. The
+  existing `deploy.yml` remains available for intentional manual recovery.
+- Removed the collector's now-unused `actions: write` permission. Collection,
+  full-history generation, the shared writer queue, production publishing and
+  failure/recovery issues retain their existing behavior.
+- Updated current operations and recovery instructions, and marked the May
+  codebase inventory as historical. Pages becomes stale between recovery
+  builds; a fresh verified build and specific DNS approval are required for
+  rollback. Re-enabling its data publication is part of any return to Pages.
+
 ## 2026-11-14 - Markdown tables render in guides
 
 - Added `remark-gfm` (dev dependency) to the MDX plugin in `vite.config.js`. Tables in guides were rendering as literal `| a | b |` text. Fixed on six live pages: the Juárez dentist and pharmacy guides and Paso del Norte vs Bridge of the Americas, EN and ES.

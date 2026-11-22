@@ -1,5 +1,75 @@
 # Public data refresh
 
+## Current operating path — 2026-11-22
+
+This section supersedes the older hosting, Pages-dispatch and recovery wording
+below. Dated receipts remain historical evidence, not present-day instructions.
+
+- **Production:** Vercel at borderpulse.com. `publish-vercel.yml` requests one
+  daily prebuilt publication at 08:17 UTC and publishes application changes;
+  data-only commits do not trigger it. Verify the completed run, deployment
+  source and public `/data/publication.json`; a schedule is not a delivery time.
+- **Current waits:** `/api/public/crossings` uses the existing cached official-CBP
+  endpoint. If it fails, the client chooses the newer valid backup between
+  the collector rewrite `/data/latest/crossings.json` and the bundled
+  `/data/crossings.json`. Preserve original retrieval and lane report clocks.
+- **Collector:** the external quarter-hour scheduler and fallback GitHub cron
+  still trigger `fetch-cbp.yml`. Its shared `repository-writer` queue, complete
+  Git history, validation, bounded retries and failure/recovery issue stay.
+  Collector commits continue to feed history and the Vercel backup rewrite.
+- **Pages:** `deploy.yml` is manual recovery only. Neither main pushes nor
+  collector commits start it. The currently published Pages copy will become
+  stale; its continued existence does not make it ready for a DNS rollback.
+- **Other existing work:** anomaly data, editorial admission, the daily blog
+  pilot, verification and dependency checks keep their existing gates. A
+  successful skipped job is not evidence of content publication.
+
+### Verify normal operation
+
+1. Match scheduler delivery to a successful collector run and its committed
+   snapshot. Inspect `fetched_at`, nonempty crossings and history consistency.
+2. Read `/api/public/crossings` and `/data/latest/crossings.json` with their
+   original timestamps. Lane source-report age is separate from retrieval age.
+3. For a site/history/FX publication, match the existing Vercel run and READY
+   deployment to the public manifest; inspect its source and data timestamps.
+4. Pages success is not part of normal production health. Preserve alerts for
+   collector and production failures; do not mute repository notifications to
+   hide an active service failure.
+
+### Recover with Pages only after explicit approval
+
+1. Diagnose the active path first. A shared CBP upstream failure is not fixed
+   by changing hosts. Do not disable the collector to stop Pages notices.
+2. Use current main with a fresh, validated collector snapshot. If the trigger
+   failed, recover that existing collector first; do not use an old bundle.
+3. Dispatch `deploy.yml` intentionally with that exact commit SHA. Wait for
+   build, tests, upload and deployment success, then verify the Pages artifact's
+   timestamps, EN/ES routes and static fallback behavior. The known artifact
+   discovery failure can still occur in this retained workflow; a failed or
+   pending Pages run blocks the rollback.
+4. Recheck the current DNS and the captured #101 recovery record. Obtain
+   approval for the specific DNS/production change, then verify HTTPS and the
+   actual source served by borderpulse.com. No DNS change is authorized merely
+   by keeping or running this manual workflow.
+5. If Pages becomes the production host again, explicitly restore its required
+   data-publication trigger through a reviewed change. A one-off Pages build
+   alone cannot keep a static production site current.
+
+### Audit evidence for this cleanup
+
+The read-only window was November 21, 20:00 UTC through November 22, 20:00 UTC
+(noon-to-noon Pacific): 205 Actions runs, including 99 automatic Pages runs
+(84 successful, 15 failed), 100 collectors (99 successful, one failed), four
+anomaly scans, one Vercel publication and one daily-blog clock-gated skip.
+The collector failure was CBP HTTP 503; [issue #206](https://github.com/sbc1-code/borderpulse/issues/206)
+opened and recovered automatically. A Pages [failed run](https://github.com/sbc1-code/borderpulse/actions/runs/45056265525)
+uploaded its artifact successfully before deployment reported zero artifacts.
+The [production publication](https://github.com/sbc1-code/borderpulse/actions/runs/45042726718)
+succeeded. Retiring the automatic Pages path removes 99 of the 205 runs in
+this observed window; it is not a guarantee about future workload or savings.
+
+## Historical implementation and release records
+
 ## Reliability continuation — 2026-10-27 UTC (local, unreleased)
 
 - Release continuation: the owner explicitly approved the scoped Zod 4
