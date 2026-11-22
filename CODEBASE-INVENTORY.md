@@ -1,6 +1,10 @@
 # BorderPulse Codebase Inventory
 
-> **Purpose:** Single source of truth for what already exists in this codebase. Feed this to other AI sessions so they stop recommending features that are already built.
+> **Status:** Historical inventory from May 16, 2026, preserved for reference.
+> It is not the current operating configuration. Hosting, source counts, Maps,
+> schedules, routes and gates below can be superseded. Read [CLAUDE.md](CLAUDE.md),
+> [README.md](README.md) and [current refresh operations](docs/REFRESH-OPERATIONS.md),
+> then verify the relevant source and run before acting.
 >
 > **Last verified:** 2026-05-16
 > **Repo:** https://github.com/sbc1-code/borderpulse · Live at borderpulse.com

@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: write
   contents: write
   issues: write
 
@@ -33,20 +32,6 @@ jobs:
       - name: Generate, validate and publish current data
         id: snapshot
         run: node scripts/write-data-snapshot.mjs cbp
-      - name: Dispatch exact snapshot to the sole Pages deployer
-        if: steps.snapshot.outputs.changed == 'true'
-        uses: actions/github-script@v9
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'deploy.yml',
-              ref: 'main',
-              inputs: {
-                commit_sha: '${{ steps.snapshot.outputs.commit_sha }}',
-              },
-            });
 
       # Auto-file an issue on failure, dedup'd by label so we don't spam
       # every 15 min. Closes the loop on "I saw it in Gmail and forgot."

@@ -15,8 +15,9 @@ Reported northbound US-Mexico border waits and historical planning views at [bor
 Paid southbound Google Maps estimates are paused and are not part of the production workflow. The retained `scripts/fetch-sb.mjs` utility is historical/manual only; production serves the official northbound CBP feed.
 
 The shared data service reads `/api/public/crossings` when the public API build
-flag is enabled, with a dated `/data/crossings.json` fallback. Static builds use
-the bundled snapshot. Both preserve retrieval timestamps; lane report clocks
+flag is enabled. On failure it selects the newer valid backup between the
+collector rewrite `/data/latest/crossings.json` and bundled `/data/crossings.json`.
+Static builds use the bundled snapshot. Both preserve retrieval timestamps; lane report clocks
 are separate. The API implementation is in `api/public/crossings.js`. No account
 is required for the free crossing reports.
 
@@ -43,9 +44,10 @@ npm run fetch:fx
 
 ## Deploy
 Use the existing guarded [publication workflow](.github/workflows/publish-vercel.yml)
-and [refresh runbook](docs/REFRESH-OPERATIONS.md). The older Pages workflow remains
-in the repository; its presence does not prove which artifact serves the public
-host. Work on a branch, preserve publication/security gates, and obtain the owner’s
+and [refresh runbook](docs/REFRESH-OPERATIONS.md). The Pages workflow is manual
+recovery only; it no longer runs on main pushes or collector updates. Its saved
+site becomes stale and must be rebuilt and verified before any approved DNS
+rollback. Work on a branch, preserve publication/security gates, and obtain the owner’s
 explicit approval before a production release. A source commit is not a deployment.
 
 The release build pins picomatch 4.0.7 and disables its repeated-pattern

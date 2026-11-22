@@ -1,5 +1,19 @@
 # DECISIONS
 
+## 2026-11-22 · Pages is manual recovery; the collector serves current production
+
+Vercel serves borderpulse.com. Retire automatic Pages builds from main pushes
+and collector dispatches, while preserving the collector, history, current-data
+API, newest-backup rewrite and existing production publisher. Keep the Pages
+workflow as a manual recovery tool, not a continuously current second site.
+Its retained artifact becomes stale; recovery requires a fresh validated build,
+successful deployment, readback and explicit DNS approval. If Pages resumes
+production, its data-publication trigger must be restored intentionally. This
+supersedes the automatic Pages-dispatch requirement from August 6 and the
+first-week parallel-host instructions from September. Details and evidence are
+in `docs/REFRESH-OPERATIONS.md`. Do not silence genuine collector/production
+alerts to eliminate obsolete-host notices.
+
 ## 2026-11-07 · Claude may merge BorderPulse PRs Sebastian approves in chat
 
 `.claude/settings.json` allows one command, `gh api -X PUT repos/sbc1-code/borderpulse/pulls/*/merge*`, so an automated check does not block a merge Sebastian approved. It does not grant approval: Claude still merges only after Sebastian says so in the conversation. It covers this repo only, not DIGITO. Remove the file to revoke.
