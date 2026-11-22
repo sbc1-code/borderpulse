@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listPosts, pillarLabel } from '@/lib/blog-runtime';
 import { resetPageMeta, updatePageMeta } from '@/lib/seo';
+import { usePersistentLanguage } from '@/lib/useLanguage';
 
 const STRINGS = {
   en: {
@@ -10,6 +11,7 @@ const STRINGS = {
       'Data-driven guides to crossing the U.S.-Mexico border. Hour by hour patterns, neutral program explainers, and trip planning for the people who actually cross. Every program rule links to the official source.',
     none: 'No posts yet.',
     all: 'All',
+    filter: 'Filter posts by language',
   },
   es: {
     title: 'Blog de Border Pulse',
@@ -17,6 +19,7 @@ const STRINGS = {
       'Guías basadas en datos para cruzar la frontera EE.UU.-México. Patrones hora por hora, explicaciones neutrales de programas y planeación de viaje para quienes cruzan a diario. Cada regla enlaza a su fuente oficial.',
     none: 'Aún no hay posts.',
     all: 'Todos',
+    filter: 'Filtrar posts por idioma',
   },
 };
 
@@ -28,6 +31,8 @@ function formatDate(iso, lang) {
 }
 
 export default function Blog() {
+  const language = usePersistentLanguage();
+  const t = STRINGS[language] || STRINGS.en;
   const [filter, setFilter] = useState('all');
   const en = listPosts({ lang: 'en' });
   const es = listPosts({ lang: 'es' });
@@ -61,16 +66,16 @@ export default function Blog() {
     <div className="p-3 sm:p-4 lg:p-6 max-w-[860px] mx-auto">
       <header className="mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
-          Border Pulse Blog
+          {t.title}
         </h1>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-prose">
-          {filter === 'es' ? STRINGS.es.subtitle : STRINGS.en.subtitle}
+          {filter === 'es' || (filter === 'all' && language === 'es') ? STRINGS.es.subtitle : STRINGS.en.subtitle}
         </p>
       </header>
 
-      <div className="mb-6 flex items-center gap-2" role="group" aria-label="Filter posts by language">
+      <div className="mb-6 flex items-center gap-2" role="group" aria-label={t.filter}>
         <button onClick={() => setFilter('all')} className={tabClass(filter === 'all')} aria-pressed={filter === 'all'}>
-          {STRINGS.en.all} ({all.length})
+          {t.all} ({all.length})
         </button>
         <button onClick={() => setFilter('en')} className={tabClass(filter === 'en')} aria-pressed={filter === 'en'}>
           English ({en.length})
@@ -82,7 +87,7 @@ export default function Blog() {
 
       {posts.length === 0 ? (
         <p className="text-sm text-slate-500">
-          {filter === 'es' ? STRINGS.es.none : STRINGS.en.none}
+          {t.none}
         </p>
       ) : (
         <ul className="space-y-6">

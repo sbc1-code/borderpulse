@@ -3,7 +3,7 @@ title: "Mejor hora para cruzar Tecate: hora por hora con 30 días de datos de CB
 description: "Tiempos medianos hacia EE.UU. en Tecate, hora por hora, con datos de CBP. Las mañanas rondan la hora; el domingo por la tarde la mediana sube a cuatro o cinco horas."
 slug: mejor-hora-para-cruzar-tecate
 date: "2026-05-09"
-updated: "2026-07-27"
+updated: "2026-10-29"
 author: sebastian
 pillar: data-analysis
 lang: es
@@ -25,6 +25,9 @@ officialSources:
   - label: "CBP Programa SENTRI"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
+
+> **Análisis histórico.** Las cifras fijas corresponden a la muestra fechada del artículo. Las gráficas usan historial publicado por separado. Revisa sus fechas de origen y los reportes recientes por carril antes de viajar.
+
 
 Tecate tiene fama de ser la opción tranquila frente a las garitas de San Diego. Los datos actuales dicen: solo en la mañana. La espera mediana hacia EE.UU. sobre los últimos 30 días es de **120 minutos**, la misma que San Ysidro, y la hora más ligera de toda la semana es **7 a. m. con mediana de 60 minutos.** El patrón real es una rampa diaria empinada: las mañanas andan cerca de la hora, las tardes casi la triplican, y la peor celda de toda la tabla es el **lunes a las 8 p. m. con 260 minutos**, con el domingo en la noche pegadito en 235.
 
@@ -73,7 +76,7 @@ Las medianas hora-de-la-semana no capturan eventos puntuales. Los más grandes e
 
 - **Semana Santa** y **temporada del Paisano (1 dic al 10 ene)** suben las esperas mucho más allá de las medianas mostradas, sobre todo hacia el sur (Tecate es ruta popular del Paisano hacia Baja).
 - **Días festivos federales de EE.UU.** pueden cambiar el personal de CBP. Los horarios publicados en la [página oficial del puerto](https://bwt.cbp.gov/) mandan.
-- **Eventos de un solo autobús** importan más aquí que en garitas grandes. Un tour bus de 50 pasajeros llegando a las 11 p. m. quintuplica la espera por los siguientes 30 minutos. El [feed oficial de CBP](https://bwt.cbp.gov/) se actualiza conforme cambian las condiciones; la tarjeta en vivo en Border Pulse muestra la snapshot actual.
+
 
 La alerta de viaje del DOS para México se actualiza periódicamente y aplica a nivel estatal. Revísala antes de cualquier primer viaje.
 
@@ -83,7 +86,7 @@ La alerta de viaje del DOS para México se actualiza periódicamente y aplica a 
 
 ## Cómo calculamos estos números
 
-Border Pulse jala el tiempo de espera oficial de CBP para Tecate y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, construida con unas 310 muestras individuales. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica de arriba siempre refleja la ventana actual. Mediana es más honesta que promedio porque un solo outlier de 310 minutos junto a cinco lecturas de 90 arrastra el promedio hasta cerca de 127, mientras la mediana se queda en 90.
+Border Pulse jala el tiempo de espera oficial de CBP para Tecate y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, construida con unas 310 muestras individuales. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica integrada muestra el historial publicado por separado; revisa sus fechas de origen y cobertura. Mediana es más honesta que promedio porque un solo outlier de 310 minutos junto a cinco lecturas de 90 arrastra el promedio hasta cerca de 127, mientras la mediana se queda en 90.
 
 Tecate registró unas 310 snapshots en esta ventana contra 390 de San Ysidro, y es una garita más delgada: de 16 a 20 de sus 24 celdas por hora pasan el piso de cinco observaciones en un día dado, contra 24 completas en San Ysidro. Cada número citado arriba descansa en al menos cinco observaciones. Los patrones por día de la semana son la señal estable; la hora más ligera exacta por día todavía puede cambiar conforme se actualiza la ventana móvil.
 

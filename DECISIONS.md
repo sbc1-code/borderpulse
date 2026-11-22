@@ -1,5 +1,159 @@
 # DECISIONS
 
+## 2026-11-22 · Pages is manual recovery; the collector serves current production
+
+Vercel serves borderpulse.com. Retire automatic Pages builds from main pushes
+and collector dispatches, while preserving the collector, history, current-data
+API, newest-backup rewrite and existing production publisher. Keep the Pages
+workflow as a manual recovery tool, not a continuously current second site.
+Its retained artifact becomes stale; recovery requires a fresh validated build,
+successful deployment, readback and explicit DNS approval. If Pages resumes
+production, its data-publication trigger must be restored intentionally. This
+supersedes the automatic Pages-dispatch requirement from August 6 and the
+first-week parallel-host instructions from September. Details and evidence are
+in `docs/REFRESH-OPERATIONS.md`. Do not silence genuine collector/production
+alerts to eliminate obsolete-host notices.
+
+## 2026-11-07 · Claude may merge BorderPulse PRs Sebastian approves in chat
+
+`.claude/settings.json` allows one command, `gh api -X PUT repos/sbc1-code/borderpulse/pulls/*/merge*`, so an automated check does not block a merge Sebastian approved. It does not grant approval: Claude still merges only after Sebastian says so in the conversation. It covers this repo only, not DIGITO. Remove the file to revoke.
+
+## 2026-11-07 · Every link between lane-aware pages carries the lane
+
+Extends the 2026-10-27 rule that a chosen lane is navigation context. Links from a crossing, card or share section to Best time, and Best time's return link, pass the validated lane key through `withLane()`. The Best time series stays Standard and is labeled as such when another lane is selected; it is not filtered or relabeled by lane.
+
+## 2026-11-02 · Lane comparisons describe retained fetches
+
+Do not infer a usual lane advantage from repeated fetches or call values current just because retrieval is fresh. Display both source clocks and actual historical coverage; mark an archive stale after 24 hours without a retained fetch. Earlier snapshots were normalized before duplicate-row repair and raw responses are unavailable: retain an explicit incompleteness caveat rather than claim they were reconstructed. Counts and percentages describe those stored fetches only.
+
+## 2026-11-02 · Lane flip counts need normalized lane snapshots, not the Standard-only archive
+
+`snapshot-history.json` keeps only Standard `current_wait_time`, so Ready, SENTRI, and Ready pedestrian comparisons use the existing full-history walk of normalized `public/data/crossings.json`. These are not raw CBP bodies and cannot recover values omitted by the older duplicate-row normalizer. Each fetch counts once if both usable lane values exist; repeated fetches may repeat the same underlying source report. Hours group port-local retrieval time. Show actual retained dates and descriptive counts/percentages, never a usual/never or probability claim. The collector requests a 30-day lookback, but a retained artifact may be older: its coverage and stale state must remain visible. Failure to write the summary must not block the CBP snapshot.
+
+## 2026-11-02 · Spanish home is one indexable entry, not a translated URL tree
+
+Search engines need a Spanish document for the home page. `/es/` is that entry: its own lang, title, description, canonical and reciprocal hreflang with `/`. Shared crossing URLs stay one address with the in-page language preference. This does not open per-crossing or best-time Spanish duplicates while query evidence is still thin.
+
+## 2026-11-02 · The no-JS home snapshot is not frozen to the last site build
+
+Vercel publishes the app daily and on application changes, so HTML baked at build time can lag the live CBP fetch by hours. The no-JS home frame reads `/snapshot/`, which on Vercel is the existing cached CBP function rendered as HTML. GitHub Pages, the rollback host, keeps the snapshot file written by that data deploy. The frame is labeled as a published snapshot and keeps the retrieval time. It does not add a collector or rebuild the site on every data commit.
+
+## 2026-10-30 · The crossing map uses the existing BorderPulse design
+
+The map is an ordinary BorderPulse page. Its presentation inherits the existing shell, type, surfaces, controls and blueprint map language; a separate cinematic visual identity is no longer the target. Keep useful geography, explicit clocks, lane comparisons, honest replay and user-entered driving arithmetic. Entry points belong in the existing navigation/dashboard and relevant crossing pages. This correction awaits exact-head review before release.
+
+## 2026-10-29 · Automatic blog reports use a narrow verified grammar
+
+The owner approved a BorderPulse-only automatic blog experiment. Start with
+AI-assisted templates for measured historical Standard northbound wait changes,
+not unsupported generated news or policy advice. Publish EN/ES together only
+when reproducible evidence and existing release checks pass, disclose machine
+authorship and preserve `humanEdited: false`. Skip weak/duplicate evidence.
+No LLM runtime credential or API spend is added. The existing manual news and
+legacy AI-draft review gates remain; see `docs/DAILY-BLOG-PILOT.md` for scope,
+schedule, audit and rollback.
+
+## 2026-10-27 · A chosen lane is navigation context, not a historical data filter
+
+Use a validated URL lane key across local comparison, crossing and sharing.
+Missing lane reports never fall back to Standard or crossing-wide summary
+numbers. The existing aggregate and browser-history series remain Standard;
+label them and do not compare a SENTRI/Ready/pedestrian report with those series.
+Canonical SEO URLs remain the existing query-free crossing identity.
+
+## 2026-10-22 · Verified capability and current lane reports answer different questions
+
+The existence of a pedestrian comparison page must survive a missing current
+report at a verified pedestrian crossing. Preserve Progreso International Bridge
+230901 and Santa Teresa 240801 by exact port identity, backed by the official
+sources in the refresh runbook. Do not infer Donna's capability from the Progreso
+name, copy another crossing's report, or manufacture zero waits. Availability,
+closures and freshness still gate recommendations. Keep other ports' existing
+behavior until separately sourced; this two-port exception is not full curation.
+
+## 2026-10-22 · Deferred content must evaluate confidence when it actually opens
+
+A usable snapshot can expire while an optional chunk is downloading, while a
+page remains open without a successful response, or while the browser is offline.
+The expanded dashboard summary must evaluate the existing retrieval policy on
+its current render clock, then keep dated readings and controls available with
+neutral interpretation when confidence is lost. Keep the per-minute reevaluation
+local to this optional view and announce the confidence transition, not every
+minute of age. A fresh response restores interpretation immediately. Do not
+change feed validation, retrieval thresholds or gate budgets for this correction.
+
+## 2026-10-22 · A patched dependency candidate must also pass the performance gate
+
+The first Router 7.18.4 candidate cleared both runtime audit entries but
+exceeded the existing entry budget. A bounded follow-up loads the existing
+closed summary/chart on request and removes unused local wrapper construction,
+with explicit loading/failure handling and EN/ES keyboard/recovery regressions.
+The full local release suite now passes under the unchanged budget. Release
+still requires green remote CI and served-app verification. Do not raise the
+budget, move bytes to another eagerly required chunk to hide them, or change
+unrelated build packages merely to reduce the advisory count. First summary
+opening has a measured cold-network cost; reports remain usable throughout.
+
+## 2026-10-22 · Historical weekday medians are not live observations
+
+The anomaly feed's lowest_today scans 30-day weekday buckets, and sunday_spike
+always describes Sunday evenings. Render typed evidence with its actual day,
+nonempty sample count and source dates; never reuse generated Right now copy
+or a retained first-detection date as Last checked. Invalid evidence gets a
+neutral unavailable state. Preserve dated history without imposing a new
+live-feed expiry rule or changing detector thresholds.
+
+## 2026-10-21 · Browser persistence is optional and saved preferences are untrusted
+
+A blocked localStorage accessor or a parsed non-array favorite value must not
+break crossing decisions. Normalize saved preferences, keep temporary language
+and theme choices usable, and report favorite-write failure without emitting
+a success event. Describe the existing rounded-coordinate storage accurately;
+do not add data collection or change consent, ads or security settings.
+
+## 2026-10-21 · Route transitions must not inherit another page's schema
+
+Mark generated route schema with its canonical URL and remove it when that
+canonical changes. Keep it during same-route data/language updates and retain
+shared schema. Synchronize Twitter and Open Graph previews. This bounded
+cleanup does not promise schema regeneration for every client-side route.
+
+## 2026-10-13 · Camera coverage cannot substitute nearby roads for inspection queues
+
+Use an explicit camera-area picker and distinguish embedded crossing views,
+Caltrans U.S. road approach views, and external official source pages. Areas
+with no verified source show that state instead of defaulting to El Paso.
+Keep canonical port identity: the Pharr source is not Anzalduas. Camera source
+review establishes provenance, not current playback or lane-specific conditions.
+
+## 2026-10-13 · Camera access belongs on the homepage
+
+The owner could not find feeds from the preview homepage. Give cameras their
+own visible entry beside local-area selection, with explicit El Paso–Juárez
+coverage and an inline bridge/view picker. Reuse the existing player and
+disclosures; selecting a view remains the only action that loads the provider,
+and bridge changes/collapse remove playback.
+
+## 2026-10-13 · Local decisions lead; published reports remain useful without JS
+
+Use familiar names as display/search aliases, preserving canonical CBP identity.
+Keep the border-wide chart available behind a disclosure and make local area
+selection shareable without creating duplicate indexable URLs. Deliver visible,
+timestamped HTML inside the React root on the homepage and crossing pages;
+createRoot replaces it with the refreshing app. Do not hide different report
+content for crawlers, imply a published snapshot is live, or expand thin SEO
+routes while current query/ranking evidence is unavailable.
+
+## 2026-10-13 · Local comparisons use eligible lanes; cameras load on request
+
+The owner requested competitor-inspired crossing features. Compare named
+corridors and the same northbound lane type without estimating total trip time.
+Suppress comparative winners on stale/unknown retrievals or unavailable hours;
+camera views are orientation, not proof of lane-specific conditions. Load the
+public YouTube player only after a user selects a camera; use official-source
+and provider fallback links. Real alerts/community reports remain separate
+backend work and do not override the ban on non-delivering notification CTAs.
+
 Short log of *why* something is the way it is. Append-only. Future-you (or
 the AI you're collaborating with) reads this when "wait, why did we…"
 comes up.
@@ -24,7 +178,7 @@ additional monthly spend; do not pause the shared Vercel team and DIGITO.
 ## 2026-09-29 · Evaluate Vercel with a public-app preview
 
 Keep the existing GitHub Pages site and automatic ads while testing Vercel.
-Vercel builds use the same Vite app plus a five-minute CDN-cached CBP endpoint;
+Vercel builds use the same Vite app plus a CBP endpoint with five minutes of CDN cache and up to ten further minutes of stale revalidation;
 the client retains the last successful reading and falls back to the published
 static snapshot with its original timestamp when the endpoint fails. A compact
 30-day snapshot artifact makes historical aggregates independent of build-host
@@ -106,9 +260,11 @@ gate.
 ## 2026-08-19 · Crossing identity is pinned in code, not read from the CBP feed
 
 CBP substitutes whole rows for the same bridge: `240202` "El Paso - Paso Del
-Norte (PDN)" becomes `202401` "Paso Del Norte", and back. The rows never
-co-occur (0/200 snapshots), so this is not something dedupe can arbitrate.
-Since slugs come from names, the crossing's URL moved on its own.
+Norte (PDN)" becomes `202401` "Paso Del Norte", and back. A 200-snapshot
+sample did not catch them together, so this was treated as something dedupe
+could not arbitrate. The 2026-11-02 feed shows that sample was incomplete;
+see the later note. Identity pinning still stands. Since slugs come from
+names, the crossing's URL moved on its own.
 
 `SLUG_ALIASES` was the wrong layer: it aliases *slugs* while the instability is
 in *port numbers*, so every rename needed a new manual entry, and
@@ -329,3 +485,126 @@ is the implementation record.
 ---
 
 *Append a new section the next time a non-obvious decision lands.*
+
+## 2026-10-06 · Accept Tailwind 4 browser floor to clear publication blockers
+
+The owner approved the tested Tailwind 4 migration and production release with
+Safari 16.4+, Chrome 111+ and Firefox 128+ as the support floor. The current
+braces advisory has no supported patched release on the reviewed Tailwind 3
+dependency paths. Remove those paths through the supported integration and
+patch source-map-js to 1.2.2; keep the existing security/data/bundle gates rather
+than widening exceptions or forcing unrelated major upgrades. Older-browser
+support is not claimed.
+
+## 2026-10-11 · San Ysidro siblings cannot replace its main port
+
+This supersedes the San Ysidro/PedWest substitution and CBX-merge assumptions
+in the August 19 identity decision. The official raw feed now demonstrably
+contains main San Ysidro (250401), PedWest (250407) and Cross Border Express
+(250409) together with different hours, status and reports. Main San Ysidro
+uses only its own row, even when reports are pending. A missing main row
+fails closed instead of substituting another facility's status or lane waits.
+
+## 2026-10-11 · Keep fixed route advice separate from rolling charts
+
+Rolling CBP charts do not support permanent hour-specific route rules. The
+San Ysidro/Otay Mesa guides now send current decisions to the timestamped
+comparison, with lane eligibility and extra driving time considered; original
+publication dates remain visible alongside dated corrections.
+
+## 2026-10-12 · Keep ad-slot diagnostics bounded and distinct from network reports
+
+The existing Umami wrapper receives only `ad-slot-diagnostic` with fixed slot
+and state enums, once per state per mounted dashboard slot. Script completion,
+DOM content and foreground container geometry can help locate loading failures,
+but none proves that a creative loaded or that a billable impression occurred.
+Missing Umami or browser observers undercount; there is no queue, retry or new
+ad request. Use the publisher's reports for actual network totals and revenue.
+The change retains the existing placement, provider and disclosure.
+
+
+## 2026-10-12 · Remove the stale FAQ from the shared HTML shell
+
+The homepage FAQPage was copied to unrelated routes and described paused
+southbound estimates as active. Remove that single node rather than add runtime
+schema management. Keep visible homepage answers, route-specific FAQ generation,
+other structured data, canonical/hreflang behavior and JSON script escaping.
+This scoped correctness fix does not promise search or rich-result improvements;
+other prerender/runtime schema lifecycle issues need separate review.
+
+
+## 2026-10-12 · Retrieval time cannot establish a lane report's age
+
+A fresh CBP fetch can contain older clock-only lane reports. Show the supplied
+lane update_time separately from fetched_at, and describe snapshot freshness
+as retrieval freshness rather than Live. Do not infer a report date, midnight
+rollover or DST occurrence from the feed export date. Existing snapshot stale
+thresholds and fallback timestamps remain unchanged.
+
+
+## 2026-10-27 · Historical lowest hours are not remaining-today advice
+
+A lowest median over the complete port-local weekday may identify a past hour.
+Keep that statistic and its existing sample/operating-hours filters, but label
+it historical, say that it may have passed, and offer current reports nearby.
+Do not imply a forecast or a best remaining departure time. All-week prerender
+aggregates keep their distinct scope; no browser-local weekday labels on the
+multi-port index. This copy/UX candidate awaits exact-head release approval.
+
+## 2026-10-29 · Separate generative editorial work from guarded publication
+
+PR #154 is a deterministic reporting foundation, not completion of the requested
+AI-driven daily editorial workflow. A cloud scheduled assistant may research,
+synthesize and review routine factual content, then submit one source bundle
+through the existing authenticated GitHub file connector. A reviewed receiver
+performs mechanical evidence/release checks; it does not pretend that a schema
+proves semantic entailment. No extra authoring schedule, model credential or
+public-repo export of local account authentication is added by the receiver.
+Activation waits for the actual cloud source/tool/connector dry run.
+
+## 2026-10-30 · Add the crossing console alongside the proven dashboard
+
+The first corridor console is a lazy, reversible route for San Ysidro/Otay, not a dashboard replacement. Current data uses existing trust/availability guards; Standard-only historical observations are a separate, on-request replay. User-entered driving time supports explicit arithmetic, not routing or forecasting. Preserve existing editorial and publication paths; release follows exact-head review and QC.
+
+## 2026-11-02 · Co-occurring CBP rows keep the reported lane
+
+The raw `bwtpublicmod` feed saved 2026-11-02 contains both port numbers for Ysleta (`240104` and `240203`) and for the other pinned substitution pairs. Identity stays pinned. When both rows are present, a reported wait outranks an empty or Update Pending row. `Lanes Closed` and `N/A` stay on the lane so a closed lane is not stored as a blank one. San Ysidro still does not take PedWest or Cross Border Express waits. This supersedes the co-occurrence claim in the 2026-08-19 identity note.
+
+## 2026-11-09 · Backup data reads the collector feed through a same-origin rewrite
+
+The bundled `/data/crossings.json` only refreshes on Vercel deploys, so as a fallback it could be most of a day old. `vercel.json` rewrites `/data/latest/crossings.json` to the collector's committed file on GitHub `main`, and the client keeps whichever valid backup is newer. Same origin, so no CORS and no new client-side host; GitHub already hosts the code and the Pages rollback. If GitHub is unreachable the bundled copy still serves. "Nothing loaded" is a separate `unavailable` state, never labeled as saved data.
+
+## 2026-11-10 - Keep all three home filters and Popular border crossings (Umami, last 30 days)
+
+- Filters: region tabs logged 83 uses and the crossing-area dropdown 77, out of about 2.35k visits. Both are used at similar rates, so neither is cut. Search use is not tracked (no free text is sent), so there is no evidence either way for it. Revisit only with a no-text search-use count.
+- Popular border crossings stays: 3 of the 20 most recent `crossing-open` events came from it, and 98% of visitors arrive from search engines, so its internal links matter more than the repetition costs.
+- Context for priorities: the home page is 25% of visitors. The prescription-medication blog post is 41% and crossing pages most of the rest. Main-screen polish reaches a minority of visitors; crossing pages and the blog-to-waits path reach the majority (blog-to-waits: 7 events against 617 post visitors).
+
+## 2026-11-10 - Ads follow readers onto crossing pages and guides
+
+Adsterra reported 21 impressions and $0.03 for Nov 5 to 9 from the single home-page slot, while 75% of visitors land on guides and crossing pages that loaded no ad. The same native placement now renders below the answer on crossing pages and guides; long guides can opt into one mid-article slot instead of the end slot. Never above the wait, never in embeds, one container per page. The dormant Google switch in `DashboardAd` still covers only the dashboard slot; these pages use `AdsterraBanner` directly.
+
+## 2026-11-10 - Do not commit build-regenerated files from a local build
+
+`npm run build` runs prebuild scripts that rewrite `public/` outputs (aggregates, rankings, stats, sitemap lastmod, RSS, OG cards, blog index). Every deploy regenerates them, and the data bot owns the data files, so commits from a local build only add noise (PRs #184-#187 included them by mistake; production was unaffected). Run `git checkout -- public/` before committing unless the change is meant to edit a `public/` file.
+
+## 2026-11-10 - Light-mode slate-500 is one notch darker for AA contrast
+
+Stock `slate-500` (#62748e) measured 4.47:1 on the light page background, just under 4.5:1, on every page. Light mode overrides `--color-slate-500` to #5e7088 (4.75:1) instead of editing hundreds of class names; `.dark` restores the stock value so dark mode does not lose contrast.
+
+## 2026-11-10 - One commercial spot per page
+
+A page carries a sponsor card or a network ad, never both, and always below the answer. A sponsor replaces the Adsterra unit on its pages. Sponsors are configured in `src/lib/sponsors.js`, one per port or guide, always labeled Sponsored/Patrocinado with the "has not evaluated" line. Sponsor copy states facts only (name, city, links); no medical or price claims in Border Pulse's voice.
+
+## 2026-11-10 - Sponsor traffic is measured in three steps, and only those are claimed
+
+Sponsor reporting counts what the existing Umami property records: clicks on the sponsor card (`sponsor-click`), visits to the sponsor's site that arrive with `utm_source=borderpulse`, and taps on that site's contact buttons by source. The WhatsApp button opens a prefilled, editable message naming Border Pulse so the business can see the source in its own inbox. Booked appointments and revenue are outside what is measured, so reports do not state them. The sponsor's site reports into the same Umami property (the plan allows one site); filter by hostname when reading Border Pulse numbers.
+
+## 2026-11-11 - Self-serve sponsor listings before 2 to 3 paying sponsors
+
+The roadmap said to wait for 2 to 3 paying sponsors before a self-serve page. Sebastian approved building it now so businesses can buy without a call. A listing is one business per category per city, $99/month through a Stripe Payment Link. Every paid listing is reviewed before it is added to `src/lib/sponsors.js`, and refunded if not approved. Rotation is by day, not per view, so prerendered pages and the client agree. Business offers are shown attributed to the business and with an end date.
+
+## 2026-11-11 - City pages carry several labeled sponsors; one checkout link per spot
+
+City pages are directories, so they list one labeled sponsor per category instead of following the one-spot-per-page rule, and they carry no network ad. Each open spot has its own Stripe Payment Link with a one-purchase limit, so a spot cannot be sold twice without a server or webhook. After a sale, remove that slot from `SLOT_CHECKOUT` (it then shows as reserved), review the listing, then add the sponsor or refund. If a sponsor cancels, create a fresh link for the slot. Rare edge: two checkouts already open at the same moment can both complete; the second is refunded under the review promise.
+- 2026-11-14: GFM enabled in the MDX pipeline (`remark-gfm`, dev dependency, owner-approved) so markdown tables in guides render as tables. Before this, `| a | b |` rendered as literal text on six live guides.

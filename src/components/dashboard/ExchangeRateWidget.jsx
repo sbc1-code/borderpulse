@@ -2,23 +2,20 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, DollarSign, Banknote } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function ExchangeRateWidget({ exchangeRate, language, theme, compact = false }) {
   const isPositive = exchangeRate?.change_percentage > 0;
 
   if (compact) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
+      <div
+        className="bp-result-enter"
       >
         <Card className={`${
           theme === 'dark'
             ? 'bg-gray-800/60 border-gray-700'
             : 'bg-white border-slate-200'
-        } transition-all hover:shadow-md`}>
+        }`}>
           <CardContent className="p-3">
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1">
@@ -63,21 +60,19 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.2 }}
+    <div
+      className="bp-result-enter"
     >
       <Card className={`${
         theme === 'dark'
-          ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700'
-          : 'bg-gradient-to-br from-white/90 to-blue-50/50 border-slate-200'
-      } backdrop-blur-sm transition-all duration-300 hover:shadow-xl`}>
+          ? 'bg-linear-to-br from-gray-800/50 to-gray-900/50 border-gray-700'
+          : 'bg-linear-to-br from-white/90 to-blue-50/50 border-slate-200'
+      } backdrop-blur-xs`}>
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-lg">
             <div className="flex items-center gap-1">
@@ -150,6 +145,6 @@ export default function ExchangeRateWidget({ exchangeRate, language, theme, comp
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }

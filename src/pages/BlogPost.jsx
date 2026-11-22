@@ -8,6 +8,9 @@ import { mdxComponents } from '@/components/blog/MdxComponents';
 import { LangContext } from '@/lib/LangContext';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { track } from '@/lib/analytics';
+import { blogHreflangs } from '@/lib/hreflang';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import { sponsorForGuide } from '@/lib/sponsors';
 
 const STRINGS = {
   en: {
@@ -74,7 +77,10 @@ export default function BlogPost() {
     const url = `https://borderpulse.com/blog/${slug}/`;
     const imagePath = fm.ogImage || fm.hero;
     const ogImg = imagePath ? `https://borderpulse.com${imagePath}` : undefined;
-    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url, lang: fm.lang || 'en' });
+    const publishedPosts = [...listPosts({ lang: 'en' }), ...listPosts({ lang: 'es' })]
+      .map((p) => ({ ...p.frontmatter, slug: p.slug }));
+    const hreflangs = blogHreflangs({ ...fm, slug }, publishedPosts);
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, ogImage: ogImg, canonical: url, lang: fm.lang || 'en', hreflangs });
     return () => resetPageMeta();
   }, [post, slug]);
 
@@ -108,12 +114,12 @@ export default function BlogPost() {
   return (
     <article className="p-3 sm:p-4 lg:p-6 max-w-[760px] mx-auto" lang={lang}>
       <div className="mb-4">
-        <Link to="/blog/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/blog/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{t.allPosts}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <header className="mb-6">
@@ -164,6 +170,7 @@ export default function BlogPost() {
         </div>
         {copyStatus && <p className="mt-2 text-xs text-slate-600 dark:text-slate-300" role="status">{copyStatus}</p>}
       </section>
+      {!fm.inArticleAd && !sponsorForGuide(slug) && <AdsterraBanner label={lang === 'es' ? 'Publicidad' : 'Advertisement'} language={lang} />}
       <footer className="mt-10 border-t border-slate-200 dark:border-gray-800 pt-4 text-xs text-slate-500">
         {t.footer}{' '}
         <a

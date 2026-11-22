@@ -6,6 +6,10 @@ import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { availableLaneWait } from '@/lib/crossingAvailability';
+import { fetchLabel, reportTimeLabel } from '@/lib/trustState';
+import { walkDriveFreshness } from '@/lib/walkDriveFreshness';
+import { getPortStatus } from '@/components/utils/crossingMeta';
 
 // Time it typically takes to park, walk the bridge, and reach a rideshare /
 // transit / family pickup on the U.S. side. This isn't a guess — it's the
@@ -20,14 +24,7 @@ const FOOT_OVERHEAD_MIN = 20;
 // dominates the wait-time savings.
 const RECOMMEND_GAP_MIN = 15;
 
-function laneWaitFromCrossing(crossing, key) {
-  const lane = crossing?.lanes?.[key];
-  if (!lane) return null;
-  if (typeof lane.delay_minutes !== 'number') return null;
-  return lane.delay_minutes;
-}
-
-function PanelCard({ icon: Icon, title, wait, sub, lang, recommendedLabel }) {
+function PanelCard({ icon: Icon, title, wait, sub, reportTime, lang, recommendedLabel }) {
   return (
     <Card className={`h-full ${recommendedLabel ? 'border-emerald-400 dark:border-emerald-700 ring-1 ring-emerald-400 dark:ring-emerald-700' : ''}`}>
       <CardContent className="p-4 sm:p-5">
@@ -46,6 +43,7 @@ function PanelCard({ icon: Icon, title, wait, sub, lang, recommendedLabel }) {
           {wait == null ? '—' : `${wait} min`}
         </div>
         <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">{sub}</p>
+        <p className="mt-1 break-words text-xs text-slate-500 dark:text-slate-400">{reportTimeLabel(reportTime, lang)}</p>
       </CardContent>
     </Card>
   );
@@ -54,11 +52,22 @@ function PanelCard({ icon: Icon, title, wait, sub, lang, recommendedLabel }) {
 export default function WalkOrDrive() {
   const { slug } = useParams();
   const language = usePersistentLanguage();
-  const [state, setState] = useState({ crossings: [], isLoading: true });
+  const [state, setState] = useState({ crossings: [], fetchedAt: null, isLoading: true });
+
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const freshness = walkDriveFreshness(state.fetchedAt, now);
+  const usableSnapshot = freshness.usable;
+  const retrievalLabel = fetchLabel(freshness.state, freshness.age, language);
 
   useEffect(() => {
     return subscribeToBorderData(data => {
-      setState({ crossings: data.crossings || [], isLoading: false });
+      setState({ crossings: data.crossings || [], fetchedAt: data.timestamp, isLoading: false });
+      setNow(Date.now());
     });
   }, []);
 
@@ -70,11 +79,11 @@ export default function WalkOrDrive() {
     return { crossing: c, canonicalSlug: c ? portToSlug[c.port_number] : null };
   }, [state.crossings, slug]);
 
-  const veh = laneWaitFromCrossing(crossing, 'passenger_standard');
-  const vehReady = laneWaitFromCrossing(crossing, 'passenger_ready');
-  const vehSentri = laneWaitFromCrossing(crossing, 'passenger_sentri');
-  const ped = laneWaitFromCrossing(crossing, 'pedestrian_standard');
-  const pedReady = laneWaitFromCrossing(crossing, 'pedestrian_ready');
+  const veh = availableLaneWait(crossing, 'passenger_standard');
+  const vehReady = availableLaneWait(crossing, 'passenger_ready');
+  const vehSentri = availableLaneWait(crossing, 'passenger_sentri');
+  const ped = availableLaneWait(crossing, 'pedestrian_standard');
+  const pedReady = availableLaneWait(crossing, 'pedestrian_ready');
 
   // Best foot wait considering Ready Lane availability for pedestrians.
   const bestFootWait = useMemo(() => {
@@ -89,7 +98,7 @@ export default function WalkOrDrive() {
   // against best foot option PLUS the foot overhead. Walking only wins if the
   // adjusted foot total still beats the vehicle by more than the threshold.
   const recommendation = useMemo(() => {
-    if (veh == null || bestFootWait == null) return null;
+    if (!usableSnapshot || veh == null || bestFootWait == null) return null;
     const footTotal = bestFootWait.minutes + FOOT_OVERHEAD_MIN;
     const gap = veh - footTotal;
     if (gap >= RECOMMEND_GAP_MIN) {
@@ -109,16 +118,16 @@ export default function WalkOrDrive() {
       };
     }
     return { verdict: 'wash', gap, footTotal, via: bestFootWait.via };
-  }, [veh, bestFootWait]);
+  }, [veh, bestFootWait, usableSnapshot]);
 
   useEffect(() => {
     if (!crossing || !canonicalSlug) return;
     const title = language === 'en'
-      ? `Walk or drive across ${crossing.name}? Live decision based on CBP data | Border Pulse`
-      : `¿Cruzar a pie o en auto en ${crossing.name}? Decisión en vivo con datos de CBP | Border Pulse`;
+      ? `Walk or drive across ${crossing.name}? CBP wait comparison | Border Pulse`
+      : `¿Cruzar a pie o en auto en ${crossing.name}? Comparación de esperas de CBP | Border Pulse`;
     const desc = language === 'en'
-      ? `Compare live pedestrian and vehicle wait times at ${crossing.name} from CBP. See whether walking saves enough minutes to be worth parking.`
-      : `Compara tiempos en vivo a pie y en vehículo en ${crossing.name} con datos de CBP. Ve si caminar te ahorra suficiente tiempo para que valga estacionar.`;
+      ? `Compare reported pedestrian and vehicle wait times at ${crossing.name} from CBP. See whether walking saves enough minutes to be worth parking.`
+      : `Compara tiempos reportados a pie y en vehículo en ${crossing.name} con datos de CBP. Ve si caminar te ahorra suficiente tiempo para que valga estacionar.`;
     const url = `https://borderpulse.com/walk-or-drive/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -129,10 +138,9 @@ export default function WalkOrDrive() {
   }
   if (!crossing) return <Navigate to="/" replace />;
 
-  // No pedestrian data at this crossing — gracefully redirect users to the
-  // crossing detail page. Don't pretend we have an answer when CBP doesn't
-  // publish ped data here.
-  if (ped == null && pedReady == null) {
+  // A closure takes precedence over old lane reports retained by CBP.
+  const closed = getPortStatus(crossing) === 'closed';
+  if (closed || (ped == null && pedReady == null)) {
     return (
       <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
         <div className="mb-3">
@@ -142,13 +150,25 @@ export default function WalkOrDrive() {
           </Link>
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
-          {language === 'en' ? `${crossing.name}: pedestrian data not published` : `${crossing.name}: sin datos peatonales publicados`}
+          {closed
+            ? (language === 'en' ? `${crossing.name}: ${usableSnapshot ? 'closed now' : 'reported closed'}` : `${crossing.name}: ${usableSnapshot ? 'cerrado ahora' : 'reportado cerrado'}`)
+            : (language === 'en' ? `${crossing.name}: no current pedestrian wait reported` : `${crossing.name}: sin espera peatonal actual reportada`)}
         </h1>
         <p className="text-sm text-slate-700 dark:text-slate-300 mb-4">
-          {language === 'en'
-            ? `CBP doesn't publish a pedestrian wait time for ${crossing.name}, so the walk-vs-drive question can't be answered from data. Some ports don't have pedestrian lanes; others have them but don't report. Check the live page for what is published.`
-            : `CBP no publica tiempo de espera peatonal para ${crossing.name}, así que la pregunta caminar-vs-manejar no se puede responder con datos. Algunos puertos no tienen carriles peatonales; otros sí pero no reportan. Revisa la página en vivo para ver lo que sí se publica.`}
+          {closed
+            ? (language === 'en'
+              ? 'CBP marks this crossing closed. Previous lane reports are not current travel options. Check the crossing status before leaving.'
+              : 'CBP marca este cruce como cerrado. Los reportes anteriores de carriles no son opciones actuales para cruzar. Verifica el estado del cruce antes de salir.')
+            : (language === 'en'
+              ? `CBP has no current pedestrian wait report for ${crossing.name}, so a walk-vs-drive recommendation is unavailable. A missing report does not mean zero wait or prove that there is no pedestrian lane.`
+              : `CBP no tiene un reporte actual de espera peatonal para ${crossing.name}, así que no hay recomendación entre caminar o manejar. La falta de un reporte no significa espera cero ni demuestra que no haya carril peatonal.`)}
         </p>
+        <p className="mb-4 text-xs text-slate-500 dark:text-slate-400" data-testid="walk-drive-fetch-time">{retrievalLabel}</p>
+        {closed && crossing.hours && (
+          <p className="mb-4 text-sm text-slate-700 dark:text-slate-300">
+            {language === 'en' ? 'Posted CBP hours: ' : 'Horario publicado por CBP: '}{crossing.hours}
+          </p>
+        )}
         <Link to={`/crossing/${canonicalSlug}/`} className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400 hover:underline">
           {language === 'en' ? `Open ${crossing.name} live page` : `Abrir página en vivo de ${crossing.name}`} <ArrowRight className="w-4 h-4" />
         </Link>
@@ -180,10 +200,18 @@ export default function WalkOrDrive() {
         <p className="text-xs sm:text-sm text-slate-500 mt-1 inline-flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5" />
           {language === 'en'
-            ? `Live wait times from CBP, plus ${FOOT_OVERHEAD_MIN} min added to the foot total to cover parking and walking the bridge. Northbound only.`
-            : `Tiempos en vivo de CBP, más ${FOOT_OVERHEAD_MIN} min al total a pie para cubrir estacionar y cruzar el puente. Solo hacia EE.UU.`}
+            ? `Reported wait times from CBP, plus ${FOOT_OVERHEAD_MIN} min added to the foot total to cover parking and walking the bridge. Northbound only.`
+            : `Tiempos reportados por CBP, más ${FOOT_OVERHEAD_MIN} min al total a pie para cubrir estacionar y cruzar el puente. Solo hacia EE.UU.`}
         </p>
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400" data-testid="walk-drive-fetch-time">{retrievalLabel}</p>
+        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{language === 'en'
+          ? 'Lane report times may differ. A recent fetch does not establish how recent each CBP report is.'
+          : 'Las horas de reporte pueden variar por carril. Una consulta reciente no confirma la antigüedad de cada reporte de CBP.'}</p>
       </header>
+
+      {!usableSnapshot && <p className="mb-4 rounded-lg border border-slate-300 p-4 text-sm dark:border-gray-700" data-testid="walk-drive-unavailable">{language === 'en'
+        ? 'Walk-or-drive recommendation unavailable: the snapshot is stale or its fetch time cannot be verified. These are retained reports; check CBP before leaving.'
+        : 'Recomendación entre caminar o manejar no disponible: la consulta está desactualizada o no se puede verificar su hora. Estos son reportes guardados; consulta CBP antes de salir.'}</p>}
 
       {recommendation && (
         <div className={`mb-4 rounded-lg border px-4 py-3 ${
@@ -198,7 +226,7 @@ export default function WalkOrDrive() {
               : recommendation.verdict === 'drive' ? 'text-sky-800 dark:text-sky-300'
               : 'text-slate-600 dark:text-slate-400'
           }`}>
-            {language === 'en' ? 'Right now' : 'Ahora mismo'}
+            {language === 'en' ? 'Comparison from reported waits, not a personal recommendation' : 'Comparación con esperas reportadas, no una recomendación personal'}
           </div>
           <p className="text-sm text-slate-900 dark:text-white">
             {(() => {
@@ -206,14 +234,16 @@ export default function WalkOrDrive() {
               if (r.verdict === 'walk') {
                 const laneEn = r.via === 'ready' ? 'Ready Lane pedestrian' : 'standard pedestrian';
                 const laneEs = r.via === 'ready' ? 'peatonal Ready Lane' : 'peatonal estándar';
+                const readyEn = r.via === 'ready' ? ' Ready Lane requires an RFID-enabled document.' : '';
+                const readyEs = r.via === 'ready' ? ' Ready Lane requiere un documento con RFID.' : '';
                 return language === 'en'
-                  ? `Walk. The ${laneEn} wait plus ${FOOT_OVERHEAD_MIN} min for parking and the bridge totals ${r.footTotal} min, vs ${veh} min driving. You save about ${r.savings} min.`
-                  : `Camina. La espera ${laneEs} más ${FOOT_OVERHEAD_MIN} min de estacionar y cruzar el puente suma ${r.footTotal} min, contra ${veh} min manejando. Ahorras unos ${r.savings} min.`;
+                  ? `On these reports, walking is shorter. The ${laneEn} wait plus ${FOOT_OVERHEAD_MIN} min assumed for parking and the bridge totals ${r.footTotal} min, vs ${veh} min in the standard car lane. That is about ${r.savings} min less, if you can use that lane and your trip works on foot.${readyEn}`
+                  : `Con estos reportes, a pie es más corto. La espera ${laneEs} más ${FOOT_OVERHEAD_MIN} min supuestos para estacionar y cruzar el puente suma ${r.footTotal} min, contra ${veh} min en el carril estándar de auto. Son unos ${r.savings} min menos, si puedes usar ese carril y tu viaje funciona a pie.${readyEs}`;
               }
               if (r.verdict === 'drive') {
                 return language === 'en'
-                  ? `Drive. Vehicle wait is ${veh} min vs ${r.footTotal} min on foot (including ${FOOT_OVERHEAD_MIN} min parking + bridge). Driving saves about ${r.savings} min.`
-                  : `Maneja. La espera en auto es de ${veh} min vs ${r.footTotal} min a pie (incluyendo ${FOOT_OVERHEAD_MIN} min de estacionar + puente). Manejar ahorra unos ${r.savings} min.`;
+                  ? `On these reports, driving is shorter. ${veh} min in the standard car lane vs ${r.footTotal} min on foot, including ${FOOT_OVERHEAD_MIN} min assumed for parking and the bridge. That is about ${r.savings} min less.`
+                  : `Con estos reportes, en auto es más corto. ${veh} min en el carril estándar de auto contra ${r.footTotal} min a pie, incluyendo ${FOOT_OVERHEAD_MIN} min supuestos para estacionar y cruzar el puente. Son unos ${r.savings} min menos.`;
               }
               return language === 'en'
                 ? `It's a wash. Vehicle wait is ${veh} min, foot total ${r.footTotal} min (within ±${RECOMMEND_GAP_MIN}). Pick whichever is more convenient for your destination on the U.S. side.`
@@ -228,8 +258,9 @@ export default function WalkOrDrive() {
           icon={Car}
           title={language === 'en' ? 'Drive (standard)' : 'En auto (estándar)'}
           wait={veh}
+          reportTime={crossing.lanes?.passenger_standard?.update_time}
           sub={vehReady != null
-            ? (language === 'en' ? `Ready Lane: ${vehReady} min · SENTRI: ${vehSentri ?? '—'} min` : `Ready Lane: ${vehReady} min · SENTRI: ${vehSentri ?? '—'} min`)
+            ? `Ready Lane: ${vehReady} min (${reportTimeLabel(crossing.lanes?.passenger_ready?.update_time, language)}) · SENTRI: ${vehSentri ?? '—'} min (${reportTimeLabel(crossing.lanes?.passenger_sentri?.update_time, language)})`
             : (language === 'en' ? 'CBP standard passenger lane' : 'Carril estándar de pasajero CBP')}
           lang={language}
           recommendedLabel={recommendation?.verdict === 'drive' ? (language === 'en' ? 'Recommended' : 'Recomendado') : null}
@@ -238,6 +269,7 @@ export default function WalkOrDrive() {
           icon={User}
           title={language === 'en' ? 'Walk (standard)' : 'A pie (estándar)'}
           wait={ped}
+          reportTime={crossing.lanes?.pedestrian_standard?.update_time}
           sub={language === 'en'
             ? `Add ~${FOOT_OVERHEAD_MIN} min for parking + bridge`
             : `Agrega ~${FOOT_OVERHEAD_MIN} min por estacionar + puente`}
@@ -248,6 +280,7 @@ export default function WalkOrDrive() {
           icon={User}
           title={language === 'en' ? 'Walk (Ready Lane)' : 'A pie (Ready Lane)'}
           wait={pedReady}
+          reportTime={crossing.lanes?.pedestrian_ready?.update_time}
           sub={language === 'en'
             ? `Requires RFID document. Add ~${FOOT_OVERHEAD_MIN} min for parking + bridge`
             : `Requiere documento con RFID. Agrega ~${FOOT_OVERHEAD_MIN} min por estacionar + puente`}

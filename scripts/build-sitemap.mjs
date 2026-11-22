@@ -3,6 +3,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
+import { laneFlipEntries } from '../src/lib/laneFlips.js';
+
+import { homeHreflangs } from '../src/lib/hreflang.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -58,15 +61,33 @@ async function main() {
     { lang: 'es', href: `${BASE}/privacidad/` },
     { lang: 'x-default', href: `${BASE}/privacy/` },
   ];
+  const featureAlternates = [
+    { lang: 'en', href: `${BASE}/feature-your-business/` },
+    { lang: 'es', href: `${BASE}/anunciate/` },
+    { lang: 'x-default', href: `${BASE}/feature-your-business/` },
+  ];
   const urls = [
-    { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today },
+    { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today, alternates: homeHreflangs() },
+    { loc: `${BASE}/es/`, changefreq: 'hourly', priority: '0.9', lastmod: today, alternates: homeHreflangs() },
     { loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/best-time/`, changefreq: 'daily', priority: '0.7', lastmod: today },
     { loc: `${BASE}/privacy/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },
     { loc: `${BASE}/privacidad/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },
     { loc: `${BASE}/methodology/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
     { loc: `${BASE}/metodologia/`, changefreq: 'monthly', priority: '0.5', lastmod: today, alternates: methodologyAlternates },
+    { loc: `${BASE}/feature-your-business/`, changefreq: 'monthly', priority: '0.4', lastmod: today, alternates: featureAlternates },
+    { loc: `${BASE}/anunciate/`, changefreq: 'monthly', priority: '0.4', lastmod: today, alternates: featureAlternates },
   ];
+  const { CITIES } = await import('../src/lib/sponsors.js');
+  for (const city of CITIES) {
+    const alternates = [
+      { lang: 'en', href: `${BASE}/city/${city.id}/` },
+      { lang: 'es', href: `${BASE}/ciudad/${city.id}/` },
+      { lang: 'x-default', href: `${BASE}/city/${city.id}/` },
+    ];
+    urls.push({ loc: `${BASE}/city/${city.id}/`, changefreq: 'weekly', priority: '0.6', lastmod: today, alternates });
+    urls.push({ loc: `${BASE}/ciudad/${city.id}/`, changefreq: 'weekly', priority: '0.6', lastmod: today, alternates });
+  }
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
@@ -93,6 +114,26 @@ async function main() {
       priority: '0.6',
       lastmod: today,
     });
+  }
+
+  let laneFlipCount = 0;
+  urls.push({ loc: `${BASE}/lane-flip/`, changefreq: 'hourly', priority: '0.7', lastmod: today });
+  const laneFlipPath = path.resolve(root, 'public/data/lane-flips.json');
+  if (fs.existsSync(laneFlipPath)) {
+    try {
+      const artifact = JSON.parse(fs.readFileSync(laneFlipPath, 'utf8'));
+      for (const entry of laneFlipEntries(artifact)) {
+        urls.push({
+          loc: `${BASE}/lane-flip/${entry.slug}/`,
+          changefreq: 'hourly',
+          priority: '0.6',
+          lastmod: today,
+        });
+        laneFlipCount += 1;
+      }
+    } catch {
+      // A damaged summary still leaves the index URL in place.
+    }
   }
 
   // Keep the sitemap in lockstep with the crossing-detail links and prerender.
@@ -164,7 +205,7 @@ ${body}
   if (fs.existsSync(path.dirname(outDist))) fs.writeFileSync(outDist, xml);
 
   const pairCount = Object.values(twins).filter((t) => t.en && t.es).length;
-  console.log(`[sitemap] wrote ${urls.length} URLs (${posts.length} blog, ${pairCount} bilingual pairs)`);
+  console.log(`[sitemap] wrote ${urls.length} URLs (${posts.length} blog, ${pairCount} bilingual pairs, ${laneFlipCount} lane flips)`);
 }
 
 main().catch((e) => {

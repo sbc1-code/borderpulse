@@ -1,5 +1,791 @@
 # CHANGELOG
 
+## 2026-11-22 - Retire automatic Pages publishing
+
+- Removed the main-push trigger and the collector's Pages dispatch. The
+  existing `deploy.yml` remains available for intentional manual recovery.
+- Removed the collector's now-unused `actions: write` permission. Collection,
+  full-history generation, the shared writer queue, production publishing and
+  failure/recovery issues retain their existing behavior.
+- Updated current operations and recovery instructions, and marked the May
+  codebase inventory as historical. Pages becomes stale between recovery
+  builds; a fresh verified build and specific DNS approval are required for
+  rollback. Re-enabling its data publication is part of any return to Pages.
+
+## 2026-11-14 - Markdown tables render in guides
+
+- Added `remark-gfm` (dev dependency) to the MDX plugin in `vite.config.js`. Tables in guides were rendering as literal `| a | b |` text. Fixed on six live pages: the Juárez dentist and pharmacy guides and Paso del Norte vs Bridge of the Americas, EN and ES.
+- Checks: headless Chrome compared the rendered text of all 54 guides before and after. Only those six changed, now showing real tables with no horizontal overflow at 390px. Full `npm test` passes after a prerendered build. Lockfile also moves `unist-util-visit-parents` 6.0.2 to 6.1.0 (dev-only, same major).
+
+## 2026-11-14 - Return-trip guide: Juárez to El Paso (EN/ES)
+
+- New paired guides `/blog/coming-back-from-juarez-to-el-paso/` and `/blog/regresar-de-juarez-a-el-paso/` (ROADMAP Phase 4): documents CBP accepts by land, the $800 / $200 personal exemptions (CBP: the 48-hour minimum does not apply to Mexico), CBP vs TABC alcohol and cigarette rules and the TABC booths at PDN, BOTA and Ysleta, agricultural items that need a permit or are prohibited, FinCEN 105 over $10,000, which bridge to use, and the PDN best-time chart. Every rule links to CBP, USDA or TABC.
+- The first sponsor's card now also shows on both guides (`guides` list in `src/lib/sponsors.js`).
+- Written as lists, not markdown tables: the MDX pipeline has no GFM support, so tables render as raw pipe text (see DECISIONS.md 2026-11-14).
+- Checks: full `npm test` passes after a prerendered build (516 browser navigations). Entry JS 62.22 KB gzip (budget 62.25). Headless Chrome 390px: both pages render the sponsor card and chart, no page errors, no raw table text.
+
+## 2026-11-14 - Juárez pharmacy guide (EN/ES)
+
+- New paired guides `/blog/pharmacy-in-juarez-from-el-paso/` and `/blog/farmacia-en-juarez-desde-el-paso/`: Mexico's counter rules (over-the-counter, prescription, antibiotics since Aug 25, 2010, controlled medicines and the barcoded special prescription, tramadol moved to controlled in July 2026), pharmacies with an adjacent doctor's office, which bridge to use from El Paso and New Mexico, and the PDN best-time chart. Links the existing U.S.-side prescription guide and the Juárez dentist guide and city page. No sponsor; the standard end-of-guide ad slot applies.
+- Why: the prescription guide is the top traffic page, but its readers are national, while Juárez sponsor inventory needs El Paso and New Mexico readers. This targets pharmacy intent in Juárez specifically.
+- Checks: full `npm test` passes after a prerendered build (524 browser navigations). Entry JS 62.16 KB gzip (budget 62.25), CSS 19.93 KB (budget 20).
+
+## 2026-11-14 - Owner analytics opt-out link
+
+- Opening any page with `?notrack` sets Umami's documented `umami.disabled` flag in that browser, so the owner's own visits and test clicks stop counting; `?track` removes it. Per browser and per device. Added because every sponsor click logged since Nov 10 came from the owner's own test session.
+- Checks: full `npm test` passes after a prerendered build. Entry JS 62.22 KB gzip (budget 62.25), CSS 19.93 KB (budget 20).
+
+## 2026-11-11 - City pages (Phase 3); one checkout link per spot
+
+- New bilingual city pages `/city/:id/` and `/ciudad/:id/` for Ciudad Juárez, Tijuana, Los Algodones, Nogales and Nuevo Progreso: links to that city's crossing waits, then one section per category with its sponsor card or an open-spot link to checkout. Prerendered, hreflang-paired, in the sitemap. No network ad on these pages. Crossing pages in those cities link to their city page under the sponsor or ad spot; the feature page links each city name.
+- Spot protection: each open spot now has its own Stripe Payment Link limited to one completed purchase, so Stripe retires the link after the sale and a second buyer sees "this spot was just taken". Links live in `SLOT_CHECKOUT` in `src/lib/sponsors.js`. A spot with no link shows as taken on the feature page and as "reserved, in review" on its city page. The earlier shared dropdown link is retired.
+- Checks: full `npm test` passes after a prerendered build. Entry JS 62.16 KB gzip (budget 62.25), CSS 19.93 KB (budget 20). Headless Chrome 390px: Juárez city page shows Juan's card and 5 open spots; Tijuana (ES) shows 6; PDN shows the city link.
+
+## 2026-11-11 - Sponsor card stands out; self-serve "Feature your business" page
+
+- Sponsor card redesign: green-tinted card with an accent edge, larger business name, the services the business lists (as chips), an optional business offer with an end date (hidden after it), and WhatsApp as the main filled button. Still labeled Sponsored/Patrocinado with the "has not evaluated" line, still below the answer and never alongside an ad.
+- First sponsor now shows as "Dr. J Constandse" (the name on his site and signage) with implants, veneers and smile design, crowns and full oral rehabilitation, per his site, and his 25% offer through Nov 30, attributed to the clinic.
+- New bilingual page `/feature-your-business/` and `/anunciate/` (hreflang-paired, in the sitemap, linked from the footer and each sponsor card). Five cities (Ciudad Juárez, Tijuana, Los Algodones, Nogales, Nuevo Progreso) by six categories (dentist, pharmacy, medical clinic, food, auto, salon and beauty). Open spots link to a $99/month Stripe Payment Link with `client_reference_id` set to the slot; taken spots show as taken. Clicks log `sponsor-checkout` with the slot id only.
+- Sponsors are now set by city and category in `src/lib/sponsors.js`. A city's crossing pages show one sponsor; with several in a city, they rotate by UTC calendar day.
+- Checks: full `npm test` passes after a prerendered build. Entry JS 62.05 KB gzip (budget 62.25), CSS 19.92 KB (budget 20). Headless Chrome 390px: card on PDN and the Juárez dentist guide; feature page renders EN and ES.
+
+## 2026-11-10 - Sponsor WhatsApp message names Border Pulse
+
+- The sponsor card's WhatsApp button now opens a prefilled message saying the patient found the clinic on Border Pulse (EN/ES). The visitor can edit it before sending. This lets the business see the source in its own inbox, which analytics cannot show.
+- Checks: full `npm test` passes after a prerendered build.
+
+## 2026-11-10 - Sponsor link goes to the live clinic site; bolder CBP report time
+
+- The Constandse sponsor card now links to the clinic's live site (constandse-dental.vercel.app) instead of its preview deployment.
+- Crossing cards show the "CBP reported" time in semibold so the report's age is easier to see. Wording unchanged.
+- Checks: full `npm test` passes after a prerendered build.
+
+## 2026-11-10 - One commercial spot per page; Juárez dentist crossing guide
+
+- Rule: a page shows a sponsor card or a network ad, never both. On the five El Paso/Juárez crossing pages and on sponsored guides, the sponsor replaces the Adsterra unit.
+- New guide (EN and ES): going to a dentist in Ciudad Juárez from El Paso or New Mexico. Covers which bridge to check, documents, how to look up a dentist's cédula, and timing the return. Agency rules link to CBP, SEP and CONAMED. No prices or treatment advice. The sponsor card sits in the guide under the vetting checklist via `<FeaturedSponsor />`.
+- Medication guides place the sponsor with `<FeaturedSponsor />` after the current-wait links.
+- Sponsor links have distinct accessible names (for example "WhatsApp: <business>").
+- Checks: full `npm test` passes after a prerendered build; entry bundle 61.92 KB gzip. Headless Chrome 390px: sponsored pages show 1 card and 0 ads; San Ysidro and the SENTRI guide show 0 cards and 1 ad.
+
+## 2026-11-10 - Sponsored listings, first sponsor
+
+- New `SponsoredCard` and `src/lib/sponsors.js`: one labeled sponsor per placement, set by port number or guide slug, with optional `since`/`until` dates. Each card is marked Sponsored/Patrocinado and says Border Pulse has not evaluated the business's care.
+- First sponsor: Constandse Esthetic & Dent (Ciudad Juárez dentist), on the five El Paso/Juárez crossing pages (above the ad) and on both medication guides (under the current-wait links). Links carry UTM tags; clicks log `sponsor-click` with sponsor, placement and action (site or WhatsApp), no free text.
+- Privacy notice (EN/ES) now says clicks on sponsored listings are counted with Umami and that sponsored listings are labeled placements from local businesses.
+- Checks: full `npm test` passes after a prerendered build; entry bundle 62.02 KB gzip (budget 62.25). Headless Chrome 390px: card on PDN and both guides, none on San Ysidro, click logs the event, no overflow.
+- Resolved the same day: the link now points at the clinic's live site (see the entry above).
+
+## 2026-11-10 - Crossing titles and descriptions match how people search
+
+- Crossing page titles now follow the query shape from Search Console: "<crossing> border wait times today" (EN) and "Tiempos de espera en <crossing> hoy" (ES). Bridges and ports of entry use the name people type: "Anzalduas International Bridge (Hidalgo/Pharr)", "Santa Teresa Port of Entry", "Andrade (Los Algodones)", "Eagle Pass International Bridge II" and others.
+- Descriptions are built per crossing instead of one shared template: the search name, the hour with the shortest typical wait over the last 30 days, and cameras where they exist. One function feeds the prerendered page and the client.
+- Why: Google Search Console, last 28 days: 51.1K impressions, 1.2% click rate, average position 9.6. "santa teresa port of entry" had 342 impressions and no clicks under the old "Santa Teresa · San Jerónimo" title.
+- New `src/lib/crossingSeo.js`, loaded only by crossing pages and prerender, so the entry bundle stays at 61.89 KB gzip (budget 62.25).
+- Checks: full `npm test` passes after a prerendered build. Measure: click rate per crossing page in Search Console 2 to 4 weeks after deploy.
+
+## 2026-11-10 - Spanish and accessibility polish (Phase 4)
+
+- Spanish: the mobile menu button is announced as "Abrir menú" / "Cerrar menú" instead of English. The blog index title, "Todos" tab, filter label and empty state follow the site language; all posts stay listed by default so Spanish readers can still open English guides. FAQ wording "job programado" is now "tarea programada".
+- Accessibility (axe-core 4, WCAG 2.2 AA, 390px light mode): every audited page had two issue types, now zero on 14 pages in EN and ES (home, `/es/`, two crossing pages, best time, compare, walk or drive, lane flip, about, blog index, both medication guides, methodology, privacy).
+  - Contrast: `slate-500` small text measured 4.47:1 on the light page background. Light mode now uses #5e7088 (4.75:1); dark mode keeps the stock value. Ad labels and an About footnote moved from `slate-400` (2.46:1) to `slate-600`.
+  - Label in name: the EN/ES buttons are now announced "EN, Switch to English" and "ES, Cambiar a español", so the visible text is part of the accessible name. Browser checks updated to the new names.
+- Checks: full `npm test` passes after a prerendered build. Entry bundle 62.00 KB gzip (budget 62.25).
+- Not audited: dark mode contrast, screen-reader walkthroughs, physical devices.
+
+## 2026-11-10 - Medication guide answers first
+
+- The prescription-medication guide (EN and ES) now opens with its TL;DR, right after the intro and before the current-wait links. It was the last section. Wording unchanged, only moved. Umami, last 30 days: 95% bounce and a 21 s average visit, so most readers left before reaching it.
+- Checks: full `npm test` passes after a prerendered build. Headless Chrome 390px: TL;DR is the first H2 at about 870-910px in EN and ES, no horizontal overflow.
+
+## 2026-11-10 - Current-wait links near the top of the medication guide
+
+- The prescription-medication guide (EN and ES) now has a "Crossing soon? Current wait times" box right after the intro, linking to San Ysidro, Andrade, Nogales DeConcini, El Paso Paso del Norte and Progreso. Umami, last 30 days: the guide had 618 visitors, a 95% bounce rate and a 21 s average visit, and only 7 opened waits from the end-of-post button, which linked to the home page.
+- Why several crossings: the guide's readers are spread nationwide (California 20%, Texas 18%, Arizona 11%, then Wisconsin, Pennsylvania and others), so no single crossing fits. The links cover the border states readers come from.
+- New MDX component `<CrossingWaitLinks items={[[slug, label], ...]} />`. Clicks log `blog-to-waits` with `crossing` and `placement: top` (slugs only, no free text). The end-of-post button is unchanged.
+- Checks: full `npm test` passes after a prerendered build. Headless Chrome 390px EN/ES: one box at about 850-890px, five correct crossing links, the first opens `/crossing/san-ysidro/`, no horizontal overflow.
+
+## 2026-11-10 - Ads where readers land
+
+- The existing Adsterra native banner (placement 29055831) now also loads on crossing pages, after Latest lane reports, and on blog guides, after the "Crossing soon?" box. Before, only the home page loaded it, and the home page is 25% of visitors (Umami, last 30 days).
+- The prescription-medication guide (EN and ES), 41% of visitors, places the slot mid-article after the four core rules (`<InArticleAd />` plus `inArticleAd: true` frontmatter) instead of at the end. On a 390px phone it sits at about 3,600px of 8,800 instead of 8,555px. One ad container per page.
+- Ads sit below the answer on each page, never above the wait or the guide's core rules. No new provider, script or dependency. Embeds stay ad-free.
+- Privacy notice (EN/ES, React and prerendered) now says the main dashboard, crossing pages and guides load Adsterra's script.
+- Checks: full `npm test` passes after a prerendered build. Headless Chrome at 390px: one container on each page, the Adsterra script requested, no horizontal overflow. Creatives do not fill on localhost, so live fill and revenue are not verified.
+
+## 2026-11-10 - Main screen, second pass (Phase 3, session 2)
+
+- One clock on the main screen: the map explorer no longer repeats "Fetched X min ago" under Latest reports. The header already shows the fetch time, and stale, offline and fallback states still show the explorer's own notice with its clock. Recorded history still shows the observation clock.
+- Footer: the separate "Source" and "Refresh rate: Regular schedule" tiles are folded into one "Source:" line inside How Border Pulse works. "Regular schedule" said nothing the paragraph above did not. EN/ES.
+- Phones (390px) are 153px shorter. No horizontal overflow at 390 or 1280.
+- Checks: full `npm test` passes after a prerendered build. Entry bundle 61.97 KB gzip. Before/after 390px screenshots shared in chat.
+- Decided from Umami data (see DECISIONS.md 2026-11-10): keep all three filters and Popular border crossings.
+
+## 2026-11-09 - Main screen, first pass (Phase 3, session 1)
+
+- Phones (under 900px): the crossing results list now comes before the map, so the first thing after the controls is a wait. A starred crossing is already sorted first, so returning visitors see their own crossing's wait first. Desktop layout unchanged.
+- One clock: the saved-data / refresh notice now shows its time in the visitor's zone, matching the header, instead of UTC. The duplicate "Snapshot retrieved" tile in the footer is removed; the header and the "Fetched ... ago" line already show it.
+- Checks: full `npm test` (including route and border-map browser checks) passes after a prerendered build. Before/after phone screenshots captured in EN and ES. Entry bundle 62.00 KB gzip.
+- Not in this pass: a "your crossing" hero, removing repeated info between map, list and crossing page, and lane cues in Standard-only sections (sessions 2-3).
+
+## 2026-11-09 - Fresher backup data and an honest "could not load" state
+
+- Fallback freshness: when the live CBP endpoint fails, the site now also reads the collector's committed feed through a same-origin rewrite (`/data/latest/crossings.json` -> `main/public/data/crossings.json` on GitHub). It keeps whichever valid backup is newer, the collector feed or the bundled copy. The bundled copy only changes when Vercel deploys (daily), so it could be most of a day old; the collector commits every 15 minutes. Backup readings are still labeled as fallback with their original clock.
+- Both sources down: with nothing loaded and nothing retained, the map no longer says "Saved fallback data" and the lists no longer say no crossings match the filters or region. EN/ES now say current reports could not load and no waits are shown. `getFallbackData()` returns `unavailable: true` and `fromFallback: false`.
+- Tests: two new regression tests in `test-data-refresh.mjs` (newest-backup selection with collector up, older or down; unavailable state). Both fail on the previous code. Full `npm test` passes after a prerendered build. Headless Chrome check with all three sources returning 503: EN 1280px and ES 390px show the unavailable copy, no saved-data or filter wording, no horizontal overflow.
+- Entry budget 62 -> 62.25 KB gzip (+0.19 KB measured) for this fix.
+- Rebuilt from current main. The Nov 5 candidate lived in a cloud workspace that was never pushed and is not reachable from here.
+- Not verified: the Vercel external rewrite in production (needs a preview deploy), native Safari, physical devices.
+
+## 2026-11-07 - Make visible controls do what they look like (Phase 2)
+
+- "View trends" in a crossing card's menu now opens `#trends`, the hourly pattern section, and scrolls to it. Before, it reloaded the same crossing page at the top. The menu skips its focus return for this link so the page does not jump back up.
+- New pages start at the top. A small `ScrollToTop` runs only when the path changes; Back/forward keeps the browser's restoration, `#hash` links scroll to their target, and query-only changes (lane, map selection) keep their position.
+- Stats tiles and the exchange-rate card no longer lift on hover, since they have no action.
+- Verified in headless Chrome at 500px: View trends lands on the section; a deep-scrolled crossing page opens Best time at the top. Back position restoration was not compared against the previous build.
+
+## 2026-11-07 - Stop overstating Walk or Drive, Analytics and the embed (Phase 1)
+
+- Walk or Drive: the result no longer says "Walk." / "You save". It states the comparison it actually made (standard car lane vs a pedestrian lane plus an assumed 20 min for parking and the bridge), notes it applies only if you can use that lane and your trip works on foot, and reminds that Ready Lane needs an RFID document. Heading changed to "Comparison from reported waits, not a personal recommendation." EN/ES. Logic unchanged.
+- Analytics: the empty state no longer says "check back after a few visits". It explains the view uses waits saved in this browser only, shows how many of the 10 it needs, and links to Best time for shared 30-day patterns.
+- Embed: northbound source label now names the lane ("CBP · Standard passenger").
+- Tests: smoke and Santa Teresa browser checks updated to the new text.
+
+## 2026-11-07 - Keep the selected lane when opening Best time and returning (draft PR)
+
+- Fix: choosing SENTRI, Ready Lane or Pedestrian and then opening "Plan your crossing" (or the card menu's "Best time to cross") dropped the lane. "See current wait time" then returned to Standard. In the audit's sampled test the displayed wait changed from 25 to 185 minutes.
+- The crossing-share link, both card best-time links and the best-time page's return link now carry the validated `?lane=` key through `withLane()`. Standard stays query-free.
+- Best time shows a short EN/ES note when a non-Standard lane is selected: the pattern is standard-passenger history and does not describe that lane. The history itself is unchanged.
+- Test: the share test previously asserted a lane-free best-time link for every lane, which encoded the bug. It now expects the lane key; added a `withLane` contract test.
+- Not changed: the "View trends" menu item, Walk or Drive wording, Analytics empty state, scroll position and the paused collector backup repair.
+
+## 2026-11-03 — Prepare the reviewed fixes as an ordered branch stack
+
+- Preserve current main data while reconciling the Spanish/snapshot, duplicate-lane and Lane Flip Watch branches in that order. Keep both endpoint regression groups, metadata imports and reviewed source-clock safeguards.
+- Refresh the retained lane archive from committed normalized snapshots; retain the explicit missing-raw-data caveat and actual coverage dates.
+- Add annotation-only Button prop and optional SEO field contracts for the configured JavaScript typecheck; no runtime, gate or dependency change. Remaining diagnostics are inherited from untouched main.
+
+## 2026-11-02 — Scope Lane Flip Watch to retained evidence
+
+- Keep concise EN/ES eligibility and non-simultaneity cautions in copied, native-shared and WhatsApp text, alongside the source clocks and canonical URL.
+
+- Replace usual/never/right-now claims with descriptive counts and percentages from retained fetches. Repeated fetches can repeat one CBP report and are not independent observations or forecasts.
+- Show actual archive and per-lane intervals, an explicit stale state after a day without a retained fetch, both compared source clocks and lane eligibility reminders in EN/ES.
+- Rebuild coverage metadata from committed normalized snapshots only; raw historical CBP responses are unavailable, so clearly disclose earlier duplicate-row omissions. This does not retroactively apply the new normalizer to old data.
+
+## 2026-11-02 — Lane Flip Watch (review candidate)
+
+- Add `/lane-flip/` and `/lane-flip/:slug/`: reported general, Ready Lane, SENTRI, and Ready pedestrian waits side by side, with a plain verdict and a tappable 24-hour strip.
+- Count flips from the same 30-day `crossings.json` history the collector already walks. `snapshot-history.json` still stores only standard waits. A paired report needs both lanes open, with a numeric delay or no-delay status. Missing, pending, and closed lanes stay missing.
+- Ship the summary as `public/data/lane-flips.json`. The collector writes it beside the standard archive and can skip it without blocking a CBP refresh. No new data source.
+- English and Spanish, sitemap, navigation, and share text that keeps the CBP report clock. Not published.
+- A null or missing open-lane count is not zero. `Lanes Closed` and `N/A` stay out of comparisons and flips.
+
+## 2026-11-02 — Normalize primary waits and retain per-lane source clocks
+
+- Apply the same status-aware scalar normalization to the San Ysidro main-row path as other ports. Hypothetical retained-number tests cover closed, N/A and pending states, actual zero, and reversed source order; they do not describe an observed feed incident.
+- Preserve each lane’s originating CBP row date/time when duplicate rows contribute different lanes, alongside the original lane update clock.
+
+## 2026-11-02 — Keep reported waits when CBP publishes two rows for one crossing
+
+- When two CBP rows map to the same crossing, a reported lane wait is kept ahead of an empty or Update Pending row. Ysleta keeps the reported Ready Lane, SENTRI, pedestrian, and commercial waits from port 240203. Standard stays Lanes Closed, with no minute invented for it.
+- Store CBP's lane status (`Lanes Closed`, `Update Pending`, `N/A`) on the lane. Closed and N/A lanes are no longer dropped. Current wait wording is unchanged.
+- The same feed also dropped Otay Mesa's reported commercial waits, and let Update Pending replace an explicit status at BOTA, Paso Del Norte, Naco, Roma, and both Brownsville legacy crossings.
+- Correct the port-identity note that said those substitute rows never appear together.
+
+## 2026-11-02 — Bound snapshot recovery and keep the Spanish home consistent
+
+- Share an 8.5-second total fetch budget between the HTML endpoint’s upstream and known-host bundled recovery, leaving headroom under the existing ten-second function limit. Preserve fallback retrieval/report clocks and no-store errors.
+- Let `/es/` own the shell, footer and shared language preference; switching to English retains the query and hash. Cover fresh and saved-English visitors, mobile/desktop and both no-JS language entries.
+- Clarify that CDN reuse includes five minutes of cache plus up to ten minutes of stale revalidation; it is not a strict five-minute freshness guarantee.
+
+## 2026-11-02 - Deploy focus race, Spanish home, fresher no-JS snapshot
+
+- Keep map selection focus from taking the search field when its callback arrives after the visitor has started filtering. This was the only failure in the Pages deploy at 06:23 UTC.
+- Add `/es/` as the indexable Spanish home, with lang, title, description, reciprocal hreflang and a sitemap entry. Shared crossing URLs stay one address.
+- Serve the no-JS home snapshot from the cached official fetch on Vercel, and from the data-deploy file on Pages, still labeled as a published snapshot.
+- Describe DIGITO as an independent creative studio. No home city added.
+
+## 2026-11-01 — Correct map report focus and selected-lane summaries
+
+- Reveal the selected report's focused Back control clear of the native header and nested pane clipping; restore the original list/document position and focus on Escape, button and browser Back, with immediate reduced-motion-safe scrolling.
+- Derive List summary counts, means/medians and current chart status from the selected lane, preserving zero/missing/closed semantics and separate official port status. Keep historical baselines Standard-only and current confidence neutral for saved API fallback.
+- Add visible-focus and all-lane regression coverage plus actual before/after evidence. Load the affected sidebar summary on demand to retain existing bundle limits. No geographic, feed, dependency, workflow, access or unrelated resize-patch change.
+
+## 2026-11-01 — Complete the facility-overview classification (review preview)
+
+- Apply the independent researchers' GSA facility representatives and remaining directory targets across CA/AZ/NM/TX; restore Otay and World Trade with named asset provenance. Use consistent US facility/site representatives, not entrances, averages or routing points.
+- Map 40 of 42 records: 26 GSA facilities, 12 directory targets, 1 federal facility point and Morley's explicitly limited contextual approximation. Keep conflicting San Luis II and aggregate El Paso list-only; preserve distinct Morley/DeConcini identities and all reports.
+- Add full-catalog identity/displacement/coverage regression evidence and updated EN/ES captures. Attribute supplied spreadsheet values/hash honestly: this worker confirmed the catalog but workbook download was blocked. Preview-only; no production deployment or unrelated resize-patch merge.
+
+## 2026-11-01 — Correct geographic catalog errors (review preview)
+
+- Replace eight materially displaced Texas fallbacks with approximate targets linked from TABC’s named directory entries, and use the Federal Register facility point for San Luis I. Correct the shared catalog so map/proximity views agree.
+- Withhold unresolved Otay, World Trade, San Luis II and aggregate El Paso points while retaining all reports in the list. Explicitly separate 9 new source references, 3 limited-review published points and 26 unverified inherited points; do not claim the catalog or entrances are certified.
+- Add identity/displacement/coverage regressions and source evidence. Geographic and hosted-product review remain release gates; no production deployment.
+
+## 2026-11-01 — Border-wide map in the main crossing experience (review preview)
+
+- Make the existing crossing screen a shared Map/List experience for the CA/AZ/NM/TX catalog, using native brand controls, report cards and actual source data. San Diego–Tijuana becomes an area filter; remove the separate regional navigation identity.
+- Correct All crossings links and old regional bookmarks; derive filters directly from router state so Back cannot retain a previous region. Preserve lane/filter/selection URLs, keyboard focus, reduced motion, recorded gaps and honest retrieval/report clocks.
+- Use one geographic SVG/camera projection, cluster nearby points and keep marker sizes steady during user-driven zoom. Label approximate locations and withhold two ambiguous pins; authoritative numeric catalog validation remains a release limit.
+- Add focused model/browser coverage and review evidence; retain existing list, comparison, camera, analytics and editorial flows. No production deployment or unrelated resize-patch merge.
+
+## 2026-10-30 — Match the crossing map to BorderPulse (review candidate)
+
+- Restore a separate readable block for retrieval warnings after independent visual review; add EN/ES desktop/mobile text-flow assertions for stale, fallback and failed-refresh states, preserving the original source clocks and data guards.
+- Replace the console's separate visual styling with the site's type, light/dark surfaces, existing controls and blueprint map tokens; retain purposeful, reduced-motion-aware transitions.
+- Keep one regional main-navigation map entry and subtle San Ysidro/Otay text links after the user's screenshot review; remove redundant dashboard promotions while preserving lane context and primary reports.
+- Qualify global entries as the San Diego map; use neutral map-card borders and a port-marker legend so identity colors do not imply wait conditions.
+- Preserve data/clock integrity, replay gaps, detour logic and editorial/news behavior. Add native-theme/discoverability browser coverage and before/after review evidence; production is unchanged pending review.
+
+## 2026-10-30 — Additive crossing console (review candidate)
+
+- Add a lazy, bilingual San Ysidro/Otay corridor view from the existing area dashboard, with geographic waits, shared-element report details and transparent extra-drive arithmetic.
+- Reuse existing CBP refresh, availability, report-clock and freshness rules; suppress current arithmetic for untrusted retrievals. Load actual Standard-only replay observations on request, preserving gaps and source times.
+- Keep the dashboard, global navigation, PR160 presentation, PR161 news freshness, daily editorial, publishing and dependencies unchanged. Add model/browser coverage and repository-visible screenshots. Exact-head QC/CI and preview evidence belong in the draft PR; no production publication is claimed.
+- Correct intermediate-width map registration with one projection for geography and port anchors; translate the Spanish ocean label and retain fully missing replay retrievals as gaps. Add live-resize registration/occlusion tests, clean mobile/720px captures and a local integrated motion recording.
+
+## 2026-10-30 — Keep old crossing news out of the recent section
+
+- Show only stories with valid, non-future publication dates within 30 days;
+  state that window in English and Spanish and hide the section when empty.
+- Preserve historical timeline files, source links and original dates. Fetch
+  or timeline-update timestamps do not refresh an old story.
+- Regression coverage includes the March 31 San Ysidro card and time boundaries.
+
+## 2026-10-30 — Simplify automated blog presentation
+
+- Remove reader-facing AI authorship labels from bilingual article summaries,
+  bodies and organization credits, including future editorial/pilot templates.
+- Preserve claim text, citations, dates, evidence receipts, machine author ids,
+  source types and `humanEdited: false`; credit BorderPulse as an organization.
+- Presentation change requested by Sebastian; implementation by ChatGPT (Codex).
+
+## 2026-10-30 — Resolve editorial push inputs from Git trees
+
+- Fix connector-triggered intake: GitHub Actions omits added/modified file
+  arrays from push payloads. Resolve exactly one added/modified inbox file
+  from the push range, fetching only missing commit objects in shallow clones.
+- Bind the publishing attempt to that input blob, retaining the one-input rule,
+  evidence/review checks, original bundle dates and disabled ingestion state.
+
+## 2026-10-29 — Keep crossing-share results tied to the current page
+
+- Ignore obsolete copy/native-share results after crossing, lane, language or
+  name changes and unmount; keep pending actions bounded and current retries
+  functional through React effect cleanup/replay.
+- Preserve browser API receivers, cancellation, honest unavailable/denied-copy
+  feedback, existing URLs, WhatsApp payloads and analytics fields.
+- Add actual-component regressions to the normal test pipeline. Test bundles
+  use isolated temporary files and the existing project React installation.
+- Implementation by Google Jules; independent review, test-harness corrections
+  and integration by ChatGPT (Codex), directed by Sebastian. Publication
+  explicitly authorized October 29; exact-head checks and deployment/live
+  verification are recorded in PR #157.
+
+## 2026-10-29 (Pacific) — Authorized UI/motion/content release preparation
+
+Updated by ChatGPT (Codex), directed by Sebastian's explicit “Push it to prod after QC and security checks.” Integrate only the reviewed presentation, motion and existing-information corrections with current main, retaining the already published daily-blog pipeline and data snapshots. Preserve both changelog histories; no publisher, schedule, credential, permission or schema-policy edits are part of this candidate. Final security/QC, protected-PR and production receipts belong in the release PR and private review record; this entry does not claim an unperformed deployment.
+
+## 2026-10-29 (Pacific) — Initial motion pass, local review
+
+Updated by ChatGPT (Codex), directed by Sebastian. Add short region-selection underline and camera/summary/lane disclosure entrances. Replace staggered, initially hidden report/stat/FX entrances with visible-by-default 140ms opacity feedback. Remove continuous freshness pulsing. Exact waits, CBP report clocks, retrieval age, stale/missing states, data refresh and ads/security behavior retain their existing rules. No new dependency, media, publisher/generator change or production release. Reduced motion removes the added animations; closed content is removed immediately, with no exit queue or animated height. The existing stale-age browser fixture now pauses its mock clock so elapsed real minutes cannot invalidate exact-text checks; expiry and recovery still advance explicitly. Detailed final checks and limits are recorded in the private review receipt; review preview remains http://127.0.0.1:3473/.
+
+## 2026-10-29 — UI and existing-information audit (local review candidate)
+
+- Isolated `codex/ui-polish-20261029` starts from independently fetched main
+  `38127d7a87753dec74345fdb003520816fb7bd98`. Original worktrees are preserved.
+  Group search/area/lane controls, collapse optional location help, simplify
+  surfaces, retain complete crossing names and emphasize existing reported waits.
+  Missing, closed, stale and lane-specific states retain their underlying rules.
+- Reconcile README’s obsolete Pages-only/no-backend/disabled-publisher claims
+  with the actual endpoint/fallback implementation and existing guarded runbook;
+  retain uncertainty about external variables and runtime until read back.
+- Correct EN/ES About and Methodology descriptions against the actual endpoint/
+  fallback/history implementation. Remove complete-coverage/prediction claims,
+  old sample-density assertions, unused BTS weighting and an incorrect median
+  example. Distinguish report clocks from retrieval dates in embeds and metadata.
+- Rewrite both CDC dog guides against the official overview, low-risk page and
+  August 27 FAQ read October 29: six-month travel history, universal-scanner
+  microchips, conditional receipt reuse and distinct high-risk pathways. Remove
+  invented booth procedures, ISO-only claims and inspection-time guarantees.
+- Archive both July 3 Sunday articles, preserve their original figures as a
+  publication record, identify the unrecorded exact observation bounds and remove
+  holiday forecasts/current-trip advice. Clarify separately published charts in
+  sixteen other historical articles without remeasuring or replacing observations.
+- Remove unsupported bus-delay multipliers and lane-speed guarantees. Rework both
+  Algodones guides around actual report/hour and official-source checks; remove
+  unsupported parking prices/location/walking times, a blanket FMM exemption and
+  generalized medication/dog-document instructions. Keep publication dates and
+  add substantive editorial update dates; no cosmetic date-only refresh.
+- Validation: build and full suite pass, including 402 browser navigations.
+  Final editorial rebuild, MDX/metadata checks and unchanged size gates pass
+  (61.36/62 KiB entry JS, 19.62/20 KiB CSS). One moderate registry advisory
+  remains below the unchanged high/critical gate; no separate lint script exists.
+  IAB desktop/mobile EN/ES, repeated controls, missing lanes and synthetic stale
+  embeds pass. The share fixture now waits for the loading UI before Escape;
+  its original dismissal/reopen assertions remain. Build and QA evidence are outside Git.
+  No dependency, workflow, refresh service, security, ads, payment, analytics or
+  production change. Existing publication and owner-review gates remain.
+  Separate daily-blog pipeline work is owned elsewhere; this candidate does not
+  authorize or implement that pipeline.
+
+## 2026-10-29 — Daily evidence-led blog pilot (release candidate)
+
+- Add a Pacific-morning daily attempt using AI-assisted bilingual templates,
+  immutable CBP evidence receipts and a closed machine-validated report grammar.
+  No daily LLM calls or new credentials. Thin, stale, duplicate or ordinary
+  changes skip; no article quota and no false claim of individual human review.
+- Preserve legacy draft review, news curation, collector/release/security gates;
+  use the existing serial writer and Vercel publisher with recoverable dispatch.
+- Policy, schedule, operating limits, evidence and rollback are in
+  `docs/DAILY-BLOG-PILOT.md`. Initial real-data dry run skipped: no eligible
+  well-covered material change. Release/activation evidence is pending.
+
+## 2026-10-27 — Historical hours, not remaining-today advice (review candidate)
+
+- Label lowest-hour summaries, chart highlights and shared annotations as
+  historical full-day patterns; explain that the hour may already have passed.
+- Put the current-report link beside the best-time result, including missing
+  historical data, and identify each index row’s port-local weekday.
+- Align EN/ES copy and static metadata/OG wording without changing source data,
+  selected hours, sample floors, operating-hour rules or prediction behavior.
+- Added elapsed-hour, local-day, sparse/unknown-hours and navigation regressions.
+  Preview/CI verification and a separate publication approval remain required.
+
+## 2026-10-27 — Preserve chosen lane across crossing journeys (released, PR #152)
+
+- Keep the selected Standard, Ready, SENTRI or pedestrian lane in comparison,
+  crossing, camera and share URLs, including reload and browser Back/Forward.
+- Label the primary wait and its source report clock for that lane; missing,
+  pending or closed reports do not substitute Standard. Keep aggregate history
+  explicitly Standard and suppress Standard-only comparisons on other lanes.
+- Load the existing share dialog on request to remain within the unchanged
+  entry budget, with loading/cancel and local failure/reload recovery states.
+- Exact-head CI and the rebuilt production artifact passed all checks, including
+  402 browser navigations and lane coverage at 320/390/1440 px. Production merge
+  `75d80e1`, run `40609553503` and Vercel `dpl_9siJyd4tEthZtsfpz5WTxhDjWVbU`
+  were verified live in EN/ES. Automated data snapshots are preserved.
+
+## 2026-10-27 — Preserve refresh outcomes and source-dated browser history (local candidate)
+
+- Keep the last failed/older refresh outcome in the shared cache so late
+  optional FX data cannot announce false recovery or replay success to a new
+  subscriber. Preserve original waits, their timestamp and valid recovery.
+- Record browser history at snapshot retrieval time, deduplicate replayed or
+  older data and reject invalid samples. Keep legacy browser-clock history
+  unchanged in its old storage key; source-dated history starts separately.
+- Add delayed/interrupted/repeated-flow regressions and preserve both history
+  keys in existing browser-fixture cleanup. The source/data/bundle/security
+  verification and remaining release hold are in the refresh runbook.
+- Local preparation only; no production publication or revenue claim.
+
+## 2026-10-22 — Verified pedestrian route exceptions (local candidate, issue #59)
+
+- Keep the existing Progreso International Bridge (230901) and Santa Teresa
+  (240801) walk-or-drive pages and crossing-detail links when pedestrian reports
+  disappear. Capability is source-backed; current waits/closures still use the
+  unchanged report checks. No missing wait becomes zero or a recommendation.
+- Add recorded-snapshot generator regression, exact-identity/zero/closure checks
+  and EN/ES keyboard/navigation/recovery coverage. Official sources, input
+  identities, evidence and remaining publication gates are in the refresh runbook.
+- Local review candidate only. Other ports retain their existing report-based
+  behavior; #59 and the separate Search Console reconciliation remain open.
+
+## 2026-10-22 — Summary confidence released (PR #143)
+
+- Published source `a14654f32e0b83b11008a978d1fb085ff83db059` through existing
+  production run `39731300070` after both final CI checks passed on `84da4c8d`.
+  Vercel `dpl_8VJ9dSkAucq3E27fjCiDJiiH4CJN` is READY; public manifest matches.
+- Native EN/ES desktop/mobile served-bundle success/failure/recovery checks and
+  real/synthetic captures pass. Complete supported localhost preview of unchanged
+  production bytes passes 416 navigations; 24 asset hashes and manifest rechecked.
+- Entry gate remains 61.88 KiB in CI under the unchanged 62 KiB cap; paired
+  initial JS adds 3 gzip bytes. No dependency, feed, threshold, security setting,
+  account, ad, paid service or monitor changes. Original work/collector preserved.
+- Initial PR CI exposed a generic-heading navigation race in an existing history
+  fixture; target-canonical synchronization retains its absence assertion.
+  Final full local suite passed again with 420 routes; six pages passed at 4x CPU.
+  Product rollback inverse checked without applying; it keeps Router mitigation,
+  newer data, release history and the stronger historical identity wait.
+
+## 2026-10-22 — Summary snapshot confidence (validated locally)
+
+- Reproduce PR141's expanded summary saying Moving well / Median wait now for
+  synthetic 120-minute-old and future retrievals in EN/ES desktop/mobile.
+- Pass the existing fetch timestamp into the deferred summary. Reuse the same
+  45/90-minute retrieval policy and future guard as Compare/walk-or-drive;
+  reevaluate each minute, at render after a delayed import/new response, and on
+  offline/online changes. Untrusted values remain dated reference readings:
+  neutral labels/ticks/metrics replace current-condition interpretations.
+- Preserve reported numbers, map selection, filters and zero readings. Keep the
+  existing empty-data validator behavior for missing/invalid source timestamps.
+  A stable polite status announces confidence changes, without announcing every
+  age-minute update. No loader, feed, threshold, dependency or configuration change.
+- Fresh build, 130 unit tests and full npm test PASS (420 local navigations),
+  with isolated EN/ES desktop/mobile delayed-open expiry, loaded expiry without
+  response, offline/online, stale/missing/invalid/future time, missing values,
+  zero recovery, original chunk failure/recovery, keyboard/menu and metadata QA.
+- The first PR CI exposed a historical-fixture race: URL changed before React
+  committed the next port, and a generic h1 wait matched the previous page.
+  Wait for the target canonical before asserting no inherited pattern; retain
+  the absence assertion and all existing scenarios. No crossing-page code change.
+- Entry 61.69 KiB local, unchanged 62 KiB cap. Paired full initial JS measurement
+  280,511 → 280,514 gzip bytes (+3); summary own chunk 5,861 → 6,520 bytes and
+  one additional small shared retrieval-guard request on opening, not initial
+  loading. Simulated opening remains a diagnostic 0.30–1.32s; no production
+  speed, usage or conversion gain is established. Publication awaits remote CI.
+
+## 2026-10-22 — Patched Router release (PR #141)
+
+- Merge/source `5a681bad045eb4153830928021350844069cef98` published by existing
+  workflow `39725320432` after both reviewed-head CI checks passed.
+  Vercel `dpl_45Wzsdoe5TwfipVhvHdLMqczfgfC` is READY with matching public
+  manifest and Router 7.18.4 marker in the served entry. No second dispatch.
+- Existing 62 KiB entry budget passes: 61.88 KiB in CI; served entry recompressed
+  locally is 63,146 bytes. The scoped initial-load reduction and first-open
+  request cost are recorded below, rather than claiming a production speed gain.
+- Real production EN/ES desktop/mobile report/chart captures passed. The full
+  route suite passed **398 navigations** against unchanged published assets in
+  the task-owned localhost preview, including the existing guarded language
+  fixture, Router/summary loading/failure/recovery, keyboard, filters, storage,
+  sharing/feedback, history, metadata and aliases. All 24 fetched asset hashes
+  and the publication manifest were checked again; the local server was closed.
+- Original work and newer collector data were preserved. Six moderate build
+  entries remain; 6.1.5 is the CSS parser, not a Router backport. No audit
+  exception, budget, credential, access, security-setting, ad or paid-service change.
+
+## 2026-10-22 — Router performance gate follow-up (validated locally)
+
+- Keep the reviewed Router 7.18.4 security candidate and the unchanged 62 KiB
+  budget. Load the already-collapsed dashboard summary/chart on first opening,
+  retain its state on reopening, and isolate asset failures with an EN/ES notice
+  while crossing reports, filters and navigation stay usable.
+- Make unused local dropdown wrappers removable through a pure ref/name factory;
+  preserve every export and the rendered menu's refs, styles and actions.
+- Entry is 63,169 bytes / 61.6885 KiB gzip (319 bytes below budget), versus
+  68,623 bytes before. All initially required JS totals 280,504 versus 285,958
+  gzip bytes: a real 5,454-byte reduction, with no build/config/budget changes.
+  First summary opening requests one 5,861-byte gzip chunk. In cold headless
+  samples at 150ms latency/200KiB/s, first opening took 0.30–1.34s versus
+  0.02–0.05s before. Loading is announced; current reports stay interactive.
+  This is an explicit on-request cost for formerly hidden work, not a speed claim.
+- Fresh build, 130 unit tests and full npm test pass, including 402 route
+  navigations and new EN/ES desktop/mobile delayed/failed-asset recovery,
+  summary keyboard/filter/state and menu keyboard/focus/action checks.
+  Audit remains six moderate build-chain entries, zero high/critical.
+- Publication remains conditional on remote CI; no deployment is claimed here.
+
+## 2026-10-22 — Router security candidate (local, not published)
+
+- Verify the two Router advisories are fixed in react-router 7.18.0+, not in
+  the unrelated postcss-selector-parser 6.1.5 backport. Prepare Router DOM and
+  Router 6.30.6 → 7.18.4 with only their required runtime lock entries changed.
+- Candidate raw audit drops from eight to six moderate entries; the two Router
+  entries disappear. Build, 130 unit tests and 402 diagnostic route checks pass,
+  including mixed-separator rejection and EN/ES desktop/mobile navigation.
+- Full npm test **fails** the unchanged 62 KiB entry gate: candidate 67.0146 KiB
+  versus baseline 60.6943 KiB. No app code, build configuration, audit exception
+  or budget changed. No candidate push, PR, CI or deployment was performed.
+  Keep it for review; production remains the verified historical-pattern release.
+
+## 2026-10-22 — Historical pattern confidence (published)
+
+- PR #139 merged at `9893047411d8545df8298eb196a8f585258b1598` after both
+  CI checks passed. Production run `39718320478` succeeded; Vercel deployment
+  `dpl_2ZwQiEBevGVAGAguBVvB1Jv5ATxR` was READY with matching public manifest.
+  Real API readback and served-bundle EN/ES mobile/desktop fixtures passed.
+  Fresh build, 126 unit tests and 402 local/production route navigations passed.
+
+- Replace the crossing callout's live-looking generated prose with validated
+  weekday/hour evidence from the existing 30-day sample. A Sunday pattern
+  remains Sunday on other days; lowest_today names its evidenced weekday.
+  Preserve genuine zero medians and show sample counts and port-local source
+  snapshot/generation dates, rather than labeling first detection Last checked.
+- Invalid/future/missing source times, unknown types and malformed numerical
+  evidence yield a neutral unavailable interpretation. Old but dated historical
+  evidence remains visible. No detector, feed, threshold or current-wait change.
+- Add unit and isolated EN/ES desktop/mobile browser regressions for weekday
+  scope, zero, malformed/future sources, recovery, dark mode and port navigation.
+- Recheck the eight moderate audit entries and actual rendered dependency
+  graph. No package update or audit exception: parser 6.1.5 is a separately
+  documented same-major candidate; React Router needs a major migration and
+  sprintf-js has no published patched version. See the refresh runbook.
+
+## 2026-10-21 — Browser resilience and navigation (published)
+
+- PR #137 merged at `0ec918a897ee356d643afbd86c8957d84369c809`.
+  Production run `39649211670` succeeded; Vercel deployment
+  `dpl_5NcpUBPmGWf1KsBs4gGqwP13cV4b` was READY with matching public manifest.
+  The served EN/ES desktop/mobile app passed native readback and isolated
+  storage, favorites, keyboard and metadata fixtures. Fresh local build,
+  118 unit tests and full npm test passed; production checked 402 navigations
+  with the current snapshot. Eight moderate audit entries remain.
+
+- Keep the app usable when browser storage is blocked or contains malformed
+  preferences. Validate saved favorites and language/theme values; show an
+  EN/ES failure notice instead of claiming a favorite was saved. Language and
+  theme controls still work in the open document when persistence is denied.
+- Move skip-link focus into the main content, close mobile navigation with
+  Escape and return focus, and replace nested link/button back controls with
+  single links with 44px minimum height.
+- Update Twitter metadata with each page and remove a previous route's
+  generated schema after client navigation. Preserve same-route and shared
+  schema. Full runtime schema generation remains separate work.
+- Correct About's EN/ES description of existing locally saved rounded
+  coordinates. No new collection, transmission, dependency or service.
+- Validation: 118 unit tests, production build and full npm test passed,
+  including 416 desktop/mobile navigations and EN/ES storage-failure,
+  keyboard, metadata, sharing, feedback and freshness regressions. These are
+  bounded checks, not a security or accessibility certification.
+
+## 2026-10-21 — Compare and Vite production verification
+
+- PR #136 merged at `f55167b6994c7b3e6532529566507352a7ff478d`.
+  Actions run `39561576557` succeeded; Vercel deployment
+  `dpl_3fkPhCsCiPdpq62RhzNPfCU1b4yg` was READY with the same commit.
+  The public publication manifest and served app were verified on
+  borderpulse.com in EN/ES at desktop/mobile sizes, with synthetic fresh,
+  stale and future snapshots kept separate from the live feed readback.
+- The two October 20 local-review entries below are now published. Vite is
+  6.4.4; the audit gate reports zero high/critical and eight remaining moderate
+  package entries. No audit exception or security-setting change was made.
+
+## 2026-10-20 — Vite audit unblock (local review)
+
+- Update the existing Vite development dependency from locked 6.4.3 to 6.4.4,
+  the first fixed 6.x release for the bundled launch-editor advisories. Raise
+  its minimum range to ^6.4.4 and change only its package entry in the lockfile.
+  Keep the audit gate, runtime configuration and other package versions intact.
+  This dependency correction is separate from the Compare UX change below.
+
+## 2026-10-20 — Compare retrieval confidence (local review)
+
+- Reuse walk-or-drive's 45/90-minute retrieval gate for pair comparisons.
+  Stale, unknown, invalid and future times suppress green advantage/tie claims;
+  reported waits, historical medians and parseable snapshot dates stay visible.
+- Re-evaluate age each minute without a new response and restore comparison
+  after a valid refresh. Show freshness even when both waits are missing.
+- Add shared-gate unit regressions and EN/ES desktop/mobile browser coverage
+  for expiry, failed/invalid refresh, recovery, zero ties and retained history.
+  This local change does not establish production feed failure or usage gains.
+
+## 2026-10-17 — Dormant Google placement and native consent (prepared)
+
+- Prepare BorderPulse's own responsive Google display unit behind a disabled
+  activation flag; retain existing automatic Adsterra at the dashboard bottom.
+  No ads are added to crossing, comparison, blog or embed pages.
+- Use Google's native CMP and European withdrawal callback; preserve Google's
+  US opt-out link. Production-only requests, singleton loading and no effect
+  replay refresh. No new consent gate, analytics change or added spending.
+- Google review is requested, not approved. Shared messages remain drafts.
+  Activation and live CMP checks require Google's decision and owner rollout
+  approval. See `docs/REFRESH-OPERATIONS.md` and the existing Drive Current Focus.
+
+## 2026-10-17 — Shared-account AdSense preparation (prepared)
+
+- Add conditional Google advertising and personalization-choice disclosures in
+  English and Spanish, describing Google ads/consent controls as inactive.
+  Preserve the existing Adsterra placement and its disclosures.
+- Serve both privacy notices visibly before JavaScript, using shared paragraph
+  text for the static HTML and interactive page. Replace internal draft-review
+  instructions with a factual description of the current public site.
+- Record the existing shared publisher, verified BorderPulse ownership,
+  separate Requires review status and ads.txt crawl discrepancy in the refresh
+  runbook. No Google runtime, domain migration or review submission is included.
+
+## 2026-10-14 — Walk-or-drive retrieval freshness (prepared)
+
+- Preserve the actual snapshot retrieval time and suppress walk/drive/tie advice
+  and recommendation badges for stale, missing, invalid or future timestamps.
+  Re-evaluate age while the page stays open, using the existing 45/90-minute
+  thresholds; failed refreshes retain the original timestamp.
+- Show retrieval age separately from raw CBP lane report clocks, including
+  unavailable-clock labels. Replace unconditional live/current decision wording
+  in the comparison and its metadata with reported-wait wording.
+- Add EN/ES desktop/mobile regression coverage for zero waits, expiry without a
+  new feed, offline refresh, recovery, future timestamps and report clocks.
+  Retain closure, pending-report and Back-navigation checks. No feed, threshold,
+  route-inventory, camera or ad changes; publication awaits independent review.
+
+## 2026-10-13 — Camera coverage beyond El Paso (prepared)
+
+- Added a camera-area selector for all nine corridors. The camera area follows
+  an explicit dashboard area change, while its own picker does not change the
+  wait-time filter. Changing areas/crossings and collapsing remove the player.
+- Added San Ysidro and Otay Mesa Caltrans U.S. road approach viewers, explicitly
+  distinguished from Mexico-to-U.S. inspection queues in visible copy, search
+  titles and no-JavaScript snapshots. Added four officially published Eagle
+  Pass Bridge II player views, without inferring their lane/orientation.
+- Added external official camera-source paths for Nogales, Laredo and Pharr.
+  Pharr's source belongs only to port 230502, not nearby Anzalduas. Calexico,
+  Brownsville and Progreso show an explicit unverified-coverage state.
+- Caltrans uses its published still images with manual refresh, original-image
+  timestamp guidance and error fallback. Both San Diego sources showed the
+  provider's Temporarily Unavailable placeholder during the browser check.
+- Generalized source/disclosure/privacy copy for YouTube, Caltrans and
+  IPCamLive; retained source/fallback links. No paid camera license, video relay,
+  new dependency or production release. Provider playback is not established
+  by mocked tests; exact verification evidence belongs to PR #132.
+
+## 2026-10-13 — Homepage camera access (prepared)
+
+- Added a visible Camera feeds section beside the local-area controls. Visitors
+  can select one of five verified El Paso–Juárez bridges and open the existing
+  camera player directly on the homepage, without finding a detail-page link.
+- Opening the section makes no player request. Selecting a view loads one
+  player; changing bridges or collapsing the section removes it. Coverage is
+  labeled explicitly, and English/Spanish copy and provider fallbacks are shared
+  with the crossing-detail component.
+- Added desktop/mobile EN/ES release checks for discovery, bridge switching,
+  deferred loading, cleanup and viewport fit. Direct inspection found both Paso
+  del Norte players rendered but buffering in the cloud browser; live playback
+  and source uptime remain unverified. Final release evidence belongs to PR #132.
+
+## 2026-10-13 — UX and crawlable-report QC (prepared)
+
+- Captured the live competitor and BorderPulse homepage in the cloud browser.
+  The observed first-screen gap is local decisions versus border-wide charts.
+  Moved the summary/chart behind an accessible disclosure, added quick local
+  choices, and made corridor selection a shareable `?area=` URL with Back
+  navigation and canonical homepage identity preserved.
+- Added familiar El Paso–Juárez crossing names and accent-insensitive aliases
+  for local search, headings and search titles without changing port identity.
+- Homepage and all 42 canonical crossing pages now deliver visible report HTML
+  before JavaScript. The original retrieval timestamp, raw lane clocks, missing
+  reports and closure state stay explicit. Other routes do not inherit this
+  homepage snapshot; no new page inventory or guessed rich-result schema.
+- Added snapshot/no-JavaScript assertions and expanded local-area browser
+  checks. No ranking, Core Web Vitals or acquisition improvement is claimed;
+  current Search Console reads were unavailable because the connected provider
+  reported an ended trial. Exact release evidence belongs to the pull request.
+
+## 2026-10-13 — Local comparison and camera feature batch (prepared)
+
+- Added nine named crossing corridors, remembered in browser storage and
+  compatible with existing state/search filters. El Paso–Juárez includes
+  Santa Teresa in New Mexico without treating the entire state as local.
+- Added northbound comparisons for standard passenger, Ready Lane, SENTRI
+  and pedestrian lanes. Missing reports, closed ports/lanes and unverifiable
+  operating hours are excluded. Ties, fewer than two available reports and
+  stale/unknown/future snapshot times suppress a shortest-wait claim. Report
+  clocks remain separate from retrieval time; extra driving is not estimated.
+- Added ten click-loaded camera views at five Juárez–El Paso bridges from
+  the official Fideicomiso directory, with view switching, closing, source and
+  playback fallback links, EN/ES provider disclosure and privacy copy.
+- Added comparison eligibility tests and desktop/mobile EN/ES interactions
+  to the existing release gate. No new npm dependency, account, database,
+  subscription, email service or production workflow change. Publication and
+  validation evidence belongs to the scoped pull request.
+
+## 2026-10-13 — Document language ownership
+
+- Metadata cleanup preserves the document language during crossing data and
+  aggregate updates. Shared pages retain the browser's EN/ES preference;
+  translated article, methodology and privacy routes declare their own content
+  language. Privacy text, canonicals and language alternates are unchanged.
+- Added a regression that fails on the previous English reset, plus local-only
+  desktop/mobile checks for delayed aggregates, feed refresh, switching,
+  Back/Forward and content-specific routes with contradictory preferences.
+  External providers and service workers stay blocked in browser checks.
+- Full release checks and exact publication evidence belong to the scoped PR.
+
+## 2026-10-12 — Bounded language metadata navigation checks (PR130)
+
+- Bound language metadata predicate waits and the combined metadata fixture,
+  with route diagnostics. A failed predicate now fails the release gate instead
+  of waiting for the workflow timeout.
+- Shared-URL crossing language switching verifies both rendered Spanish copy
+  and the selected language control, then checks the exact canonical/alternates.
+  Existing cleanup can reset document language on a background data update;
+  that separate lifecycle issue is outside this metadata-alternate correction.
+
+## 2026-10-12 — Route-specific language alternates (PR129)
+
+- Generated crossing, best-time, comparison and other single-URL pages replace
+  inherited homepage hreflangs with their own canonical URL. Existing published
+  EN/ES blog, methodology and privacy pairs remain reciprocal; browser language
+  preferences do not create translated URLs.
+- SPA metadata updates replace stale language alternates and restore homepage
+  alternates on reset, preserving canonical URLs and non-language alternate links.
+- Added all-generated-page and desktop/mobile navigation checks, including
+  language switching, translated article entry and Back. Providers remain blocked
+  or mocked in browser tests. Sitemap inventory is a separate follow-up; release
+  and production verification evidence belongs to the scoped pull request.
+
+## 2026-10-12 — CBP report times and fetch labels
+
+- Dashboard and crossing cards distinguish snapshot retrieval from the official
+  standard-lane report time. Lane details expose each report's original clock
+  and timezone text, with an explicit missing-time label for numeric reports.
+- Replaced fetch-derived Live labels and the detail page's Lanes right now
+  heading. All crossing detail cards use the actual snapshot retrieval time.
+  Missing report dates are not inferred from export timestamps or clock text;
+  collection, identity, wait availability and historical calculations stay intact.
+- Added EN/ES regression coverage for raw report text, missing times, retrieval
+  labels, stale fallback and lane state/navigation behavior. Release evidence
+  belongs to the pull request.
+
+## 2026-10-12 — Shared FAQ metadata scope
+
+- Removed the homepage FAQPage node from the shared HTML shell. Its southbound
+  live-routing answer was stale and the same four questions leaked into
+  unrelated prerendered routes. Visible homepage answers and crossing-specific
+  FAQ generation remain unchanged.
+- Added release checks for every generated HTML JSON-LD block, absence of the
+  removed questions/claim, representative metadata and bilingual canonicals,
+  and client navigation through crossing and EN/ES blog routes with Back.
+  Existing ad-slot and comparison-guide checks remain in the smoke gate.
+- This is a metadata correctness correction, with no claimed search-result
+  benefit. Other prerender/runtime schema lifecycle issues remain separate.
+
+## 2026-10-12 — Bounded ad-slot diagnostics
+
+- Added best-effort Umami diagnostics for the existing dashboard native slot:
+  script ready/error, container populated and at least 50% container geometry
+  visible in a foreground tab. Each state is attempted once per mounted slot,
+  including effect replays. No new provider, ad request, identifier or storage.
+- These are browser diagnostics, not audited impressions, creative viewability,
+  fill rate or earnings. Current ad placement and EN/ES disclosure remain intact.
+- Added mocked unit and desktop/mobile EN/ES browser coverage. Browser tests
+  intercept all external traffic and use inert content instead of live ads.
+
+## 2026-10-12 — San Ysidro source identity
+
+- Main San Ysidro now uses only CBP port 250401. PedWest and Cross Border
+  Express can no longer override its hours, closure status or lane waits when
+  the main crossing is awaiting reports. Missing main-row data fails closed.
+- Added a captured official-source regression fixture, source-order/rename
+  tests and public endpoint failure-cache checks.
+
+## 2026-10-11 — Safer crossing guidance
+
+- Walk-or-drive pages now treat an official port closure as overriding retained
+  lane numbers, explain closure separately from missing reports in EN/ES, and
+  preserve genuine zero-minute waits. PR #123 passed 414 desktop/mobile route
+  navigations and was verified on Vercel production at commit 89955af1.
+- Corrected the paired San Ysidro/Otay Mesa guides: removed fixed April figures,
+  unsupported truck-delay explanations and blanket route rules; linked the
+  current comparison and identified rolling charts as historical context.
+  Original publication/byline remain; revision metadata records October 11.
+- Added EN/ES regression coverage for closure, Back navigation, reopening,
+  pending lane reports, comparison-guide links, translation and date metadata.
+
+## 2026-10-06 — Publication security and generated-writer reliability
+
+- Generated-data writers now resolve current main after queueing, generate in an
+  isolated worktree and regenerate/validate on bounded push races rather than
+  rebasing stale JSON. Manual anomaly drafts use the final successful worktree;
+  unrelated caller edits remain intact. Added 14 local-remote integration tests.
+- Migrated Tailwind to 4.3.3 with its dedicated PostCSS integration, CSS theme
+  and utility migration; updated source-map-js to its compatible patched 1.2.2.
+  The audit, data, bundle and route gates remain unchanged.
+- Owner approved Safari 16.4+, Chrome 111+ and Firefox 128+ as the support floor.
+  Older browsers may be affected. No Radix or unrelated dependency PRs are part
+  of this repair. Production recovery is verified separately by publication
+  provenance and public data freshness; a merged code change alone is not proof.
+
 ## 2026-09-30 — Vercel cutover and live-wait refresh
 
 - Approved production publication and IONOS apex/www website DNS cutover
@@ -192,7 +978,6 @@ a single session. Pull from `git log` if you ever need raw commit detail.
 
 ## 2026-08-19
 
-<<<<<<< HEAD
 ### Added
 - **Blueprint Border Line on the dashboard.** The border drawn as an
   architect's elevation: one line from the Pacific to the Gulf, all 42 ports
@@ -209,8 +994,7 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   `npm test`). There was no size check and the entry chunk had already
   drifted from a documented ~161 KB to 177 KB with nothing to catch it.
 
-=======
->>>>>>> origin/main
+
 ### Fixed
 - **Port identity is pinned; CBP renames can no longer move a URL.** CBP's feed
   intermittently substitutes a different row for the same physical crossing
@@ -232,15 +1016,13 @@ a single session. Pull from `git log` if you ever need raw commit detail.
   exactly to 42.
 - **Southbound restored for Ysleta**, which was failing silently on a stale
   `240203` key in `fetch-sb.mjs`. Coordinate coverage 40/44 -> 42/42.
-<<<<<<< HEAD
 - **Border Line i18n and tap-target gaps caught in verification.** The SVG
   title block rendered "42 CROSSINGS · 18 CON DATOS" in Spanish (half
   translated) and the `<desc>` was English-only; both are localised now.
   Mobile tick rows measured 23 CSS px at a 375px viewport (iPhone SE/mini),
   just under the 24x24 AA floor, because the SVG scales down inside a
   narrower screen — row height raised so it clears at 375px too.
-=======
->>>>>>> origin/main
+
 - **Accessibility: single `<h1>` and WCAG 2.2 tap targets.** The sidebar brand
   was an `<h1>` inside `hidden lg:flex`, so every page had two h1s at every
   width. Controls raised to a 24x24 floor with 44x44 on primary actions, via a
@@ -966,3 +1748,15 @@ Big push day — UX/product sprint phase 1+2, embed widget, /api, /best-time,
 ## Earlier sessions
 
 Before this changelog existed. Use `git log` for archeology.
+
+## 2026-10-29 — AI editorial receiver (review candidate, disabled)
+
+- Add an evidence-bundle contract and event-driven GitHub-file receiver for
+  genuine cloud-assistant EN/ES synthesis. No model call or authoring schedule
+  is created; ingestion stays off pending a verified cloud/connector dry run.
+- Re-fetch official primary sources, trace claim excerpts/numbers, retain AI
+  evidence-review provenance, escape narrative as literal MDX, enforce paired
+  receipts and coordinate one automated report per UTC day with the data pilot.
+- Schema/substring checks do not prove semantic accuracy; source/risk/language
+  review remains an explicit AI responsibility. Runtime/access limits and the
+  exact supported connector interface are in `docs/AI-EDITORIAL-INTERFACE.md`.

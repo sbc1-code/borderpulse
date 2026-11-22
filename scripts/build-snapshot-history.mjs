@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { writeLaneFlips } from './build-lane-flips.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_FILE = 'public/data/crossings.json';
@@ -79,6 +80,14 @@ function main() {
   };
   fs.writeFileSync(OUTPUT_FILE, `${JSON.stringify(artifact)}\n`);
   console.log(`[history] wrote ${ordered.length} snapshots → ${OUTPUT_FILE}`);
+  // Lane summaries are a separate artifact. A failure here must not block the
+  // standard-wait archive the rest of the site already depends on.
+  try {
+    const count = writeLaneFlips({ includeCurrent: process.argv.includes('--include-current') });
+    console.log(`[lane-flips] wrote ${count} crossings`);
+  } catch (error) {
+    console.error(`[lane-flips] skipped: ${error.message}`);
+  }
 }
 
 try {

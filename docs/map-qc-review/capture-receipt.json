@@ -1,0 +1,119 @@
+{
+  "base": "4c906a6cc70926811147744be55e509eaeb45b3f",
+  "origin": "local production-mode API builds, not public browser QA",
+  "fixtureWaits": false,
+  "clockFrozen": false,
+  "snapshotFetchedAt": "2026-11-01T23:37:51.353Z",
+  "focusBefore": [
+    {
+      "width": 1440,
+      "focus": {
+        "focused": true,
+        "top": -28.859375,
+        "bottom": 15.140625,
+        "paneTop": -40.859375,
+        "paneScroll": 0,
+        "hit": false,
+        "viewportHeight": 844
+      }
+    },
+    {
+      "width": 390,
+      "focus": {
+        "focused": true,
+        "top": 49.140625,
+        "bottom": 93.140625,
+        "paneTop": 86.140625,
+        "paneScroll": 50,
+        "hit": false,
+        "viewportHeight": 844
+      }
+    }
+  ],
+  "summaryBefore": [
+    {
+      "width": 1440,
+      "stats": "/\nUSD/MXN\n0.00%\n$18.8216\nPrev $18.8216\n11:37 PM\n\nSummary: standard passenger lane\n\nWAIT TIMES AVAILABLE \u00b7 TEXAS\n\n20/26\n\nOPEN NOW\n\n26/26\n\nAVERAGE WAIT\n\n58 min\n\nADVISORIES\n\n11"
+    },
+    {
+      "width": 390,
+      "stats": "/\nUSD/MXN\n0.00%\n$18.8216\nPrev $18.8216\n11:37 PM\n\nSummary: standard passenger lane\n\nWAIT TIMES AVAILABLE \u00b7 TEXAS\n\n20/26\n\nOPEN NOW\n\n26/26\n\nAVERAGE WAIT\n\n58 min\n\nADVISORIES\n\n11"
+    }
+  ],
+  "after": [
+    {
+      "width": 1440,
+      "selected": "San Luis - San Luis II\nAZ \u00b7 No report \u00b7 Location not verified\n\u2014",
+      "focus": {
+        "focused": true,
+        "top": 86.140625,
+        "bottom": 130.140625,
+        "paneTop": 74.140625,
+        "paneScroll": 0,
+        "hit": true,
+        "viewportHeight": 844
+      },
+      "stats": "/\nUSD/MXN\n0.00%\n$18.8216\nPrev $18.8216\n11:37 PM\n\nSummary: SENTRI\n\nWAIT TIMES AVAILABLE \u00b7 TEXAS\n\n8/26\n\nOPEN NOW\n\n26/26\n\nAVERAGE WAIT\n\n5 min\n\nADVISORIES\n\n11",
+      "expectedSentri": {
+        "reports": 8,
+        "total": 26,
+        "mean": 5
+      },
+      "snapshot": "2026-11-01T23:37:51.353Z"
+    },
+    {
+      "width": 390,
+      "selected": "San Luis - San Luis II\nAZ \u00b7 No report \u00b7 Location not verified\n\u2014",
+      "focus": {
+        "focused": true,
+        "top": 86.140625,
+        "bottom": 130.140625,
+        "paneTop": 73.140625,
+        "paneScroll": 0,
+        "hit": true,
+        "viewportHeight": 844
+      },
+      "stats": "/\nUSD/MXN\n0.00%\n$18.8216\nPrev $18.8216\n11:37 PM\n\nSummary: SENTRI\n\nWAIT TIMES AVAILABLE \u00b7 TEXAS\n\n8/26\n\nOPEN NOW\n\n26/26\n\nAVERAGE WAIT\n\n5 min\n\nADVISORIES\n\n11",
+      "expectedSentri": {
+        "reports": 8,
+        "total": 26,
+        "mean": 5
+      },
+      "snapshot": "2026-11-01T23:37:51.353Z"
+    }
+  ],
+  "captures": [
+    {
+      "file": "before-focus-1440.png",
+      "capturedAt": "2026-11-01T23:49:49.118329+00:00"
+    },
+    {
+      "file": "before-focus-390.png",
+      "capturedAt": "2026-11-01T23:49:50.266353+00:00"
+    },
+    {
+      "file": "before-summary-TX-1440.png",
+      "capturedAt": "2026-11-01T23:51:13.908095+00:00"
+    },
+    {
+      "file": "before-summary-TX-390.png",
+      "capturedAt": "2026-11-01T23:51:14.556109+00:00"
+    },
+    {
+      "file": "after-focus-1440.png",
+      "capturedAt": "2026-11-01T23:55:06.272865+00:00"
+    },
+    {
+      "file": "after-focus-390.png",
+      "capturedAt": "2026-11-01T23:55:07.336886+00:00"
+    },
+    {
+      "file": "after-summary-1440.png",
+      "capturedAt": "2026-11-01T23:55:06.672873+00:00"
+    },
+    {
+      "file": "after-summary-390.png",
+      "capturedAt": "2026-11-01T23:55:07.608892+00:00"
+    }
+  ]
+}

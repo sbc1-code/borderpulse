@@ -3,7 +3,7 @@ title: "Mejor hora para cruzar Nogales DeConcini: 30 días de datos de CBP"
 description: "Mediana de espera en Nogales DeConcini (Arizona) por hora y día, según CBP. Mediana general de 45 minutos. El lunes es la pared; el miércoles a la 1 a. m. marca 0."
 slug: mejor-hora-para-cruzar-nogales-deconcini
 date: "2026-04-24"
-updated: "2026-07-27"
+updated: "2026-10-29"
 author: sebastian
 pillar: data-analysis
 lang: es
@@ -24,6 +24,9 @@ officialSources:
   - label: "CBP Programa SENTRI"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
+
+> **Análisis histórico.** Las cifras fijas corresponden a la muestra fechada del artículo. Las gráficas usan historial publicado por separado. Revisa sus fechas de origen y los reportes recientes por carril antes de viajar.
+
 
 Nogales DeConcini es la garita central de Nogales, Arizona, principalmente para tráfico de pasajeros y peatones. La mediana de espera hacia el norte sobre 30 días es de **45 minutos**, todavía la más pesada de las garitas de Arizona que monitoreamos (Mariposa anda en 50 general pero más ligera en la mañana, Douglas en 35, San Luis en 25, Naco en 10). La ventana ligera más confiable es **la madrugada del miércoles, donde la 1 a. m. marca 0 minutos y las 2 y 3 a. m. se quedan en 10**. El bloque a evitar es **la madrugada del lunes**: la medianoche y la 1 a. m. marcan 120 minutos, las celdas más pesadas de esta garita. Todas las horas son hora de Arizona.
 
@@ -66,7 +69,7 @@ DeConcini tiene acceso a carril SENTRI. En las ventanas de madrugada de miércol
 
 ## Cómo calculamos estos números
 
-El cron de Border Pulse jala el tiempo de espera oficial de CBP para DeConcini y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, en hora de Arizona (sin horario de verano). Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica de arriba siempre refleja la ventana actual. La mediana es más honesta que el promedio para estos datos: un solo outlier de 180 minutos puede inflar un promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), la fuente canónica. La página en vivo de [DeConcini](/crossing/nogales-deconcini/) muestra la espera de hoy junto a este patrón de 30 días.
+El cron de Border Pulse jala el tiempo de espera oficial de CBP para DeConcini y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, en hora de Arizona (sin horario de verano). Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica integrada muestra el historial publicado por separado; revisa sus fechas de origen y cobertura. La mediana es más honesta que el promedio para estos datos: un solo outlier de 180 minutos puede inflar un promedio sin decirte nada de la hora típica. Cada número en esta página viene del [feed CBP BWT](https://bwt.cbp.gov/), la fuente canónica. La página en vivo de [DeConcini](/crossing/nogales-deconcini/) muestra la espera de hoy junto a este patrón de 30 días.
 
 ## Qué hacer con esto
 

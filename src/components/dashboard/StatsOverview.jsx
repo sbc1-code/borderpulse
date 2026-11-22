@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, MapPin, Activity, AlertTriangle } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { getPortStatus, hasOperationalAdvisory } from '@/components/utils/crossingMeta';
 
@@ -11,17 +10,18 @@ import { getPortStatus, hasOperationalAdvisory } from '@/components/utils/crossi
 //   heavy   >= 45
 // Null wait = CBP has no current report (closed lane, offline port). These
 // are NOT counted as "0 min" — they're excluded from math and shown as the
-// denominator-only contribution under "Open".
+// total-crossing denominator. "Open" independently uses official port status.
 export default function StatsOverview({
   crossings,
   selectedDirection = 'northbound',
+  lane = null,
   language,
   theme,
   regionLabel,
   layout = 'grid', // 'grid' (4-col), 'strip' (single horizontal row), 'sidebar' (vertical stack)
 }) {
   const reportingWaits = crossings
-    .map((crossing) => getWaitMinutes(crossing, selectedDirection))
+    .map((crossing) => getWaitMinutes(crossing, selectedDirection, lane))
     .filter((t) => t !== null);
   const totalCrossings = crossings.length;
   const reportingCount = reportingWaits.length;
@@ -76,18 +76,15 @@ export default function StatsOverview({
   // Compact horizontal strip — placed AFTER the wait list begins. Single row, no Card wrapper.
   if (layout === 'strip') {
     return (
-      <div className={`flex flex-wrap items-center gap-3 sm:gap-4 px-3 py-2 rounded-lg border ${
+      <div data-testid="stats-overview" className={`flex flex-wrap items-center gap-3 sm:gap-4 px-3 py-2 rounded-lg border ${
         theme === 'dark' ? 'bg-gray-800/60 border-gray-700' : 'bg-white border-slate-200'
       }`}>
-        {stats.map((stat, index) => (
-          <motion.div
+        {stats.map((stat) => (
+          <div
             key={stat.label}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.04 }}
-            className="flex items-center gap-2 min-w-0"
+            className="bp-result-enter flex items-center gap-2 min-w-0"
           >
-            <div className={`p-1 rounded-md ${stat.bg} flex-shrink-0`}>
+            <div className={`p-1 rounded-md ${stat.bg} shrink-0`}>
               <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
             </div>
             <div className="min-w-0">
@@ -100,7 +97,7 @@ export default function StatsOverview({
                 {stat.value}
               </p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     );
@@ -109,21 +106,19 @@ export default function StatsOverview({
   // Vertical sidebar layout — stacked single-column cards for the right rail.
   if (layout === 'sidebar') {
     return (
-      <div className="grid grid-cols-2 gap-2">
-        {stats.map((stat, index) => (
-          <motion.div
+      <div data-testid="stats-overview" className="grid grid-cols-2 gap-2">
+        {stats.map((stat) => (
+          <div
             key={stat.label}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.04 }}
+            className="bp-result-enter"
           >
             <Card className={`${
               theme === 'dark'
                 ? 'bg-gray-800/60 border-gray-700'
                 : 'bg-white border-slate-200'
-            } hover:shadow-md transition-all`}>
+            }`}>
               <CardContent className="p-2.5 flex items-start gap-2">
-                <div className={`p-1 rounded-md ${stat.bg} flex-shrink-0`}>
+                <div className={`p-1 rounded-md ${stat.bg} shrink-0`}>
                   <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -138,7 +133,7 @@ export default function StatsOverview({
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         ))}
       </div>
     );
@@ -146,21 +141,19 @@ export default function StatsOverview({
 
   // Default 4-column grid (original layout, unchanged).
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
-      {stats.map((stat, index) => (
-        <motion.div
+    <div data-testid="stats-overview" className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
+      {stats.map((stat) => (
+        <div
           key={stat.label}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.04 }}
+          className="bp-result-enter"
         >
           <Card className={`${
             theme === 'dark'
               ? 'bg-gray-800/60 border-gray-700'
               : 'bg-white/80 border-slate-200'
-          } backdrop-blur-sm hover:shadow-md transition-all`}>
+          } backdrop-blur-xs`}>
             <CardContent className="p-3 min-h-[70px] sm:min-h-[80px] flex items-start gap-2">
-              <div className={`p-1.5 rounded-lg ${stat.bg} flex-shrink-0`}>
+              <div className={`p-1.5 rounded-lg ${stat.bg} shrink-0`}>
                 <stat.icon className={`w-4 h-4 ${stat.color}`} />
               </div>
               <div className="min-w-0 flex-1">
@@ -178,7 +171,7 @@ export default function StatsOverview({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

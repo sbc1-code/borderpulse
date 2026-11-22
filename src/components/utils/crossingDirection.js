@@ -1,10 +1,13 @@
-export function getWaitMinutes(crossing, direction = 'northbound') {
+import { availableLaneWait } from '../../lib/crossingAvailability.js';
+
+export function getWaitMinutes(crossing, direction = 'northbound', lane = null) {
   if ((crossing?.port_status || '').trim().toLowerCase() === 'closed') {
     return null;
   }
   if (direction === 'southbound') {
     return typeof crossing.southbound_wait_time === 'number' ? crossing.southbound_wait_time : null;
   }
+  if (lane) return availableLaneWait(crossing, lane);
   if (typeof crossing.northbound_wait_time === 'number') return crossing.northbound_wait_time;
   return typeof crossing.current_wait_time === 'number' ? crossing.current_wait_time : null;
 }

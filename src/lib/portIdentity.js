@@ -1,13 +1,12 @@
 // Canonical port identity.
 //
-// CBP's /api/bwtpublicmod intermittently substitutes a DIFFERENT row for the
-// same physical crossing: a different port_number AND a different port_name.
-// The two rows are mutually exclusive, verified across 200 committed snapshots
-// (git log public/data/crossings.json) -- they never co-occur, so this is not
-// a dedupe contest. The feed simply changes what it calls a bridge.
+// CBP's /api/bwtpublicmod sometimes publishes a different port_number and
+// port_name for the same physical crossing. Identity (port_number, name,
+// state) comes from this table, never from the feed. The feed still supplies
+// all live data (waits, lanes, status).
 //
-// That matters because slugs are derived from names (src/lib/slugs.js), so a
-// substitution moved the crossing's URL. Measured consequences before this fix:
+// Slugs are derived from names (src/lib/slugs.js), so a substitution used to
+// move the crossing's URL. Measured consequences before identity was pinned:
 //   - /crossing/paso-del-norte/ served a hard 404 while the sitemap advertised
 //     /crossing/el-paso-paso-del-norte-pdn/
 //   - ~22% of production deploys failed, because scripts/smoke-routes.mjs
@@ -17,12 +16,19 @@
 //   - favorites are stored by port_number in localStorage, so a favorited Naco
 //     silently vanished on 25% of loads
 //
-// Fix: identity (port_number, name, state) comes from this table, never from
-// the feed. The feed still supplies all live DATA (waits, lanes, status).
+// An early sample of 200 committed snapshots mostly saw these spellings
+// alternate rather than arrive together. That is not a rule. The raw feed
+// saved 2026-11-02 contains both rows at once for Ysleta (240104 and 240203),
+// Paso Del Norte, BOTA, Naco, Otay Mesa, and the Brownsville legacy pairs.
+// When both are present, scripts/fetch-cbp.mjs has to choose: a reported wait
+// outranks an empty or Update Pending row, and Lanes Closed or N/A stays on
+// the lane instead of being dropped.
 //
-// Substitution rates measured over 200 snapshots:
+// Substitution counts from that earlier 200-snapshot sample:
 //   240202 PDN 188 / 202401 12      240201 BOTA 188 / 240207 12
-//   240104 Ysleta 199 / 240203 1    250401 San Ysidro 198 / 250407 2
+//   240104 Ysleta 199 / 240203 1
+//   San Ysidro/PedWest was previously treated as a substitution. The raw CBP
+//   feed observed 2026-10-11 contains both, so that mapping is revoked below.
 //   260301 Naco 149 / 260305 51     250601 Otay Mesa 196 / 250609 4
 //
 // The last two entries are a different failure: 230103 "Gateway" and 230106
@@ -37,7 +43,9 @@ export const PINNED_PORTS = {
   '240202': { name: 'El Paso - Paso Del Norte (PDN)', state: 'TX', aliases: ['202401'] },
   '240201': { name: 'El Paso - Bridge of the Americas (BOTA)', state: 'TX', aliases: ['240207'] },
   '240104': { name: 'El Paso - Ysleta', state: 'TX', aliases: ['240203'] },
-  '250401': { name: 'San Ysidro', state: 'CA', aliases: ['250407'] },
+  // PedWest (250407) co-occurs with the main crossing and has its own hours.
+  // It is not an identity alias. See the explicit San Ysidro collector guard.
+  '250401': { name: 'San Ysidro', state: 'CA', aliases: [] },
   '260301': { name: 'Naco', state: 'AZ', aliases: ['260305'] },
   '250601': { name: 'Otay Mesa', state: 'CA', aliases: ['250609'] },
 
@@ -46,8 +54,8 @@ export const PINNED_PORTS = {
   // the substitution pairs above already group correctly via the name rules in
   // scripts/fetch-cbp.mjs (both spellings match the same regex), so they need
   // identity pinning only. Forcing port-grouping on them would bypass those
-  // name rules and orphan sibling rows (cargo lots, Cross Border Express)
-  // that are supposed to merge into their parent crossing.
+  // name rules and orphan sibling rows (such as cargo lots) that are
+  // supposed to merge into their parent crossing. San Ysidro is guarded separately.
   '535501': { name: 'Brownsville - B&M', state: 'TX', aliases: ['230106'], collapse: true },
   '535504': { name: 'Brownsville - Gateway', state: 'TX', aliases: ['230103'], collapse: true },
 };

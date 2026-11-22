@@ -25,7 +25,7 @@ export default function SanYsidroDecision({ sanYsidro, otayMesa, fetchedAt, lang
   ];
 
   return (
-    <section className="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:p-5" aria-labelledby="san-ysidro-decision-title">
+    <section className="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-xs dark:border-gray-700 dark:bg-gray-900 sm:p-5" aria-labelledby="san-ysidro-decision-title">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h2 id="san-ysidro-decision-title" className="text-base font-semibold text-slate-900 dark:text-white">
           {es ? 'Compara San Ysidro y Otay Mesa' : 'Compare San Ysidro and Otay Mesa'}

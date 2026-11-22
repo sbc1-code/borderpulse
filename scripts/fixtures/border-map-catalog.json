@@ -1,0 +1,217 @@
+{
+  "source_commit": "6a4a0bdac51f37f8ab59fd236205ca3790427076",
+  "snapshot_fetched_at": "2026-11-01T20:37:32.153Z",
+  "purpose": "Frozen canonical identities for geographic regression; contains no wait observations.",
+  "crossings": [
+    {
+      "port_number": "250201",
+      "name": "Andrade",
+      "state": "CA"
+    },
+    {
+      "port_number": "535501",
+      "name": "Brownsville - B&M",
+      "state": "TX"
+    },
+    {
+      "port_number": "240201",
+      "name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX"
+    },
+    {
+      "port_number": "535504",
+      "name": "Brownsville - Gateway",
+      "state": "TX"
+    },
+    {
+      "port_number": "535503",
+      "name": "Brownsville - Los Indios",
+      "state": "TX"
+    },
+    {
+      "port_number": "535502",
+      "name": "Brownsville - Veterans International",
+      "state": "TX"
+    },
+    {
+      "port_number": "250301",
+      "name": "Calexico - East",
+      "state": "CA"
+    },
+    {
+      "port_number": "250302",
+      "name": "Calexico - West",
+      "state": "CA"
+    },
+    {
+      "port_number": "240601",
+      "name": "Columbus",
+      "state": "NM"
+    },
+    {
+      "port_number": "230201",
+      "name": "Del Rio",
+      "state": "TX"
+    },
+    {
+      "port_number": "260101",
+      "name": "Douglas (Raul Hector Castro)",
+      "state": "AZ"
+    },
+    {
+      "port_number": "230301",
+      "name": "Eagle Pass - Bridge I",
+      "state": "TX"
+    },
+    {
+      "port_number": "230302",
+      "name": "Eagle Pass - Bridge II",
+      "state": "TX"
+    },
+    {
+      "port_number": "240221",
+      "name": "El Paso",
+      "state": "TX"
+    },
+    {
+      "port_number": "240202",
+      "name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX"
+    },
+    {
+      "port_number": "240204",
+      "name": "El Paso - Stanton DCL",
+      "state": "TX"
+    },
+    {
+      "port_number": "240104",
+      "name": "El Paso - Ysleta",
+      "state": "TX"
+    },
+    {
+      "port_number": "l24501",
+      "name": "Fort Hancock",
+      "state": "TX"
+    },
+    {
+      "port_number": "230503",
+      "name": "Hidalgo/Pharr - Anzalduas International Bridge",
+      "state": "TX"
+    },
+    {
+      "port_number": "230501",
+      "name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX"
+    },
+    {
+      "port_number": "230502",
+      "name": "Hidalgo/Pharr - Pharr",
+      "state": "TX"
+    },
+    {
+      "port_number": "230401",
+      "name": "Laredo - Bridge I",
+      "state": "TX"
+    },
+    {
+      "port_number": "230402",
+      "name": "Laredo - Bridge II",
+      "state": "TX"
+    },
+    {
+      "port_number": "230403",
+      "name": "Laredo - Colombia Solidarity",
+      "state": "TX"
+    },
+    {
+      "port_number": "230404",
+      "name": "Laredo - World Trade Bridge",
+      "state": "TX"
+    },
+    {
+      "port_number": "260201",
+      "name": "Lukeville",
+      "state": "AZ"
+    },
+    {
+      "port_number": "240401",
+      "name": "Marcelino Serna - Tornillo",
+      "state": "TX"
+    },
+    {
+      "port_number": "260301",
+      "name": "Naco",
+      "state": "AZ"
+    },
+    {
+      "port_number": "260401",
+      "name": "Nogales - Deconcini",
+      "state": "AZ"
+    },
+    {
+      "port_number": "260402",
+      "name": "Nogales - Mariposa",
+      "state": "AZ"
+    },
+    {
+      "port_number": "260403",
+      "name": "Nogales - Morley Gate",
+      "state": "AZ"
+    },
+    {
+      "port_number": "250601",
+      "name": "Otay Mesa",
+      "state": "CA"
+    },
+    {
+      "port_number": "240301",
+      "name": "Presidio - PRESIDIO PORT OF ENTRY",
+      "state": "TX"
+    },
+    {
+      "port_number": "230902",
+      "name": "Progreso - Donna International Bridge",
+      "state": "TX"
+    },
+    {
+      "port_number": "230901",
+      "name": "Progreso - Progreso International Bridge",
+      "state": "TX"
+    },
+    {
+      "port_number": "230701",
+      "name": "Rio Grande City",
+      "state": "TX"
+    },
+    {
+      "port_number": "231001",
+      "name": "Roma",
+      "state": "TX"
+    },
+    {
+      "port_number": "260801",
+      "name": "San Luis - San Luis I",
+      "state": "AZ"
+    },
+    {
+      "port_number": "260802",
+      "name": "San Luis - San Luis II",
+      "state": "AZ"
+    },
+    {
+      "port_number": "250401",
+      "name": "San Ysidro",
+      "state": "CA"
+    },
+    {
+      "port_number": "240801",
+      "name": "Santa Teresa - Santa Teresa Port of Entry",
+      "state": "NM"
+    },
+    {
+      "port_number": "250501",
+      "name": "Tecate",
+      "state": "CA"
+    }
+  ]
+}

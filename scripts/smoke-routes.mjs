@@ -4,6 +4,28 @@ import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { checkGrowthInteractions } from './check-growth-interactions.mjs';
+import { checkBrowserResilience } from './check-browser-resilience.mjs';
+import { checkHistoricalPatterns } from './check-historical-pattern.mjs';
+import { checkRouterNavigation } from './check-router-navigation.mjs';
+import { checkDashboardSummary } from './check-dashboard-summary.mjs';
+import { checkShareLoading } from './check-share-loading.mjs';
+import { checkLaneContext } from './check-lane-context.mjs';
+import { checkHistoricalHourLabels } from './check-historical-hour-labels.mjs';
+import { checkLocalCrossings } from './check-local-crossings.mjs';
+import { checkNoJsReports } from './check-nojs-reports.mjs';
+import { checkWalkDriveFreshness } from './check-walk-drive-freshness.mjs';
+import { checkWalkDriveAvailability } from './check-walk-drive-availability.mjs';
+import { checkComparisonGuide } from './check-comparison-guide.mjs';
+import { checkSentriRenewal } from './check-sentri-renewal.mjs';
+import { checkSantaTeresaActions } from './check-santa-teresa-actions.mjs';
+import { checkHiddenCrossings } from './check-hidden-crossings.mjs';
+import { checkReportTimes } from './check-report-times.mjs';
+import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
+import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
+import { checkBuiltHreflangs, checkHreflangNavigation } from './check-hreflang.mjs';
+import { checkDocumentLanguage } from './check-document-language.mjs';
+import { checkBorderMap } from './check-border-map.mjs';
+import { checkLaneFlips } from './check-lane-flips.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.resolve(root, 'dist');
@@ -203,7 +225,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
           const headings = [...document.querySelectorAll('h1')].map((node) => node.textContent?.trim() || '');
           const body = document.body?.innerText || '';
           return headings.some((heading) =>
-            heading.startsWith('Best time to cross every U.S.-Mexico border crossing today'),
+            heading.startsWith('Best time to cross: historical patterns by crossing'),
           ) || body.includes('Something went wrong');
         }, null, { timeout: 5_000 });
       }
@@ -220,11 +242,12 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
       }
       if (!rendered.title || !rendered.description) throw new Error('missing title or description');
       const schemas = rendered.schemas.map((value) => JSON.parse(value));
+      assertNoGlobalFaq(schemas, route.path);
       if (route.path === '/best-time/') {
         const types = schemaTypes(schemas);
         const itemList = schemas.find((schema) => schema?.['@type'] === 'ItemList');
         const routeHeading = rendered.headings.find((heading) =>
-          heading.startsWith('Best time to cross every U.S.-Mexico border crossing today'),
+          heading.startsWith('Best time to cross: historical patterns by crossing'),
         );
         if (!routeHeading) {
           throw new Error(`expected Best time heading; saw: ${rendered.headings.join(' | ') || '(none)'}`);
@@ -279,6 +302,9 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   // The dashboard's Analytics view is a lazy-loaded chunk, so a route-only
   // sweep cannot prove its asset is present in the deploy artifact. Exercise
   // the toggle once per viewport and fail on the same ErrorBoundary users see.
+  // The canonical sweep includes /es/, which intentionally saves Spanish.
+  // This English-copy fixture must establish its own preference.
+  await page.evaluate(() => localStorage.setItem('borderPulse_language', 'en'));
   activeErrors = [];
   try {
     const response = await page.goto(new URL('/', baseUrl).href, {
@@ -292,7 +318,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     await page.getByRole('button', { name: 'Analytics', exact: true }).click();
     await page.waitForFunction(() => {
       const body = document.body?.innerText || '';
-      return body.includes('Analytics populate as you use the app.')
+      return body.includes('This view uses waits saved in this browser only.')
         || body.includes('Average wait by hour')
         || body.includes('Something went wrong');
     }, null, { timeout: 5_000 });
@@ -300,7 +326,7 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
     if (rendered.body.includes('Something went wrong') || rendered.body.includes('Border Pulse encountered an error')) {
       throw new Error('ErrorBoundary rendered');
     }
-    if (!rendered.body.includes('Analytics populate as you use the app.') && !rendered.body.includes('Average wait by hour')) {
+    if (!rendered.body.includes('This view uses waits saved in this browser only.') && !rendered.body.includes('Average wait by hour')) {
       throw new Error('Analytics view did not render');
     }
     if (activeErrors.length) throw new Error(activeErrors.join(' | '));
@@ -309,9 +335,73 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
   }
 
   try {
+    await checkBorderMap(browser, baseUrl, profile.viewport);
     await checkGrowthInteractions(page, context, baseUrl);
+    await checkBrowserResilience(page, context, baseUrl);
+    await checkHistoricalPatterns(page, context, baseUrl);
+    await checkRouterNavigation(page, context, baseUrl);
+    await checkDashboardSummary(page, context, baseUrl);
+    await checkLocalCrossings(page, context, baseUrl);
+    await checkLaneContext(browser, baseUrl, profile.viewport);
+    if (profile.name === 'mobile') await checkLaneContext(browser, baseUrl, { width: 320, height: 720 });
+    await checkShareLoading(browser, baseUrl, profile.viewport);
+    await checkHistoricalHourLabels(browser, baseUrl, profile.viewport);
+    if (profile.name === 'mobile') await checkHistoricalHourLabels(browser, baseUrl, { width: 320, height: 720 });
+    await checkWalkDriveAvailability(page, context, baseUrl);
+    await checkWalkDriveFreshness(context, baseUrl);
+    await checkComparisonGuide(page, context, baseUrl);
+    await checkSentriRenewal(page, context, baseUrl);
+    await checkSantaTeresaActions(context, baseUrl);
+    await checkHiddenCrossings(context, baseUrl);
   } catch (error) {
     failures.push(`${profile.name} growth interactions: ${error.stack || error.message}`);
+  }
+  activeErrors = [];
+  // Bound the entire fixture, including browser protocol promises that are
+  // outside locator timeouts. A stuck fixture must fail the release gate.
+  const reportDeadline = setTimeout(() => {
+    console.error(`[report-times] ${profile.name}: exceeded 60-second fixture deadline`);
+    page.close().catch(() => {});
+  }, 60_000);
+  try {
+    await checkReportTimes(page, context, baseUrl);
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} report times: ${error.stack || error.message}`);
+  } finally {
+    clearTimeout(reportDeadline);
+  }
+  activeErrors = [];
+  const languageDeadline = setTimeout(() => {
+    console.error(`[document-language] ${profile.name}: exceeded 60-second fixture deadline`);
+    page.close().catch(() => {});
+  }, 60_000);
+  try {
+    await checkDocumentLanguage(page, context, baseUrl);
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} document language: ${error.stack || error.message}`);
+  } finally {
+    clearTimeout(languageDeadline);
+  }
+  activeErrors = [];
+  const metadataDeadline = setTimeout(() => {
+    console.error(`[metadata-navigation] ${profile.name}: exceeded 60-second fixture deadline`);
+    page.close().catch(() => {});
+  }, 60_000);
+  try {
+    await checkFaqNavigation(page, baseUrl);
+    await checkHreflangNavigation(page, baseUrl);
+    if (activeErrors.length) throw new Error(activeErrors.join(' | '));
+  } catch (error) {
+    failures.push(`${profile.name} metadata navigation: ${error.stack || error.message}`);
+  } finally {
+    clearTimeout(metadataDeadline);
+  }
+  try {
+    await checkLaneFlips(browser, baseUrl, profile.viewport);
+  } catch (error) {
+    failures.push(`${profile.name} lane flips: ${error.stack || error.message}`);
   }
   await context.close();
   console.log(`[routes:${profile.name}] checked ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes + dashboard analytics`);
@@ -319,6 +409,8 @@ async function runProfile(browser, profile, manifest, expectedCrossingCount) {
 }
 
 async function main() {
+  checkBuiltFaqScope(distDir);
+  checkBuiltHreflangs(distDir);
   const manifest = loadRouteManifest();
   if (process.argv.includes('--growth-only')) {
     manifest.canonicals = [];
@@ -332,6 +424,9 @@ async function main() {
     console.log(`[routes] Chrome: ${executablePath}`);
     console.log(`[routes] manifest: ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes`);
     browser = await chromium.launch({ executablePath, headless: true, args: ['--no-sandbox'] });
+    await checkNoJsReports(browser, baseUrl);
+    await checkAdSlotDiagnostics(browser, baseUrl);
+    if (process.argv.includes('--ads-only')) return;
     const profiles = [
       { name: 'desktop', viewport: { width: 1440, height: 900 }, isMobile: false },
       { name: 'mobile', viewport: { width: 390, height: 844 }, isMobile: true },

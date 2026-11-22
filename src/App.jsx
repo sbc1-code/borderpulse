@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from '@/components/ScrollToTop';
 import Layout from '@/Layout';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Dashboard from '@/pages/Dashboard';
@@ -20,6 +21,10 @@ const Methodology = lazy(() => import('@/pages/Methodology'));
 const Compare = lazy(() => import('@/pages/Compare'));
 const WalkOrDrive = lazy(() => import('@/pages/WalkOrDrive'));
 const Privacy = lazy(() => import('@/pages/Privacy'));
+const CrossingConsole = lazy(() => import('@/pages/CorridorRedirect'));
+const LaneFlip = lazy(() => import('@/pages/LaneFlip'));
+const FeatureBusiness = lazy(() => import('@/pages/FeatureBusiness'));
+const CityGuide = lazy(() => import('@/pages/CityGuide'));
 
 function RouteFallback() {
   return (
@@ -35,6 +40,7 @@ function LayoutRoutes() {
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/es" element={<Dashboard />} />
           <Route path="/crossing/:slug" element={<CrossingDetail />} />
           <Route path="/best-time" element={<BestTimeIndex />} />
           <Route path="/best-time/:slug" element={<BestTime />} />
@@ -45,9 +51,16 @@ function LayoutRoutes() {
           <Route path="/methodology" element={<Methodology lang="en" />} />
           <Route path="/metodologia" element={<Methodology lang="es" />} />
           <Route path="/compare/:pair" element={<Compare />} />
+          <Route path="/corridor/san-diego-tijuana" element={<CrossingConsole />} />
           <Route path="/walk-or-drive/:slug" element={<WalkOrDrive />} />
+          <Route path="/lane-flip" element={<LaneFlip />} />
+          <Route path="/lane-flip/:slug" element={<LaneFlip />} />
           <Route path="/privacy" element={<Privacy lang="en" />} />
           <Route path="/privacidad" element={<Privacy lang="es" />} />
+          <Route path="/feature-your-business" element={<FeatureBusiness lang="en" />} />
+          <Route path="/anunciate" element={<FeatureBusiness lang="es" />} />
+          <Route path="/city/:city" element={<CityGuide lang="en" />} />
+          <Route path="/ciudad/:city" element={<CityGuide lang="es" />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
@@ -58,6 +71,7 @@ function LayoutRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ErrorBoundary>
         <Suspense fallback={<RouteFallback />}>
           <Routes>

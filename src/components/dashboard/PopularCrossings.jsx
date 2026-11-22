@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withLane } from '@/lib/laneContext';
 import { track } from '@/lib/analytics';
 
 const POPULAR_PORTS = [
@@ -17,7 +18,7 @@ const POPULAR_PORTS = [
   '230501', // Hidalgo/Pharr - Hidalgo
 ];
 
-export default function PopularCrossings({ crossings, language = 'en' }) {
+export default function PopularCrossings({ crossings, language = 'en', lane }) {
   if (!crossings || !crossings.length) return null;
   const byPort = new Map(crossings.map((c) => [c.port_number, c]));
   const items = POPULAR_PORTS.map((p) => byPort.get(p)).filter((c) => c && c.slug);
@@ -30,14 +31,14 @@ export default function PopularCrossings({ crossings, language = 'en' }) {
       </h2>
       <p className="text-xs text-slate-500 mb-3">
         {language === 'en'
-          ? 'Live wait times, historical patterns, and best times to cross at each port.'
-          : 'Tiempos de espera en vivo, patrones históricos y mejores horas para cruzar en cada puerto.'}
+          ? 'Reported waits, historical patterns and crossing details. Availability varies by lane.'
+          : 'Esperas reportadas, patrones históricos y detalles de cada cruce. La disponibilidad varía por carril.'}
       </p>
       <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-1.5">
         {items.map((c) => (
           <li key={c.port_number} className="text-xs">
             <Link
-              to={`/crossing/${c.slug}/`}
+              to={withLane(`/crossing/${c.slug}/`, lane)}
               onClick={() => track('crossing-open', { slug: c.slug, source: 'popular' })}
               className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:underline"
             >

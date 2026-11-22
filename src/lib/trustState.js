@@ -70,22 +70,29 @@ export function formatAge(age, language = 'en') {
 }
 
 /**
- * The live-state label for a card footer. Only genuinely recent data is
- * allowed to call itself "Live"; everything else states its age instead of
- * implying a real-time feed.
+ * Retrieval freshness is not the age of an individual CBP lane report.
+ * Keep the measured snapshot thresholds, but never label a recent fetch Live.
  */
-export function liveLabel(state, age, language = 'en') {
+export function fetchLabel(state, age, language = 'en') {
   const en = language === 'en';
-  switch (state) {
-    case FRESHNESS.FRESH:
-      return en ? 'Live' : 'En vivo';
-    case FRESHNESS.AGING:
-      return formatAge(age, language);
-    case FRESHNESS.STALE:
-      return en ? `Stale · ${formatAge(age, language)}` : `Desactualizado · ${formatAge(age, language)}`;
-    default:
-      return en ? 'Age unknown' : 'Antigüedad desconocida';
+  if (state === FRESHNESS.UNKNOWN) return en ? 'Fetch time unknown' : 'Hora de consulta desconocida';
+  const fetched = en ? `Fetched ${formatAge(age, language)}` : `Consulta: ${formatAge(age, language)}`;
+  return state === FRESHNESS.STALE
+    ? `${en ? 'Stale snapshot' : 'Consulta desactualizada'} · ${fetched}`
+    : fetched;
+}
+
+/**
+ * CBP lane update_time is clock-only text, often with a timezone abbreviation.
+ * Preserve it as supplied; the feed's export date and our fetch time cannot
+ * establish the lane's report date, midnight rollover or DST occurrence.
+ */
+export function reportTimeLabel(updateTime, language = 'en') {
+  const en = language === 'en';
+  if (typeof updateTime !== 'string' || !updateTime.trim()) {
+    return en ? 'CBP report time unavailable' : 'Hora del reporte CBP no disponible';
   }
+  return `${en ? 'CBP reported' : 'Reporte CBP'}: ${updateTime}`;
 }
 
 /**

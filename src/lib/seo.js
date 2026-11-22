@@ -2,6 +2,18 @@
  * seo.js — lightweight helpers to set <meta> tags from SPA routes.
  * No extra deps; manipulates head directly.
  */
+import { pageHreflangs } from './hreflang.js';
+
+function setHreflangs(hreflangs) {
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((link) => link.remove());
+  for (const { lang, href } of hreflangs) {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', lang);
+    link.setAttribute('href', href);
+    document.head.appendChild(link);
+  }
+}
 
 function setMeta(name, content, attr = 'name') {
   if (!content) return;
@@ -16,17 +28,30 @@ function setMeta(name, content, attr = 'name') {
 
 /**
  * Update page-level SEO tags. Call from useEffect in each page component.
- * Pass null/undefined for any field to skip it.
+ * Pass null/undefined for a field to skip it. A canonical update also replaces
+ * language alternates; explicit hreflangs (including []) override the defaults.
+ * @param {{ title?: string|null, description?: string|null, ogTitle?: string|null,
+ * ogDescription?: string|null, ogImage?: string|null, ogUrl?: string|null,
+ * canonical?: string|null, lang?: string|null,
+ * hreflangs?: Array<{lang: string, href: string}>|null }} meta
  */
-export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical, lang }) {
+export function updatePageMeta({ title, description, ogTitle, ogDescription, ogImage, ogUrl, canonical, lang, hreflangs }) {
   if (lang) document.documentElement.lang = lang;
   if (title) document.title = title;
   if (description) setMeta('description', description);
   if (ogTitle) setMeta('og:title', ogTitle, 'property');
   if (ogDescription) setMeta('og:description', ogDescription, 'property');
   if (ogImage) setMeta('og:image', ogImage, 'property');
+  if (ogTitle || title) setMeta('twitter:title', ogTitle || title);
+  if (ogDescription || description) setMeta('twitter:description', ogDescription || description);
+  if (ogImage) setMeta('twitter:image', ogImage);
   if (ogUrl) setMeta('og:url', ogUrl, 'property');
   if (canonical) {
+    // Keep the correct direct-entry schema through data/language updates, but
+    // never carry a previous route's FAQ, Place or Article into another page.
+    document.querySelectorAll('script[data-route-canonical]').forEach(script => {
+      if (script.getAttribute('data-route-canonical') !== canonical) script.remove();
+    });
     let link = document.querySelector('link[rel="canonical"]');
     if (!link) {
       link = document.createElement('link');
@@ -34,20 +59,26 @@ export function updatePageMeta({ title, description, ogTitle, ogDescription, ogI
       document.head.appendChild(link);
     }
     link.setAttribute('href', canonical);
+    setHreflangs(hreflangs ?? pageHreflangs(canonical, lang || 'en'));
   }
 }
 
 /**
  * Reset meta tags to defaults (call on unmount or route change).
+ * Document language belongs to Layout or the content-specific page. Metadata
+ * effects also clean up during data updates, so they must not reset language.
  */
 export function resetPageMeta() {
-  document.documentElement.lang = 'en';
-  document.title = 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times';
-  setMeta('description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
-  setMeta('og:title', 'Border Pulse | Real-Time US-Mexico Border Crossing Wait Times', 'property');
-  setMeta('og:description', 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
+  setHreflangs(pageHreflangs('https://borderpulse.com/'));
+  document.title = 'Border Pulse | Reported US-Mexico Border Crossing Wait Times';
+  setMeta('description', 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
+  setMeta('og:title', 'Border Pulse | Reported US-Mexico Border Crossing Wait Times', 'property');
+  setMeta('og:description', 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.', 'property');
   setMeta('og:image', 'https://borderpulse.com/og-card.png', 'property');
   setMeta('og:url', 'https://borderpulse.com/', 'property');
+  setMeta('twitter:title', 'Border Pulse | Reported US-Mexico Border Crossing Wait Times');
+  setMeta('twitter:description', 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly. Bilingual EN/ES.');
+  setMeta('twitter:image', 'https://borderpulse.com/og-card.png');
   const link = document.querySelector('link[rel="canonical"]');
   if (link) link.setAttribute('href', 'https://borderpulse.com/');
 }

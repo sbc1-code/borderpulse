@@ -6,19 +6,10 @@ import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
 import { isSparseCell } from '@/lib/aggregates';
+import { DEFAULT_LANE, laneLabel } from '@/lib/laneContext';
+import { freshnessOf, fetchLabel, reportTimeLabel } from '@/lib/trustState';
 
 const FLAG = { CA: '🇺🇸', AZ: '🇺🇸', NM: '🇺🇸', TX: '🇺🇸' };
-
-function formatRelative(ts, lang) {
-  if (!ts) return '';
-  const d = new Date(ts);
-  if (Number.isNaN(d.getTime())) return '';
-  const minsAgo = Math.max(0, Math.round((Date.now() - d.getTime()) / 60000));
-  if (minsAgo < 1) return lang === 'es' ? 'ahora' : 'just now';
-  if (minsAgo < 60) return lang === 'es' ? `hace ${minsAgo} min` : `${minsAgo} min ago`;
-  const hrs = Math.floor(minsAgo / 60);
-  return lang === 'es' ? `hace ${hrs} h` : `${hrs} h ago`;
-}
 
 export default function Embed() {
   const { slug } = useParams();
@@ -35,10 +26,18 @@ export default function Embed() {
   const [crossings, setCrossings] = useState([]);
   const [aggregate, setAggregate] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [snapshotAt, setSnapshotAt] = useState(null);
+  const [now, setNow] = useState(Date.now);
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
+  const freshness = freshnessOf(snapshotAt, now);
 
   useEffect(() => {
     return subscribeToBorderData(doc => {
       setCrossings(doc.crossings || []);
+      setSnapshotAt(doc.timestamp || null);
       setLoaded(true);
     });
   }, []);
@@ -85,10 +84,6 @@ export default function Embed() {
     return null;
   }, [aggregate, wait, isSouthbound]);
 
-  const updatedAt = crossing
-    ? (isSouthbound ? crossing.southbound_updated_at : crossing.updated_at)
-    : null;
-
   const isDark = theme === 'dark';
   const bg = isDark ? 'bg-gray-900' : 'bg-white';
   const text = isDark ? 'text-slate-100' : 'text-slate-900';
@@ -121,7 +116,7 @@ export default function Embed() {
 
   const sourceLabel = isSouthbound
     ? (lang === 'es' ? 'Estimación' : 'Estimate')
-    : 'CBP';
+    : `CBP · ${laneLabel(DEFAULT_LANE, lang)}`;
 
   const deltaText = (() => {
     if (!typicalDelta) return null;
@@ -161,9 +156,9 @@ export default function Embed() {
         <div className="flex items-center justify-between gap-2 min-w-0">
           <div className="flex items-center gap-1.5 min-w-0">
             <h1 className="truncate text-[13px] font-semibold">{crossing.name}</h1>
-            <span className="text-xs flex-shrink-0" aria-hidden="true">{FLAG[crossing.state] || ''}</span>
+            <span className="text-xs shrink-0" aria-hidden="true">{FLAG[crossing.state] || ''}</span>
           </div>
-          <span className={`text-[10px] uppercase tracking-wide ${subtext} flex-shrink-0`}>
+          <span className={`text-[10px] uppercase tracking-wide ${subtext} shrink-0`}>
             {directionLabel}
           </span>
         </div>
@@ -179,7 +174,7 @@ export default function Embed() {
               {lang === 'es' ? 'Sin tiempo reportado' : 'No current wait reported'}
             </span>
           )}
-          <span className={`text-[10px] ml-auto ${subtext} flex-shrink-0`}>{sourceLabel}</span>
+          <span className={`text-[10px] ml-auto ${subtext} shrink-0`}>{sourceLabel}</span>
         </div>
 
         {!compact && deltaText && (
@@ -187,17 +182,17 @@ export default function Embed() {
         )}
 
         <div className={`mt-auto flex items-center justify-between gap-2 text-[10px] ${subtext}`}>
-          <div className="flex items-center gap-1 min-w-0">
+          <div className="flex min-w-0 flex-col gap-1">
             {wait != null ? (
               <>
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block flex-shrink-0" aria-hidden="true" />
-                <span className="truncate">{lang === 'es' ? 'En vivo' : 'Live'} · {formatRelative(updatedAt, lang)}</span>
+                <span>{reportTimeLabel(crossing.lanes?.passenger_standard?.update_time, lang)}</span>
               </>
             ) : (
               <span className="truncate">
-                {lang === 'es' ? 'Esperando datos de CBP' : 'Waiting for CBP data'}
+                {lang === 'es' ? 'Sin reporte de espera de CBP' : 'No CBP wait report'}
               </span>
             )}
+            <span>{fetchLabel(freshness.state, freshness.age, lang)}</span>
           </div>
         </div>
       </div>
@@ -214,7 +209,7 @@ export default function Embed() {
             {lang === 'es' ? 'Datos por Border Pulse' : 'Powered by Border Pulse'}
           </span>
         </div>
-        <span className={`text-[10px] ${subtext} flex-shrink-0`}>borderpulse.com →</span>
+        <span className={`text-[10px] ${subtext} shrink-0`}>borderpulse.com →</span>
       </a>
     </main>
   );

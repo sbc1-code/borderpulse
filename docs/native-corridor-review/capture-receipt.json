@@ -1,0 +1,78 @@
+{
+  "capturedAt": "2026-10-30T18:19:08.160Z",
+  "source": "Native-brand candidate, actual dated published snapshot/history, no synthetic fixture or clock override",
+  "states": [
+    {
+      "name": "dashboard-default-mobile",
+      "width": 390,
+      "scrollY": 0,
+      "heading": "US–Mexico border wait times",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "console-entry-mobile",
+      "width": 390,
+      "scrollY": 0,
+      "heading": "San Ysidro–Otay crossing map",
+      "mapClock": "Reported snapshot\n\nOct 30, 2026 / 10:07 AM PDT",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "console-es-mobile",
+      "width": 390,
+      "scrollY": 0,
+      "heading": "Mapa de cruces San Ysidro–Otay",
+      "mapClock": "Consulta reportada\n\n30 oct 2026 / 10:07 a.m. GMT-7",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "console-es-sentri-mobile",
+      "width": 390,
+      "scrollY": 103,
+      "heading": "Mapa de cruces San Ysidro–Otay",
+      "mapClock": "Consulta reportada\n\n30 oct 2026 / 10:07 a.m. GMT-7",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "console-es-720",
+      "width": 720,
+      "scrollY": 103,
+      "heading": "Mapa de cruces San Ysidro–Otay",
+      "mapClock": "Consulta reportada\n\n30 oct 2026 / 10:07 a.m. GMT-7",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "navigation-es-mobile",
+      "width": 390,
+      "scrollY": 308,
+      "heading": "Mapa de cruces San Ysidro–Otay",
+      "mapClock": "Consulta reportada\n\n30 oct 2026 / 10:07 a.m. GMT-7",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "console-details-desktop",
+      "width": 1440,
+      "scrollY": 103,
+      "heading": "San Ysidro–Otay crossing map",
+      "mapClock": "Reported snapshot\n\nOct 30, 2026 / 10:07 AM PDT",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    },
+    {
+      "name": "console-replay-desktop",
+      "width": 1440,
+      "scrollY": 156,
+      "heading": "San Ysidro–Otay crossing map",
+      "mapClock": "Historical replay · Not live\n\nOct 29, 2026 / 7:07 AM PDT",
+      "font": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

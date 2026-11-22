@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { observeAdSlot } from '@/lib/adSlotDiagnostics';
 
 /**
  * AdsterraBanner — lazy-injects the Adsterra Native Banner script.
@@ -20,26 +21,30 @@ export default function AdsterraBanner({
   language = 'en',
 }) {
   const hostRef = useRef(null);
-  const injectedRef = useRef(false);
+  const containerRef = useRef(null);
+  const scriptRef = useRef(null);
+  const diagnosticsRef = useRef(new Set());
 
   useEffect(() => {
-    if (injectedRef.current) return;
     if (!hostRef.current) return;
-    injectedRef.current = true;
-
-    const s = document.createElement('script');
-    s.async = true;
-    s.setAttribute('data-cfasync', 'false');
-    s.src = scriptSrc;
-    s.onerror = () => {
-      // Silent fail — don't surface ad-network errors to users.
-    };
-    hostRef.current.appendChild(s);
-  }, [scriptSrc]);
+    const shouldInject = !scriptRef.current;
+    if (shouldInject) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.setAttribute('data-cfasync', 'false');
+      s.src = scriptSrc;
+      scriptRef.current = s;
+    }
+    const cleanup = observeAdSlot(scriptRef.current, containerRef.current, diagnosticsRef.current);
+    // Attach listeners first; effect replays reuse the script without another
+    // ad request. A failed script remains visually silent and is not retried.
+    if (shouldInject) hostRef.current.appendChild(scriptRef.current);
+    return cleanup;
+  }, [scriptSrc, containerId]);
 
   return (
     <div className="w-full flex flex-col items-center my-6">
-      <span className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">{label}</span>
+      <span className="text-[10px] uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">{label}</span>
       <p className="mb-2 text-center text-[11px] text-slate-500">
         {language === 'en' ? 'Ads help support BorderPulse. Served by Adsterra.' : 'Los anuncios ayudan a mantener BorderPulse. Publicados por Adsterra.'}{' '}
         <a href={language === 'en' ? '/privacy/#advertising' : '/privacidad/#advertising'} className="underline underline-offset-2">
@@ -47,7 +52,7 @@ export default function AdsterraBanner({
         </a>
       </p>
       <div ref={hostRef} className="w-full flex justify-center">
-        <div id={containerId} />
+        <div ref={containerRef} id={containerId} />
       </div>
     </div>
   );

@@ -63,14 +63,16 @@ function SnapshotMetric({ icon: Icon, label, value, detail, tone = 'slate' }) {
 export default function CommuterSnapshot({
   crossings,
   selectedDirection = 'northbound',
+  lane = null,
   language = 'en',
   regionLabel,
+  trusted = true,
 }) {
   const reduceMotion = useReducedMotion();
   const stats = useMemo(() => {
     const rows = (crossings || []).map((crossing) => ({
       crossing,
-      wait: getWaitMinutes(crossing, selectedDirection),
+      wait: getWaitMinutes(crossing, selectedDirection, lane),
     }));
     const reporting = rows.filter((row) => row.wait != null);
     const total = rows.length;
@@ -110,9 +112,12 @@ export default function CommuterSnapshot({
       counts,
       overallTier: getStatusForWait(median),
     };
-  }, [crossings, selectedDirection]);
+  }, [crossings, selectedDirection, lane]);
 
-  const tier = TIER_META[stats.overallTier] || TIER_META.unknown;
+  const tier = trusted ? (TIER_META[stats.overallTier] || TIER_META.unknown) : {
+    ...TIER_META.unknown,
+    label: { en: 'Reported values', es: 'Valores reportados' },
+  };
   const hasRegion = Boolean(regionLabel) && !['All', 'Todos'].includes(regionLabel);
   const scopeLabel = hasRegion
     ? regionLabel
@@ -131,10 +136,10 @@ export default function CommuterSnapshot({
       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduceMotion ? { duration: 0 } : undefined}
-      className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950"
+      className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-950"
       aria-label={language === 'en' ? 'Commuter snapshot' : 'Resumen para commuters'}
     >
-      <div className="grid gap-0 lg:grid-cols-[1.1fr,2fr]">
+      <div className="grid gap-0 lg:grid-cols-[1.1fr_2fr]">
         <div className="border-b border-slate-200 bg-slate-950 p-3 text-white sm:p-4 lg:border-b-0 lg:border-r lg:border-slate-800">
           <div className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-semibold ${tier.chip}`}>
             <span className={`h-1.5 w-1.5 rounded-full ${tier.bar}`} />
@@ -143,7 +148,9 @@ export default function CommuterSnapshot({
           <div className="mt-2.5 flex items-end justify-between gap-3">
             <div className="min-w-0">
               <p className="text-xs uppercase tracking-wide text-slate-300">
-                {language === 'en' ? 'Median wait now' : 'Espera mediana ahora'}
+                {trusted
+                  ? (language === 'en' ? 'Median wait now' : 'Espera mediana ahora')
+                  : (language === 'en' ? 'Reported median wait' : 'Espera mediana reportada')}
               </p>
               <p className="mt-0.5 text-3xl font-bold leading-none tabular-nums sm:text-4xl">
                 {formatWait(stats.median)}
@@ -155,9 +162,9 @@ export default function CommuterSnapshot({
             </div>
           </div>
           <div className="mt-3 flex h-2 overflow-hidden rounded-full bg-slate-800">
-            <div className="bg-emerald-500" style={{ width: `${goodPct}%` }} />
-            <div className="bg-amber-500" style={{ width: `${moderatePct}%` }} />
-            <div className="bg-rose-500" style={{ width: `${heavyPct}%` }} />
+            <div className={trusted ? 'bg-emerald-500' : 'bg-slate-400'} style={{ width: `${goodPct}%` }} />
+            <div className={trusted ? 'bg-amber-500' : 'bg-slate-400'} style={{ width: `${moderatePct}%` }} />
+            <div className={trusted ? 'bg-rose-500' : 'bg-slate-400'} style={{ width: `${heavyPct}%` }} />
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-slate-300">
             <span>{stats.reportingCount}/{stats.total} {language === 'en' ? 'reporting' : 'reportando'}</span>
@@ -171,7 +178,7 @@ export default function CommuterSnapshot({
             label={language === 'en' ? 'Longest wait' : 'Mayor espera'}
             value={formatWait(stats.slowest?.wait)}
             detail={stats.slowest?.crossing?.name || (language === 'en' ? 'No current report' : 'Sin reporte actual')}
-            tone={stats.slowest?.wait >= 45 ? 'rose' : stats.slowest?.wait >= 15 ? 'amber' : 'slate'}
+            tone={!trusted ? 'slate' : stats.slowest?.wait >= 45 ? 'rose' : stats.slowest?.wait >= 15 ? 'amber' : 'slate'}
           />
           <SnapshotMetric
             icon={TrendingDown}
@@ -179,13 +186,13 @@ export default function CommuterSnapshot({
             // use. Border-wide, the shortest wait can be 1,500 miles away, so
             // the label states its scope instead of recommending anything.
             label={
-              hasRegion
+              !trusted ? (language === 'en' ? 'Lowest reported wait' : 'Menor espera reportada') : hasRegion
                 ? (language === 'en' ? `Shortest in ${scopeLabel}` : `Menor en ${scopeLabel}`)
                 : (language === 'en' ? 'Shortest border-wide' : 'Menor en la frontera')
             }
             value={formatWait(stats.fastest?.wait)}
             detail={stats.fastest?.crossing?.name || (language === 'en' ? 'No current report' : 'Sin reporte actual')}
-            tone="emerald"
+            tone={trusted ? 'emerald' : 'slate'}
           />
           <SnapshotMetric
             icon={Clock}
@@ -194,11 +201,11 @@ export default function CommuterSnapshot({
             detail={language === 'en'
               ? `${stats.counts.moderate} typical, ${stats.counts.good} quick`
               : `${stats.counts.moderate} normales, ${stats.counts.good} rápidos`}
-            tone={stats.counts.heavy ? 'rose' : 'emerald'}
+            tone={!trusted ? 'slate' : stats.counts.heavy ? 'rose' : 'emerald'}
           />
         </div>
       </div>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-200 bg-slate-50 px-4 py-2 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300">
+      {trusted && <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-200 bg-slate-50 px-4 py-2 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300">
         <span className="inline-flex items-center gap-1">
           <Activity className="h-3 w-3 text-emerald-500" />
           {language === 'en' ? 'Quick under 15m' : 'Rápido bajo 15m'}
@@ -211,7 +218,7 @@ export default function CommuterSnapshot({
           <AlertTriangle className="h-3 w-3 text-rose-500" />
           {language === 'en' ? 'Heavy 45m+' : 'Pesado 45m+'}
         </span>
-      </div>
+      </div>}
     </motion.section>
   );
 }

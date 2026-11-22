@@ -1,12 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck, AlertTriangle } from 'lucide-react';
+import { useParams, useLocation, useSearchParams, useNavigate, Link, Navigate } from 'react-router-dom';
+import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import LaneSelector from '@/components/dashboard/LaneSelector';
+import { normalizeLane, withLane } from '@/lib/laneContext';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
+import CrossingCameras from '@/components/dashboard/CrossingCameras';
+import { cameraSourceFor } from '@/lib/cameras';
+import { crossingDisplayName } from '@/lib/crossingNames';
+import { crossingSearchDescription, crossingSearchTitle } from '@/lib/crossingSeo';
+import SantaTeresaActions from '@/components/dashboard/SantaTeresaActions';
 import SanYsidroDecision from '@/components/dashboard/SanYsidroDecision';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
@@ -16,10 +23,16 @@ import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { nearestCrossings, kmToMiles } from '@/lib/geo';
 import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { readFavorites } from '@/lib/browserStorage';
+import HistoricalPattern from '@/components/dashboard/HistoricalPattern';
+import { recentTimelineEntries, RECENT_TIMELINE_DAYS } from '@/lib/timelineFreshness';
 import { isSparseCell } from '@/lib/aggregates';
 import { hasPedestrianLane } from '@/lib/crossingAvailability';
 import { pickLightestHour } from '@/lib/recommendations';
 import { track } from '@/lib/analytics';
+import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import SponsoredCard from '@/components/sponsors/SponsoredCard';
+import { sponsorForPort, cityForPort } from '@/lib/sponsors';
 
 const DAY_LABELS = {
   en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -82,7 +95,7 @@ function faqItems(crossing, aggregate, lang) {
   out.push({
     q: lang === 'en' ? `What are the current wait times at ${name}?` : `¿Cuáles son los tiempos de espera actuales en ${name}?`,
     a: lang === 'en'
-      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the card above for the live number.`
+      ? `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule. Check the lane report clock and retrieval age shown above.`
       : `Border Pulse toma el tiempo de espera más reciente de ${name} de U.S. Customs and Border Protection con regularidad. Consulta la tarjeta arriba para ver el número en vivo.`,
   });
 
@@ -99,20 +112,27 @@ function faqItems(crossing, aggregate, lang) {
     const best = pickLightestHour(crossing, aggregate.by_hour, today);
     if (best) {
       out.push({
-        q: lang === 'en' ? `What is the best time to cross at ${name} today?` : `¿Cuál es la mejor hora para cruzar en ${name} hoy?`,
+        q: lang === 'en' ? `What does the historical wait pattern show at ${name}?` : `¿Qué muestra el patrón histórico de espera en ${name}?`,
         a: lang === 'en'
-          ? `Based on the last 30 days of CBP data, the lightest typical wait at ${name} on ${DAY_LABELS.en[today]} is around ${formatHour12(best.hour, 'en')} (median ${best.median} min).`
-          : `Según los últimos 30 días de datos de CBP, la espera típica más ligera en ${name} los ${DAY_LABELS.es[today]} es alrededor de ${formatHour12(best.hour, 'es')} (mediana ${best.median} min).`,
+          ? `In the last 30 days of standard-passenger CBP data, the hour with the lowest median for the full local weekday (${DAY_LABELS.en[today]}) at ${name} is ${formatHour12(best.hour, 'en')} (median ${best.median} min). This hour may have passed; it is not a forecast.`
+          : `En los últimos 30 días de datos CBP de auto estándar, la hora con menor mediana del día local completo (${DAY_LABELS.es[today]}) en ${name} es ${formatHour12(best.hour, 'es')} (mediana ${best.median} min). Esa hora puede haber pasado; no es un pronóstico.`,
       });
     }
   }
 
   const laneList = [];
   const l = crossing.lanes || {};
-  if (l.passenger_sentri) laneList.push(lang === 'en' ? 'SENTRI' : 'SENTRI');
-  if (l.passenger_ready) laneList.push(lang === 'en' ? 'Ready Lane' : 'Ready Lane');
-  if (l.pedestrian_standard || l.pedestrian_ready) laneList.push(lang === 'en' ? 'pedestrian' : 'peatonal');
-  if (l.commercial_standard || l.commercial_fast) laneList.push(lang === 'en' ? 'commercial' : 'comercial');
+  // Closed and N/A used to be missing objects. Keeping the status must not
+  // add those lanes to this list.
+  const listed = (lane) => {
+    if (!lane || typeof lane !== 'object') return false;
+    const status = String(lane.status || '').trim().toLowerCase();
+    return status !== 'lanes closed' && status !== 'n/a';
+  };
+  if (listed(l.passenger_sentri)) laneList.push('SENTRI');
+  if (listed(l.passenger_ready)) laneList.push('Ready Lane');
+  if (listed(l.pedestrian_standard) || listed(l.pedestrian_ready)) laneList.push(lang === 'en' ? 'pedestrian' : 'peatonal');
+  if (listed(l.commercial_standard) || listed(l.commercial_fast)) laneList.push(lang === 'en' ? 'commercial' : 'comercial');
   if (laneList.length) {
     out.push({
       q: lang === 'en' ? `What lanes are available at ${name}?` : `¿Qué carriles están disponibles en ${name}?`,
@@ -134,7 +154,7 @@ function lookupSlot(byHour, dayIdx, hour) {
   return { median: slot.median, samples: slot.samples || 0 };
 }
 
-function CompareRow({ entry, language, slug }) {
+function CompareRow({ entry, language, slug, lane }) {
   const { crossing, distanceKm, currentWait, vsTypical } = entry;
 
   let deltaLine = null;
@@ -157,7 +177,7 @@ function CompareRow({ entry, language, slug }) {
 
   return (
     <Link
-      to={`/crossing/${slug}/`}
+      to={withLane(`/crossing/${slug}/`, lane)}
       className="block group"
     >
       <div className="flex items-center justify-between gap-3 p-3 rounded-md border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors">
@@ -185,7 +205,7 @@ function CompareRow({ entry, language, slug }) {
             )}
           </div>
         </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <div className="text-right">
             <div className="text-base font-semibold text-slate-900 dark:text-white tabular-nums">
               {currentWait == null ? '—' : currentWait}
@@ -205,6 +225,14 @@ function CompareRow({ entry, language, slug }) {
 
 export default function CrossingDetail() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const lane = normalizeLane(searchParams.get('lane'));
+  const changeLane = value => {
+    const next = new URLSearchParams(searchParams);
+    next.set('lane', normalizeLane(value));
+    navigate({ search: next.toString(), hash });
+  };
   const [state, setState] = useState({
     crossings: [],
     isLoading: true,
@@ -213,19 +241,13 @@ export default function CrossingDetail() {
   });
   const [aggregate, setAggregate] = useState(null);
   const [timeline, setTimeline] = useState(null);
+  const recentEntries = recentTimelineEntries(timeline?.entries);
   const [nearbyAggregates, setNearbyAggregates] = useState({}); // { port_number: aggregate|null }
   const [embedOpen, setEmbedOpen] = useState(false);
   const [anomalies, setAnomalies] = useState(null);
   const language = usePersistentLanguage();
   const [favoriteError, setFavoriteError] = useState(false);
-  const [favorites, setFavorites] = useState(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem('borderPulse_favorites') || '[]');
-      return Array.isArray(stored) ? stored : [];
-    } catch {
-      return [];
-    }
-  });
+  const [favorites, setFavorites] = useState(readFavorites);
 
   const toggleFavorite = (portNumber) => {
     const adding = !favorites.includes(portNumber);
@@ -278,6 +300,14 @@ export default function CrossingDetail() {
   }, [state.crossings, slug]);
 
   const canonicalSlug = crossing ? (portToSlug[crossing.port_number] || slug) : slug;
+  const { hash, search } = useLocation();
+  const loadedPort = crossing?.port_number;
+  useEffect(() => {
+    const target = hash === '#cameras' || hash === '#trends' ? hash.slice(1) : null;
+    if (!target || !loadedPort) return;
+    const frame = requestAnimationFrame(() => document.getElementById(target)?.scrollIntoView());
+    return () => cancelAnimationFrame(frame);
+  }, [hash, loadedPort, aggregate]);
 
   // Aggregate buckets are port-local; evaluate "today"/"now" in the port's
   // timezone once the crossing is known.
@@ -285,17 +315,6 @@ export default function CrossingDetail() {
     () => (crossing ? nowInPortTz(crossing) : { day: new Date().getDay(), hour: new Date().getHours() }),
     [crossing],
   );
-
-  const activeAnomaly = useMemo(() => {
-    if (!anomalies || !canonicalSlug) return null;
-    const list = Array.isArray(anomalies.active) ? anomalies.active : [];
-    const match = list.find((a) => a && a.port_slug === canonicalSlug);
-    if (!match) return null;
-    // Only render when the strings we display are actually strings — guards
-    // against a malformed feed crashing the page.
-    if (typeof match.summary_en !== 'string' || typeof match.summary_es !== 'string') return null;
-    return match;
-  }, [anomalies, canonicalSlug]);
 
   // Reset selected day to today's day-of-week whenever the crossing changes.
   useEffect(() => {
@@ -376,13 +395,9 @@ export default function CrossingDetail() {
 
   useEffect(() => {
     if (!crossing) return;
-    const hasHistoricalPattern = Array.isArray(aggregate?.by_hour) && aggregate.by_hour.length > 0;
-    const title = language === 'en'
-      ? `${crossing.name} Wait Times | Border Pulse`
-      : `Tiempos de Espera en ${crossing.name} | Border Pulse`;
-    const desc = language === 'en'
-      ? `Live ${crossing.name} border wait times, refreshed regularly. Official CBP data${hasHistoricalPattern ? ', historical trends, and best crossing times' : ', lane status, and port hours'}.`
-      : `Tiempos de espera en ${crossing.name}, actualizados con regularidad. Datos oficiales de CBP${hasHistoricalPattern ? ', tendencias históricas y mejores horarios para cruzar' : ', estado de carriles y horarios del puerto'}.`;
+    const cameraKind = cameraSourceFor(crossing.port_number)?.kind;
+    const title = crossingSearchTitle(crossing, language, cameraKind);
+    const desc = crossingSearchDescription(crossing, language, { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraKind) });
     const url = `https://borderpulse.com/crossing/${canonicalSlug}/`;
     updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
     return () => resetPageMeta();
@@ -406,7 +421,7 @@ export default function CrossingDetail() {
   }
 
   if (canonicalSlug && slug !== canonicalSlug) {
-    return <Navigate to={`/crossing/${canonicalSlug}/`} replace />;
+    return <Navigate to={`/crossing/${canonicalSlug}/${search}${hash}`} replace />;
   }
 
   const hoursSummary = getHoursSummary(crossing, language);
@@ -434,6 +449,7 @@ export default function CrossingDetail() {
     };
   });
   const isSanYsidro = canonicalSlug === 'san-ysidro';
+  const isSantaTeresa = String(crossing.port_number) === '240801';
   const lowerCompareEntries = isSanYsidro
     ? compareEntries.filter(({ crossing: c }) => portToSlug[c.port_number] !== 'otay-mesa')
     : compareEntries;
@@ -446,14 +462,14 @@ export default function CrossingDetail() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3 flex items-center justify-between gap-2">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to={withLane('/?area=all', lane)}>
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">
               {language === 'en' ? 'All crossings' : 'Todos los cruces'}
             </span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <Button
           variant="outline"
           size="sm"
@@ -467,7 +483,7 @@ export default function CrossingDetail() {
 
       <header className="mb-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-          {language === 'en' ? `${crossing.name} wait times` : `Tiempos de espera en ${crossing.name}`}
+          {language === 'en' ? `${crossingDisplayName(crossing, language)} wait times` : `Tiempos de espera en ${crossingDisplayName(crossing, language)}`}
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-3 flex-wrap">
           <span className="inline-flex items-center gap-1">
@@ -486,13 +502,17 @@ export default function CrossingDetail() {
         </p>
       </header>
 
+      {isSantaTeresa && <SantaTeresaActions slug={canonicalSlug} language={language} />}
+
+      <div className="mb-3"><LaneSelector lane={lane} onChange={changeLane} language={language} /></div>
       <div className="mb-6">
         <BorderCrossingCard
+          selectedLane={lane}
           crossing={crossing}
           language={language}
           index={0}
           selectedDirection="northbound"
-          snapshotAt={isSanYsidro ? state.fetchedAt : null}
+          snapshotAt={state.fetchedAt}
           isFavorite={favorites.includes(crossing.port_number)}
           onToggleFavorite={toggleFavorite}
         />
@@ -511,6 +531,11 @@ export default function CrossingDetail() {
         )}
       </div>
 
+      <Link to={withLane(`/?area=all&port=${encodeURIComponent(crossing.port_number)}`, lane)} className="mb-4 inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+        {language === 'es' ? 'Ver en el mapa fronterizo' : 'View on the border map'}
+        <ArrowRight className="w-3 h-3 shrink-0" />
+      </Link>
+
       {isSanYsidro && (
         <SanYsidroDecision
           sanYsidro={crossing}
@@ -520,41 +545,16 @@ export default function CrossingDetail() {
         />
       )}
 
-      <CrossingShare key={canonicalSlug} name={crossing.name} slug={canonicalSlug} language={language} />
+      <CrossingShare lane={lane} key={`${canonicalSlug}:${lane}:${language}`} name={crossing.name} slug={canonicalSlug} language={language} />
 
-      {activeAnomaly && (
-        <section
-          className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950/40 p-3 sm:p-4"
-          aria-live="polite"
-        >
-          <div className="flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 mt-0.5 text-emerald-700 dark:text-emerald-400 flex-shrink-0" />
-            <div className="min-w-0">
-              <h2 className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
-                {language === 'es' ? 'Hoy vs. el patrón de 30 días' : 'Today vs. the 30-day pattern'}
-              </h2>
-              <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-100 leading-relaxed">
-                {language === 'es' ? activeAnomaly.summary_es : activeAnomaly.summary_en}
-              </p>
-              <p className="mt-2 text-[11px] text-emerald-700 dark:text-emerald-300">
-                {language === 'es' ? 'Última verificación' : 'Last checked'}{' '}
-                {new Date(activeAnomaly.detected_at).toLocaleString(language === 'es' ? 'es-MX' : 'en-US')}{' · '}
-                <a
-                  href="https://bwt.cbp.gov/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline"
-                >
-                  {language === 'es' ? 'Verificar en bwt.cbp.gov' : 'Verify on bwt.cbp.gov'}
-                </a>
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
+      <div id="cameras" className="scroll-mt-20">
+        <CrossingCameras key={canonicalSlug} crossing={crossing} language={language} />
+      </div>
+
+      <HistoricalPattern feed={anomalies} slug={canonicalSlug} crossing={crossing} language={language} />
 
       {(() => {
-        // "Lanes right now" — always-on per-lane breakout for this port.
+        // "Latest lane reports" — always-on per-lane breakout for this port.
         // Filters to lanes CBP currently reports with a real delay value;
         // hides "Update Pending" stubs and null lanes that don't apply here.
         const L = crossing.lanes || {};
@@ -573,12 +573,12 @@ export default function CrossingDetail() {
         return (
           <section className="mb-6">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-              {language === 'en' ? 'Lanes right now' : 'Carriles ahora mismo'}
+              {language === 'en' ? 'Latest lane reports' : 'Últimos reportes por carril'}
             </h2>
             <p className="text-xs text-slate-500 mb-3">
               {language === 'en'
-                ? `Per-lane delay and number of lanes open at ${crossing.name}, straight from CBP. Northbound only.`
-                : `Demora por carril y número de carriles abiertos en ${crossing.name}, directo de CBP. Solo hacia EE.UU.`}
+                ? `Per-lane delay and number of lanes open at ${crossing.name}, as reported by CBP. Report times may differ from the data fetch time. Northbound only.`
+                : `Demora por carril y número de carriles abiertos en ${crossing.name}, según CBP. La hora del reporte puede diferir de la hora de consulta. Solo hacia EE.UU.`}
             </p>
             <div className="rounded-md border border-slate-200 bg-slate-50 p-2.5 divide-y divide-slate-200">
               {rows.map((r) => (
@@ -589,8 +589,20 @@ export default function CrossingDetail() {
         );
       })()}
 
+      {/* One commercial spot per page: a sponsor replaces the network ad. */}
+      {sponsorForPort(crossing.port_number)
+        ? <SponsoredCard sponsor={sponsorForPort(crossing.port_number)} placement={`crossing-${canonicalSlug}`} language={language} />
+        : <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />}
+      {cityForPort(crossing.port_number) && (
+        <p className="-mt-3 mb-6 text-sm">
+          <Link to={`/${language === 'es' ? 'ciudad' : 'city'}/${cityForPort(crossing.port_number).id}/`} className="inline-flex min-h-11 items-center text-emerald-700 underline dark:text-emerald-400">
+            {language === 'es' ? `Negocios en ${cityForPort(crossing.port_number).name}` : `Businesses in ${cityForPort(crossing.port_number).name}`}
+          </Link>
+        </p>
+      )}
+
       {aggregate && aggregate.by_hour && aggregate.by_hour.length > 0 && (
-        <section className="mb-6">
+        <section id="trends" className="mb-6 scroll-mt-20">
           <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
               {language === 'en'
@@ -606,19 +618,15 @@ export default function CrossingDetail() {
           </div>
           {bestForSelected && (
             <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-medium mb-2">
-              {isViewingToday
-                ? (language === 'en'
-                  ? `Best time to cross today: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
-                  : `Mejor hora para cruzar hoy: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)
-                : (language === 'en'
-                  ? `Lightest hour on ${DAY_LABELS.en[selectedDay]}: ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
-                  : `Hora más ligera los ${DAY_LABELS.es[selectedDay]}: ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`)}
+              {language === 'en'
+                ? `Historical lightest hour (${DAY_LABELS.en[selectedDay]}): ${formatHour12(bestForSelected.hour, 'en')} (median ${bestForSelected.median} min)`
+                : `Hora histórica más ligera (${DAY_LABELS.es[selectedDay]}): ${formatHour12(bestForSelected.hour, 'es')} (mediana ${bestForSelected.median} min)`}
             </p>
           )}
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? `Median northbound wait by hour, last 30 days at ${crossing.name}.`
-              : `Mediana de espera hacia EE.UU. por hora, últimos 30 días en ${crossing.name}.`}
+              ? `Median standard-passenger wait by hour, last 30 days at ${crossing.name}. Full local weekday, including hours already passed—not a forecast for the rest of today.`
+              : `Mediana de espera de auto estándar por hora, últimos 30 días en ${crossing.name}. Día local completo, incluidas horas que ya pasaron; no es un pronóstico para lo que queda de hoy.`}
           </p>
 
           <div
@@ -750,18 +758,18 @@ export default function CrossingDetail() {
         </section>
       )}
 
-      {timeline && timeline.entries && timeline.entries.length > 0 && (
+      {recentEntries.length > 0 && (
         <section className="mb-6">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
             {language === 'en' ? 'Recent at this crossing' : 'Reciente en este cruce'}
           </h2>
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? `Curated from public news and government feeds. ${timeline.entries.length} item${timeline.entries.length === 1 ? '' : 's'}.`
-              : `Curado de noticias públicas y feeds gubernamentales. ${timeline.entries.length} entrada${timeline.entries.length === 1 ? '' : 's'}.`}
+              ? `From public news and government feeds, published within the past ${RECENT_TIMELINE_DAYS} days. ${recentEntries.length} item${recentEntries.length === 1 ? '' : 's'}.`
+              : `De noticias públicas y fuentes gubernamentales, publicadas en los últimos ${RECENT_TIMELINE_DAYS} días. ${recentEntries.length} entrada${recentEntries.length === 1 ? '' : 's'}.`}
           </p>
           <div className="space-y-3">
-            {timeline.entries.slice(0, 8).map((e) => (
+            {recentEntries.map((e) => (
               <Card key={e.id || e.url}>
                 <CardContent className="p-4">
                   <div className="flex items-baseline justify-between gap-3 mb-1">
@@ -822,8 +830,8 @@ export default function CrossingDetail() {
           </h2>
           <p className="text-xs text-slate-500 mb-3">
             {language === 'en'
-              ? 'Closest by straight-line distance. Northbound wait times.'
-              : 'Más cercanos en línea recta. Tiempos de espera hacia EE.UU.'}
+              ? 'Closest by straight-line distance. Standard-passenger wait times.'
+              : 'Más cercanos en línea recta. Esperas de auto estándar.'}
           </p>
           <div className="space-y-2">
             {lowerCompareEntries.map((entry) => {
@@ -835,6 +843,7 @@ export default function CrossingDetail() {
                   entry={entry}
                   language={language}
                   slug={s}
+                  lane={lane}
                 />
               );
             })}
@@ -860,7 +869,7 @@ export default function CrossingDetail() {
               })}
             </div>
           )}
-          {hasPedestrianLane(crossing) && !isSanYsidro && (
+          {hasPedestrianLane(crossing) && !isSanYsidro && !isSantaTeresa && (
             <div className="mt-2 text-xs">
               <Link
                 to={`/walk-or-drive/${canonicalSlug}/`}

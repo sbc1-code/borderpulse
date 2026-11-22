@@ -12,7 +12,7 @@ Status legend: `[ ]` open · `[~]` in flight · `[x]` shipped · `[-]` won't do
 BorderPulse is an independently branded product built by DIGITO. Its own domain,
 codebase, operating record and product decisions stay here; DIGITO may describe
 the product as proof of its work without folding the crossing experience into
-the trades-focused DIGITO site.
+the DIGITO site. DIGITO is an independent creative studio: Make more of technology.
 
 The long-term opportunity is practical, bilingual cross-border decision support
 for people who cross for work, family and everyday life. Wait times are the
@@ -21,17 +21,101 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
 
 ### Now: earn trust in the free entry point
 
+- [x] Keep a reported CBP lane wait ahead of an empty duplicate row, and store `Lanes Closed` / `N/A` instead of a blank lane. Ysleta 240104/240203 co-occur in the 2026-11-02 feed. Review-only until the collector publishes a new snapshot.
+- [~] Review the additive bilingual San Ysidro/Otay crossing console with geographic reports, meaningful motion, observed replay and user-entered detour arithmetic. Draft PR, exact-head QC/CI and a protected preview precede any merge; the existing dashboard and editorial remain.
+
+- [x] Preserve chosen lane through local comparison, crossing detail and sharing
+  (PR #152, production `75d80e1`, run `40609553503`). Current waits are labeled by
+  lane; aggregate history remains explicitly Standard. Exact-head and live QA pass.
+- [~] Clarify full-day historical lowest-hour summaries versus remaining-today
+  advice; expose current reports beside the result. Review candidate only, with
+  no change to recommendation algorithms or a new forecasting feature.
+
+- [x] Publish the pair-comparison retrieval guard and Vite 6.4.4 patch (PR #136).
+  Production commit `f55167b6`, Actions run `39561576557`, manifest and served
+  EN/ES desktop/mobile app were verified October 21. Eight moderate audit
+  package entries remain; no usage or conversion increase is established.
+- [x] Publish bounded browser-storage, keyboard-navigation and route-metadata
+  corrections (PR #137, merge `0ec918a8`). Production run `39649211670`,
+  deployment manifest and served EN/ES desktop/mobile behavior were verified
+  October 21. Fresh build, 118 unit tests and 402 route navigations passed.
+  Broader schema lifecycle, assistive-technology and cross-browser audits
+  remain separate work, alongside the eight moderate audit entries.
+
+- [~] QC the October 13 locality-first flow, shareable area URLs and familiar
+  crossing names, with a visible inline camera entry on the homepage. Deliver
+  useful visible homepage/crossing snapshots without
+  JavaScript, preserving timestamps and canonical identity. Validation and
+  preview evidence belong to PR #132; not published yet.
+- [ ] Reconnect an existing authorized Search Console data path to measure
+  query/page impressions, clicks, CTR and area-to-crossing actions after release.
+  GSC Wizard reported an ended trial during QC; no subscription was started.
+
+- [~] October 13 competitor feature batch: nine remembered local corridor
+  filters, comparisons of the selected eligible lane and click-loaded public
+  camera views across El Paso–Juárez, San Diego–Tijuana and Eagle Pass, with
+  external official source paths for Nogales, Laredo and Pharr. Prepared on the feature branch;
+  production publication is not implied. Keep raw CBP report times visible and
+  exclude closed/unverifiable hours, missing reports and stale winner claims.
+- [ ] Verify permissible camera sources for Calexico–Mexicali, Brownsville and
+  Progreso, and real playback of the prepared viewers. Public source directories
+  and road approaches do not establish inspection-queue or live-stream coverage.
+- [ ] Real email threshold alerts and community crossing reports: implement
+  only with a working delivery channel and shared storage. See
+  `docs/CROSSING-FEATURES.md` for the concrete follow-up contract, source receipts,
+  operating costs and validation requirements. No signup/report form until the
+  service actually accepts and delivers it.
+
+- [x] Correct route hreflangs and bound metadata-navigation checks (PR129/130).
+  Production was verified on October 12 at `2b40cb2b`, including reciprocal
+  pairs and exact served assets. Those releases are complete; preserve them.
+- [x] Preserve document language through metadata cleanup, data/aggregate
+  updates and navigation. Content-specific EN/ES routes keep their own language;
+  implementation checks and exact publication evidence belong to the scoped PR.
+- [ ] Prioritize stable pedestrian-capability curation for walk-or-drive route
+  inventory. Sitemap and prerender currently share a predicate based on lane
+  objects in each snapshot, so the inventory fluctuates as reports change.
+  Keep this separate from document-language ownership; do not invent capability
+  or expand routes without source evidence.
+  Issue #59 has a local, source-backed candidate preserving existing Progreso
+  International Bridge and Santa Teresa routes across missing reports.
+  Review/publication and other-port curation remain open; see the refresh runbook
+  for exact input identities, coverage and gates.
+
+- [x] Separate CBP lane report times from snapshot retrieval on dashboard and
+  crossing detail cards. Preserve raw report text and unknown dates; release
+  verification belongs to the scoped pull request.
+
 - [x] Approved Vercel production cutover: PR #109 merged, Actions publication
   succeeded, and IONOS apex/www DNS plus trusted HTTPS were verified. See
   issue #101 for publication evidence and exact rollback records.
-- [ ] Observe two scheduled Vercel production publications and first-week
-  usage/cost. The manual cutover publish does not count toward the two runs.
-  No publication-monitoring automation exists; the October pilot readout is
-  separate. Preserve Pages rollback and the 15-minute collector meanwhile.
+- [x] Historical cutover verification: October 1 and October 2 scheduled
+  Vercel production publications succeeded. These do not establish continued
+  daily health; October 3-6 publication was blocked by dependency audit findings.
+- [x] Implement the October 6 publication dependency repair and bounded
+  generated-writer race recovery. Keep all existing release gates and the Pages
+  rollback; production recovery requires a successful publication receipt.
+- [ ] Verify fresh public history/FX after the repair and observe two subsequent
+  scheduled publications. Keep first-week usage/cost review pending separately;
+  no second monitoring automation or manual run counts as a scheduled success.
+- [x] Publish Router/DOM 7.18.4 within the existing 62 KiB entry gate (PR #141,
+  merge/source `5a681bad`, production run `39725320432`, matching READY deployment
+  and public manifest). Both CI checks passed; served-version and EN/ES checks
+  are recorded in the refresh runbook. Six moderate build-chain entries stay
+  separate; parser 6.1.5 is not a Router fix. No security exception or budget change.
+- [x] Keep the deferred dashboard summary within snapshot confidence (PR #143,
+  source `a14654f3`, production run `39731300070`). Retain dated numbers and
+  controls with neutral interpretation on stale/unknown/future/offline input;
+  recover immediately on a valid response. Both final CI and native EN/ES QA
+  pass; complete unmodified served-byte route suite passes 416 navigations.
 - [x] Current-waits views refresh while open and on tab return/reconnection,
   including comparison, crossing, best-time, walk-or-drive and embed routes.
   Slow optional feeds no longer delay waits, and the service worker does not
   silently substitute an old response for the live API.
+- [x] Remove the stale shared homepage FAQ schema, preserving visible homepage
+  answers and crossing-specific FAQ generation. Bounded release checks cover
+  generated metadata and client navigation; release evidence belongs in the PR.
+  Broader prerender/runtime schema lifecycle work is outside this correction.
 - Keep official northbound CBP data, source timestamps, honest stale states and
   the static fallback reliable. Keep the free experience supported by ads.
 - Measure whether people complete a crossing decision and return. Review
@@ -46,14 +130,18 @@ cross-border experience; it is a product hypothesis, not a claim of demand.
   Comparison sharing and a fixed-choice usefulness prompt are prepared for the
   next release. Read `compare-share` and `compare-feedback` alongside visits;
   a feedback click is stated usefulness, not evidence of a completed crossing.
-- Follow up on the separately observed Sunday-pattern callout: its "Today vs.
-  the 30-day pattern" heading can appear on another day. Align the heading and
-  displayed day with the pattern's actual scope before calling it a today
-  comparison.
+- [x] Correct the historical-pattern callout using validated weekday/hour
+  evidence, sample counts and source dates (PR #139, `98930474`). Production
+  run `39718320478`, public manifest and served EN/ES mobile/desktop behavior
+  were verified October 22. No live claim is made from historical medians;
+  malformed sources get a neutral unavailable state. Audit review is recorded
+  in the existing runbook; the eight moderate entries remain separate work.
 - Sebastian reports that Stripe is connected for BorderPulse. Verify the
   account, mode, product/Price, webhook and checkout state in Stripe before
   describing any paid offering or accepting a charge. The free, ad-supported
   crossing experience remains the current offer.
+
+- [~] Lane Flip Watch (`/lane-flip/`): reported Ready Lane, SENTRI, and Ready pedestrian versus general, plus a 30-day hour strip. Review candidate only. No production release.
 
 ### Next: test one adjacent crossing job
 
@@ -138,10 +226,13 @@ Work top to bottom; restore product trust before expanding the URL inventory.
 - [x] **Programmatic SEO `/compare/:slugA-vs-:slugB`** — shipped
       2026-05-09. 15 seed pairs prerendered + sitemap'd. Add more
       via the single `COMPARE_PAIRS` inventory in `src/lib/comparePairs.js`.
-- [ ] **Hreflang for ES variants** — currently EN/ES share the same URL
-      and toggle in localStorage. For better ES SEO, consider
-      `/mejor-hora/:slug` parallel routes with proper `<link
-      rel="alternate" hreflang="es">` pointing.
+- [~] **Spanish home entry:** `/es/` is prepared as the indexable Spanish
+      homepage, with its own lang, title, description and reciprocal hreflang.
+      The in-page toggle still changes shared URLs such as `/`. Not published.
+- [ ] **Hreflang for other ES variants:** crossing, best-time and compare
+      URLs still share one address and toggle in the browser. Parallel
+      routes such as `/mejor-hora/:slug` stay deferred while current
+      query evidence is thin.
 - [ ] **Refactor: extract `useTypicalDelta` hook** — duplicated in
       `BorderCrossingCard.jsx` and `Embed.jsx`. Pull into `src/lib/`
       once a third caller emerges. Low priority, no user impact.
@@ -236,12 +327,46 @@ Snapshot of features live on borderpulse.com today.
 ### Infra
 - Vercel production via `.github/workflows/publish-vercel.yml`; daily prebuilt
   Actions publication plus application changes. IONOS owns domain/DNS.
-- GitHub Pages deploy via `.github/workflows/deploy.yml` retained for rollback;
-  recent jobs are pending/canceled, so verify a successful build before rollback.
-- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml`; changed,
-  validated snapshots explicitly dispatch the sole deployer with their SHA
+- GitHub Pages via `.github/workflows/deploy.yml` is manual recovery only.
+  Its existing artifact becomes stale; verify a fresh successful build and
+  obtain specific DNS approval before using it as production.
+- Scheduled CBP refresh via `.github/workflows/fetch-cbp.yml` commits validated
+  snapshots and rolling history without deploying Pages. Vercel's latest-data
+  fallback reads the committed collector feed independently.
 - Sitemap (175 URLs) + RSS (36 entries) regenerated each prebuild
 - Desktop/mobile browser smoke gate covers every sitemap URL and generated alias
 - Code-split leaf routes (main bundle ~161 KB)
 - Robots.txt allows AI crawlers, disallows `/embed/`
 - Anonymous page-view analytics via Umami
+- Bounded dashboard ad-slot diagnostics through existing Umami: script/DOM/
+  container visibility stages only, not billed impressions or revenue. Actual
+  ad-network totals still require publisher reports.
+
+## Backlog: sponsored placements (added 2026-11-10)
+
+- Pharmacy sponsor for the medication guides (highest-traffic slot). Not being pitched yet; needs a trusted contact and a vetting pass first.
+- City guides as sponsor inventory: Tijuana, Los Algodones, Nuevo Progreso, Nogales. One featured business per category section.
+- [x] Self-serve "feature your business" page (2026-11-11, shipped early at Sebastian's call).
+- [x] City directory pages, one per sponsor city (Phase 3, 2026-11-11).
+- [x] Return-trip guide (Phase 4), EN and ES (#199).
+- [x] Markdown tables in guides render as tables (remark-gfm, 2026-11-14).
+- Swap the first sponsor's link to its own domain once it has one (currently constandse-dental.vercel.app).
+
+### Shipped 2026-11-10
+
+- [x] Sponsored card and `src/lib/sponsors.js`, one commercial spot per page (#190).
+- [x] First sponsor live on five El Paso/Juárez crossing pages and four guides (#190, #191).
+- [x] Juárez dentist crossing guide, EN and ES (#190).
+- [x] Sponsor WhatsApp message names Border Pulse (#192).
+
+### Checks due
+
+- 2026-11-16, then weekly: sponsor card clicks, tagged visits and contact taps. Day one of tracking is 2026-11-11; earlier clicks include tests.
+- 2026-11-17: Adsterra impressions against the 2026-11-05 to 11-09 baseline (21 impressions, home slot only), `blog-to-waits` top-placement clicks against 7, medication guide bounce against 95%.
+- 2 to 4 weeks after 2026-11-10: click rate per crossing page in Search Console against 1.2%.
+
+### Not started
+
+- Sourced line on how often CBP updates its wait times.
+- Clearer title for the SENTRI renewal guide (424 impressions, 2 clicks in 28 days).
+- Spanish crossing pages.

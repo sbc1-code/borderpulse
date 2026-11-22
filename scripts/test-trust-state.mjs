@@ -7,10 +7,13 @@ import {
   ageMinutes,
   freshnessOf,
   formatAge,
-  liveLabel,
+  fetchLabel,
+  reportTimeLabel,
   summarize,
 } from '../src/lib/trustState.js';
+import { availableLaneWait, hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { standardPassengerWait } from '../src/lib/standardPassengerWait.js';
+import { walkDriveFreshness } from '../src/lib/walkDriveFreshness.js';
 import { track } from '../src/lib/analytics.js';
 
 const NOW = Date.parse('2026-08-21T12:00:00.000Z');
@@ -64,19 +67,35 @@ test('missing or unparseable timestamps are unknown, never zero', () => {
     assert.equal(freshnessOf(bad, NOW).state, FRESHNESS.UNKNOWN);
   }
   // An unknown age must not render as "Live".
-  assert.notEqual(liveLabel(FRESHNESS.UNKNOWN, null, 'en'), 'Live');
+  assert.notEqual(fetchLabel(FRESHNESS.UNKNOWN, null, 'en'), 'Live');
 });
 
 test('future timestamps clamp to zero rather than going negative', () => {
   assert.equal(ageMinutes(new Date(NOW + 60_000).toISOString(), NOW), 0);
 });
 
-test('only fresh data is allowed to call itself Live, in both languages', () => {
-  assert.equal(liveLabel(FRESHNESS.FRESH, 3, 'en'), 'Live');
-  assert.equal(liveLabel(FRESHNESS.FRESH, 3, 'es'), 'En vivo');
-  for (const state of [FRESHNESS.AGING, FRESHNESS.STALE, FRESHNESS.UNKNOWN]) {
-    assert.doesNotMatch(liveLabel(state, 120, 'en'), /^Live$/);
-    assert.doesNotMatch(liveLabel(state, 120, 'es'), /^En vivo$/);
+test('retrieval labels never claim the lane report itself is live', () => {
+  assert.equal(fetchLabel(FRESHNESS.FRESH, 3, 'en'), 'Fetched 3 min ago');
+  assert.equal(fetchLabel(FRESHNESS.FRESH, 3, 'es'), 'Consulta: hace 3 min');
+  assert.equal(fetchLabel(FRESHNESS.STALE, 120, 'en'), 'Stale snapshot · Fetched 2 h ago');
+  assert.equal(fetchLabel(FRESHNESS.UNKNOWN, null, 'es'), 'Hora de consulta desconocida');
+  for (const state of Object.values(FRESHNESS)) {
+    assert.doesNotMatch(fetchLabel(state, 120, 'en'), /Live/);
+    assert.doesNotMatch(fetchLabel(state, 120, 'es'), /En vivo/);
+  }
+});
+
+test('official report times preserve raw midnight, locale and DST text without inferred dates or ages', () => {
+  for (const raw of ['At 11:00 pm MST', 'At Midnight PDT', 'At 1:00 am PST', 'At 1:00 am PDT', 'A las 11:00 pm MST']) {
+    assert.equal(reportTimeLabel(raw, 'en'), `CBP reported: ${raw}`);
+    assert.equal(reportTimeLabel(raw, 'es'), `Reporte CBP: ${raw}`);
+  }
+});
+
+test('missing report times stay unknown rather than borrowing a fresh fetch or feed export time', () => {
+  for (const missing of [null, undefined, '', '  ', 0, {}]) {
+    assert.equal(reportTimeLabel(missing, 'en'), 'CBP report time unavailable');
+    assert.equal(reportTimeLabel(missing, 'es'), 'Hora del reporte CBP no disponible');
   }
 });
 
@@ -121,4 +140,90 @@ test('a zero wait is a real reading and must survive summarization', () => {
   assert.equal(s.count, 3);
   assert.equal(s.min, 0);
   assert.equal(s.median, 0);
+});
+
+
+test('verified pedestrian capability survives disappearing reports without inventing a wait', () => {
+  for (const port_number of ['230901', '240801']) {
+    for (const lanes of [undefined, {}, { pedestrian_standard: null, pedestrian_ready: null },
+      { pedestrian_standard: { status: 'Update Pending', delay_minutes: null, lanes_open: 0 } }]) {
+      const crossing = { port_number, lanes };
+      assert.equal(hasPedestrianLane(crossing), true);
+      assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), null);
+      assert.equal(availableLaneWait(crossing, 'pedestrian_ready'), null);
+    }
+    const crossing = { port_number, lanes: { pedestrian_standard: { status: 'no delay', delay_minutes: 0, lanes_open: 1 } } };
+    assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), 0);
+    crossing.port_status = 'Closed';
+    assert.equal(hasPedestrianLane(crossing), true, 'capability is not current availability');
+    assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), null);
+  }
+});
+
+test('capability exceptions use exact port identity, never a similar name or nearby crossing', () => {
+  for (const port_number of ['230902', '240601', 'unknown', undefined]) {
+    assert.equal(hasPedestrianLane({ port_number, name: 'Progreso - Santa Teresa', lanes: {} }), false);
+  }
+  assert.equal(hasPedestrianLane(null), false);
+  assert.equal(hasPedestrianLane({ port_number: '250201', lanes: { pedestrian_standard: { status: 'Update Pending' } } }), true,
+    'unreviewed ports retain the existing lane-object behavior');
+});
+
+test('walk-or-drive ignores retained lane numbers at a closed crossing', () => {
+  const crossing = { port_status: ' Closed ', lanes: {
+    passenger_standard: { status: 'delay', delay_minutes: 15, lanes_open: 1 },
+    pedestrian_standard: { status: 'no delay', delay_minutes: 0, lanes_open: 1 },
+    pedestrian_ready: { status: 'no delay', delay_minutes: 0, lanes_open: 1 },
+  } };
+  for (const key of Object.keys(crossing.lanes)) assert.equal(availableLaneWait(crossing, key), null);
+  crossing.port_status = 'Open';
+  assert.equal(availableLaneWait(crossing, 'passenger_standard'), 15);
+  assert.equal(availableLaneWait(crossing, 'pedestrian_standard'), 0, 'a reported zero is real');
+});
+
+test('walk-or-drive requires a usable lane report rather than an old numeric value', () => {
+  const wait = (lane) => availableLaneWait({ port_status: 'Open', lanes: { pedestrian_standard: lane } }, 'pedestrian_standard');
+  for (const status of ['Update Pending', 'Lanes Closed', 'N/A', '', 'unexpected']) {
+    assert.equal(wait({ status, delay_minutes: 5, lanes_open: 1 }), null);
+  }
+  for (const delay_minutes of [null, undefined, -1, NaN, Infinity, '0']) {
+    assert.equal(wait({ status: 'delay', delay_minutes, lanes_open: 1 }), null);
+  }
+  assert.equal(wait({ status: 'delay', delay_minutes: 5, lanes_open: 0 }), null);
+  assert.equal(wait(null), null);
+  assert.equal(wait({ status: ' No Delay ', delay_minutes: 0, lanes_open: 1 }), 0);
+});
+
+// Walk/drive uses the same measured thresholds without treating clock skew as fresh.
+test('walk-drive retrieval gate handles fresh, aging, stale and inconsistent clocks', async () => {
+  const { walkDriveFreshness } = await import('../src/lib/walkDriveFreshness.js');
+  for (const minutes of [0, 45, 46, 90]) {
+    assert.equal(walkDriveFreshness(minutesAgo(minutes), NOW).usable, true);
+  }
+  for (const stamp of [minutesAgo(91), null, undefined, '', 'invalid', 0, {}, minutesAgo(-1)]) {
+    assert.equal(walkDriveFreshness(stamp, NOW).usable, false);
+  }
+  const stamp = minutesAgo(90);
+  assert.equal(walkDriveFreshness(stamp, NOW + 60_000).state, FRESHNESS.STALE);
+  assert.equal(walkDriveFreshness(stamp, NOW + 60_000).usable, false);
+});
+
+test('Compare shares the 45/90-minute gate and never treats a future retrieval as fresh', () => {
+  for (const [minutes, state, usable] of [
+    [0, FRESHNESS.FRESH, true], [45, FRESHNESS.FRESH, true],
+    [46, FRESHNESS.AGING, true], [90, FRESHNESS.AGING, true],
+    [91, FRESHNESS.STALE, false], [120, FRESHNESS.STALE, false],
+  ]) {
+    assert.deepEqual(walkDriveFreshness(minutesAgo(minutes), NOW), { state, age: minutes, usable });
+  }
+  for (const stamp of [null, undefined, '', 'invalid', new Date(NOW + 1).toISOString()]) {
+    assert.deepEqual(walkDriveFreshness(stamp, NOW), { state: FRESHNESS.UNKNOWN, age: null, usable: false });
+  }
+});
+
+test('comparison retrieval eligibility expires without a response and recovers with a new timestamp', () => {
+  const stamp = minutesAgo(90);
+  assert.equal(walkDriveFreshness(stamp, NOW).usable, true);
+  assert.equal(walkDriveFreshness(stamp, NOW + 61_000).usable, false);
+  assert.equal(walkDriveFreshness(new Date(NOW + 61_000).toISOString(), NOW + 61_000).usable, true);
 });

@@ -1,7 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DEFAULT_LANE, laneLabel, withLane } from '@/lib/laneContext';
+import { availableLaneWait } from '@/lib/crossingAvailability';
+import { camerasFor } from '@/lib/cameras';
 import { track } from '@/lib/analytics';
-import { FRESHNESS, freshnessOf, liveLabel } from '@/lib/trustState';
+import { FRESHNESS, freshnessOf, fetchLabel, reportTimeLabel } from '@/lib/trustState';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -9,7 +12,6 @@ import {
   Clock, MapPin, TrendingUp, TrendingDown, Minus, AlertTriangle,
   Car, User, Truck, Star, MoreHorizontal,
 } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +23,7 @@ import LaneRow from '@/components/dashboard/LaneRow';
 import { isSparseCell } from '@/lib/aggregates';
 import {
   getStatusForDirection,
-  getUpdatedAtForDirection,
+  getStatusForWait,
   getWaitMinutes,
 } from '@/components/utils/crossingDirection';
 import {
@@ -96,20 +98,6 @@ function formatHour12(h, lang) {
   return `${h % 12 || 12} ${suffix}`;
 }
 
-function formatUpdatedAt(value, language) {
-  if (!value) return '';
-  if (typeof value === 'string' && /T.*Z$/.test(value)) {
-    const d = new Date(value);
-    if (!Number.isNaN(d.getTime())) {
-      return d.toLocaleTimeString(language === 'en' ? 'en-US' : 'es-MX', {
-        hour: 'numeric',
-        minute: '2-digit',
-      });
-    }
-  }
-  return String(value);
-}
-
 function advisoryLabel(type, language) {
   const labels = {
     closure: { en: 'Closure', es: 'Cierre' },
@@ -125,16 +113,18 @@ function advisoryLabel(type, language) {
 export default function BorderCrossingCard({
   crossing,
   language,
-  index = 0,
   selectedDirection = 'northbound',
   isFavorite = false,
   onToggleFavorite,
   slug,
   snapshotAt = null,
+  selectedLane = DEFAULT_LANE,
 }) {
   const [showLanes, setShowLanes] = useState(false);
+  // Skip the menu's focus return when we are scrolling to #trends, or it
+  // pulls the page back up to the trigger.
+  const skipMenuFocusReturn = useRef(false);
   const [aggregate, setAggregate] = useState(null);
-  const reduceMotion = useReducedMotion();
 
   const cardSlug = slug || crossing.slug || null;
 
@@ -161,15 +151,15 @@ export default function BorderCrossingCard({
     };
   }, [cardSlug]);
 
-  const status = getStatusForDirection(crossing, selectedDirection);
-  const s = STATUS_STYLES[status] || STATUS_STYLES.unknown;
-  const wait = getWaitMinutes(crossing, selectedDirection);
-  const isHigh = typeof wait === 'number' && wait >= 45;
-  const updatedAt = getUpdatedAtForDirection(crossing, selectedDirection);
-  // The footer dot used to say "Live" unconditionally, even on an hours-old
-  // snapshot. Freshness now comes from the shared trust model.
-  const freshness = freshnessOf(snapshotAt ?? updatedAt);
   const isSouthbound = selectedDirection === 'southbound';
+  const isStandard = selectedLane === DEFAULT_LANE;
+  const wait = isSouthbound ? getWaitMinutes(crossing, selectedDirection) : availableLaneWait(crossing, selectedLane);
+  const status = isSouthbound ? getStatusForDirection(crossing, selectedDirection) : getStatusForWait(wait);
+  const s = STATUS_STYLES[status] || STATUS_STYLES.unknown;
+  const isHigh = typeof wait === 'number' && wait >= 45;
+  // Retrieval freshness must not be confused with a lane's report time.
+  // A timezone-less feed export timestamp is not a fallback fetch timestamp.
+  const freshness = freshnessOf(snapshotAt);
   const portStatus = getPortStatus(crossing);
   const portStatusStyle = PORT_STATUS_STYLES[portStatus] || PORT_STATUS_STYLES.unknown;
   const sourceLabel = isSouthbound
@@ -179,7 +169,7 @@ export default function BorderCrossingCard({
     ? (language === 'en'
       ? (isSouthbound ? 'Estimate not available yet' : 'No current wait time reported')
       : (isSouthbound ? 'La estimación todavía no está disponible' : 'No hay tiempo actual reportado'))
-    : (isSouthbound ? (language === 'en' ? 'Estimated delay' : 'Demora estimada') : (language === 'en' ? 'Official wait time' : 'Tiempo oficial'));
+    : (isSouthbound ? (language === 'en' ? 'Estimated delay' : 'Demora estimada') : (language === 'en' ? 'Latest reported wait' : 'Última espera reportada'));
   const hoursLabel = getHoursSummary(crossing, language);
   const advisoryText = summarizeNotice(getOperationalNotice(crossing));
   const hasAdvisory = hasOperationalAdvisory(crossing);
@@ -206,11 +196,11 @@ export default function BorderCrossingCard({
       ? (language === 'en' ? 'Dropping' : 'Bajando')
       : (language === 'en' ? 'Steady' : 'Estable');
 
-  // Lightest typical hour for today's day-of-week. Surfaces "best time today"
-  // as an inline pill so users see actionable guidance without clicking through
+  // Historical lightest hour for the port-local weekday, across the full day.
+  // The pill links to the historical pattern, not a remaining-today forecast
   // to /best-time. Northbound only — same reason as typicalDelta below.
   const bestTimeToday = useMemo(() => {
-    if (isSouthbound) return null;
+    if (isSouthbound || !isStandard) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || !byHour.length) return null;
     // Buckets are port-local; evaluate "today" in the port's timezone.
@@ -218,7 +208,7 @@ export default function BorderCrossingCard({
     const best = pickLightestHour(crossing, byHour, day);
     if (!best) return null;
     return { hour: best.hour, median: best.median };
-  }, [aggregate, isSouthbound, crossing]);
+  }, [aggregate, isSouthbound, isStandard, crossing]);
 
   // Suppress the pill when the current hour IS the lightest hour — pointing
   // a user to "leave at 8 AM" when it's currently 8 AM is noise. Within ±1
@@ -233,7 +223,7 @@ export default function BorderCrossingCard({
   // Only compute for northbound (CBP-backed) data; southbound waits are estimates
   // without a comparable aggregate in /data/aggregates.
   const typicalDelta = useMemo(() => {
-    if (isSouthbound) return null;
+    if (isSouthbound || !isStandard) return null;
     if (wait == null) return null;
     const byHour = aggregate?.by_hour;
     if (!Array.isArray(byHour) || byHour.length === 0) return null;
@@ -249,26 +239,22 @@ export default function BorderCrossingCard({
       return { delta: wait - aggregate.overall_median, median: aggregate.overall_median };
     }
     return null;
-  }, [aggregate, wait, isSouthbound, crossing]);
+  }, [aggregate, wait, isSouthbound, isStandard, crossing]);
 
   const lanes = crossing.lanes || {};
 
   return (
-    <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={reduceMotion ? { duration: 0 } : { delay: Math.min(index * 0.02, 0.3) }}
-    >
-      <Card className="h-full flex flex-col overflow-hidden rounded-lg border-slate-200/90 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-700 dark:bg-slate-950">
-        <div className={`h-1.5 ${s.bar}`} />
-        <CardContent className="p-3 flex-1 flex flex-col">
+    <div className="bp-result-enter">
+      <Card data-testid="border-crossing-card" data-port-number={crossing.port_number} className="h-full flex flex-col overflow-hidden rounded-xl border-slate-200/90 bg-white shadow-xs dark:border-slate-700 dark:bg-slate-950">
+        <div className={`h-1 ${s.bar}`} />
+        <CardContent className="p-4 flex-1 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between gap-2 mb-1.5">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 mb-0.5">
-                <h2 className="min-w-0 text-base font-semibold text-slate-900 dark:text-slate-100 truncate" title={crossing.name}>
+                <h2 className="min-w-0 text-base leading-snug font-semibold text-slate-900 dark:text-slate-100 break-words" title={crossing.name}>
                   {cardSlug ? (
-                    <Link to={`/crossing/${cardSlug}/`} className="rounded-sm hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
+                    <Link to={withLane(`/crossing/${cardSlug}/`, selectedLane)} className="rounded-sm hover:underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                       {crossing.name || crossing.port_name}
                     </Link>
                   ) : (
@@ -278,28 +264,16 @@ export default function BorderCrossingCard({
                 <span className="text-base leading-none">{isSouthbound ? '🇲🇽' : '🇺🇸'}</span>
               </div>
               <div className="flex items-center gap-1 text-xs text-slate-600 dark:text-slate-300">
-                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                <MapPin className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">
                   {isSouthbound
                     ? (language === 'en' ? 'To Mexico' : 'Hacia México')
                     : (language === 'en' ? 'To USA' : 'Hacia EE.UU.')}
                 </span>
               </div>
-              <div className="flex flex-wrap gap-1 mt-1.5">
-                <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap py-0.5 ${portStatusStyle.badge}`}>
-                  {portStatusStyle.label[language] || portStatusStyle.label.en}
-                </Badge>
-                <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-slate-50 text-slate-700 border-slate-200">
-                  {sourceLabel}
-                </Badge>
-                {hasAdvisory && (
-                  <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-amber-50 text-amber-700 border-amber-200">
-                    {advisoryLabel(advisoryType, language)}
-                  </Badge>
-                )}
-              </div>
+
             </div>
-            <div className="flex items-center gap-1 flex-shrink-0">
+            <div className="flex items-center gap-1 shrink-0">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -308,7 +282,7 @@ export default function BorderCrossingCard({
                 aria-label={isFavorite
                   ? (language === 'en' ? 'Remove from favorites' : 'Quitar de favoritos')
                   : (language === 'en' ? 'Add to favorites' : 'Agregar a favoritos')}
-                className="flex h-11 w-11 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="flex h-11 w-11 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:text-slate-200 dark:hover:bg-slate-800"
               >
                 <Star
                   className={`w-4 h-4 transition-colors ${
@@ -322,15 +296,15 @@ export default function BorderCrossingCard({
                 <DropdownMenuTrigger asChild>
                   <button
                     aria-label={language === 'en' ? 'More options' : 'Más opciones'}
-                    className="flex h-11 w-11 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:text-slate-200 dark:hover:bg-slate-800"
+                    className="flex h-11 w-11 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:text-slate-200 dark:hover:bg-slate-800"
                   >
                     <MoreHorizontal className="w-5 h-5" />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-44">
+                <DropdownMenuContent align="end" className="w-44" onCloseAutoFocus={(event) => { if (skipMenuFocusReturn.current) { event.preventDefault(); skipMenuFocusReturn.current = false; } }}>
                   {cardSlug ? (
                     <DropdownMenuItem asChild>
-                      <Link to={`/crossing/${cardSlug}/`} className="cursor-pointer" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
+                      <Link to={withLane(`/crossing/${cardSlug}/#trends`, selectedLane)} className="cursor-pointer" onClick={() => { skipMenuFocusReturn.current = true; track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection }); }}>
                         {language === 'en' ? 'View trends' : 'Ver tendencias'}
                       </Link>
                     </DropdownMenuItem>
@@ -341,7 +315,7 @@ export default function BorderCrossingCard({
                   )}
                   {cardSlug && (
                     <DropdownMenuItem asChild>
-                      <Link to={`/best-time/${cardSlug}/`} className="cursor-pointer" onClick={() => track('best-time-open', { slug: cardSlug, source: 'card' })}>
+                      <Link to={withLane(`/best-time/${cardSlug}/`, selectedLane)} className="cursor-pointer" onClick={() => track('best-time-open', { slug: cardSlug, source: 'card' })}>
                         {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
                       </Link>
                     </DropdownMenuItem>
@@ -358,15 +332,30 @@ export default function BorderCrossingCard({
             </div>
           </div>
 
+              <div className="flex flex-wrap gap-1 mt-1.5">
+                <Badge variant="outline" className={`text-xs font-medium whitespace-nowrap py-0.5 ${portStatusStyle.badge}`}>
+                  {portStatusStyle.label[language] || portStatusStyle.label.en}
+                </Badge>
+                <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-slate-50 text-slate-700 border-slate-200">
+                  {sourceLabel}
+                </Badge>
+                {hasAdvisory && (
+                  <Badge variant="outline" className="text-xs font-medium whitespace-nowrap py-0.5 bg-amber-50 text-amber-700 border-amber-200">
+                    {advisoryLabel(advisoryType, language)}
+                  </Badge>
+                )}
+              </div>
+
           {/* Wait time */}
           <div className={`mt-2.5 rounded-lg border p-3 ${s.meter}`}>
             <div className="flex items-end justify-between gap-3">
               <div className="min-w-0">
                 <div className="text-xs font-semibold uppercase tracking-wide text-slate-700">
-                  {waitMetaLabel}
+                  {!isSouthbound && <span className="block" data-testid="primary-lane">{laneLabel(selectedLane, language)}</span>}
+                  <span className="block">{waitMetaLabel}</span>
                 </div>
                 <div className="mt-1 flex items-baseline gap-2">
-                  <span className={`text-4xl font-bold tabular-nums leading-none ${s.waitText}`}>
+                  <span data-testid="primary-wait" className={`text-5xl font-semibold tracking-tight tabular-nums leading-none ${s.waitText}`}>
                     {wait == null ? '—' : wait}
                   </span>
                   <span className="text-sm font-medium text-slate-700">
@@ -382,7 +371,7 @@ export default function BorderCrossingCard({
                 <Badge variant="outline" className={`text-xs font-semibold whitespace-nowrap py-0.5 ${s.badge}`}>
                   {s.label[language] || s.label.en}
                 </Badge>
-                {wait != null && (
+                {wait != null && (isSouthbound || isStandard) && (
                   <span className={`inline-flex items-center gap-1 text-xs font-medium ${trendColor}`}>
                     <TrendIcon className="w-3 h-3" />
                     {trendLabel}
@@ -390,6 +379,11 @@ export default function BorderCrossingCard({
                 )}
               </div>
             </div>
+            {!isSouthbound && wait != null && (
+              <p className="mt-2 text-xs font-semibold text-slate-700 break-words" data-testid="cbp-report-time">
+                {reportTimeLabel(lanes[selectedLane]?.update_time, language)}
+              </p>
+            )}
             <div className={`mt-2.5 h-2 overflow-hidden rounded-full ${s.rail}`}>
               <div
                 className={`h-full rounded-full ${s.bar}`}
@@ -423,15 +417,15 @@ export default function BorderCrossingCard({
 
               {showBestTimePill && cardSlug && (
                 <Link
-                  to={`/best-time/${cardSlug}/`}
-                  className="inline-flex min-h-11 items-center gap-1 rounded-full border border-emerald-200 bg-white px-3 py-1 text-xs font-semibold text-emerald-800 transition-colors hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-200 dark:hover:bg-emerald-900"
+                  to={withLane(`/best-time/${cardSlug}/`, selectedLane)}
+                  className="inline-flex min-h-11 items-center gap-1 rounded-full border border-emerald-200 bg-white px-3 py-1 text-xs font-semibold text-emerald-800 transition-colors hover:bg-emerald-50 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-200 dark:hover:bg-emerald-900"
                   title={language === 'en'
-                    ? `Lightest typical hour today opens the full hour-by-hour pattern`
-                    : `Hora más ligera típica hoy abre el patrón hora por hora`}
+                    ? `Historical lowest median for the full local weekday; this hour may have passed. Opens the full pattern.`
+                    : `Menor mediana histórica del día local completo; esa hora puede haber pasado. Abre el patrón completo.`}
                 >
                   {language === 'en'
-                    ? `Best ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median}m)`
-                    : `Mejor ${formatHour12(bestTimeToday.hour, language)} (~${bestTimeToday.median}m)`}
+                    ? `30-day pattern: ${formatHour12(bestTimeToday.hour, language)} (${bestTimeToday.median}m median)`
+                    : `Patrón de 30 días: ${formatHour12(bestTimeToday.hour, language)} (mediana ${bestTimeToday.median}m)`}
                 </Link>
               )}
             </div>
@@ -448,16 +442,15 @@ export default function BorderCrossingCard({
             </div>
           )}
 
+          {cardSlug && camerasFor(crossing.port_number).length > 0 && (
+            <Link to={withLane(`/crossing/${cardSlug}/#cameras`, selectedLane)} className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-emerald-700 underline dark:text-emerald-400">
+              {language === 'es' ? 'Ver cámaras' : 'View cameras'}
+            </Link>
+          )}
+
           {/* Lane details */}
-          <AnimatePresence>
             {showLanes && (
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={reduceMotion ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-                transition={reduceMotion ? { duration: 0 } : undefined}
-                className="overflow-hidden"
-              >
+              <div className="bp-panel-enter overflow-hidden">
                 {isSouthbound ? (
                   <div className="mt-2 rounded-md border border-slate-200 bg-slate-50 p-2.5 space-y-1.5 text-xs text-slate-700">
                     <div className="flex items-center justify-between">
@@ -494,32 +487,30 @@ export default function BorderCrossingCard({
                     <LaneRow icon={Truck} label={{ en: 'FAST', es: 'FAST' }} data={lanes.commercial_fast} language={language} />
                   </div>
                 )}
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
 
-          {/* Footer: live dot + updated + warning */}
+          {/* Footer: snapshot retrieval freshness, separate from official lane reports. */}
           <div className="mt-auto mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-t border-slate-200 pt-2 text-xs text-slate-600 dark:border-slate-700 dark:text-slate-300">
             <div className="flex items-center gap-1.5">
               <span
                 className={`w-2 h-2 rounded-full ${
-                  freshness.state === FRESHNESS.FRESH ? `${s.dot} motion-safe:animate-pulse` : 'bg-slate-400'
+                  freshness.state === FRESHNESS.FRESH ? s.dot : 'bg-slate-400'
                 }`}
               />
-              <span className={freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : undefined}>
-                {liveLabel(freshness.state, freshness.age, language)}
+              <span data-testid="snapshot-freshness" className={freshness.state === FRESHNESS.STALE ? 'text-amber-700 dark:text-amber-400' : undefined}>
+                {fetchLabel(freshness.state, freshness.age, language)}
               </span>
             </div>
-            <span className="text-slate-600 dark:text-slate-300 tabular-nums">{formatUpdatedAt(updatedAt, language)}</span>
           </div>
           {isHigh && (
             <div className="mt-2 flex items-center gap-1.5 rounded-md bg-rose-50 px-2 py-1 text-xs text-rose-800">
-              <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+              <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
               {language === 'en' ? 'High wait time' : 'Tiempo de espera alto'}
             </div>
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }

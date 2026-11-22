@@ -1,0 +1,242 @@
+[
+  {
+    "port_number": "250401",
+    "border": "Mexican Border",
+    "port_name": "San Ysidro",
+    "crossing_name": "",
+    "hours": "24 hrs/day",
+    "date": "10/11/2026",
+    "time": "00:14:33",
+    "port_status": "Open",
+    "commercial_vehicle_lanes": {
+      "maximum_lanes": "N/A",
+      "cv_automation_type": "Manual",
+      "cv_segment_from": "",
+      "cv_segment_to": "",
+      "cv_standard_tolerance": "",
+      "cv_fast_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "FAST_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "passenger_vehicle_lanes": {
+      "maximum_lanes": "34",
+      "pv_automation_type": "Manual",
+      "pv_segment_from": "",
+      "pv_segment_to": "",
+      "pv_standard_tolerance": "",
+      "pv_nexus_sentri_tolerance": "",
+      "pv_ready_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "NEXUS_SENTRI_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "ready_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "pedestrian_lanes": {
+      "maximum_lanes": "22",
+      "ped_automation_type": "Manual",
+      "ped_segment_from": "",
+      "ped_segment_to": "",
+      "ped_standard_tolerance": "",
+      "ped_ready_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "ready_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "construction_notice": "",
+    "automation": "0",
+    "automation_enabled": "0"
+  },
+  {
+    "port_number": "250409",
+    "border": "Mexican Border",
+    "port_name": "San Ysidro",
+    "crossing_name": "Cross Border Express",
+    "hours": "24 hrs/day",
+    "date": "10/11/2026",
+    "time": "00:14:33",
+    "port_status": "Open",
+    "commercial_vehicle_lanes": {
+      "maximum_lanes": "N/A",
+      "cv_automation_type": "Manual",
+      "cv_segment_from": "",
+      "cv_segment_to": "",
+      "cv_standard_tolerance": "",
+      "cv_fast_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "N/A",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "FAST_lanes": {
+        "update_time": "",
+        "operational_status": "N/A",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "passenger_vehicle_lanes": {
+      "maximum_lanes": "N/A",
+      "pv_automation_type": "Manual",
+      "pv_segment_from": "",
+      "pv_segment_to": "",
+      "pv_standard_tolerance": "",
+      "pv_nexus_sentri_tolerance": "",
+      "pv_ready_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "N/A",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "NEXUS_SENTRI_lanes": {
+        "update_time": "",
+        "operational_status": "N/A",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "ready_lanes": {
+        "update_time": "",
+        "operational_status": "N/A",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "pedestrian_lanes": {
+      "maximum_lanes": "8",
+      "ped_automation_type": "Manual",
+      "ped_segment_from": "",
+      "ped_segment_to": "",
+      "ped_standard_tolerance": "",
+      "ped_ready_tolerance": "",
+      "standard_lanes": {
+        "update_time": "At 6:00 am PDT",
+        "operational_status": "no delay",
+        "delay_minutes": "0",
+        "lanes_open": "5"
+      },
+      "ready_lanes": {
+        "update_time": "At 6:00 am PDT",
+        "operational_status": "no delay",
+        "delay_minutes": "0",
+        "lanes_open": "1"
+      }
+    },
+    "construction_notice": "",
+    "automation": "0",
+    "automation_enabled": "0"
+  },
+  {
+    "port_number": "250407",
+    "border": "Mexican Border",
+    "port_name": "San Ysidro",
+    "crossing_name": "PedWest",
+    "hours": "6 am-2 pm",
+    "date": "10/11/2026",
+    "time": "00:14:33",
+    "port_status": "Closed",
+    "commercial_vehicle_lanes": {
+      "maximum_lanes": "N/A",
+      "cv_automation_type": "Manual",
+      "cv_segment_from": "",
+      "cv_segment_to": "",
+      "cv_standard_tolerance": "",
+      "cv_fast_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "FAST_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "passenger_vehicle_lanes": {
+      "maximum_lanes": "N/A",
+      "pv_automation_type": "Manual",
+      "pv_segment_from": "",
+      "pv_segment_to": "",
+      "pv_standard_tolerance": "",
+      "pv_nexus_sentri_tolerance": "",
+      "pv_ready_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "NEXUS_SENTRI_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "ready_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "pedestrian_lanes": {
+      "maximum_lanes": "14",
+      "ped_automation_type": "Manual",
+      "ped_segment_from": "",
+      "ped_segment_to": "",
+      "ped_standard_tolerance": "",
+      "ped_ready_tolerance": "",
+      "standard_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      },
+      "ready_lanes": {
+        "update_time": "",
+        "operational_status": "Update Pending",
+        "delay_minutes": "",
+        "lanes_open": ""
+      }
+    },
+    "construction_notice": "",
+    "automation": "0",
+    "automation_enabled": "0"
+  }
+]

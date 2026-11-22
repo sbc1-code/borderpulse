@@ -1,0 +1,123 @@
+{
+  "version": "borderpulse-editorial-receipt-v1",
+  "admittedAt": "2026-11-17T15:36:32.559Z",
+  "fingerprint": "7e25f441bd7cf72b25f04d74a9c6e775f7f24910e88dc928d689110ec36a8687",
+  "bundle": {
+    "version": "borderpulse-editorial-v1",
+    "id": "2026-11-17-sr56-southbound-i15-overnight-closure",
+    "topicKey": "sr56-southbound-i15-november17-closure",
+    "category": "operations-report",
+    "createdAt": "2026-11-17T15:35:07.000Z",
+    "synthesizedBy": {
+      "system": "chatgpt-scheduled-task",
+      "runId": "/root/borderpulse_daily:2026-11-17:synthesis",
+      "model": null,
+      "at": "2026-11-17T15:35:07.000Z"
+    },
+    "title": {
+      "en": "SR-56 to southbound I-15: overnight closure November 17",
+      "es": "SR-56 hacia I-15 sur: cierre nocturno el 17 de noviembre"
+    },
+    "readerValue": {
+      "en": "San Diego connector closure.",
+      "es": "Cierre de conexión en San Diego."
+    },
+    "relatedCrossings": [],
+    "sources": [
+      {
+        "id": "caltrans-notice",
+        "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261116-sr56i15closures",
+        "title": "Caltrans SR-56 / I-15 overnight closure notice",
+        "role": "primary",
+        "publishedDate": "2026-11-16",
+        "publishedAt": null,
+        "checkedAt": "2026-11-17T15:35:07.000Z",
+        "publicationDateEvidence": "Published: Nov 16, 2026"
+      }
+    ],
+    "claims": [
+      {
+        "id": "closure",
+        "type": "reported-fact",
+        "text": {
+          "en": "Caltrans scheduled the westbound Ted Williams Parkway/SR-56 connection to southbound I-15 to close overnight on November 17, from 9 p.m. to 5 a.m. The notice concerns this connector in San Diego, not the entire freeway. It is an overnight roadwork notice, not a border-crossing closure.",
+          "es": "Caltrans programó el cierre de la conexión de Ted Williams Parkway/SR-56 al oeste con I-15 al sur para la noche del 17 de noviembre, de 9 p.m. a 5 a.m. El aviso abarca esa conexión en San Diego, no toda la autopista ni un cruce fronterizo."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-notice",
+            "excerpt": "Westbound Ted Williams Parkway/SR-56 connector to southbound I-15."
+          },
+          {
+            "sourceId": "caltrans-notice",
+            "excerpt": "17, from 9 p.m. to 5 a.m."
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "Ted Williams Parkway/SR-56",
+          "I-15"
+        ]
+      },
+      {
+        "id": "schedule-limit",
+        "type": "reported-fact",
+        "text": {
+          "en": "Treat the hours as a planned work window, not a guarantee: Caltrans says weather, traffic incidents or work-related circumstances can alter the schedule. Consult the linked official notice when planning your journey around this connection.",
+          "es": "El horario es una previsión, no una garantía: Caltrans advierte que el clima, los incidentes de tránsito u otras circunstancias de la obra pueden modificarlo. Consulta el aviso oficial enlazado al planear tu recorrido por esta conexión."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-notice",
+            "excerpt": "subject to change"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans"
+        ]
+      }
+    ],
+    "articleClaimIds": [
+      "closure",
+      "schedule-limit"
+    ],
+    "review": {
+      "performedBy": {
+        "system": "chatgpt-scheduled-task",
+        "runId": "/root/borderpulse_daily:2026-11-17:review",
+        "model": null,
+        "at": "2026-11-17T15:35:47.000Z"
+      },
+      "method": "ai-source-and-language-review",
+      "claimIdsChecked": [
+        "closure",
+        "schedule-limit"
+      ],
+      "semanticSupport": "pass",
+      "scopeAndDates": "pass",
+      "riskClassification": "routine-factual-reporting",
+      "translationConsistency": "pass",
+      "duplicateTopicCheck": "pass",
+      "headlineAndReaderValue": "pass",
+      "sourceInstructionsIgnored": true,
+      "holds": [],
+      "rationale": "Distinct source-and-language review after synthesis, by the same scheduled assistant. Read the complete Caltrans notice. Both languages preserve connector direction, route identities and the November 17 overnight window, while limiting the report to the connector and retaining schedule uncertainty. Omitted prior-night-only Express Lanes work and detour instructions. No border wait, entry or safety advice. Current blog, inbox and receipts contain no matching topic or same-day pair. This is AI review, not human review."
+    }
+  },
+  "confirmations": [
+    {
+      "sourceId": "caltrans-notice",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261116-sr56i15closures",
+      "verifiedAt": "2026-11-17T15:36:32.559Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "f8673461ba949ef0f55df3bd068d8d4420e0d773d89ff7be2731ee4e0a54795f",
+      "excerptHashes": [
+        "1da144cd3a0c5c3205713d51702fed9e471c74bc79c5024486c43bd89f3aac40",
+        "2a7a981ce2ea1b4d7d1cc204d140f933c8c8b00ae17592469a968fbcde8a856f",
+        "adb4658de28af7567bcbcfafa535d58dbeeccbfde3106c08e53243b56e28d285"
+      ]
+    }
+  ]
+}

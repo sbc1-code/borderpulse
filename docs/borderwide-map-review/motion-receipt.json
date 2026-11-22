@@ -1,0 +1,471 @@
+{
+  "stages": [
+    {
+      "name": "Whole border, actual repository observations",
+      "at": 1793568428319
+    },
+    {
+      "name": "San Diego–Tijuana is a region filter",
+      "at": 1793568429319
+    },
+    {
+      "name": "Map marker opens the native report",
+      "at": 1793568429951
+    },
+    {
+      "name": "Ready Lane preserves original report clock",
+      "at": 1793568430601
+    },
+    {
+      "name": "Escape returns to results",
+      "at": 1793568431217
+    },
+    {
+      "name": "All crossings restores the whole border",
+      "at": 1793568431830
+    },
+    {
+      "name": "Texas filter",
+      "at": 1793568432498
+    },
+    {
+      "name": "Recorded data is explicitly historical",
+      "at": 1793568433164
+    },
+    {
+      "name": "Choose the retained Standard lane explicitly",
+      "at": 1793568433807
+    },
+    {
+      "name": "Keyboard scrub through actual archived retrievals",
+      "at": 1793568434452
+    },
+    {
+      "name": "Return to latest reports",
+      "at": 1793568435089
+    }
+  ],
+  "frames": [
+    {
+      "filename": "frame-00000.jpg",
+      "time": 1793568428.343844
+    },
+    {
+      "filename": "frame-00001.jpg",
+      "time": 1793568429.377389
+    },
+    {
+      "filename": "frame-00002.jpg",
+      "time": 1793568429.39473
+    },
+    {
+      "filename": "frame-00003.jpg",
+      "time": 1793568429.411974
+    },
+    {
+      "filename": "frame-00004.jpg",
+      "time": 1793568429.426769
+    },
+    {
+      "filename": "frame-00005.jpg",
+      "time": 1793568429.446303
+    },
+    {
+      "filename": "frame-00006.jpg",
+      "time": 1793568429.46432
+    },
+    {
+      "filename": "frame-00007.jpg",
+      "time": 1793568429.478496
+    },
+    {
+      "filename": "frame-00008.jpg",
+      "time": 1793568429.495936
+    },
+    {
+      "filename": "frame-00009.jpg",
+      "time": 1793568429.512391
+    },
+    {
+      "filename": "frame-00010.jpg",
+      "time": 1793568429.532138
+    },
+    {
+      "filename": "frame-00011.jpg",
+      "time": 1793568429.550687
+    },
+    {
+      "filename": "frame-00012.jpg",
+      "time": 1793568429.56715
+    },
+    {
+      "filename": "frame-00013.jpg",
+      "time": 1793568429.987372
+    },
+    {
+      "filename": "frame-00014.jpg",
+      "time": 1793568430.006024
+    },
+    {
+      "filename": "frame-00015.jpg",
+      "time": 1793568430.020321
+    },
+    {
+      "filename": "frame-00016.jpg",
+      "time": 1793568430.038396
+    },
+    {
+      "filename": "frame-00017.jpg",
+      "time": 1793568430.048351
+    },
+    {
+      "filename": "frame-00018.jpg",
+      "time": 1793568430.059297
+    },
+    {
+      "filename": "frame-00019.jpg",
+      "time": 1793568430.074174
+    },
+    {
+      "filename": "frame-00020.jpg",
+      "time": 1793568430.089964
+    },
+    {
+      "filename": "frame-00021.jpg",
+      "time": 1793568430.107466
+    },
+    {
+      "filename": "frame-00022.jpg",
+      "time": 1793568430.123685
+    },
+    {
+      "filename": "frame-00023.jpg",
+      "time": 1793568430.141613
+    },
+    {
+      "filename": "frame-00024.jpg",
+      "time": 1793568430.159696
+    },
+    {
+      "filename": "frame-00025.jpg",
+      "time": 1793568430.177635
+    },
+    {
+      "filename": "frame-00026.jpg",
+      "time": 1793568430.19573
+    },
+    {
+      "filename": "frame-00027.jpg",
+      "time": 1793568430.631809
+    },
+    {
+      "filename": "frame-00028.jpg",
+      "time": 1793568430.827592
+    },
+    {
+      "filename": "frame-00029.jpg",
+      "time": 1793568431.237242
+    },
+    {
+      "filename": "frame-00030.jpg",
+      "time": 1793568431.253057
+    },
+    {
+      "filename": "frame-00031.jpg",
+      "time": 1793568431.267055
+    },
+    {
+      "filename": "frame-00032.jpg",
+      "time": 1793568431.439202
+    },
+    {
+      "filename": "frame-00033.jpg",
+      "time": 1793568431.907727
+    },
+    {
+      "filename": "frame-00034.jpg",
+      "time": 1793568431.922958
+    },
+    {
+      "filename": "frame-00035.jpg",
+      "time": 1793568431.944934
+    },
+    {
+      "filename": "frame-00036.jpg",
+      "time": 1793568431.963869
+    },
+    {
+      "filename": "frame-00037.jpg",
+      "time": 1793568431.978088
+    },
+    {
+      "filename": "frame-00038.jpg",
+      "time": 1793568431.992249
+    },
+    {
+      "filename": "frame-00039.jpg",
+      "time": 1793568432.012639
+    },
+    {
+      "filename": "frame-00040.jpg",
+      "time": 1793568432.032139
+    },
+    {
+      "filename": "frame-00041.jpg",
+      "time": 1793568432.046451
+    },
+    {
+      "filename": "frame-00042.jpg",
+      "time": 1793568432.061619
+    },
+    {
+      "filename": "frame-00043.jpg",
+      "time": 1793568432.078094
+    },
+    {
+      "filename": "frame-00044.jpg",
+      "time": 1793568432.096259
+    },
+    {
+      "filename": "frame-00045.jpg",
+      "time": 1793568432.110801
+    },
+    {
+      "filename": "frame-00046.jpg",
+      "time": 1793568432.567511
+    },
+    {
+      "filename": "frame-00047.jpg",
+      "time": 1793568432.586277
+    },
+    {
+      "filename": "frame-00048.jpg",
+      "time": 1793568432.601932
+    },
+    {
+      "filename": "frame-00049.jpg",
+      "time": 1793568432.625765
+    },
+    {
+      "filename": "frame-00050.jpg",
+      "time": 1793568432.642122
+    },
+    {
+      "filename": "frame-00051.jpg",
+      "time": 1793568432.655964
+    },
+    {
+      "filename": "frame-00052.jpg",
+      "time": 1793568432.66894
+    },
+    {
+      "filename": "frame-00053.jpg",
+      "time": 1793568432.681382
+    },
+    {
+      "filename": "frame-00054.jpg",
+      "time": 1793568432.695797
+    },
+    {
+      "filename": "frame-00055.jpg",
+      "time": 1793568432.716268
+    },
+    {
+      "filename": "frame-00056.jpg",
+      "time": 1793568432.732866
+    },
+    {
+      "filename": "frame-00057.jpg",
+      "time": 1793568432.744968
+    },
+    {
+      "filename": "frame-00058.jpg",
+      "time": 1793568432.764097
+    },
+    {
+      "filename": "frame-00059.jpg",
+      "time": 1793568432.782235
+    },
+    {
+      "filename": "frame-00060.jpg",
+      "time": 1793568432.797734
+    },
+    {
+      "filename": "frame-00061.jpg",
+      "time": 1793568433.216684
+    },
+    {
+      "filename": "frame-00062.jpg",
+      "time": 1793568433.248053
+    },
+    {
+      "filename": "frame-00063.jpg",
+      "time": 1793568433.261986
+    },
+    {
+      "filename": "frame-00064.jpg",
+      "time": 1793568433.276283
+    },
+    {
+      "filename": "frame-00065.jpg",
+      "time": 1793568433.296427
+    },
+    {
+      "filename": "frame-00066.jpg",
+      "time": 1793568433.309195
+    },
+    {
+      "filename": "frame-00067.jpg",
+      "time": 1793568433.33658
+    },
+    {
+      "filename": "frame-00068.jpg",
+      "time": 1793568433.353178
+    },
+    {
+      "filename": "frame-00069.jpg",
+      "time": 1793568433.364414
+    },
+    {
+      "filename": "frame-00070.jpg",
+      "time": 1793568433.376188
+    },
+    {
+      "filename": "frame-00071.jpg",
+      "time": 1793568433.394215
+    },
+    {
+      "filename": "frame-00072.jpg",
+      "time": 1793568433.41389
+    },
+    {
+      "filename": "frame-00073.jpg",
+      "time": 1793568433.859794
+    },
+    {
+      "filename": "frame-00074.jpg",
+      "time": 1793568433.874444
+    },
+    {
+      "filename": "frame-00075.jpg",
+      "time": 1793568433.891343
+    },
+    {
+      "filename": "frame-00076.jpg",
+      "time": 1793568433.908036
+    },
+    {
+      "filename": "frame-00077.jpg",
+      "time": 1793568433.924361
+    },
+    {
+      "filename": "frame-00078.jpg",
+      "time": 1793568433.941765
+    },
+    {
+      "filename": "frame-00079.jpg",
+      "time": 1793568433.95746
+    },
+    {
+      "filename": "frame-00080.jpg",
+      "time": 1793568433.976882
+    },
+    {
+      "filename": "frame-00081.jpg",
+      "time": 1793568433.992706
+    },
+    {
+      "filename": "frame-00082.jpg",
+      "time": 1793568434.008365
+    },
+    {
+      "filename": "frame-00083.jpg",
+      "time": 1793568434.026037
+    },
+    {
+      "filename": "frame-00084.jpg",
+      "time": 1793568434.041149
+    },
+    {
+      "filename": "frame-00085.jpg",
+      "time": 1793568434.058306
+    },
+    {
+      "filename": "frame-00086.jpg",
+      "time": 1793568434.48437
+    },
+    {
+      "filename": "frame-00087.jpg",
+      "time": 1793568434.502352
+    },
+    {
+      "filename": "frame-00088.jpg",
+      "time": 1793568434.516069
+    },
+    {
+      "filename": "frame-00089.jpg",
+      "time": 1793568434.526821
+    },
+    {
+      "filename": "frame-00090.jpg",
+      "time": 1793568434.679664
+    },
+    {
+      "filename": "frame-00091.jpg",
+      "time": 1793568435.1387
+    },
+    {
+      "filename": "frame-00092.jpg",
+      "time": 1793568435.152391
+    },
+    {
+      "filename": "frame-00093.jpg",
+      "time": 1793568435.175298
+    },
+    {
+      "filename": "frame-00094.jpg",
+      "time": 1793568435.191615
+    },
+    {
+      "filename": "frame-00095.jpg",
+      "time": 1793568435.206832
+    },
+    {
+      "filename": "frame-00096.jpg",
+      "time": 1793568435.223603
+    },
+    {
+      "filename": "frame-00097.jpg",
+      "time": 1793568435.239498
+    },
+    {
+      "filename": "frame-00098.jpg",
+      "time": 1793568435.256457
+    },
+    {
+      "filename": "frame-00099.jpg",
+      "time": 1793568435.272983
+    },
+    {
+      "filename": "frame-00100.jpg",
+      "time": 1793568435.289843
+    },
+    {
+      "filename": "frame-00101.jpg",
+      "time": 1793568435.310086
+    },
+    {
+      "filename": "frame-00102.jpg",
+      "time": 1793568435.327148
+    },
+    {
+      "filename": "frame-00103.jpg",
+      "time": 1793568435.343047
+    },
+    {
+      "filename": "frame-00104.jpg",
+      "time": 1793568435.358745
+    }
+  ],
+  "fixtures": false
+}

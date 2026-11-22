@@ -3,9 +3,8 @@
 
 export const ANOMALY_CONFIG = {
   // A (day, hour) cell counts as "meaningful" only if it has at least this many samples.
-  // v1 default is 1 because the CBP fetch has only accumulated ~30 days of history so most
-  // (day, hour) cells have 1 to 2 samples. Bump this to 3 once the archive is >= 90 days old.
-  minSamplesPerCell: 1,
+  // Match the editorial evidence floor; sparse historical cells stay unpublished.
+  minSamplesPerCell: 3,
 
   // Only consider the top-N busiest POEs for automation. Small ports produce noisy anomalies.
   // Port numbers verified against public/data/crossings.json on 2026-04-23.

@@ -33,8 +33,8 @@ export default function About() {
       ? 'About Border Pulse | The U.S.-Mexico border wait time tracker'
       : 'Acerca de Border Pulse | Rastreador de tiempos de espera en la frontera EE.UU.-México';
     const description = language === 'en'
-      ? 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, with a 30-day rolling history.'
-      : 'Border Pulse es un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP, con un historial rotativo de 30 días.';
+      ? 'Border Pulse is an independent, bilingual project that presents available northbound U.S.-Mexico crossing reports from official CBP data, with a 30-day rolling history.'
+      : 'Border Pulse es un proyecto independiente y bilingüe que presenta los reportes disponibles de cruces hacia EE.UU. con datos oficiales de CBP, con un historial rotativo de 30 días.';
     updatePageMeta({
       title,
       description,
@@ -63,10 +63,10 @@ export default function About() {
       {
         value: 'CBP',
         label: language === 'en' ? 'Source of record' : 'Fuente original',
-        sub: language === 'en' ? 'Live upstream feed' : 'Feed en vivo',
+        sub: language === 'en' ? 'Reported lane waits' : 'Esperas reportadas por carril',
       },
       {
-        value: stats.blog_posts ?? 12,
+        value: stats.blog_posts ?? '—',
         label: language === 'en' ? 'Blog posts' : 'Posts del blog',
         sub: language === 'en'
           ? `${stats.blog_posts_en ?? 0} EN · ${stats.blog_posts_es ?? 0} ES`
@@ -78,12 +78,12 @@ export default function About() {
   return (
     <div className="p-3 sm:p-4 lg:p-6 max-w-[900px] mx-auto">
       <div className="mb-3">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-1 h-8 -ml-2">
+        <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
+          <Link to="/">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">{language === 'en' ? 'All crossings' : 'Todos los cruces'}</span>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       <header className="mb-6">
@@ -92,8 +92,8 @@ export default function About() {
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
           {language === 'en'
-            ? 'An independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data.'
-            : 'Un proyecto independiente y bilingüe que rastrea cada puerto terrestre de entrada EE.UU.-México usando datos oficiales de CBP.'}
+            ? 'An independent, bilingual project that presents available northbound U.S.-Mexico crossing reports from official CBP data.'
+            : 'Un proyecto independiente y bilingüe que presenta los reportes disponibles de cruces hacia EE.UU. con datos oficiales de CBP.'}
         </p>
       </header>
 
@@ -112,7 +112,7 @@ export default function About() {
           <div className="text-xs text-slate-500">{language === 'en' ? 'Loading stats…' : 'Cargando estadísticas…'}</div>
         )}
         {stats?.generated_at && (
-          <div className="text-[10px] text-slate-400 dark:text-slate-500 mt-2">
+          <div className="text-[10px] text-slate-600 dark:text-slate-400 mt-2">
             {language === 'en' ? 'Snapshot generated ' : 'Snapshot generado '}
             {new Date(stats.generated_at).toLocaleString(language === 'es' ? 'es-MX' : 'en-US')}
           </div>
@@ -128,8 +128,8 @@ export default function About() {
         <div className="space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
           <p>
             {language === 'en'
-              ? 'Northbound passenger wait times come directly from U.S. Customs and Border Protection (CBP). A scheduled job pulls the feed and writes a snapshot to /data/crossings.json — the same file the dashboard reads. Snapshots roll up into per-crossing aggregates with a 30-day lookback that power "vs. typical" comparisons and the lightest-hour predictions on every /best-time page.'
-              : 'Los tiempos de espera hacia EE.UU. vienen directamente de U.S. Customs and Border Protection (CBP). Un trabajo programado jala el feed y escribe un snapshot en /data/crossings.json — el mismo archivo que lee el panel. Los snapshots se agregan en datos por cruce con un retroceso de 30 días que alimentan las comparaciones "vs. lo normal" y las predicciones de hora más ligera en cada página /best-time.'}
+              ? 'Northbound wait reports come from U.S. Customs and Border Protection (CBP). The dashboard requests the latest available snapshot, with a dated bundled copy as a fallback. Each lane’s CBP report clock may be older than the snapshot retrieval. Separately published 30-day history supports Standard passenger comparisons and historical lightest-hour patterns, not predictions.'
+              : 'Los reportes hacia EE.UU. provienen de U.S. Customs and Border Protection (CBP). El panel solicita la versión más reciente disponible, con una copia fechada como respaldo. La hora del reporte de cada carril puede ser anterior a la consulta. El historial de 30 días se publica por separado y permite comparar auto estándar y explorar patrones de menor espera, no predicciones.'}
           </p>
           <p>
             {language === 'en'
@@ -138,8 +138,8 @@ export default function About() {
           </p>
           <p>
             {language === 'en'
-              ? 'The historical bucketing is sparse — a 30-day rolling window often gives only one or two samples per (day-of-week, hour) bucket — so we treat any observation as signal and fall back to the all-hours overall median when an hour-bucket is empty.'
-              : 'El bucketing histórico es escaso — una ventana rotativa de 30 días a menudo da solo una o dos muestras por bucket (día de la semana, hora) — así que tratamos cualquier observación como señal y volvemos a la mediana general cuando un bucket de hora está vacío.'}
+              ? 'Historical cells can pool neighboring hours within the same local weekday and need at least five samples to show a value. A Standard passenger card can use the crossing’s overall median when its matching hour is sparse. Missing waits stay unavailable; they are not treated as zero.'
+              : 'Las celdas históricas pueden agrupar horas vecinas del mismo día local y requieren al menos cinco muestras para mostrar un valor. Una tarjeta de auto estándar puede usar la mediana general del cruce si faltan muestras para esa hora. Una espera no disponible no se convierte en cero.'}
           </p>
         </div>
       </section>
@@ -168,8 +168,8 @@ export default function About() {
           </li>
           <li>
             {language === 'en'
-              ? 'Geolocation runs in the browser; only the resulting state filter (e.g., "California") is saved to localStorage.'
-              : 'La geolocalización corre en el navegador; solo se guarda el filtro de estado resultante (p.ej., "California") en localStorage.'}
+              ? 'If you choose nearby crossings, this browser saves the selected state and coordinates rounded to two decimal places to order nearby crossings.'
+              : 'Si eliges cruces cercanos, este navegador guarda el estado seleccionado y las coordenadas redondeadas a dos decimales para ordenar los cruces cercanos.'}
           </li>
         </ul>
       </section>
@@ -190,7 +190,7 @@ export default function About() {
               ? (language === 'en'
                 ? `${stats.crossings} crossings, hour by hour`
                 : `${stats.crossings} cruces, hora por hora`)
-              : (language === 'en' ? 'Hour by hour, every crossing' : 'Hora por hora, cada cruce')}
+              : (language === 'en' ? 'Historical patterns where available' : 'Patrones históricos donde hay datos')}
           </div>
         </Link>
         <Link

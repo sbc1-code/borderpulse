@@ -19,7 +19,8 @@ const ASSETS = path.resolve(process.cwd(), 'dist', 'assets');
 
 // entry chunk (index-*.js) and the single stylesheet
 const BUDGETS = [
-  { label: 'entry js', pattern: /^index-.*\.js$/, maxGzipKb: 62 },
+  // 62 -> 62.25 (2026-11-09): fresher fallback feed + honest "could not load" state, +0.19 KB.
+  { label: 'entry js', pattern: /^index-.*\.js$/, maxGzipKb: 62.25 },
   { label: 'css', pattern: /^index-.*\.css$/, maxGzipKb: 20 },
 ];
 

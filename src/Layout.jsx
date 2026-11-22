@@ -1,18 +1,34 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, BookOpen, Menu, X, Moon, Sun, Clock3 } from 'lucide-react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { BookOpen, Menu, X, Moon, Sun, Clock3, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BorderPulseLogo from '@/components/BorderPulseLogo';
+import { themeValue, readStorage, writeStorage } from '@/lib/browserStorage';
+import { usePersistentLanguage } from '@/lib/useLanguage';
+import { normalizeLane, withLane } from '@/lib/laneContext';
+
+function LaneIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M4 7h16M4 12h10M4 17h16" />
+    </svg>
+  );
+}
 
 export default function Layout({ children }) {
   const location = useLocation();
-  const [language, setLanguage] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('borderPulse_language') || 'en' : 'en'
-  );
-  const [theme, setTheme] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('borderPulse_theme') || 'light' : 'light'
-  );
+  const navigate = useNavigate();
+  const storedLanguage = usePersistentLanguage();
+  const spanishHome = /^\/es\/?$/.test(location.pathname);
+  const language = spanishHome ? 'es' : storedLanguage;
+  useEffect(() => {
+    if (!spanishHome) return;
+    writeStorage('borderPulse_language', 'es');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: 'es' }));
+  }, [spanishHome]);
+  const [theme, setTheme] = useState(() => themeValue(readStorage('borderPulse_theme')));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButton = useRef(null);
 
   const applyTheme = useCallback((t) => {
     if (typeof document === 'undefined') return;
@@ -23,8 +39,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     const onStorage = (e) => {
-      if (e.key === 'borderPulse_language') setLanguage(e.newValue || 'en');
-      if (e.key === 'borderPulse_theme') setTheme(e.newValue || 'light');
+      if (e.key === 'borderPulse_theme') setTheme(themeValue(e.newValue));
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
@@ -33,7 +48,8 @@ export default function Layout({ children }) {
   useEffect(() => {
     const pageOwnsLanguage =
       /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
-      /^\/(methodology|metodologia)\/?$/.test(location.pathname);
+      /^\/(city|ciudad)\/[^/]+\/?$/.test(location.pathname) ||
+      /^\/(methodology|metodologia|privacy|privacidad|feature-your-business|anunciate|es)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
   }, [language, location.pathname]);
@@ -41,21 +57,21 @@ export default function Layout({ children }) {
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
-    localStorage.setItem('borderPulse_theme', next);
+    writeStorage('borderPulse_theme', next);
   };
 
   const changeLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('borderPulse_language', lang);
+    writeStorage('borderPulse_language', lang);
     window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
+    if (lang === 'en' && /^\/es\/?$/.test(location.pathname)) navigate({ pathname: '/', search: location.search, hash: location.hash });
   };
 
   const nav = [
     {
-      name: language === 'en' ? 'Dashboard' : 'Panel',
-      href: '/',
-      icon: BarChart3,
-      current: location.pathname === '/',
+      name: language === 'en' ? 'Crossings' : 'Cruces',
+      href: withLane(`${spanishHome ? '/es/' : '/'}?area=all`, normalizeLane(new URLSearchParams(location.search).get('lane'))),
+      icon: MapPin,
+      current: location.pathname === '/' || /^\/es\/?$/.test(location.pathname) || location.pathname.startsWith('/corridor/'),
     },
     {
       name: 'Blog',
@@ -68,6 +84,12 @@ export default function Layout({ children }) {
       href: '/best-time/',
       icon: Clock3,
       current: location.pathname.startsWith('/best-time'),
+    },
+    {
+      name: language === 'en' ? 'Lane flips' : 'Carril rápido',
+      href: '/lane-flip/',
+      icon: LaneIcon,
+      current: location.pathname.startsWith('/lane-flip'),
     },
   ];
 
@@ -83,14 +105,19 @@ export default function Layout({ children }) {
       {/* Skip to content - accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:text-slate-900 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:text-sm focus:font-medium"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 focus:bg-white focus:text-slate-900 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:text-sm focus:font-medium"
       >
         {language === 'en' ? 'Skip to content' : 'Ir al contenido'}
       </a>
       {/* Mobile header */}
-      <header className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
+      <header onKeyDown={event => {
+        if (event.key === 'Escape' && mobileOpen) {
+          setMobileOpen(false);
+          menuButton.current?.focus();
+        }
+      }} className={`lg:hidden w-screen max-w-full ${isDark ? 'bg-gray-900/80 border-gray-800' : 'bg-white/80 border-slate-200'} backdrop-blur-md border-b sticky top-0 z-40`}>
         <div className="flex items-center justify-between px-4 py-3">
-          <Link to="/" aria-label="Border Pulse home" className="flex min-h-11 min-w-11 items-center gap-2 rounded-md">
+          <Link to={spanishHome ? `/es/${location.search}` : "/"} aria-label="Border Pulse home" className="flex min-h-11 min-w-11 items-center gap-2 rounded-md">
             <BorderPulseLogo size={32} />
             <span className={`hidden truncate text-base font-bold sm:inline sm:text-lg ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Border Pulse
@@ -98,13 +125,13 @@ export default function Layout({ children }) {
           </Link>
           <div className="flex shrink-0 items-center gap-1">
             <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Switch to English" aria-pressed={language === 'en'}>EN</Button>
-              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
+              <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="EN, Switch to English" aria-pressed={language === 'en'}>EN</Button>
+              <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="ES, Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
             </div>
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+            <Button ref={menuButton} variant="ghost" size="icon" onClick={() => setMobileOpen((v) => !v)} className="min-h-11 min-w-11 rounded-full" aria-label={mobileOpen ? (language === 'es' ? 'Cerrar menú' : 'Close menu') : (language === 'es' ? 'Abrir menú' : 'Open menu')} aria-expanded={mobileOpen} aria-controls={mobileOpen ? 'mobile-navigation' : undefined}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
@@ -130,7 +157,7 @@ export default function Layout({ children }) {
       <div className="lg:flex min-h-screen">
         <aside aria-label={language === 'en' ? 'Site navigation' : 'Navegación del sitio'} className={`hidden lg:flex w-60 shrink-0 ${sidebarClasses} backdrop-blur-md border-r flex-col`}>
           <div className={`p-5 border-b ${isDark ? 'border-gray-800' : 'border-slate-200'}`}>
-            <Link to="/" className="flex items-center gap-3">
+            <Link to={spanishHome ? `/es/${location.search}` : "/"} className="flex items-center gap-3">
               <BorderPulseLogo size={40} />
               <div>
                 {/* Not an <h1>: the sidebar is `hidden lg:flex` but stays in
@@ -151,8 +178,8 @@ export default function Layout({ children }) {
                 on tall pages. */}
             <div className="mt-3 flex items-center gap-2">
               <div className={`flex items-center ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'} border rounded-lg p-0.5`}>
-                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Switch to English" aria-pressed={language === 'en'}>EN</Button>
-                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
+                <Button variant={language === 'en' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('en')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="EN, Switch to English" aria-pressed={language === 'en'}>EN</Button>
+                <Button variant={language === 'es' ? 'default' : 'ghost'} size="sm" onClick={() => changeLanguage('es')} className="min-h-11 min-w-11 px-2 text-sm" aria-label="ES, Cambiar a español" aria-pressed={language === 'es'}>ES</Button>
               </div>
               <Button variant="ghost" size="icon" onClick={toggleTheme} className="min-h-11 min-w-11 rounded-full" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -175,11 +202,11 @@ export default function Layout({ children }) {
             ))}
           </nav>
         </aside>
-        <main id="main-content" className="flex-1 overflow-auto">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 overflow-auto">{children}</main>
       </div>
 
       {/* Footer (all viewports) */}
-      <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-sm`}>
+      <footer className={`border-t ${isDark ? 'border-gray-800 bg-gray-900/60' : 'border-slate-200 bg-white/60'} backdrop-blur-xs`}>
         <div className="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
           <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
             <span>
@@ -189,8 +216,17 @@ export default function Layout({ children }) {
             <Link to="/best-time/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
             </Link>
+            <Link to="/lane-flip/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {language === 'en' ? 'Lane flips' : 'Carril rápido'}
+            </Link>
             <Link to="/about/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
+            </Link>
+            <Link
+              to={language === 'es' ? '/anunciate/' : '/feature-your-business/'}
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              {language === 'es' ? 'Anuncia tu negocio' : 'Feature your business'}
             </Link>
             <span>·</span>
             <Link

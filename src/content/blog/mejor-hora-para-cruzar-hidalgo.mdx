@@ -3,7 +3,7 @@ title: "Mejor hora para cruzar Hidalgo: hora por hora con 30 días de datos de C
 description: "Tiempos medianos hacia EE.UU. en el puente Hidalgo, hora por hora, con datos de CBP. Las mañanas aquí se despejan más rápido que en cualquier garita de San Diego."
 slug: mejor-hora-para-cruzar-hidalgo
 date: "2026-05-09"
-updated: "2026-07-27"
+updated: "2026-10-29"
 author: sebastian
 pillar: data-analysis
 lang: es
@@ -27,6 +27,9 @@ officialSources:
   - label: "CBP Programa SENTRI"
     url: "https://www.cbp.gov/travel/trusted-traveler-programs/sentri"
 ---
+
+> **Análisis histórico.** Las cifras fijas corresponden a la muestra fechada del artículo. Las gráficas usan historial publicado por separado. Revisa sus fechas de origen y los reportes recientes por carril antes de viajar.
+
 
 El puente internacional Hidalgo es el caballo de batalla de McAllen / Reynosa, y los datos cuentan una historia distinta a la de las garitas de California con las que la mayoría de los viajeros lo comparan. La espera mediana hacia EE.UU. sobre los últimos 30 días es de **55 minutos**, más baja que cualquier garita grande del sur de California. La hora más ligera de toda la semana es **8 a. m. con mediana de 20 minutos**, y el bloque temprano corre ligero todos los días: de las 2 a las 9 a. m. las medianas por hora se quedan entre 15 y 40 minutos. El patrón es menos un pico que un muro: la espera sube desde media mañana y se sostiene entre 50 y 65 minutos desde como las 10 a. m. hasta la noche, los siete días de la semana.
 
@@ -89,7 +92,7 @@ La alerta de viaje del DOS para México se actualiza periódicamente y aplica a 
 
 ## Cómo calculamos estos números
 
-Border Pulse jala el tiempo de espera oficial de CBP para Hidalgo y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, construida con unas 380 muestras individuales. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica de arriba siempre refleja la ventana actual. Mediana es más honesta que promedio porque un solo outlier de 240 minutos infla el promedio de una hora típica de 60 minutos hasta 90.
+Border Pulse jala el tiempo de espera oficial de CBP para Hidalgo y guarda una snapshot. La gráfica de arriba es la **mediana** de espera por celda (día de la semana, hora del día) sobre los últimos 30 días, construida con unas 380 muestras individuales. Como una cuadrícula de 7 por 24 es más fina de lo que la cadencia de refresco puede llenar, cada celda se estima con una ventana centrada en esa hora, ampliada como máximo dos horas hacia cada lado y solo lo necesario. Las celdas que aun así no llegan a cinco observaciones se muestran como "datos insuficientes" en lugar de un número. Nunca promediamos entre días, porque el día de la semana es el patrón. La ventana es móvil, así que estas cifras se mueven conforme entran snapshots nuevos y salen los viejos. Los números citados en esta página se recalcularon el 27 de julio de 2026; la gráfica integrada muestra el historial publicado por separado; revisa sus fechas de origen y cobertura. Mediana es más honesta que promedio porque un solo outlier de 240 minutos infla el promedio de una hora típica de 60 minutos hasta 90.
 
 Los datos crudos y la metodología viven en [nuestro repo público](https://github.com/sbc1-code/borderpulse). Las snapshots vienen del [feed público de CBP BWT](https://bwt.cbp.gov/), que es la fuente canónica.
 

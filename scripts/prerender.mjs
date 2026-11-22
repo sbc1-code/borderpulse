@@ -3,8 +3,21 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { mdxBodyToHtml } from './lib/mdx-to-html.mjs';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import EditorialArticle from '../src/components/blog/EditorialArticle.js';
 import { hasPedestrianLane } from '../src/lib/crossingAvailability.js';
 import { COMPARE_PAIRS } from '../src/lib/comparePairs.js';
+import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
+import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
+import { SPANISH_HOME } from '../src/lib/homeMeta.js';
+import { crossingSearchDescription, crossingSearchTitle } from '../src/lib/crossingSeo.js';
+import { cameraSourceFor } from '../src/lib/cameras.js';
+import { googlePrivacyNotice } from '../src/lib/googlePrivacyNotice.js';
+import { privacyParagraphs } from '../src/lib/privacyParagraphs.js';
+import { CONSOLE_PATH } from '../src/lib/crossingConsole.js';
+import { laneFlipEntries } from '../src/lib/laneFlips.js';
+import { archiveCaveat, eligibilityNote, historyNotice, checkNote, detailDescription, detailTitle, indexDescription, indexTitle, laneLabel } from '../src/lib/laneFlipCopy.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -32,8 +45,8 @@ function faqItems(crossing, aggregate) {
     const h = aggregate.overall_best_hour;
     const hourLabel = `${h % 12 || 12} ${h >= 12 ? 'PM' : 'AM'}`;
     items.push({
-      q: `What is the best time to cross at ${name}?`,
-      a: `Based on the last 30 days of CBP data, the lightest typical wait at ${name} is around ${hourLabel} (median ${aggregate.overall_best_median} min).`,
+      q: `What does the historical wait pattern show at ${name}?`,
+      a: `The last 30 days of standard-passenger CBP data show an overall historical low around ${hourLabel} at ${name} (median ${aggregate.overall_best_median} min). This full-day pattern includes hours already passed and is not a forecast.`,
     });
   }
   return items;
@@ -42,8 +55,8 @@ function faqItems(crossing, aggregate) {
 function renderCrossingHead(crossing, slug, aggregate) {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
-  const title = `${crossing.name} Border Wait Time Today: Live CBP Data (2026) | Border Pulse`;
-  const desc = `Live ${crossing.name} border wait time from U.S. Customs and Border Protection, plus 30-day hour-by-hour patterns, port hours, and the best time to cross today.`;
+  const title = crossingSearchTitle(crossing, 'en', cameraSourceFor(crossing.port_number)?.kind);
+  const desc = crossingSearchDescription(crossing, 'en', { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraSourceFor(crossing.port_number)?.kind) });
   const canonical = `${BASE}/crossing/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
@@ -135,19 +148,7 @@ function renderBlogPostHead(post, author, allPosts) {
   const datePublished = `${post.date}T12:00:00Z`;
   const dateModified = `${post.updated || post.date}T12:00:00Z`;
 
-  // Build hreflang pairs if this post has a translation twin.
-  const hreflangs = [];
-  if (post.translationKey && allPosts) {
-    const en = allPosts.find(
-      (p) => p.translationKey === post.translationKey && p.lang === 'en',
-    );
-    const es = allPosts.find(
-      (p) => p.translationKey === post.translationKey && p.lang === 'es',
-    );
-    if (en) hreflangs.push({ lang: 'en', href: `${BASE}/blog/${en.slug}/` });
-    if (es) hreflangs.push({ lang: 'es', href: `${BASE}/blog/${es.slug}/` });
-    if (en) hreflangs.push({ lang: 'x-default', href: `${BASE}/blog/${en.slug}/` });
-  }
+  const hreflangs = blogHreflangs(post, allPosts || []);
 
   const blogPosting = {
     '@context': 'https://schema.org',
@@ -159,7 +160,7 @@ function renderBlogPostHead(post, author, allPosts) {
     datePublished,
     dateModified,
     author: {
-      '@type': 'Person',
+      '@type': author?.type || 'Person',
       name: author?.name || post.author,
       url: author?.url,
     },
@@ -290,15 +291,12 @@ function rewriteIndex(indexHtml, head) {
     }
   }
 
-  // Replace any existing hreflang tags with post-specific ones (the shell has
-  // homepage-default hreflangs from index.html that we must override per page).
-  if (head.hreflangs && head.hreflangs.length) {
-    html = html.replace(/\s*<link\s+rel=["']alternate["']\s+hreflang=[^>]*>/gi, '');
-    const hreflangTags = head.hreflangs
-      .map((h) => `  <link rel="alternate" hreflang="${esc(h.lang)}" href="${esc(h.href)}" />`)
-      .join('\n');
-    html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
-  }
+  // Always replace shell alternates, including routes without translated URLs.
+  html = html.replace(/\s*<link\b(?=[^>]*\brel=["']alternate["'])(?=[^>]*\bhreflang=)[^>]*>/gi, '');
+  const hreflangTags = (head.hreflangs ?? pageHreflangs(head.canonical, head.lang || 'en'))
+    .map((h) => `  <link rel="alternate" hreflang="${esc(h.lang)}" href="${esc(h.href)}" />`)
+    .join('\n');
+  html = html.replace(/<\/head>/i, `${hreflangTags}\n  </head>`);
 
   // Escape any literal "</script" inside the JSON body so a value like
   // "</script><script>alert(1)</script>" can't break out of the
@@ -306,7 +304,7 @@ function rewriteIndex(indexHtml, head) {
   const jsonLdTags = head.jsonLd
     .map((obj) => {
       const body = JSON.stringify(obj).replace(/<\/script/gi, '<\\/script');
-      return `  <script type="application/ld+json">${body}</script>`;
+      return `  <script type="application/ld+json" data-route-canonical="${esc(head.canonical)}">${body}</script>`;
     })
     .join('\n');
   html = html.replace(/<\/head>/i, `${jsonLdTags}\n  </head>`);
@@ -319,8 +317,8 @@ function renderBestTimeHead(crossing, slug, aggregate) {
   const bestMedian = aggregate?.overall_best_median;
   const title = `Best Time to Cross ${crossing.name}: Hour-by-Hour CBP Data (2026) | Border Pulse`;
   const desc = bestHour != null && bestMedian != null
-    ? `Lightest typical hour to cross ${crossing.name}: ~${bestHour % 12 || 12} ${bestHour >= 12 ? 'PM' : 'AM'} (median ${bestMedian} min). Hour-by-hour from the last 30 days of CBP data.`
-    : `Lightest typical hour to cross ${crossing.name} based on the last 30 days of CBP wait time data, hour by hour, every day of the week.`;
+    ? `Historical lightest hour across the weekly pattern at ${crossing.name}: ${bestHour % 12 || 12} ${bestHour >= 12 ? 'PM' : 'AM'} (median ${bestMedian} min). From 30 days of standard-passenger CBP data; not a forecast.`
+    : `Historical standard-passenger wait patterns at ${crossing.name} from 30 days of CBP data, by hour and weekday. Not a forecast.`;
   const canonical = `${BASE}/best-time/${slug}/`;
   // Per-best-time OG cards live under /og/best-time/<slug>.png.
   // Falls back to per-crossing card if the new generator hasn't run yet.
@@ -354,7 +352,7 @@ function renderBestTimeHead(crossing, slug, aggregate) {
 
 function renderEmbedHead(crossing, slug) {
   const title = `${crossing.name} wait time | Border Pulse`;
-  const desc = `Live wait time at ${crossing.name}, refreshed regularly.`;
+  const desc = `Reported wait time at ${crossing.name}, refreshed regularly.`;
   // Canonical points to the full crossing page so search engines consolidate
   // any accidental indexing on the canonical URL.
   const canonical = `${BASE}/crossing/${slug}/`;
@@ -390,7 +388,7 @@ function renderRedirectPage(targetUrl) {
     <meta http-equiv="refresh" content="0; url=${esc(localTarget)}" />
     <link rel="canonical" href="${esc(targetUrl)}" />
     <title>Redirecting | Border Pulse</title>
-    <script>window.location.replace(${JSON.stringify(localTarget)});</script>
+    <script>window.location.replace(${JSON.stringify(localTarget)} + window.location.search + window.location.hash);</script>
   </head>
   <body>
     <p>Redirecting to <a href="${esc(targetUrl)}">${esc(targetUrl)}</a>.</p>
@@ -414,7 +412,7 @@ function injectCrawlableLinks(html, crossings, portToSlug, posts) {
     .join('\n');
 
   const block = `
-<nav aria-label="All border crossings" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+<nav aria-label="All border crossings" aria-hidden="true" inert style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
   <h2>All U.S. border crossings</h2>
   <ul>
 ${crossingLinks}
@@ -435,8 +433,10 @@ function renderBlogPostBody(post, author) {
   let bodyHtml;
   try {
     const raw = fs.readFileSync(mdxPath, 'utf8');
-    const { content } = matter(raw);
-    bodyHtml = mdxBodyToHtml(content);
+    const { content, data } = matter(raw);
+    bodyHtml = data.source === 'ai-editorial'
+      ? renderToStaticMarkup(createElement(EditorialArticle, { article: data.editorialArticle }))
+      : mdxBodyToHtml(content);
   } catch (e) {
     console.warn(`[prerender] failed to render body for ${post.slug}:`, e.message);
     return '';
@@ -503,7 +503,38 @@ async function main() {
   const authors = readAuthors();
 
   const indexWithLinks = injectCrawlableLinks(originalIndex, crossings, portToSlug, posts);
-  fs.writeFileSync(indexPath, indexWithLinks);
+  const homeSnapshot = snapshotHtml(crossings, portToSlug, doc.fetched_at);
+  fs.writeFileSync(indexPath, injectSnapshot(indexWithLinks, homeSnapshot, { refresh: true, lang: 'en' }));
+
+  const esCanonical = `${BASE}/es/`;
+  const esHead = {
+    lang: 'es',
+    title: SPANISH_HOME.title,
+    desc: SPANISH_HOME.description,
+    canonical: esCanonical,
+    ogImage: `${BASE}/og-card.png`,
+    jsonLd: [],
+  };
+  let esHtml = injectSnapshot(
+    rewriteIndex(indexWithLinks, esHead),
+    snapshotHtml(crossings, portToSlug, doc.fetched_at, false, { lang: 'es' }),
+    { refresh: true, lang: 'es' },
+  );
+  esHtml = esHtml
+    .replace(/<meta\s+property=["']og:locale["'][^>]*>/i, '<meta property="og:locale" content="es_MX" />')
+    .replace(/<meta\s+property=["']og:locale:alternate["'][^>]*>/i, '<meta property="og:locale:alternate" content="en_US" />');
+  const esDir = path.resolve(distDir, 'es');
+  fs.mkdirSync(esDir, { recursive: true });
+  fs.writeFileSync(path.resolve(esDir, 'index.html'), esHtml);
+
+  // Pages and local previews serve these files. Vercel rewrites the same
+  // paths to the cached CBP function, so a production build leaves them out
+  // and the published table is not frozen to this build.
+  if (process.env.VITE_PUBLIC_CBP_API !== 'true') {
+    fs.mkdirSync(path.resolve(distDir, 'snapshot', 'es'), { recursive: true });
+    fs.writeFileSync(path.resolve(distDir, 'snapshot', 'index.html'), snapshotDocument(doc, { lang: 'en', framed: true }));
+    fs.writeFileSync(path.resolve(distDir, 'snapshot', 'es', 'index.html'), snapshotDocument(doc, { lang: 'es', framed: true }));
+  }
 
   const aggregatesDir = path.resolve(root, 'public/data/aggregates');
   let crossingCount = 0;
@@ -518,11 +549,26 @@ async function main() {
       } catch {}
     }
     const head = renderCrossingHead(c, slug, aggregate);
-    const html = rewriteIndex(indexWithLinks, head);
+    const html = injectSnapshot(rewriteIndex(indexWithLinks, head), snapshotHtml([c], portToSlug, doc.fetched_at, true));
     const outDir = path.resolve(distDir, 'crossing', slug);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     crossingCount++;
+  }
+
+  // Static hosts redirect legacy regional bookmarks into the shared map too.
+  // Preserve query/lane context with URLSearchParams, not query concatenation.
+  {
+    const html = `<!doctype html><html lang="en"><head>
+      <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="robots" content="noindex, follow" />
+      <meta http-equiv="refresh" content="0; url=/?area=san-diego-tijuana" />
+      <link rel="canonical" href="${BASE}/" /><title>Redirecting | Border Pulse</title>
+      <script>const next=new URL('/',location.origin);next.search=location.search;next.searchParams.set('area','san-diego-tijuana');next.searchParams.delete('display');next.hash=location.hash;location.replace(next.pathname+next.search+next.hash);</script>
+      </head><body><p><a href="/?area=san-diego-tijuana">Open San Diego–Tijuana in the border map</a></p></body></html>`;
+    const outDir = path.resolve(distDir, `.${CONSOLE_PATH}`);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
   }
 
   let blogPageCount = 0;
@@ -622,7 +668,7 @@ async function main() {
     const enHead = {
       lang: 'en',
       title: 'Methodology | Border Pulse',
-      desc: 'How Border Pulse turns CBP and Google Maps data into the numbers on every page: sources, scheduled refreshes, median over mean, 30-day rolling window, and what we deliberately don\'t model.',
+      desc: 'CBP sources, report and retrieval clocks, medians, historical coverage and BorderPulse limits.',
       canonical: enCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumbFor(enCanonical, 'Methodology')],
@@ -631,7 +677,7 @@ async function main() {
     const esHead = {
       lang: 'es',
       title: 'Metodología | Border Pulse',
-      desc: 'Cómo Border Pulse convierte datos de CBP y Google Maps en los números que ves en cada página: fuentes, cadencia programada, mediana sobre promedio, ventana rotativa de 30 días, y lo que deliberadamente no modelamos.',
+      desc: 'Fuentes de CBP, horas de reporte y consulta, medianas, cobertura histórica y límites de BorderPulse.',
       canonical: esCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumbFor(esCanonical, 'Metodología')],
@@ -647,11 +693,74 @@ async function main() {
     fs.writeFileSync(path.resolve(esDir, 'index.html'), esHtml);
   }
 
+  // /feature-your-business + /anunciate — self-serve sponsor page, hreflang-paired.
+  {
+    const enCanonical = `${BASE}/feature-your-business/`;
+    const esCanonical = `${BASE}/anunciate/`;
+    const hreflangs = [
+      { lang: 'en', href: enCanonical },
+      { lang: 'es', href: esCanonical },
+      { lang: 'x-default', href: enCanonical },
+    ];
+    const heads = [
+      ['feature-your-business', {
+        lang: 'en',
+        title: 'Feature your business | Border Pulse',
+        desc: 'A labeled spot on Border Pulse crossing pages for one business per category in each border city. $99 a month.',
+        canonical: enCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+      }],
+      ['anunciate', {
+        lang: 'es',
+        title: 'Anuncia tu negocio | Border Pulse',
+        desc: 'Un espacio patrocinado en las páginas de cruces de Border Pulse para un negocio por categoría en cada ciudad fronteriza. $99 dólares al mes.',
+        canonical: esCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+      }],
+    ];
+    for (const [route, head] of heads) {
+      const outDir = path.resolve(distDir, route);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+    }
+  }
+
+  // /city/:id + /ciudad/:id — one directory page per sponsor city, hreflang-paired.
+  {
+    const { CITIES } = await import(path.resolve(root, 'src/lib/sponsors.js'));
+    for (const city of CITIES) {
+      const enCanonical = `${BASE}/city/${city.id}/`;
+      const esCanonical = `${BASE}/ciudad/${city.id}/`;
+      const hreflangs = [
+        { lang: 'en', href: enCanonical },
+        { lang: 'es', href: esCanonical },
+        { lang: 'x-default', href: enCanonical },
+      ];
+      const heads = [
+        [['city', city.id], {
+          lang: 'en',
+          title: `${city.name}: border crossings and local businesses | Border Pulse`,
+          desc: `Wait times for the crossings into ${city.name} from ${city.from.en}, and local businesses by category.`,
+          canonical: enCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+        }],
+        [['ciudad', city.id], {
+          lang: 'es',
+          title: `${city.name}: cruces y negocios locales | Border Pulse`,
+          desc: `Tiempos de espera de los cruces a ${city.name} desde ${city.from.es}, y negocios locales por categoría.`,
+          canonical: esCanonical, ogImage: `${BASE}/og-card.png`, jsonLd: [], hreflangs,
+        }],
+      ];
+      for (const [parts, head] of heads) {
+        const outDir = path.resolve(distDir, ...parts);
+        fs.mkdirSync(outDir, { recursive: true });
+        fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+      }
+    }
+  }
+
   // /about — trust signal page with methodology + public stats + privacy
   {
     const aboutHead = {
       title: 'About Border Pulse | The U.S.-Mexico border wait time tracker',
-      desc: 'Border Pulse is an independent, bilingual project that tracks every U.S.-Mexico land port of entry using official CBP data, refreshed regularly, with a 30-day rolling history.',
+      desc: 'Border Pulse is an independent, bilingual project that presents available northbound U.S.-Mexico crossing reports from official CBP data, refreshed regularly, with a 30-day rolling history.',
       canonical: `${BASE}/about/`,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
@@ -674,7 +783,7 @@ async function main() {
     const enHead = {
       lang: 'en',
       title: 'Privacy and advertising | Border Pulse',
-      desc: 'How Border Pulse uses browser preferences, analytics, and Adsterra advertising.',
+      desc: 'How Border Pulse uses browser preferences, analytics, and third-party advertising.',
       canonical: enCanonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [],
@@ -684,13 +793,30 @@ async function main() {
       ...enHead,
       lang: 'es',
       title: 'Privacidad y publicidad | Border Pulse',
-      desc: 'Cómo Border Pulse usa preferencias del navegador, analítica y publicidad de Adsterra.',
+      desc: 'Cómo Border Pulse usa preferencias del navegador, analítica y publicidad de terceros.',
       canonical: esCanonical,
     };
     for (const [route, head] of [['privacy', enHead], ['privacidad', esHead]]) {
       const outDir = path.resolve(distDir, route);
       fs.mkdirSync(outDir, { recursive: true });
-      fs.writeFileSync(path.resolve(outDir, 'index.html'), rewriteIndex(indexWithLinks, head));
+      const es = head.lang === 'es';
+      const notice = privacyParagraphs(head.lang);
+      const google = googlePrivacyNotice(head.lang);
+      const section = (id, title, paragraphs, links = []) => `<section id="${esc(id)}" class="my-6"><h2 class="text-xl font-semibold">${esc(title)}</h2>${paragraphs.map(text => `<p class="my-3">${esc(text)}</p>`).join('')}${links.map(link => `<p><a class="underline" href="${esc(link.href)}" target="_blank" rel="noopener noreferrer">${esc(link.label)}</a></p>`).join('')}</section>`;
+      const body = `<main class="mx-auto max-w-[900px] p-4 sm:p-6">
+        <a href="/">${es ? 'Todos los cruces' : 'All crossings'}</a>
+        <h1 class="text-2xl font-bold">${es ? 'Privacidad y datos' : 'Privacy and data'}</h1>
+        ${section('cameras', es ? 'Cámaras públicas' : 'Public cameras', [notice.cameras], [{ href: 'https://policies.google.com/privacy', label: es ? 'Aviso de privacidad de Google' : 'Google Privacy Policy' }])}
+        ${section('public-site', es ? 'El sitio público' : 'The public site', [notice.publicSite, notice.analytics])}
+        ${section('advertising', es ? 'Publicidad' : 'Advertising', [notice.adsterra, notice.adsterraData, notice.adsterraChoices], [
+          { href: 'https://adsterra.com/privacy-policy-managed/', label: es ? 'Aviso de privacidad de Adsterra' : 'Adsterra Privacy Policy' },
+          { href: 'https://adsterra.com/cookies/', label: es ? 'Política de cookies de Adsterra' : 'Adsterra Cookies Policy' },
+        ])}
+        ${section('google-advertising', google.title, google.paragraphs, google.links)}
+        <p>${es ? 'Actualizado: 17 de octubre de 2026.' : 'Updated: October 17, 2026.'}</p>
+      </main>`;
+      const html = injectSnapshot(rewriteIndex(indexWithLinks, head), body);
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     }
   }
 
@@ -721,8 +847,8 @@ async function main() {
       }),
     };
     const indexHead = {
-      title: 'Best time to cross every U.S.-Mexico border crossing | Border Pulse',
-      desc: `Lightest typical hour for every U.S.-Mexico border crossing today, based on the last 30 days of CBP wait time data. ${crossings.length} crossings, hour by hour.`,
+      title: 'Best time to cross: historical patterns by crossing | Border Pulse',
+      desc: `Historical lightest hour for each crossing’s local weekday, based on the last 30 days of standard-passenger CBP data. Not a forecast. ${crossings.length} crossings, hour by hour.`,
       canonical,
       ogImage: `${BASE}/og-card.png`,
       jsonLd: [breadcrumb, itemList],
@@ -766,7 +892,7 @@ async function main() {
     if (!cA || !cB) continue;
     const pair = `${aSlug}-vs-${bSlug}`;
     const title = `${cA.name} vs ${cB.name}: Reported Northbound Waits | Border Pulse`;
-    const desc = `CBP-reported northbound standard-passenger waits, today's lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. These figures do not include total trip time.`;
+    const desc = `CBP-reported northbound standard-passenger waits, historical lightest hour, and 30-day patterns at ${cA.name} and ${cB.name} side by side. These figures do not include total trip time.`;
     const canonical = `${BASE}/compare/${pair}/`;
     const ogImage = `${BASE}/og-card.png`;
     const breadcrumb = {
@@ -792,8 +918,8 @@ async function main() {
   for (const c of crossings.filter(hasPedestrianLane)) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
-    const title = `Walk or Drive Across ${c.name}? Live Wait Comparison (2026) | Border Pulse`;
-    const desc = `Compare live pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
+    const title = `Walk or Drive Across ${c.name}? CBP Wait Comparison | Border Pulse`;
+    const desc = `Compare reported pedestrian and vehicle wait times at ${c.name} from CBP. See whether walking saves enough minutes to be worth parking.`;
     const canonical = `${BASE}/walk-or-drive/${slug}/`;
     const ogImage = `${BASE}/og/${slug}.png`;
     const breadcrumb = {
@@ -813,8 +939,89 @@ async function main() {
     walkOrDriveCount++;
   }
 
+  let laneFlipCount = 0;
+  {
+    const laneFlipFile = path.resolve(root, 'public/data/lane-flips.json');
+    const artifact = fs.existsSync(laneFlipFile)
+      ? JSON.parse(fs.readFileSync(laneFlipFile, 'utf8'))
+      : { crossings: [] };
+    const entries = laneFlipEntries(artifact);
+    const summary = (entry) => {
+      const items = Object.entries(entry?.lanes || {}).map(([key, stats]) =>
+        `<li>${esc(laneLabel(key, 'en'))}: reported slower in ${Number(stats?.slower) || 0} of ${Number(stats?.paired) || 0} fetches with both lane values in the retained archive.</li>`,
+      ).join('');
+      const title = entry ? `Lane Flip Watch at ${entry.name}` : 'Lane Flip Watch';
+      return `<main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#0f172a">
+        <p><a href="/">${esc('All crossings')}</a>${entry ? ` · <a href="/lane-flip/">Lane Flip Watch</a>` : ''}</p>
+        <h1>${esc(title)}</h1>
+        <p>${esc(checkNote('en'))} <a href="https://bwt.cbp.gov/">CBP border wait times</a>.</p>
+        <p>Ready Lane and SENTRI are compared with reported general passenger waits. Ready pedestrian is compared with reported general pedestrian waits. Hours use the crossing local time of each stored fetch. Missing reports are not counted as zero.</p>
+        <p>${esc(historyNotice(artifact, Date.now(), 'en'))}</p>
+        <p>${esc(archiveCaveat('en'))}</p>
+        <p>${esc(eligibilityNote('en'))}</p>
+        ${items ? `<ul>${items}</ul>` : '<p>Archive counts appear when both lane values were retained.</p>'}
+      </main>`;
+    };
+    const indexCanonical = `${BASE}/lane-flip/`;
+    const indexHead = {
+      title: indexTitle('en'),
+      desc: indexDescription('en'),
+      canonical: indexCanonical,
+      ogImage: `${BASE}/og-card.png`,
+      jsonLd: [{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Lane Flip Watch', item: indexCanonical },
+        ],
+      }, {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Lane Flip Watch crossings',
+        numberOfItems: entries.length,
+        itemListElement: entries.map((entry, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: entry.name,
+          url: `${BASE}/lane-flip/${entry.slug}/`,
+        })),
+      }],
+    };
+    const indexList = entries.map(entry => `    <li><a href="/lane-flip/${esc(entry.slug)}/">${esc(entry.name)}</a></li>`).join('\n');
+    const indexHtml = injectSnapshot(
+      rewriteIndex(indexWithLinks, indexHead),
+      `${summary(null)}<ul>\n${indexList}\n</ul>`,
+    );
+    fs.mkdirSync(path.resolve(distDir, 'lane-flip'), { recursive: true });
+    fs.writeFileSync(path.resolve(distDir, 'lane-flip/index.html'), indexHtml);
+    for (const entry of entries) {
+      const canonical = `${BASE}/lane-flip/${entry.slug}/`;
+      const head = {
+        title: detailTitle(entry.name, 'en'),
+        desc: detailDescription(entry.name, 'en'),
+        canonical,
+        ogImage: `${BASE}/og-card.png`,
+        jsonLd: [{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Lane Flip Watch', item: indexCanonical },
+            { '@type': 'ListItem', position: 3, name: entry.name, item: canonical },
+          ],
+        }],
+      };
+      const html = injectSnapshot(rewriteIndex(indexWithLinks, head), summary(entry));
+      const outDir = path.resolve(distDir, 'lane-flip', entry.slug);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+      laneFlipCount += 1;
+    }
+  }
+
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + ${laneFlipCount} lane-flip pages + crawlable nav on homepage`,
   );
 }
 

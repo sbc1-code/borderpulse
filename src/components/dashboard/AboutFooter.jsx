@@ -5,8 +5,7 @@ import React from 'react';
  * Goal: give LLMs and SEO crawlers explicit, citable facts about this
  * site's data, coverage, update frequency, and privacy model.
  */
-export default function AboutFooter({ language, fetchedAt, count, direction = 'northbound' }) {
-  const updatedStr = fetchedAt ? new Date(fetchedAt).toLocaleString() : '—';
+export default function AboutFooter({ language, count, direction = 'northbound' }) {
   const isSouthbound = direction === 'southbound';
 
   return (
@@ -24,44 +23,26 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             </>
           ) : (
             <>
-              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante un job programado.</p>
+              <p>Los tiempos hacia Estados Unidos provienen de datos oficiales de CBP y se actualizan con regularidad mediante una tarea programada.</p>
               <p>Las estimaciones hacia México están pausadas. Este panel muestra únicamente datos oficiales hacia Estados Unidos. La hora del reporte de CBP de cada carril puede ser anterior a la consulta del sitio.</p>
               <p>El estado del puerto, los horarios y los avisos se muestran cuando están disponibles. Un cruce puede estar abierto aunque no tenga un tiempo actual reportado.</p>
             </>
           )}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? (isSouthbound ? 'Method' : 'Source') : (isSouthbound ? 'Método' : 'Fuente')}
-          </div>
-          <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {isSouthbound ? 'Border Pulse estimate' : 'U.S. Customs and Border Protection'}
-          </div>
-          <a
-            href={isSouthbound ? 'https://developers.google.com/maps/documentation/distance-matrix' : 'https://bwt.cbp.gov/api/bwtpublicmod'}
-            className="text-[10px] text-slate-500 hover:underline break-all"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {isSouthbound ? 'Uses Google Maps Platform Distance Matrix API' : 'bwt.cbp.gov/api/bwtpublicmod'}
-          </a>
-        </div>
-        <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? 'Refresh rate' : 'Frecuencia'}
-          </div>
-          <div className="font-medium text-slate-900 dark:text-white text-sm">
-            {language === 'en' ? 'Regular schedule' : 'Horario regular'}
-          </div>
-        </div>
-        <div className="rounded-lg border border-slate-200 dark:border-gray-800 p-3">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-1">
-            {language === 'en' ? 'Last updated' : 'Última actualización'}
-          </div>
-          <div className="font-medium text-slate-900 dark:text-white text-sm">{updatedStr}</div>
+          <p>
+            {language === 'en' ? (isSouthbound ? 'Method: ' : 'Source: ') : (isSouthbound ? 'Método: ' : 'Fuente: ')}
+            <span className="font-medium text-slate-900 dark:text-white">
+              {isSouthbound ? 'Border Pulse estimate' : 'U.S. Customs and Border Protection'}
+            </span>
+            {' · '}
+            <a
+              href={isSouthbound ? 'https://developers.google.com/maps/documentation/distance-matrix' : 'https://bwt.cbp.gov/api/bwtpublicmod'}
+              className="underline break-all hover:text-slate-900 dark:hover:text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {isSouthbound ? 'Google Maps Platform Distance Matrix API' : 'bwt.cbp.gov/api/bwtpublicmod'}
+            </a>
+          </p>
         </div>
       </div>
 
@@ -77,7 +58,7 @@ export default function AboutFooter({ language, fetchedAt, count, direction = 'n
             <p>
               {language === 'en'
                 ? 'Directly from U.S. Customs and Border Protection (CBP). Each port officer reports current conditions; we refresh the feed regularly via a scheduled job.'
-                : 'Directamente de U.S. Customs and Border Protection (CBP). Cada oficial del puerto reporta las condiciones actuales; actualizamos el feed con regularidad mediante un job programado.'}
+                : 'Directamente de U.S. Customs and Border Protection (CBP). Cada oficial del puerto reporta las condiciones actuales; actualizamos el feed con regularidad mediante una tarea programada.'}
             </p>
           </div>
           <div>

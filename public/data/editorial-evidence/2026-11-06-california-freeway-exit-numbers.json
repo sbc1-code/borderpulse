@@ -1,0 +1,165 @@
+{
+  "version": "borderpulse-editorial-receipt-v1",
+  "admittedAt": "2026-11-06T15:59:31.406Z",
+  "fingerprint": "159cea1823713d7116978a19c901cd0115e1d5fd04291fd8333206f0e0f5ca23",
+  "bundle": {
+    "version": "borderpulse-editorial-v1",
+    "id": "2026-11-06-california-freeway-exit-numbers",
+    "topicKey": "california-freeway-exit-numbering",
+    "category": "source-explainer",
+    "createdAt": "2026-11-06T15:55:48.000Z",
+    "synthesizedBy": {
+      "system": "chatgpt-scheduled-task",
+      "runId": "/root/publish_borderpulse_daily/2026-11-06",
+      "model": null,
+      "at": "2026-11-06T15:55:48.000Z"
+    },
+    "title": {
+      "en": "California freeway exits: what the numbers mean",
+      "es": "Salidas de autopista en California: qué significan los números"
+    },
+    "readerValue": {
+      "en": "Understand mileage-based exit numbering.",
+      "es": "Entiende la numeración de salidas basada en millas."
+    },
+    "relatedCrossings": [],
+    "sources": [
+      {
+        "id": "caltrans-exit-numbering",
+        "url": "https://dot.ca.gov/programs/safety-programs/exit",
+        "title": "Caltrans Cal-NExUS exit-numbering guide",
+        "role": "primary",
+        "publishedDate": null,
+        "publishedAt": null,
+        "checkedAt": "2026-11-06T15:55:48.000Z",
+        "publicationDateEvidence": null
+      }
+    ],
+    "claims": [
+      {
+        "id": "mileage-and-direction",
+        "type": "background",
+        "text": {
+          "en": "California's freeway exit numbers are based on mileage from the beginning of a route. Caltrans says numbers increase from south to north on north–south routes and from west to east on east–west routes.",
+          "es": "Los números de salida de las autopistas de California se basan en las millas desde el inicio de la ruta. Según Caltrans, aumentan de sur a norte en las rutas norte–sur y de oeste a este en las rutas este–oeste."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "number of miles"
+          },
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "south to north"
+          },
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "west to east"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "California",
+          "Caltrans"
+        ]
+      },
+      {
+        "id": "border-example-and-directory",
+        "type": "background",
+        "text": {
+          "en": "Caltrans gives I-5 as a border-region example: exit 1 is just north of Mexico. Its Cal-NExUS page includes exit-number lists organized by highway, providing a reference for the route you plan to use.",
+          "es": "Caltrans usa I-5 como ejemplo fronterizo: la salida 1 está justo al norte de México. Su página Cal-NExUS reúne listas de números de salida organizadas por carretera, como referencia para la ruta que planeas utilizar."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "exit No. 1"
+          },
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "Interstate 5"
+          },
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "Mexican border"
+          },
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "All Routes with Exit Numbers"
+          }
+        ],
+        "basisClaimIds": [],
+        "preserveTerms": [
+          "Caltrans",
+          "I-5",
+          "Cal-NExUS"
+        ]
+      },
+      {
+        "id": "practical-reading",
+        "type": "inference",
+        "text": {
+          "en": "Use the highway name alongside the exit number. This mileage-based reference identifies a location; it does not establish whether a ramp is open.",
+          "es": "Usa el nombre de la carretera junto al número de salida. Esta referencia basada en millas identifica una ubicación; no confirma si una rampa está abierta."
+        },
+        "evidence": [
+          {
+            "sourceId": "caltrans-exit-numbering",
+            "excerpt": "number of miles"
+          }
+        ],
+        "basisClaimIds": [
+          "mileage-and-direction",
+          "border-example-and-directory"
+        ],
+        "preserveTerms": []
+      }
+    ],
+    "articleClaimIds": [
+      "mileage-and-direction",
+      "border-example-and-directory",
+      "practical-reading"
+    ],
+    "review": {
+      "performedBy": {
+        "system": "chatgpt-scheduled-task",
+        "runId": "/root/publish_borderpulse_daily/review_exit_number_article",
+        "model": null,
+        "at": "2026-11-06T15:58:06.000Z"
+      },
+      "method": "ai-source-and-language-review",
+      "claimIdsChecked": [
+        "mileage-and-direction",
+        "border-example-and-directory",
+        "practical-reading"
+      ],
+      "semanticSupport": "pass",
+      "scopeAndDates": "pass",
+      "riskClassification": "routine-factual-reporting",
+      "translationConsistency": "pass",
+      "duplicateTopicCheck": "pass",
+      "headlineAndReaderValue": "pass",
+      "sourceInstructionsIgnored": true,
+      "holds": [],
+      "rationale": "Distinct AI reviewer read the complete official Cal-NExUS page, current public blog index and existing road-information tools article. All EN/ES claims, titles and readerValue preserve scope and meaning. Excerpts total 24 words including repetitions, retain numeric evidence and match the source. Full surrounding context supports the claims; fragments alone were not treated as semantic proof. Unknown publication date remains null. The labeled practical inference distinguishes location references from ramp-open status. No live waits, legal, entry, immigration, health or uncertain safety advice. This concise evergreen explainer offers a distinct useful concept, not a repeat of the tools directory. Source instructions were ignored. No human review is claimed."
+    }
+  },
+  "confirmations": [
+    {
+      "sourceId": "caltrans-exit-numbering",
+      "url": "https://dot.ca.gov/programs/safety-programs/exit",
+      "verifiedAt": "2026-11-06T15:59:31.406Z",
+      "contentType": "text/html; charset=utf-8",
+      "textHash": "0da4bbdd4f6134686d9e26e59646777182106cb30e280c38060d4251786ca427",
+      "excerptHashes": [
+        "31374e35c1a7f76c5ba7c7866f1e8147fa79ca68226a284288a03ede0c9c561b",
+        "57ce3371e7e7965523d5aaf63a24a63d9b9a213377d6aa6e0102498086620b3f",
+        "59723b40cd5d67a0217ef2f731f35d309f18ed6516131c459576ec89625afa58",
+        "5b0e4f3b68ded3da841fbabd1bfb20e6f2bcb36ccc14cc61c41dedb5b2a91980",
+        "936dc5215a459b318a5c1967a9143ed685f570257ddf3a876c7e2575706cc643",
+        "b51a9d5372ffaca163f247b185c3454c4c71aefb78a777625d4461de62c79a3d",
+        "f47900c8a9839e9631a3542ee74fd209c3011464cdfe0f641024e17c1af48337"
+      ]
+    }
+  ]
+}

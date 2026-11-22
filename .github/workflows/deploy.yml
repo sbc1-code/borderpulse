@@ -1,9 +1,7 @@
-name: Deploy to GitHub Pages
-run-name: Deploy ${{ inputs.commit_sha || github.sha }}
+name: Manual GitHub Pages recovery
+run-name: Pages recovery ${{ inputs.commit_sha || github.sha }}
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       commit_sha:
@@ -16,9 +14,9 @@ permissions:
   pages: write
   id-token: write
 
-# Only this workflow deploys Pages. Scheduled data fetches explicitly dispatch
-# this workflow with their validated snapshot SHA because pushes made by the
-# workflow GITHUB_TOKEN do not trigger another workflow.
+# Manual recovery only. Vercel serves production; data collection does not
+# rebuild Pages. Verify this run and its data timestamps before any DNS cutover.
+# The existing Pages site becomes stale between intentional recovery runs.
 concurrency:
   group: pages
   cancel-in-progress: false

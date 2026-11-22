@@ -1,0 +1,100 @@
+name: Daily evidence-led blog pilot
+
+on:
+  # 08:37 America/Los_Angeles across DST. The clock gate runs only one slot.
+  schedule:
+    - cron: '37 15,16 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate and select a report without committing or deploying
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+# Same queue as CBP and anomaly writers; generated changes are rebuilt on races.
+concurrency:
+  group: repository-writer
+  cancel-in-progress: false
+
+jobs:
+  report:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Select the Pacific morning slot
+        id: clock
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = workflow_dispatch ] || [ "$(TZ=America/Los_Angeles date +%H)" = 08 ]; then
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v7
+        if: steps.clock.outputs.run == 'true'
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v6
+        if: steps.clock.outputs.run == 'true'
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        if: steps.clock.outputs.run == 'true'
+        run: npm ci
+      - name: Safe dry run
+        if: steps.clock.outputs.run == 'true'
+        run: npm run blog:daily
+      - name: Generate, verify and publish eligible source
+        id: publish
+        if: steps.clock.outputs.run == 'true' && vars.BLOG_PILOT_ENABLED == 'true' && (github.event_name == 'schedule' || !inputs.dry_run)
+        env:
+          BLOG_PILOT_ENABLED: ${{ vars.BLOG_PILOT_ENABLED }}
+        run: node scripts/publish-daily-blog.mjs
+      - name: Dispatch the existing Vercel publisher
+        # A retry after a committed source but failed dispatch must recover publication.
+        if: steps.publish.outputs.has_report == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish-vercel.yml --ref main
+      - name: Retain decision and run context
+        if: always() && steps.clock.outputs.run == 'true'
+        env:
+          ENABLED: ${{ vars.BLOG_PILOT_ENABLED }}
+          CHANGED: ${{ steps.publish.outputs.changed }}
+          SOURCE_COMMIT: ${{ steps.publish.outputs.commit_sha }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          {
+            echo '### Daily blog pilot'
+            echo "Enabled: $ENABLED; changed: $CHANGED; source: $SOURCE_COMMIT; manual dry run: $DRY_RUN"
+            echo 'Selection/skip reason is in the dry-run log. A source commit is not proof of public deployment.'
+            echo 'The existing Vercel publication run owns release/deployment evidence.'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Report failure or recovery
+        if: always() && steps.clock.outputs.run == 'true'
+        uses: actions/github-script@v9
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          script: |
+            const title = '[ops] Daily blog pilot held';
+            const { data } = await github.rest.issues.listForRepo({owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', creator: 'github-actions[bot]', per_page: 100});
+            const issue = data.find(i => i.title === title);
+            const url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            if (process.env.JOB_STATUS === 'failure' && !issue) {
+              await github.rest.issues.create({owner: context.repo.owner, repo: context.repo.repo, title,
+                body: `Publication held: ${url}. Inspect the failure; do not weaken evidence or release checks. Previous posts remain unchanged.`});
+            } else if (process.env.JOB_STATUS === 'success' && issue) {
+              await github.rest.issues.createComment({owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number, body: `Recovered: ${url}. A clean skip is healthy; inspect deployment separately.`});
+              await github.rest.issues.update({owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number, state: 'closed'});
+            }

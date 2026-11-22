@@ -1,30 +1,43 @@
-import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { RefreshCw, BarChart3, Share2, Search, X, Star, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
-import StatsOverview from '@/components/dashboard/StatsOverview';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
+const CrossingMapExplorer = React.lazy(() => import('@/components/dashboard/CrossingMapExplorer'));
+const StatsOverview = React.lazy(() => import('@/components/dashboard/StatsOverview').catch(() => ({
+  default: ({ language }) => <p role="status" className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen no disponible. Recarga la página para reintentar.' : 'Summary unavailable. Reload the page to retry.'}</p>
+})));
 const AnalyticsView = React.lazy(() => import('@/components/dashboard/AnalyticsView'));
 import AboutFooter from '@/components/dashboard/AboutFooter';
-import AdsterraBanner from '@/components/ads/AdsterraBanner';
+import DashboardAd from '@/components/ads/DashboardAd';
 import InstallPrompt from '@/components/dashboard/InstallPrompt';
 import SkeletonCard from '@/components/dashboard/SkeletonCard';
 import StaleDataBanner from '@/components/dashboard/StaleDataBanner';
 import PopularCrossings from '@/components/dashboard/PopularCrossings';
-import BorderLine from '@/components/dashboard/BorderLine';
-import CommuterSnapshot from '@/components/dashboard/CommuterSnapshot';
+import DashboardSummaryDisclosure from '@/components/dashboard/DashboardSummaryDisclosure';
+import LaneSelector from '@/components/dashboard/LaneSelector';
+import LocalCrossingComparison from '@/components/dashboard/LocalCrossingComparison';
+import DashboardCameras from '@/components/dashboard/DashboardCameras';
+import { currentSearchParams } from '@/lib/queryState';
+import { canonicalPortNumber } from '@/lib/portIdentity';
+import { normalizeLane, laneLabel } from '@/lib/laneContext';
+import { availableLaneWait } from '@/lib/crossingAvailability';
+import { CORRIDORS, corridorFor } from '@/lib/corridors';
+import { crossingSearchTerms } from '@/lib/crossingNames';
 import { dataService } from '@/components/utils/dataService';
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { recordSnapshot } from '@/components/utils/waitTimeHistory';
-import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta } from '@/lib/seo';
 import { buildSlugMap } from '@/lib/slugs';
 import { track } from '@/lib/analytics';
 import { findNearestCrossing, nearestCrossings } from '@/lib/geo';
 import { usePersistentLanguage } from '@/lib/useLanguage';
+import { SPANISH_HOME } from '@/lib/homeMeta';
+import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
+import styles from './Dashboard.module.css';
 
 const REGIONS = [
   { code: 'ALL', label: { en: 'All', es: 'Todos' } },
@@ -63,19 +76,37 @@ export default function Dashboard() {
     isRefreshing: false,
     source: null,
     fetchedAt: null,
+    success: false,
+    fromFallback: false,
+    unavailable: false,
   });
 
-  const language = usePersistentLanguage();
+  const location = useLocation();
+  const spanishHome = /^\/es\/?$/.test(location.pathname);
+  const storedLanguage = usePersistentLanguage();
+  const language = spanishHome ? 'es' : storedLanguage;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const lane = normalizeLane(searchParams.get('lane'));
+  const areaParam = searchParams.get('area');
+  const regionParam = searchParams.get('region');
+  const searchParam = searchParams.get('q') || '';
+  const presentation = searchParams.get('display') === 'list' ? 'list' : 'map';
+  const selectedPort = canonicalPortNumber(searchParams.get('port'));
   const direction = 'northbound';
-  const [region, setRegion] = useState(() => {
-    // Stored region preference takes precedence; otherwise check the geolocation default.
-    const stored = localStorage.getItem('borderPulse_region');
-    if (stored) return stored;
-    const geoDefault = localStorage.getItem('borderPulse_defaultRegion');
-    if (geoDefault) return geoDefault;
-    return 'ALL';
-  });
-  const [search, setSearch] = useState('');
+  // A bare home URL is the whole border. Explicit URL state, including Back,
+  // takes precedence over old saved regional preferences.
+  // Derive filters from the committed router location. Mirrored optimistic
+  // state can survive a Back navigation that interrupts a router transition.
+  const corridor = corridorFor(areaParam)?.id || '';
+  const region = corridor || areaParam === 'all' ? 'ALL' : REGIONS.some(r => r.code === regionParam) ? regionParam : 'ALL';
+  const search = searchParam;
+  // Keep typing synchronous while the router renders the filtered results.
+  const [searchInput, setSearchInput] = useState(search);
+  useLayoutEffect(() => {
+    // Ignore superseded router commits. Clear, shared links and Back/Forward
+    // still restore the field from the active URL.
+    if ((currentSearchParams().get('q') || '') === search) setSearchInput(search);
+  }, [location.key, search]);
   const [showWithoutCurrentWaits, setShowWithoutCurrentWaits] = useState(true);
   const [view, setView] = useState('live');
   const [focusedPort, setFocusedPort] = useState(null);
@@ -84,37 +115,22 @@ export default function Dashboard() {
   const [shareOpen, setShareOpen] = useState(false);
   const [showGeoPrompt, setShowGeoPrompt] = useState(false);
   const [geoLocating, setGeoLocating] = useState(false);
-  const [favorites, setFavorites] = useState(() => {
-    try {
-      const stored = localStorage.getItem('borderPulse_favorites');
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  const toggleFavorite = useCallback((portNumber) => {
-    setFavorites((prev) => {
-      const next = prev.includes(portNumber)
-        ? prev.filter((p) => p !== portNumber)
-        : [...prev, portNumber];
-      localStorage.setItem('borderPulse_favorites', JSON.stringify(next));
-      // Analytics deliberately does NOT live in here. A state updater must be
-      // safe to call more than once (StrictMode, concurrent re-render), and a
-      // double-invoked updater would double-count the event.
-      return next;
-    });
-  }, []);
+  const [favorites, setFavorites] = useState(readFavorites);
+  const [favoriteError, setFavoriteError] = useState(false);
 
   const handleToggleFavorite = useCallback((portNumber) => {
-    const adding = !favoritesSetRef.current.has(portNumber);
-    toggleFavorite(portNumber);
+    const adding = !favorites.includes(portNumber);
+    const next = adding ? [...favorites, portNumber] : favorites.filter(port => port !== portNumber);
+    if (!writeStorage('borderPulse_favorites', JSON.stringify(next))) {
+      setFavoriteError(true);
+      return;
+    }
+    setFavorites(next);
+    setFavoriteError(false);
     track('favorite-toggle', { action: adding ? 'add' : 'remove' });
-  }, [toggleFavorite]);
+  }, [favorites]);
 
   const favoritesSet = useMemo(() => new Set(favorites), [favorites]);
-  const favoritesSetRef = useRef(favoritesSet);
-  useEffect(() => { favoritesSetRef.current = favoritesSet; }, [favoritesSet]);
 
   // 30-day medians for the ghost "typical" tick. One 8.6 KB request for all
   // ranked crossings, deliberately not 42 per-crossing aggregate fetches.
@@ -148,13 +164,12 @@ export default function Dashboard() {
         isRefreshing: false,
         source: data.source,
         fetchedAt: data.timestamp,
+        success: data.success,
+        fromFallback: Boolean(data.fromFallback),
+        unavailable: Boolean(data.unavailable),
       });
       if (data.success) {
-        try {
-          recordSnapshot(data.crossings || [], 'northbound');
-        } catch (e) {
-          console.warn('[dashboard] snapshot error', e);
-        }
+        recordSnapshot(data.crossings, 'northbound', data.timestamp);
       }
     };
     return subscribeToBorderData(applyData);
@@ -167,16 +182,16 @@ export default function Dashboard() {
   // explicit click (one-tap consent), not silently.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const denied = localStorage.getItem('borderPulse_geoConsent') === 'denied';
-    const defaultRegion = localStorage.getItem('borderPulse_defaultRegion');
-    const savedRegion = localStorage.getItem('borderPulse_region');
+    const denied = readStorage('borderPulse_geoConsent') === 'denied';
+    const defaultRegion = readStorage('borderPulse_defaultRegion');
+    const savedRegion = readStorage('borderPulse_region');
     if (denied || defaultRegion || savedRegion) return;
     if (!('geolocation' in navigator)) return;
     setShowGeoPrompt(true);
   }, []);
 
   const dismissGeoPrompt = useCallback(() => {
-    localStorage.setItem('borderPulse_geoConsent', 'denied');
+    writeStorage('borderPulse_geoConsent', 'denied');
     setShowGeoPrompt(false);
   }, []);
 
@@ -199,44 +214,112 @@ export default function Dashboard() {
         } catch { /* storage may be unavailable */ }
         const nearest = findNearestCrossing(state.crossings, latitude, longitude);
         if (nearest && nearest.state) {
-          localStorage.setItem('borderPulse_defaultRegion', nearest.state);
-          localStorage.setItem('borderPulse_region', nearest.state);
-          setRegion(nearest.state);
+          writeStorage('borderPulse_defaultRegion', nearest.state);
+          writeStorage('borderPulse_region', nearest.state);
+          setSearchParams(() => {
+            const next = currentSearchParams();
+            next.delete('area');
+            next.delete('port');
+            next.set('region', nearest.state);
+            return next;
+          });
         }
         setGeoLocating(false);
         setShowGeoPrompt(false);
       },
       () => {
         // Treat geolocation errors / user cancellation as a denial so we don't re-prompt.
-        localStorage.setItem('borderPulse_geoConsent', 'denied');
+        writeStorage('borderPulse_geoConsent', 'denied');
         setGeoLocating(false);
         setShowGeoPrompt(false);
       },
       { timeout: 10000, maximumAge: 600000 },
     );
-  }, [state.crossings]);
+  }, [state.crossings, setSearchParams]);
 
   useEffect(() => {
     const title = language === 'en'
-      ? 'Border Pulse | Real-Time US-Mexico Border Wait Times'
-      : 'Border Pulse | Tiempos de Espera Frontera EE.UU.-México en Tiempo Real';
-    const description = language === 'en'
-      ? 'Live wait times at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
-      : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
+      ? 'Border Pulse | Reported US-Mexico Border Wait Times'
+      : SPANISH_HOME.title;
+    const description = spanishHome
+      ? SPANISH_HOME.description
+      : language === 'en'
+        ? 'Reported northbound waits at US-Mexico border crossings. Official CBP data, refreshed regularly via a scheduled job. Bilingual EN/ES.'
+        : 'Tiempos de espera en cruces fronterizos EE.UU.-México. Datos oficiales de CBP, actualizados con regularidad mediante un job programado. Bilingüe EN/ES.';
+    const canonical = spanishHome ? 'https://borderpulse.com/es/' : 'https://borderpulse.com/';
     updatePageMeta({
       title,
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: 'https://borderpulse.com/',
-      canonical: 'https://borderpulse.com/',
+      ogUrl: canonical,
+      canonical,
+      lang: spanishHome ? 'es' : language,
     });
-  }, [language]);
+  }, [language, spanishHome]);
 
   const changeRegion = (r) => {
-    setRegion(r);
-    localStorage.setItem('borderPulse_region', r);
+    try {
+      localStorage.setItem('borderPulse_region', r);
+      localStorage.removeItem('borderPulse_corridor');
+    } catch { /* Filters still work when browser storage is unavailable. */ }
     track('region-filter', { region: r });
+    const next = currentSearchParams();
+    next.delete('area');
+    next.delete('port');
+    next.set('region', r);
+    setSearchParams(next);
+  };
+
+  const changeCorridor = (id) => {
+    setShowGeoPrompt(false);
+    setFocusedPort(null);
+    try {
+      localStorage.setItem('borderPulse_corridor', id);
+      localStorage.setItem('borderPulse_region', 'ALL');
+    } catch { /* A blocked write must not prevent local comparison. */ }
+    track('corridor-filter', { corridor: id || 'all' });
+    const next = currentSearchParams();
+    next.set('area', id || 'all');
+    next.delete('region');
+    next.delete('q');
+    next.delete('port');
+    setSearchParams(next);
+  };
+
+  const changeLane = (value) => {
+    const next = currentSearchParams();
+    next.set('lane', normalizeLane(value));
+    if (corridor) next.set('area', corridor);
+    setSearchParams(next);
+  };
+
+  const changeSearch = (value) => {
+    setSearchInput(value);
+    const next = currentSearchParams();
+    value ? next.set('q', value) : next.delete('q');
+    next.delete('port');
+    setSearchParams(next, { replace: true });
+  };
+  const selectPort = (id) => {
+    const next = currentSearchParams();
+    next.set('port', id);
+    if (next.toString() !== currentSearchParams().toString()) setSearchParams(next);
+  };
+  const closePort = useCallback(() => {
+    const next = currentSearchParams();
+    next.delete('port');
+    setSearchParams(next, { replace: true });
+  }, [searchParams, setSearchParams]);
+  const showWholeBorder = () => {
+    changeCorridor('');
+    setShowWithoutCurrentWaits(true);
+  };
+  const changePresentation = (display) => {
+    const next = currentSearchParams();
+    display === 'list' ? next.set('display', 'list') : next.delete('display');
+    if (display === 'list') { next.delete('mode'); next.delete('at'); }
+    setSearchParams(next);
   };
 
   // Map port_number → slug for /crossing/{slug} links and /data/aggregates/{slug}.json fetches.
@@ -247,37 +330,36 @@ export default function Dashboard() {
 
   // Filter by region + search; then sort heaviest first, keep null waits last.
   const filteredCrossings = useMemo(() => {
-    const q = search.trim().toLowerCase();
+    const q = search.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     return state.crossings.filter((c) => {
+      if (corridor && !corridorFor(corridor)?.ports.includes(String(c.port_number))) return false;
       if (region !== 'ALL' && c.state !== region) return false;
       if (!q) return true;
-      const haystack = [c.name, c.port_name, c.crossing_name, c.state]
-        .filter(Boolean).join(' ').toLowerCase();
-      return haystack.includes(q);
+      return crossingSearchTerms(c).includes(q);
     });
-  }, [state.crossings, region, search]);
+  }, [state.crossings, region, search, corridor]);
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
       const aFav = favoritesSet.has(a.port_number) ? 1 : 0;
       const bFav = favoritesSet.has(b.port_number) ? 1 : 0;
       if (aFav !== bFav) return bFav - aFav;
-      const waitA = getWaitMinutes(a, direction);
-      const waitB = getWaitMinutes(b, direction);
+      const waitA = availableLaneWait(a, lane);
+      const waitB = availableLaneWait(b, lane);
       if (waitA == null && waitB == null) return 0;
       if (waitA == null) return 1;
       if (waitB == null) return -1;
       return waitB - waitA;
     });
-  }, [filteredCrossings, direction, favoritesSet]);
+  }, [filteredCrossings, lane, favoritesSet]);
 
   const reportingCrossings = useMemo(
-    () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) != null),
-    [sortedCrossings, direction],
+    () => sortedCrossings.filter((c) => availableLaneWait(c, lane) != null),
+    [sortedCrossings, lane],
   );
   const offlineCrossings = useMemo(
-    () => sortedCrossings.filter((c) => getWaitMinutes(c, direction) == null),
-    [sortedCrossings, direction],
+    () => sortedCrossings.filter((c) => availableLaneWait(c, lane) == null),
+    [sortedCrossings, lane],
   );
   const visibleCrossings = showWithoutCurrentWaits ? sortedCrossings : reportingCrossings;
 
@@ -302,6 +384,7 @@ export default function Dashboard() {
     if (!isNarrow || showAllCards) return visibleCrossings;
     const keep = new Set(nearestPorts);
     if (focusedPort) keep.add(focusedPort);
+    if (selectedPort) keep.add(selectedPort);
     const picked = visibleCrossings.filter(
       (c) => favoritesSet.has(c.port_number) || keep.has(c.port_number)
     );
@@ -310,7 +393,7 @@ export default function Dashboard() {
       if (!picked.includes(c)) picked.push(c);
     }
     return picked;
-  }, [isNarrow, showAllCards, visibleCrossings, favoritesSet, nearestPorts, focusedPort]);
+  }, [isNarrow, showAllCards, visibleCrossings, favoritesSet, nearestPorts, focusedPort, selectedPort]);
 
   const hiddenCardCount = visibleCrossings.length - cardCrossings.length;
 
@@ -341,16 +424,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1600px] overflow-x-hidden p-3 sm:p-4 lg:p-6">
+    <div className={`${styles.dashboard} mx-auto w-full max-w-[1600px] p-3 sm:p-4 lg:p-6`}>
       {/* Header */}
-      <header className="mb-4 sm:mb-5">
-        <motion.h1
-          initial={{ opacity: 0, x: -8 }}
-          animate={{ opacity: 1, x: 0 }}
+      <header className={`${styles.header} mb-4 sm:mb-5`}>
+        <h1
           className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
         >
-          {language === 'en' ? 'Border Crossing Intelligence' : 'Inteligencia de Cruces Fronterizos'}
-        </motion.h1>
+          {language === 'en' ? 'US–Mexico border wait times' : 'Tiempos de espera en la frontera México–EE. UU.'}
+        </h1>
         <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">
           {language === 'en'
             ? 'Official CBP wait times to the U.S. · Historical patterns'
@@ -358,8 +439,8 @@ export default function Dashboard() {
         </p>
 
         {/* Controls row — wraps cleanly on mobile */}
-        <div className="flex items-center gap-2 flex-wrap mt-3">
-          <div className="mr-auto flex items-center gap-1 text-xs text-slate-600 dark:text-slate-300">
+        <div className={styles.headerActions}>
+          <div className={styles.freshness}>
             <RefreshCw className="w-3 h-3" />
             <span>
               {language === 'en' ? 'Data fetched: ' : 'Datos consultados: '}
@@ -372,13 +453,14 @@ export default function Dashboard() {
             variant={view === 'analytics' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setView((v) => (v === 'analytics' ? 'live' : 'analytics'))}
-            className="gap-1 min-h-11"
+            className="gap-1 min-h-11 min-w-11"
+            aria-label={view === 'analytics' ? (language === 'en' ? 'Reports' : 'Reportes') : (language === 'en' ? 'Analytics' : 'Análisis')}
             aria-pressed={view === 'analytics'}
           >
             <BarChart3 className="w-3.5 h-3.5" />
-            <span className="text-xs">
+            <span className="text-xs hidden sm:inline">
               {view === 'analytics'
-                ? (language === 'en' ? 'Live' : 'En vivo')
+                ? (language === 'en' ? 'Reports' : 'Reportes')
                 : (language === 'en' ? 'Analytics' : 'Análisis')}
             </span>
           </Button>
@@ -400,6 +482,13 @@ export default function Dashboard() {
       {/* Offline / stale data warning */}
       <StaleDataBanner fetchedAt={state.fetchedAt} language={language} />
 
+      {favoriteError && <p role="status" className="mb-3 text-sm text-amber-800 dark:text-amber-300">
+        {language === 'en'
+          ? 'Your browser could not save this change. Allow site storage and try again.'
+          : 'Tu navegador no pudo guardar este cambio. Permite el almacenamiento del sitio e inténtalo de nuevo.'}
+      </p>}
+
+      {view === 'analytics' && <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">{language === 'es' ? 'Historial: auto estándar' : 'History: standard passenger lane'}</p>}
       {view === 'analytics' ? (
         <Suspense
           fallback={
@@ -417,18 +506,19 @@ export default function Dashboard() {
         </Suspense>
       ) : (
         <>
+          <div className={styles.filters}>
           {/* Geolocation prompt — first-visit only (#7). One-tap consent. */}
-          {showGeoPrompt && (
-            <div className="mx-auto mb-3 flex w-full max-w-[calc(100vw-1.5rem)] flex-col gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 sm:max-w-3xl sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 min-w-0">
-                <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
+          {showGeoPrompt && presentation === 'list' && (
+            <details className={styles.geoPrompt}>
+              <summary className="flex min-h-11 cursor-pointer items-center gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 min-w-0">
+                <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
                 <span className="truncate">
                   {language === 'en'
                     ? '📍 Show crossings near you?'
                     : '📍 ¿Mostrar cruces cerca de ti?'}
                 </span>
-              </div>
-              <div className="flex items-center gap-1.5 flex-shrink-0">
+              </summary>
+              <div className="flex items-center gap-1.5 shrink-0">
                 <Button
                   size="sm"
                   variant="default"
@@ -449,25 +539,25 @@ export default function Dashboard() {
                   {language === 'en' ? 'Not now' : 'Ahora no'}
                 </Button>
               </div>
-            </div>
+            </details>
           )}
 
           {/* Search + region filter */}
-          <div className="mx-auto mb-4 flex w-full max-w-[calc(100vw-1.5rem)] flex-col items-stretch gap-2 sm:max-w-3xl sm:flex-row sm:items-center">
+          <div className={styles.searchRow}>
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
                 type="search"
                 inputMode="search"
                 placeholder={language === 'en' ? 'Search crossing or city (San Ysidro, Laredo, Nogales…)' : 'Buscar cruce o ciudad…'}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchInput}
+                onChange={(e) => changeSearch(e.target.value)}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
-                className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+                className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
               />
-              {search && (
+              {searchInput && (
                 <button
-                  onClick={() => setSearch('')}
+                  onClick={() => changeSearch('')}
                   aria-label={language === 'en' ? 'Clear search' : 'Borrar búsqueda'}
                   className="absolute right-0 top-0 h-11 w-11 flex items-center justify-center rounded-md hover:bg-slate-100 dark:hover:bg-gray-800"
                 >
@@ -475,7 +565,7 @@ export default function Dashboard() {
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:flex-wrap sm:justify-end" role="group" aria-label={language === 'en' ? 'Filter by region' : 'Filtrar por región'} tabIndex={0}>
+            <div className={styles.regions} role="group" aria-label={language === 'en' ? 'Filter by region' : 'Filtrar por región'} tabIndex={0}>
               {REGIONS.map((r) => (
                 <Button
                   key={r.code}
@@ -491,69 +581,102 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <CommuterSnapshot
-            crossings={filteredCrossings}
-            selectedDirection={direction}
-            language={language}
-            regionLabel={regionLabelFor(region, language)}
-          />
+          <div className={styles.areaRow}>
+          <div className={styles.area}>
+            <label htmlFor="local-corridor" className="text-sm font-medium text-slate-700 dark:text-slate-300">{language === 'es' ? 'Tu zona de cruce' : 'Your crossing area'}</label>
+            <select id="local-corridor" value={corridor} onChange={e => changeCorridor(e.target.value)} className="min-h-11 min-w-0 max-w-full flex-1 rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
+              <option value="">{language === 'es' ? 'Todos los cruces' : 'All crossings'}</option>
+              {CORRIDORS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </select>
+          </div>
+          {(presentation === 'map' || !corridor) && <LaneSelector lane={lane} onChange={changeLane} language={language} />}
+          </div>
 
-          {/* The border drawn to scale. Primary orientation layer: on small
-              screens the card list below collapses behind it. */}
-          <BorderLine
+          </div>
+          {presentation === 'list' && <LocalCrossingComparison lane={lane} onLaneChange={changeLane} crossings={state.crossings} corridorId={corridor} portToSlug={portToSlug} fetchedAt={state.fetchedAt} language={language} />}
+          {presentation === 'list' && <div className="flex items-center justify-between gap-3 mb-3">
+            <div role="group" aria-label={language === 'es' ? 'Vista de cruces' : 'Crossing view'} className="flex gap-1">
+              <Button variant={presentation === 'map' ? 'default' : 'outline'} className="min-h-11" size="sm" aria-pressed={presentation === 'map'} onClick={() => changePresentation('map')}>{language === 'es' ? 'Mapa' : 'Map'}</Button>
+              <Button variant={presentation === 'list' ? 'default' : 'outline'} className="min-h-11" size="sm" aria-pressed={presentation === 'list'} onClick={() => changePresentation('list')}>{language === 'es' ? 'Lista' : 'List'}</Button>
+            </div>
+          </div>}
+          <div hidden={presentation !== 'map'}>
+            <Suspense fallback={<p role="status" className="py-8 text-sm text-slate-500">{language === 'es' ? 'Cargando mapa fronterizo…' : 'Loading border map…'}</p>}>
+              <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} unavailable={state.unavailable} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />
+            </Suspense>
+          </div>
+          {presentation === 'list' && <>
+          <p className="mb-2 text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Últimos reportes por cruce' : 'Latest reports by crossing'}</p>
+          <div className={styles.extras}>
+          <DashboardCameras crossings={state.crossings} language={language} corridorId={corridor} />
+          <DashboardSummaryDisclosure
             crossings={filteredCrossings}
+            lane={lane}
+            success={state.success}
+            fromFallback={state.fromFallback}
+            fetchedAt={state.fetchedAt}
             direction={direction}
             language={language}
+            regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
             favoritesSet={favoritesSet}
             typicalByPort={typicalByPort}
             focusedPort={focusedPort}
             onSelect={handleTickSelect}
           />
+          </div>
 
           {/* Wait list (left) + sidebar (right): stats + USD/MXN + alert banner. */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6 mb-6">
             <div className="xl:col-span-9">
-              {visibleCrossings.length === 0 ? (
-                <Card className="border-dashed">
-                  <CardContent className="p-8 text-center text-sm text-slate-500">
-                    {search
-                      ? (language === 'en'
-                        ? `No crossings match "${search}". Try a different name or clear the search.`
-                        : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
-                      : offlineCrossings.length > 0
+              {sortedCrossings.length > 0 && (
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <p className="text-xs text-slate-600 dark:text-slate-300">
+                    {language === 'en'
+                      ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
+                      : `Mostrando ${cardCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
+                    {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
+                    {search && ` · "${search}"`}
+                  </p>
+                  {offlineCrossings.length > 0 && (
+                    <button
+                      aria-expanded={showWithoutCurrentWaits}
+                      aria-controls="crossing-results"
+                      onClick={() => setShowWithoutCurrentWaits((value) => !value)}
+                      className="self-start min-h-11 py-2 text-left text-xs text-slate-600 underline decoration-dotted hover:text-slate-900 dark:text-slate-300 dark:hover:text-white sm:self-auto sm:text-right"
+                    >
+                      {showWithoutCurrentWaits
                         ? (language === 'en'
-                          ? 'No crossings currently have published wait times in this region.'
-                          : 'Ningún cruce tiene tiempos publicados en este momento en esta región.')
+                          ? `Hide ${offlineCrossings.length} without current waits`
+                          : `Ocultar ${offlineCrossings.length} sin tiempo actual`)
+                        : (language === 'en'
+                          ? `Show ${offlineCrossings.length} without current waits`
+                          : `Mostrar ${offlineCrossings.length} sin tiempo actual`)}
+                    </button>
+                  )}
+                </div>
+              )}
+              {visibleCrossings.length === 0 ? (
+                <Card id="crossing-results" className="border-dashed">
+                  <CardContent className="p-8 text-center text-sm text-slate-500">
+                    {state.unavailable && state.crossings.length === 0
+                      ? (language === 'en'
+                        ? 'Reports could not load. No waits are shown.'
+                        : 'No cargaron los reportes. No se muestran esperas.')
+                      : offlineCrossings.length > 0
+                      ? (language === 'en'
+                        ? 'Matching crossings have no current published wait times. Show them to open their reports.'
+                        : 'Los cruces encontrados no tienen tiempos actuales publicados. Muéstralos para abrir sus reportes.')
+                      : search
+                        ? (language === 'en'
+                          ? `No crossings match "${search}". Try a different name or clear the search.`
+                          : `No hay cruces que coincidan con "${search}". Intenta otro nombre o limpia la búsqueda.`)
                         : (language === 'en'
                           ? 'No crossings in this region right now.'
                           : 'No hay cruces en esta región ahora.')}
                   </CardContent>
                 </Card>
               ) : (
-                <>
-                  <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-                    <p className="text-xs text-slate-600 dark:text-slate-300">
-                      {language === 'en'
-                        ? `Showing ${cardCrossings.length} of ${reportingCrossings.length + offlineCrossings.length}`
-                        : `Mostrando ${cardCrossings.length} de ${reportingCrossings.length + offlineCrossings.length}`}
-                      {region !== 'ALL' && ` · ${regionLabelFor(region, language)}`}
-                      {search && ` · "${search}"`}
-                    </p>
-                    {offlineCrossings.length > 0 && (
-                      <button
-                        onClick={() => setShowWithoutCurrentWaits((value) => !value)}
-                        className="self-start min-h-11 py-2 text-left text-xs text-slate-600 underline decoration-dotted hover:text-slate-900 dark:text-slate-300 dark:hover:text-white sm:self-auto sm:text-right"
-                      >
-                        {showWithoutCurrentWaits
-                          ? (language === 'en'
-                            ? `Hide ${offlineCrossings.length} without current waits`
-                            : `Ocultar ${offlineCrossings.length} sin tiempo actual`)
-                          : (language === 'en'
-                            ? `Show ${offlineCrossings.length} without current waits`
-                            : `Mostrar ${offlineCrossings.length} sin tiempo actual`)}
-                      </button>
-                    )}
-                  </div>
+                <div id="crossing-results">
                   {(() => {
                     const favCrossings = cardCrossings.filter((c) => favoritesSet.has(c.port_number));
                     const restCrossings = cardCrossings.filter((c) => !favoritesSet.has(c.port_number));
@@ -589,6 +712,7 @@ export default function Dashboard() {
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                     snapshotAt={state.fetchedAt}
+                                selectedLane={lane}
                                   />
                                 </div>
                               ))}
@@ -619,6 +743,7 @@ export default function Dashboard() {
                                 onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
                                 snapshotAt={state.fetchedAt}
+                                selectedLane={lane}
                               />
                             </div>
                           ))}
@@ -641,6 +766,7 @@ export default function Dashboard() {
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
                                     snapshotAt={state.fetchedAt}
+                                selectedLane={lane}
                                   />
                                 </div>
                               ))}
@@ -660,28 +786,34 @@ export default function Dashboard() {
                         : `Ver los ${visibleCrossings.length} cruces`}
                     </button>
                   )}
-                </>
+                </div>
               )}
             </div>
 
             {/* Sidebar: USD/MXN + stats. xl: shown to the right; mobile: stacked below. */}
             <aside className="xl:col-span-3 space-y-3">
               <ExchangeRateWidget exchangeRate={state.exchangeRate} language={language} theme="light" compact />
+              <p className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen: ' : 'Summary: '}{laneLabel(lane, language)}</p>
+              <Suspense fallback={<p role="status" className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Cargando resumen…' : 'Loading summary…'}</p>}>
               <StatsOverview
                 crossings={filteredCrossings}
+                lane={lane}
                 selectedDirection={direction}
                 language={language}
                 theme="light"
-                regionLabel={regionLabelFor(region, language)}
+                regionLabel={corridorFor(corridor)?.name || regionLabelFor(region, language)}
                 layout="sidebar"
               />
+              </Suspense>
             </aside>
           </div>
 
-          <PopularCrossings crossings={state.crossings} language={language} />
+          </>}
+
+          <PopularCrossings lane={lane} crossings={state.crossings} language={language} />
 
           <InstallPrompt language={language} />
-          <AdsterraBanner label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
+          <DashboardAd label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />
 
           <AboutFooter
             language={language}
@@ -693,12 +825,15 @@ export default function Dashboard() {
       )}
 
       <ShareModal
+        lane={lane}
         open={shareOpen}
         onOpenChange={setShareOpen}
         crossings={sortedCrossings}
         language={language}
         direction={direction}
         portToSlug={portToSlug}
+        corridorId={corridor}
+        fetchedAt={state.fetchedAt}
       />
     </div>
   );

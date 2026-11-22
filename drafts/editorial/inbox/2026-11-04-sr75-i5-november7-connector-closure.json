@@ -1,0 +1,153 @@
+{
+  "version": "borderpulse-editorial-v1",
+  "id": "2026-11-04-sr75-i5-november7-connector-closure",
+  "topicKey": "sr75-i5-november7-connector-closure",
+  "category": "operations-report",
+  "createdAt": "2026-11-04T15:54:00.000Z",
+  "synthesizedBy": {
+    "system": "chatgpt-scheduled-task",
+    "runId": "publish-borderpulse-daily/2026-11-04T15:00:00Z/root/publish_daily_borderpulse",
+    "model": null,
+    "at": "2026-11-04T15:54:00.000Z"
+  },
+  "title": {
+    "en": "Northbound SR-75 to northbound I-5: November 7 connector closure",
+    "es": "De SR-75 norte a I-5 norte: cierre del enlace el 7 de noviembre"
+  },
+  "readerValue": {
+    "en": "Plan around a specific connector closure without mistaking it for a freeway-wide shutdown.",
+    "es": "Ten en cuenta el cierre de un enlace concreto sin confundirlo con el cierre de toda una autopista."
+  },
+  "relatedCrossings": [],
+  "sources": [
+    {
+      "id": "district-listing",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11",
+      "title": "Caltrans District 11 news listing",
+      "role": "primary",
+      "publishedDate": "2026-11-03",
+      "publishedAt": null,
+      "checkedAt": "2026-11-04T15:53:11.000Z",
+      "publicationDateEvidence": "Published: Nov 03, 2026"
+    },
+    {
+      "id": "closure-notice",
+      "url": "https://dot.ca.gov/caltrans-near-me/district-11/news/20261103-sr75i5closure",
+      "title": "Caltrans connector closure notice",
+      "role": "primary",
+      "publishedDate": "2026-11-03",
+      "publishedAt": null,
+      "checkedAt": "2026-11-04T15:53:11.000Z",
+      "publicationDateEvidence": "Published: Nov 03, 2026"
+    }
+  ],
+  "claims": [
+    {
+      "id": "closure-scope-hours",
+      "type": "reported-fact",
+      "text": {
+        "en": "Caltrans plans to close the connector from northbound SR-75 to northbound I-5 on Saturday, November 7, from 3 a.m. to 8 a.m. The announcement concerns that directional connection, not an entire freeway or a border crossing. The notice does not specify a time zone.",
+        "es": "Caltrans prevé cerrar el enlace de SR-75 hacia el norte a I-5 hacia el norte, el sábado 7 de noviembre, de 3 a.m. a 8 a.m. El anuncio se refiere a esa conexión y esos sentidos, no a toda una autopista ni a un cruce fronterizo. El aviso no especifica una zona horaria."
+      },
+      "evidence": [
+        {
+          "sourceId": "district-listing",
+          "excerpt": "SR-75"
+        },
+        {
+          "sourceId": "district-listing",
+          "excerpt": "I-5"
+        },
+        {
+          "sourceId": "district-listing",
+          "excerpt": "November 7 from 3 a.m. to 8 a.m."
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "Caltrans",
+        "SR-75",
+        "I-5"
+      ]
+    },
+    {
+      "id": "detour",
+      "type": "reported-fact",
+      "text": {
+        "en": "Caltrans describes an alternative: continue north on SR-75 toward the southbound I-5 connector, leave at National Avenue/27th Street, turn right onto National Avenue, then right onto the northbound I-5 ramp. This repeats the announced route without estimating how long the detour will take.",
+        "es": "Caltrans describe esta alternativa: seguir al norte por SR-75 hacia el enlace con I-5 en sentido sur, salir en National Avenue/27th Street, girar a la derecha en National Avenue y después a la derecha hacia la rampa de I-5 en sentido norte. Es la ruta anunciada, sin estimar cuánto tardará el desvío."
+      },
+      "evidence": [
+        {
+          "sourceId": "closure-notice",
+          "excerpt": "SR-75 towards the southbound I-5"
+        },
+        {
+          "sourceId": "closure-notice",
+          "excerpt": "National Avenue/27th Street exit"
+        },
+        {
+          "sourceId": "closure-notice",
+          "excerpt": "turn right onto National Avenue"
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "Caltrans",
+        "SR-75",
+        "I-5",
+        "National Avenue"
+      ]
+    },
+    {
+      "id": "purpose-limits",
+      "type": "reported-fact",
+      "text": {
+        "en": "Caltrans attributes the closure to drainage cleaning and warns that the schedule may change. These are planned hours, not confirmation that work has begun or finished. Check the linked notice for updates.",
+        "es": "Caltrans atribuye el cierre a la limpieza del drenaje y advierte que el programa puede cambiar. Son horarios previstos, no una confirmación de que las obras hayan comenzado o terminado. Consulta el aviso enlazado para ver las actualizaciones."
+      },
+      "evidence": [
+        {
+          "sourceId": "closure-notice",
+          "excerpt": "drainage cleaning"
+        },
+        {
+          "sourceId": "closure-notice",
+          "excerpt": "subject to change"
+        }
+      ],
+      "basisClaimIds": [],
+      "preserveTerms": [
+        "Caltrans"
+      ]
+    }
+  ],
+  "articleClaimIds": [
+    "closure-scope-hours",
+    "detour",
+    "purpose-limits"
+  ],
+  "review": {
+    "performedBy": {
+      "system": "chatgpt-scheduled-task",
+      "runId": "/root/publish_daily_borderpulse/review_closure_article",
+      "model": null,
+      "at": "2026-11-04T15:56:24.000Z"
+    },
+    "method": "ai-source-and-language-review",
+    "claimIdsChecked": [
+      "closure-scope-hours",
+      "detour",
+      "purpose-limits"
+    ],
+    "semanticSupport": "pass",
+    "scopeAndDates": "pass",
+    "riskClassification": "routine-factual-reporting",
+    "translationConsistency": "pass",
+    "duplicateTopicCheck": "pass",
+    "headlineAndReaderValue": "pass",
+    "sourceInstructionsIgnored": true,
+    "holds": [],
+    "rationale": "Distinct AI reviewer read both complete official Caltrans pages and reviewed all EN/ES claims, headlines, directionality, dates and scope. Both sources show November 3 without a publication clock. Titles retain both northbound legs; no entire-freeway or border-port closure, time-zone guess, delay estimate or live-wait claim. Final copy is original bilingual synthesis; quoted excerpts plus date evidence total 14 words for listing and 23 for notice. Screened all 42 blog files and read six recent editorial versions fully; this SR-75/I-5 November 7 event is distinct. Legal, entry, health and uncertain safety advice excluded. Source instructions ignored. No human review claimed."
+  }
+}

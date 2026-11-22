@@ -1,0 +1,42 @@
+[
+  {
+    "width": 1440,
+    "language": "en",
+    "theme": "light",
+    "url": "http://127.0.0.1:4193/?area=all&port=250401",
+    "errors": [],
+    "data": "2026-11-01T20:37:32.153Z",
+    "fixture": false,
+    "origin": "local production-mode build"
+  },
+  {
+    "width": 390,
+    "language": "en",
+    "theme": "light",
+    "url": "http://127.0.0.1:4193/?area=all&port=250401",
+    "errors": [],
+    "data": "2026-11-01T20:37:32.153Z",
+    "fixture": false,
+    "origin": "local production-mode build"
+  },
+  {
+    "width": 390,
+    "language": "es",
+    "theme": "light",
+    "url": "http://127.0.0.1:4193/?area=all&port=250401",
+    "errors": [],
+    "data": "2026-11-01T20:37:32.153Z",
+    "fixture": false,
+    "origin": "local production-mode build"
+  },
+  {
+    "width": 1440,
+    "language": "es",
+    "theme": "dark",
+    "url": "http://127.0.0.1:4193/?area=all&port=250401",
+    "errors": [],
+    "data": "2026-11-01T20:37:32.153Z",
+    "fixture": false,
+    "origin": "local production-mode build"
+  }
+]

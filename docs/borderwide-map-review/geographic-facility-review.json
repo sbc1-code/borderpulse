@@ -1,0 +1,268 @@
+{
+  "reviewed_at": "2026-11-01",
+  "policy": "Named US facility building/site representative for a border overview, or named directory-link target. Never an arbitrary average, routing point or surveyed entrance.",
+  "source": {
+    "catalog": "https://catalog.data.gov/dataset/inventory-of-owned-and-leased-properties-iolp",
+    "export": "https://inventory.data.gov/dataset/9a9e946e-124e-46f5-a934-e458a6c1c2b2/resource/a07671a5-037d-4a2b-8f52-3a556f0a2422/download/2026-10-23-iolp-buildings.xlsx",
+    "sha256": "4ef7c372d15f540ee277ad7b05d5110d48e4a570953ecc7169333b9e2896fe0f",
+    "numeric_extraction": "Independent coordinating researchers supplied the original export hash, named asset identities and selected representative coordinates. The implementation worker read the catalog and confirmed the dated resource; direct spreadsheet download was blocked by proxy 403. The worker did not independently hash or parse the workbook, and did not retry through an alternate route."
+  },
+  "gsa_facilities": [
+    {
+      "port_number": "250201",
+      "identity": "Andrade",
+      "asset": "CA0621",
+      "lat": 32.7184,
+      "lng": -114.7282
+    },
+    {
+      "port_number": "250301",
+      "identity": "Calexico East",
+      "asset": "CA0507",
+      "lat": 32.6798,
+      "lng": -115.3828
+    },
+    {
+      "port_number": "250302",
+      "identity": "Calexico West",
+      "asset": "CA0518",
+      "lat": 32.6656,
+      "lng": -115.4962
+    },
+    {
+      "port_number": "250401",
+      "identity": "San Ysidro",
+      "asset": "CA0335",
+      "lat": 32.5437,
+      "lng": -117.0287
+    },
+    {
+      "port_number": "250501",
+      "identity": "Tecate",
+      "asset": "CA0801",
+      "lat": 32.5769,
+      "lng": -116.6275
+    },
+    {
+      "port_number": "250601",
+      "identity": "Otay Mesa",
+      "asset": "CA0267",
+      "lat": 32.5527,
+      "lng": -116.9391
+    },
+    {
+      "port_number": "260101",
+      "identity": "Douglas",
+      "asset": "AZ0611",
+      "lat": 31.3352,
+      "lng": -109.5602
+    },
+    {
+      "port_number": "260201",
+      "identity": "Lukeville",
+      "asset": "AZ0670",
+      "lat": 31.8816,
+      "lng": -112.8161
+    },
+    {
+      "port_number": "260301",
+      "identity": "Naco",
+      "asset": "AZ0681",
+      "lat": 31.3346,
+      "lng": -109.9483
+    },
+    {
+      "port_number": "260401",
+      "identity": "Deconcini",
+      "asset": "AZ0551",
+      "lat": 31.3329,
+      "lng": -110.9428
+    },
+    {
+      "port_number": "260402",
+      "identity": "Mariposa",
+      "asset": "AZ0334",
+      "lat": 31.3351,
+      "lng": -110.9677
+    },
+    {
+      "port_number": "240601",
+      "identity": "Columbus",
+      "asset": "NM8015",
+      "lat": 31.7838,
+      "lng": -107.6279
+    },
+    {
+      "port_number": "240801",
+      "identity": "Santa Teresa",
+      "asset": "NM0560",
+      "lat": 31.786,
+      "lng": -106.6799
+    },
+    {
+      "port_number": "240201",
+      "identity": "Bridge of the Americas",
+      "asset": "TX0961",
+      "lat": 31.7676,
+      "lng": -106.4509
+    },
+    {
+      "port_number": "240202",
+      "identity": "Paso Del Norte",
+      "asset": "TX0986",
+      "lat": 31.751,
+      "lng": -106.4869
+    },
+    {
+      "port_number": "240104",
+      "identity": "Ysleta",
+      "asset": "TX0963",
+      "lat": 31.672,
+      "lng": -106.3354
+    },
+    {
+      "port_number": "240401",
+      "identity": "Tornillo",
+      "asset": "TX0711",
+      "lat": 31.4352,
+      "lng": -106.1424
+    },
+    {
+      "port_number": "l24501",
+      "identity": "Fort Hancock",
+      "asset": "TX0705",
+      "lat": 31.2748,
+      "lng": -105.8536
+    },
+    {
+      "port_number": "230201",
+      "identity": "Del Rio",
+      "asset": "TX0409",
+      "lat": 29.3336,
+      "lng": -100.9186
+    },
+    {
+      "port_number": "230301",
+      "identity": "Eagle Pass I",
+      "asset": "TX0201",
+      "lat": 28.7054,
+      "lng": -100.5059
+    },
+    {
+      "port_number": "230403",
+      "identity": "Colombia",
+      "asset": "TX0306",
+      "lat": 27.701,
+      "lng": -99.7423
+    },
+    {
+      "port_number": "230404",
+      "identity": "World Trade",
+      "asset": "TX0730",
+      "lat": 27.5977,
+      "lng": -99.5343
+    },
+    {
+      "port_number": "230501",
+      "identity": "Hidalgo",
+      "asset": "TX1782",
+      "lat": 26.1007,
+      "lng": -98.2665
+    },
+    {
+      "port_number": "230503",
+      "identity": "Anzalduas",
+      "asset": "TX0610",
+      "lat": 26.1453,
+      "lng": -98.3121
+    },
+    {
+      "port_number": "230701",
+      "identity": "Rio Grande City",
+      "asset": "TX2348",
+      "lat": 26.368,
+      "lng": -98.8016
+    },
+    {
+      "port_number": "535501",
+      "identity": "Brownsville B&M",
+      "asset": "TX0312",
+      "lat": 25.8937,
+      "lng": -97.5051
+    }
+  ],
+  "directory_targets": [
+    {
+      "port_number": "230401",
+      "identity": "Laredo I",
+      "lat": 27.4997,
+      "lng": -99.5075
+    },
+    {
+      "port_number": "230402",
+      "identity": "Laredo II",
+      "lat": 27.5017,
+      "lng": -99.5027
+    },
+    {
+      "port_number": "230901",
+      "identity": "Progreso",
+      "lat": 26.0621,
+      "lng": -97.95
+    },
+    {
+      "port_number": "231001",
+      "identity": "Roma",
+      "lat": 26.4039,
+      "lng": -99.019
+    }
+  ],
+  "contextual_limited": {
+    "port_number": "260403",
+    "identity": "Morley",
+    "lat": 31.3343,
+    "lng": -110.9408,
+    "source": "https://rosap.ntl.bts.gov/view/dot/53809/dot_53809_DS2.pdf",
+    "reason": "Retain the distinct contextual approximation with an explicit limited-numeric-review label. GSA AZ0553 duplicates Deconcini's point despite the distinct Morley facility; do not collapse the identities."
+  },
+  "withheld": [
+    {
+      "port_number": "260802",
+      "reason": "San Luis II GSA representatives conflict: 32.515786/-114.70114 versus NII 32.4635599/-114.6997983, about 5.8 km apart. No arbitrary midpoint."
+    },
+    {
+      "port_number": "240221",
+      "reason": "Aggregate El Paso is not a separate physical crossing."
+    }
+  ],
+  "selection_notes": {
+    "Columbus": "NM8015 site, not repeated building rows falsely town-geocoded; GSA prospectus page 3 places the facility about three miles south of Columbus beside Palomas.",
+    "Otay": "CA0267 main/primary facility, 2500 Paseo Internacional; not the prior uncertified commercial-facility override.",
+    "WorldTrade": "TX0730 administration facility, 715 Bob Bullock Loop, with adjacent core assets corroborating.",
+    "EaglePassI": "Use the named TX0201 administration facility rather than mixing the bridge target and building representative.",
+    "Anzalduas": "TX0610 US facility representative, corroborated by NADBank's explicit site coordinates.",
+    "Ysleta": "Use TX0963, corroborated by the MPO facility corridor; do not adopt the internally contradictory TABC S/N Zaragoza redirect."
+  },
+  "corroboration": {
+    "Columbus": "https://www.gsa.gov/system/files/2016_CONSTRUCTION_PROSPECTUS_Columbus_NM_U_S_Land_Port_of_Entry.pdf",
+    "Anzalduas": "https://nadbank.org/hubfs/projects/draft_bd_2022_xx_anzalduas_expansion_project_proposal_public_eng.pdf?hsLang=en",
+    "Ysleta": "https://www.elpasompo.org/media/Rider7/EmissionQuantification.pdf"
+  },
+  "coverage": {
+    "catalog": 42,
+    "mapped": 40,
+    "list_only": 2,
+    "gsa_facility": 26,
+    "directory_target": 12,
+    "federal_facility": 1,
+    "contextual_limited": 1,
+    "inherited_unverified": 0,
+    "states": {
+      "CA": 6,
+      "AZ": 7,
+      "NM": 2,
+      "TX": 25
+    }
+  },
+  "entrance_certification": false
+}

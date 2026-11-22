@@ -1,0 +1,77 @@
+{
+  "capturedAt": "2026-10-30T20:58:49.993Z",
+  "source": "Local production-mode build; actual dated published snapshot, no synthetic fixture or clock override. Not current crossing conditions.",
+  "states": [
+    {
+      "name": "after-dashboard-1440",
+      "url": "/?lane=passenger_standard",
+      "width": 1440,
+      "height": 1000,
+      "scrollY": 0,
+      "heading": "US\u2013Mexico border wait times",
+      "overflow": false
+    },
+    {
+      "name": "after-crossing-1440",
+      "url": "/crossing/san-ysidro/?lane=passenger_standard",
+      "width": 1440,
+      "height": 1000,
+      "scrollY": 0,
+      "heading": "San Ysidro wait times",
+      "overflow": false
+    },
+    {
+      "name": "after-crossing-es-1440",
+      "url": "/crossing/san-ysidro/?lane=passenger_standard",
+      "width": 1440,
+      "height": 1000,
+      "scrollY": 0,
+      "heading": "Tiempos de espera en San Ysidro",
+      "overflow": false
+    },
+    {
+      "name": "after-dashboard-390",
+      "url": "/?lane=passenger_standard",
+      "width": 390,
+      "height": 844,
+      "scrollY": 0,
+      "heading": "US\u2013Mexico border wait times",
+      "overflow": false
+    },
+    {
+      "name": "after-navigation-es-390",
+      "url": "/?lane=passenger_standard",
+      "width": 390,
+      "height": 844,
+      "scrollY": 0,
+      "heading": "Tiempos de espera en la frontera M\u00e9xico\u2013EE. UU.",
+      "overflow": false
+    },
+    {
+      "name": "after-crossing-390",
+      "url": "/crossing/san-ysidro/?lane=passenger_standard",
+      "width": 390,
+      "height": 844,
+      "scrollY": 330,
+      "heading": "San Ysidro wait times",
+      "overflow": false
+    },
+    {
+      "name": "after-crossing-es-390",
+      "url": "/crossing/san-ysidro/?lane=passenger_standard",
+      "width": 390,
+      "height": 844,
+      "scrollY": 362,
+      "heading": "Tiempos de espera en San Ysidro",
+      "overflow": false
+    }
+  ],
+  "beforeSourceCommit": "d139ba6f25f26145fc182d1b6e3edbe2be88be60",
+  "afterSource": "Lean-access working source appended to the same review branch; exact resulting head is reported in the job outcome.",
+  "afterSourceSha256": {
+    "src/pages/Dashboard.jsx": "fac7e3ebb37733a04ca50ce45852a67b4e261d0fd0edd9c91d1a087e4acaa962",
+    "src/pages/Dashboard.module.css": "007c2857e9e57447f86ac9c3bc03794966e882e79aed7087259d18804dd9c815",
+    "src/pages/CrossingDetail.jsx": "13cc04bd0250232c94c463f1a26c0a7c0f43add14fafc7866f49383efad751a1",
+    "scripts/check-crossing-console.mjs": "b10b9e8841790b8de07c121c10e0779fa7255c07d838a5badb369c883a24c262"
+  }
+}

@@ -1,0 +1,500 @@
+{
+  "stages": [
+    {
+      "name": "Whole border; actual dated fallback reports",
+      "at": 1793574055341
+    },
+    {
+      "name": "Restored Otay facility, CA0267",
+      "at": 1793574056543
+    },
+    {
+      "name": "Select the native Otay report and its GSA reference",
+      "at": 1793574057369
+    },
+    {
+      "name": "Escape returns focus; clear the shared search",
+      "at": 1793574058230
+    },
+    {
+      "name": "Restored World Trade facility, TX0730",
+      "at": 1793574059086
+    },
+    {
+      "name": "Select the World Trade report",
+      "at": 1793574059910
+    },
+    {
+      "name": "Return to all crossings",
+      "at": 1793574060747
+    },
+    {
+      "name": "Morley remains distinct and explicitly limited",
+      "at": 1793574061622
+    },
+    {
+      "name": "Read Morley location context alongside its report",
+      "at": 1793574062439
+    }
+  ],
+  "frames": [
+    {
+      "filename": "frame-00000.jpg",
+      "time": 1793574055.358419
+    },
+    {
+      "filename": "frame-00001.jpg",
+      "time": 1793574056.571937
+    },
+    {
+      "filename": "frame-00002.jpg",
+      "time": 1793574056.585719
+    },
+    {
+      "filename": "frame-00003.jpg",
+      "time": 1793574056.602989
+    },
+    {
+      "filename": "frame-00004.jpg",
+      "time": 1793574056.622674
+    },
+    {
+      "filename": "frame-00005.jpg",
+      "time": 1793574056.640678
+    },
+    {
+      "filename": "frame-00006.jpg",
+      "time": 1793574056.656691
+    },
+    {
+      "filename": "frame-00007.jpg",
+      "time": 1793574056.674437
+    },
+    {
+      "filename": "frame-00008.jpg",
+      "time": 1793574056.691237
+    },
+    {
+      "filename": "frame-00009.jpg",
+      "time": 1793574056.710827
+    },
+    {
+      "filename": "frame-00010.jpg",
+      "time": 1793574056.727708
+    },
+    {
+      "filename": "frame-00011.jpg",
+      "time": 1793574056.748855
+    },
+    {
+      "filename": "frame-00012.jpg",
+      "time": 1793574056.77016
+    },
+    {
+      "filename": "frame-00013.jpg",
+      "time": 1793574056.78182
+    },
+    {
+      "filename": "frame-00014.jpg",
+      "time": 1793574056.798754
+    },
+    {
+      "filename": "frame-00015.jpg",
+      "time": 1793574056.81335
+    },
+    {
+      "filename": "frame-00016.jpg",
+      "time": 1793574057.087242
+    },
+    {
+      "filename": "frame-00017.jpg",
+      "time": 1793574057.409159
+    },
+    {
+      "filename": "frame-00018.jpg",
+      "time": 1793574057.439737
+    },
+    {
+      "filename": "frame-00019.jpg",
+      "time": 1793574057.488128
+    },
+    {
+      "filename": "frame-00020.jpg",
+      "time": 1793574057.503897
+    },
+    {
+      "filename": "frame-00021.jpg",
+      "time": 1793574057.526643
+    },
+    {
+      "filename": "frame-00022.jpg",
+      "time": 1793574057.538246
+    },
+    {
+      "filename": "frame-00023.jpg",
+      "time": 1793574057.550075
+    },
+    {
+      "filename": "frame-00024.jpg",
+      "time": 1793574057.567738
+    },
+    {
+      "filename": "frame-00025.jpg",
+      "time": 1793574057.583617
+    },
+    {
+      "filename": "frame-00026.jpg",
+      "time": 1793574057.601181
+    },
+    {
+      "filename": "frame-00027.jpg",
+      "time": 1793574057.618102
+    },
+    {
+      "filename": "frame-00028.jpg",
+      "time": 1793574057.638447
+    },
+    {
+      "filename": "frame-00029.jpg",
+      "time": 1793574058.259741
+    },
+    {
+      "filename": "frame-00030.jpg",
+      "time": 1793574058.279438
+    },
+    {
+      "filename": "frame-00031.jpg",
+      "time": 1793574058.295836
+    },
+    {
+      "filename": "frame-00032.jpg",
+      "time": 1793574058.311929
+    },
+    {
+      "filename": "frame-00033.jpg",
+      "time": 1793574058.333278
+    },
+    {
+      "filename": "frame-00034.jpg",
+      "time": 1793574058.356911
+    },
+    {
+      "filename": "frame-00035.jpg",
+      "time": 1793574058.372368
+    },
+    {
+      "filename": "frame-00036.jpg",
+      "time": 1793574058.389722
+    },
+    {
+      "filename": "frame-00037.jpg",
+      "time": 1793574058.405265
+    },
+    {
+      "filename": "frame-00038.jpg",
+      "time": 1793574058.419211
+    },
+    {
+      "filename": "frame-00039.jpg",
+      "time": 1793574058.436224
+    },
+    {
+      "filename": "frame-00040.jpg",
+      "time": 1793574058.455883
+    },
+    {
+      "filename": "frame-00041.jpg",
+      "time": 1793574058.472573
+    },
+    {
+      "filename": "frame-00042.jpg",
+      "time": 1793574058.488766
+    },
+    {
+      "filename": "frame-00043.jpg",
+      "time": 1793574058.50378
+    },
+    {
+      "filename": "frame-00044.jpg",
+      "time": 1793574059.11511
+    },
+    {
+      "filename": "frame-00045.jpg",
+      "time": 1793574059.137235
+    },
+    {
+      "filename": "frame-00046.jpg",
+      "time": 1793574059.15766
+    },
+    {
+      "filename": "frame-00047.jpg",
+      "time": 1793574059.176096
+    },
+    {
+      "filename": "frame-00048.jpg",
+      "time": 1793574059.194089
+    },
+    {
+      "filename": "frame-00049.jpg",
+      "time": 1793574059.211339
+    },
+    {
+      "filename": "frame-00050.jpg",
+      "time": 1793574059.229874
+    },
+    {
+      "filename": "frame-00051.jpg",
+      "time": 1793574059.250977
+    },
+    {
+      "filename": "frame-00052.jpg",
+      "time": 1793574059.271445
+    },
+    {
+      "filename": "frame-00053.jpg",
+      "time": 1793574059.285357
+    },
+    {
+      "filename": "frame-00054.jpg",
+      "time": 1793574059.30422
+    },
+    {
+      "filename": "frame-00055.jpg",
+      "time": 1793574059.323926
+    },
+    {
+      "filename": "frame-00056.jpg",
+      "time": 1793574059.337945
+    },
+    {
+      "filename": "frame-00057.jpg",
+      "time": 1793574059.630111
+    },
+    {
+      "filename": "frame-00058.jpg",
+      "time": 1793574059.961446
+    },
+    {
+      "filename": "frame-00059.jpg",
+      "time": 1793574059.983377
+    },
+    {
+      "filename": "frame-00060.jpg",
+      "time": 1793574060.006181
+    },
+    {
+      "filename": "frame-00061.jpg",
+      "time": 1793574060.021058
+    },
+    {
+      "filename": "frame-00062.jpg",
+      "time": 1793574060.033982
+    },
+    {
+      "filename": "frame-00063.jpg",
+      "time": 1793574060.051374
+    },
+    {
+      "filename": "frame-00064.jpg",
+      "time": 1793574060.066727
+    },
+    {
+      "filename": "frame-00065.jpg",
+      "time": 1793574060.084747
+    },
+    {
+      "filename": "frame-00066.jpg",
+      "time": 1793574060.102258
+    },
+    {
+      "filename": "frame-00067.jpg",
+      "time": 1793574060.116857
+    },
+    {
+      "filename": "frame-00068.jpg",
+      "time": 1793574060.134248
+    },
+    {
+      "filename": "frame-00069.jpg",
+      "time": 1793574060.15262
+    },
+    {
+      "filename": "frame-00070.jpg",
+      "time": 1793574060.783719
+    },
+    {
+      "filename": "frame-00071.jpg",
+      "time": 1793574060.80283
+    },
+    {
+      "filename": "frame-00072.jpg",
+      "time": 1793574060.821867
+    },
+    {
+      "filename": "frame-00073.jpg",
+      "time": 1793574060.84675
+    },
+    {
+      "filename": "frame-00074.jpg",
+      "time": 1793574060.868571
+    },
+    {
+      "filename": "frame-00075.jpg",
+      "time": 1793574060.892933
+    },
+    {
+      "filename": "frame-00076.jpg",
+      "time": 1793574060.907088
+    },
+    {
+      "filename": "frame-00077.jpg",
+      "time": 1793574060.924164
+    },
+    {
+      "filename": "frame-00078.jpg",
+      "time": 1793574060.938002
+    },
+    {
+      "filename": "frame-00079.jpg",
+      "time": 1793574060.952054
+    },
+    {
+      "filename": "frame-00080.jpg",
+      "time": 1793574060.97014
+    },
+    {
+      "filename": "frame-00081.jpg",
+      "time": 1793574060.990767
+    },
+    {
+      "filename": "frame-00082.jpg",
+      "time": 1793574061.006507
+    },
+    {
+      "filename": "frame-00083.jpg",
+      "time": 1793574061.021676
+    },
+    {
+      "filename": "frame-00084.jpg",
+      "time": 1793574061.037028
+    },
+    {
+      "filename": "frame-00085.jpg",
+      "time": 1793574061.053056
+    },
+    {
+      "filename": "frame-00086.jpg",
+      "time": 1793574061.318129
+    },
+    {
+      "filename": "frame-00087.jpg",
+      "time": 1793574061.653365
+    },
+    {
+      "filename": "frame-00088.jpg",
+      "time": 1793574061.681522
+    },
+    {
+      "filename": "frame-00089.jpg",
+      "time": 1793574061.707328
+    },
+    {
+      "filename": "frame-00090.jpg",
+      "time": 1793574061.732084
+    },
+    {
+      "filename": "frame-00091.jpg",
+      "time": 1793574061.747694
+    },
+    {
+      "filename": "frame-00092.jpg",
+      "time": 1793574061.75951
+    },
+    {
+      "filename": "frame-00093.jpg",
+      "time": 1793574061.774306
+    },
+    {
+      "filename": "frame-00094.jpg",
+      "time": 1793574061.789877
+    },
+    {
+      "filename": "frame-00095.jpg",
+      "time": 1793574061.802312
+    },
+    {
+      "filename": "frame-00096.jpg",
+      "time": 1793574061.817456
+    },
+    {
+      "filename": "frame-00097.jpg",
+      "time": 1793574061.834678
+    },
+    {
+      "filename": "frame-00098.jpg",
+      "time": 1793574061.851563
+    },
+    {
+      "filename": "frame-00099.jpg",
+      "time": 1793574061.868592
+    },
+    {
+      "filename": "frame-00100.jpg",
+      "time": 1793574062.171204
+    },
+    {
+      "filename": "frame-00101.jpg",
+      "time": 1793574062.513455
+    },
+    {
+      "filename": "frame-00102.jpg",
+      "time": 1793574062.542614
+    },
+    {
+      "filename": "frame-00103.jpg",
+      "time": 1793574062.558482
+    },
+    {
+      "filename": "frame-00104.jpg",
+      "time": 1793574062.576464
+    },
+    {
+      "filename": "frame-00105.jpg",
+      "time": 1793574062.589995
+    },
+    {
+      "filename": "frame-00106.jpg",
+      "time": 1793574062.603203
+    },
+    {
+      "filename": "frame-00107.jpg",
+      "time": 1793574062.620491
+    },
+    {
+      "filename": "frame-00108.jpg",
+      "time": 1793574062.639801
+    },
+    {
+      "filename": "frame-00109.jpg",
+      "time": 1793574062.655765
+    },
+    {
+      "filename": "frame-00110.jpg",
+      "time": 1793574062.66937
+    },
+    {
+      "filename": "frame-00111.jpg",
+      "time": 1793574062.689041
+    },
+    {
+      "filename": "frame-00112.jpg",
+      "time": 1793574062.704319
+    }
+  ],
+  "fixtures": false,
+  "clockFrozen": false,
+  "snapshotFetchedAt": "2026-11-01T20:37:32.153Z",
+  "sourceBaseHead": "2103c9d9a517f0e07ad3f807bceda63950c61d33",
+  "candidate": "working facility-overview correction; final commit in PR166",
+  "origin": "local API-enabled production-mode build, not hosted QA"
+}

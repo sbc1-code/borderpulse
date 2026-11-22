@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Activity, AlertTriangle, Database, TrendingDown, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -12,7 +13,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { getAllHistory } from '@/components/utils/waitTimeHistory';
+import { getAllHistory } from '@/components/utils/historyAnalytics';
 import { getStorageKey } from '@/components/utils/crossingDirection';
 
 // Auto-derived volume proxy: sum of CBP-published lanes_open across all lane
@@ -91,7 +92,7 @@ function MetricTile({ icon: Icon, label, value, detail, tone = 'slate' }) {
   }[tone];
 
   return (
-    <Card className="overflow-hidden border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+    <Card className="overflow-hidden border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-950">
       <CardContent className="p-3 sm:p-4">
         <div className="flex items-center justify-between gap-2">
           <div className="min-w-0">
@@ -123,7 +124,7 @@ function DistributionStrip({ counts, total, language }) {
   const heavyPct = (counts.heavy / denominator) * 100;
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-xs dark:border-slate-800 dark:bg-slate-950">
       <div className="mb-2 flex items-center justify-between gap-3">
         <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
           {language === 'en' ? 'Wait mix' : 'Mezcla de esperas'}
@@ -355,12 +356,17 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
       <Card className="border-dashed border-slate-300 bg-white/80 dark:border-slate-700 dark:bg-slate-950/80">
         <CardContent className="p-8 text-center text-sm text-slate-500 dark:text-slate-400">
           <Database className="mx-auto mb-3 h-7 w-7 text-slate-300" />
-          {language === 'en'
-            ? 'Analytics populate as you use the app. Check back after a few visits.'
-            : 'Los análisis se llenan conforme uses la app. Vuelve después de varias visitas.'}
-          <div className="mt-2 text-[11px] text-slate-400">
-            {language === 'en' ? 'Samples collected' : 'Muestras recolectadas'}: {summary.totalSamples}
-          </div>
+          <p data-testid="analytics-local-empty">
+            {language === 'en'
+              ? `This view uses waits saved in this browser only. It has ${summary.totalSamples} of the 10 it needs.`
+              : `Esta vista usa solo las esperas guardadas en este navegador. Tiene ${summary.totalSamples} de las 10 que necesita.`}
+          </p>
+          <p className="mt-2">
+            {language === 'en' ? 'For 30-day hourly patterns from the shared record, open ' : 'Para patrones por hora de 30 días del registro compartido, abre '}
+            <Link to="/best-time/" className="font-medium text-emerald-700 underline underline-offset-4 dark:text-emerald-400">
+              {language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar'}
+            </Link>.
+          </p>
         </CardContent>
       </Card>
     );
@@ -368,8 +374,8 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
 
   return (
     <div className="space-y-4">
-      <section className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
-        <div className="grid gap-0 lg:grid-cols-[0.95fr,2fr]">
+      <section className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-950">
+        <div className="grid gap-0 lg:grid-cols-[0.95fr_2fr]">
           <div className="border-b border-slate-200 bg-slate-950 p-3 text-white sm:p-4 lg:border-b-0 lg:border-r lg:border-slate-800">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-2 py-0.5 text-[11px] font-semibold">
               <span className="h-1.5 w-1.5 rounded-full" style={{ background: WAIT_COLORS[summary.tier] }} />
@@ -434,7 +440,7 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
 
       <DistributionStrip counts={summary.counts} total={summary.populatedHourCount} language={language} />
 
-      <Card className="overflow-hidden border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <Card className="overflow-hidden border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-950">
         <CardHeader className="space-y-2 pb-2">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <CardTitle className="text-sm text-slate-950 dark:text-white">
@@ -475,7 +481,7 @@ export default function AnalyticsView({ crossings, language, direction = 'northb
         </CardContent>
       </Card>
 
-      <Card className="overflow-hidden border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <Card className="overflow-hidden border-slate-200 bg-white shadow-xs dark:border-slate-800 dark:bg-slate-950">
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-sm text-slate-950 dark:text-white">
             <Activity className="h-4 w-4 text-slate-500" />
