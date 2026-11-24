@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-23T21:00:27.154Z",
-  "snapshot_at": "2026-11-23T20:52:59.063Z",
+  "generated_at": "2026-11-24T05:16:12.551Z",
+  "snapshot_at": "2026-11-24T05:08:11.595Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -51,23 +51,6 @@
         "overall_median": 60,
         "samples": 22,
         "ratio": 2.3333333333333335
-      }
-    },
-    {
-      "type": "sunday_spike",
-      "port_slug": "hidalgo-pharr-pharr",
-      "port_name": "Hidalgo/Pharr - Pharr",
-      "state": "TX",
-      "severity": 1.25,
-      "detected_at": "2026-11-23T08:44:54.426Z",
-      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 45 min around 6 PM — ~225% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 45 min cerca de las 6 PM — ~225% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 18,
-        "peak_median": 45,
-        "overall_median": 20,
-        "samples": 21,
-        "ratio": 2.25
       }
     },
     {
@@ -180,7 +163,7 @@
       "port_name": "Laredo - Colombia Solidarity",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-23T08:44:54.426Z",
+      "detected_at": "2026-11-24T05:16:12.551Z",
       "summary_en": "Right now Laredo - Colombia Solidarity's lightest Monday hour so far is 12 AM (median 0 min) — ~100% below the 30-day baseline of 5 min.",
       "summary_es": "Ahora mismo la hora más ligera del lunes en Laredo - Colombia Solidarity es 12 AM (mediana 0 min) — ~100% debajo de la base de 30 días de 5 min.",
       "evidence": {
@@ -189,7 +172,7 @@
         "best_hour": 0,
         "best_median": 0,
         "overall_median": 5,
-        "samples": 17
+        "samples": 18
       }
     },
     {
@@ -198,7 +181,7 @@
       "port_name": "Brownsville - Gateway",
       "state": "TX",
       "severity": 1,
-      "detected_at": "2026-11-23T08:44:54.426Z",
+      "detected_at": "2026-11-24T05:16:12.551Z",
       "summary_en": "Right now Brownsville - Gateway's lightest Monday hour so far is 11 PM (median 0 min) — ~100% below the 30-day baseline of 40 min.",
       "summary_es": "Ahora mismo la hora más ligera del lunes en Brownsville - Gateway es 11 PM (mediana 0 min) — ~100% debajo de la base de 30 días de 40 min.",
       "evidence": {
@@ -207,7 +190,7 @@
         "best_hour": 23,
         "best_median": 0,
         "overall_median": 40,
-        "samples": 16
+        "samples": 17
       }
     },
     {
@@ -233,16 +216,16 @@
       "port_slug": "hidalgo-pharr-pharr",
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
-      "severity": 0.95,
-      "detected_at": "2026-11-23T08:44:54.426Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Monday hour so far is 12 AM (median 1 min) — ~95% below the 30-day baseline of 20 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Pharr es 12 AM (mediana 1 min) — ~95% debajo de la base de 30 días de 20 min.",
+      "severity": 0.96,
+      "detected_at": "2026-11-24T05:16:12.551Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Monday hour so far is 12 AM (median 1 min) — ~96% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Hidalgo/Pharr - Pharr es 12 AM (mediana 1 min) — ~96% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
         "best_hour": 0,
         "best_median": 1,
-        "overall_median": 20,
+        "overall_median": 25,
         "samples": 9
       }
     },
@@ -252,7 +235,7 @@
       "port_name": "Otay Mesa",
       "state": "CA",
       "severity": 0.875,
-      "detected_at": "2026-11-23T08:44:54.426Z",
+      "detected_at": "2026-11-24T05:16:12.551Z",
       "summary_en": "Right now Otay Mesa's lightest Monday hour so far is 9 PM (median 10 min) — ~88% below the 30-day baseline of 80 min.",
       "summary_es": "Ahora mismo la hora más ligera del lunes en Otay Mesa es 9 PM (mediana 10 min) — ~88% debajo de la base de 30 días de 80 min.",
       "evidence": {
@@ -261,7 +244,7 @@
         "best_hour": 21,
         "best_median": 10,
         "overall_median": 80,
-        "samples": 16
+        "samples": 17
       }
     },
     {
@@ -283,18 +266,35 @@
       }
     },
     {
+      "type": "sunday_spike",
+      "port_slug": "hidalgo-pharr-pharr",
+      "port_name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "severity": 0.8,
+      "detected_at": "2026-11-24T05:16:12.551Z",
+      "summary_en": "Heads up: Hidalgo/Pharr - Pharr's Sunday peak hits 45 min around 6 PM — ~180% of the 30-day median. Plan around it.",
+      "summary_es": "Atención: el pico dominical de Hidalgo/Pharr - Pharr alcanza 45 min cerca de las 6 PM — ~180% de la mediana de 30 días. Planea alrededor.",
+      "evidence": {
+        "peak_hour": 18,
+        "peak_median": 45,
+        "overall_median": 25,
+        "samples": 21,
+        "ratio": 1.8
+      }
+    },
+    {
       "type": "lowest_today",
       "port_slug": "tecate",
       "port_name": "Tecate",
       "state": "CA",
       "severity": 0.7833333333333333,
-      "detected_at": "2026-11-23T08:44:54.426Z",
-      "summary_en": "Right now Tecate's lightest Monday hour so far is 9 PM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en Tecate es 9 PM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
+      "detected_at": "2026-11-24T05:16:12.551Z",
+      "summary_en": "Right now Tecate's lightest Monday hour so far is 10 PM (median 13 min) — ~78% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en Tecate es 10 PM (mediana 13 min) — ~78% debajo de la base de 30 días de 60 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 21,
+        "best_hour": 22,
         "best_median": 13,
         "overall_median": 60,
         "samples": 16
@@ -340,17 +340,17 @@
       "port_slug": "el-paso-paso-del-norte-pdn",
       "port_name": "El Paso - Paso Del Norte (PDN)",
       "state": "TX",
-      "severity": 0.6949152542372881,
-      "detected_at": "2026-11-23T21:00:27.154Z",
-      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Monday hour so far is 11 PM (median 18 min) — ~69% below the 30-day baseline of 59 min.",
-      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Paso Del Norte (PDN) es 11 PM (mediana 18 min) — ~69% debajo de la base de 30 días de 59 min.",
+      "severity": 0.6896551724137931,
+      "detected_at": "2026-11-24T05:16:12.551Z",
+      "summary_en": "Right now El Paso - Paso Del Norte (PDN)'s lightest Monday hour so far is 10 PM (median 18 min) — ~69% below the 30-day baseline of 58 min.",
+      "summary_es": "Ahora mismo la hora más ligera del lunes en El Paso - Paso Del Norte (PDN) es 10 PM (mediana 18 min) — ~69% debajo de la base de 30 días de 58 min.",
       "evidence": {
         "day_of_week": 1,
         "day_label": "Mon",
-        "best_hour": 23,
+        "best_hour": 22,
         "best_median": 18,
-        "overall_median": 59,
-        "samples": 12
+        "overall_median": 58,
+        "samples": 6
       }
     },
     {
@@ -425,23 +425,5 @@
       }
     }
   ],
-  "trailing_24h": [
-    {
-      "type": "sunday_spike",
-      "port_slug": "el-paso-paso-del-norte-pdn",
-      "port_name": "El Paso - Paso Del Norte (PDN)",
-      "state": "TX",
-      "severity": 0.5272727272727273,
-      "detected_at": "2026-11-23T00:06:05.127Z",
-      "summary_en": "Heads up: El Paso - Paso Del Norte (PDN)'s Sunday peak hits 84 min around 10 PM — ~153% of the 30-day median. Plan around it.",
-      "summary_es": "Atención: el pico dominical de El Paso - Paso Del Norte (PDN) alcanza 84 min cerca de las 10 PM — ~153% de la mediana de 30 días. Planea alrededor.",
-      "evidence": {
-        "peak_hour": 22,
-        "peak_median": 84,
-        "overall_median": 55,
-        "samples": 12,
-        "ratio": 1.5272727272727273
-      }
-    }
-  ]
+  "trailing_24h": []
 }
