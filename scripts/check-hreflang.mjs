@@ -27,6 +27,8 @@ export function checkBuiltHreflangs(dist = path.join(root, 'dist')) {
     ['/privacidad/', pair('/privacy/', '/privacidad/')],
     ['/feature-your-business/', pair('/feature-your-business/', '/anunciate/')],
     ['/anunciate/', pair('/feature-your-business/', '/anunciate/')],
+    ['/atlas/', pair('/atlas/', '/es/atlas/')],
+    ['/es/atlas/', pair('/atlas/', '/es/atlas/')],
     ...['juarez', 'tijuana', 'algodones', 'nogales', 'progreso'].flatMap((c) => [
       [`/city/${c}/`, pair(`/city/${c}/`, `/ciudad/${c}/`)],
       [`/ciudad/${c}/`, pair(`/city/${c}/`, `/ciudad/${c}/`)],

@@ -66,9 +66,16 @@ async function main() {
     { lang: 'es', href: `${BASE}/anunciate/` },
     { lang: 'x-default', href: `${BASE}/feature-your-business/` },
   ];
+  const atlasAlternates = [
+    { lang: 'en', href: `${BASE}/atlas/` },
+    { lang: 'es', href: `${BASE}/es/atlas/` },
+    { lang: 'x-default', href: `${BASE}/atlas/` },
+  ];
   const urls = [
     { loc: `${BASE}/`, changefreq: 'hourly', priority: '1.0', lastmod: today, alternates: homeHreflangs() },
     { loc: `${BASE}/es/`, changefreq: 'hourly', priority: '0.9', lastmod: today, alternates: homeHreflangs() },
+    { loc: `${BASE}/atlas/`, changefreq: 'daily', priority: '0.8', lastmod: today, alternates: atlasAlternates },
+    { loc: `${BASE}/es/atlas/`, changefreq: 'daily', priority: '0.8', lastmod: today, alternates: atlasAlternates },
     { loc: `${BASE}/about/`, changefreq: 'monthly', priority: '0.5', lastmod: today },
     { loc: `${BASE}/best-time/`, changefreq: 'daily', priority: '0.7', lastmod: today },
     { loc: `${BASE}/privacy/`, changefreq: 'yearly', priority: '0.2', lastmod: today, alternates: privacyAlternates },

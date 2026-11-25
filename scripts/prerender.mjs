@@ -787,6 +787,62 @@ async function main() {
     }
   }
 
+  // /atlas + /es/atlas — interactive Crossing Atlas, hreflang-paired.
+  {
+    const enCanonical = `${BASE}/atlas/`;
+    const esCanonical = `${BASE}/es/atlas/`;
+    const hreflangs = [
+      { lang: 'en', href: enCanonical },
+      { lang: 'es', href: esCanonical },
+      { lang: 'x-default', href: enCanonical },
+    ];
+    const atlasPages = [
+      [['atlas'], {
+        lang: 'en',
+        title: 'Crossing Atlas: US-Mexico & US-Canada Border Globe | Border Pulse',
+        desc: 'Interactive two-country Crossing Atlas: live CBP US-Mexico wait times across 42 ports plus the Canada-US BC/Washington pilot.',
+        canonical: enCanonical,
+        ogImage: `${BASE}/og-card.png`,
+        jsonLd: [{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Crossing Atlas', item: enCanonical },
+          ],
+        }],
+        hreflangs,
+      }, `<main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#0f172a"><h1>Crossing Atlas</h1><p>Explore US-Mexico live waits across 42 ports and the Washington-BC Canada pilot.</p><p><a href="/">All crossings</a> · <a href="/city/tijuana/">City directories</a></p></main>`],
+      [['es', 'atlas'], {
+        lang: 'es',
+        title: 'Atlas de cruces: globo fronterizo EE.UU.-México y Canadá | Border Pulse',
+        desc: 'Atlas interactivo de cruces en Norteamérica: esperas en vivo de CBP EE.UU.-México en 42 garitas y el piloto Canadá-EE.UU.',
+        canonical: esCanonical,
+        ogImage: `${BASE}/og-card.png`,
+        jsonLd: [{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: `${BASE}/es/` },
+            { '@type': 'ListItem', position: 2, name: 'Atlas de cruces', item: esCanonical },
+          ],
+        }],
+        hreflangs,
+      }, `<main style="max-width:1100px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#0f172a"><h1>Atlas de cruces</h1><p>Explora las esperas en vivo entre EE.UU. y México (42 garitas) y el piloto Canadá-EE.UU.</p><p><a href="/es/">Todos los cruces</a> · <a href="/ciudad/tijuana/">Directorios por ciudad</a></p></main>`],
+    ];
+    for (const [parts, head, body] of atlasPages) {
+      let html = injectSnapshot(rewriteIndex(indexWithLinks, head), body);
+      if (head.lang === 'es') {
+        html = html
+          .replace(/<meta\s+property=["']og:locale["'][^>]*>/i, '<meta property="og:locale" content="es_MX" />')
+          .replace(/<meta\s+property=["']og:locale:alternate["'][^>]*>/i, '<meta property="og:locale:alternate" content="en_US" />');
+      }
+      const outDir = path.resolve(distDir, ...parts);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
+    }
+  }
+
   // /about — trust signal page with methodology + public stats + privacy
   {
     const aboutHead = {

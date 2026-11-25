@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-11-25 - Native accessible Crossing Atlas (/atlas/ & /es/atlas/) and full Spanish UI navigation
+
+- Added native, lazy-loaded `src/pages/Atlas.jsx` at `/atlas/` and `/es/atlas/` (added to main desktop & mobile navigation, sitemap, `hreflang`, and `scripts/prerender.mjs`) backed by `public/atlas-globe.png` (zero entry JS impact). Includes dark mode support, keyboard-rotatable canvas (`Arrow` keys + `Home`), `44px` touch controls, saved favorites quick-jump chips synced via `borderPulse_favorites`, live CBP multi-lane waits for US–Mexico, two-direction mobile glance strip for Canada–US, persistent deep links, and opt-in street-level Google Maps support.
+- Connected `/es/`, `/ciudad/:city/`, `CrossingMapExplorer`, `BorderCrossingCard`, `PopularCrossings`, `CrossingWaitLinks`, and `CrossingDetail` directly to `/cruce/:slug/` for Spanish routes, added a top-bar `Español`/`English` switcher on crossing pages, and added a footer `Cities`/`Ciudades` link.
+
 ## 2026-11-25 - Spanish crossing pages (`/cruce/:slug/`)
 
 - Added dedicated Spanish crossing routes (`/cruce/:slug/`) across all 42 ports in `src/App.jsx`, `src/Layout.jsx`, `src/pages/CrossingDetail.jsx`, and `src/lib/hreflang.js`.

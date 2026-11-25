@@ -473,15 +473,24 @@ export default function CrossingDetail({ forcedLang = null } = {}) {
             </span>
           </Link>
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="gap-1 h-8 text-xs"
-          onClick={() => setEmbedOpen(true)}
-        >
-          <Code className="w-3.5 h-3.5" />
-          {language === 'en' ? 'Embed this' : 'Insertar'}
-        </Button>
+        <div className="flex items-center gap-2">
+          {canonicalSlug && (
+            <Button asChild variant="outline" size="sm" className="min-h-11 text-xs">
+              <Link to={withLane(`/${isSpanishRoute ? 'crossing' : 'cruce'}/${canonicalSlug}/`, lane)}>
+                {isSpanishRoute ? 'English' : 'Español'}
+              </Link>
+            </Button>
+          )}
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1 min-h-11 text-xs"
+            onClick={() => setEmbedOpen(true)}
+          >
+            <Code className="w-3.5 h-3.5" />
+            {language === 'en' ? 'Embed this' : 'Insertar'}
+          </Button>
+        </div>
       </div>
 
       <header className="mb-4">

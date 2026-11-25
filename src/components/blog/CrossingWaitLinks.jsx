@@ -17,7 +17,7 @@ export default function CrossingWaitLinks({ items = [] }) {
         {items.map(([crossing, label]) => (
           <li key={crossing}>
             <Link
-              to={`/crossing/${crossing}/`}
+              to={`/${es ? 'cruce' : 'crossing'}/${crossing}/`}
               onClick={() => track('blog-to-waits', { slug, crossing, placement: 'top' })}
               className="inline-flex min-h-11 items-center gap-1 rounded-md border border-emerald-700 bg-white px-3 py-2 text-sm font-medium text-emerald-800 hover:bg-emerald-100 dark:bg-transparent dark:text-emerald-300 dark:hover:bg-emerald-950/40"
             >

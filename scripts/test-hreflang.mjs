@@ -36,8 +36,8 @@ test('the home page and /es/ are one reciprocal language pair', () => {
   assert.deepEqual(pageHreflangs(base + '/'), expected);
   assert.deepEqual(pageHreflangs(base + '/es/', 'es'), expected);
 });
-test('existing methodology and privacy twins remain reciprocal', () => {
-  for (const [en, es] of [['methodology', 'metodologia'], ['privacy', 'privacidad']]) {
+test('existing methodology, privacy, and atlas twins remain reciprocal', () => {
+  for (const [en, es] of [['methodology', 'metodologia'], ['privacy', 'privacidad'], ['atlas', 'es/atlas']]) {
     assert.deepEqual(pageHreflangs(`${base}/${en}/`), pageHreflangs(`${base}/${es}/`, 'es'));
     assert.equal(pageHreflangs(`${base}/${en}/`).length, 3);
   }
