@@ -1,0 +1,112 @@
+{
+  "sourceUrl": "https://www.cbsa-asfc.gc.ca/bwt-taf/bwt-eng.csv",
+  "fetchedAt": "2026-11-24T07:40:13.370287+00:00",
+  "snapshotOnly": true,
+  "crossings": [
+    {
+      "id": "abbotsford-huntingdon",
+      "name": "Abbotsford-Huntingdon",
+      "location": "Huntingdon, BC/Sumas, WA",
+      "rawTimestamp": "2026-11-24 00:20 PDT",
+      "reportedAt": "2026-11-24T07:20:00.000Z",
+      "flows": {
+        "CA": {
+          "traveler": {
+            "state": "wait",
+            "minutes": 5,
+            "raw": "5 minutes"
+          },
+          "commercial": {
+            "state": "no_delay",
+            "minutes": null,
+            "raw": "No Delay"
+          }
+        },
+        "US": {
+          "traveler": {
+            "state": "unknown",
+            "minutes": null,
+            "raw": "--",
+            "reason": "outside_source_coverage"
+          },
+          "commercial": {
+            "state": "unknown",
+            "minutes": null,
+            "raw": "--",
+            "reason": "outside_source_coverage"
+          }
+        }
+      }
+    },
+    {
+      "id": "douglas",
+      "name": "Douglas",
+      "location": "Surrey, BC/Blaine, WA",
+      "rawTimestamp": "2026-11-24 00:20 PDT",
+      "reportedAt": "2026-11-24T07:20:00.000Z",
+      "flows": {
+        "CA": {
+          "traveler": {
+            "state": "wait",
+            "minutes": 5,
+            "raw": "5 minutes"
+          },
+          "commercial": {
+            "state": "not_applicable",
+            "minutes": null,
+            "raw": "Not Applicable"
+          }
+        },
+        "US": {
+          "traveler": {
+            "state": "unknown",
+            "minutes": null,
+            "raw": "--",
+            "reason": "outside_source_coverage"
+          },
+          "commercial": {
+            "state": "unknown",
+            "minutes": null,
+            "raw": "--",
+            "reason": "outside_source_coverage"
+          }
+        }
+      }
+    },
+    {
+      "id": "pacific-highway",
+      "name": "Pacific Highway",
+      "location": "Surrey, BC/Blaine, WA",
+      "rawTimestamp": "2026-11-24 00:20 PDT",
+      "reportedAt": "2026-11-24T07:20:00.000Z",
+      "flows": {
+        "CA": {
+          "traveler": {
+            "state": "wait",
+            "minutes": 5,
+            "raw": "5 minutes"
+          },
+          "commercial": {
+            "state": "wait",
+            "minutes": 5,
+            "raw": "5 minutes"
+          }
+        },
+        "US": {
+          "traveler": {
+            "state": "unknown",
+            "minutes": null,
+            "raw": "--",
+            "reason": "outside_source_coverage"
+          },
+          "commercial": {
+            "state": "unknown",
+            "minutes": null,
+            "raw": "--",
+            "reason": "outside_source_coverage"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # DECISIONS
 
+## 2026-11-25 · Google Maps API reactivation capped at $10/month; Crossing Atlas pilot staged; Adsterra -> AdSense path documented
+
+- Reactivating Google Maps Platform under Google Cloud Services is gated behind a strict **$10.00/month** spend ceiling enforced primarily via **GCP per-API daily/minute request quotas** (since billing budgets alert rather than stop usage), paired with HTTP referrer/API key restrictions, $10 budget alerts, and lazy-loaded client integration.
+- Core wait times and the **Crossing Atlas** (`drafts/atlas-pilot/`) must remain 100% functional without paid APIs, degrading gracefully to the zero-cost vector/canvas globe if quota is reached or keys are absent.
+- Monetization stays on **Adsterra + direct city/corridor sponsors** (preserving the 1-commercial-spot-per-page invariant) while bilingual content depth, Search Console CTR optimizations, and Atlas engagement build toward a phased **Google AdSense** transition.
+- Multi-agent execution specs live in `docs/ATLAS-AND-GOOGLE-MAPS-PLAN.md`.
+
 ## 2026-11-22 · Pages is manual recovery; the collector serves current production
 
 Vercel serves borderpulse.com. Retire automatic Pages builds from main pushes

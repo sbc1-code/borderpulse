@@ -1,0 +1,22 @@
+{
+  "attribution": "Contains information licensed under the Open Government Licence – Canada. Canada Border Services Agency.",
+  "selection": "Verbatim UTF-8 BOM header and three selected rows in original order with original line endings. Full hashes apply to the downloaded files before subsetting.",
+  "feeds": [
+    {
+      "lang": "eng",
+      "sourceUrl": "https://www.cbsa-asfc.gc.ca/bwt-taf/bwt-eng.csv",
+      "fetchedAt": "2026-11-24T07:40:13.370287+00:00",
+      "sha256Full": "8cbea388780abdddfc895c227dc55199c4c5231b90d9049c8dc2d1e970442179",
+      "sha256Subset": "4a8599c982862ceead0ce027e86d2a7fc5389c65fed6f7fbb55fccb00c2f57be",
+      "nonblankRecords": 29
+    },
+    {
+      "lang": "fra",
+      "sourceUrl": "https://www.cbsa-asfc.gc.ca/bwt-taf/bwt-fra.csv",
+      "fetchedAt": "2026-11-24T07:40:13.386000+00:00",
+      "sha256Full": "973ddae4db8832f6ebc25da18cbbe0a39bca7f5fee3dc6a8bf542d4782f60aa5",
+      "sha256Subset": "696f652685e43111b83f53c18fce60edc3cf3483767f3482554733029dc6c72e",
+      "nonblankRecords": 29
+    }
+  ]
+}

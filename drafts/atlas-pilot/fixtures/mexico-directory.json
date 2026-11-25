@@ -1,0 +1,344 @@
+{
+  "source": "BorderPulse crossing directory, canonical route mapping and approximate facility coordinates",
+  "sourceCommit": "a57f6015861b7ef66874bc41555d0104343553d1",
+  "sourceUrl": "https://github.com/sbc1-code/borderpulse/tree/a57f6015861b7ef66874bc41555d0104343553d1",
+  "fetchedAt": "2026-11-24T07:38:05.162Z",
+  "crossings": [
+    {
+      "id": "250201",
+      "name": "Andrade",
+      "state": "CA",
+      "url": "https://borderpulse.com/crossing/andrade/",
+      "lat": 32.7184,
+      "lon": -114.7282
+    },
+    {
+      "id": "535501",
+      "name": "Brownsville - B&M",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/brownsville-b-and-m/",
+      "lat": 25.8937,
+      "lon": -97.5051
+    },
+    {
+      "id": "240201",
+      "name": "El Paso - Bridge of the Americas (BOTA)",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/el-paso-bridge-of-the-americas-bota/",
+      "lat": 31.7676,
+      "lon": -106.4509
+    },
+    {
+      "id": "535504",
+      "name": "Brownsville - Gateway",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/brownsville-gateway/",
+      "lat": 25.8988,
+      "lon": -97.4976
+    },
+    {
+      "id": "535503",
+      "name": "Brownsville - Los Indios",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/brownsville-los-indios/",
+      "lat": 26.0291,
+      "lon": -97.7388
+    },
+    {
+      "id": "535502",
+      "name": "Brownsville - Veterans International",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/brownsville-veterans-international/",
+      "lat": 25.8858,
+      "lon": -97.4764
+    },
+    {
+      "id": "250301",
+      "name": "Calexico - East",
+      "state": "CA",
+      "url": "https://borderpulse.com/crossing/calexico-east/",
+      "lat": 32.6798,
+      "lon": -115.3828
+    },
+    {
+      "id": "250302",
+      "name": "Calexico - West",
+      "state": "CA",
+      "url": "https://borderpulse.com/crossing/calexico-west/",
+      "lat": 32.6656,
+      "lon": -115.4962
+    },
+    {
+      "id": "240601",
+      "name": "Columbus",
+      "state": "NM",
+      "url": "https://borderpulse.com/crossing/columbus/",
+      "lat": 31.7838,
+      "lon": -107.6279
+    },
+    {
+      "id": "230201",
+      "name": "Del Rio",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/del-rio/",
+      "lat": 29.3336,
+      "lon": -100.9186
+    },
+    {
+      "id": "260101",
+      "name": "Douglas (Raul Hector Castro)",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/douglas-raul-hector-castro/",
+      "lat": 31.3352,
+      "lon": -109.5602
+    },
+    {
+      "id": "230301",
+      "name": "Eagle Pass - Bridge I",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/eagle-pass-bridge-i/",
+      "lat": 28.7054,
+      "lon": -100.5059
+    },
+    {
+      "id": "230302",
+      "name": "Eagle Pass - Bridge II",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/eagle-pass-bridge-ii/",
+      "lat": 28.6979,
+      "lon": -100.5094
+    },
+    {
+      "id": "240221",
+      "name": "El Paso",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/el-paso-downtown/",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "240202",
+      "name": "El Paso - Paso Del Norte (PDN)",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/el-paso-paso-del-norte-pdn/",
+      "lat": 31.751,
+      "lon": -106.4869
+    },
+    {
+      "id": "240204",
+      "name": "El Paso - Stanton DCL",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/el-paso-stanton-dcl/",
+      "lat": 31.7498,
+      "lon": -106.4835
+    },
+    {
+      "id": "240104",
+      "name": "El Paso - Ysleta",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/ysleta/",
+      "lat": 31.672,
+      "lon": -106.3354
+    },
+    {
+      "id": "l24501",
+      "name": "Fort Hancock",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/fort-hancock/",
+      "lat": 31.2748,
+      "lon": -105.8536
+    },
+    {
+      "id": "230503",
+      "name": "Hidalgo/Pharr - Anzalduas International Bridge",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/hidalgo-pharr-anzalduas-international-bridge/",
+      "lat": 26.1453,
+      "lon": -98.3121
+    },
+    {
+      "id": "230501",
+      "name": "Hidalgo/Pharr - Hidalgo",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/hidalgo-pharr-hidalgo/",
+      "lat": 26.1007,
+      "lon": -98.2665
+    },
+    {
+      "id": "230502",
+      "name": "Hidalgo/Pharr - Pharr",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/hidalgo-pharr-pharr/",
+      "lat": 26.0669,
+      "lon": -98.2052
+    },
+    {
+      "id": "230401",
+      "name": "Laredo - Bridge I",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/laredo-bridge-i/",
+      "lat": 27.4997,
+      "lon": -99.5075
+    },
+    {
+      "id": "230402",
+      "name": "Laredo - Bridge II",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/laredo-bridge-ii/",
+      "lat": 27.5017,
+      "lon": -99.5027
+    },
+    {
+      "id": "230403",
+      "name": "Laredo - Colombia Solidarity",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/laredo-colombia-solidarity/",
+      "lat": 27.701,
+      "lon": -99.7423
+    },
+    {
+      "id": "230404",
+      "name": "Laredo - World Trade Bridge",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/laredo-world-trade-bridge/",
+      "lat": 27.5977,
+      "lon": -99.5343
+    },
+    {
+      "id": "260201",
+      "name": "Lukeville",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/lukeville/",
+      "lat": 31.8816,
+      "lon": -112.8161
+    },
+    {
+      "id": "240401",
+      "name": "Marcelino Serna - Tornillo",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/marcelino-serna-tornillo/",
+      "lat": 31.4352,
+      "lon": -106.1424
+    },
+    {
+      "id": "260301",
+      "name": "Naco",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/naco/",
+      "lat": 31.3346,
+      "lon": -109.9483
+    },
+    {
+      "id": "260401",
+      "name": "Nogales - Deconcini",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/nogales-deconcini/",
+      "lat": 31.3329,
+      "lon": -110.9428
+    },
+    {
+      "id": "260402",
+      "name": "Nogales - Mariposa",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/nogales-mariposa/",
+      "lat": 31.3351,
+      "lon": -110.9677
+    },
+    {
+      "id": "260403",
+      "name": "Nogales - Morley Gate",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/nogales-morley-gate/",
+      "lat": 31.3343,
+      "lon": -110.9408
+    },
+    {
+      "id": "250601",
+      "name": "Otay Mesa",
+      "state": "CA",
+      "url": "https://borderpulse.com/crossing/otay-mesa/",
+      "lat": 32.5527,
+      "lon": -116.9391
+    },
+    {
+      "id": "240301",
+      "name": "Presidio - PRESIDIO PORT OF ENTRY",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/presidio-presidio-port-of-entry/",
+      "lat": 29.5623,
+      "lon": -104.3911
+    },
+    {
+      "id": "230902",
+      "name": "Progreso - Donna International Bridge",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/progreso-donna-international-bridge/",
+      "lat": 26.0691,
+      "lon": -98.0738
+    },
+    {
+      "id": "230901",
+      "name": "Progreso - Progreso International Bridge",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/progreso-progreso-international-bridge/",
+      "lat": 26.0621,
+      "lon": -97.95
+    },
+    {
+      "id": "230701",
+      "name": "Rio Grande City",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/rio-grande-city/",
+      "lat": 26.368,
+      "lon": -98.8016
+    },
+    {
+      "id": "231001",
+      "name": "Roma",
+      "state": "TX",
+      "url": "https://borderpulse.com/crossing/roma/",
+      "lat": 26.4039,
+      "lon": -99.019
+    },
+    {
+      "id": "260801",
+      "name": "San Luis - San Luis I",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/san-luis-san-luis-i/",
+      "lat": 32.4844,
+      "lon": -114.7799
+    },
+    {
+      "id": "260802",
+      "name": "San Luis - San Luis II",
+      "state": "AZ",
+      "url": "https://borderpulse.com/crossing/san-luis-san-luis-ii/",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "250401",
+      "name": "San Ysidro",
+      "state": "CA",
+      "url": "https://borderpulse.com/crossing/san-ysidro/",
+      "lat": 32.5437,
+      "lon": -117.0287
+    },
+    {
+      "id": "240801",
+      "name": "Santa Teresa - Santa Teresa Port of Entry",
+      "state": "NM",
+      "url": "https://borderpulse.com/crossing/santa-teresa-santa-teresa-port-of-entry/",
+      "lat": 31.786,
+      "lon": -106.6799
+    },
+    {
+      "id": "250501",
+      "name": "Tecate",
+      "state": "CA",
+      "url": "https://borderpulse.com/crossing/tecate/",
+      "lat": 32.5769,
+      "lon": -116.6275
+    }
+  ]
+}
