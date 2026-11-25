@@ -15,13 +15,23 @@ function LaneIcon({ className }) {
   );
 }
 
+function GlobeIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3.6 9h16.8M3.6 15h16.8M12 3a13 13 0 0 0 0 18M12 3a13 13 0 0 1 0 18" />
+    </svg>
+  );
+}
+
 export default function Layout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
   const storedLanguage = usePersistentLanguage();
   const spanishHome = /^\/es\/?$/.test(location.pathname);
   const spanishCrossing = /^\/cruce\/[^/]+\/?$/.test(location.pathname);
-  const language = spanishHome || spanishCrossing ? 'es' : storedLanguage;
+  const spanishAtlas = /^\/es\/atlas\/?$/.test(location.pathname);
+  const language = spanishHome || spanishCrossing || spanishAtlas ? 'es' : storedLanguage;
   useEffect(() => {
     if (!spanishHome) return;
     writeStorage('borderPulse_language', 'es');
@@ -49,7 +59,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const pageOwnsLanguage =
       /^\/(blog|city|ciudad|cruce)\/[^/]+\/?$/.test(location.pathname) ||
-      /^\/(methodology|metodologia|privacy|privacidad|feature-your-business|anunciate|es)\/?$/.test(location.pathname);
+      /^\/(methodology|metodologia|privacy|privacidad|feature-your-business|anunciate|es|atlas|es\/atlas)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
   }, [language, location.pathname]);
@@ -71,6 +81,8 @@ export default function Layout({ children }) {
         hash: location.hash,
       });
     }
+    if (lang === 'en' && spanishAtlas) navigate({ pathname: '/atlas/', search: location.search, hash: location.hash });
+    if (lang === 'es' && /^\/atlas\/?$/.test(location.pathname)) navigate({ pathname: '/es/atlas/', search: location.search, hash: location.hash });
   };
 
   const nav = [
@@ -79,6 +91,12 @@ export default function Layout({ children }) {
       href: withLane(`${spanishHome ? '/es/' : '/'}?area=all`, normalizeLane(new URLSearchParams(location.search).get('lane'))),
       icon: MapPin,
       current: location.pathname === '/' || /^\/es\/?$/.test(location.pathname) || location.pathname.startsWith('/corridor/'),
+    },
+    {
+      name: 'Atlas',
+      href: language === 'es' ? '/es/atlas/' : '/atlas/',
+      icon: GlobeIcon,
+      current: /^\/(es\/)?atlas(\/|$)/.test(location.pathname),
     },
     {
       name: 'Blog',
@@ -228,6 +246,12 @@ export default function Layout({ children }) {
             </Link>
             <Link to="/about/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {language === 'en' ? 'About' : 'Acerca de'}
+            </Link>
+            <Link
+              to={language === 'es' ? '/ciudad/tijuana/' : '/city/tijuana/'}
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              {language === 'es' ? 'Ciudades' : 'Cities'}
             </Link>
             <Link
               to={language === 'es' ? '/anunciate/' : '/feature-your-business/'}

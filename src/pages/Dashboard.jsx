@@ -83,6 +83,7 @@ export default function Dashboard() {
 
   const location = useLocation();
   const spanishHome = /^\/es\/?$/.test(location.pathname);
+  const crossingBase = spanishHome ? '/cruce' : '/crossing';
   const storedLanguage = usePersistentLanguage();
   const language = spanishHome ? 'es' : storedLanguage;
   const [searchParams, setSearchParams] = useSearchParams();
@@ -602,7 +603,7 @@ export default function Dashboard() {
           </div>}
           <div hidden={presentation !== 'map'}>
             <Suspense fallback={<p role="status" className="py-8 text-sm text-slate-500">{language === 'es' ? 'Cargando mapa fronterizo…' : 'Loading border map…'}</p>}>
-              <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} unavailable={state.unavailable} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />
+              <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} unavailable={state.unavailable} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} crossingBase={crossingBase} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />
             </Suspense>
           </div>
           {presentation === 'list' && <>
@@ -711,6 +712,7 @@ export default function Dashboard() {
                                     isFavorite={true}
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
+                                    crossingBase={crossingBase}
                                     snapshotAt={state.fetchedAt}
                                 selectedLane={lane}
                                   />
@@ -742,6 +744,7 @@ export default function Dashboard() {
                                 isFavorite={false}
                                 onToggleFavorite={handleToggleFavorite}
                                 slug={portToSlug[crossing.port_number] || crossing.slug}
+                                crossingBase={crossingBase}
                                 snapshotAt={state.fetchedAt}
                                 selectedLane={lane}
                               />
@@ -765,6 +768,7 @@ export default function Dashboard() {
                                     isFavorite={false}
                                     onToggleFavorite={handleToggleFavorite}
                                     slug={portToSlug[crossing.port_number] || crossing.slug}
+                                    crossingBase={crossingBase}
                                     snapshotAt={state.fetchedAt}
                                 selectedLane={lane}
                                   />
@@ -810,7 +814,7 @@ export default function Dashboard() {
 
           </>}
 
-          <PopularCrossings lane={lane} crossings={state.crossings} language={language} />
+          <PopularCrossings lane={lane} crossings={state.crossings} language={language} crossingBase={crossingBase} />
 
           <InstallPrompt language={language} />
           <DashboardAd label={language === 'en' ? 'Advertisement' : 'Publicidad'} language={language} />

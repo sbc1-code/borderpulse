@@ -25,6 +25,7 @@ const CrossingConsole = lazy(() => import('@/pages/CorridorRedirect'));
 const LaneFlip = lazy(() => import('@/pages/LaneFlip'));
 const FeatureBusiness = lazy(() => import('@/pages/FeatureBusiness'));
 const CityGuide = lazy(() => import('@/pages/CityGuide'));
+const Atlas = lazy(() => import('@/pages/Atlas'));
 
 function RouteFallback() {
   return (
@@ -62,6 +63,8 @@ function LayoutRoutes() {
           <Route path="/anunciate" element={<FeatureBusiness lang="es" />} />
           <Route path="/city/:city" element={<CityGuide lang="en" />} />
           <Route path="/ciudad/:city" element={<CityGuide lang="es" />} />
+          <Route path="/atlas" element={<Atlas lang="en" />} />
+          <Route path="/es/atlas" element={<Atlas lang="es" />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

@@ -119,6 +119,7 @@ export default function BorderCrossingCard({
   slug,
   snapshotAt = null,
   selectedLane = DEFAULT_LANE,
+  crossingBase = '/crossing',
 }) {
   const [showLanes, setShowLanes] = useState(false);
   // Skip the menu's focus return when we are scrolling to #trends, or it
@@ -254,7 +255,7 @@ export default function BorderCrossingCard({
               <div className="flex items-center gap-1.5 mb-0.5">
                 <h2 className="min-w-0 text-base leading-snug font-semibold text-slate-900 dark:text-slate-100 break-words" title={crossing.name}>
                   {cardSlug ? (
-                    <Link to={withLane(`/crossing/${cardSlug}/`, selectedLane)} className="rounded-sm hover:underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
+                    <Link to={withLane(`${crossingBase}/${cardSlug}/`, selectedLane)} className="rounded-sm hover:underline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500" onClick={() => track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection })}>
                       {crossing.name || crossing.port_name}
                     </Link>
                   ) : (
@@ -304,7 +305,7 @@ export default function BorderCrossingCard({
                 <DropdownMenuContent align="end" className="w-44" onCloseAutoFocus={(event) => { if (skipMenuFocusReturn.current) { event.preventDefault(); skipMenuFocusReturn.current = false; } }}>
                   {cardSlug ? (
                     <DropdownMenuItem asChild>
-                      <Link to={withLane(`/crossing/${cardSlug}/#trends`, selectedLane)} className="cursor-pointer" onClick={() => { skipMenuFocusReturn.current = true; track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection }); }}>
+                      <Link to={withLane(`${crossingBase}/${cardSlug}/#trends`, selectedLane)} className="cursor-pointer" onClick={() => { skipMenuFocusReturn.current = true; track('crossing-open', { slug: cardSlug, source: 'card', direction: selectedDirection }); }}>
                         {language === 'en' ? 'View trends' : 'Ver tendencias'}
                       </Link>
                     </DropdownMenuItem>
@@ -443,7 +444,7 @@ export default function BorderCrossingCard({
           )}
 
           {cardSlug && camerasFor(crossing.port_number).length > 0 && (
-            <Link to={withLane(`/crossing/${cardSlug}/#cameras`, selectedLane)} className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-emerald-700 underline dark:text-emerald-400">
+            <Link to={withLane(`${crossingBase}/${cardSlug}/#cameras`, selectedLane)} className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-emerald-700 underline dark:text-emerald-400">
               {language === 'es' ? 'Ver cámaras' : 'View cameras'}
             </Link>
           )}

@@ -73,7 +73,7 @@ export default function CityGuide({ lang = 'en' }) {
             {city.crossings.map(([slug, label]) => (
               <li key={slug}>
                 <Link
-                  to={`/crossing/${slug}/`}
+                  to={`/${es ? 'cruce' : 'crossing'}/${slug}/`}
                   onClick={() => track('city-to-waits', { city: city.id, crossing: slug })}
                   className="flex min-h-11 items-center justify-between rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 hover:bg-slate-50 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800"
                 >

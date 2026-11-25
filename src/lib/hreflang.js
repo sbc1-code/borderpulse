@@ -15,7 +15,7 @@ export function homeHreflangs() {
 
 export function pageHreflangs(canonical, lang = 'en') {
   if (canonical === HOME_URL || canonical === HOME_ES_URL) return homeHreflangs();
-  for (const [en, es] of [['methodology', 'metodologia'], ['privacy', 'privacidad']]) {
+  for (const [en, es] of [['methodology', 'metodologia'], ['privacy', 'privacidad'], ['atlas', 'es/atlas']]) {
     const enUrl = `${BASE}/${en}/`;
     const esUrl = `${BASE}/${es}/`;
     if (canonical === enUrl || canonical === esUrl) {

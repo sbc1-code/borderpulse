@@ -141,6 +141,20 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
     await inspect('/cruce/san-ysidro/', 'es');
     await switchTo('en');
     await inspect('/crossing/san-ysidro/', 'en');
+    await page.evaluate(() => {
+      localStorage.setItem('borderPulse_language', 'es');
+    });
+    await page.goto(new URL('/atlas/', baseUrl).href);
+    await inspect('/atlas/', 'en');
+    await switchTo('es');
+    await inspect('/es/atlas/', 'es');
+    await page.evaluate(() => {
+      localStorage.setItem('borderPulse_language', 'en');
+    });
+    await page.goto(new URL('/es/atlas/', baseUrl).href);
+    await inspect('/es/atlas/', 'es');
+    await switchTo('en');
+    await inspect('/atlas/', 'en');
     assert.ok(feedRequests > 1, 'must exercise a genuine feed refresh');
     assert.ok(aggregateRequests > 0, 'must exercise delayed aggregate arrival');
     console.log('[document-language] PASS: delayed aggregate, feed refresh, switching, Back/Forward, shared pages and EN/ES content-owned pages');
