@@ -20,7 +20,8 @@ export default function Layout({ children }) {
   const navigate = useNavigate();
   const storedLanguage = usePersistentLanguage();
   const spanishHome = /^\/es\/?$/.test(location.pathname);
-  const language = spanishHome ? 'es' : storedLanguage;
+  const spanishCrossing = /^\/cruce\/[^/]+\/?$/.test(location.pathname);
+  const language = spanishHome || spanishCrossing ? 'es' : storedLanguage;
   useEffect(() => {
     if (!spanishHome) return;
     writeStorage('borderPulse_language', 'es');
@@ -47,8 +48,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     const pageOwnsLanguage =
-      /^\/blog\/[^/]+\/?$/.test(location.pathname) ||
-      /^\/(city|ciudad)\/[^/]+\/?$/.test(location.pathname) ||
+      /^\/(blog|city|ciudad|cruce)\/[^/]+\/?$/.test(location.pathname) ||
       /^\/(methodology|metodologia|privacy|privacidad|feature-your-business|anunciate|es)\/?$/.test(location.pathname);
     if (pageOwnsLanguage) return;
     document.documentElement.lang = language;
@@ -63,7 +63,14 @@ export default function Layout({ children }) {
   const changeLanguage = (lang) => {
     writeStorage('borderPulse_language', lang);
     window.dispatchEvent(new StorageEvent('storage', { key: 'borderPulse_language', newValue: lang }));
-    if (lang === 'en' && /^\/es\/?$/.test(location.pathname)) navigate({ pathname: '/', search: location.search, hash: location.hash });
+    if (lang === 'en' && spanishHome) navigate({ pathname: '/', search: location.search, hash: location.hash });
+    if (lang === 'en' && spanishCrossing) {
+      navigate({
+        pathname: location.pathname.replace(/^\/cruce/, '/crossing'),
+        search: location.search,
+        hash: location.hash,
+      });
+    }
   };
 
   const nav = [

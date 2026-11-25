@@ -133,6 +133,14 @@ export async function checkDocumentLanguage(page, context, baseUrl) {
       assert.equal(new URL(page.url()).search, '?area=all&lane=sentri&display=list');
       await page.locator('footer').getByRole('link', { name: 'Methodology', exact: true }).waitFor();
     }
+    await page.evaluate(() => {
+      localStorage.setItem('borderPulse_language', 'en');
+    });
+    await page.goto(new URL('/cruce/san-ysidro/', baseUrl).href);
+    await page.locator('#root').getByRole('link', { name: 'Todos los cruces', exact: true }).waitFor();
+    await inspect('/cruce/san-ysidro/', 'es');
+    await switchTo('en');
+    await inspect('/crossing/san-ysidro/', 'en');
     assert.ok(feedRequests > 1, 'must exercise a genuine feed refresh');
     assert.ok(aggregateRequests > 0, 'must exercise delayed aggregate arrival');
     console.log('[document-language] PASS: delayed aggregate, feed refresh, switching, Back/Forward, shared pages and EN/ES content-owned pages');

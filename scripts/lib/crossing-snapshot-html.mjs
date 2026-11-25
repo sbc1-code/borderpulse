@@ -96,7 +96,7 @@ export function snapshotHtml(crossings, portToSlug, fetchedAt, single = false, o
     const closed = (c.port_status || '').trim().toLowerCase() === 'closed';
     const value = closed ? t.closed : wait == null ? t.missing : `${wait} min`;
     const name = esc(crossingDisplayName(c));
-    const nameCell = slug ? link(`/crossing/${slug}/`, name, framed) : name;
+    const nameCell = slug ? link(`/${lang === 'es' ? 'cruce' : 'crossing'}/${slug}/`, name, framed) : name;
     return `<tr><th scope="row" style="text-align:left;padding:12px">${nameCell}</th><td style="padding:12px">${esc(value)}</td><td style="padding:12px">${esc(lane?.update_time || t.reportUnavailable)}</td><td style="padding:12px">${esc(c.hours || t.hoursUnavailable)}</td></tr>`;
   }).join('');
   const cameraSource = single && cameraSourceFor(crossings[0]?.port_number);

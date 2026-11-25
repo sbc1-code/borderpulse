@@ -88,12 +88,19 @@ test('built homepage and every crossing page contain their own useful visible sn
   assert.match(fs.readFileSync('dist/index.html', 'utf8'), /data-prerender="crossing-snapshot"/);
   assert.match(fs.readFileSync('dist/index.html', 'utf8'), /aria-label="All border crossings" aria-hidden="true" inert/);
   const doc = JSON.parse(fs.readFileSync('public/data/crossings.json', 'utf8'));
-  for (const dir of fs.readdirSync('dist/crossing')) {
-    const html = fs.readFileSync(`dist/crossing/${dir}/index.html`, 'utf8');
-    if (html.includes('http-equiv="refresh"')) continue;
-    assert.match(html, /data-prerender="crossing-snapshot"/, dir);
-    assert.match(html, new RegExp(doc.fetched_at.replaceAll('.', '\\.')), dir);
-    assert.doesNotMatch(html, /<h1>US–Mexico border wait times<\/h1>/, dir);
+  for (const prefix of ['crossing', 'cruce']) {
+    for (const dir of fs.readdirSync(`dist/${prefix}`)) {
+      const html = fs.readFileSync(`dist/${prefix}/${dir}/index.html`, 'utf8');
+      if (html.includes('http-equiv="refresh"')) continue;
+      assert.match(html, /data-prerender="crossing-snapshot"/, `${prefix}/${dir}`);
+      assert.match(html, new RegExp(doc.fetched_at.replaceAll('.', '\\.')), `${prefix}/${dir}`);
+      if (prefix === 'crossing') {
+        assert.doesNotMatch(html, /<h1>US–Mexico border wait times<\/h1>/, `${prefix}/${dir}`);
+      } else {
+        assert.match(html, /<html[^>]*\blang="es"/, `${prefix}/${dir}`);
+        assert.doesNotMatch(html, /<h1>Tiempos de espera en la frontera EE\.UU\.-México<\/h1>/, `${prefix}/${dir}`);
+      }
+    }
   }
   assert.doesNotMatch(fs.readFileSync('dist/privacy/index.html', 'utf8'), /data-prerender="crossing-snapshot"/);
 });

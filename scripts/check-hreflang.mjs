@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildSlugMap } from '../src/lib/slugs.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const origin = 'https://borderpulse.com';
@@ -31,6 +32,14 @@ export function checkBuiltHreflangs(dist = path.join(root, 'dist')) {
       [`/ciudad/${c}/`, pair(`/city/${c}/`, `/ciudad/${c}/`)],
     ]),
   ]);
+  const crossings = JSON.parse(fs.readFileSync(path.join(dist, 'data/crossings.json'), 'utf8')).crossings || [];
+  const { portToSlug } = buildSlugMap(crossings);
+  for (const slug of Object.values(portToSlug)) {
+    const crossingPair = pair(`/crossing/${slug}/`, `/cruce/${slug}/`);
+    expected.set(`/crossing/${slug}/`, crossingPair);
+    expected.set(`/cruce/${slug}/`, crossingPair);
+    expected.set(`/embed/${slug}/`, crossingPair);
+  }
   for (const post of posts) {
     const twins = post.translationKey ? posts.filter((p) => p.translationKey === post.translationKey) : [];
     const en = twins.find((p) => p.lang === 'en');
@@ -85,6 +94,7 @@ export async function checkHreflangNavigation(page, baseUrl) {
     assert.deepEqual(await page.locator('link[rel="canonical"]').evaluateAll((nodes) => nodes.map((node) => node.href)), [origin + route]);
   };
   const homePair = pair('/', '/es/');
+  const crossingPair = pair('/crossing/san-ysidro/', '/cruce/san-ysidro/');
   const click = async (route) => page.locator(`#root a[href="${route}"]:visible`).first().click();
   await inspect('/', homePair);
   await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).click();
@@ -93,19 +103,19 @@ export async function checkHreflangNavigation(page, baseUrl) {
   await page.getByRole('button', { name: 'EN, Switch to English', exact: true }).filter({ visible: true }).click();
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).fill('San Ysidro');
   await click('/crossing/san-ysidro/');
-  await inspect('/crossing/san-ysidro/');
+  await inspect('/crossing/san-ysidro/', crossingPair);
   await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).click();
   // A background crossing update can reset html.lang through the existing
   // metadata cleanup. Verify the rendered language preference, independently
   // of that separate lifecycle issue, then assert the full alternate set.
   await page.locator('#root').getByRole('link', { name: 'Todos los cruces', exact: true }).waitFor({ timeout: 10_000 });
   assert.equal(await page.getByRole('button', { name: 'ES, Cambiar a español', exact: true }).filter({ visible: true }).getAttribute('aria-pressed'), 'true');
-  await inspect('/crossing/san-ysidro/');
+  await inspect('/crossing/san-ysidro/', crossingPair);
   await page.getByRole('button', { name: 'EN, Switch to English', exact: true }).filter({ visible: true }).click();
   await click('/best-time/san-ysidro/');
   await inspect('/best-time/san-ysidro/');
   await page.goBack();
-  await inspect('/crossing/san-ysidro/');
+  await inspect('/crossing/san-ysidro/', crossingPair);
   await click('/compare/san-ysidro-vs-otay-mesa/');
   await inspect('/compare/san-ysidro-vs-otay-mesa/');
   const menu = page.getByRole('button', { name: /^(Open menu|Abrir menú)$/ });
@@ -129,7 +139,12 @@ export async function checkHreflangNavigation(page, baseUrl) {
   await click('/');
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).waitFor();
   assert.deepEqual(await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) => nodes.map((node) => ({ lang: node.hreflang, href: node.href }))), homePair);
-  console.log('[hreflang] PASS: SPA home/language switch → crossing → best-time → Back → compare → blog → EN/ES article → Back → home');
+  await page.goto(new URL('/cruce/san-ysidro/', baseUrl).href);
+  await page.evaluate((value) => { window.hreflangDocument = value; }, marker);
+  await inspect('/cruce/san-ysidro/', crossingPair);
+  await page.getByRole('button', { name: 'EN, Switch to English', exact: true }).filter({ visible: true }).click();
+  await inspect('/crossing/san-ysidro/', crossingPair);
+  console.log('[hreflang] PASS: SPA home/language switch → crossing/cruce → best-time → Back → compare → blog → EN/ES article → Back → home');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) checkBuiltHreflangs();

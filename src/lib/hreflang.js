@@ -22,6 +22,12 @@ export function pageHreflangs(canonical, lang = 'en') {
       return [{ lang: 'en', href: enUrl }, { lang: 'es', href: esUrl }, { lang: 'x-default', href: enUrl }];
     }
   }
+  const crossing = canonical.match(/^https:\/\/borderpulse\.com\/(crossing|cruce)\/([^/]+)\/$/);
+  if (crossing) {
+    const enUrl = `${BASE}/crossing/${crossing[2]}/`;
+    const esUrl = `${BASE}/cruce/${crossing[2]}/`;
+    return [{ lang: 'en', href: enUrl }, { lang: 'es', href: esUrl }, { lang: 'x-default', href: enUrl }];
+  }
   return [{ lang, href: canonical }, { lang: 'x-default', href: canonical }];
 }
 
