@@ -368,5 +368,15 @@ Snapshot of features live on borderpulse.com today.
 ### Not started
 
 - Sourced line on how often CBP updates its wait times.
-- Clearer title for the SENTRI renewal guide (424 impressions, 2 clicks in 28 days).
+- [x] Clearer title for the SENTRI renewal guide (424 impressions, 2 clicks in 28 days) + `<CrossingWaitLinks />` on SENTRI and Los Algodones EN/ES guides (shipped 2026-11-25).
 - Spanish crossing pages.
+
+## Google Maps API, Crossing Atlas & Monetization (added 2026-11-25)
+
+Reference plan: `docs/ATLAS-AND-GOOGLE-MAPS-PLAN.md`
+
+- [x] Stage two-country Crossing Atlas pilot in `drafts/atlas-pilot/` with BorderPulse visual design tokens, mobile glance strip, bounded rollover logic, and replay tests (2026-11-25).
+- [ ] **Manual GCP Console setup (Sebastian):** Configure billing budget alerts ($5/$8/$9.50/$10), strict per-API daily/minute request quotas capping monthly Google Maps Platform spend at <= $10/mo, and HTTP-referrer + API-restricted keys.
+- [ ] **Crossing Atlas production integration:** Unify CBP (`public/data/latest.json`) + CBSA + MX corridor schema and promote `drafts/atlas-pilot/` to a lazy-loaded `/atlas` route with graceful offline-globe fallback when Google Maps quota is capped or absent.
+- [ ] **Content & SEO growth:** Continue upgrading high-impression bilingual guides with search-intent titles and `<CrossingWaitLinks />`, plus corridor/city guides targeting medical and commuter traffic.
+- [ ] **Monetization progression (Adsterra -> AdSense):** Keep Adsterra + direct sponsors active (1 commercial spot per page), track Search Console CTR and Umami slot visibility, and transition high-intent guides to Google AdSense once traffic and policy readiness justify higher-RPM placements.

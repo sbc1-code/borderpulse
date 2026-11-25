@@ -1,0 +1,196 @@
+{
+  "source": "U.S. Customs and Border Protection",
+  "sourceUrl": "https://bwt.cbp.gov/api/waittimes",
+  "direction": "United States entry from Canada",
+  "retrievedAt": "2026-11-24T07:40:46.176841Z",
+  "sourceBodySha256": "f04c59e3080b3366ed7f0d67519af1d59b76da6574a496645d018447c1c6a17b",
+  "scope": "Three verbatim pilot port objects parsed from the agency JSON response. The checksum covers the full response before selecting ports.",
+  "ports": [
+    {
+      "port_number": "300401",
+      "border": "Canadian Border",
+      "port_name": "Blaine",
+      "crossing_name": "Pacific Highway",
+      "hours": "24 hrs/day",
+      "date": "11/23/2026",
+      "time": "23:37:25",
+      "port_status": "Open",
+      "commercial_vehicle_lanes": {
+        "maximum_lanes": "3",
+        "standard_lanes": {
+          "update_time": "At 11:00 pm PST",
+          "operational_status": "no delay",
+          "delay_minutes": "5",
+          "lanes_open": "1"
+        },
+        "FAST_lanes": {
+          "update_time": "",
+          "operational_status": "Lanes Closed",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "passenger_vehicle_lanes": {
+        "maximum_lanes": "7",
+        "standard_lanes": {
+          "update_time": "At 11:00 pm PST",
+          "operational_status": "no delay",
+          "delay_minutes": "5",
+          "lanes_open": "1"
+        },
+        "NEXUS_SENTRI_lanes": {
+          "update_time": "",
+          "operational_status": "Lanes Closed",
+          "delay_minutes": "",
+          "lanes_open": ""
+        },
+        "ready_lanes": {
+          "update_time": "",
+          "operational_status": "Lanes Closed",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "pedestrian_lanes": {
+        "maximum_lanes": "N/A",
+        "standard_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        },
+        "ready_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "construction_notice": ""
+    },
+    {
+      "port_number": "300402",
+      "border": "Canadian Border",
+      "port_name": "Blaine",
+      "crossing_name": "Peace Arch",
+      "hours": "24 hrs/day",
+      "date": "11/23/2026",
+      "time": "23:37:25",
+      "port_status": "Open",
+      "commercial_vehicle_lanes": {
+        "maximum_lanes": "N/A",
+        "standard_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        },
+        "FAST_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "passenger_vehicle_lanes": {
+        "maximum_lanes": "10",
+        "standard_lanes": {
+          "update_time": "At 11:00 pm PST",
+          "operational_status": "no delay",
+          "delay_minutes": "5",
+          "lanes_open": "1"
+        },
+        "NEXUS_SENTRI_lanes": {
+          "update_time": "At 11:00 pm PST",
+          "operational_status": "no delay",
+          "delay_minutes": "5",
+          "lanes_open": "1"
+        },
+        "ready_lanes": {
+          "update_time": "",
+          "operational_status": "Lanes Closed",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "pedestrian_lanes": {
+        "maximum_lanes": "N/A",
+        "standard_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        },
+        "ready_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "construction_notice": ""
+    },
+    {
+      "port_number": "300901",
+      "border": "Canadian Border",
+      "port_name": "Sumas",
+      "crossing_name": "",
+      "hours": "24 hrs/day",
+      "date": "11/23/2026",
+      "time": "23:37:25",
+      "port_status": "Open",
+      "commercial_vehicle_lanes": {
+        "maximum_lanes": "2",
+        "standard_lanes": {
+          "update_time": "At 9:00 pm PST",
+          "operational_status": "no delay",
+          "delay_minutes": "0",
+          "lanes_open": "1"
+        },
+        "FAST_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "passenger_vehicle_lanes": {
+        "maximum_lanes": "5",
+        "standard_lanes": {
+          "update_time": "At 9:00 pm PST",
+          "operational_status": "no delay",
+          "delay_minutes": "0",
+          "lanes_open": "1"
+        },
+        "NEXUS_SENTRI_lanes": {
+          "update_time": "",
+          "operational_status": "Lanes Closed",
+          "delay_minutes": "",
+          "lanes_open": ""
+        },
+        "ready_lanes": {
+          "update_time": "",
+          "operational_status": "Lanes Closed",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "pedestrian_lanes": {
+        "maximum_lanes": "N/A",
+        "standard_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        },
+        "ready_lanes": {
+          "update_time": "",
+          "operational_status": "N/A",
+          "delay_minutes": "",
+          "lanes_open": ""
+        }
+      },
+      "construction_notice": ""
+    }
+  ]
+}

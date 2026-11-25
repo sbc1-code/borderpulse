@@ -1,0 +1,2 @@
+# Preserve the downloaded line endings, trailing spaces and receipt hashes.
+fixtures/cbsa-*.csv -text whitespace=-trailing-space

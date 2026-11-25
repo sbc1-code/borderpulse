@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 export async function checkSentriRenewal(page, context, baseUrl) {
   const versions = [
     { slug: 'sentri-renewal-2026-step-by-step', lang: 'en',
-      title: 'SENTRI renewal: how to renew in the TTP portal',
+      title: 'SENTRI Renewal Steps: Apply, Pending Status, Interview',
       cta: 'Renew SENTRI in the official TTP portal (opens a new tab)',
       waits: 'Check current northbound crossing reports', twin: 'Español',
       published: 'May 9, 2026', updated: 'Updated October 22, 2026',
@@ -12,7 +12,7 @@ export async function checkSentriRenewal(page, context, baseUrl) {
       pending: 'For questions about continued benefits, consult the renewal FAQ and CBP support; this guide cannot confirm your lane access.',
       conditional: 'Conditional approval by itself is not a statement that you may use a SENTRI lane.' },
     { slug: 'renovacion-sentri-2026-paso-a-paso', lang: 'es',
-      title: 'Renovación SENTRI: cómo renovar en el portal TTP',
+      title: 'Renovar SENTRI paso a paso: portal TTP, entrevista y tarjeta',
       cta: 'Renueva SENTRI en el portal oficial TTP (abre otra pestaña)',
       waits: 'Consulta los reportes actuales de cruces hacia Estados Unidos', twin: 'English',
       published: '9 de mayo de 2026', updated: 'Actualizado 22 de octubre de 2026',

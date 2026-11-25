@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-25 - SENTRI guide CTR title refresh, Los Algodones wait links, Crossing Atlas pilot, and Google Maps $10/mo plan
+
+- Updated EN/ES SENTRI renewal guide titles (`sentri-renewal-2026-step-by-step`, `renovacion-sentri-2026-paso-a-paso`) and added `<CrossingWaitLinks />` across SENTRI renewal and Los Algodones EN/ES guides; updated `scripts/check-sentri-renewal.mjs`.
+- Added `drafts/atlas-pilot/`, the self-contained two-country Crossing Atlas pilot aligned with live BorderPulse visual tokens, mobile two-direction glance strip, bounded rollover fixture logic, and a 4-checkpoint CBSA+CBP replay test suite (`15/15` passing).
+- Added `docs/ATLAS-AND-GOOGLE-MAPS-PLAN.md` and updated `DECISIONS.md` and `ROADMAP.md` with the strict $10/month Google Maps API reactivation plan, Adsterra-to-AdSense monetization roadmap, and multi-agent handoff contract.
+
 ## 2026-11-22 - Retire automatic Pages publishing
 
 - Removed the main-push trigger and the collector's Pages dispatch. The

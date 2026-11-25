@@ -1,0 +1,63 @@
+{
+  "sourceUrl": "https://bwt.cbp.gov/api/waittimes",
+  "fetchedAt": "2026-11-24T07:40:46.176841Z",
+  "laneType": "General (standard)",
+  "trialStaleAfterMinutes": 120,
+  "snapshotOnly": true,
+  "crossings": [
+    {
+      "id": "pacific-highway",
+      "portNumber": "300401",
+      "traveler": {
+        "state": "reported_wait",
+        "minutes": 5,
+        "raw": "no delay",
+        "reportedAt": "2026-11-24T07:00:00.000Z",
+        "ageMinutes": 40.8
+      },
+      "commercial": {
+        "state": "reported_wait",
+        "minutes": 5,
+        "raw": "no delay",
+        "reportedAt": "2026-11-24T07:00:00.000Z",
+        "ageMinutes": 40.8
+      }
+    },
+    {
+      "id": "douglas",
+      "portNumber": "300402",
+      "traveler": {
+        "state": "reported_wait",
+        "minutes": 5,
+        "raw": "no delay",
+        "reportedAt": "2026-11-24T07:00:00.000Z",
+        "ageMinutes": 40.8
+      },
+      "commercial": {
+        "state": "not_applicable",
+        "minutes": null,
+        "raw": "N/A",
+        "reportedAt": null,
+        "ageMinutes": null
+      }
+    },
+    {
+      "id": "abbotsford-huntingdon",
+      "portNumber": "300901",
+      "traveler": {
+        "state": "stale",
+        "minutes": 0,
+        "raw": "no delay",
+        "reportedAt": "2026-11-24T05:00:00.000Z",
+        "ageMinutes": 160.8
+      },
+      "commercial": {
+        "state": "stale",
+        "minutes": 0,
+        "raw": "no delay",
+        "reportedAt": "2026-11-24T05:00:00.000Z",
+        "ageMinutes": 160.8
+      }
+    }
+  ]
+}
