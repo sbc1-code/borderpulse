@@ -140,6 +140,7 @@ export async function checkHreflangNavigation(page, baseUrl) {
   await page.getByRole('searchbox', { name: 'Search crossings by name or city', exact: true }).waitFor();
   assert.deepEqual(await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) => nodes.map((node) => ({ lang: node.hreflang, href: node.href }))), homePair);
   await page.goto(new URL('/cruce/san-ysidro/', baseUrl).href);
+  await page.evaluate((value) => { window.hreflangDocument = value; }, marker);
   await inspect('/cruce/san-ysidro/', crossingPair);
   await page.getByRole('button', { name: 'EN, Switch to English', exact: true }).filter({ visible: true }).click();
   await inspect('/crossing/san-ysidro/', crossingPair);
