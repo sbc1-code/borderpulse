@@ -28,10 +28,19 @@ function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function faqItems(crossing, aggregate) {
+function faqItems(crossing, aggregate, lang = 'en') {
   const name = crossing.name;
-  const hours = crossing.hours || 'check official CBP hours';
-  const items = [
+  const hours = crossing.hours || (lang === 'es' ? 'consulta el horario oficial de CBP' : 'check official CBP hours');
+  const items = lang === 'es' ? [
+    {
+      q: `¿Cuáles son los tiempos de espera actuales en ${name}?`,
+      a: `Border Pulse consulta los tiempos de espera más recientes en ${name} de U.S. Customs and Border Protection (CBP) de forma periódica.`,
+    },
+    {
+      q: `¿Cuál es el horario de ${name}?`,
+      a: `Horario oficial publicado por CBP: ${hours}. Los horarios pueden cambiar en días festivos de EE.UU.`,
+    },
+  ] : [
     {
       q: `What are the current wait times at ${name}?`,
       a: `Border Pulse pulls the latest wait time for ${name} from U.S. Customs and Border Protection on a regular schedule.`,
@@ -44,7 +53,10 @@ function faqItems(crossing, aggregate) {
   if (aggregate && aggregate.overall_best_hour != null) {
     const h = aggregate.overall_best_hour;
     const hourLabel = `${h % 12 || 12} ${h >= 12 ? 'PM' : 'AM'}`;
-    items.push({
+    items.push(lang === 'es' ? {
+      q: `¿Qué muestra el patrón histórico de espera en ${name}?`,
+      a: `Los últimos 30 días de datos de CBP para autos estándar muestran el punto más bajo alrededor de las ${hourLabel} en ${name} (mediana de ${aggregate.overall_best_median} min). Este patrón de día completo incluye horas ya pasadas y no es un pronóstico.`,
+    } : {
       q: `What does the historical wait pattern show at ${name}?`,
       a: `The last 30 days of standard-passenger CBP data show an overall historical low around ${hourLabel} at ${name} (median ${aggregate.overall_best_median} min). This full-day pattern includes hours already passed and is not a forecast.`,
     });
@@ -52,12 +64,13 @@ function faqItems(crossing, aggregate) {
   return items;
 }
 
-function renderCrossingHead(crossing, slug, aggregate) {
+function renderCrossingHead(crossing, slug, aggregate, lang = 'en') {
   // Title pattern matches what wins these SERPs: keyword-first, "today"/live
   // freshness signal, current year. Brand goes last where truncation is cheap.
-  const title = crossingSearchTitle(crossing, 'en', cameraSourceFor(crossing.port_number)?.kind);
-  const desc = crossingSearchDescription(crossing, 'en', { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraSourceFor(crossing.port_number)?.kind) });
-  const canonical = `${BASE}/crossing/${slug}/`;
+  const es = lang === 'es';
+  const title = crossingSearchTitle(crossing, es ? 'es' : 'en', cameraSourceFor(crossing.port_number)?.kind);
+  const desc = crossingSearchDescription(crossing, es ? 'es' : 'en', { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraSourceFor(crossing.port_number)?.kind) });
+  const canonical = `${BASE}/${es ? 'cruce' : 'crossing'}/${slug}/`;
   const ogImage = `${BASE}/og/${slug}.png`;
 
   const place = {
@@ -76,7 +89,7 @@ function renderCrossingHead(crossing, slug, aggregate) {
   const faq = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqItems(crossing, aggregate).map((f) => ({
+    mainEntity: faqItems(crossing, aggregate, es ? 'es' : 'en').map((f) => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -87,12 +100,13 @@ function renderCrossingHead(crossing, slug, aggregate) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: BASE + '/' },
+      { '@type': 'ListItem', position: 1, name: 'Border Pulse', item: es ? `${BASE}/es/` : `${BASE}/` },
       { '@type': 'ListItem', position: 2, name: crossing.name, item: canonical },
     ],
   };
 
   return {
+    lang: es ? 'es' : 'en',
     title,
     desc,
     canonical,
@@ -399,12 +413,14 @@ function renderRedirectPage(targetUrl) {
 
 function injectCrawlableLinks(html, crossings, portToSlug, posts) {
   const crossingLinks = crossings
-    .map((c) => {
+    .flatMap((c) => {
       const slug = portToSlug[c.port_number];
-      if (!slug) return null;
-      return `    <li><a href="/crossing/${slug}/">${esc(c.name)} wait times</a></li>`;
+      if (!slug) return [];
+      return [
+        `    <li><a href="/crossing/${slug}/">${esc(c.name)} wait times</a></li>`,
+        `    <li><a href="/cruce/${slug}/">Tiempos de espera en ${esc(c.name)}</a></li>`,
+      ];
     })
-    .filter(Boolean)
     .join('\n');
 
   const postLinks = posts
@@ -538,6 +554,7 @@ async function main() {
 
   const aggregatesDir = path.resolve(root, 'public/data/aggregates');
   let crossingCount = 0;
+  let spanishCrossingCount = 0;
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
@@ -554,6 +571,20 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.resolve(outDir, 'index.html'), html);
     crossingCount++;
+
+    const esCrossingHead = renderCrossingHead(c, slug, aggregate, 'es');
+    let esCrossingHtml = injectSnapshot(
+      rewriteIndex(indexWithLinks, esCrossingHead),
+      snapshotHtml([c], portToSlug, doc.fetched_at, true, { lang: 'es' }),
+      { lang: 'es' },
+    );
+    esCrossingHtml = esCrossingHtml
+      .replace(/<meta\s+property=["']og:locale["'][^>]*>/i, '<meta property="og:locale" content="es_MX" />')
+      .replace(/<meta\s+property=["']og:locale:alternate["'][^>]*>/i, '<meta property="og:locale:alternate" content="en_US" />');
+    const esOutDir = path.resolve(distDir, 'cruce', slug);
+    fs.mkdirSync(esOutDir, { recursive: true });
+    fs.writeFileSync(path.resolve(esOutDir, 'index.html'), esCrossingHtml);
+    spanishCrossingCount++;
   }
 
   // Static hosts redirect legacy regional bookmarks into the shared map too.
@@ -1021,7 +1052,7 @@ async function main() {
   }
 
   console.log(
-    `[prerender] wrote ${crossingCount} crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + ${laneFlipCount} lane-flip pages + crawlable nav on homepage`,
+    `[prerender] wrote ${crossingCount} crossing pages + ${spanishCrossingCount} spanish crossing pages + ${blogPageCount} blog pages + ${aliasPageCount} alias pages + ${embedPageCount} embed pages + ${bestTimePageCount} best-time pages + ${comparePageCount} compare pages + ${walkOrDriveCount} walk-or-drive pages + ${laneFlipCount} lane-flip pages + crawlable nav on homepage`,
   );
 }
 

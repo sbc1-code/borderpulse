@@ -4,9 +4,18 @@ import { pageHreflangs, blogHreflangs } from '../src/lib/hreflang.js';
 
 const base = 'https://borderpulse.com';
 test('single URL routes point to themselves without inventing translations', () => {
-  for (const route of ['/crossing/san-ysidro/', '/best-time/san-ysidro/', '/compare/san-ysidro-vs-otay-mesa/']) {
+  for (const route of ['/best-time/san-ysidro/', '/compare/san-ysidro-vs-otay-mesa/']) {
     assert.deepEqual(pageHreflangs(base + route), [{ lang: 'en', href: base + route }, { lang: 'x-default', href: base + route }]);
   }
+});
+test('crossing and cruce routes form reciprocal language pairs', () => {
+  const expected = [
+    { lang: 'en', href: base + '/crossing/san-ysidro/' },
+    { lang: 'es', href: base + '/cruce/san-ysidro/' },
+    { lang: 'x-default', href: base + '/crossing/san-ysidro/' },
+  ];
+  assert.deepEqual(pageHreflangs(base + '/crossing/san-ysidro/'), expected);
+  assert.deepEqual(pageHreflangs(base + '/cruce/san-ysidro/', 'es'), expected);
 });
 test('only published EN/ES blog twins create reciprocal alternates', () => {
   const en = { slug: 'english', lang: 'en', translationKey: 'guide' };

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-25 - Spanish crossing pages (`/cruce/:slug/`)
+
+- Added dedicated Spanish crossing routes (`/cruce/:slug/`) across all 42 ports in `src/App.jsx`, `src/Layout.jsx`, `src/pages/CrossingDetail.jsx`, and `src/lib/hreflang.js`.
+- Updated `scripts/prerender.mjs`, `scripts/lib/crossing-snapshot-html.mjs`, and `scripts/build-sitemap.mjs` to emit 42 prerendered Spanish crossing pages with localized titles, descriptions, Place/FAQ/Breadcrumb JSON-LD, no-JS snapshots, and reciprocal `en`/`es`/`x-default` hreflang links.
+- Updated `scripts/test-hreflang.mjs`, `scripts/check-hreflang.mjs`, `scripts/check-document-language.mjs`, and `scripts/test-crossing-snapshot.mjs`.
+
 ## 2026-11-25 - SENTRI guide CTR title refresh, Los Algodones wait links, Crossing Atlas pilot, and Google Maps $10/mo plan
 
 - Updated EN/ES SENTRI renewal guide titles (`sentri-renewal-2026-step-by-step`, `renovacion-sentri-2026-paso-a-paso`) and added `<CrossingWaitLinks />` across SENTRI renewal and Los Algodones EN/ES guides; updated `scripts/check-sentri-renewal.mjs`.

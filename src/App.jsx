@@ -42,6 +42,7 @@ function LayoutRoutes() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/es" element={<Dashboard />} />
           <Route path="/crossing/:slug" element={<CrossingDetail />} />
+          <Route path="/cruce/:slug" element={<CrossingDetail forcedLang="es" />} />
           <Route path="/best-time" element={<BestTimeIndex />} />
           <Route path="/best-time/:slug" element={<BestTime />} />
           <Route path="/blog" element={<Blog />} />

@@ -91,11 +91,24 @@ async function main() {
   for (const c of crossings) {
     const slug = portToSlug[c.port_number];
     if (!slug) continue;
+    const alternates = [
+      { lang: 'en', href: `${BASE}/crossing/${slug}/` },
+      { lang: 'es', href: `${BASE}/cruce/${slug}/` },
+      { lang: 'x-default', href: `${BASE}/crossing/${slug}/` },
+    ];
     urls.push({
       loc: `${BASE}/crossing/${slug}/`,
       changefreq: 'hourly',
       priority: '0.9',
       lastmod: today,
+      alternates,
+    });
+    urls.push({
+      loc: `${BASE}/cruce/${slug}/`,
+      changefreq: 'hourly',
+      priority: '0.9',
+      lastmod: today,
+      alternates,
     });
     urls.push({
       loc: `${BASE}/best-time/${slug}/`,

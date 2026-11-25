@@ -369,7 +369,7 @@ Snapshot of features live on borderpulse.com today.
 
 - Sourced line on how often CBP updates its wait times.
 - [x] Clearer title for the SENTRI renewal guide (424 impressions, 2 clicks in 28 days) + `<CrossingWaitLinks />` on SENTRI and Los Algodones EN/ES guides (shipped 2026-11-25).
-- Spanish crossing pages.
+- [x] Spanish crossing pages (`/cruce/:slug/`, 42 prerendered pages with Spanish titles, FAQs, snapshots, sitemap entries, and reciprocal hreflang links, shipped 2026-11-25).
 
 ## Google Maps API, Crossing Atlas & Monetization (added 2026-11-25)
 

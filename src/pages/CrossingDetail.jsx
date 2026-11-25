@@ -154,7 +154,7 @@ function lookupSlot(byHour, dayIdx, hour) {
   return { median: slot.median, samples: slot.samples || 0 };
 }
 
-function CompareRow({ entry, language, slug, lane }) {
+function CompareRow({ entry, language, slug, lane, crossingBase = '/crossing' }) {
   const { crossing, distanceKm, currentWait, vsTypical } = entry;
 
   let deltaLine = null;
@@ -177,7 +177,7 @@ function CompareRow({ entry, language, slug, lane }) {
 
   return (
     <Link
-      to={withLane(`/crossing/${slug}/`, lane)}
+      to={withLane(`${crossingBase}/${slug}/`, lane)}
       className="block group"
     >
       <div className="flex items-center justify-between gap-3 p-3 rounded-md border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors">
@@ -223,7 +223,7 @@ function CompareRow({ entry, language, slug, lane }) {
   );
 }
 
-export default function CrossingDetail() {
+export default function CrossingDetail({ forcedLang = null } = {}) {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -245,7 +245,10 @@ export default function CrossingDetail() {
   const [nearbyAggregates, setNearbyAggregates] = useState({}); // { port_number: aggregate|null }
   const [embedOpen, setEmbedOpen] = useState(false);
   const [anomalies, setAnomalies] = useState(null);
-  const language = usePersistentLanguage();
+  const storedLanguage = usePersistentLanguage();
+  const isSpanishRoute = forcedLang === 'es';
+  const language = forcedLang || storedLanguage;
+  const crossingBase = isSpanishRoute ? '/cruce' : '/crossing';
   const [favoriteError, setFavoriteError] = useState(false);
   const [favorites, setFavorites] = useState(readFavorites);
 
@@ -398,10 +401,10 @@ export default function CrossingDetail() {
     const cameraKind = cameraSourceFor(crossing.port_number)?.kind;
     const title = crossingSearchTitle(crossing, language, cameraKind);
     const desc = crossingSearchDescription(crossing, language, { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraKind) });
-    const url = `https://borderpulse.com/crossing/${canonicalSlug}/`;
-    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url });
+    const url = `https://borderpulse.com${crossingBase}/${canonicalSlug}/`;
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url, ...(isSpanishRoute ? { lang: 'es' } : {}) });
     return () => resetPageMeta();
-  }, [aggregate, canonicalSlug, crossing, language]);
+  }, [aggregate, canonicalSlug, crossing, crossingBase, isSpanishRoute, language]);
 
   if (state.isLoading) {
     return (
@@ -421,7 +424,7 @@ export default function CrossingDetail() {
   }
 
   if (canonicalSlug && slug !== canonicalSlug) {
-    return <Navigate to={`/crossing/${canonicalSlug}/${search}${hash}`} replace />;
+    return <Navigate to={`${crossingBase}/${canonicalSlug}/${search}${hash}`} replace />;
   }
 
   const hoursSummary = getHoursSummary(crossing, language);
@@ -463,7 +466,7 @@ export default function CrossingDetail() {
     <div className="p-3 sm:p-4 lg:p-6 max-w-[1100px] mx-auto">
       <div className="mb-3 flex items-center justify-between gap-2">
         <Button asChild variant="ghost" size="sm" className="gap-1 min-h-11 -ml-2">
-          <Link to={withLane('/?area=all', lane)}>
+          <Link to={withLane(`${isSpanishRoute ? '/es/' : '/'}?area=all`, lane)}>
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="text-xs">
               {language === 'en' ? 'All crossings' : 'Todos los cruces'}
@@ -844,6 +847,7 @@ export default function CrossingDetail() {
                   language={language}
                   slug={s}
                   lane={lane}
+                  crossingBase={crossingBase}
                 />
               );
             })}
