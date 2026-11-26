@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-26T14:50:45.019Z",
-  "snapshot_at": "2026-11-26T14:37:46.011Z",
+  "generated_at": "2026-11-26T23:35:43.913Z",
+  "snapshot_at": "2026-11-26T23:22:59.500Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -337,6 +337,24 @@
       }
     },
     {
+      "type": "lowest_today",
+      "port_slug": "calexico-east",
+      "port_name": "Calexico - East",
+      "state": "CA",
+      "severity": 0.75,
+      "detected_at": "2026-11-26T23:35:43.913Z",
+      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 7 AM (median 15 min) — ~75% below the 30-day baseline of 60 min.",
+      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 7 AM (mediana 15 min) — ~75% debajo de la base de 30 días de 60 min.",
+      "evidence": {
+        "day_of_week": 4,
+        "day_label": "Thu",
+        "best_hour": 7,
+        "best_median": 15,
+        "overall_median": 60,
+        "samples": 19
+      }
+    },
+    {
       "type": "sunday_spike",
       "port_slug": "hidalgo-pharr-hidalgo",
       "port_name": "Hidalgo/Pharr - Hidalgo",
@@ -369,24 +387,6 @@
         "best_median": 25,
         "overall_median": 60,
         "samples": 16
-      }
-    },
-    {
-      "type": "lowest_today",
-      "port_slug": "calexico-east",
-      "port_name": "Calexico - East",
-      "state": "CA",
-      "severity": 0.5833333333333333,
-      "detected_at": "2026-11-26T14:50:45.019Z",
-      "summary_en": "Right now Calexico - East's lightest Thursday hour so far is 7 AM (median 25 min) — ~58% below the 30-day baseline of 60 min.",
-      "summary_es": "Ahora mismo la hora más ligera del jueves en Calexico - East es 7 AM (mediana 25 min) — ~58% debajo de la base de 30 días de 60 min.",
-      "evidence": {
-        "day_of_week": 4,
-        "day_label": "Thu",
-        "best_hour": 7,
-        "best_median": 25,
-        "overall_median": 60,
-        "samples": 15
       }
     }
   ],
