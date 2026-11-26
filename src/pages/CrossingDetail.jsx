@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useParams, useLocation, useSearchParams, useNavigate, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck } from 'lucide-react';
+import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import LaneSelector from '@/components/dashboard/LaneSelector';
@@ -21,7 +21,8 @@ import { buildSlugMap } from '@/lib/slugs';
 import { getHoursSummary, nowInPortTz } from '@/components/utils/crossingMeta';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
-import { nearestCrossings, kmToMiles } from '@/lib/geo';
+import { nearestCrossings, kmToMiles, getCrossingCoords } from '@/lib/geo';
+import { mapAppLinks } from '@/lib/mapLinks';
 import { comparePairsFor } from '@/lib/comparePairs';
 import { usePersistentLanguage } from '@/lib/useLanguage';
 import { readFavorites } from '@/lib/browserStorage';
@@ -555,6 +556,34 @@ export default function CrossingDetail({ forcedLang = null } = {}) {
           <ArrowRight className="w-3 h-3 shrink-0" />
         </Link>
       </div>
+
+      {(() => {
+        const coords = getCrossingCoords(crossing);
+        const externalMaps = coords ? mapAppLinks(coords.lat, coords.lng, crossingDisplayName(crossing, language)) : [];
+        if (!externalMaps.length) return null;
+        return (
+          <div className="mb-5">
+            <div className="flex flex-wrap items-center gap-2" role="group" aria-label={language === 'es' ? 'Abrir en tu app de mapas' : 'Open in your map app'}>
+              <span className="text-xs font-medium text-slate-600 dark:text-slate-300">
+                {language === 'es' ? 'Abrir en:' : 'Open in:'}
+              </span>
+              {externalMaps.map((app) => (
+                <Button key={app.id} asChild variant="outline" size="sm" className="min-h-11 text-xs">
+                  <a href={app.href} target="_blank" rel="noopener noreferrer">
+                    <span>{app.name}</span>
+                    <ExternalLink className="h-3.5 w-3.5 ml-1.5" aria-hidden="true" />
+                  </a>
+                </Button>
+              ))}
+            </div>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              {language === 'es'
+                ? 'Ubicación aproximada de la garita. Verifica el acceso a tu carril en tu app de mapas.'
+                : 'Approximate port location. Confirm your lane approach in your map app.'}
+            </p>
+          </div>
+        );
+      })()}
 
       {isSanYsidro && (
         <SanYsidroDecision

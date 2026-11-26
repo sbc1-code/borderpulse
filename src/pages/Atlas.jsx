@@ -20,6 +20,7 @@ import { buildSlugMap } from '@/lib/slugs';
 import { availableLaneWait } from '@/lib/crossingAvailability';
 import { crossingDisplayName, crossingSearchTerms } from '@/lib/crossingNames';
 import { PORT_SEARCH_TERMS } from '@/lib/sisterCitySearch';
+import { mapAppLinks } from '@/lib/mapLinks';
 import { getStatusForWait } from '@/components/utils/crossingDirection';
 import { reportTimeLabel } from '@/lib/trustState';
 import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
@@ -81,6 +82,8 @@ const COPY = {
     copyLink: 'Copy view link',
     copied: 'Link copied',
     openGmaps: 'Open in Google Maps',
+    openMapApps: 'Open in your map app',
+    mapApproxNote: 'Approximate port location. Confirm your lane approach in your map app.',
     loadStreetMap: 'Load street-level approach map',
     mapsUnavailable: 'Street-level Google Maps unavailable right now; interactive globe remains active.',
     saveFav: (name) => `Save ${name} to favorites`,
@@ -132,6 +135,8 @@ const COPY = {
     copyLink: 'Copiar enlace',
     copied: 'Enlace copiado',
     openGmaps: 'Abrir en Google Maps',
+    openMapApps: 'Abrir en tu app de mapas',
+    mapApproxNote: 'Ubicación aproximada de la garita. Verifica el acceso a tu carril en tu app de mapas.',
     loadStreetMap: 'Cargar mapa vial de acceso',
     mapsUnavailable: 'Mapa vial de Google Maps no disponible ahora; el globo sigue activo.',
     saveFav: (name) => `Guardar ${name} en favoritos`,
@@ -604,9 +609,12 @@ export default function Atlas({ lang = 'en' }) {
   }, [liveMx, t]);
 
   const gmapsEnabled = Boolean(import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
-  const coordsUrl = Number.isFinite(selectedMx?.lat) && Number.isFinite(selectedMx?.lon)
-    ? `https://www.google.com/maps/search/?api=1&query=${selectedMx.lat},${selectedMx.lon}`
-    : null;
+  const mxMapLinks = mapAppLinks(
+    selectedMx?.lat,
+    selectedMx?.lon,
+    liveMx ? crossingDisplayName(liveMx, lang) : selectedMx?.name,
+  );
+  const caMapLinks = mapAppLinks(selectedCa?.lat, selectedCa?.lon, pilotName(selectedCa));
 
   return (
     <div className="mx-auto max-w-[1100px] p-3 sm:p-4 lg:p-6">
@@ -929,23 +937,29 @@ export default function Atlas({ lang = 'en' }) {
                   </div>
                 </div>
 
-                {(coordsUrl || gmapsEnabled) && (
+                {(mxMapLinks.length > 0 || gmapsEnabled) && (
                   <div className="border-t border-slate-200 dark:border-gray-800 pt-3 space-y-2">
-                    <div className="flex flex-wrap gap-2">
-                      {gmapsEnabled && gmapsState === 'idle' && (
-                        <Button type="button" variant="outline" size="sm" onClick={loadStreetMap} className="min-h-11 flex-1">
-                          {t.loadStreetMap}
-                        </Button>
-                      )}
-                      {coordsUrl && (
-                        <Button asChild variant="ghost" size="sm" className="min-h-11 flex-1">
-                          <a href={coordsUrl} target="_blank" rel="noopener noreferrer">
-                            <span>{t.openGmaps}</span>
-                            <ExternalLink className="h-3.5 w-3.5 ml-1.5" aria-hidden="true" />
-                          </a>
-                        </Button>
-                      )}
-                    </div>
+                    {mxMapLinks.length > 0 && (
+                      <div className="space-y-1.5">
+                        <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">{t.openMapApps}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {mxMapLinks.map((app) => (
+                            <Button key={app.id} asChild variant="outline" size="sm" className="min-h-11 flex-1 text-xs">
+                              <a href={app.href} target="_blank" rel="noopener noreferrer">
+                                <span>{app.name}</span>
+                                <ExternalLink className="h-3.5 w-3.5 ml-1.5" aria-hidden="true" />
+                              </a>
+                            </Button>
+                          ))}
+                        </div>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400">{t.mapApproxNote}</p>
+                      </div>
+                    )}
+                    {gmapsEnabled && gmapsState === 'idle' && (
+                      <Button type="button" variant="outline" size="sm" onClick={loadStreetMap} className="w-full min-h-11">
+                        {t.loadStreetMap}
+                      </Button>
+                    )}
                     {gmapsState === 'error' && (
                       <p role="status" className="text-xs text-slate-600 dark:text-slate-400">{t.mapsUnavailable}</p>
                     )}
@@ -1036,6 +1050,23 @@ export default function Atlas({ lang = 'en' }) {
                     {formatCaObs(caDir === 'CA' ? selectedCa.flows?.CA?.[caMode] : selectedUs?.[caMode], caDir === 'CA' ? canadaFixture.fetchedAt : usFixture.fetchedAt, t)}
                   </div>
                 </div>
+
+                {caMapLinks.length > 0 && (
+                  <div className="border-t border-slate-200 dark:border-gray-800 pt-3 space-y-1.5">
+                    <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">{t.openMapApps}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {caMapLinks.map((app) => (
+                        <Button key={app.id} asChild variant="outline" size="sm" className="min-h-11 flex-1 text-xs">
+                          <a href={app.href} target="_blank" rel="noopener noreferrer">
+                            <span>{app.name}</span>
+                            <ExternalLink className="h-3.5 w-3.5 ml-1.5" aria-hidden="true" />
+                          </a>
+                        </Button>
+                      ))}
+                    </div>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">{t.mapApproxNote}</p>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
