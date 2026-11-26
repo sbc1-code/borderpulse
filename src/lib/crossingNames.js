@@ -11,8 +11,9 @@ const LOCAL_NAMES = {
 export function crossingDisplayName(crossing, language = 'en') {
   return LOCAL_NAMES[String(crossing?.port_number)]?.[language] || crossing?.name || '';
 }
-export function crossingSearchTerms(crossing) {
+export function crossingSearchTerms(crossing, extraTerms = null) {
+  const key = String(crossing?.port_number ?? '');
   return [crossing?.name, crossing?.port_name, crossing?.crossing_name, crossing?.state,
-    LOCAL_NAMES[String(crossing?.port_number)]?.terms].filter(Boolean).join(' ')
+    LOCAL_NAMES[key]?.terms, extraTerms?.[key]].filter(Boolean).join(' ')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }

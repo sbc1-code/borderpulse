@@ -18,7 +18,8 @@ import mexicoFixture from '../../drafts/atlas-pilot/fixtures/mexico-directory.js
 import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { availableLaneWait } from '@/lib/crossingAvailability';
-import { crossingDisplayName } from '@/lib/crossingNames';
+import { crossingDisplayName, crossingSearchTerms } from '@/lib/crossingNames';
+import { PORT_SEARCH_TERMS } from '@/lib/sisterCitySearch';
 import { getStatusForWait } from '@/components/utils/crossingDirection';
 import { reportTimeLabel } from '@/lib/trustState';
 import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
@@ -53,6 +54,8 @@ const COPY = {
     corridorMx: 'US – Mexico (42)',
     corridorCa: 'Canada – US (3 pilot)',
     crossingLabel: 'Select crossing',
+    searchPlaceholder: 'Filter by port or city (Tijuana, Juárez, Mexicali…)',
+    noPortMatches: 'No ports match that search.',
     directionLabel: 'Direction',
     modeLabel: 'Vehicle / lane',
     intoCa: 'Into Canada',
@@ -102,6 +105,8 @@ const COPY = {
     corridorMx: 'EE.UU. – México (42)',
     corridorCa: 'Canadá – EE.UU. (3 piloto)',
     crossingLabel: 'Elige un cruce',
+    searchPlaceholder: 'Filtrar por garita o ciudad (Tijuana, Juárez, Reynosa…)',
+    noPortMatches: 'Sin garitas que coincidan.',
     directionLabel: 'Dirección',
     modeLabel: 'Vehículo / carril',
     intoCa: 'Hacia Canadá',
@@ -206,6 +211,7 @@ export default function Atlas({ lang = 'en' }) {
 
   const [liveData, setLiveData] = useState({ crossings: [], fetchedAt: null });
   const [favorites, setFavorites] = useState(readFavorites);
+  const [mxQuery, setMxQuery] = useState('');
   const [copyMessage, setCopyMessage] = useState('');
   const [gmapsState, setGmapsState] = useState('idle'); // idle | loading | ready | error
 
@@ -229,6 +235,7 @@ export default function Atlas({ lang = 'en' }) {
       description: t.pageDesc,
       ogTitle: t.pageTitle,
       ogDescription: t.pageDesc,
+      ogImage: es ? 'https://borderpulse.com/og/es-atlas.png' : 'https://borderpulse.com/og/atlas.png',
       ogUrl: canonical,
       canonical,
       lang: es ? 'es' : 'en',
@@ -266,6 +273,15 @@ export default function Atlas({ lang = 'en' }) {
     () => new Map(liveData.crossings.map((c) => [String(c.port_number), c])),
     [liveData.crossings],
   );
+  const filteredMxPorts = useMemo(() => {
+    const q = mxQuery.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    if (!q) return mexicoFixture.crossings;
+    return mexicoFixture.crossings.filter((port) => {
+      const live = liveByPort.get(port.id);
+      const terms = crossingSearchTerms(live || { port_number: port.id, name: port.name, state: port.state }, PORT_SEARCH_TERMS);
+      return terms.includes(q);
+    });
+  }, [mxQuery, liveByPort]);
 
   const selectedMx = useMemo(
     () => mexicoFixture.crossings.find((c) => c.id === mxId) || mexicoFixture.crossings[0],
@@ -799,6 +815,28 @@ export default function Atlas({ lang = 'en' }) {
             {corridor === 'mx' ? (
               <div className="space-y-4">
                 <div>
+                  <label htmlFor="atlas-mx-search" className="sr-only">
+                    {t.searchPlaceholder}
+                  </label>
+                  <input
+                    id="atlas-mx-search"
+                    type="search"
+                    inputMode="search"
+                    value={mxQuery}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setMxQuery(val);
+                      const q = val.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+                      if (!q) return;
+                      const match = mexicoFixture.crossings.find((port) => {
+                        const live = liveByPort.get(port.id);
+                        return crossingSearchTerms(live || { port_number: port.id, name: port.name, state: port.state }, PORT_SEARCH_TERMS).includes(q);
+                      });
+                      if (match && match.id !== mxId) handleSelectMx(match.id);
+                    }}
+                    placeholder={t.searchPlaceholder}
+                    className="mb-2 w-full min-h-11 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-sm text-slate-900 dark:text-slate-100"
+                  />
                   <label htmlFor="atlas-mx-select" className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">
                     {t.crossingLabel}
                   </label>
@@ -808,11 +846,13 @@ export default function Atlas({ lang = 'en' }) {
                     onChange={(e) => handleSelectMx(e.target.value)}
                     className="w-full min-h-11 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-sm font-medium text-slate-900 dark:text-slate-100"
                   >
-                    {mexicoFixture.crossings.map((port) => (
+                    {filteredMxPorts.length ? filteredMxPorts.map((port) => (
                       <option key={port.id} value={port.id}>
                         {port.name} ({port.state})
                       </option>
-                    ))}
+                    )) : (
+                      <option value={mxId}>{t.noPortMatches}</option>
+                    )}
                   </select>
                 </div>
 

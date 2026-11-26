@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-snapshot-html.mjs';
 import { crossingDisplayName, crossingSearchTerms } from '../src/lib/crossingNames.js';
+import { PORT_SEARCH_TERMS } from '../src/lib/sisterCitySearch.js';
 import { crossingSearchTitle } from '../src/lib/crossingSeo.js';
 
 const crossing = { port_number: '240202', name: 'El Paso - Paso Del Norte (PDN)',
@@ -78,8 +79,16 @@ test('snapshot mounts in the visible React root, and rejects a non-empty target'
 test('local naming helps search without changing official identity or canonical slug', () => {
   assert.equal(crossing.name, 'El Paso - Paso Del Norte (PDN)');
   assert.match(crossingDisplayName(crossing), /Santa Fe/);
+  assert.equal(crossingDisplayName({ port_number: '250401', name: 'San Ysidro' }), 'San Ysidro');
   assert.ok(crossingSearchTerms({ port_number: '240201', name: 'BOTA' }).includes('puente libre'));
   assert.ok(crossingSearchTerms({ port_number: '240801', name: 'Santa Teresa' }).includes('san jeronimo'));
+  assert.ok(crossingSearchTerms({ port_number: '250401', name: 'San Ysidro' }, PORT_SEARCH_TERMS).includes('tijuana'));
+  assert.ok(crossingSearchTerms({ port_number: '250302', name: 'Calexico - West' }, PORT_SEARCH_TERMS).includes('mexicali'));
+  assert.ok(crossingSearchTerms({ port_number: '230501', name: 'Hidalgo/Pharr - Hidalgo' }, PORT_SEARCH_TERMS).includes('reynosa'));
+  assert.ok(crossingSearchTerms({ port_number: '535504', name: 'Brownsville - Gateway' }, PORT_SEARCH_TERMS).includes('matamoros'));
+  assert.ok(crossingSearchTerms({ port_number: '230401', name: 'Laredo - Bridge I' }, PORT_SEARCH_TERMS).includes('nuevo laredo'));
+  assert.ok(crossingSearchTerms({ port_number: '260201', name: 'Lukeville' }, PORT_SEARCH_TERMS).includes('rocky point'));
+  assert.ok(crossingSearchTerms({ port_number: '260201', name: 'Lukeville' }, PORT_SEARCH_TERMS).includes('puerto penasco'));
   assert.match(crossingSearchTitle(crossing, 'en', true), /wait times today & cameras/);
   assert.match(crossingSearchTitle(crossing, 'es', true), /hoy y cámaras/);
 });

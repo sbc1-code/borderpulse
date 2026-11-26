@@ -74,9 +74,12 @@ export async function checkDashboardSummary(owner, context, baseUrl) {
       const lane = page.getByRole('menuitem', { name: /^(Show lanes|Hide lanes|Ver carriles|Ocultar carriles)$/ });
       const label = await lane.innerText();
       await lane.click();
+      await page.locator('[role="menu"]').waitFor({ state: 'hidden' });
       await menu.click();
+      await page.locator('[role="menu"][data-state="open"]').waitFor();
       assert.notEqual(await lane.innerText(), label, 'lane menu action still toggles');
-      await page.keyboard.press('Escape');
+      await page.locator('[role="menu"][data-state="open"]').press('Escape');
+      await page.locator('[role="menu"]').waitFor({ state: 'hidden' });
       assert.ok(await menu.evaluate(node => node === document.activeElement), 'Escape restores trigger focus');
       await menu.click();
       await page.getByRole('menuitem', { name: language === 'en' ? 'Best time to cross' : 'Mejor hora para cruzar', exact: true }).click();

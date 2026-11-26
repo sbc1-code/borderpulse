@@ -934,3 +934,48 @@ test('Pending rapid clicks are guarded synchronously and retries work after comp
 
   act(() => { root.unmount(); });
 });
+
+test('crossingBase="/cruce" shares Spanish /cruce/:slug/ URLs across Copy, WhatsApp, and Native share', { timeout: 5000 }, async () => {
+  const copied = [];
+  const shared = [];
+  setupMocks({
+    clipboardWriteText: async (url) => { copied.push(url); },
+    nativeShare: async (payload) => { shared.push(payload); }
+  });
+
+  const container = document.createElement('div');
+  const root = createRoot(container);
+
+  act(() => {
+    root.render(
+      React.createElement(MemoryRouter, null,
+        React.createElement(CrossingShare, { name: 'San Ysidro', slug: 'san-ysidro', language: 'es', lane: 'passenger_sentri', crossingBase: '/cruce' })
+      )
+    );
+  });
+
+  const expectedUrl = 'https://borderpulse.com/cruce/san-ysidro/?lane=passenger_sentri';
+  const links = getLinks(container);
+  assert.equal(
+    links.whatsappLink.href,
+    'https://wa.me/?text=' + encodeURIComponent(`Consulta los tiempos de espera y horarios de San Ysidro (SENTRI) en BorderPulse.\n${expectedUrl}`)
+  );
+
+  const { copyBtn, shareBtn } = getButtons(container);
+  await act(async () => {
+    await copyBtn.onClick();
+  });
+  assert.deepEqual(copied, [expectedUrl]);
+  assert.equal(getStatusText(container), 'Enlace copiado.');
+
+  await act(async () => {
+    await shareBtn.onClick();
+  });
+  assert.deepEqual(shared, [{
+    title: 'San Ysidro | BorderPulse',
+    text: 'Consulta los tiempos de espera y horarios de San Ysidro (SENTRI) en BorderPulse.',
+    url: expectedUrl
+  }]);
+
+  act(() => { root.unmount(); });
+});

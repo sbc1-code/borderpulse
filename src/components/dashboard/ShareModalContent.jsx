@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Copy, Share2, Check } from 'lucide-react';
+import { Copy, Share2, Check, Download } from 'lucide-react';
 import { getWaitMinutes } from '@/components/utils/crossingDirection';
 import { nowInTz } from '@/components/utils/crossingMeta';
 import { track } from '@/lib/analytics';
@@ -70,6 +70,7 @@ function buildStatusText(crossings, language, direction, portToSlug, aggregates,
 export default function ShareModal({ open, onOpenChange, crossings, language, direction = 'northbound', portToSlug, corridorId, fetchedAt, lane = DEFAULT_LANE }) {
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
+  const [imageStatus, setImageStatus] = useState('');
   const [aggregates, setAggregates] = useState({});
 
   // Lazy-fetch aggregates for the top 17 NB crossings on open. Browser
@@ -138,6 +139,88 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
     }
   };
 
+  const downloadImageSummary = () => {
+    const es = language === 'es';
+    const area = corridorFor(corridorId);
+    const items = (crossings || [])
+      .map((c) => ({
+        c,
+        wait: direction === 'southbound' ? getWaitMinutes(c, direction) : availableLaneWait(c, lane),
+      }))
+      .filter((item) => item.wait != null)
+      .slice(0, 8);
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1350;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      setImageStatus(es ? 'No se pudo generar la imagen.' : 'Could not create the image.');
+      return;
+    }
+    const grad = ctx.createLinearGradient(0, 0, 0, 1350);
+    grad.addColorStop(0, '#0f172a');
+    grad.addColorStop(1, '#020617');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1350);
+    ctx.fillStyle = '#10b981';
+    ctx.fillRect(0, 0, 1080, 14);
+
+    ctx.font = '700 32px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillText('Border Pulse · CBP Waits', 64, 96);
+
+    ctx.font = '700 44px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(area ? `${area.name} · ${laneLabel(lane, language)}` : laneLabel(lane, language), 64, 168);
+
+    const time = fetchedAt && Number.isFinite(Date.parse(fetchedAt))
+      ? new Date(fetchedAt).toLocaleString(es ? 'es-MX' : 'en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
+      : (es ? 'Hora de consulta desconocida' : 'Retrieval time unknown');
+    ctx.font = '500 26px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText(time, 64, 218);
+
+    let y = 278;
+    for (const { c, wait } of items) {
+      const bar = wait < 30 ? '#10b981' : wait < 60 ? '#f59e0b' : '#e11d48';
+      ctx.fillStyle = '#111827';
+      ctx.fillRect(64, y, 952, 98);
+      ctx.fillStyle = bar;
+      ctx.fillRect(64, y, 10, 98);
+
+      ctx.font = '700 30px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillText(String(c.name || '').slice(0, 34), 96, y + 60);
+
+      const val = `${wait} min`;
+      ctx.font = '800 34px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillStyle = bar;
+      const vw = ctx.measureText(val).width;
+      ctx.fillText(val, 984 - vw, y + 62);
+      y += 116;
+    }
+
+    ctx.font = '700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.fillStyle = '#34d399';
+    ctx.fillText(`borderpulse.com${es ? '/es/' : '/'}`, 64, 1288);
+
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        setImageStatus(es ? 'No se pudo generar la imagen.' : 'Could not create the image.');
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `borderpulse-${area ? area.id : 'waits'}-${lane}.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setImageStatus(es ? 'Imagen PNG descargada.' : 'Status PNG downloaded.');
+    }, 'image/png');
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg">
@@ -165,6 +248,11 @@ export default function ShareModal({ open, onOpenChange, crossings, language, di
               {language === 'en' ? 'Share' : 'Compartir'}
             </Button>
           </div>
+          <Button onClick={downloadImageSummary} variant="outline" className="w-full gap-2 min-h-11">
+            <Download className="w-4 h-4" />
+            {language === 'en' ? 'Download status image (PNG)' : 'Descargar imagen de esperas (PNG)'}
+          </Button>
+          {imageStatus && <p role="status" className="text-xs text-emerald-700 dark:text-emerald-400 text-center">{imageStatus}</p>}
           {copyError && <p role="status" className="text-xs text-amber-700 dark:text-amber-300">{language === 'en' ? 'Copy failed. You can share the page URL from your browser.' : 'No se pudo copiar. Puedes compartir la URL desde tu navegador.'}</p>}
           <p className="text-[11px] text-slate-500 text-center">
             {language === 'en'

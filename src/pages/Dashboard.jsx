@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import ExchangeRateWidget from '@/components/dashboard/ExchangeRateWidget';
 import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import ShareModal from '@/components/dashboard/ShareModal';
+const SavedCrossingsBar = React.lazy(() => import('@/components/dashboard/SavedCrossingsBar'));
 const CrossingMapExplorer = React.lazy(() => import('@/components/dashboard/CrossingMapExplorer'));
 const StatsOverview = React.lazy(() => import('@/components/dashboard/StatsOverview').catch(() => ({
   default: ({ language }) => <p role="status" className="text-xs text-slate-600 dark:text-slate-300">{language === 'es' ? 'Resumen no disponible. Recarga la página para reintentar.' : 'Summary unavailable. Reload the page to retry.'}</p>
@@ -118,6 +119,13 @@ export default function Dashboard() {
   const [geoLocating, setGeoLocating] = useState(false);
   const [favorites, setFavorites] = useState(readFavorites);
   const [favoriteError, setFavoriteError] = useState(false);
+  const [cityTerms, setCityTerms] = useState(null);
+  const ensureCityTerms = useCallback(() => {
+    if (!cityTerms) import('@/lib/sisterCitySearch').then((m) => setCityTerms(m.PORT_SEARCH_TERMS));
+  }, [cityTerms]);
+  useEffect(() => {
+    if (search) ensureCityTerms();
+  }, [search, ensureCityTerms]);
 
   const handleToggleFavorite = useCallback((portNumber) => {
     const adding = !favorites.includes(portNumber);
@@ -336,9 +344,9 @@ export default function Dashboard() {
       if (corridor && !corridorFor(corridor)?.ports.includes(String(c.port_number))) return false;
       if (region !== 'ALL' && c.state !== region) return false;
       if (!q) return true;
-      return crossingSearchTerms(c).includes(q);
+      return crossingSearchTerms(c, cityTerms).includes(q);
     });
-  }, [state.crossings, region, search, corridor]);
+  }, [state.crossings, region, search, corridor, cityTerms]);
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
@@ -550,9 +558,10 @@ export default function Dashboard() {
               <input
                 type="search"
                 inputMode="search"
-                placeholder={language === 'en' ? 'Search crossing or city (San Ysidro, Laredo, Nogales…)' : 'Buscar cruce o ciudad…'}
+                placeholder={language === 'en' ? 'Search crossing or city (Tijuana, San Ysidro, Juárez, Laredo…)' : 'Buscar cruce o ciudad (Tijuana, Juárez, Mexicali, Reynosa…)'}
                 value={searchInput}
-                onChange={(e) => changeSearch(e.target.value)}
+                onFocus={ensureCityTerms}
+                onChange={(e) => { ensureCityTerms(); changeSearch(e.target.value); }}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
                 className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
               />
@@ -601,6 +610,18 @@ export default function Dashboard() {
               <Button variant={presentation === 'list' ? 'default' : 'outline'} className="min-h-11" size="sm" aria-pressed={presentation === 'list'} onClick={() => changePresentation('list')}>{language === 'es' ? 'Lista' : 'List'}</Button>
             </div>
           </div>}
+          {presentation === 'map' && favorites.length > 0 && (
+            <Suspense fallback={null}>
+              <SavedCrossingsBar
+                favorites={favorites}
+                crossings={state.crossings}
+                portToSlug={portToSlug}
+                lane={lane}
+                crossingBase={crossingBase}
+                language={language}
+              />
+            </Suspense>
+          )}
           <div hidden={presentation !== 'map'}>
             <Suspense fallback={<p role="status" className="py-8 text-sm text-slate-500">{language === 'es' ? 'Cargando mapa fronterizo…' : 'Loading border map…'}</p>}>
               <CrossingMapExplorer crossings={sortedCrossings} allCount={state.crossings.length} language={language} lane={lane} fetchedAt={state.fetchedAt} success={state.success} fromFallback={state.fromFallback} unavailable={state.unavailable} selectedPort={selectedPort} onSelect={selectPort} onClose={closePort} onAll={showWholeBorder} onLaneChange={changeLane} portToSlug={portToSlug} crossingBase={crossingBase} favoritesSet={favoritesSet} onToggleFavorite={handleToggleFavorite} scopeKey={region === 'ALL' && !corridor && !search ? 'ALL' : `${region}|${corridor}|${search}`} active={presentation === 'map'} onDisplayChange={changePresentation} />

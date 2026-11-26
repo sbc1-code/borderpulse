@@ -27,10 +27,11 @@ const getClipboardWriteText = () => {
   }
 };
 
-export default function CrossingShare({ name, slug, language = 'en', lane = DEFAULT_LANE }) {
+export default function CrossingShare({ name, slug, language = 'en', lane = DEFAULT_LANE, crossingBase = '/crossing' }) {
   const es = language === 'es';
   const [status, setStatus] = useState('');
-  const url = `https://borderpulse.com${withLane(`/crossing/${slug}/`, lane)}`;
+  const base = crossingBase === '/cruce' ? '/cruce' : '/crossing';
+  const url = `https://borderpulse.com${withLane(`${base}/${slug}/`, lane)}`;
   const text = es
     ? `Consulta los tiempos de espera y horarios de ${name} (${laneLabel(lane, language)}) en BorderPulse.`
     : `Check ${name} (${laneLabel(lane, language)}) wait times and crossing hours on BorderPulse.`;
