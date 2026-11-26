@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Check } from 'lucide-react';
 import { updatePageMeta, resetPageMeta } from '@/lib/seo';
 import { track } from '@/lib/analytics';
-import SponsoredCard from '@/components/sponsors/SponsoredCard';
-import { CITIES, CATEGORIES, checkoutFor, LISTING_PRICE_USD, SPONSORS, slotTaken } from '@/lib/sponsors';
+import { CITIES, CATEGORIES, checkoutFor, LISTING_PRICE_USD, slotTaken } from '@/lib/sponsors';
 
 const COPY = {
   en: {
@@ -38,7 +37,12 @@ const COPY = {
       'A sponsor never sits above the wait times, and a page never shows a sponsor and an ad together.',
       'Your card shows facts you give us: name, city, the services you list, links. Border Pulse does not rate or recommend businesses.',
     ],
-    exampleTitle: 'Example',
+    exampleTitle: 'Example sponsored listing',
+    exampleLabel: 'Sponsored · Your category',
+    exampleName: 'Your business name',
+    exampleCity: 'Your city',
+    exampleActions: ['Message on WhatsApp', 'Visit site'],
+    exampleNote: 'Contact buttons are inactive in this example.',
   },
   es: {
     title: 'Anuncia tu negocio | Border Pulse',
@@ -71,7 +75,12 @@ const COPY = {
       'Un patrocinador nunca va arriba de los tiempos de espera, y una página nunca muestra un patrocinador y un anuncio al mismo tiempo.',
       'Tu tarjeta muestra los datos que nos das: nombre, ciudad, los servicios que anuncias y tus enlaces. Border Pulse no califica ni recomienda negocios.',
     ],
-    exampleTitle: 'Ejemplo',
+    exampleTitle: 'Ejemplo de anuncio patrocinado',
+    exampleLabel: 'Patrocinado · Tu categoría',
+    exampleName: 'Nombre de tu negocio',
+    exampleCity: 'Tu ciudad',
+    exampleActions: ['Escribir por WhatsApp', 'Ver sitio'],
+    exampleNote: 'Los botones de contacto están desactivados en este ejemplo.',
   },
 };
 
@@ -84,7 +93,6 @@ function checkoutHref(slot) {
 export default function FeatureBusiness({ lang = 'en' }) {
   const es = lang === 'es';
   const t = COPY[es ? 'es' : 'en'];
-  const example = SPONSORS[0];
 
   useEffect(() => {
     const canonical = `https://borderpulse.com/${es ? 'anunciate' : 'feature-your-business'}/`;
@@ -174,12 +182,20 @@ export default function FeatureBusiness({ lang = 'en' }) {
           </ul>
         </section>
 
-        {example && (
-          <section aria-labelledby="example">
-            <h2 id="example" className="font-semibold text-slate-900 dark:text-white">{t.exampleTitle}</h2>
-            <SponsoredCard sponsor={example} placement="feature-page-example" language={es ? 'es' : 'en'} />
-          </section>
-        )}
+        <section aria-labelledby="example">
+          <h2 id="example" className="font-semibold text-slate-900 dark:text-white">{t.exampleTitle}</h2>
+          <div className="my-6 rounded-xl border border-l-4 border-emerald-300 border-l-emerald-600 bg-emerald-50/60 p-4 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/20 sm:p-5">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">{t.exampleLabel}</p>
+            <p className="mt-1 text-lg font-bold">{t.exampleName}</p>
+            <p className="text-sm">{t.exampleCity}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {t.exampleActions.map(label => (
+                <button key={label} type="button" disabled className="min-h-11 rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-gray-700">{label}</button>
+              ))}
+            </div>
+            <p className="mt-3 text-xs text-slate-600 dark:text-slate-400">{t.exampleNote}</p>
+          </div>
+        </section>
       </div>
     </div>
   );

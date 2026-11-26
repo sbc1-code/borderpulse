@@ -21,6 +21,7 @@ import { checkSantaTeresaActions } from './check-santa-teresa-actions.mjs';
 import { checkHiddenCrossings } from './check-hidden-crossings.mjs';
 import { checkReportTimes } from './check-report-times.mjs';
 import { checkAdSlotDiagnostics } from './check-ad-slot-diagnostics.mjs';
+import { checkSponsorExample } from './check-sponsor-example.mjs';
 import { assertNoGlobalFaq, checkBuiltFaqScope, checkFaqNavigation } from './check-faq-scope.mjs';
 import { checkBuiltHreflangs, checkHreflangNavigation } from './check-hreflang.mjs';
 import { checkDocumentLanguage } from './check-document-language.mjs';
@@ -424,9 +425,21 @@ async function main() {
     console.log(`[routes] Chrome: ${executablePath}`);
     console.log(`[routes] manifest: ${manifest.canonicals.length} canonical + ${manifest.aliases.length} alias routes`);
     browser = await chromium.launch({ executablePath, headless: true, args: ['--no-sandbox'] });
-    await checkNoJsReports(browser, baseUrl);
-    await checkAdSlotDiagnostics(browser, baseUrl);
-    if (process.argv.includes('--ads-only')) return;
+    const sponsorOnly = process.argv.includes('--sponsor-only');
+    if (!sponsorOnly) {
+      await checkNoJsReports(browser, baseUrl);
+      await checkAdSlotDiagnostics(browser, baseUrl);
+      if (process.argv.includes('--ads-only')) return;
+    }
+    const sponsorPage = await browser.newPage({ serviceWorkers: 'block' });
+    try {
+      await sponsorPage.route('**/*', route => new URL(route.request().url()).origin === baseUrl.origin
+        ? route.continue() : route.abort());
+      await checkSponsorExample(sponsorPage, baseUrl);
+    } finally {
+      await sponsorPage.close();
+    }
+    if (sponsorOnly) return;
     const profiles = [
       { name: 'desktop', viewport: { width: 1440, height: 900 }, isMobile: false },
       { name: 'mobile', viewport: { width: 390, height: 844 }, isMobile: true },
