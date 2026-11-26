@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2026-11-25 - Multi-app map links (Google Maps, Apple Maps, Waze)
+
+- Added `src/lib/mapLinks.js` and 1-tap `Google Maps`, `Apple Maps`, and `Waze` deep links across `/atlas/`, `/es/atlas/` (for both US-Mexico and Canada-US ports), `/crossing/:slug/`, and `/cruce/:slug/`, respecting withheld location records and adding an approximate-location confirmation note.
+
 ## 2026-11-25 - Line Photo & Status Card Studio, sister-city search, and bilingual OG cards
 
 - Added lazy-loaded `src/components/dashboard/CrossingPhotoCard.jsx` (`CrossingPhotoCard.module.css`) on EN/ES crossing pages so travelers can create 4:5 Post (`1080x1350`) and 9:16 Story (`1080x1920`) cards or stamp their own on-device line photo with live CBP wait times, safe condition tags, timestamps, and native share/PNG download (`Photos stay on your device`). Also added PNG summary export to `ShareModalContent.jsx` and linked each crossing page directly to the 3D Atlas.

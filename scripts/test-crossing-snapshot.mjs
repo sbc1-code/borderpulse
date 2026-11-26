@@ -9,6 +9,8 @@ import { snapshotHtml, snapshotDocument, injectSnapshot } from './lib/crossing-s
 import { crossingDisplayName, crossingSearchTerms } from '../src/lib/crossingNames.js';
 import { PORT_SEARCH_TERMS } from '../src/lib/sisterCitySearch.js';
 import { crossingSearchTitle } from '../src/lib/crossingSeo.js';
+import { getCrossingCoords } from '../src/lib/geo.js';
+import { mapAppLinks } from '../src/lib/mapLinks.js';
 
 const crossing = { port_number: '240202', name: 'El Paso - Paso Del Norte (PDN)',
   hours: '24 hrs/day', port_status: 'Open', lanes: { passenger_standard: { status: 'No Delay', lanes_open: 1, delay_minutes: 0, update_time: 'At 6:00 pm MDT' } } };
@@ -91,6 +93,16 @@ test('local naming helps search without changing official identity or canonical 
   assert.ok(crossingSearchTerms({ port_number: '260201', name: 'Lukeville' }, PORT_SEARCH_TERMS).includes('puerto penasco'));
   assert.match(crossingSearchTitle(crossing, 'en', true), /wait times today & cameras/);
   assert.match(crossingSearchTitle(crossing, 'es', true), /hoy y cámaras/);
+});
+test('mapAppLinks generates Google Maps, Apple Maps, and Waze URLs and respects withheld ports', () => {
+  const links = mapAppLinks(32.5437, -117.0287, 'San Ysidro');
+  assert.equal(links.length, 3);
+  assert.deepEqual(links.map((l) => l.name), ['Google Maps', 'Apple Maps', 'Waze']);
+  assert.equal(links[0].href, 'https://www.google.com/maps/search/?api=1&query=32.5437%2C-117.0287');
+  assert.equal(links[1].href, 'https://maps.apple.com/?ll=32.5437%2C-117.0287&q=San%20Ysidro');
+  assert.equal(links[2].href, 'https://waze.com/ul?ll=32.5437%2C-117.0287&navigate=yes');
+  assert.deepEqual(mapAppLinks(null, undefined), []);
+  assert.equal(getCrossingCoords({ port_number: '240221' }), null);
 });
 test('built homepage and every crossing page contain their own useful visible snapshot', () => {
   if (!fs.existsSync('dist/index.html')) return;
