@@ -71,7 +71,7 @@ function renderCrossingHead(crossing, slug, aggregate, lang = 'en') {
   const title = crossingSearchTitle(crossing, es ? 'es' : 'en', cameraSourceFor(crossing.port_number)?.kind);
   const desc = crossingSearchDescription(crossing, es ? 'es' : 'en', { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraSourceFor(crossing.port_number)?.kind) });
   const canonical = `${BASE}/${es ? 'cruce' : 'crossing'}/${slug}/`;
-  const ogImage = `${BASE}/og/${slug}.png`;
+  const ogImage = es ? `${BASE}/og/cruce/${slug}.png` : `${BASE}/og/${slug}.png`;
 
   const place = {
     '@context': 'https://schema.org',
@@ -528,7 +528,7 @@ async function main() {
     title: SPANISH_HOME.title,
     desc: SPANISH_HOME.description,
     canonical: esCanonical,
-    ogImage: `${BASE}/og-card.png`,
+    ogImage: `${BASE}/og/es-home.png`,
     jsonLd: [],
   };
   let esHtml = injectSnapshot(
@@ -802,7 +802,7 @@ async function main() {
         title: 'Crossing Atlas: US-Mexico & US-Canada Border Globe | Border Pulse',
         desc: 'Interactive two-country Crossing Atlas: live CBP US-Mexico wait times across 42 ports plus the Canada-US BC/Washington pilot.',
         canonical: enCanonical,
-        ogImage: `${BASE}/og-card.png`,
+        ogImage: `${BASE}/og/atlas.png`,
         jsonLd: [{
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
@@ -818,7 +818,7 @@ async function main() {
         title: 'Atlas de cruces: globo fronterizo EE.UU.-México y Canadá | Border Pulse',
         desc: 'Atlas interactivo de cruces en Norteamérica: esperas en vivo de CBP EE.UU.-México en 42 garitas y el piloto Canadá-EE.UU.',
         canonical: esCanonical,
-        ogImage: `${BASE}/og-card.png`,
+        ogImage: `${BASE}/og/es-atlas.png`,
         jsonLd: [{
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',

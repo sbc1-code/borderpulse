@@ -78,8 +78,16 @@ test('snapshot mounts in the visible React root, and rejects a non-empty target'
 test('local naming helps search without changing official identity or canonical slug', () => {
   assert.equal(crossing.name, 'El Paso - Paso Del Norte (PDN)');
   assert.match(crossingDisplayName(crossing), /Santa Fe/);
+  assert.equal(crossingDisplayName({ port_number: '250401', name: 'San Ysidro' }), 'San Ysidro');
   assert.ok(crossingSearchTerms({ port_number: '240201', name: 'BOTA' }).includes('puente libre'));
   assert.ok(crossingSearchTerms({ port_number: '240801', name: 'Santa Teresa' }).includes('san jeronimo'));
+  assert.ok(crossingSearchTerms({ port_number: '250401', name: 'San Ysidro' }).includes('tijuana'));
+  assert.ok(crossingSearchTerms({ port_number: '250302', name: 'Calexico - West' }).includes('mexicali'));
+  assert.ok(crossingSearchTerms({ port_number: '230501', name: 'Hidalgo/Pharr - Hidalgo' }).includes('reynosa'));
+  assert.ok(crossingSearchTerms({ port_number: '535504', name: 'Brownsville - Gateway' }).includes('matamoros'));
+  assert.ok(crossingSearchTerms({ port_number: '230401', name: 'Laredo - Bridge I' }).includes('nuevo laredo'));
+  assert.ok(crossingSearchTerms({ port_number: '260201', name: 'Lukeville' }).includes('rocky point'));
+  assert.ok(crossingSearchTerms({ port_number: '260201', name: 'Lukeville' }).includes('puerto penasco'));
   assert.match(crossingSearchTitle(crossing, 'en', true), /wait times today & cameras/);
   assert.match(crossingSearchTitle(crossing, 'es', true), /hoy y cámaras/);
 });

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-11-25 - Line Photo & Status Card Studio, sister-city search, and bilingual OG cards
+
+- Added lazy-loaded `src/components/dashboard/CrossingPhotoCard.jsx` (`CrossingPhotoCard.module.css`) on EN/ES crossing pages so travelers can create 4:5 Post (`1080x1350`) and 9:16 Story (`1080x1920`) cards or stamp their own on-device line photo with live CBP wait times, safe condition tags, timestamps, and native share/PNG download (`Photos stay on your device`). Also added PNG summary export to `ShareModalContent.jsx` and linked each crossing page directly to the 3D Atlas.
+- Fixed `CrossingShare.jsx` on `/cruce/:slug/` so Copy, WhatsApp, and Native share preserve the Spanish canonical URL (`crossingBase="/cruce"`), covered in `scripts/test-crossing-share.mjs`.
+- Expanded `crossingSearchTerms` across all 42 ports in `src/lib/crossingNames.js` (Tijuana, Mexicali, Ciudad Juárez, Nuevo Laredo, Reynosa, Matamoros, Nogales, Rocky Point, and local bridge names), added Atlas port filtering in `src/pages/Atlas.jsx`, and added a saved-crossings quick-jump bar above the Dashboard map in `src/pages/Dashboard.jsx`.
+- Upgraded `scripts/build-og-cards.mjs`, `scripts/prerender.mjs`, `CrossingDetail.jsx`, and `Atlas.jsx` with 30-day low highlights on EN crossing previews, 42 dedicated Spanish `public/og/cruce/:slug.png` cards, and `atlas.png`, `es-atlas.png`, and `es-home.png` social preview images.
+
 ## 2026-11-25 - Native accessible Crossing Atlas (/atlas/ & /es/atlas/) and full Spanish UI navigation
 
 - Added native, lazy-loaded `src/pages/Atlas.jsx` at `/atlas/` and `/es/atlas/` (added to main desktop & mobile navigation, sitemap, `hreflang`, and `scripts/prerender.mjs`) backed by `public/atlas-globe.png` (zero entry JS impact). Includes dark mode support, keyboard-rotatable canvas (`Arrow` keys + `Home`), `44px` touch controls, saved favorites quick-jump chips synced via `borderPulse_favorites`, live CBP multi-lane waits for US–Mexico, two-direction mobile glance strip for Canada–US, persistent deep links, and opt-in street-level Google Maps support.

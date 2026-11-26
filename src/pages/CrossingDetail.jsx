@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useParams, useLocation, useSearchParams, useNavigate, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, MapPin, RefreshCw, ArrowRight, Code, Car, User, Truck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +9,7 @@ import BorderCrossingCard from '@/components/dashboard/BorderCrossingCard';
 import LaneRow from '@/components/dashboard/LaneRow';
 import EmbedSnippetModal from '@/components/dashboard/EmbedSnippetModal';
 import CrossingShare from '@/components/dashboard/CrossingShare';
+const CrossingPhotoCard = React.lazy(() => import('@/components/dashboard/CrossingPhotoCard'));
 import CrossingCameras from '@/components/dashboard/CrossingCameras';
 import { cameraSourceFor } from '@/lib/cameras';
 import { crossingDisplayName } from '@/lib/crossingNames';
@@ -402,7 +403,8 @@ export default function CrossingDetail({ forcedLang = null } = {}) {
     const title = crossingSearchTitle(crossing, language, cameraKind);
     const desc = crossingSearchDescription(crossing, language, { bestHour: aggregate?.overall_best_hour ?? null, hasCameras: Boolean(cameraKind) });
     const url = `https://borderpulse.com${crossingBase}/${canonicalSlug}/`;
-    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogUrl: url, canonical: url, ...(isSpanishRoute ? { lang: 'es' } : {}) });
+    const ogImage = `https://borderpulse.com/og/${isSpanishRoute ? 'cruce/' : ''}${canonicalSlug}.png`;
+    updatePageMeta({ title, description: desc, ogTitle: title, ogDescription: desc, ogImage, ogUrl: url, canonical: url, ...(isSpanishRoute ? { lang: 'es' } : {}) });
     return () => resetPageMeta();
   }, [aggregate, canonicalSlug, crossing, crossingBase, isSpanishRoute, language]);
 
@@ -543,10 +545,16 @@ export default function CrossingDetail({ forcedLang = null } = {}) {
         )}
       </div>
 
-      <Link to={withLane(`/?area=all&port=${encodeURIComponent(crossing.port_number)}`, lane)} className="mb-4 inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
-        {language === 'es' ? 'Ver en el mapa fronterizo' : 'View on the border map'}
-        <ArrowRight className="w-3 h-3 shrink-0" />
-      </Link>
+      <div className="mb-4 flex flex-wrap items-center gap-4">
+        <Link to={withLane(`${isSpanishRoute ? '/es/' : '/'}?area=all&port=${encodeURIComponent(crossing.port_number)}`, lane)} className="inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+          {language === 'es' ? 'Ver en el mapa fronterizo' : 'View on the border map'}
+          <ArrowRight className="w-3 h-3 shrink-0" />
+        </Link>
+        <Link to={`${isSpanishRoute ? '/es/atlas/' : '/atlas/'}?corridor=mx&port=${encodeURIComponent(crossing.port_number)}`} className="inline-flex min-h-11 max-w-full items-center gap-1 text-sm font-medium text-slate-700 hover:underline dark:text-slate-300">
+          {language === 'es' ? 'Ver en el Atlas 3D' : 'Explore on 3D Atlas'}
+          <ArrowRight className="w-3 h-3 shrink-0" />
+        </Link>
+      </div>
 
       {isSanYsidro && (
         <SanYsidroDecision
@@ -557,7 +565,19 @@ export default function CrossingDetail({ forcedLang = null } = {}) {
         />
       )}
 
-      <CrossingShare lane={lane} key={`${canonicalSlug}:${lane}:${language}`} name={crossing.name} slug={canonicalSlug} language={language} />
+      <CrossingShare lane={lane} crossingBase={crossingBase} key={`${canonicalSlug}:${lane}:${language}`} name={crossing.name} slug={canonicalSlug} language={language} />
+
+      <Suspense fallback={null}>
+        <CrossingPhotoCard
+          crossing={crossing}
+          slug={canonicalSlug}
+          language={language}
+          lane={lane}
+          crossingBase={crossingBase}
+          aggregate={aggregate}
+          fetchedAt={state.fetchedAt}
+        />
+      </Suspense>
 
       <div id="cameras" className="scroll-mt-20">
         <CrossingCameras key={canonicalSlug} crossing={crossing} language={language} />
