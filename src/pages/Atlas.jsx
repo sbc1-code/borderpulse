@@ -19,6 +19,7 @@ import { subscribeToBorderData } from '@/lib/liveDataSubscription';
 import { buildSlugMap } from '@/lib/slugs';
 import { availableLaneWait } from '@/lib/crossingAvailability';
 import { crossingDisplayName, crossingSearchTerms } from '@/lib/crossingNames';
+import { PORT_SEARCH_TERMS } from '@/lib/sisterCitySearch';
 import { getStatusForWait } from '@/components/utils/crossingDirection';
 import { reportTimeLabel } from '@/lib/trustState';
 import { readFavorites, readStorage, writeStorage } from '@/lib/browserStorage';
@@ -277,7 +278,7 @@ export default function Atlas({ lang = 'en' }) {
     if (!q) return mexicoFixture.crossings;
     return mexicoFixture.crossings.filter((port) => {
       const live = liveByPort.get(port.id);
-      const terms = crossingSearchTerms(live || { port_number: port.id, name: port.name, state: port.state });
+      const terms = crossingSearchTerms(live || { port_number: port.id, name: port.name, state: port.state }, PORT_SEARCH_TERMS);
       return terms.includes(q);
     });
   }, [mxQuery, liveByPort]);
@@ -829,7 +830,7 @@ export default function Atlas({ lang = 'en' }) {
                       if (!q) return;
                       const match = mexicoFixture.crossings.find((port) => {
                         const live = liveByPort.get(port.id);
-                        return crossingSearchTerms(live || { port_number: port.id, name: port.name, state: port.state }).includes(q);
+                        return crossingSearchTerms(live || { port_number: port.id, name: port.name, state: port.state }, PORT_SEARCH_TERMS).includes(q);
                       });
                       if (match && match.id !== mxId) handleSelectMx(match.id);
                     }}

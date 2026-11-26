@@ -119,6 +119,13 @@ export default function Dashboard() {
   const [geoLocating, setGeoLocating] = useState(false);
   const [favorites, setFavorites] = useState(readFavorites);
   const [favoriteError, setFavoriteError] = useState(false);
+  const [cityTerms, setCityTerms] = useState(null);
+  const ensureCityTerms = useCallback(() => {
+    if (!cityTerms) import('@/lib/sisterCitySearch').then((m) => setCityTerms(m.PORT_SEARCH_TERMS));
+  }, [cityTerms]);
+  useEffect(() => {
+    if (search) ensureCityTerms();
+  }, [search, ensureCityTerms]);
 
   const handleToggleFavorite = useCallback((portNumber) => {
     const adding = !favorites.includes(portNumber);
@@ -337,9 +344,9 @@ export default function Dashboard() {
       if (corridor && !corridorFor(corridor)?.ports.includes(String(c.port_number))) return false;
       if (region !== 'ALL' && c.state !== region) return false;
       if (!q) return true;
-      return crossingSearchTerms(c).includes(q);
+      return crossingSearchTerms(c, cityTerms).includes(q);
     });
-  }, [state.crossings, region, search, corridor]);
+  }, [state.crossings, region, search, corridor, cityTerms]);
 
   const sortedCrossings = useMemo(() => {
     return [...filteredCrossings].sort((a, b) => {
@@ -553,7 +560,8 @@ export default function Dashboard() {
                 inputMode="search"
                 placeholder={language === 'en' ? 'Search crossing or city (Tijuana, San Ysidro, Juárez, Laredo…)' : 'Buscar cruce o ciudad (Tijuana, Juárez, Mexicali, Reynosa…)'}
                 value={searchInput}
-                onChange={(e) => changeSearch(e.target.value)}
+                onFocus={ensureCityTerms}
+                onChange={(e) => { ensureCityTerms(); changeSearch(e.target.value); }}
                 aria-label={language === 'en' ? 'Search crossings by name or city' : 'Buscar cruces por nombre o ciudad'}
                 className="w-full h-11 pl-9 pr-12 rounded-lg border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/30"
               />
