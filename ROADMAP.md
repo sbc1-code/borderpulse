@@ -361,9 +361,14 @@ Snapshot of features live on borderpulse.com today.
 
 ### Checks due
 
-- 2026-11-16, then weekly: sponsor card clicks, tagged visits and contact taps. Day one of tracking is 2026-11-11; earlier clicks include tests.
-- 2026-11-17: Adsterra impressions against the 2026-11-05 to 11-09 baseline (21 impressions, home slot only), `blog-to-waits` top-placement clicks against 7, medication guide bounce against 95%.
-- 2 to 4 weeks after 2026-11-10: click rate per crossing page in Search Console against 1.2%.
+Done:
+- 2026-11-17 week-1 check. Adsterra: 196 impressions and $0.22 from Nov 12 to 16 (baseline 21 and $0.03 over Nov 5 to 9, home slot only); one placement id, so home versus crossing/guide cannot be split. Medication guide (EN): 109 readers, 4 clicks on the top wait links (3.7%, was 7 of 617 over 30 days), bounce 92%. Sponsor: 1 card click, 1 "directions" tap on the clinic site, 0 WhatsApp taps. Totals are tiny; not conclusive.
+- 2026-11-19 SENTRI guides recheck (Oct 23 to Nov 18). EN 10 clicks / 1,416 impressions / 0.7% / position 7.5 (was 0.3% / 8.6). ES 5 / 700 / 0.7% / 7.9 (was 1.2% / 8.3). Neither recovered, but about 15 clicks in 27 days is a small prize. No title change made. Untested candidates: EN "SENTRI Renewal Steps: Apply, Pending Status, Interview"; ES "Renovar SENTRI paso a paso: portal TTP, entrevista y tarjeta".
+
+Open:
+- Weekly sponsor report for the clinic was cancelled 2026-11-19 (ownership moved to another assistant). Events to read in Umami, split by hostname: `sponsor-click`, `constandse-whatsapp`, `constandse-call`, `constandse-directions`.
+- Search Console click rate per crossing page, 2 to 4 weeks after 2026-11-10, against 1.2%.
+- Clinic still owes hours and 2 or 3 photos for its site. Payment links go to the clinic only after traffic is verified.
 
 ### Not started
 
