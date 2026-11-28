@@ -176,9 +176,11 @@ export class DataService {
   // be labeled as a fallback reading.
   getFallbackData() { return { success: false, crossings: [], exchange_rate: null, timestamp: null, source: 'unavailable', fromFallback: false, unavailable: true }; }
 
-  startAutoRefresh(intervalMs = 15 * 60 * 1000) {
+  startAutoRefresh(intervalMs = 15 * 60 * 1000, shouldRefresh = () => true) {
     if (this.refreshTimer) return;
-    this.refreshTimer = setInterval(() => this.getBorderData(), intervalMs);
+    this.refreshTimer = setInterval(() => {
+      if (shouldRefresh()) this.getBorderData();
+    }, intervalMs);
   }
   stopAutoRefresh() {
     if (this.refreshTimer) { clearInterval(this.refreshTimer); this.refreshTimer = null; }

@@ -8,7 +8,8 @@ export function subscribeToBorderData(listener, {
 } = {}) {
   service.addListener(listener);
   if (service.cache) listener(service.cache);
-  service.startAutoRefresh(5 * 60_000);
+  // Hidden tabs retain their last reading; visibilitychange refreshes on return.
+  service.startAutoRefresh(5 * 60_000, () => page?.visibilityState !== 'hidden');
   const refresh = () => service.getBorderData();
   const onVisible = () => {
     if (page.visibilityState === 'visible') refresh();
