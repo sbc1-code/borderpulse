@@ -336,6 +336,12 @@ export async function checkCrossingConsole(browser, baseUrl, viewport) {
     await page.getByRole("button", { name: "Replay day", exact: true }).click();
     const scrub = page.getByRole("slider", { name: "Historical snapshot" });
     await scrub.waitFor();
+    const scrubBounds = await scrub.boundingBox();
+    assert.ok(scrubBounds.height >= 44, "replay slider has a 44px touch target");
+    const chartBounds = await page.locator(".timeline-chart").boundingBox();
+    const labelBounds = await page.locator(".timeline-labels").boundingBox();
+    assert.ok(chartBounds.y + chartBounds.height <= scrubBounds.y + 1, "slider does not overlap its chart");
+    assert.ok(scrubBounds.y + scrubBounds.height <= labelBounds.y + 1, "slider does not overlap its labels");
     assert.equal(historyCalls, 1);
     await expectValues(["130", "70"]);
     assert.match(await page.locator(".map-heading").innerText(), /Not live/);

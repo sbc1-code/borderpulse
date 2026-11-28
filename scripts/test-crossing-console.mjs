@@ -1,4 +1,5 @@
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import {
   currentConsoleRows,
@@ -236,4 +237,13 @@ test("the latest recorded past day remains visible even when both ports have onl
   assert.equal(selected.length, 2);
   assert.ok(selected.every(s => dayKey(s.fetched_at) === "2026-10-28"));
   assert.ok(selected.every(s => s.crossings.every(row => row.current_wait_time === null)));
+});
+
+// DT-004: touch targets should match the existing 44px console controls.
+test("historical scrubber reserves a non-overlapping 44px touch target", () => {
+  const css = readFileSync(new URL("../src/components/corridor/CrossingConsole.css", import.meta.url), "utf8");
+  const rule = css.match(/\.corridorConsole \.timeline input \{([^}]+)\}/)?.[1];
+  assert.ok(rule, "timeline input rule exists");
+  assert.match(rule, /height:\s*44px/, "touch area must not shrink to the old 24px rail");
+  assert.match(rule, /display:\s*block/, "reserve layout space rather than overlap neighboring labels");
 });
