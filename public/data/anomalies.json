@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-27T17:57:40.577Z",
-  "snapshot_at": "2026-11-27T17:53:14.883Z",
+  "generated_at": "2026-11-28T01:20:18.189Z",
+  "snapshot_at": "2026-11-28T01:07:42.664Z",
   "active": [
     {
       "type": "sunday_spike",
@@ -271,16 +271,16 @@
       "port_name": "Hidalgo/Pharr - Pharr",
       "state": "TX",
       "severity": 0.8,
-      "detected_at": "2026-11-27T07:35:30.759Z",
-      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 9 PM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
-      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 9 PM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
+      "detected_at": "2026-11-28T01:20:18.189Z",
+      "summary_en": "Right now Hidalgo/Pharr - Pharr's lightest Friday hour so far is 7 PM (median 5 min) — ~80% below the 30-day baseline of 25 min.",
+      "summary_es": "Ahora mismo la hora más ligera del viernes en Hidalgo/Pharr - Pharr es 7 PM (mediana 5 min) — ~80% debajo de la base de 30 días de 25 min.",
       "evidence": {
         "day_of_week": 5,
         "day_label": "Fri",
-        "best_hour": 21,
+        "best_hour": 19,
         "best_median": 5,
         "overall_median": 25,
-        "samples": 5
+        "samples": 6
       }
     },
     {
